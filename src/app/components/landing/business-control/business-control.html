@@ -1,1 +1,376 @@
-<p>business-control works!</p>
+<section class="w-full py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <!-- Section Top Header -->
+  <div class="text-center mb-10 md:mb-14">
+    <h2
+      class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] tracking-tight leading-tight"
+    >
+      {{ 'BUSINESS_CONTROL.HEADER_TITLE' | translate }}
+    </h2>
+    <p
+      class="text-slate-500 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3 font-normal leading-relaxed"
+    >
+      {{ 'BUSINESS_CONTROL.HEADER_SUBTITLE' | translate }}
+    </p>
+  </div>
+
+  <!-- Main Rounded Blue Container -->
+  <div
+    class="rounded-3xl sm:rounded-[36px] md:rounded-[44px] bg-gradient-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-6 sm:p-10 lg:p-14 relative shadow-sm border border-blue-100/80"
+  >
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <!-- Left Column: Real-Time Business Control & Interactive Chart -->
+      <div class="lg:col-span-7 flex flex-col">
+        <!-- White Chart Box Container -->
+        <div
+          class="bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 p-5 sm:p-7 border border-slate-100/90 relative select-none"
+        >
+          <!-- Chart Header: Title & 3-Dots Menu -->
+          <div class="flex items-center justify-between gap-4 mb-2">
+            <h4 class="text-xs sm:text-sm font-bold text-slate-700 tracking-wide uppercase">
+              {{ 'BUSINESS_CONTROL.CHART_TITLE' | translate }}
+            </h4>
+
+            <!-- 3 Dots Options Button & Dropdown -->
+            <div class="relative chart-menu-container">
+              <button
+                type="button"
+                (click)="toggleMenu($event)"
+                [attr.aria-label]="'BUSINESS_CONTROL.OPTIONS_MENU' | translate"
+                class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-100/80 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-700 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                <svg
+                  class="w-4 h-4 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+                  />
+                </svg>
+              </button>
+
+              <!-- Dropdown Menu -->
+              @if (isMenuOpen()) {
+                <div
+                  class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-2xl border border-slate-100 py-1.5 z-20 animate-in fade-in zoom-in-95 duration-150"
+                >
+                  <button
+                    type="button"
+                    (click)="resetView()"
+                    class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer"
+                  >
+                    <svg
+                      class="w-3.5 h-3.5 text-slate-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                      />
+                    </svg>
+                    {{ 'BUSINESS_CONTROL.RESET_VIEW' | translate }}
+                  </button>
+                  <button
+                    type="button"
+                    (click)="exportData()"
+                    class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer"
+                  >
+                    <svg
+                      class="w-3.5 h-3.5 text-slate-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                    {{ 'BUSINESS_CONTROL.EXPORT_DATA' | translate }}
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Interactive Legend (Centered) -->
+          <div class="flex items-center justify-center gap-6 my-2">
+            <button
+              type="button"
+              (click)="toggleExpense()"
+              [class.opacity-40]="!isExpenseVisible()"
+              class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1 px-2 rounded-lg hover:bg-slate-50"
+              [attr.aria-pressed]="isExpenseVisible()"
+              title="Toggle Expense series"
+            >
+              <span
+                class="w-5 h-2.5 rounded-sm bg-[#fee2e2] border border-[#f87171] inline-block shadow-2xs"
+              ></span>
+              <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}</span>
+            </button>
+
+            <button
+              type="button"
+              (click)="toggleIncome()"
+              [class.opacity-40]="!isIncomeVisible()"
+              class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1 px-2 rounded-lg hover:bg-slate-50"
+              [attr.aria-pressed]="isIncomeVisible()"
+              title="Toggle Income series"
+            >
+              <span
+                class="w-5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#3b82f6] inline-block shadow-2xs"
+              ></span>
+              <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}</span>
+            </button>
+          </div>
+
+          <!-- Interactive Chart SVG Container -->
+          <div class="relative w-full mt-2">
+            <!-- Active Tooltip Overlay -->
+            @if (activePoint(); as pt) {
+              <div
+                class="absolute z-10 pointer-events-none transition-all duration-150 ease-out -top-2 transform -translate-x-1/2 -translate-y-full bg-slate-900/90 backdrop-blur-md text-white text-[11px] rounded-xl px-3 py-2 shadow-xl border border-slate-700/50"
+                [style.left.%]="((pt.x - chartLeft) / (chartRight - chartLeft)) * 86 + 8"
+              >
+                <div class="font-semibold text-slate-300 pb-1 border-b border-slate-700/60 mb-1">
+                  {{ pt.monthKey | translate }}
+                </div>
+                @if (isIncomeVisible()) {
+                  <div class="flex items-center justify-between gap-3 text-[#60a5fa]">
+                    <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}:</span>
+                    <span class="font-bold font-mono">{{ formatCurrency(pt.income) }}</span>
+                  </div>
+                }
+                @if (isExpenseVisible()) {
+                  <div class="flex items-center justify-between gap-3 text-[#f87171]">
+                    <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}:</span>
+                    <span class="font-bold font-mono">{{ formatCurrency(pt.expense) }}</span>
+                  </div>
+                }
+                <!-- Tooltip triangle pointer -->
+                <div
+                  class="absolute left-1/2 -bottom-1 -translate-x-1/2 w-2 h-2 bg-slate-900/90 rotate-45 border-r border-b border-slate-700/50"
+                ></div>
+              </div>
+            }
+
+            <svg
+              [attr.viewBox]="'0 0 ' + svgWidth + ' ' + svgHeight"
+              class="w-full h-auto overflow-visible select-none"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Real-time Income and Expense Chart"
+            >
+              <!-- Horizontal Grid Lines & Y-Axis Labels -->
+              @for (grid of yGridLines; track grid.value) {
+                <!-- Grid line -->
+                <line
+                  [attr.x1]="chartLeft"
+                  [attr.y1]="grid.y"
+                  [attr.x2]="chartRight"
+                  [attr.y2]="grid.y"
+                  stroke="#f1f5f9"
+                  stroke-width="1.2"
+                />
+                <!-- Y-Axis Label -->
+                <text
+                  [attr.x]="chartLeft - 8"
+                  [attr.y]="grid.y"
+                  dominant-baseline="central"
+                  text-anchor="end"
+                  class="text-[10px] fill-slate-400 font-medium tracking-tight"
+                >
+                  {{ grid.label }}
+                </text>
+              }
+
+              <!-- Vertical Grid Lines for Months -->
+              @for (month of monthAxes; track month.x) {
+                <line
+                  [attr.x1]="month.x"
+                  [attr.y1]="chartTop"
+                  [attr.x2]="month.x"
+                  [attr.y2]="chartBottom"
+                  stroke="#f1f5f9"
+                  stroke-width="1.2"
+                />
+              }
+
+              <!-- Active Crosshair Line on Hover/Selected Point -->
+              @if (activePoint(); as pt) {
+                <line
+                  [attr.x1]="pt.x"
+                  [attr.y1]="chartTop"
+                  [attr.x2]="pt.x"
+                  [attr.y2]="chartBottom"
+                  stroke="#cbd5e1"
+                  stroke-width="1.5"
+                  stroke-dasharray="3,3"
+                  class="transition-opacity duration-200"
+                />
+              }
+
+              <!-- Expense Smooth Curve (Red) -->
+              @if (isExpenseVisible()) {
+                <path
+                  [attr.d]="expensePath()"
+                  fill="none"
+                  stroke="#f87171"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="transition-opacity duration-300"
+                />
+              }
+
+              <!-- Income Smooth Curve (Blue) -->
+              @if (isIncomeVisible()) {
+                <path
+                  [attr.d]="incomePath()"
+                  fill="none"
+                  stroke="#3b82f6"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="transition-opacity duration-300"
+                />
+              }
+
+              <!-- Expense Data Points (Red Dots) -->
+              @if (isExpenseVisible()) {
+                @for (pt of dataPoints; track pt.id) {
+                  <g class="cursor-pointer">
+                    <!-- Standard circle -->
+                    <circle
+                      [attr.cx]="pt.x"
+                      [attr.cy]="getYForValue(pt.expense)"
+                      [attr.r]="activePointIndex() === pt.id ? 5.5 : 3.5"
+                      fill="#f87171"
+                      stroke="#ffffff"
+                      stroke-width="1.5"
+                      class="transition-all duration-200"
+                    />
+                    <!-- Active highlight ring -->
+                    @if (activePointIndex() === pt.id) {
+                      <circle
+                        [attr.cx]="pt.x"
+                        [attr.cy]="getYForValue(pt.expense)"
+                        r="9"
+                        fill="none"
+                        stroke="#f87171"
+                        stroke-width="1.5"
+                        stroke-opacity="0.4"
+                        class="animate-pulse"
+                      />
+                    }
+                  </g>
+                }
+              }
+
+              <!-- Income Data Points (Blue Dots) -->
+              @if (isIncomeVisible()) {
+                @for (pt of dataPoints; track pt.id) {
+                  <g class="cursor-pointer">
+                    <!-- Standard circle -->
+                    <circle
+                      [attr.cx]="pt.x"
+                      [attr.cy]="getYForValue(pt.income)"
+                      [attr.r]="activePointIndex() === pt.id ? 5.5 : 3.5"
+                      fill="#3b82f6"
+                      stroke="#ffffff"
+                      stroke-width="1.5"
+                      class="transition-all duration-200"
+                    />
+                    <!-- Active highlight ring -->
+                    @if (activePointIndex() === pt.id) {
+                      <circle
+                        [attr.cx]="pt.x"
+                        [attr.cy]="getYForValue(pt.income)"
+                        r="9"
+                        fill="none"
+                        stroke="#3b82f6"
+                        stroke-width="1.5"
+                        stroke-opacity="0.4"
+                        class="animate-pulse"
+                      />
+                    }
+                  </g>
+                }
+              }
+
+              <!-- Invisible Hover Capture Columns for Smooth Mouse Interaction -->
+              @for (pt of dataPoints; track pt.id) {
+                <rect
+                  [attr.x]="pt.x - 22"
+                  [attr.y]="chartTop"
+                  width="44"
+                  [attr.height]="chartBottom - chartTop"
+                  fill="transparent"
+                  class="cursor-pointer"
+                  (mouseenter)="setHoveredIndex(pt.id)"
+                  (mouseleave)="setHoveredIndex(null)"
+                  (click)="selectPoint(pt.id)"
+                />
+              }
+
+              <!-- X-Axis Month Labels (Rotated -25 deg) -->
+              @for (month of monthAxes; track month.x) {
+                <g
+                  [attr.transform]="
+                    'translate(' + month.x + ', ' + (chartBottom + 16) + ') rotate(-25)'
+                  "
+                >
+                  <text
+                    x="0"
+                    y="0"
+                    text-anchor="end"
+                    class="text-[10px] sm:text-[11px] fill-slate-400 font-medium tracking-tight"
+                  >
+                    {{ month.translationKey | translate }}
+                  </text>
+                </g>
+              }
+            </svg>
+          </div>
+
+          <!-- Copy Feedback Toast Notification -->
+          @if (copyFeedback()) {
+            <div
+              class="absolute bottom-3 right-3 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg animate-in fade-in duration-150"
+            >
+              ✓ Data copied to clipboard
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Right Column: Headline, Description & Call to Action -->
+      <div class="lg:col-span-5 flex flex-col justify-center space-y-5 lg:pl-4">
+        <h3
+          class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+        >
+          {{ 'BUSINESS_CONTROL.CONTENT_TITLE' | translate }}
+        </h3>
+
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          {{ 'BUSINESS_CONTROL.CONTENT_DESC' | translate }}
+        </p>
+
+        <div class="pt-2">
+          <button
+            type="button"
+            class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

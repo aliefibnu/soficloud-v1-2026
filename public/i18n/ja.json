@@ -6,5 +6,26 @@
     "WELCOME": "ようこそ",
     "HOME": "ホーム",
     "LANGUAGE": "言語"
+  },
+  "BUSINESS_CONTROL": {
+    "HEADER_TITLE": "ビジネスをひとつの場所から管理",
+    "HEADER_SUBTITLE": "表示したいエリアを選択。すべてのプロセスが同じデータに連携し、常に追跡可能です。",
+    "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
+    "EXPENSE": "支出",
+    "INCOME": "収入",
+    "CONTENT_TITLE": "迅速な意思決定のためのリアルタイムビジネスモニタリング",
+    "CONTENT_DESC": "売上、資金状況、在庫アラート、未処理プロセス、生産、プロジェクト、ビジネスKPIを1つの管理ビューで確認できます。",
+    "CTA_BUTTON": "機能を見る",
+    "OPTIONS_MENU": "グラフ設定",
+    "RESET_VIEW": "表示リセット",
+    "EXPORT_DATA": "データをエクスポート",
+    "MONTHS": {
+      "AUG_2025": "2025年8月",
+      "SEP_2025": "2025年9月",
+      "OCT_2025": "2025年10月",
+      "NOV_2025": "2025年11月",
+      "DEC_2025": "2025年12月",
+      "JAN_2026": "2026年1月"
+    }
   }
 }
