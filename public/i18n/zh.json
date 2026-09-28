@@ -6,5 +6,26 @@
     "WELCOME": "欢迎",
     "HOME": "首页",
     "LANGUAGE": "语言"
+  },
+  "BUSINESS_CONTROL": {
+    "HEADER_TITLE": "从一处掌控您的业务",
+    "HEADER_SUBTITLE": "选择您想要查看的区域。每个流程都连接到相同的数据，并且始终可追溯。",
+    "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
+    "EXPENSE": "支出",
+    "INCOME": "收入",
+    "CONTENT_TITLE": "实时监控业务，助您更快做出决策",
+    "CONTENT_DESC": "销售、资金状况、库存预警、未决流程、生产、项目和业务KPI尽在一个管理视图中。",
+    "CTA_BUTTON": "查看功能",
+    "OPTIONS_MENU": "图表选项",
+    "RESET_VIEW": "重置视图",
+    "EXPORT_DATA": "导出摘要",
+    "MONTHS": {
+      "AUG_2025": "2025年8月",
+      "SEP_2025": "2025年9月",
+      "OCT_2025": "2025年10月",
+      "NOV_2025": "2025年11月",
+      "DEC_2025": "2025年12月",
+      "JAN_2026": "2026年1月"
+    }
   }
 }
