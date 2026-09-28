@@ -51,5 +51,20 @@
       "DEC_2025": "2025년 12月",
       "JAN_2026": "2026년 1월"
     }
+  },
+  "HERO": {
+    "BADGE": "SOFICLOUD ENTERPRISE RESOURCE PLANNING",
+    "TITLE_LINE_1": "비즈니스 성장을 위한",
+    "TITLE_LINE_2_PREFIX": "통합 ERP 소프트웨어로 ",
+    "TITLE_LINE_2_HIGHLIGHT": "지속적인 성장",
+    "SUBTITLE": "운영에서 재무까지 연결된 하나의 시스템에서 모든 비즈니스 프로세스를 관리하세요.",
+    "ACTIONS": {
+      "CONTACT_US": "문의하기",
+      "WATCH_VIDEO": "동영상 보기"
+    },
+    "ARIA": {
+      "CONTACT_US": "Soficloud 팀에 문의하기",
+      "WATCH_VIDEO": "Soficloud 데모 영상 시청"
+    }
   }
 }

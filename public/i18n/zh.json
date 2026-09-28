@@ -51,5 +51,20 @@
       "DEC_2025": "2025年12月",
       "JAN_2026": "2026年1月"
     }
+  },
+  "HERO": {
+    "BADGE": "SOFICLOUD ENTERPRISE RESOURCE PLANNING",
+    "TITLE_LINE_1": "一体化企业ERP软件",
+    "TITLE_LINE_2_PREFIX": "助力业务",
+    "TITLE_LINE_2_HIGHLIGHT": "持续增长",
+    "SUBTITLE": "在一个互联系统中管理整个业务流程，涵盖从运营到财务的方方面面。",
+    "ACTIONS": {
+      "CONTACT_US": "联系我们",
+      "WATCH_VIDEO": "观看视频"
+    },
+    "ARIA": {
+      "CONTACT_US": "联系Soficloud团队",
+      "WATCH_VIDEO": "观看Soficloud产品演示视频"
+    }
   }
 }

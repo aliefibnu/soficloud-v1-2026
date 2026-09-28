@@ -51,5 +51,20 @@
       "DEC_2025": "December 2025",
       "JAN_2026": "January 2026"
     }
+  },
+  "HERO": {
+    "BADGE": "SOFICLOUD ENTERPRISE RESOURCE PLANNING",
+    "TITLE_LINE_1": "Software ERP Terintegrasi Untuk",
+    "TITLE_LINE_2_PREFIX": "Bisnis Yang ",
+    "TITLE_LINE_2_HIGHLIGHT": "Terus Bertumbuh",
+    "SUBTITLE": "Kelola seluruh proses bisnis dalam satu sistem yang terhubung, dari operasional hingga keuangan.",
+    "ACTIONS": {
+      "CONTACT_US": "Kontak Kami",
+      "WATCH_VIDEO": "Lihat Video"
+    },
+    "ARIA": {
+      "CONTACT_US": "Hubungi tim Soficloud",
+      "WATCH_VIDEO": "Tonton video demonstrasi Soficloud"
+    }
   }
 }

@@ -1,21 +1,120 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { Hero } from './hero';
 
 describe('Hero', () => {
   let component: Hero;
   let fixture: ComponentFixture<Hero>;
+  let translateService: TranslateService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Hero],
+      providers: [
+        provideTranslateService({
+          fallbackLang: 'en',
+          lang: 'id',
+        }),
+      ],
     }).compileComponents();
+
+    translateService = TestBed.inject(TranslateService);
+    translateService.setTranslation('id', {
+      HERO: {
+        BADGE: 'SOFICLOUD ENTERPRISE RESOURCE PLANNING',
+        TITLE_LINE_1: 'Software ERP Terintegrasi Untuk',
+        TITLE_LINE_2_PREFIX: 'Bisnis Yang ',
+        TITLE_LINE_2_HIGHLIGHT: 'Terus Bertumbuh',
+        SUBTITLE: 'Kelola seluruh proses bisnis dalam satu sistem yang terhubung, dari operasional hingga keuangan.',
+        ACTIONS: {
+          CONTACT_US: 'Kontak Kami',
+          WATCH_VIDEO: 'Lihat Video',
+        },
+        ARIA: {
+          CONTACT_US: 'Hubungi tim Soficloud',
+          WATCH_VIDEO: 'Tonton video demonstrasi Soficloud',
+        },
+      },
+    });
+    translateService.use('id');
 
     fixture = TestBed.createComponent(Hero);
     component = fixture.componentInstance;
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('should create the hero component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render the top badge with correct text', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const badge = compiled.querySelector('.inline-flex');
+    expect(badge?.textContent).toContain('SOFICLOUD ENTERPRISE RESOURCE PLANNING');
+  });
+
+  it('should render the H1 headline with Inter Extra Bold styling and highlighted text', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const h1 = compiled.querySelector('h1');
+    expect(h1).toBeTruthy();
+    expect(h1?.classList.contains('font-inter')).toBe(true);
+    expect(h1?.classList.contains('font-extrabold')).toBe(true);
+    expect(h1?.textContent).toContain('Software ERP Terintegrasi Untuk');
+    expect(h1?.textContent).toContain('Bisnis Yang');
+    expect(h1?.textContent).toContain('Terus Bertumbuh');
+
+    const highlightedSpan = h1?.querySelector('.text-\\[\\#1d64ec\\]');
+    expect(highlightedSpan?.textContent).toContain('Terus Bertumbuh');
+  });
+
+  it('should render the subtitle with DM Sans Regular styling', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const subtitle = compiled.querySelector('p');
+    expect(subtitle).toBeTruthy();
+    expect(subtitle?.classList.contains('font-dm-sans')).toBe(true);
+    expect(subtitle?.classList.contains('font-normal')).toBe(true);
+    expect(subtitle?.textContent).toContain('Kelola seluruh proses bisnis dalam satu sistem yang terhubung');
+  });
+
+  it('should render both CTA buttons with proper styles and ARIA labels', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const buttons = compiled.querySelectorAll('button');
+    expect(buttons.length).toBe(2);
+
+    const contactButton = buttons[0];
+    const videoButton = buttons[1];
+
+    expect(contactButton.textContent).toContain('Kontak Kami');
+    expect(contactButton.getAttribute('aria-label')).toBe('Hubungi tim Soficloud');
+
+    expect(videoButton.textContent).toContain('Lihat Video');
+    expect(videoButton.getAttribute('aria-label')).toBe('Tonton video demonstrasi Soficloud');
+  });
+
+  it('should emit contactClick output when "Kontak Kami" button is clicked', () => {
+    let emitted = false;
+    component.contactClick.subscribe(() => {
+      emitted = true;
+    });
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const contactButton = compiled.querySelectorAll('button')[0];
+    contactButton.click();
+
+    expect(emitted).toBe(true);
+  });
+
+  it('should emit videoClick output when "Lihat Video" button is clicked', () => {
+    let emitted = false;
+    component.videoClick.subscribe(() => {
+      emitted = true;
+    });
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const videoButton = compiled.querySelectorAll('button')[1];
+    videoButton.click();
+
+    expect(emitted).toBe(true);
   });
 });

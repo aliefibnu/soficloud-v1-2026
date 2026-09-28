@@ -51,5 +51,20 @@
       "DEC_2025": "December 2025",
       "JAN_2026": "January 2026"
     }
+  },
+  "HERO": {
+    "BADGE": "SOFICLOUD ENTERPRISE RESOURCE PLANNING",
+    "TITLE_LINE_1": "Integrated ERP Software For",
+    "TITLE_LINE_2_PREFIX": "Businesses That ",
+    "TITLE_LINE_2_HIGHLIGHT": "Keep Growing",
+    "SUBTITLE": "Manage your entire business processes in one connected system, from operations to finance.",
+    "ACTIONS": {
+      "CONTACT_US": "Contact Us",
+      "WATCH_VIDEO": "Watch Video"
+    },
+    "ARIA": {
+      "CONTACT_US": "Contact Soficloud team",
+      "WATCH_VIDEO": "Watch Soficloud product demonstration video"
+    }
   }
 }

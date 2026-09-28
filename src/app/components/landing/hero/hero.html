@@ -1,1 +1,59 @@
-<p>hero works!</p>
+<section class="relative w-full pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-12 sm:pb-16 md:pb-20">
+  <!-- Subtle ambient glow background -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden"
+    aria-hidden="true"
+  >
+    <div
+      class="h-[380px] w-[600px] sm:w-[880px] rounded-full bg-linear-to-b from-[#dbeafe]/70 via-[#eff6ff]/40 to-transparent blur-3xl opacity-80"
+    ></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+    <!-- Top Pill / Badge -->
+    <div
+      class="inline-flex items-center gap-2 rounded-full border border-[#93c5fd]/70 bg-[#eff6ff]/80 px-4.5 py-1.5 sm:px-5 sm:py-1.5 text-[11px] sm:text-[12.5px] font-semibold uppercase tracking-[0.05em] text-[#1d64ec] shadow-2xs backdrop-blur-xs mb-6 sm:mb-8 transition-colors"
+    >
+      <span>{{ 'HERO.BADGE' | translate }}</span>
+    </div>
+
+    <!-- Main Headline (2 lines) -->
+    <h1
+      class="font-inter font-extrabold text-[#182849] text-3xl sm:text-4xl md:text-[46px] lg:text-[54px] xl:text-[60px] leading-[1.16] sm:leading-[1.14] tracking-[-0.03em] max-w-5xl mb-5 sm:mb-6"
+    >
+      <span class="block md:whitespace-nowrap">{{ 'HERO.TITLE_LINE_1' | translate }}</span>
+      <span class="block md:whitespace-nowrap">
+        <span>{{ 'HERO.TITLE_LINE_2_PREFIX' | translate }}</span>
+        <span class="text-[#1d64ec]">{{ 'HERO.TITLE_LINE_2_HIGHLIGHT' | translate }}</span>
+      </span>
+    </h1>
+
+    <!-- Subheadline (1 line) -->
+    <p
+      class="font-dm-sans font-normal text-[#182849]/80 text-[15px] sm:text-[16.5px] md:text-[17.5px] lg:text-[18.5px] leading-relaxed max-w-5xl md:whitespace-nowrap mb-8 sm:mb-10"
+    >
+      {{ 'HERO.SUBTITLE' | translate }}
+    </p>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4.5 w-full sm:w-auto">
+      <button
+        type="button"
+        (click)="onContact()"
+        [attr.aria-label]="'HERO.ARIA.CONTACT_US' | translate"
+        class="w-full sm:w-auto min-w-[150px] rounded-xl bg-linear-to-r from-[#1d4ed8] via-[#1d5fe8] to-[#3b82f6] px-7 py-3 sm:px-8 sm:py-3.5 text-[15px] sm:text-[16px] font-semibold text-white shadow-[0_4px_14px_rgba(29,78,216,0.28)] transition-all duration-200 hover:shadow-[0_6px_20px_rgba(29,78,216,0.38)] hover:brightness-105 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d4ed8] cursor-pointer"
+      >
+        {{ 'HERO.ACTIONS.CONTACT_US' | translate }}
+      </button>
+
+      <button
+        type="button"
+        (click)="onWatchVideo()"
+        [attr.aria-label]="'HERO.ARIA.WATCH_VIDEO' | translate"
+        class="w-full sm:w-auto min-w-[150px] rounded-xl border-[1.5px] border-[#2563eb] bg-white/90 px-7 py-3 sm:px-8 sm:py-3.5 text-[15px] sm:text-[16px] font-semibold text-[#1d64ec] shadow-2xs backdrop-blur-xs transition-all duration-200 hover:bg-blue-50/60 hover:border-[#1d4ed8] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] cursor-pointer"
+      >
+        {{ 'HERO.ACTIONS.WATCH_VIDEO' | translate }}
+      </button>
+    </div>
+  </div>
+</section>

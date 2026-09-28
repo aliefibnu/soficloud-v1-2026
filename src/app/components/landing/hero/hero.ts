@@ -1,8 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  imports: [],
   selector: 'app-hero',
+  imports: [TranslatePipe],
   templateUrl: './hero.html',
+  host: {
+    class: 'relative block w-full overflow-hidden',
+  },
 })
-export class Hero {}
+export class Hero {
+  readonly contactClick = output<void>();
+  readonly videoClick = output<void>();
+
+  onContact(): void {
+    this.contactClick.emit();
+  }
+
+  onWatchVideo(): void {
+    this.videoClick.emit();
+  }
+}
