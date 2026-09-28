@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   imports: [],
   selector: 'app-features',
   styles: ``,
-  template: ` <p>features works!</p> `,
+  templateUrl: './features.html',
 })
 export class Features {}
