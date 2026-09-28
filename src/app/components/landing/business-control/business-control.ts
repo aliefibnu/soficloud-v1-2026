@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   imports: [],
   selector: 'app-business-control',
   styles: ``,
-  template: ` <p>business-control works!</p> `,
+  templateUrl: './business-control.html',
 })
 export class BusinessControl {}

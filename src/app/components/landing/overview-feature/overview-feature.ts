@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   imports: [],
   selector: 'app-overview-feature',
   styles: ``,
-  template: ` <p>overview-feature works!</p> `,
+  templateUrl: './overview-feature.html',
 })
 export class OverviewFeature {}
