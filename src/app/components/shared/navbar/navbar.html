@@ -1,35 +1,35 @@
 <header
-  class="relative w-full bg-white font-sans py-4 sm:py-4.5 border-b border-x border-gray-200/70 shadow-[0_8px_24px_-4px_rgba(24,40,73,0.08),0_2px_8px_-2px_rgba(24,40,73,0.04)] md:rounded-b-[15px] transition-[border-radius] duration-200"
+  class="relative w-full bg-white font-sans py-3.5 sm:py-4 border-b border-x border-gray-200/70 shadow-[0_8px_24px_-4px_rgba(24,40,73,0.08),0_2px_8px_-2px_rgba(24,40,73,0.04)] md:rounded-b-[15px] transition-[border-radius] duration-200"
   [class.rounded-b-4xl]="!isMobileMenuOpen()"
   [class.rounded-b-none]="isMobileMenuOpen()"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative flex items-center justify-between gap-4 md:gap-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center justify-between gap-4 md:gap-8">
     <a href="/" class="flex items-center shrink-0">
       <img
         ngSrc="/soficloud-logo.svg"
         alt="SOFICloud logo"
-        width="345"
-        height="97"
+        width="322"
+        height="74"
         priority
-        class="h-11 sm:h-12 md:h-14 lg:h-15 w-auto object-contain transition-opacity duration-200 hover:opacity-90"
+        class="h-9.5 sm:h-10 md:h-10.5 lg:h-11 w-auto object-contain transition-opacity duration-200 hover:opacity-90"
       />
     </a>
 
     <nav
-      class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 lg:gap-10"
+      class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-7 lg:gap-9"
       [attr.aria-label]="'HEADER.ARIA.MAIN_NAV' | translate"
     >
       @for (link of navLinks; track link.key) {
         <a
           [href]="link.href"
-          class="text-[15.5px] lg:text-[16px] font-bold text-[#182849] tracking-[-0.01em] transition-all hover:text-[#6d4552] hover:opacity-85"
+          class="text-[15px] lg:text-[15.5px] font-bold text-[#182849] tracking-[-0.01em] transition-all hover:text-[#6d4552] hover:opacity-85"
         >
           {{ link.key | translate }}
         </a>
       }
     </nav>
 
-    <div class="hidden md:flex items-center gap-4.5 shrink-0">
+    <div class="hidden md:flex items-center gap-4 shrink-0">
       <div class="relative inline-block text-left">
         <button
           type="button"
@@ -40,7 +40,7 @@
           [attr.aria-label]="('LANGUAGES.' + selectedLang.code) | translate"
         >
           <span class="text-base leading-none" aria-hidden="true">{{ selectedLang.flag }}</span>
-          <span>{{ selectedLang.code }}</span>
+          <span class="uppercase font-semibold">{{ selectedLang.code }}</span>
           <svg
             class="h-3.5 w-3.5 text-[#182849]/60 transition-transform duration-200 motion-reduce:transition-none"
             [class.rotate-180]="isLangMenuOpen()"
@@ -93,11 +93,11 @@
         }
       </div>
 
-      <span class="hidden md:block h-7 w-px bg-gray-200/90" aria-hidden="true"></span>
+      <span class="hidden md:block h-6.5 w-px bg-gray-200/90" aria-hidden="true"></span>
 
       <button
         type="button"
-        class="w-full rounded-xl bg-linear-to-r from-[#6d4552] to-[#8e5e6e] px-6 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-200 hover:from-[#5c3a45] hover:to-[#7b4f5d] hover:shadow-sm active:scale-[0.98] md:w-auto cursor-pointer"
+        class="w-full rounded-xl bg-linear-to-r from-[#6d4552] to-[#8e5e6e] px-5.5 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-200 hover:from-[#5c3a45] hover:to-[#7b4f5d] hover:shadow-sm active:scale-[0.98] md:w-auto cursor-pointer"
         (click)="onScheduleDemo()"
       >
         {{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}
@@ -147,7 +147,7 @@
     [hidden]="!isMobileMenuOpen()"
     class="absolute top-full left-0 right-0 z-40 bg-white border-b border-x border-gray-200/70 rounded-b-4xl shadow-[0_16px_36px_-4px_rgba(24,40,73,0.14)] md:hidden origin-top animate-dropdown motion-reduce:animate-none"
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-3 pb-5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-3 pb-5">
       <nav class="flex flex-col" [attr.aria-label]="'HEADER.ARIA.MOBILE_NAV' | translate">
         @for (link of navLinks; track link.key) {
           <a
@@ -170,7 +170,7 @@
             [attr.aria-label]="('LANGUAGES.' + selectedLang.code) | translate"
           >
             <span class="text-base leading-none" aria-hidden="true">{{ selectedLang.flag }}</span>
-            <span>{{ selectedLang.code }}</span>
+            <span class="uppercase font-semibold">{{ selectedLang.code }}</span>
             <svg
               class="h-3.5 w-3.5 text-[#182849]/60 transition-transform duration-200 motion-reduce:transition-none"
               [class.rotate-180]="isMobileLangSheetOpen()"
