@@ -1,1 +1,267 @@
-<p>navbar works!</p>
+<header
+  class="relative w-full bg-white font-sans py-4 sm:py-4.5 border-b border-x border-gray-200/70 shadow-[0_8px_24px_-4px_rgba(24,40,73,0.08),0_2px_8px_-2px_rgba(24,40,73,0.04)] md:rounded-b-[15px] transition-[border-radius] duration-200"
+  [class.rounded-b-4xl]="!isMobileMenuOpen()"
+  [class.rounded-b-none]="isMobileMenuOpen()"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative flex items-center justify-between gap-4 md:gap-10">
+    <a href="/" class="flex items-center gap-2.5 shrink-0 group">
+      <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-[#6d4552] to-[#8e5e6e] text-white font-bold text-lg shadow-xs transition-transform duration-200 group-hover:scale-105">
+        S
+      </span>
+      <span class="text-xl font-bold tracking-tight text-[#182849]">
+        Soficloud
+      </span>
+    </a>
+
+    <nav
+      class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 lg:gap-10"
+      [attr.aria-label]="'HEADER.ARIA.MAIN_NAV' | translate"
+    >
+      @for (link of navLinks; track link.key) {
+        <a
+          [href]="link.href"
+          class="text-[15.5px] lg:text-[16px] font-bold text-[#182849] tracking-[-0.01em] transition-all hover:text-[#6d4552] hover:opacity-85"
+        >
+          {{ link.key | translate }}
+        </a>
+      }
+    </nav>
+
+    <div class="hidden md:flex items-center gap-4.5 shrink-0">
+      <div class="relative inline-block text-left">
+        <button
+          type="button"
+          class="inline-flex h-10 items-center gap-2.5 rounded-full border border-gray-200/90 bg-gray-50/70 px-3.5 py-1.5 text-[13.5px] font-semibold tracking-wide text-[#182849] shadow-2xs transition-all duration-200 hover:border-gray-300 hover:bg-gray-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d4552] motion-reduce:transition-none cursor-pointer"
+          (click)="toggleLangMenu($event)"
+          [attr.aria-expanded]="isLangMenuOpen()"
+          aria-haspopup="listbox"
+          [attr.aria-label]="('LANGUAGES.' + selectedLang.code) | translate"
+        >
+          <span class="text-base leading-none" aria-hidden="true">{{ selectedLang.flag }}</span>
+          <span>{{ selectedLang.code }}</span>
+          <svg
+            class="h-3.5 w-3.5 text-[#182849]/60 transition-transform duration-200 motion-reduce:transition-none"
+            [class.rotate-180]="isLangMenuOpen()"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        @if (isLangMenuOpen()) {
+          <ul
+            role="listbox"
+            class="absolute left-1/2 -translate-x-1/2 top-[calc(100%+8px)] z-30 w-56 rounded-2xl border border-gray-100/90 bg-white/95 p-1.5 shadow-[0_12px_36px_-6px_rgba(24,40,73,0.12),0_4px_12px_-2px_rgba(24,40,73,0.06)] ring-1 ring-black/4 backdrop-blur-md origin-top animate-dropdown motion-reduce:animate-none"
+          >
+            @for (lang of languages; track lang.code) {
+              <li role="none">
+                <button
+                  type="button"
+                  role="option"
+                  [attr.aria-selected]="selectedLang.code === lang.code"
+                  class="group flex w-full items-center justify-between rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-all duration-150 cursor-pointer"
+                  [class.bg-[#6d4552]/8]="selectedLang.code === lang.code"
+                  [class.text-[#6d4552]]="selectedLang.code === lang.code"
+                  [class.font-semibold]="selectedLang.code === lang.code"
+                  [class.text-[#182849]]="selectedLang.code !== lang.code"
+                  [class.hover:bg-gray-100/80]="selectedLang.code !== lang.code"
+                  [class.active:bg-gray-200/60]="selectedLang.code !== lang.code"
+                  (click)="selectLang(lang)"
+                >
+                  <span class="flex items-center gap-2.5 min-w-0">
+                    <span class="text-base leading-none" aria-hidden="true">{{ lang.flag }}</span>
+                    <span class="truncate whitespace-nowrap">{{ lang.label }}</span>
+                  </span>
+                  @if (selectedLang.code === lang.code) {
+                    <svg
+                      class="h-4 w-4 shrink-0 text-[#6d4552]"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path d="M13.25 4.75L6 12L2.75 8.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  }
+                </button>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
+      <span class="hidden md:block h-7 w-px bg-gray-200/90" aria-hidden="true"></span>
+
+      <button
+        type="button"
+        class="w-full rounded-xl bg-linear-to-r from-[#6d4552] to-[#8e5e6e] px-6 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-200 hover:from-[#5c3a45] hover:to-[#7b4f5d] hover:shadow-sm active:scale-[0.98] md:w-auto cursor-pointer"
+        (click)="onScheduleDemo()"
+      >
+        {{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}
+      </button>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex h-11 w-11 md:hidden flex-col items-center justify-center gap-1.5 rounded-xl text-[#182849] transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d4552] motion-reduce:transition-none cursor-pointer"
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="isMobileMenuOpen()"
+      aria-controls="mobile-menu"
+      [attr.aria-label]="(isMobileMenuOpen() ? 'HEADER.ARIA.CLOSE_MENU' : 'HEADER.ARIA.OPEN_MENU') | translate"
+    >
+      <span
+        class="h-0.5 w-5 rounded-full bg-current transition-transform duration-200 motion-reduce:transition-none"
+        [class.translate-y-2]="isMobileMenuOpen()"
+        [class.rotate-45]="isMobileMenuOpen()"
+        aria-hidden="true"
+      ></span>
+      <span
+        class="h-0.5 w-5 rounded-full bg-current transition-opacity duration-200 motion-reduce:transition-none"
+        [class.opacity-0]="isMobileMenuOpen()"
+        aria-hidden="true"
+      ></span>
+      <span
+        class="h-0.5 w-5 rounded-full bg-current transition-transform duration-200 motion-reduce:transition-none"
+        [class.-translate-y-2]="isMobileMenuOpen()"
+        [class.-rotate-45]="isMobileMenuOpen()"
+        aria-hidden="true"
+      ></span>
+    </button>
+  </div>
+
+  <!-- mobile menu backdrop overlay -->
+  @if (isMobileMenuOpen()) {
+    <div
+      class="fixed inset-0 top-0 bg-[#0f0f19]/30 backdrop-blur-[2px] -z-10 md:hidden animate-fade-in motion-reduce:animate-none"
+      (click)="closeMobileMenu()"
+      aria-hidden="true"
+    ></div>
+  }
+
+  <!-- mobile menu dropdown overlay -->
+  <div
+    id="mobile-menu"
+    [hidden]="!isMobileMenuOpen()"
+    class="absolute top-full left-0 right-0 z-40 bg-white border-b border-x border-gray-200/70 rounded-b-4xl shadow-[0_16px_36px_-4px_rgba(24,40,73,0.14)] md:hidden origin-top animate-dropdown motion-reduce:animate-none"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-3 pb-5">
+      <nav class="flex flex-col" [attr.aria-label]="'HEADER.ARIA.MOBILE_NAV' | translate">
+        @for (link of navLinks; track link.key) {
+          <a
+            [href]="link.href"
+            class="py-2.5 text-[15px] font-bold text-[#182849] transition-opacity hover:opacity-75"
+            (click)="closeMobileMenu()"
+          >
+            {{ link.key | translate }}
+          </a>
+        }
+      </nav>
+      <div class="mt-3.5 flex flex-col items-stretch gap-3 border-t border-gray-100 pt-4">
+        <div class="flex items-center justify-start">
+          <button
+            type="button"
+            class="inline-flex h-10 items-center gap-2.5 rounded-full border border-gray-200/90 bg-gray-50/70 px-3.5 py-1.5 text-[13.5px] font-semibold tracking-wide text-[#182849] shadow-2xs transition-all duration-200 hover:border-gray-300 hover:bg-gray-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d4552] motion-reduce:transition-none cursor-pointer"
+            (click)="openMobileLangSheet()"
+            [attr.aria-expanded]="isMobileLangSheetOpen()"
+            aria-haspopup="dialog"
+            [attr.aria-label]="('LANGUAGES.' + selectedLang.code) | translate"
+          >
+            <span class="text-base leading-none" aria-hidden="true">{{ selectedLang.flag }}</span>
+            <span>{{ selectedLang.code }}</span>
+            <svg
+              class="h-3.5 w-3.5 text-[#182849]/60 transition-transform duration-200 motion-reduce:transition-none"
+              [class.rotate-180]="isMobileLangSheetOpen()"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="w-full rounded-xl bg-linear-to-r from-[#6d4552] to-[#8e5e6e] px-6 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-200 hover:from-[#5c3a45] hover:to-[#7b4f5d] hover:shadow-sm active:scale-[0.98] cursor-pointer"
+          (click)="onScheduleDemo(); closeMobileMenu()"
+        >
+          {{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile language bottom sheet (mobile viewport only) -->
+  @if (isMobileLangSheetOpen()) {
+    <div
+      class="fixed inset-0 z-50 md:hidden"
+      aria-labelledby="mobile-lang-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="fixed inset-0 bg-[#0f0f19]/40 backdrop-blur-[2px] animate-fade-in motion-reduce:animate-none"
+        (click)="closeMobileLangSheet()"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        #mobileSheet
+        class="fixed inset-x-0 bottom-0 z-50 flex flex-col rounded-t-3xl border-t border-gray-100 bg-white px-5 pt-3 pb-[max(1.5rem,env(safe-area-inset-bottom,1.5rem))] shadow-[0_-12px_36px_-6px_rgba(24,40,73,0.18)] animate-slide-up motion-reduce:animate-none"
+        (keydown)="onSheetKeyDown($event)"
+      >
+        <div class="mx-auto mb-3 h-1 w-10 shrink-0 rounded-full bg-gray-300" aria-hidden="true"></div>
+
+        <div class="mb-3 flex items-center justify-between">
+          <h2 id="mobile-lang-title" class="text-base font-bold text-[#182849]">
+            {{ 'HEADER.CHOOSE_LANGUAGE' | translate }}
+          </h2>
+          <button
+            type="button"
+            class="inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus-visible:outline-2 focus-visible:outline-[#6d4552] cursor-pointer"
+            (click)="closeMobileLangSheet()"
+            [attr.aria-label]="'HEADER.ARIA.CLOSE_MENU' | translate"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div role="listbox" class="flex flex-col gap-1">
+          @for (lang of languages; track lang.code) {
+            <button
+              type="button"
+              role="option"
+              [attr.aria-selected]="selectedLang.code === lang.code"
+              class="group flex min-h-12 w-full items-center justify-between rounded-xl px-3.5 py-3 text-left text-[15px] font-medium transition-all duration-150 active:scale-[0.99] cursor-pointer"
+              [class.bg-[#6d4552]/8]="selectedLang.code === lang.code"
+              [class.text-[#6d4552]]="selectedLang.code === lang.code"
+              [class.font-semibold]="selectedLang.code === lang.code"
+              [class.text-[#182849]]="selectedLang.code !== lang.code"
+              [class.hover:bg-gray-100/80]="selectedLang.code !== lang.code"
+              [class.active:bg-gray-200/60]="selectedLang.code !== lang.code"
+              (click)="selectMobileLang(lang)"
+            >
+              <span class="flex items-center gap-3 min-w-0">
+                <span class="text-xl leading-none" aria-hidden="true">{{ lang.flag }}</span>
+                <span class="truncate">{{ lang.label }}</span>
+              </span>
+              @if (selectedLang.code === lang.code) {
+                <svg
+                  class="h-5 w-5 shrink-0 text-[#6d4552]"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path d="M13.25 4.75L6 12L2.75 8.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              }
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</header>

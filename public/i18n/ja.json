@@ -6,5 +6,29 @@
     "WELCOME": "ようこそ",
     "HOME": "ホーム",
     "LANGUAGE": "言語"
+  },
+  "HEADER": {
+    "NAV": {
+      "FEATURES": "機能",
+      "RESOURCES": "リソース",
+      "SUPPORT": "サポート"
+    },
+    "ACTIONS": {
+      "SCHEDULE_DEMO": "デモを予約する"
+    },
+    "CHOOSE_LANGUAGE": "言語を選択",
+    "ARIA": {
+      "MAIN_NAV": "メインナビゲーション",
+      "MOBILE_NAV": "モバイルナビゲーション",
+      "OPEN_MENU": "メインメニューを開く",
+      "CLOSE_MENU": "メニューを閉じる"
+    }
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "id": "Bahasa Indonesia",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
   }
 }

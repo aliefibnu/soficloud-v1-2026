@@ -6,5 +6,29 @@
     "WELCOME": "Welcome",
     "HOME": "Home",
     "LANGUAGE": "Language"
+  },
+  "HEADER": {
+    "NAV": {
+      "FEATURES": "Features",
+      "RESOURCES": "Resources",
+      "SUPPORT": "Support"
+    },
+    "ACTIONS": {
+      "SCHEDULE_DEMO": "Schedule a Demo"
+    },
+    "CHOOSE_LANGUAGE": "Choose Language",
+    "ARIA": {
+      "MAIN_NAV": "Main Navigation",
+      "MOBILE_NAV": "Mobile Navigation",
+      "OPEN_MENU": "Open main menu",
+      "CLOSE_MENU": "Close menu"
+    }
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "id": "Bahasa Indonesia",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
   }
 }

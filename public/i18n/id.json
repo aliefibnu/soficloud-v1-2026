@@ -6,5 +6,29 @@
     "WELCOME": "Selamat Datang",
     "HOME": "Beranda",
     "LANGUAGE": "Bahasa"
+  },
+  "HEADER": {
+    "NAV": {
+      "FEATURES": "Fitur",
+      "RESOURCES": "Sumber Daya",
+      "SUPPORT": "Dukungan"
+    },
+    "ACTIONS": {
+      "SCHEDULE_DEMO": "Jadwalkan Demo"
+    },
+    "CHOOSE_LANGUAGE": "Pilih Bahasa",
+    "ARIA": {
+      "MAIN_NAV": "Navigasi Utama",
+      "MOBILE_NAV": "Navigasi Seluler",
+      "OPEN_MENU": "Buka menu utama",
+      "CLOSE_MENU": "Tutup menu"
+    }
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "id": "Bahasa Indonesia",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
   }
 }

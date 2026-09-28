@@ -6,5 +6,29 @@
     "WELCOME": "欢迎",
     "HOME": "首页",
     "LANGUAGE": "语言"
+  },
+  "HEADER": {
+    "NAV": {
+      "FEATURES": "功能特性",
+      "RESOURCES": "资源中心",
+      "SUPPORT": "支持服务"
+    },
+    "ACTIONS": {
+      "SCHEDULE_DEMO": "预约演示"
+    },
+    "CHOOSE_LANGUAGE": "选择语言",
+    "ARIA": {
+      "MAIN_NAV": "主导航",
+      "MOBILE_NAV": "移动导航",
+      "OPEN_MENU": "打开主菜单",
+      "CLOSE_MENU": "关闭菜单"
+    }
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "id": "Bahasa Indonesia",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
   }
 }
