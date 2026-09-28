@@ -4,13 +4,15 @@
   [class.rounded-b-none]="isMobileMenuOpen()"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative flex items-center justify-between gap-4 md:gap-10">
-    <a href="/" class="flex items-center gap-2.5 shrink-0 group">
-      <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-[#6d4552] to-[#8e5e6e] text-white font-bold text-lg shadow-xs transition-transform duration-200 group-hover:scale-105">
-        S
-      </span>
-      <span class="text-xl font-bold tracking-tight text-[#182849]">
-        Soficloud
-      </span>
+    <a href="/" class="flex items-center shrink-0">
+      <img
+        ngSrc="/soficloud-logo.svg"
+        alt="SOFICloud logo"
+        width="345"
+        height="97"
+        priority
+        class="h-11 sm:h-12 md:h-14 lg:h-15 w-auto object-contain transition-opacity duration-200 hover:opacity-90"
+      />
     </a>
 
     <nav
