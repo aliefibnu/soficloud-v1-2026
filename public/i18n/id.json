@@ -1,0 +1,10 @@
+{
+  "APP": {
+    "TITLE": "Soficloud"
+  },
+  "COMMON": {
+    "WELCOME": "Selamat Datang",
+    "HOME": "Beranda",
+    "LANGUAGE": "Bahasa"
+  }
+}

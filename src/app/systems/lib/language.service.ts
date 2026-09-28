@@ -1,0 +1,55 @@
+import { inject, PLATFORM_ID, Service, signal } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+
+export type Language = 'en' | 'id' | 'zh' | 'ja' | 'ko';
+
+@Service()
+export class LanguageService {
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly translate = inject(TranslateService);
+  private readonly document = inject(DOCUMENT);
+  readonly supportedLanguages: readonly Language[] = ['en', 'id', 'zh', 'ja', 'ko'];
+  private readonly storageKey = 'app-lang';
+
+  readonly currentLanguage = signal<Language>('en');
+
+  init(): Observable<unknown> {
+    this.translate.addLangs([...this.supportedLanguages]);
+    this.translate.setFallbackLang('en');
+
+    let language = 'en';
+
+    if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
+      const savedLang = localStorage.getItem(this.storageKey);
+      const browserLang = this.translate.getBrowserLang();
+      language = savedLang ?? browserLang ?? 'en';
+    }
+
+    const selected = this.supportedLanguages.includes(language as Language)
+      ? (language as Language)
+      : 'en';
+
+    this.currentLanguage.set(selected);
+    if (this.document?.documentElement) {
+      this.document.documentElement.lang = selected;
+    }
+    return this.translate.use(selected);
+  }
+
+  setLanguage(language: Language): void {
+    this.currentLanguage.set(language);
+    if (this.document?.documentElement) {
+      this.document.documentElement.lang = language;
+    }
+    this.translate.use(language);
+    if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
+      localStorage.setItem(this.storageKey, language);
+    }
+  }
+
+  getLanguage(): Language {
+    return this.currentLanguage();
+  }
+}
