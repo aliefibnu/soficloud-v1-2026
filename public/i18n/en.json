@@ -30,5 +30,26 @@
     "zh": "中文",
     "ja": "日本語",
     "ko": "한국어"
+  },
+  "BUSINESS_CONTROL": {
+    "HEADER_TITLE": "Control Business From One Place",
+    "HEADER_SUBTITLE": "Select the area you want to see. Every process connects to the same data and is always traceable.",
+    "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
+    "EXPENSE": "Expense",
+    "INCOME": "Income",
+    "CONTENT_TITLE": "Real-Time Business Monitoring for Faster Decision-Making",
+    "CONTENT_DESC": "Sales, cash position, inventory alerts, outstanding processes, production, projects, and business KPIs are available in a single management view.",
+    "CTA_BUTTON": "View Capabilities",
+    "OPTIONS_MENU": "Chart Options",
+    "RESET_VIEW": "Reset View",
+    "EXPORT_DATA": "Export Summary",
+    "MONTHS": {
+      "AUG_2025": "August 2025",
+      "SEP_2025": "September 2025",
+      "OCT_2025": "October 2025",
+      "NOV_2025": "November 2025",
+      "DEC_2025": "December 2025",
+      "JAN_2026": "January 2026"
+    }
   }
 }

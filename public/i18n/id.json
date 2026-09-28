@@ -30,5 +30,26 @@
     "zh": "中文",
     "ja": "日本語",
     "ko": "한국어"
+  },
+  "BUSINESS_CONTROL": {
+    "HEADER_TITLE": "Kendalikan Bisnis Dari Satu Tempat",
+    "HEADER_SUBTITLE": "Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan selalu dapat ditelusuri.",
+    "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
+    "EXPENSE": "Expense",
+    "INCOME": "Income",
+    "CONTENT_TITLE": "Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat",
+    "CONTENT_DESC": "Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view.",
+    "CTA_BUTTON": "Lihat Kapabilitas",
+    "OPTIONS_MENU": "Opsi Grafik",
+    "RESET_VIEW": "Reset Tampilan",
+    "EXPORT_DATA": "Ekspor Ringkasan",
+    "MONTHS": {
+      "AUG_2025": "August 2025",
+      "SEP_2025": "September 2025",
+      "OCT_2025": "October 2025",
+      "NOV_2025": "November 2025",
+      "DEC_2025": "December 2025",
+      "JAN_2026": "January 2026"
+    }
   }
 }
