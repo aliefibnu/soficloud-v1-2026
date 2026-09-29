@@ -65,6 +65,71 @@
     "ARIA": {
       "CONTACT_US": "联系Soficloud团队",
       "WATCH_VIDEO": "观看Soficloud产品演示视频"
+    },
+    "UI_MOCKUP": {
+      "TARGET_REVENUE": "目标营收",
+      "APPROVAL_TODAY": "今日审批",
+      "APPROVAL_DOCUMENTS": "18 份文档",
+      "MANAGEMENT_OVERVIEW": "管理概览",
+      "DATE": "2026年3月18日 星期三",
+      "GREETING": "欢迎，{{name}}",
+      "PERIOD_CURRENT_MONTH": "本月",
+      "PERIOD_THIS_QUARTER": "本季度",
+      "PERIOD_THIS_YEAR": "本年度",
+      "NAV": {
+        "DASHBOARD": "仪表板",
+        "FINANCE": "财务",
+        "SALES": "销售",
+        "PURCHASING": "采购",
+        "INVENTORY": "库存",
+        "PRODUCTION": "生产",
+        "PROJECT": "项目",
+        "ANALYTICS": "分析"
+      },
+      "METRICS": {
+        "REVENUE": "营收",
+        "GROSS_PROFIT": "毛利润",
+        "INVENTORY_VALUE": "库存价值",
+        "AR_OUTSTANDING": "应收账款未结",
+        "LOCATIONS_COUNT": "42 个地点",
+        "OVERDUE_COUNT": "12 笔逾期"
+      },
+      "SALES_PERFORMANCE": "销售业绩",
+      "REVENUE_GROSS_PROFIT": "营收与毛利",
+      "MONTHS": {
+        "JAN": "1月",
+        "FEB": "2月",
+        "MAR": "3月",
+        "APR": "4月",
+        "MAY": "5月",
+        "JUN": "6月",
+        "JUL": "7月"
+      },
+      "WEEKS": {
+        "W1": "第1周",
+        "W2": "第2周",
+        "W3": "第3周",
+        "W4": "第4周",
+        "W5": "第5周",
+        "W6": "第6周",
+        "W7": "第7周"
+      },
+      "HEALTH": {
+        "CASH_POSITION": "资金状况",
+        "CASH_POSITION_VALUE": "良好",
+        "ORDER_FULFILMENT": "订单履约",
+        "INVENTORY_ALERT": "库存预警",
+        "INVENTORY_ALERT_VALUE": "8 项",
+        "INVENTORY_ALERT_VALUE_QTR": "4 项",
+        "INVENTORY_ALERT_VALUE_YR": "2 项"
+      },
+      "ARIA": {
+        "TARGET_REVENUE_CARD": "目标营收卡片",
+        "APPROVAL_STATUS_CARD": "审批状态卡片",
+        "USER_PROFILE": "用户个人资料",
+        "SIDEBAR_NAV": "仪表板侧边导航",
+        "PERIOD_SELECTOR": "仪表板时间周期筛选"
+      }
     }
   },
   "OVERVIEW_FEATURE": {
