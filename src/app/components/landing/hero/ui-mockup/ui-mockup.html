@@ -1,13 +1,11 @@
 <div class="relative w-full max-w-5xl mx-auto px-2 sm:px-4 lg:px-6">
-  <!-- Top Right Floating Card: Target Revenue -->
   <div
-    class="absolute -top-3 sm:-top-5 right-4 sm:right-6 lg:right-2 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 shadow-[0_16px_36px_-6px_rgba(24,40,73,0.16),0_4px_16px_rgba(24,40,73,0.06)] border border-slate-100/90 flex flex-col items-center min-w-[110px] sm:min-w-[126px] animate-fade-in"
+    class="absolute -top-3 sm:-top-5 right-4 sm:right-6 lg:right-2 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 shadow-[0_16px_36px_-6px_rgba(24,40,73,0.16),0_4px_16px_rgba(24,40,73,0.06)] border border-slate-100/90 flex flex-col items-center min-w-27.5 sm:min-w-31.5 animate-fade-in"
     aria-label="Target Revenue Card"
   >
     <span class="text-[11px] sm:text-xs text-[#8fa0b5] font-medium mb-2 sm:mb-2.5">Target Revenue</span>
     <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center">
       <svg class="w-full h-full -rotate-90" viewBox="0 0 64 64" aria-hidden="true">
-        <!-- Background circle -->
         <circle
           cx="32"
           cy="32"
@@ -16,7 +14,6 @@
           stroke="#e2e8f0"
           stroke-width="5.5"
         />
-        <!-- 92% Progress circle (circumference ~ 163.36, 92% = ~150.3) -->
         <circle
           cx="32"
           cy="32"
@@ -33,7 +30,6 @@
     </div>
   </div>
 
-  <!-- Bottom Left Floating Card: Approval Hari ini -->
   <div
     class="absolute bottom-16 sm:bottom-20 left-4 sm:left-6 lg:left-2 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4.5 shadow-[0_16px_36px_-6px_rgba(24,40,73,0.16),0_4px_16px_rgba(24,40,73,0.06)] border border-slate-100/90 w-44 sm:w-52 animate-fade-in"
     aria-label="Approval Status Card"
@@ -41,17 +37,14 @@
     <span class="text-[11px] sm:text-xs text-[#8fa0b5] font-medium block">Approval Hari ini</span>
     <span class="text-sm sm:text-base font-bold text-[#182849] block mt-0.5 mb-2.5">18 dokumen</span>
     <div class="h-2 w-full bg-[#ebf3fe] rounded-full overflow-hidden p-0.5" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
-      <div class="h-full w-[72%] bg-gradient-to-r from-[#1d44eb] to-[#3b82f6] rounded-full"></div>
+      <div class="h-full w-[72%] bg-linear-to-r from-[#1d44eb] to-[#3b82f6] rounded-full"></div>
     </div>
   </div>
 
-  <!-- Main Window Frame with Smooth Fadeout at Bottom -->
   <div
-    class="relative w-full rounded-[24px] sm:rounded-[32px] md:rounded-[36px] bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-[0_30px_90px_-20px_rgba(24,40,73,0.12),0_12px_36px_-8px_rgba(24,40,73,0.06)] overflow-hidden [mask-image:linear-gradient(to_bottom,black_65%,transparent_98%)] [-webkit-mask-image:linear-gradient(to_bottom,black_65%,transparent_98%)] pb-12 sm:pb-20"
+    class="relative w-full rounded-3xl sm:rounded-4xl md:rounded-[36px] bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-[0_30px_90px_-20px_rgba(24,40,73,0.12),0_12px_36px_-8px_rgba(24,40,73,0.06)] overflow-hidden mask-[linear-gradient(to_bottom,black_65%,transparent_98%)] [-webkit-mask-image:linear-gradient(to_bottom,black_65%,transparent_98%)] pb-12 sm:pb-20"
   >
-    <!-- Top Header Bar -->
     <div class="px-4 sm:px-6 md:px-8 py-3.5 sm:py-4.5 flex items-center justify-between border-b border-slate-100/80 bg-white/60">
-      <!-- Left: SOFICloud Brand Logo -->
       <div class="flex items-center gap-2">
         <img
           src="/soficloud-logo.svg"
@@ -60,14 +53,12 @@
         />
       </div>
 
-      <!-- Center: Management Overview Pill -->
       <div class="flex items-center">
         <div class="px-3.5 py-1 sm:px-4.5 sm:py-1.5 rounded-full bg-[#f0f4fa] border border-slate-200/50 text-[#334155] text-[11px] sm:text-xs font-semibold tracking-normal shadow-2xs">
           Management Overview
         </div>
       </div>
 
-      <!-- Right: User Avatar -->
       <div class="flex items-center">
         <div
           class="w-6 h-6 sm:w-7.5 sm:h-7.5 rounded-full bg-[#1d44eb] text-white flex items-center justify-center font-bold text-xs sm:text-sm shadow-xs"
@@ -77,11 +68,8 @@
         </div>
       </div>
     </div>
-
-    <!-- Dashboard Window Body (Sidebar + Content) -->
-    <div class="flex flex-row p-3 sm:p-5 md:p-6 gap-3 sm:gap-5 md:gap-6 bg-[#f8faff]/50 min-h-[480px]">
-      <!-- Left Sidebar Navigation -->
-      <aside class="w-32 sm:w-40 md:w-44 flex-shrink-0 flex flex-col gap-1 pr-1 border-r border-slate-100/80" aria-label="Dashboard Sidebar Navigation">
+    <div class="flex flex-row p-3 sm:p-5 md:p-6 gap-3 sm:gap-5 md:gap-6 bg-[#f8faff]/50 min-h-120">
+      <aside class="w-32 sm:w-40 md:w-44 shrink-0 flex flex-col gap-1 pr-1 border-r border-slate-100/80" aria-label="Dashboard Sidebar Navigation">
         @for (item of navItems; track item.id) {
           @if (item.id === activeNav()) {
             <button
@@ -89,7 +77,7 @@
               (click)="setActiveNav(item.id)"
               class="w-full flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-[#ebf3fe] text-[#1d44eb] font-semibold text-xs sm:text-[13px] text-left transition-all duration-150 cursor-pointer shadow-2xs"
             >
-              <span class="w-4 h-4 rounded-[4px] border-[1.5px] border-[#1d44eb] flex items-center justify-center flex-shrink-0">
+              <span class="w-4 h-4 rounded-sm border-[1.5px] border-[#1d44eb] flex items-center justify-center shrink-0">
                 <span class="w-1.5 h-1.5 bg-[#1d44eb] rounded-[1px]"></span>
               </span>
               <span class="truncate">{{ item.label }}</span>
@@ -100,16 +88,14 @@
               (click)="setActiveNav(item.id)"
               class="w-full flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-[#8fa0b5] hover:text-[#475569] hover:bg-slate-100/50 font-normal text-xs sm:text-[13px] text-left transition-all duration-150 cursor-pointer"
             >
-              <span class="w-4 h-4 rounded-[4px] border-[1.5px] border-[#cbd5e1] flex-shrink-0"></span>
+              <span class="w-4 h-4 rounded-sm border-[1.5px] border-[#cbd5e1] shrink-0"></span>
               <span class="truncate">{{ item.label }}</span>
             </button>
           }
         }
       </aside>
 
-      <!-- Right Dashboard Content Area -->
       <main class="flex-1 flex flex-col min-w-0">
-        <!-- Content Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 sm:mb-5">
           <div>
             <span class="text-[11px] sm:text-xs text-[#8fa0b5] font-medium block">Kamis, 28 Juli 2026</span>
@@ -118,7 +104,6 @@
             </h3>
           </div>
 
-          <!-- Period Filter Dropdown Button -->
           <div class="flex items-center">
             <button
               type="button"
@@ -132,7 +117,6 @@
           </div>
         </div>
 
-        <!-- 4 Top KPI Cards Grid -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-3.5 sm:mb-4.5">
           @for (kpi of kpiMetrics; track kpi.title) {
             <div class="bg-white rounded-2xl p-3 sm:p-4 border border-slate-100 shadow-[0_4px_16px_-4px_rgba(24,40,73,0.04)] flex flex-col justify-between">
@@ -155,9 +139,7 @@
           }
         </div>
 
-        <!-- Bottom 2 Cards Grid (Line Chart & Health Gauge) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-3.5">
-          <!-- Left: Sales Performance Chart Card -->
           <div class="lg:col-span-7 bg-white rounded-2xl p-3.5 sm:p-5 border border-slate-100 shadow-[0_4px_16px_-4px_rgba(24,40,73,0.04)] flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
@@ -171,7 +153,6 @@
                 </div>
               </div>
 
-              <!-- Line Chart Visual Area -->
               <div class="mt-4 sm:mt-6 relative w-full h-24 sm:h-32">
                 <svg class="w-full h-full overflow-visible" viewBox="0 0 500 120" preserveAspectRatio="none" aria-hidden="true">
                   <defs>
@@ -181,12 +162,10 @@
                       <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0" />
                     </linearGradient>
                   </defs>
-                  <!-- Smooth Area Fill -->
                   <path
                     d="M 10,95 C 60,95 90,80 130,80 C 170,80 200,92 240,70 C 280,48 310,85 350,72 C 390,58 420,20 460,15 C 480,12 495,12 500,12 L 500,120 L 10,120 Z"
                     fill="url(#salesGrad)"
                   />
-                  <!-- Smooth Main Curve Stroke -->
                   <path
                     d="M 10,95 C 60,95 90,80 130,80 C 170,80 200,92 240,70 C 280,48 310,85 350,72 C 390,58 420,20 460,15 C 480,12 495,12 500,12"
                     fill="none"
@@ -196,8 +175,6 @@
                   />
                 </svg>
               </div>
-
-              <!-- Month Axis -->
               <div class="flex items-center justify-between text-[11px] sm:text-xs text-[#8fa0b5] font-medium mt-2 px-1">
                 @for (m of chartMonths; track m) {
                   <span>{{ m }}</span>
@@ -206,13 +183,10 @@
             </div>
           </div>
 
-          <!-- Right: Health Gauge & Status Items Card -->
           <div class="lg:col-span-5 bg-white rounded-2xl p-3.5 sm:p-5 border border-slate-100 shadow-[0_4px_16px_-4px_rgba(24,40,73,0.04)] flex flex-col justify-between">
-            <!-- Semicircular Gauge Chart -->
             <div class="flex flex-col items-center pt-1">
               <div class="relative w-44 sm:w-48 h-22 sm:h-24 overflow-hidden flex items-end justify-center">
                 <svg class="w-44 sm:w-48 h-44 sm:h-48 -mb-22 sm:-mb-24" viewBox="0 0 160 160" aria-hidden="true">
-                  <!-- Background Arc (180 deg) -->
                   <path
                     d="M 20,80 A 60,60 0 0,1 140,80"
                     fill="none"
@@ -220,7 +194,6 @@
                     stroke-width="12"
                     stroke-linecap="round"
                   />
-                  <!-- Progress Arc (~92% of 180deg) -->
                   <path
                     d="M 20,80 A 60,60 0 0,1 140,80"
                     fill="none"
@@ -238,10 +211,9 @@
               </div>
             </div>
 
-            <!-- Divider -->
+            <!-- divider -->
             <div class="border-t border-slate-100 my-3"></div>
 
-            <!-- Status Indicator Rows -->
             <div class="flex flex-col gap-2.5">
               @for (status of healthStatuses; track status.label) {
                 <div class="flex items-center justify-between text-xs sm:text-[13px]">
@@ -258,9 +230,8 @@
       </main>
     </div>
 
-    <!-- Smooth Bottom Overlay for Seamless Fadeout -->
     <div
-      class="pointer-events-none absolute inset-x-0 bottom-0 h-32 sm:h-44 bg-gradient-to-t from-white via-white/80 to-transparent"
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-32 sm:h-44 bg-linear-to-t from-white via-white/80 to-transparent"
       aria-hidden="true"
     ></div>
   </div>
