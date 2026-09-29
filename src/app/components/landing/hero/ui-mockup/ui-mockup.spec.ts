@@ -216,14 +216,12 @@ describe('UiMockup', () => {
     expect(compiled.textContent).toContain('8 item');
   });
 
-  it('should render top-right Target Revenue floating card and bottom-left Approval card', () => {
+  it('should render bottom-left Approval card and not render Target Revenue card', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const targetRevenueCard = compiled.querySelector('[aria-label="Target Revenue Card"]');
     const approvalCard = compiled.querySelector('[aria-label="Approval Status Card"]');
 
-    expect(targetRevenueCard).toBeTruthy();
-    expect(targetRevenueCard?.textContent).toContain('Target Revenue');
-    expect(targetRevenueCard?.textContent).toContain('92%');
+    expect(targetRevenueCard).toBeNull();
 
     expect(approvalCard).toBeTruthy();
     expect(approvalCard?.textContent).toContain('Approval Hari ini');
