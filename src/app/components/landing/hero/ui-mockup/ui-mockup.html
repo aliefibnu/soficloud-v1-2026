@@ -129,8 +129,19 @@
                   >
                     <span>{{ option.labelKey | translate }}</span>
                     @if (selectedPeriod() === option.id) {
-                      <svg class="w-3.5 h-3.5 text-[#1d44eb] shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      <svg
+                        class="w-3.5 h-3.5 text-[#1d44eb] shrink-0"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M13.25 4.75L6 12L2.75 8.75"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
                       </svg>
                     }
                   </button>
