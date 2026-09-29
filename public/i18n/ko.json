@@ -65,6 +65,57 @@
     "ARIA": {
       "CONTACT_US": "Soficloud 팀에 문의하기",
       "WATCH_VIDEO": "Soficloud 데모 영상 시청"
+    },
+    "UI_MOCKUP": {
+      "TARGET_REVENUE": "목표 매출",
+      "APPROVAL_TODAY": "오늘의 결재",
+      "APPROVAL_DOCUMENTS": "18건의 문서",
+      "MANAGEMENT_OVERVIEW": "경영 개요",
+      "DATE": "2009년 3월 18일 수요일",
+      "GREETING": "환영합니다, {{name}}",
+      "PERIOD_CURRENT_MONTH": "당월",
+      "NAV": {
+        "DASHBOARD": "대시보드",
+        "FINANCE": "재무",
+        "SALES": "영업",
+        "PURCHASING": "구매",
+        "INVENTORY": "재고",
+        "PRODUCTION": "생산",
+        "PROJECT": "프로젝트",
+        "ANALYTICS": "분석"
+      },
+      "METRICS": {
+        "REVENUE": "매출",
+        "GROSS_PROFIT": "매출총이익",
+        "INVENTORY_VALUE": "재고 자산",
+        "AR_OUTSTANDING": "미수금 잔액",
+        "LOCATIONS_COUNT": "42개 위치",
+        "OVERDUE_COUNT": "12건 만기"
+      },
+      "SALES_PERFORMANCE": "매출 실적",
+      "REVENUE_GROSS_PROFIT": "매출 및 매출총이익",
+      "MONTHS": {
+        "JAN": "1월",
+        "FEB": "2월",
+        "MAR": "3월",
+        "APR": "4월",
+        "MAY": "5월",
+        "JUN": "6월",
+        "JUL": "7월"
+      },
+      "HEALTH": {
+        "CASH_POSITION": "자금 현황",
+        "CASH_POSITION_VALUE": "양호",
+        "ORDER_FULFILMENT": "주문 처리율",
+        "INVENTORY_ALERT": "재고 경고",
+        "INVENTORY_ALERT_VALUE": "8개 항목"
+      },
+      "ARIA": {
+        "TARGET_REVENUE_CARD": "목표 매출 카드",
+        "APPROVAL_STATUS_CARD": "결재 현황 카드",
+        "USER_PROFILE": "사용자 프로필",
+        "SIDEBAR_NAV": "대시보드 사이드 탐색"
+      }
     }
   }
 }

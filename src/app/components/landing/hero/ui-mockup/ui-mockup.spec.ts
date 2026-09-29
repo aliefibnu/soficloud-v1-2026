@@ -1,18 +1,144 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { UiMockup } from './ui-mockup';
+
+const ID_TRANSLATIONS = {
+  HERO: {
+    UI_MOCKUP: {
+      TARGET_REVENUE: 'Target Revenue',
+      APPROVAL_TODAY: 'Approval Hari ini',
+      APPROVAL_DOCUMENTS: '18 dokumen',
+      MANAGEMENT_OVERVIEW: 'Management Overview',
+      DATE: 'Rabu, 18 Maret 2009',
+      GREETING: 'Selamat datang, {{name}}',
+      PERIOD_CURRENT_MONTH: 'Bulan berjalan',
+      NAV: {
+        DASHBOARD: 'Dashboard',
+        FINANCE: 'Finance',
+        SALES: 'Sales',
+        PURCHASING: 'Purchasing',
+        INVENTORY: 'Inventory',
+        PRODUCTION: 'Production',
+        PROJECT: 'Project',
+        ANALYTICS: 'Analytics',
+      },
+      METRICS: {
+        REVENUE: 'Revenue',
+        GROSS_PROFIT: 'Gross Profit',
+        INVENTORY_VALUE: 'Inventory Value',
+        AR_OUTSTANDING: 'AR Outstanding',
+        LOCATIONS_COUNT: '42 lokasi',
+        OVERDUE_COUNT: '12 Jatuh tempo',
+      },
+      SALES_PERFORMANCE: 'Sales Performance',
+      REVENUE_GROSS_PROFIT: 'Revenue & gross profit',
+      MONTHS: {
+        JAN: 'Jan',
+        FEB: 'Feb',
+        MAR: 'Mar',
+        APR: 'Apr',
+        MAY: 'Mei',
+        JUN: 'Jun',
+        JUL: 'Jul',
+      },
+      HEALTH: {
+        CASH_POSITION: 'Cash position',
+        CASH_POSITION_VALUE: 'sehat',
+        ORDER_FULFILMENT: 'Order fulfilment',
+        INVENTORY_ALERT: 'Inventory alert',
+        INVENTORY_ALERT_VALUE: '8 item',
+      },
+      ARIA: {
+        TARGET_REVENUE_CARD: 'Target Revenue Card',
+        APPROVAL_STATUS_CARD: 'Approval Status Card',
+        USER_PROFILE: 'User Profile',
+        SIDEBAR_NAV: 'Dashboard Sidebar Navigation',
+      },
+    },
+  },
+};
+
+const EN_TRANSLATIONS = {
+  HERO: {
+    UI_MOCKUP: {
+      TARGET_REVENUE: 'Target Revenue',
+      APPROVAL_TODAY: "Today's Approval",
+      APPROVAL_DOCUMENTS: '18 documents',
+      MANAGEMENT_OVERVIEW: 'Management Overview',
+      DATE: 'Wednesday, 18 March 2009',
+      GREETING: 'Welcome, {{name}}',
+      PERIOD_CURRENT_MONTH: 'Current month',
+      NAV: {
+        DASHBOARD: 'Dashboard',
+        FINANCE: 'Finance',
+        SALES: 'Sales',
+        PURCHASING: 'Purchasing',
+        INVENTORY: 'Inventory',
+        PRODUCTION: 'Production',
+        PROJECT: 'Project',
+        ANALYTICS: 'Analytics',
+      },
+      METRICS: {
+        REVENUE: 'Revenue',
+        GROSS_PROFIT: 'Gross Profit',
+        INVENTORY_VALUE: 'Inventory Value',
+        AR_OUTSTANDING: 'AR Outstanding',
+        LOCATIONS_COUNT: '42 locations',
+        OVERDUE_COUNT: '12 overdue',
+      },
+      SALES_PERFORMANCE: 'Sales Performance',
+      REVENUE_GROSS_PROFIT: 'Revenue & gross profit',
+      MONTHS: {
+        JAN: 'Jan',
+        FEB: 'Feb',
+        MAR: 'Mar',
+        APR: 'Apr',
+        MAY: 'May',
+        JUN: 'Jun',
+        JUL: 'Jul',
+      },
+      HEALTH: {
+        CASH_POSITION: 'Cash position',
+        CASH_POSITION_VALUE: 'Healthy',
+        ORDER_FULFILMENT: 'Order fulfillment',
+        INVENTORY_ALERT: 'Inventory alert',
+        INVENTORY_ALERT_VALUE: '8 items',
+      },
+      ARIA: {
+        TARGET_REVENUE_CARD: 'Target Revenue Card',
+        APPROVAL_STATUS_CARD: 'Approval Status Card',
+        USER_PROFILE: 'User Profile',
+        SIDEBAR_NAV: 'Dashboard Sidebar Navigation',
+      },
+    },
+  },
+};
 
 describe('UiMockup', () => {
   let component: UiMockup;
   let fixture: ComponentFixture<UiMockup>;
+  let translateService: TranslateService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [UiMockup],
+      providers: [
+        provideTranslateService({
+          fallbackLang: 'en',
+          lang: 'id',
+        }),
+      ],
     }).compileComponents();
+
+    translateService = TestBed.inject(TranslateService);
+    translateService.setTranslation('id', ID_TRANSLATIONS);
+    translateService.setTranslation('en', EN_TRANSLATIONS);
+    translateService.use('id');
 
     fixture = TestBed.createComponent(UiMockup);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create the UiMockup component', () => {
@@ -53,7 +179,7 @@ describe('UiMockup', () => {
 
   it('should render greeting and date', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Kamis, 28 Juli 2026');
+    expect(compiled.textContent).toContain('Rabu, 18 Maret 2009');
     expect(compiled.textContent).toContain('Selamat datang, Atabil');
   });
 
@@ -102,5 +228,22 @@ describe('UiMockup', () => {
     expect(approvalCard).toBeTruthy();
     expect(approvalCard?.textContent).toContain('Approval Hari ini');
     expect(approvalCard?.textContent).toContain('18 dokumen');
+  });
+
+  it('should update texts when language changes to English', async () => {
+    translateService.use('en');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Wednesday, 18 March 2009');
+    expect(compiled.textContent).toContain('Welcome, Atabil');
+    expect(compiled.textContent).toContain('Current month');
+    expect(compiled.textContent).toContain("Today's Approval");
+    expect(compiled.textContent).toContain('18 documents');
+    expect(compiled.textContent).toContain('42 locations');
+    expect(compiled.textContent).toContain('12 overdue');
+    expect(compiled.textContent).toContain('Healthy');
+    expect(compiled.textContent).toContain('8 items');
   });
 });
