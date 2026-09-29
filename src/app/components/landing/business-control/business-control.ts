@@ -12,8 +12,8 @@ export interface DataPoint {
   readonly x: number;
   readonly monthKey: string;
   readonly periodLabel: string;
-  readonly expense: number; // in Millions (IDR)
-  readonly income: number;  // in Millions (IDR)
+  readonly expense: number;
+  readonly income: number;
 }
 
 export interface GridLine {
@@ -41,7 +41,6 @@ export class BusinessControl {
   protected readonly languageService = inject(LanguageService);
   protected readonly translate = inject(TranslateService);
 
-  // SVG Dimension Constants
   readonly svgWidth = 620;
   readonly svgHeight = 290;
   readonly chartTop = 25;
@@ -50,15 +49,13 @@ export class BusinessControl {
   readonly chartRight = 585;
   readonly maxY = 600;
 
-  // Chart Visibility & Interaction State (Signals)
   readonly isExpenseVisible = signal<boolean>(true);
   readonly isIncomeVisible = signal<boolean>(true);
   readonly hoveredIndex = signal<number | null>(null);
-  readonly selectedIndex = signal<number | null>(6); // Defaults to Nov 2025 peak highlight
+  readonly selectedIndex = signal<number | null>(6);
   readonly isMenuOpen = signal<boolean>(false);
   readonly copyFeedback = signal<boolean>(false);
 
-  // Y-Axis Grid Definitions (0 to 600M)
   readonly yGridLines: readonly GridLine[] = [
     { value: 600, label: '600M', y: this.getYForValue(600) },
     { value: 500, label: '500M', y: this.getYForValue(500) },
@@ -69,7 +66,6 @@ export class BusinessControl {
     { value: 0, label: '0', y: this.getYForValue(0) },
   ];
 
-  // Month Columns on X-Axis
   readonly monthAxes: readonly MonthAxis[] = [
     { x: 85, translationKey: 'BUSINESS_CONTROL.MONTHS.AUG_2025' },
     { x: 180, translationKey: 'BUSINESS_CONTROL.MONTHS.SEP_2025' },
@@ -79,7 +75,6 @@ export class BusinessControl {
     { x: 560, translationKey: 'BUSINESS_CONTROL.MONTHS.JAN_2026' },
   ];
 
-  // Raw Financial Data Points matching the real-time business control graph
   readonly dataPoints: readonly DataPoint[] = [
     { id: 0, x: 85, monthKey: 'BUSINESS_CONTROL.MONTHS.AUG_2025', periodLabel: 'Early Aug 2025', expense: 210, income: 270 },
     { id: 1, x: 132.5, monthKey: 'BUSINESS_CONTROL.MONTHS.AUG_2025', periodLabel: 'Late Aug 2025', expense: 215, income: 395 },
@@ -94,7 +89,6 @@ export class BusinessControl {
     { id: 10, x: 560, monthKey: 'BUSINESS_CONTROL.MONTHS.JAN_2026', periodLabel: 'Jan 2026', expense: 230, income: 475 },
   ];
 
-  // Active Highlighted Point (Hover or Selected)
   readonly activePointIndex = computed<number>(() => {
     const hovered = this.hoveredIndex();
     if (hovered !== null) return hovered;
@@ -107,7 +101,6 @@ export class BusinessControl {
     return this.dataPoints[idx] ?? null;
   });
 
-  // Smooth Bézier Spline Curves for Income and Expense
   readonly incomePath = computed<string>(() => {
     const coords = this.dataPoints.map((pt) => ({
       x: pt.x,
@@ -124,13 +117,11 @@ export class BusinessControl {
     return this.calculateCatmullRomSpline(coords);
   });
 
-  // Helper method to compute Y pixel position from data value (0..600)
   getYForValue(value: number): number {
     const ratio = Math.max(0, Math.min(value, this.maxY)) / this.maxY;
     return this.chartBottom - ratio * (this.chartBottom - this.chartTop);
   }
 
-  // Format currency value in Indonesian Rupiah
   formatCurrency(valueInMillions: number): string {
     const fullAmount = valueInMillions * 1_000_000;
     return new Intl.NumberFormat('id-ID', {
@@ -140,7 +131,6 @@ export class BusinessControl {
     }).format(fullAmount);
   }
 
-  // Toggle Series Visibility
   toggleExpense(): void {
     this.isExpenseVisible.update((visible) => !visible);
   }
@@ -149,17 +139,14 @@ export class BusinessControl {
     this.isIncomeVisible.update((visible) => !visible);
   }
 
-  // Set Hovered Point
   setHoveredIndex(index: number | null): void {
     this.hoveredIndex.set(index);
   }
 
-  // Select Point
   selectPoint(index: number): void {
     this.selectedIndex.set(index);
   }
 
-  // Toggle Dropdown Menu
   toggleMenu(event: MouseEvent): void {
     event.stopPropagation();
     this.isMenuOpen.update((open) => !open);
@@ -194,15 +181,12 @@ export class BusinessControl {
     }
   }
 
-  /**
-   * Generates a smooth cubic Bézier spline SVG path from a set of points using Catmull-Rom formulation.
-   */
   private calculateCatmullRomSpline(points: readonly { x: number; y: number }[]): string {
     if (points.length === 0) return '';
     if (points.length === 1) return `M ${points[0].x},${points[0].y}`;
 
     let path = `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
-    const tension = 0.2; // Smooth curve factor
+    const tension = 0.2;
 
     for (let i = 0; i < points.length - 1; i++) {
       const p0 = points[i > 0 ? i - 1 : i];
