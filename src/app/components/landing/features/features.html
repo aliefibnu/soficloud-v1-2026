@@ -1,1 +1,96 @@
-<p>features works!</p>
+<section
+  class="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden"
+  aria-labelledby="features-heading"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20">
+      <h2
+        id="features-heading"
+        class="font-inter font-semibold text-3xl sm:text-4xl md:text-[44px] lg:text-[48px] text-[#182849] tracking-[-0.02em] leading-tight"
+      >
+        9 Fitur Utama SOFICloud
+      </h2>
+      <p
+        class="mt-4 sm:mt-5 font-dm-sans font-normal text-base sm:text-[17px] text-slate-600 leading-relaxed max-w-2xl mx-auto"
+      >
+        Kapabilitas yang saling terhubung untuk menjalankan proses operasional dan menghasilkan informasi management yang konsisten.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 xl:gap-8">
+      @for (card of cards; track card.id) {
+        <article
+          class="group relative bg-white rounded-2xl border border-slate-100/90 shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:shadow-blue-950/8 hover:-translate-y-1.5 flex flex-col overflow-hidden"
+          (mouseenter)="setHoveredCard(card.id)"
+          (mouseleave)="setHoveredCard(null)"
+        >
+          <!-- Illustration Box (Aspect Ratio 396/215) -->
+          <div
+            class="relative w-full aspect-[396/215] rounded-t-2xl overflow-hidden select-none"
+            [style.backgroundColor]="card.topBg"
+            aria-hidden="true"
+          >
+            <!-- Setengah Lingkaran (Semicircle Dome) -->
+            <svg
+              class="absolute -bottom-0.5 inset-x-0 w-full h-[35%] pointer-events-none"
+              viewBox="0 0 396 70"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M -40 75 Q 198 -10 436 75 Z" [attr.fill]="card.domeBg" />
+            </svg>
+
+            <!-- Responsive Layers (Anchored to prevent bottom gap) -->
+            @for (layer of card.layers; track layer.name) {
+              <div
+                class="absolute pointer-events-none will-change-transform transition-all duration-500 ease-out {{ layer.hoverClass }}"
+                [style.left.%]="layer.leftPct"
+                [style.top.%]="layer.topPct !== undefined ? layer.topPct : null"
+                [style.bottom.%]="layer.bottomPct !== undefined ? layer.bottomPct : null"
+                [style.width.%]="layer.widthPct"
+                [style.height.%]="layer.heightPct"
+                [style.zIndex]="layer.z"
+              >
+                <img
+                  [ngSrc]="layer.src"
+                  [width]="layer.w"
+                  [height]="layer.h"
+                  alt=""
+                  class="w-full h-full object-contain pointer-events-none"
+                  [priority]="card.id <= 3"
+                />
+              </div>
+            }
+          </div>
+
+          <!-- Card Content Body -->
+          <div class="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
+            <div>
+              <h3
+                class="font-dm-sans font-bold text-xl sm:text-[22px] text-[#182849] leading-snug tracking-[-0.01em]"
+              >
+                {{ card.title }}
+              </h3>
+              <p
+                class="mt-3.5 font-dm-sans font-normal text-sm sm:text-[15px] text-slate-600 leading-relaxed"
+              >
+                {{ card.desc }}
+              </p>
+            </div>
+
+            <div class="mt-7 pt-1">
+              <a
+                href="#contact"
+                class="w-fit inline-flex items-center justify-center px-6 py-2.5 rounded-xl font-dm-sans font-semibold text-sm sm:text-[15px] text-white bg-gradient-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              >
+                Pelajari Selengkapnya
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
