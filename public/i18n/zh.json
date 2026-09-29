@@ -117,5 +117,20 @@
         "SIDEBAR_NAV": "仪表板侧边导航"
       }
     }
+  },
+  "OVERVIEW_FEATURE": {
+    "TITLE": "SOFICloud，功能丰富、值得信赖的企业资源规划（ERP）软件",
+    "DESCRIPTION": "SOFICloud 专为在单一集成系统中支持关键企业流程而设计。从财务、销售、采购、库存、生产、项目、工作流到业务分析，各项功能紧密互联，并在一致的数据流中协同运行。凭借在各行各业的实施经验，SOFICloud 不断进化以满足日益复杂的业务需求。",
+    "TARGET_REVENUE": {
+      "LABEL": "目标收入",
+      "VALUE": "92%"
+    },
+    "APPROVAL": {
+      "LABEL": "今日审批",
+      "VALUE": "18 份文档"
+    },
+    "ARIA": {
+      "IMAGE_ALT": "带有业务绩效小组件的 SOFICloud ERP 仪表板监控屏幕预览"
+    }
   }
 }

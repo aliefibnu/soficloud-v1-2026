@@ -1,5 +1,4 @@
-<section class="w-full py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  <!-- Section Top Header -->
+<section class="w-full pb-12 md:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   <div class="text-center mb-10 md:mb-14">
     <h2
       class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] tracking-tight leading-tight"
@@ -13,24 +12,19 @@
     </p>
   </div>
 
-  <!-- Main Rounded Blue Container -->
   <div
     class="rounded-3xl sm:rounded-[36px] md:rounded-[44px] bg-gradient-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-6 sm:p-10 lg:p-14 relative shadow-sm border border-blue-100/80"
   >
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-      <!-- Left Column: Real-Time Business Control & Interactive Chart -->
       <div class="lg:col-span-7 flex flex-col">
-        <!-- White Chart Box Container -->
         <div
           class="bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 p-5 sm:p-7 border border-slate-100/90 relative select-none"
         >
-          <!-- Chart Header: Title & 3-Dots Menu -->
-          <div class="flex items-center justify-between gap-4 mb-2">
+          <div class="flex items-center justify-between gap-4 mb-4">
             <h4 class="text-xs sm:text-sm font-bold text-slate-700 tracking-wide uppercase">
               {{ 'BUSINESS_CONTROL.CHART_TITLE' | translate }}
             </h4>
 
-            <!-- 3 Dots Options Button & Dropdown -->
             <div class="relative chart-menu-container">
               <button
                 type="button"
@@ -49,7 +43,6 @@
                 </svg>
               </button>
 
-              <!-- Dropdown Menu -->
               @if (isMenuOpen()) {
                 <div
                   class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-2xl border border-slate-100 py-1.5 z-20 animate-in fade-in zoom-in-95 duration-150"
@@ -99,40 +92,7 @@
             </div>
           </div>
 
-          <!-- Interactive Legend (Centered) -->
-          <div class="flex items-center justify-center gap-6 my-2">
-            <button
-              type="button"
-              (click)="toggleExpense()"
-              [class.opacity-40]="!isExpenseVisible()"
-              class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1 px-2 rounded-lg hover:bg-slate-50"
-              [attr.aria-pressed]="isExpenseVisible()"
-              title="Toggle Expense series"
-            >
-              <span
-                class="w-5 h-2.5 rounded-sm bg-[#fee2e2] border border-[#f87171] inline-block shadow-2xs"
-              ></span>
-              <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}</span>
-            </button>
-
-            <button
-              type="button"
-              (click)="toggleIncome()"
-              [class.opacity-40]="!isIncomeVisible()"
-              class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1 px-2 rounded-lg hover:bg-slate-50"
-              [attr.aria-pressed]="isIncomeVisible()"
-              title="Toggle Income series"
-            >
-              <span
-                class="w-5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#3b82f6] inline-block shadow-2xs"
-              ></span>
-              <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}</span>
-            </button>
-          </div>
-
-          <!-- Interactive Chart SVG Container -->
-          <div class="relative w-full mt-2">
-            <!-- Active Tooltip Overlay -->
+          <div class="relative w-full">
             @if (activePoint(); as pt) {
               <div
                 class="absolute z-10 pointer-events-none transition-all duration-150 ease-out -top-2 transform -translate-x-1/2 -translate-y-full bg-slate-900/90 backdrop-blur-md text-white text-[11px] rounded-xl px-3 py-2 shadow-xl border border-slate-700/50"
@@ -153,7 +113,6 @@
                     <span class="font-bold font-mono">{{ formatCurrency(pt.expense) }}</span>
                   </div>
                 }
-                <!-- Tooltip triangle pointer -->
                 <div
                   class="absolute left-1/2 -bottom-1 -translate-x-1/2 w-2 h-2 bg-slate-900/90 rotate-45 border-r border-b border-slate-700/50"
                 ></div>
@@ -167,9 +126,7 @@
               role="img"
               aria-label="Real-time Income and Expense Chart"
             >
-              <!-- Horizontal Grid Lines & Y-Axis Labels -->
               @for (grid of yGridLines; track grid.value) {
-                <!-- Grid line -->
                 <line
                   [attr.x1]="chartLeft"
                   [attr.y1]="grid.y"
@@ -178,7 +135,6 @@
                   stroke="#f1f5f9"
                   stroke-width="1.2"
                 />
-                <!-- Y-Axis Label -->
                 <text
                   [attr.x]="chartLeft - 8"
                   [attr.y]="grid.y"
@@ -190,7 +146,6 @@
                 </text>
               }
 
-              <!-- Vertical Grid Lines for Months -->
               @for (month of monthAxes; track month.x) {
                 <line
                   [attr.x1]="month.x"
@@ -202,7 +157,6 @@
                 />
               }
 
-              <!-- Active Crosshair Line on Hover/Selected Point -->
               @if (activePoint(); as pt) {
                 <line
                   [attr.x1]="pt.x"
@@ -216,7 +170,6 @@
                 />
               }
 
-              <!-- Expense Smooth Curve (Red) -->
               @if (isExpenseVisible()) {
                 <path
                   [attr.d]="expensePath()"
@@ -229,7 +182,6 @@
                 />
               }
 
-              <!-- Income Smooth Curve (Blue) -->
               @if (isIncomeVisible()) {
                 <path
                   [attr.d]="incomePath()"
@@ -242,11 +194,9 @@
                 />
               }
 
-              <!-- Expense Data Points (Red Dots) -->
               @if (isExpenseVisible()) {
                 @for (pt of dataPoints; track pt.id) {
                   <g class="cursor-pointer">
-                    <!-- Standard circle -->
                     <circle
                       [attr.cx]="pt.x"
                       [attr.cy]="getYForValue(pt.expense)"
@@ -256,7 +206,6 @@
                       stroke-width="1.5"
                       class="transition-all duration-200"
                     />
-                    <!-- Active highlight ring -->
                     @if (activePointIndex() === pt.id) {
                       <circle
                         [attr.cx]="pt.x"
@@ -273,11 +222,9 @@
                 }
               }
 
-              <!-- Income Data Points (Blue Dots) -->
               @if (isIncomeVisible()) {
                 @for (pt of dataPoints; track pt.id) {
                   <g class="cursor-pointer">
-                    <!-- Standard circle -->
                     <circle
                       [attr.cx]="pt.x"
                       [attr.cy]="getYForValue(pt.income)"
@@ -287,7 +234,6 @@
                       stroke-width="1.5"
                       class="transition-all duration-200"
                     />
-                    <!-- Active highlight ring -->
                     @if (activePointIndex() === pt.id) {
                       <circle
                         [attr.cx]="pt.x"
@@ -304,7 +250,6 @@
                 }
               }
 
-              <!-- Invisible Hover Capture Columns for Smooth Mouse Interaction -->
               @for (pt of dataPoints; track pt.id) {
                 <rect
                   [attr.x]="pt.x - 22"
@@ -319,7 +264,6 @@
                 />
               }
 
-              <!-- X-Axis Month Labels (Rotated -25 deg) -->
               @for (month of monthAxes; track month.x) {
                 <g
                   [attr.transform]="
@@ -339,7 +283,36 @@
             </svg>
           </div>
 
-          <!-- Copy Feedback Toast Notification -->
+          <div class="flex items-center justify-center gap-6 mt-3">
+            <button
+              type="button"
+              (click)="toggleExpense()"
+              [class.opacity-40]="!isExpenseVisible()"
+              class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1.5 px-3 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
+              [attr.aria-pressed]="isExpenseVisible()"
+              title="Toggle Expense series"
+            >
+              <span
+                class="w-5 h-2.5 rounded-sm bg-[#fee2e2] border border-[#f87171] inline-block shadow-2xs"
+              ></span>
+              <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}</span>
+            </button>
+
+            <button
+              type="button"
+              (click)="toggleIncome()"
+              [class.opacity-40]="!isIncomeVisible()"
+              class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1.5 px-3 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
+              [attr.aria-pressed]="isIncomeVisible()"
+              title="Toggle Income series"
+            >
+              <span
+                class="w-5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#3b82f6] inline-block shadow-2xs"
+              ></span>
+              <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}</span>
+            </button>
+          </div>
+
           @if (copyFeedback()) {
             <div
               class="absolute bottom-3 right-3 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg animate-in fade-in duration-150"
@@ -350,7 +323,6 @@
         </div>
       </div>
 
-      <!-- Right Column: Headline, Description & Call to Action -->
       <div class="lg:col-span-5 flex flex-col justify-center space-y-5 lg:pl-4">
         <h3
           class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
