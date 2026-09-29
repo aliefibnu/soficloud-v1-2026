@@ -75,8 +75,4 @@ export class UiMockup {
   ];
 
   readonly chartMonths: readonly string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-
-  setActiveNav(id: string): void {
-    this.activeNav.set(id);
-  }
 }

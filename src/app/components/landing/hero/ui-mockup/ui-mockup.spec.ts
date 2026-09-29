@@ -33,8 +33,6 @@ describe('UiMockup', () => {
 
   it('should render all 8 navigation items in sidebar', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const buttons = compiled.querySelectorAll('aside button');
-    expect(buttons.length).toBe(8);
     expect(compiled.textContent).toContain('Dashboard');
     expect(compiled.textContent).toContain('Finance');
     expect(compiled.textContent).toContain('Sales');
@@ -45,15 +43,12 @@ describe('UiMockup', () => {
     expect(compiled.textContent).toContain('Analytics');
   });
 
-  it('should update active nav item when clicked', () => {
+  it('should lock active navigation to Dashboard only', () => {
     expect(component.activeNav()).toBe('dashboard');
-    component.setActiveNav('finance');
-    expect(component.activeNav()).toBe('finance');
-    fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const activeBtn = compiled.querySelector('aside button.bg-\\[\\#ebf3fe\\]');
-    expect(activeBtn?.textContent).toContain('Finance');
+    const activeItem = compiled.querySelector('aside div.bg-\\[\\#ebf3fe\\]');
+    expect(activeItem?.textContent).toContain('Dashboard');
   });
 
   it('should render greeting and date', () => {

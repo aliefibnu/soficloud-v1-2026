@@ -83,26 +83,25 @@
     <div class="flex flex-row p-3 sm:p-5 md:p-6 gap-3 sm:gap-5 md:gap-6 bg-[#f8faff]/50 min-h-120">
       <aside class="w-32 sm:w-40 md:w-44 shrink-0 flex flex-col gap-1 pr-1 border-r border-slate-100/80" aria-label="Dashboard Sidebar Navigation">
         @for (item of navItems; track item.id) {
-          @if (item.id === activeNav()) {
-            <button
-              type="button"
-              (click)="setActiveNav(item.id)"
-              class="w-full flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-[#ebf3fe] text-[#1d44eb] font-semibold text-xs sm:text-[13px] text-left transition-all duration-150 cursor-pointer shadow-2xs"
+          @if (item.id === 'dashboard') {
+            <div
+              class="w-full flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-[#ebf3fe] text-[#1d44eb] font-semibold text-xs sm:text-[13px] text-left shadow-2xs select-none"
             >
-              <span class="w-4 h-4 rounded-sm border-[1.5px] border-[#1d44eb] flex items-center justify-center shrink-0">
-                <span class="w-1.5 h-1.5 bg-[#1d44eb] rounded-[1px]"></span>
-              </span>
+              <svg class="w-4 h-4 shrink-0 text-[#1d44eb]" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="1.25" y="1.25" width="13.5" height="13.5" rx="3.5" stroke="currentColor" stroke-width="1.5" />
+                <rect x="5.25" y="5.25" width="5.5" height="5.5" rx="1.2" fill="currentColor" />
+              </svg>
               <span class="truncate">{{ item.label }}</span>
-            </button>
+            </div>
           } @else {
-            <button
-              type="button"
-              (click)="setActiveNav(item.id)"
-              class="w-full flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-[#8fa0b5] hover:text-[#475569] hover:bg-slate-100/50 font-normal text-xs sm:text-[13px] text-left transition-all duration-150 cursor-pointer"
+            <div
+              class="w-full flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-[#8fa0b5] font-normal text-xs sm:text-[13px] text-left select-none"
             >
-              <span class="w-4 h-4 rounded-sm border-[1.5px] border-[#cbd5e1] shrink-0"></span>
+              <svg class="w-4 h-4 shrink-0 text-[#cbd5e1]" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="1.25" y="1.25" width="13.5" height="13.5" rx="3.5" stroke="currentColor" stroke-width="1.5" />
+              </svg>
               <span class="truncate">{{ item.label }}</span>
-            </button>
+            </div>
           }
         }
       </aside>
