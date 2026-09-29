@@ -7,14 +7,38 @@
     "HOME": "Home",
     "LANGUAGE": "Language"
   },
+  "HEADER": {
+    "NAV": {
+      "FEATURES": "Features",
+      "RESOURCES": "Resources",
+      "SUPPORT": "Support"
+    },
+    "ACTIONS": {
+      "SCHEDULE_DEMO": "Schedule a Demo"
+    },
+    "CHOOSE_LANGUAGE": "Choose Language",
+    "ARIA": {
+      "MAIN_NAV": "Main Navigation",
+      "MOBILE_NAV": "Mobile Navigation",
+      "OPEN_MENU": "Open main menu",
+      "CLOSE_MENU": "Close menu"
+    }
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "id": "Bahasa Indonesia",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  },
   "BUSINESS_CONTROL": {
-    "HEADER_TITLE": "Control Your Business from One Place",
-    "HEADER_SUBTITLE": "Choose the area you want to view. Every process connects to the same data and is always traceable.",
+    "HEADER_TITLE": "Control Business From One Place",
+    "HEADER_SUBTITLE": "Select the area you want to see. Every process connects to the same data and is always traceable.",
     "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
     "EXPENSE": "Expense",
     "INCOME": "Income",
-    "CONTENT_TITLE": "Monitor Business in Real-Time for Faster Decisions",
-    "CONTENT_DESC": "Sales, cash position, inventory alert, outstanding process, production, project, and business KPIs are available in a single management view.",
+    "CONTENT_TITLE": "Real-Time Business Monitoring for Faster Decision-Making",
+    "CONTENT_DESC": "Sales, cash position, inventory alerts, outstanding processes, production, projects, and business KPIs are available in a single management view.",
     "CTA_BUTTON": "View Capabilities",
     "OPTIONS_MENU": "Chart Options",
     "RESET_VIEW": "Reset View",
@@ -26,6 +50,21 @@
       "NOV_2025": "November 2025",
       "DEC_2025": "December 2025",
       "JAN_2026": "January 2026"
+    }
+  },
+  "HERO": {
+    "BADGE": "SOFICLOUD ENTERPRISE RESOURCE PLANNING",
+    "TITLE_LINE_1": "Integrated ERP Software For",
+    "TITLE_LINE_2_PREFIX": "Businesses That ",
+    "TITLE_LINE_2_HIGHLIGHT": "Keep Growing",
+    "SUBTITLE": "Manage your entire business processes in one connected system, from operations to finance.",
+    "ACTIONS": {
+      "CONTACT_US": "Contact Us",
+      "WATCH_VIDEO": "Watch Video"
+    },
+    "ARIA": {
+      "CONTACT_US": "Contact Soficloud team",
+      "WATCH_VIDEO": "Watch Soficloud product demonstration video"
     }
   }
 }

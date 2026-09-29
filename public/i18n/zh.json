@@ -7,6 +7,30 @@
     "HOME": "首页",
     "LANGUAGE": "语言"
   },
+  "HEADER": {
+    "NAV": {
+      "FEATURES": "功能特性",
+      "RESOURCES": "资源中心",
+      "SUPPORT": "支持服务"
+    },
+    "ACTIONS": {
+      "SCHEDULE_DEMO": "预约演示"
+    },
+    "CHOOSE_LANGUAGE": "选择语言",
+    "ARIA": {
+      "MAIN_NAV": "主导航",
+      "MOBILE_NAV": "移动导航",
+      "OPEN_MENU": "打开主菜单",
+      "CLOSE_MENU": "关闭菜单"
+    }
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "id": "Bahasa Indonesia",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "从一处掌控您的业务",
     "HEADER_SUBTITLE": "选择您想要查看的区域。每个流程都连接到相同的数据，并且始终可追溯。",
@@ -26,6 +50,21 @@
       "NOV_2025": "2025年11月",
       "DEC_2025": "2025年12月",
       "JAN_2026": "2026年1月"
+    }
+  },
+  "HERO": {
+    "BADGE": "SOFICLOUD ENTERPRISE RESOURCE PLANNING",
+    "TITLE_LINE_1": "一体化企业ERP软件",
+    "TITLE_LINE_2_PREFIX": "助力业务",
+    "TITLE_LINE_2_HIGHLIGHT": "持续增长",
+    "SUBTITLE": "在一个互联系统中管理整个业务流程，涵盖从运营到财务的方方面面。",
+    "ACTIONS": {
+      "CONTACT_US": "联系我们",
+      "WATCH_VIDEO": "观看视频"
+    },
+    "ARIA": {
+      "CONTACT_US": "联系Soficloud团队",
+      "WATCH_VIDEO": "观看Soficloud产品演示视频"
     }
   }
 }

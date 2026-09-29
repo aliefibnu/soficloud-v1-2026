@@ -7,6 +7,30 @@
     "HOME": "ホーム",
     "LANGUAGE": "言語"
   },
+  "HEADER": {
+    "NAV": {
+      "FEATURES": "機能",
+      "RESOURCES": "リソース",
+      "SUPPORT": "サポート"
+    },
+    "ACTIONS": {
+      "SCHEDULE_DEMO": "デモを予約する"
+    },
+    "CHOOSE_LANGUAGE": "言語を選択",
+    "ARIA": {
+      "MAIN_NAV": "メインナビゲーション",
+      "MOBILE_NAV": "モバイルナビゲーション",
+      "OPEN_MENU": "メインメニューを開く",
+      "CLOSE_MENU": "メニューを閉じる"
+    }
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "id": "Bahasa Indonesia",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "ビジネスをひとつの場所から管理",
     "HEADER_SUBTITLE": "表示したいエリアを選択。すべてのプロセスが同じデータに連携し、常に追跡可能です。",
@@ -26,6 +50,21 @@
       "NOV_2025": "2025年11月",
       "DEC_2025": "2025年12月",
       "JAN_2026": "2026年1月"
+    }
+  },
+  "HERO": {
+    "BADGE": "SOFICLOUD ENTERPRISE RESOURCE PLANNING",
+    "TITLE_LINE_1": "統合ERPソフトウェアで",
+    "TITLE_LINE_2_PREFIX": "ビジネスの",
+    "TITLE_LINE_2_HIGHLIGHT": "持続的な成長を実現",
+    "SUBTITLE": "業務から財務まで、相互に連携した単一のシステムですべてのビジネスプロセスを管理します。",
+    "ACTIONS": {
+      "CONTACT_US": "お問い合わせ",
+      "WATCH_VIDEO": "動画を見る"
+    },
+    "ARIA": {
+      "CONTACT_US": "Soficloudチームにお問い合わせ",
+      "WATCH_VIDEO": "Soficloudデモ動画を視聴"
     }
   }
 }
