@@ -74,6 +74,8 @@
       "DATE": "Wednesday, 18 March 2026",
       "GREETING": "Welcome, {{name}}",
       "PERIOD_CURRENT_MONTH": "Current month",
+      "PERIOD_THIS_QUARTER": "This quarter",
+      "PERIOD_THIS_YEAR": "This year",
       "NAV": {
         "DASHBOARD": "Dashboard",
         "FINANCE": "Finance",
@@ -103,18 +105,30 @@
         "JUN": "Jun",
         "JUL": "Jul"
       },
+      "WEEKS": {
+        "W1": "W1",
+        "W2": "W2",
+        "W3": "W3",
+        "W4": "W4",
+        "W5": "W5",
+        "W6": "W6",
+        "W7": "W7"
+      },
       "HEALTH": {
         "CASH_POSITION": "Cash position",
         "CASH_POSITION_VALUE": "Healthy",
         "ORDER_FULFILMENT": "Order fulfillment",
         "INVENTORY_ALERT": "Inventory alert",
-        "INVENTORY_ALERT_VALUE": "8 items"
+        "INVENTORY_ALERT_VALUE": "8 items",
+        "INVENTORY_ALERT_VALUE_QTR": "4 items",
+        "INVENTORY_ALERT_VALUE_YR": "2 items"
       },
       "ARIA": {
         "TARGET_REVENUE_CARD": "Target Revenue Card",
         "APPROVAL_STATUS_CARD": "Approval Status Card",
         "USER_PROFILE": "User Profile",
-        "SIDEBAR_NAV": "Dashboard Sidebar Navigation"
+        "SIDEBAR_NAV": "Dashboard Sidebar Navigation",
+        "PERIOD_SELECTOR": "Filter dashboard time period"
       }
     }
   },

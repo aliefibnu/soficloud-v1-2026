@@ -74,6 +74,8 @@
       "DATE": "2026年3月18日 水曜日",
       "GREETING": "ようこそ、{{name}}",
       "PERIOD_CURRENT_MONTH": "当月",
+      "PERIOD_THIS_QUARTER": "当四半期",
+      "PERIOD_THIS_YEAR": "当年",
       "NAV": {
         "DASHBOARD": "ダッシュボード",
         "FINANCE": "財務",
@@ -103,18 +105,30 @@
         "JUN": "6月",
         "JUL": "7月"
       },
+      "WEEKS": {
+        "W1": "第1週",
+        "W2": "第2週",
+        "W3": "第3週",
+        "W4": "第4週",
+        "W5": "第5週",
+        "W6": "第6週",
+        "W7": "第7週"
+      },
       "HEALTH": {
         "CASH_POSITION": "資金状況",
         "CASH_POSITION_VALUE": "健全",
         "ORDER_FULFILMENT": "注文履行率",
         "INVENTORY_ALERT": "在庫アラート",
-        "INVENTORY_ALERT_VALUE": "8件"
+        "INVENTORY_ALERT_VALUE": "8件",
+        "INVENTORY_ALERT_VALUE_QTR": "4件",
+        "INVENTORY_ALERT_VALUE_YR": "2件"
       },
       "ARIA": {
         "TARGET_REVENUE_CARD": "目標売上カード",
         "APPROVAL_STATUS_CARD": "承認ステータスカード",
         "USER_PROFILE": "ユーザープロフィール",
-        "SIDEBAR_NAV": "ダッシュボードサイドナビゲーション"
+        "SIDEBAR_NAV": "ダッシュボードサイドナビゲーション",
+        "PERIOD_SELECTOR": "ダッシュボード期間フィルター"
       }
     }
   },

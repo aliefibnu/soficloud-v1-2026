@@ -85,26 +85,71 @@
             </h3>
           </div>
 
-          <div class="flex items-center">
+          <!-- Interactive Period Selector Dropdown -->
+          <div class="relative inline-block text-left period-dropdown-container">
             <button
               type="button"
-              class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-[#93c5fd] bg-white text-[#1d44eb] text-[11px] sm:text-xs font-semibold shadow-2xs hover:bg-blue-50/50 transition cursor-pointer"
+              (click)="togglePeriodMenu($event)"
+              [attr.aria-expanded]="isPeriodMenuOpen()"
+              aria-haspopup="listbox"
+              aria-controls="period-options-list"
+              id="period-select-btn"
+              [attr.aria-label]="'HERO.UI_MOCKUP.ARIA.PERIOD_SELECTOR' | translate"
+              class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-[#93c5fd] bg-white text-[#1d44eb] text-[11px] sm:text-xs font-semibold shadow-2xs hover:bg-blue-50/50 focus-visible:ring-2 focus-visible:ring-[#1d44eb]/30 focus-visible:outline-none transition cursor-pointer"
             >
-              <span>{{ 'HERO.UI_MOCKUP.PERIOD_CURRENT_MONTH' | translate }}</span>
-              <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+              <span>{{ currentPeriodOption().labelKey | translate }}</span>
+              <svg
+                class="w-3.5 h-3.5 fill-none stroke-current stroke-2 transition-transform duration-200"
+                [class.rotate-180]="isPeriodMenuOpen()"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
+
+            @if (isPeriodMenuOpen()) {
+              <div
+                id="period-options-list"
+                role="listbox"
+                [attr.aria-activedescendant]="'period-option-' + selectedPeriod()"
+                tabindex="-1"
+                (keydown)="onMenuKeyDown($event)"
+                class="absolute right-0 mt-1.5 w-36 sm:w-40 z-40 bg-white/95 backdrop-blur-md rounded-xl shadow-[0_12px_30px_-6px_rgba(24,40,73,0.18),0_4px_12px_-2px_rgba(29,68,235,0.12)] border border-slate-100/90 py-1 overflow-hidden animate-dropdown focus:outline-none"
+              >
+                @for (option of periodOptions; track option.id) {
+                  <button
+                    type="button"
+                    role="option"
+                    [id]="'period-option-' + option.id"
+                    [attr.aria-selected]="selectedPeriod() === option.id"
+                    (click)="selectPeriod(option.id)"
+                    class="w-full text-left px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium flex items-center justify-between transition-colors duration-150 cursor-pointer"
+                    [class]="selectedPeriod() === option.id ? 'bg-[#ebf3fe] text-[#1d44eb] font-semibold' : 'text-[#334155] hover:bg-slate-50'"
+                  >
+                    <span>{{ option.labelKey | translate }}</span>
+                    @if (selectedPeriod() === option.id) {
+                      <svg class="w-3.5 h-3.5 text-[#1d44eb] shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    }
+                  </button>
+                }
+              </div>
+            }
           </div>
         </div>
 
-        <!-- 4 KPI Metrics Cards -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3.5 mb-3 sm:mb-4.5">
-          @for (kpi of kpiMetrics; track kpi.titleKey) {
-            <div class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-4 border border-slate-100 shadow-[0_8px_20px_-6px_rgba(24,40,73,0.08),0_2px_6px_-2px_rgba(24,40,73,0.04)] flex flex-col justify-between">
+        <!-- 4 KPI Metrics Cards with Smooth Transition -->
+        <div
+          class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3.5 mb-3 sm:mb-4.5 transition-opacity duration-300"
+          [class.opacity-70]="isTransitioning()"
+        >
+          @for (kpi of currentMetrics(); track kpi.titleKey) {
+            <div class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-4 border border-slate-100 shadow-[0_8px_20px_-6px_rgba(24,40,73,0.08),0_2px_6px_-2px_rgba(24,40,73,0.04)] flex flex-col justify-between transition-all duration-300">
               <div>
                 <span class="text-[10px] sm:text-xs text-[#8fa0b5] font-medium block truncate">{{ kpi.titleKey | translate }}</span>
-                <span class="text-xs sm:text-lg lg:text-xl font-bold text-[#182849] tracking-tight block mt-0.5 truncate">
+                <span class="text-xs sm:text-lg lg:text-xl font-bold text-[#182849] tracking-tight block mt-0.5 truncate transition-all duration-300">
                   {{ kpi.value }}
                 </span>
               </div>
@@ -124,7 +169,10 @@
         <!-- Sales Performance & Health Status Section -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-3.5">
           <!-- Sales Performance Chart Card -->
-          <div class="lg:col-span-7 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-slate-100 shadow-[0_10px_28px_-8px_rgba(24,40,73,0.08),0_4px_12px_-4px_rgba(24,40,73,0.04)] flex flex-col justify-between">
+          <div
+            class="lg:col-span-7 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-slate-100 shadow-[0_10px_28px_-8px_rgba(24,40,73,0.08),0_4px_12px_-4px_rgba(24,40,73,0.04)] flex flex-col justify-between transition-opacity duration-300"
+            [class.opacity-70]="isTransitioning()"
+          >
             <div>
               <div class="flex items-center justify-between gap-2">
                 <div class="min-w-0">
@@ -170,18 +218,20 @@
                       <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0" />
                     </linearGradient>
                   </defs>
-                  <!-- Gradient Area -->
+                  <!-- Gradient Area with smooth transition -->
                   <path
-                    d="M 10,95 C 60,95 90,80 130,80 C 170,80 200,92 240,70 C 280,48 310,85 350,72 C 390,58 420,20 460,15 C 480,12 495,12 500,12 L 500,120 L 10,120 Z"
+                    [attr.d]="chartAreaPath()"
                     fill="url(#salesGrad)"
+                    class="transition-all duration-500 ease-out"
                   />
-                  <!-- Main Line -->
+                  <!-- Main Line with smooth transition -->
                   <path
-                    d="M 10,95 C 60,95 90,80 130,80 C 170,80 200,92 240,70 C 280,48 310,85 350,72 C 390,58 420,20 460,15 C 480,12 495,12 500,12"
+                    [attr.d]="chartPath()"
                     fill="none"
                     stroke="#1d44eb"
                     stroke-width="3"
                     stroke-linecap="round"
+                    class="transition-all duration-500 ease-out"
                   />
 
                   <!-- Hover Vertical Guideline and Dot Marker -->
@@ -215,10 +265,10 @@
                     />
                   }
 
-                  <!-- Interactive Hitboxes for 7 Months -->
-                  @for (pt of chartPoints; track pt.monthKey; let idx = $index) {
+                  <!-- Interactive Hitboxes for Data Points -->
+                  @for (pt of currentChartPoints(); track pt.monthKey; let idx = $index) {
                     <rect
-                      [attr.x]="idx === 0 ? 0 : chartPoints[idx].x - 35"
+                      [attr.x]="idx === 0 ? 0 : currentChartPoints()[idx].x - 35"
                       y="0"
                       width="70"
                       height="120"
@@ -234,9 +284,9 @@
                 </svg>
               </div>
 
-              <!-- Month Axis Labels with Synchronized Hover State -->
+              <!-- Month/Period Axis Labels with Synchronized Hover State -->
               <div class="flex items-center justify-between text-[10px] sm:text-xs font-medium mt-2 px-1">
-                @for (pt of chartPoints; track pt.monthKey; let idx = $index) {
+                @for (pt of currentChartPoints(); track pt.monthKey; let idx = $index) {
                   <button
                     type="button"
                     (mouseenter)="onPointHover(idx)"
@@ -254,7 +304,10 @@
           </div>
 
           <!-- Health Status Card -->
-          <div class="lg:col-span-5 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-slate-100 shadow-[0_10px_28px_-8px_rgba(24,40,73,0.08),0_4px_12px_-4px_rgba(24,40,73,0.04)] flex flex-col justify-between">
+          <div
+            class="lg:col-span-5 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-slate-100 shadow-[0_10px_28px_-8px_rgba(24,40,73,0.08),0_4px_12px_-4px_rgba(24,40,73,0.04)] flex flex-col justify-between transition-opacity duration-300"
+            [class.opacity-70]="isTransitioning()"
+          >
             <div class="flex flex-col items-center pt-1">
               <div class="relative w-36 sm:w-48 h-18 sm:h-24 overflow-hidden flex items-end justify-center">
                 <svg class="w-36 sm:w-48 h-36 sm:h-48 -mb-18 sm:-mb-24" viewBox="0 0 160 160" aria-hidden="true">
@@ -271,12 +324,15 @@
                     stroke="#1d44eb"
                     stroke-width="12"
                     stroke-dasharray="188.5"
-                    stroke-dashoffset="15"
+                    [attr.stroke-dashoffset]="gaugeDashOffset()"
                     stroke-linecap="round"
+                    class="transition-all duration-700 ease-out"
                   />
                 </svg>
                 <div class="absolute bottom-0 sm:bottom-1 flex items-baseline gap-1 font-inter">
-                  <span class="text-xl sm:text-3xl font-extrabold text-[#182849]">92</span>
+                  <span class="text-xl sm:text-3xl font-extrabold text-[#182849] transition-all duration-300">
+                    {{ currentHealthScore() }}
+                  </span>
                   <span class="text-[10px] sm:text-sm font-normal text-[#8fa0b5]">/ 100</span>
                 </div>
               </div>
@@ -286,8 +342,8 @@
             <div class="border-t border-slate-100 my-2.5 sm:my-3"></div>
 
             <div class="flex flex-col gap-2 sm:gap-2.5">
-              @for (status of healthStatuses; track status.labelKey) {
-                <div class="flex items-center justify-between text-[11px] sm:text-[13px]">
+              @for (status of currentHealthStatuses(); track status.labelKey) {
+                <div class="flex items-center justify-between text-[11px] sm:text-[13px] transition-all duration-300">
                   <div class="flex items-center gap-1.5 sm:gap-2 text-[#475569] font-medium">
                     <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full {{ status.dotColor }}"></span>
                     <span>{{ status.labelKey | translate }}</span>

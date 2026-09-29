@@ -74,6 +74,8 @@
       "DATE": "2026년 3월 18일 수요일",
       "GREETING": "환영합니다, {{name}}",
       "PERIOD_CURRENT_MONTH": "당월",
+      "PERIOD_THIS_QUARTER": "이번 분기",
+      "PERIOD_THIS_YEAR": "올해",
       "NAV": {
         "DASHBOARD": "대시보드",
         "FINANCE": "재무",
@@ -103,18 +105,30 @@
         "JUN": "6월",
         "JUL": "7월"
       },
+      "WEEKS": {
+        "W1": "1주",
+        "W2": "2주",
+        "W3": "3주",
+        "W4": "4주",
+        "W5": "5주",
+        "W6": "6주",
+        "W7": "7주"
+      },
       "HEALTH": {
         "CASH_POSITION": "자금 현황",
         "CASH_POSITION_VALUE": "양호",
         "ORDER_FULFILMENT": "주문 처리율",
         "INVENTORY_ALERT": "재고 경고",
-        "INVENTORY_ALERT_VALUE": "8개 항목"
+        "INVENTORY_ALERT_VALUE": "8개 항목",
+        "INVENTORY_ALERT_VALUE_QTR": "4개 항목",
+        "INVENTORY_ALERT_VALUE_YR": "2개 항목"
       },
       "ARIA": {
         "TARGET_REVENUE_CARD": "목표 매출 카드",
         "APPROVAL_STATUS_CARD": "결재 현황 카드",
         "USER_PROFILE": "사용자 프로필",
-        "SIDEBAR_NAV": "대시보드 사이드 탐색"
+        "SIDEBAR_NAV": "대시보드 사이드 탐색",
+        "PERIOD_SELECTOR": "대시보드 기간 필터"
       }
     }
   },
