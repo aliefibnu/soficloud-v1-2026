@@ -86,7 +86,7 @@
           </div>
 
           <!-- Interactive Period Selector Dropdown -->
-          <div class="relative inline-block text-left period-dropdown-container">
+          <div class="relative inline-block self-start sm:self-auto text-left period-dropdown-container">
             <button
               type="button"
               (click)="togglePeriodMenu($event)"
@@ -115,7 +115,7 @@
                 [attr.aria-activedescendant]="'period-option-' + selectedPeriod()"
                 tabindex="-1"
                 (keydown)="onMenuKeyDown($event)"
-                class="absolute right-0 mt-1.5 w-36 sm:w-40 z-40 bg-white/95 backdrop-blur-md rounded-xl shadow-[0_12px_30px_-6px_rgba(24,40,73,0.18),0_4px_12px_-2px_rgba(29,68,235,0.12)] border border-slate-100/90 py-1 overflow-hidden animate-dropdown focus:outline-none"
+                class="absolute left-0 sm:left-auto sm:right-0 mt-1.5 w-36 sm:w-40 z-40 bg-white/95 backdrop-blur-md rounded-xl shadow-[0_12px_30px_-6px_rgba(24,40,73,0.18),0_4px_12px_-2px_rgba(29,68,235,0.12)] border border-slate-100/90 py-1 overflow-hidden animate-dropdown focus:outline-none"
               >
                 @for (option of periodOptions; track option.id) {
                   <button
