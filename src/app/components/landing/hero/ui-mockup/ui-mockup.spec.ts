@@ -230,6 +230,30 @@ describe('UiMockup', () => {
     expect(approvalCard?.textContent).toContain('18 dokumen');
   });
 
+  it('should handle chart hover and leave interactions', () => {
+    expect(component.hoveredIndex()).toBeNull();
+    expect(component.activePoint()).toBeNull();
+
+    // Hover over May (index 4)
+    component.onPointHover(4);
+    fixture.detectChanges();
+
+    expect(component.hoveredIndex()).toBe(4);
+    expect(component.activePoint()?.monthKey).toBe('HERO.UI_MOCKUP.MONTHS.MAY');
+    expect(component.activePoint()?.revenue).toBe('Rp11,6M');
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Rp11,6M');
+    expect(compiled.textContent).toContain('+7.4%');
+
+    // Leave hover
+    component.onPointLeave();
+    fixture.detectChanges();
+
+    expect(component.hoveredIndex()).toBeNull();
+    expect(component.activePoint()).toBeNull();
+  });
+
   it('should update texts when language changes to English', async () => {
     translateService.use('en');
     fixture.detectChanges();
@@ -247,3 +271,4 @@ describe('UiMockup', () => {
     expect(compiled.textContent).toContain('8 items');
   });
 });
+

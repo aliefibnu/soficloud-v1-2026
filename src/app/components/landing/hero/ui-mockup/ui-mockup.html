@@ -175,7 +175,31 @@
                 </div>
               </div>
 
-              <div class="mt-3 sm:mt-6 relative w-full h-20 sm:h-32">
+              <!-- Interactive Chart Area with Hover UI -->
+              <div
+                class="mt-3 sm:mt-6 relative w-full h-20 sm:h-32 select-none"
+                (mouseleave)="onPointLeave()"
+              >
+                <!-- Floating Tooltip -->
+                @if (activePoint(); as pt) {
+                  <div
+                    class="absolute z-30 pointer-events-none transition-all duration-150 ease-out transform -translate-x-1/2 -translate-y-full -top-1"
+                    [style.left.%]="tooltipLeftPercent()"
+                  >
+                    <div
+                      class="bg-white/95 backdrop-blur-md rounded-xl shadow-[0_10px_25px_-5px_rgba(24,40,73,0.18),0_4px_10px_-2px_rgba(29,68,235,0.08)] border border-slate-100/90 py-1 px-2.5 flex flex-col items-center whitespace-nowrap"
+                    >
+                      <div class="flex items-center gap-1.5 text-[9px] sm:text-[10px] text-[#8fa0b5] font-medium">
+                        <span>{{ pt.monthKey | translate }}</span>
+                        <span class="text-[#10b981] font-semibold">{{ pt.growth }}</span>
+                      </div>
+                      <span class="text-[11px] sm:text-xs font-bold text-[#182849] tracking-tight">
+                        {{ pt.revenue }}
+                      </span>
+                    </div>
+                  </div>
+                }
+
                 <svg class="w-full h-full overflow-visible" viewBox="0 0 500 120" preserveAspectRatio="none" aria-hidden="true">
                   <defs>
                     <linearGradient id="salesGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -184,10 +208,12 @@
                       <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0" />
                     </linearGradient>
                   </defs>
+                  <!-- Gradient Area -->
                   <path
                     d="M 10,95 C 60,95 90,80 130,80 C 170,80 200,92 240,70 C 280,48 310,85 350,72 C 390,58 420,20 460,15 C 480,12 495,12 500,12 L 500,120 L 10,120 Z"
                     fill="url(#salesGrad)"
                   />
+                  <!-- Main Line -->
                   <path
                     d="M 10,95 C 60,95 90,80 130,80 C 170,80 200,92 240,70 C 280,48 310,85 350,72 C 390,58 420,20 460,15 C 480,12 495,12 500,12"
                     fill="none"
@@ -195,11 +221,71 @@
                     stroke-width="3"
                     stroke-linecap="round"
                   />
+
+                  <!-- Hover Vertical Guideline and Dot Marker -->
+                  @if (activePoint(); as pt) {
+                    <line
+                      [attr.x1]="pt.x"
+                      [attr.y1]="pt.y"
+                      [attr.x2]="pt.x"
+                      y2="120"
+                      stroke="#1d44eb"
+                      stroke-opacity="0.25"
+                      stroke-width="1.5"
+                      stroke-dasharray="3,3"
+                    />
+                    <!-- Outer halo ring -->
+                    <circle
+                      [attr.cx]="pt.x"
+                      [attr.cy]="pt.y"
+                      r="8"
+                      fill="#1d44eb"
+                      fill-opacity="0.18"
+                    />
+                    <!-- Inner dot -->
+                    <circle
+                      [attr.cx]="pt.x"
+                      [attr.cy]="pt.y"
+                      r="4.5"
+                      fill="#1d44eb"
+                      stroke="#ffffff"
+                      stroke-width="2"
+                    />
+                  }
+
+                  <!-- Interactive Hitboxes for 7 Months -->
+                  @for (pt of chartPoints; track pt.monthKey; let idx = $index) {
+                    <rect
+                      [attr.x]="idx === 0 ? 0 : chartPoints[idx].x - 35"
+                      y="0"
+                      width="70"
+                      height="120"
+                      fill="transparent"
+                      class="cursor-pointer"
+                      (mouseenter)="onPointHover(idx)"
+                      (focus)="onPointHover(idx)"
+                      (blur)="onPointLeave()"
+                      tabindex="0"
+                      [attr.aria-label]="(pt.monthKey | translate) + ': ' + pt.revenue"
+                    />
+                  }
                 </svg>
               </div>
-              <div class="flex items-center justify-between text-[10px] sm:text-xs text-[#8fa0b5] font-medium mt-2 px-1">
-                @for (m of chartMonthKeys; track m) {
-                  <span>{{ m | translate }}</span>
+
+              <!-- Month Axis Labels with Synchronized Hover State -->
+              <div class="flex items-center justify-between text-[10px] sm:text-xs font-medium mt-2 px-1">
+                @for (pt of chartPoints; track pt.monthKey; let idx = $index) {
+                  <button
+                    type="button"
+                    (mouseenter)="onPointHover(idx)"
+                    (mouseleave)="onPointLeave()"
+                    (focus)="onPointHover(idx)"
+                    (blur)="onPointLeave()"
+                    class="cursor-pointer transition-colors duration-150 py-0.5"
+                    [class]="hoveredIndex() === idx ? 'text-[#1d44eb] font-bold' : 'text-[#8fa0b5]'"
+                  >
+                    {{ pt.monthKey | translate }}
+                  </button>
                 }
               </div>
             </div>

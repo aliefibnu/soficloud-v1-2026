@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 export interface NavItem {
@@ -20,6 +20,15 @@ export interface HealthStatusItem {
   readonly dotColor: string;
 }
 
+export interface ChartDataPoint {
+  readonly monthKey: string;
+  readonly x: number;
+  readonly y: number;
+  readonly revenue: string;
+  readonly profit: string;
+  readonly growth: string;
+}
+
 @Component({
   selector: 'app-ui-mockup',
   imports: [TranslatePipe],
@@ -30,6 +39,7 @@ export interface HealthStatusItem {
 })
 export class UiMockup {
   readonly activeNav = signal<string>('dashboard');
+  readonly hoveredIndex = signal<number | null>(null);
 
   readonly navItems: readonly NavItem[] = [
     { id: 'dashboard', labelKey: 'HERO.UI_MOCKUP.NAV.DASHBOARD', active: true },
@@ -87,13 +97,88 @@ export class UiMockup {
     },
   ];
 
-  readonly chartMonthKeys: readonly string[] = [
-    'HERO.UI_MOCKUP.MONTHS.JAN',
-    'HERO.UI_MOCKUP.MONTHS.FEB',
-    'HERO.UI_MOCKUP.MONTHS.MAR',
-    'HERO.UI_MOCKUP.MONTHS.APR',
-    'HERO.UI_MOCKUP.MONTHS.MAY',
-    'HERO.UI_MOCKUP.MONTHS.JUN',
-    'HERO.UI_MOCKUP.MONTHS.JUL',
+  readonly chartPoints: readonly ChartDataPoint[] = [
+    {
+      monthKey: 'HERO.UI_MOCKUP.MONTHS.JAN',
+      x: 10,
+      y: 95,
+      revenue: 'Rp8,4M',
+      profit: 'Rp1,6M',
+      growth: '+4.2%',
+    },
+    {
+      monthKey: 'HERO.UI_MOCKUP.MONTHS.FEB',
+      x: 90,
+      y: 80,
+      revenue: 'Rp9,8M',
+      profit: 'Rp1,9M',
+      growth: '+6.1%',
+    },
+    {
+      monthKey: 'HERO.UI_MOCKUP.MONTHS.MAR',
+      x: 170,
+      y: 82,
+      revenue: 'Rp10,5M',
+      profit: 'Rp2,1M',
+      growth: '+5.5%',
+    },
+    {
+      monthKey: 'HERO.UI_MOCKUP.MONTHS.APR',
+      x: 250,
+      y: 66,
+      revenue: 'Rp12,2M',
+      profit: 'Rp2,4M',
+      growth: '+8.0%',
+    },
+    {
+      monthKey: 'HERO.UI_MOCKUP.MONTHS.MAY',
+      x: 330,
+      y: 74,
+      revenue: 'Rp11,6M',
+      profit: 'Rp2,3M',
+      growth: '+7.4%',
+    },
+    {
+      monthKey: 'HERO.UI_MOCKUP.MONTHS.JUN',
+      x: 415,
+      y: 26,
+      revenue: 'Rp14,5M',
+      profit: 'Rp2,9M',
+      growth: '+11.2%',
+    },
+    {
+      monthKey: 'HERO.UI_MOCKUP.MONTHS.JUL',
+      x: 490,
+      y: 12,
+      revenue: 'Rp15,8M',
+      profit: 'Rp3,1M',
+      growth: '+14.8%',
+    },
   ];
+
+  readonly chartMonthKeys: readonly string[] = this.chartPoints.map((p) => p.monthKey);
+
+  readonly activePoint = computed<ChartDataPoint | null>(() => {
+    const idx = this.hoveredIndex();
+    if (idx === null || idx < 0 || idx >= this.chartPoints.length) {
+      return null;
+    }
+    return this.chartPoints[idx];
+  });
+
+  readonly tooltipLeftPercent = computed<number>(() => {
+    const pt = this.activePoint();
+    if (!pt) return 50;
+    const rawPercent = (pt.x / 500) * 100;
+    // Clamp between 10% and 90% to avoid edge overflow
+    return Math.max(10, Math.min(90, rawPercent));
+  });
+
+  onPointHover(index: number): void {
+    this.hoveredIndex.set(index);
+  }
+
+  onPointLeave(): void {
+    this.hoveredIndex.set(null);
+  }
 }
