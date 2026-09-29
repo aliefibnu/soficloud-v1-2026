@@ -1,9 +1,10 @@
 import { Component, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { UiMockup } from './ui-mockup/ui-mockup';
 
 @Component({
   selector: 'app-hero',
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, UiMockup],
   templateUrl: './hero.html',
   host: {
     class: 'relative block w-full overflow-hidden',
