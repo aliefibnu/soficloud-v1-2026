@@ -30,18 +30,18 @@
 
     <!-- Subheadline (1 line) -->
     <p
-      class="font-dm-sans font-normal text-[#182849]/80 text-[15px] sm:text-[16.5px] md:text-[17.5px] lg:text-[18.5px] leading-relaxed max-w-5xl md:whitespace-nowrap mb-8 sm:mb-10"
+      class="font-dm-sans font-normal text-[#182849]/80 text-[15px] sm:text-[16.5px] md:text-[17.5px] lg:text-[18.5px] leading-relaxed max-w-5xl md:whitespace-nowrap"
     >
       {{ 'HERO.SUBTITLE' | translate }}
     </p>
 
     <!-- Action Buttons -->
-    <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5 w-full sm:w-auto">
+    <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto">
       <button
         type="button"
         (click)="onContact()"
         [attr.aria-label]="'HERO.ARIA.CONTACT_US' | translate"
-        class="w-full sm:w-auto min-w-[130px] rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2463ea] to-[#408bf5] px-6 py-2.5 text-[15px] sm:text-[15.5px] font-semibold text-white shadow-[0_2px_8px_-2px_rgba(29,68,235,0.25)] transition-all duration-200 hover:brightness-105 hover:shadow-[0_4px_12px_-2px_rgba(29,68,235,0.35)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer"
+        class="w-full sm:w-auto inline-flex items-center justify-center px-6.5 py-2.5 sm:px-7 sm:py-2.5 rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] text-white font-display text-[15px] sm:text-xl font-semibold shadow-xs hover:from-[#1738c2] hover:via-[#1e4ed8] hover:to-[#2563eb] hover:shadow-md active:scale-[0.98] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer"
       >
         {{ 'HERO.ACTIONS.CONTACT_US' | translate }}
       </button>
@@ -50,9 +50,11 @@
         type="button"
         (click)="onWatchVideo()"
         [attr.aria-label]="'HERO.ARIA.WATCH_VIDEO' | translate"
-        class="w-full sm:w-auto min-w-[130px] rounded-xl border-[1.25px] border-[#2563eb] bg-white px-6 py-2.5 text-[15px] sm:text-[15.5px] font-semibold text-[#2563eb] shadow-2xs backdrop-blur-xs transition-all duration-200 hover:bg-blue-50/50 hover:border-[#1d44eb] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] cursor-pointer"
+        class="w-full sm:w-auto inline-flex items-center justify-center px-6.5 py-2.5 sm:px-7 sm:py-2.5 rounded-xl border border-transparent bg-origin-border [background-clip:padding-box,border-box] bg-[linear-gradient(white,white),linear-gradient(to_right,#1d44eb,#3b82f6)] font-display text-[15px] sm:text-xl font-semibold shadow-2xs hover:bg-[#1d44eb]/5 hover:shadow-xs active:scale-[0.98] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer"
       >
-        {{ 'HERO.ACTIONS.WATCH_VIDEO' | translate }}
+        <span class="bg-linear-to-r from-[#1d44eb] to-[#3b82f6] bg-clip-text text-transparent">
+          {{ 'HERO.ACTIONS.WATCH_VIDEO' | translate }}
+        </span>
       </button>
     </div>
   </div>
