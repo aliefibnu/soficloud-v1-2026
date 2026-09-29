@@ -66,5 +66,20 @@
       "CONTACT_US": "Soficloudチームにお問い合わせ",
       "WATCH_VIDEO": "Soficloudデモ動画を視聴"
     }
+  },
+  "OVERVIEW_FEATURE": {
+    "TITLE": "SOFICloud、多彩な機能を備えた信頼のERPソフトウェア",
+    "DESCRIPTION": "SOFICloudは、企業の重要な業務プロセスを1つの統合システムでサポートするように設計されています。財務、販売、購買、在庫、生産、プロジェクト、ワークフローからビジネス分析まで、すべての機能が連携し、一貫したデータフローで稼働します。多様な企業での導入実績を活かし、SOFICloudは進化し続けるビジネスニーズに応えて成長を続けています。",
+    "TARGET_REVENUE": {
+      "LABEL": "売上目標",
+      "VALUE": "92%"
+    },
+    "APPROVAL": {
+      "LABEL": "本日の承認",
+      "VALUE": "18 件の文書"
+    },
+    "ARIA": {
+      "IMAGE_ALT": "ビジネスパフォーマンスウィジェットを備えた SOFICloud ERP ダッシュボードのモニタープレビュー"
+    }
   }
 }

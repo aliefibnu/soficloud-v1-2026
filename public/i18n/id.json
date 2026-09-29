@@ -66,5 +66,20 @@
       "CONTACT_US": "Hubungi tim Soficloud",
       "WATCH_VIDEO": "Tonton video demonstrasi Soficloud"
     }
+  },
+  "OVERVIEW_FEATURE": {
+    "TITLE": "SOFICloud, Software ERP Andal dengan Beragam Fitur Unggulan",
+    "DESCRIPTION": "SOFICloud dirancang untuk mendukung berbagai proses penting perusahaan dalam satu sistem yang terintegrasi. Mulai dari keuangan, penjualan, pembelian, persediaan, produksi, project, workflow hingga analisa bisnis, setiap fitur saling terhubung dan bekerja dalam satu alur data yang konsisten. Dengan pengalaman implementasi di berbagai jenis perusahaan, SOFICloud terus dikembangkan mengikuti kebutuhan bisnis yang semakin kompleks.",
+    "TARGET_REVENUE": {
+      "LABEL": "Target Revenue",
+      "VALUE": "92%"
+    },
+    "APPROVAL": {
+      "LABEL": "Approval Hari ini",
+      "VALUE": "18 dokumen"
+    },
+    "ARIA": {
+      "IMAGE_ALT": "Pratinjau Dashboard ERP SOFICloud pada layar monitor dengan widget performa bisnis"
+    }
   }
 }

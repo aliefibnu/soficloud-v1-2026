@@ -66,5 +66,20 @@
       "CONTACT_US": "Contact Soficloud team",
       "WATCH_VIDEO": "Watch Soficloud product demonstration video"
     }
+  },
+  "OVERVIEW_FEATURE": {
+    "TITLE": "SOFICloud, Reliable ERP Software with Diverse Flagship Features",
+    "DESCRIPTION": "SOFICloud is designed to support crucial company processes within a single integrated system. From finance, sales, purchasing, inventory, production, projects, workflows to business analysis, every feature is interconnected and works in a consistent data stream. With implementation experience across various industries, SOFICloud continuously evolves to meet increasingly complex business needs.",
+    "TARGET_REVENUE": {
+      "LABEL": "Target Revenue",
+      "VALUE": "92%"
+    },
+    "APPROVAL": {
+      "LABEL": "Today's Approval",
+      "VALUE": "18 documents"
+    },
+    "ARIA": {
+      "IMAGE_ALT": "SOFICloud ERP Dashboard preview on monitor display with business performance widgets"
+    }
   }
 }

@@ -24,7 +24,6 @@ describe('BusinessControl', () => {
     languageService = TestBed.inject(LanguageService);
     translateService = TestBed.inject(TranslateService);
 
-    // Set initial translations for testing
     translateService.setTranslation('id', {
       BUSINESS_CONTROL: {
         HEADER_TITLE: 'Kendalikan Bisnis Dari Satu Tempat',
