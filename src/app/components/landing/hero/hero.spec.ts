@@ -117,4 +117,12 @@ describe('Hero', () => {
 
     expect(emitted).toBe(true);
   });
+
+  it('should render the ambient background gradient layer with accessibility and overlay attributes', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const bgContainer = compiled.querySelector('[aria-hidden="true"].pointer-events-none');
+    expect(bgContainer).toBeTruthy();
+    expect(bgContainer?.classList.contains('-z-10')).toBe(true);
+    expect(bgContainer?.classList.contains('overflow-hidden')).toBe(true);
+  });
 });
