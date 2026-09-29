@@ -79,7 +79,8 @@ describe('Hero', () => {
 
   it('should render both CTA buttons with proper styles and ARIA labels', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const buttons = compiled.querySelectorAll('button');
+    const ctaContainer = compiled.querySelector('.mt-6');
+    const buttons = ctaContainer?.querySelectorAll('button') ?? [];
     expect(buttons.length).toBe(2);
 
     const contactButton = buttons[0];
@@ -99,8 +100,9 @@ describe('Hero', () => {
     });
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const contactButton = compiled.querySelectorAll('button')[0];
-    contactButton.click();
+    const ctaContainer = compiled.querySelector('.mt-6');
+    const contactButton = ctaContainer?.querySelectorAll('button')[0];
+    contactButton?.click();
 
     expect(emitted).toBe(true);
   });
@@ -112,8 +114,9 @@ describe('Hero', () => {
     });
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const videoButton = compiled.querySelectorAll('button')[1];
-    videoButton.click();
+    const ctaContainer = compiled.querySelector('.mt-6');
+    const videoButton = ctaContainer?.querySelectorAll('button')[1];
+    videoButton?.click();
 
     expect(emitted).toBe(true);
   });
@@ -124,5 +127,11 @@ describe('Hero', () => {
     expect(bgContainer).toBeTruthy();
     expect(bgContainer?.classList.contains('-z-10')).toBe(true);
     expect(bgContainer?.classList.contains('overflow-hidden')).toBe(true);
+  });
+
+  it('should render the app-ui-mockup component', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const uiMockup = compiled.querySelector('app-ui-mockup');
+    expect(uiMockup).toBeTruthy();
   });
 });
