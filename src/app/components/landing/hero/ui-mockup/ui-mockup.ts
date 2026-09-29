@@ -23,7 +23,7 @@ export interface HealthStatusItem {
   selector: 'app-ui-mockup',
   templateUrl: './ui-mockup.html',
   host: {
-    class: 'relative block w-full select-none',
+    class: 'relative block w-full select-none text-left',
   },
 })
 export class UiMockup {
