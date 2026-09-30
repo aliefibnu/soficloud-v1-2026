@@ -1,9 +1,9 @@
 <header
-  class="relative w-full bg-white font-sans py-3.5 sm:py-4 border-b border-x border-gray-200/70 shadow-[0_8px_24px_-4px_rgba(24,40,73,0.08),0_2px_8px_-2px_rgba(24,40,73,0.04)] md:rounded-b-[15px] transition-[border-radius] duration-200"
+  class="relative w-full bg-white font-sans py-4 sm:py-4.5 border-b border-x border-gray-200/70 shadow-[0_8px_24px_-4px_rgba(24,40,73,0.08),0_2px_8px_-2px_rgba(24,40,73,0.04)] md:rounded-b-[15px] transition-[border-radius] duration-200"
   [class.rounded-b-4xl]="!isMobileMenuOpen()"
   [class.rounded-b-none]="isMobileMenuOpen()"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center justify-between gap-4 md:gap-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative flex items-center justify-between gap-4 md:gap-10">
     <a href="/" class="flex items-center shrink-0">
       <img
         ngSrc="/soficloud-logo.svg"
@@ -11,29 +11,29 @@
         width="322"
         height="74"
         priority
-        class="h-9.5 sm:h-10 md:h-10.5 lg:h-11 w-auto object-contain transition-opacity duration-200 hover:opacity-90"
+        class="h-8.5 sm:h-9 md:h-10 w-auto object-contain transition-opacity duration-200 hover:opacity-90"
       />
     </a>
 
     <nav
-      class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-7 lg:gap-9"
+      class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 lg:gap-10"
       [attr.aria-label]="'HEADER.ARIA.MAIN_NAV' | translate"
     >
       @for (link of navLinks; track link.key) {
         <a
           [href]="link.href"
-          class="text-[15px] lg:text-[15.5px] font-bold text-[#182849] tracking-[-0.01em] transition-all hover:text-[#6d4552] hover:opacity-85"
+          class="text-[15.5px] lg:text-[16px] font-bold text-[#182849] tracking-[-0.01em] transition-all hover:text-[#1d64ec] hover:opacity-85"
         >
           {{ link.key | translate }}
         </a>
       }
     </nav>
 
-    <div class="hidden md:flex items-center gap-4 shrink-0">
+    <div class="hidden md:flex items-center gap-4.5 shrink-0">
       <div class="relative inline-block text-left">
         <button
           type="button"
-          class="inline-flex h-10 items-center gap-2.5 rounded-full border border-gray-200/90 bg-gray-50/70 px-3.5 py-1.5 text-[13.5px] font-semibold tracking-wide text-[#182849] shadow-2xs transition-all duration-200 hover:border-gray-300 hover:bg-gray-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d4552] motion-reduce:transition-none cursor-pointer"
+          class="inline-flex h-10 items-center gap-2.5 rounded-full border border-gray-200/90 bg-gray-50/70 px-3.5 py-1.5 text-[13.5px] font-semibold tracking-wide text-[#182849] shadow-2xs transition-all duration-200 hover:border-gray-300 hover:bg-gray-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] motion-reduce:transition-none cursor-pointer"
           (click)="toggleLangMenu($event)"
           [attr.aria-expanded]="isLangMenuOpen()"
           aria-haspopup="listbox"
@@ -77,8 +77,8 @@
                   role="option"
                   [attr.aria-selected]="selectedLang.code === lang.code"
                   class="group flex w-full items-center justify-between rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-all duration-150 cursor-pointer"
-                  [class.bg-[#6d4552]/8]="selectedLang.code === lang.code"
-                  [class.text-[#6d4552]]="selectedLang.code === lang.code"
+                  [class.bg-[#1d44eb]/8]="selectedLang.code === lang.code"
+                  [class.text-[#1d44eb]]="selectedLang.code === lang.code"
                   [class.font-semibold]="selectedLang.code === lang.code"
                   [class.text-gray-500]="selectedLang.code !== lang.code"
                   [class.hover:text-[#182849]]="selectedLang.code !== lang.code"
@@ -92,7 +92,7 @@
                   </span>
                   @if (selectedLang.code === lang.code) {
                     <svg
-                      class="h-4 w-4 shrink-0 text-[#6d4552]"
+                      class="h-4 w-4 shrink-0 text-[#1d44eb]"
                       viewBox="0 0 16 16"
                       fill="none"
                       aria-hidden="true"
@@ -107,11 +107,11 @@
         }
       </div>
 
-      <span class="hidden md:block h-6.5 w-px bg-gray-200/90" aria-hidden="true"></span>
+      <span class="hidden md:block h-7 w-px bg-gray-200/90" aria-hidden="true"></span>
 
       <button
         type="button"
-        class="group relative overflow-hidden w-full md:w-auto rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] px-5.5 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-300 hover:shadow-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
+        class="group relative overflow-hidden w-full md:w-auto rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] px-6 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-300 hover:shadow-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
         (click)="onScheduleDemo()"
       >
         <span class="relative z-10">{{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}</span>
@@ -120,7 +120,7 @@
 
     <button
       type="button"
-      class="inline-flex h-11 w-11 md:hidden flex-col items-center justify-center gap-1.5 rounded-xl text-[#182849] transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d4552] motion-reduce:transition-none cursor-pointer"
+      class="inline-flex h-11 w-11 md:hidden flex-col items-center justify-center gap-1.5 rounded-xl text-[#182849] transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] motion-reduce:transition-none cursor-pointer"
       (click)="toggleMobileMenu()"
       [attr.aria-expanded]="isMobileMenuOpen()"
       aria-controls="mobile-menu"
@@ -161,7 +161,7 @@
     [hidden]="!isMobileMenuOpen()"
     class="absolute top-full left-0 right-0 z-40 bg-white border-b border-x border-gray-200/70 rounded-b-4xl shadow-[0_16px_36px_-4px_rgba(24,40,73,0.14)] md:hidden origin-top animate-dropdown motion-reduce:animate-none"
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-3 pb-5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-3 pb-5">
       <nav class="flex flex-col" [attr.aria-label]="'HEADER.ARIA.MOBILE_NAV' | translate">
         @for (link of navLinks; track link.key) {
           <a
@@ -177,7 +177,7 @@
         <div class="flex items-center justify-start">
           <button
             type="button"
-            class="inline-flex h-10 items-center gap-2.5 rounded-full border border-gray-200/90 bg-gray-50/70 px-3.5 py-1.5 text-[13.5px] font-semibold tracking-wide text-[#182849] shadow-2xs transition-all duration-200 hover:border-gray-300 hover:bg-gray-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d4552] motion-reduce:transition-none cursor-pointer"
+            class="inline-flex h-10 items-center gap-2.5 rounded-full border border-gray-200/90 bg-gray-50/70 px-3.5 py-1.5 text-[13.5px] font-semibold tracking-wide text-[#182849] shadow-2xs transition-all duration-200 hover:border-gray-300 hover:bg-gray-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] motion-reduce:transition-none cursor-pointer"
             (click)="openMobileLangSheet()"
             [attr.aria-expanded]="isMobileLangSheetOpen()"
             aria-haspopup="dialog"
@@ -248,7 +248,7 @@
           </h2>
           <button
             type="button"
-            class="inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus-visible:outline-2 focus-visible:outline-[#6d4552] cursor-pointer"
+            class="inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus-visible:outline-2 focus-visible:outline-[#1d44eb] cursor-pointer"
             (click)="closeMobileLangSheet()"
             [attr.aria-label]="'HEADER.ARIA.CLOSE_MENU' | translate"
           >
@@ -265,8 +265,8 @@
               role="option"
               [attr.aria-selected]="selectedLang.code === lang.code"
               class="group flex min-h-12 w-full items-center justify-between rounded-xl px-3.5 py-3 text-left text-[15px] font-medium transition-all duration-150 active:scale-[0.99] cursor-pointer"
-              [class.bg-[#6d4552]/8]="selectedLang.code === lang.code"
-              [class.text-[#6d4552]]="selectedLang.code === lang.code"
+              [class.bg-[#1d44eb]/8]="selectedLang.code === lang.code"
+              [class.text-[#1d44eb]]="selectedLang.code === lang.code"
               [class.font-semibold]="selectedLang.code === lang.code"
               [class.text-gray-500]="selectedLang.code !== lang.code"
               [class.hover:text-[#182849]]="selectedLang.code !== lang.code"
@@ -280,7 +280,7 @@
               </span>
               @if (selectedLang.code === lang.code) {
                 <svg
-                  class="h-5 w-5 shrink-0 text-[#6d4552]"
+                  class="h-5 w-5 shrink-0 text-[#1d44eb]"
                   viewBox="0 0 16 16"
                   fill="none"
                   aria-hidden="true"
