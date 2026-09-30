@@ -1,0 +1,149 @@
+<section
+  class="relative w-full bg-white pt-10 sm:pt-12 md:pt-14 pb-8 sm:pb-10 overflow-hidden select-none"
+  aria-labelledby="why-choose-us-heading"
+>
+  <div
+    class="absolute top-0 inset-x-0 h-72.5 sm:h-77.5 md:h-82.5 bg-linear-to-b from-[#336DEC] via-[#3572EF] 55% to-white pointer-events-none"
+    aria-hidden="true"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+      <h2
+        id="why-choose-us-heading"
+        class="font-inter font-bold text-2xl sm:text-3xl md:text-[38px] text-white tracking-[-0.02em] leading-tight drop-shadow-xs"
+      >
+        {{ 'WHY_CHOOSE_US.HEADING' | translate }}
+      </h2>
+      <p
+        class="mt-2 sm:mt-2.5 font-dm-sans font-normal text-xs sm:text-sm md:text-[15px] text-white/90 leading-relaxed max-w-xl mx-auto"
+      >
+        {{ 'WHY_CHOOSE_US.SUBHEADING' | translate }}
+      </p>
+    </div>
+
+    <div
+      class="relative w-full h-67.5 sm:h-71.25 md:h-75 flex items-center justify-center overflow-visible touch-pan-y"
+      (touchstart)="onTouchStart($event)"
+      (touchend)="onTouchEnd($event)"
+      (mousedown)="onMouseDown($event)"
+      (mouseup)="onMouseUp($event)"
+      role="region"
+      [attr.aria-label]="'WHY_CHOOSE_US.ARIA.CAROUSEL' | translate"
+    >
+      @for (card of cards; track card.id; let i = $index) {
+        @let offset = getShortestOffset(i);
+        @let isVisible = offset >= -2 && offset <= 2;
+        @let isCenter = offset === 0;
+
+        <article
+          class="carousel-card absolute top-1/2 left-1/2 w-67.5 min-[420px]:w-75 sm:w-82.5 md:w-87.5 h-61.25 sm:h-65 md:h-68.75 rounded-2xl p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center will-change-transform cursor-pointer"
+          [class.bg-white]="isCenter"
+          [class.border]="isCenter"
+          [class.border-slate-100/80]="isCenter"
+          [class.shadow-2xl]="isCenter"
+          [class.shadow-slate-900/10]="isCenter"
+          [class.bg-white/85]="!isCenter"
+          [class.backdrop-blur-md]="!isCenter"
+          [class.border-white/50]="!isCenter"
+          [style.transform]="getCardTransform(offset)"
+          [style.opacity]="getCardOpacity(offset)"
+          [style.zIndex]="getCardZIndex(offset)"
+          [style.filter]="getCardFilter(offset)"
+          [style.pointerEvents]="isVisible ? 'auto' : 'none'"
+          [attr.aria-hidden]="!isCenter"
+          role="group"
+          aria-roledescription="slide"
+          [attr.aria-label]="
+            'WHY_CHOOSE_US.ARIA.SLIDE'
+              | translate
+                : {
+                    current: card.id,
+                    total: totalCards(),
+                    title: ('WHY_CHOOSE_US.CARDS.' + card.id + '.TITLE' | translate),
+                  }
+          "
+          (click)="onCardClick(i, offset)"
+        >
+          <div
+            class="h-14.5 sm:h-16 flex items-center justify-center w-full"
+            aria-hidden="true"
+          >
+            <img
+              [ngSrc]="card.icon"
+              alt=""
+              [width]="72"
+              [height]="72"
+              class="max-h-3 sm:max-h-14.5 w-auto object-contain pointer-events-none drop-shadow-xs transition-all duration-500"
+              [class.grayscale]="!isCenter"
+              [class.opacity-40]="!isCenter"
+              [class.opacity-100]="isCenter"
+              [priority]="card.id <= 3"
+            />
+          </div>
+
+          <div class="flex flex-col items-center justify-center flex-1 mt-1 sm:mt-1.5 w-full">
+            <h3
+              class="font-dm-sans font-bold text-sm sm:text-base md:text-[18px] text-[#182849] leading-snug tracking-[-0.01em] whitespace-pre-line text-center transition-colors duration-300"
+              [class.text-slate-700]="!isCenter"
+            >
+              {{ 'WHY_CHOOSE_US.CARDS.' + card.id + '.TITLE' | translate }}
+            </h3>
+
+            <p
+              class="mt-1.5 sm:mt-2 font-dm-sans font-normal text-[11.5px] sm:text-xs md:text-[13px] text-slate-600 leading-relaxed text-center max-w-72.5"
+            >
+              {{ 'WHY_CHOOSE_US.CARDS.' + card.id + '.DESCRIPTION' | translate }}
+            </p>
+          </div>
+        </article>
+      }
+    </div>
+
+    <div class="flex items-center justify-center gap-3 sm:gap-3.5 mt-5 sm:mt-6 md:mt-7">
+      <button
+        type="button"
+        class="group w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-slate-50 border border-slate-200/80 hover:border-slate-300 text-[#2563EB] hover:text-[#1D3FE0] shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2"
+        (click)="prev()"
+        [attr.aria-label]="'WHY_CHOOSE_US.ARIA.PREV_BUTTON' | translate"
+      >
+        <svg
+          class="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform group-hover:-translate-x-0.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+          />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="group w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-slate-50 border border-slate-200/80 hover:border-slate-300 text-[#2563EB] hover:text-[#1D3FE0] shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2"
+        (click)="next()"
+        [attr.aria-label]="'WHY_CHOOSE_US.ARIA.NEXT_BUTTON' | translate"
+      >
+        <svg
+          class="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform group-hover:translate-x-0.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>

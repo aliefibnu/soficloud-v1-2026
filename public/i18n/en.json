@@ -189,5 +189,54 @@
         "DESC": "Protect system access, sensitive data, and transaction logs with role-based authorization, comprehensive audit trails, cloud access, backups, and monitoring."
       }
     }
+  },
+  "WHY_CHOOSE_US": {
+    "HEADING": "Why Do Companies Choose SOFICloud?",
+    "SUBHEADING": "A mature, integrated ERP ready to support your business growth.",
+    "ARIA": {
+      "SECTION": "Why Choose SOFICloud",
+      "CAROUSEL": "Why Choose SOFICloud Carousel Slider",
+      "PREV_BUTTON": "Previous slide",
+      "NEXT_BUTTON": "Next slide",
+      "SLIDE": "Slide {{current}} of {{total}}: {{title}}"
+    },
+    "CARDS": {
+      "1": {
+        "TITLE": "Developed\nSince 1998",
+        "DESCRIPTION": "Over two decades of experience make SOFICloud a mature, stable ERP that continues to evolve with business needs."
+      },
+      "2": {
+        "TITLE": "Proven Across Diverse\nImplementations",
+        "DESCRIPTION": "Used by diverse companies across various business models and operational workflows in multiple industries."
+      },
+      "3": {
+        "TITLE": "Modern, Responsive, and User\nFriendly",
+        "DESCRIPTION": "Clean, fast, and intuitive interface designed to support seamless day-to-day work activities."
+      },
+      "4": {
+        "TITLE": "Flexible to Match Your\nBusiness Processes",
+        "DESCRIPTION": "Workflows and system parameters can be adapted to your company's operational requirements."
+      },
+      "5": {
+        "TITLE": "Easier for Users to\nUnderstand",
+        "DESCRIPTION": "Intuitive menu structures and workflows help users adapt rapidly during operational activities."
+      },
+      "6": {
+        "TITLE": "Comprehensive Modules in\nOne System",
+        "DESCRIPTION": "Finance, Sales, Procurement, Inventory, Manufacturing, Project, Workflow, and Analytics seamlessly interconnected."
+      },
+      "7": {
+        "TITLE": "Continuous Post-Sale\nSupport",
+        "DESCRIPTION": "Implementation teams understand systems, business processes, and customer needs well beyond go-live."
+      },
+      "8": {
+        "TITLE": "Reliable, Safe, and Truly\nDependable",
+        "DESCRIPTION": "Secure cloud infrastructure, scheduled backups, and strict data security standards ensure operational continuity."
+      },
+      "9": {
+        "TITLE": "Supports Data-Driven\nDecisions",
+        "DESCRIPTION": "Real-time reports, interactive dashboards, and analytics help leadership make precise business decisions."
+      }
+    }
   }
 }
