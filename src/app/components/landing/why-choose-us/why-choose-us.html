@@ -24,7 +24,7 @@
       </p>
     </div>
 
-    <!-- Compact Carousel Stage -->
+    <!-- Compact Carousel Stage with Distinct Spacing & Depth of Field -->
     <div
       class="relative w-full h-[270px] sm:h-[285px] md:h-[300px] flex items-center justify-center overflow-visible touch-pan-y"
       (touchstart)="onTouchStart($event)"
@@ -40,7 +40,7 @@
         @let isCenter = offset === 0;
 
         <article
-          class="carousel-card absolute top-1/2 left-1/2 w-[270px] min-[420px]:w-[300px] sm:w-[335px] md:w-[365px] h-[245px] sm:h-[260px] md:h-[275px] rounded-[16px] p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center will-change-transform cursor-pointer"
+          class="carousel-card absolute top-1/2 left-1/2 w-[270px] min-[420px]:w-[300px] sm:w-[330px] md:w-[350px] h-[245px] sm:h-[260px] md:h-[275px] rounded-[16px] p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center will-change-transform cursor-pointer"
           [class.bg-white]="isCenter"
           [class.border]="isCenter"
           [class.border-slate-100/80]="isCenter"
@@ -68,7 +68,7 @@
           "
           (click)="onCardClick(i, offset)"
         >
-          <!-- Compact Icon Area -->
+          <!-- Icon Area: Full color when active, monochrome grayscale when unselected -->
           <div
             class="h-[58px] sm:h-[64px] flex items-center justify-center w-full"
             aria-hidden="true"
@@ -78,7 +78,10 @@
               alt=""
               [width]="72"
               [height]="72"
-              class="max-h-[52px] sm:max-h-[58px] w-auto object-contain pointer-events-none drop-shadow-xs"
+              class="max-h-[52px] sm:max-h-[58px] w-auto object-contain pointer-events-none drop-shadow-xs transition-all duration-500"
+              [class.grayscale]="!isCenter"
+              [class.opacity-40]="!isCenter"
+              [class.opacity-100]="isCenter"
               [priority]="card.id <= 3"
             />
           </div>
@@ -86,13 +89,14 @@
           <!-- Card Content Body -->
           <div class="flex flex-col items-center justify-center flex-1 mt-1 sm:mt-1.5 w-full">
             <h3
-              class="font-dm-sans font-bold text-sm sm:text-base md:text-[18px] text-[#182849] leading-snug tracking-[-0.01em] whitespace-pre-line text-center"
+              class="font-dm-sans font-bold text-sm sm:text-base md:text-[18px] text-[#182849] leading-snug tracking-[-0.01em] whitespace-pre-line text-center transition-colors duration-300"
+              [class.text-slate-700]="!isCenter"
             >
               {{ 'WHY_CHOOSE_US.CARDS.' + card.id + '.TITLE' | translate }}
             </h3>
 
             <p
-              class="mt-1.5 sm:mt-2 font-dm-sans font-normal text-[11.5px] sm:text-xs md:text-[13px] text-slate-600 leading-relaxed text-center max-w-[300px]"
+              class="mt-1.5 sm:mt-2 font-dm-sans font-normal text-[11.5px] sm:text-xs md:text-[13px] text-slate-600 leading-relaxed text-center max-w-[290px]"
             >
               {{ 'WHY_CHOOSE_US.CARDS.' + card.id + '.DESCRIPTION' | translate }}
             </p>

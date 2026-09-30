@@ -127,10 +127,10 @@ export class WhyChooseUs {
       return 'translate(-50%, -50%) scale(1)';
     }
 
-    // Responsive horizontal distance matching compact Figma spacing
-    const baseSpacing = 295;
+    // Horizontal center distance: 385px creates a clear ~35px gap without overlap
+    const baseSpacing = 385;
     const xTranslate = offset * baseSpacing;
-    const scale = Math.max(0.76, 1 - Math.abs(offset) * 0.07);
+    const scale = Math.max(0.82, 1 - Math.abs(offset) * 0.06);
 
     return `translate(calc(-50% + ${xTranslate}px), -50%) scale(${scale})`;
   }
@@ -138,7 +138,7 @@ export class WhyChooseUs {
   getCardOpacity(offset: number): number {
     const abs = Math.abs(offset);
     if (abs === 0) return 1;
-    if (abs === 1) return 0.72;
+    if (abs === 1) return 0.7;
     if (abs === 2) return 0.35;
     return 0;
   }
@@ -151,8 +151,8 @@ export class WhyChooseUs {
   getCardFilter(offset: number): string {
     const abs = Math.abs(offset);
     if (abs === 0) return 'none';
-    if (abs === 1) return 'blur(0.5px)';
-    return 'blur(2px)';
+    if (abs === 1) return 'blur(2.8px)';
+    return 'blur(6px)';
   }
 
   next(): void {
