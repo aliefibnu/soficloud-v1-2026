@@ -2,6 +2,7 @@ import { computed, inject, PLATFORM_ID, Service, signal } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { polyfillCountryFlagEmojis } from 'country-flag-emoji-polyfill';
 
 export type Language = 'en' | 'id' | 'zh' | 'ja' | 'ko';
 
@@ -35,6 +36,14 @@ export class LanguageService {
   });
 
   init(): Observable<unknown> {
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        polyfillCountryFlagEmojis();
+      } catch {
+        // Fallback gracefully in environments where canvas measurement is unavailable
+      }
+    }
+
     this.translate.addLangs([...this.supportedLanguages]);
     this.translate.setFallbackLang('en');
 
