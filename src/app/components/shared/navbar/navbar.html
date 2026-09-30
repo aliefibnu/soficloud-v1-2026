@@ -97,10 +97,10 @@
 
       <button
         type="button"
-        class="w-full rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] px-5.5 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-200 hover:from-[#1738c2] hover:via-[#1e4ed8] hover:to-[#2563eb] hover:shadow-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] md:w-auto cursor-pointer"
+        class="group relative overflow-hidden w-full md:w-auto rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] px-5.5 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-300 hover:shadow-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
         (click)="onScheduleDemo()"
       >
-        {{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}
+        <span class="relative z-10">{{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}</span>
       </button>
     </div>
 
@@ -185,10 +185,10 @@
 
         <button
           type="button"
-          class="w-full rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] px-6 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-200 hover:from-[#1738c2] hover:via-[#1e4ed8] hover:to-[#2563eb] hover:shadow-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer"
+          class="group relative overflow-hidden w-full rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] px-6 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-300 hover:shadow-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
           (click)="onScheduleDemo(); closeMobileMenu()"
         >
-          {{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}
+          <span class="relative z-10">{{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}</span>
         </button>
       </div>
     </div>
