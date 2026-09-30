@@ -146,5 +146,54 @@
     "ARIA": {
       "IMAGE_ALT": "Pratinjau Dashboard ERP SOFICloud pada layar monitor dengan widget performa bisnis"
     }
+  },
+  "WHY_CHOOSE_US": {
+    "HEADING": "Mengapa Perusahaan Memilih SOFICloud?",
+    "SUBHEADING": "ERP yang matang, terintegrasi, dan siap mendukung pertumbuhan bisnis Anda.",
+    "ARIA": {
+      "SECTION": "Mengapa Perusahaan Memilih SOFICloud",
+      "CAROUSEL": "Slider Alasan Memilih SOFICloud",
+      "PREV_BUTTON": "Kartu sebelumnya",
+      "NEXT_BUTTON": "Kartu berikutnya",
+      "SLIDE": "Slide {{current}} dari {{total}}: {{title}}"
+    },
+    "CARDS": {
+      "1": {
+        "TITLE": "Dikembangkan\nSejak 1998",
+        "DESCRIPTION": "Pengalaman lebih dari dua dekade membentuk SOFICloud menjadi ERP yang matang, stabil, dan terus berkembang mengikuti kebutuhan bisnis."
+      },
+      "2": {
+        "TITLE": "Teruji dalam Berbagai\nImplementasi",
+        "DESCRIPTION": "Digunakan oleh berbagai perusahaan dengan karakter bisnis dan proses operasional yang beragam di berbagai industri."
+      },
+      "3": {
+        "TITLE": "Modern, Responsif, dan Nyaman\nDigunakan",
+        "DESCRIPTION": "Antarmuka bersih, cepat, dan mudah dipahami untuk mendukung aktivitas kerja sehari-hari."
+      },
+      "4": {
+        "TITLE": "Fleksibel Mengikuti\nProses Bisnis",
+        "DESCRIPTION": "Alur kerja dan parameter sistem dapat disesuaikan dengan kebutuhan operasional perusahaan."
+      },
+      "5": {
+        "TITLE": "Lebih Mudah Dipahami\nPengguna",
+        "DESCRIPTION": "Struktur menu dan proses kerja membantu pengguna beradaptasi lebih cepat dalam aktivitas operasional."
+      },
+      "6": {
+        "TITLE": "Modul Lengkap Dalam\nSatu Sistem",
+        "DESCRIPTION": "Finance, Sales, Procurement, Inventory, Manufacturing, Project, Workflow, dan Analytics saling terhubung."
+      },
+      "7": {
+        "TITLE": "Dukungan Purna Jual\nBerkelanjutan",
+        "DESCRIPTION": "Tim implementasi memahami sistem, proses bisnis, dan kebutuhan pelanggan setelah sistem mulai digunakan."
+      },
+      "8": {
+        "TITLE": "Andal, Aman, dan Dapat\nDiandalkan",
+        "DESCRIPTION": "Infrastruktur cloud yang aman, backup terjadwal, dan standar keamanan data menjaga kelancaran operasional."
+      },
+      "9": {
+        "TITLE": "Mendukung Keputusan\nBerbasis Data",
+        "DESCRIPTION": "Laporan real-time, dashboard interaktif, dan analitik membantu management mengambil keputusan lebih tepat."
+      }
+    }
   }
 }
