@@ -147,6 +147,49 @@
       "IMAGE_ALT": "Pratinjau Dashboard ERP SOFICloud pada layar monitor dengan widget performa bisnis"
     }
   },
+  "FEATURES": {
+    "HEADING": "9 Fitur Utama SOFICloud",
+    "SUBTITLE": "Kapabilitas yang saling terhubung untuk menjalankan proses operasional dan menghasilkan informasi management yang konsisten.",
+    "CTA_LEARN_MORE": "Pelajari Selengkapnya",
+    "CARDS": {
+      "FINANCIAL": {
+        "TITLE": "Financial Management & Accounting",
+        "DESC": "Kelola proses keuangan dan accounting dari transaksi operasional hingga laporan keuangan, cash control, cost analysis dan management insight."
+      },
+      "SALES": {
+        "TITLE": "Sales & Order Management",
+        "DESC": "Kelola proses penjualan dari quotation, Sales Order dan pemenuhan pesanan hingga delivery, invoice dan monitoring revenue."
+      },
+      "PROCUREMENT": {
+        "TITLE": "Procurement & Vendor Management",
+        "DESC": "Kelola kebutuhan pembelian dari Purchase Requisition, approval, vendor, Purchase Order hingga penerimaan barang dan supplier invoice."
+      },
+      "INVENTORY": {
+        "TITLE": "Inventory & Warehouse Management",
+        "DESC": "Pantau stock dan pergerakan barang secara real-time di berbagai gudang, lengkap dengan location, allocation, transfer, opname dan stock control."
+      },
+      "MANUFACTURING": {
+        "TITLE": "Manufacturing & Production Control",
+        "DESC": "Kelola perencanaan dan pelaksanaan produksi dari BOM, Routing dan MRP hingga Production Order, WIP serta analisa biaya produksi."
+      },
+      "PROJECT": {
+        "TITLE": "Project & Cost Management",
+        "DESC": "Kelola project budget, progress dan realisasi biaya untuk memantau cost, budget vs actual serta profitability setiap proyek."
+      },
+      "WORKFLOW": {
+        "TITLE": "Workflow, Approval & Internal Control",
+        "DESC": "Atur workflow, multi-level approval dan otorisasi sesuai struktur perusahaan, lengkap dengan status proses dan audit trail."
+      },
+      "ANALYTICS": {
+        "TITLE": "Business Analytics & Reporting",
+        "DESC": "Ubah transaksi harian menjadi dashboard, laporan dan analisa yang membantu management membaca kinerja dan mengambil keputusan."
+      },
+      "SECURITY": {
+        "TITLE": "Security, Cloud & Auditability",
+        "DESC": "Lindungi akses, data dan histori transaksi melalui role-based authorization, audit trail, cloud access, backup dan monitoring."
+      }
+    }
+  },
   "WHY_CHOOSE_US": {
     "HEADING": "Mengapa Perusahaan Memilih SOFICloud?",
     "SUBHEADING": "ERP yang matang, terintegrasi, dan siap mendukung pertumbuhan bisnis Anda.",

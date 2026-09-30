@@ -147,6 +147,49 @@
       "IMAGE_ALT": "SOFICloud ERP Dashboard preview on monitor display with business performance widgets"
     }
   },
+  "FEATURES": {
+    "HEADING": "9 Core Features of SOFICloud",
+    "SUBTITLE": "Interconnected capabilities to streamline operational workflows and produce consistent management insights.",
+    "CTA_LEARN_MORE": "Learn More",
+    "CARDS": {
+      "FINANCIAL": {
+        "TITLE": "Financial Management & Accounting",
+        "DESC": "Manage finance and accounting processes from operational transactions to financial statements, cash control, cost analysis, and management insights."
+      },
+      "SALES": {
+        "TITLE": "Sales & Order Management",
+        "DESC": "Manage the sales cycle from quotation, Sales Orders, and order fulfillment to delivery, invoicing, and revenue monitoring."
+      },
+      "PROCUREMENT": {
+        "TITLE": "Procurement & Vendor Management",
+        "DESC": "Manage purchasing needs from Purchase Requisitions, approvals, and vendors to Purchase Orders, goods receipts, and supplier invoices."
+      },
+      "INVENTORY": {
+        "TITLE": "Inventory & Warehouse Management",
+        "DESC": "Monitor stock and inventory movements in real time across multiple warehouses with location tracking, allocations, transfers, stock counts, and control."
+      },
+      "MANUFACTURING": {
+        "TITLE": "Manufacturing & Production Control",
+        "DESC": "Plan and execute manufacturing operations from BOM, Routing, and MRP to Production Orders, WIP tracking, and production cost analysis."
+      },
+      "PROJECT": {
+        "TITLE": "Project & Cost Management",
+        "DESC": "Oversee project budgets, progress, and actual cost realization to track expenses, budget vs. actuals, and profitability for every project."
+      },
+      "WORKFLOW": {
+        "TITLE": "Workflow, Approval & Internal Control",
+        "DESC": "Configure workflows, multi-level approval hierarchies, and role authorization aligned with company hierarchy, complete with audit trails."
+      },
+      "ANALYTICS": {
+        "TITLE": "Business Analytics & Reporting",
+        "DESC": "Transform daily transactions into executive dashboards, comprehensive reports, and analytical insights that empower managerial decisions."
+      },
+      "SECURITY": {
+        "TITLE": "Security, Cloud & Auditability",
+        "DESC": "Protect system access, sensitive data, and transaction logs with role-based authorization, comprehensive audit trails, cloud access, backups, and monitoring."
+      }
+    }
+  },
   "WHY_CHOOSE_US": {
     "HEADING": "Why Do Companies Choose SOFICloud?",
     "SUBHEADING": "A mature, integrated ERP ready to support your business growth.",

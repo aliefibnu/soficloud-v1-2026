@@ -1,14 +1,38 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { Features } from './features';
 
 describe('Features', () => {
   let component: Features;
   let fixture: ComponentFixture<Features>;
+  let translateService: TranslateService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Features],
+      providers: [
+        provideTranslateService({
+          fallbackLang: 'en',
+          lang: 'id',
+        }),
+      ],
     }).compileComponents();
+
+    translateService = TestBed.inject(TranslateService);
+    translateService.setTranslation('id', {
+      FEATURES: {
+        HEADING: '9 Fitur Utama SOFICloud',
+        SUBTITLE: 'Kapabilitas yang saling terhubung untuk menjalankan proses operasional dan menghasilkan informasi management yang konsisten.',
+        CTA_LEARN_MORE: 'Pelajari Selengkapnya',
+        CARDS: {
+          FINANCIAL: {
+            TITLE: 'Financial Management & Accounting',
+            DESC: 'Kelola proses keuangan dan accounting dari transaksi operasional hingga laporan keuangan, cash control, cost analysis dan management insight.',
+          },
+        },
+      },
+    });
+    translateService.use('id');
 
     fixture = TestBed.createComponent(Features);
     component = fixture.componentInstance;
