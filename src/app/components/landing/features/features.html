@@ -9,12 +9,12 @@
         id="features-heading"
         class="font-inter font-semibold text-3xl sm:text-4xl md:text-[44px] lg:text-[48px] text-[#182849] tracking-[-0.02em] leading-tight"
       >
-        9 Fitur Utama SOFICloud
+        {{ 'FEATURES.HEADING' | translate }}
       </h2>
       <p
         class="mt-4 sm:mt-5 font-dm-sans font-normal text-base sm:text-[17px] text-slate-600 leading-relaxed max-w-2xl mx-auto"
       >
-        Kapabilitas yang saling terhubung untuk menjalankan proses operasional dan menghasilkan informasi management yang konsisten.
+        {{ 'FEATURES.SUBTITLE' | translate }}
       </p>
     </div>
 
@@ -72,12 +72,12 @@
               <h3
                 class="font-dm-sans font-bold text-xl sm:text-[22px] text-[#182849] leading-snug tracking-[-0.01em]"
               >
-                {{ card.title }}
+                {{ card.titleKey | translate }}
               </h3>
               <p
                 class="mt-3.5 font-dm-sans font-normal text-sm sm:text-[15px] text-slate-600 leading-relaxed"
               >
-                {{ card.desc }}
+                {{ card.descKey | translate }}
               </p>
             </div>
 
@@ -86,7 +86,7 @@
                 href="#contact"
                 class="w-fit inline-flex items-center justify-center px-6 py-2.5 rounded-xl font-dm-sans font-semibold text-sm sm:text-[15px] text-white bg-gradient-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
               >
-                Pelajari Selengkapnya
+                {{ 'FEATURES.CTA_LEARN_MORE' | translate }}
               </a>
             </div>
           </div>

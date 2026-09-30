@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface FeatureLayer {
   name: string;
@@ -17,8 +18,8 @@ export interface FeatureLayer {
 
 export interface FeatureCard {
   id: number;
-  title: string;
-  desc: string;
+  titleKey: string;
+  descKey: string;
   topBg: string;
   domeBg: string;
   layers: FeatureLayer[];
@@ -26,7 +27,7 @@ export interface FeatureCard {
 
 @Component({
   selector: 'app-features',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, TranslatePipe],
   templateUrl: './features.html',
   styles: `
     @media (prefers-reduced-motion: reduce) {
@@ -47,8 +48,8 @@ export class Features {
   readonly cards: FeatureCard[] = [
     {
       id: 1,
-      title: 'Financial Management & Accounting',
-      desc: 'Kelola proses keuangan dan accounting dari transaksi operasional hingga laporan keuangan, cash control, cost analysis dan management insight.',
+      titleKey: 'FEATURES.CARDS.FINANCIAL.TITLE',
+      descKey: 'FEATURES.CARDS.FINANCIAL.DESC',
       topBg: '#FCD5D0',
       domeBg: '#FFF1EE',
       layers: [
@@ -94,8 +95,8 @@ export class Features {
     },
     {
       id: 2,
-      title: 'Sales & Order Management',
-      desc: 'Kelola proses penjualan dari quotation, Sales Order dan pemenuhan pesanan hingga delivery, invoice dan monitoring revenue.',
+      titleKey: 'FEATURES.CARDS.SALES.TITLE',
+      descKey: 'FEATURES.CARDS.SALES.DESC',
       topBg: '#CCE0F8',
       domeBg: '#EDF5FE',
       layers: [
@@ -141,8 +142,8 @@ export class Features {
     },
     {
       id: 3,
-      title: 'Procurement & Vendor Management',
-      desc: 'Kelola kebutuhan pembelian dari Purchase Requisition, approval, vendor, Purchase Order hingga penerimaan barang dan supplier invoice.',
+      titleKey: 'FEATURES.CARDS.PROCUREMENT.TITLE',
+      descKey: 'FEATURES.CARDS.PROCUREMENT.DESC',
       topBg: '#CBE1E1',
       domeBg: '#EDF6F6',
       layers: [
@@ -188,8 +189,8 @@ export class Features {
     },
     {
       id: 4,
-      title: 'Inventory & Warehouse Management',
-      desc: 'Pantau stock dan pergerakan barang secara real-time di berbagai gudang, lengkap dengan location, allocation, transfer, opname dan stock control.',
+      titleKey: 'FEATURES.CARDS.INVENTORY.TITLE',
+      descKey: 'FEATURES.CARDS.INVENTORY.DESC',
       topBg: '#B4F5F5',
       domeBg: '#E0FAFA',
       layers: [
@@ -235,8 +236,8 @@ export class Features {
     },
     {
       id: 5,
-      title: 'Manufacturing & Production Control',
-      desc: 'Kelola perencanaan dan pelaksanaan produksi dari BOM, Routing dan MRP hingga Production Order, WIP serta analisa biaya produksi.',
+      titleKey: 'FEATURES.CARDS.MANUFACTURING.TITLE',
+      descKey: 'FEATURES.CARDS.MANUFACTURING.DESC',
       topBg: '#F8C8C8',
       domeBg: '#FDF2F2',
       layers: [
@@ -293,8 +294,8 @@ export class Features {
     },
     {
       id: 6,
-      title: 'Project & Cost Management',
-      desc: 'Kelola project budget, progress dan realisasi biaya untuk memantau cost, budget vs actual serta profitability setiap proyek.',
+      titleKey: 'FEATURES.CARDS.PROJECT.TITLE',
+      descKey: 'FEATURES.CARDS.PROJECT.DESC',
       topBg: '#B8D3F8',
       domeBg: '#E8F1FC',
       layers: [
@@ -340,8 +341,8 @@ export class Features {
     },
     {
       id: 7,
-      title: 'Workflow, Approval & Internal Control',
-      desc: 'Atur workflow, multi-level approval dan otorisasi sesuai struktur perusahaan, lengkap dengan status proses dan audit trail.',
+      titleKey: 'FEATURES.CARDS.WORKFLOW.TITLE',
+      descKey: 'FEATURES.CARDS.WORKFLOW.DESC',
       topBg: '#BED1F6',
       domeBg: '#EAF1FD',
       layers: [
@@ -399,8 +400,8 @@ export class Features {
     },
     {
       id: 8,
-      title: 'Business Analytics & Reporting',
-      desc: 'Ubah transaksi harian menjadi dashboard, laporan dan analisa yang membantu management membaca kinerja dan mengambil keputusan.',
+      titleKey: 'FEATURES.CARDS.ANALYTICS.TITLE',
+      descKey: 'FEATURES.CARDS.ANALYTICS.DESC',
       topBg: '#BEE7E7',
       domeBg: '#E7F9F9',
       layers: [
@@ -458,8 +459,8 @@ export class Features {
     },
     {
       id: 9,
-      title: 'Security, Cloud & Auditability',
-      desc: 'Lindungi akses, data dan histori transaksi melalui role-based authorization, audit trail, cloud access, backup dan monitoring.',
+      titleKey: 'FEATURES.CARDS.SECURITY.TITLE',
+      descKey: 'FEATURES.CARDS.SECURITY.DESC',
       topBg: '#F7BDBD',
       domeBg: '#FDE8E7',
       layers: [
