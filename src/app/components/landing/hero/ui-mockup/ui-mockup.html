@@ -10,12 +10,12 @@
     class="relative w-full rounded-2xl sm:rounded-3xl bg-[#f0f4f9] border border-slate-200/90 shadow-[0_25px_70px_-15px_rgba(15,23,42,0.18)] overflow-hidden"
   >
     <!-- Top Header Bar -->
-    <header class="w-full bg-white border-b border-slate-200/80 px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between">
-      <div class="w-40 sm:w-48 shrink-0 flex items-center">
+    <header class="w-full bg-white border-b border-slate-200/80 px-3.5 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between gap-2">
+      <div class="w-36 sm:w-48 shrink-0 flex items-center">
         <img
           src="/soficloud-logo.svg"
           alt="SOFICloud Logo"
-          class="h-5 sm:h-6 w-auto object-contain select-none pointer-events-none"
+          class="h-4.5 sm:h-6 w-auto object-contain select-none pointer-events-none"
         />
       </div>
 
@@ -23,10 +23,10 @@
         Enterprice Workspace
       </div>
 
-      <div class="flex items-center gap-3">
-        <span class="text-[#334155] text-xs sm:text-[13px] font-medium tracking-tight">September 2026</span>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="text-[#334155] text-[11px] sm:text-xs md:text-[13px] font-medium tracking-tight">September 2026</span>
         <div
-          class="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-full bg-[#141b36] text-white flex items-center justify-center font-bold text-xs shadow-xs select-none"
+          class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#141b36] text-white flex items-center justify-center font-bold text-xs shadow-xs select-none shrink-0"
           aria-label="User profile avatar"
         >
           A
@@ -61,22 +61,22 @@
       </aside>
 
       <!-- Main Dashboard Content Area -->
-      <main class="flex-1 p-3.5 sm:p-5 lg:p-6 flex flex-col gap-3.5 sm:gap-4 min-w-0 bg-[#f0f4f9]">
+      <main class="flex-1 p-3 sm:p-5 lg:p-6 flex flex-col gap-3 sm:gap-4 min-w-0 bg-[#f0f4f9]">
         <!-- Breadcrumb & Title Row -->
         <div class="flex flex-col gap-0.5">
-          <span class="text-[#2563eb] font-semibold text-xs sm:text-[12.5px]">SofiCloud / Management View</span>
-          <div class="flex flex-row items-center justify-between gap-3">
-            <h2 class="text-xl sm:text-2xl lg:text-[28px] font-bold text-[#182849] tracking-tight leading-tight">
+          <span class="text-[#2563eb] font-semibold text-[11px] sm:text-xs">SofiCloud / Management View</span>
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-lg sm:text-2xl lg:text-[28px] font-bold text-[#182849] tracking-tight leading-tight truncate">
               Executive Dashboard
             </h2>
             <button
               type="button"
-              class="px-3 sm:px-4 py-1 rounded-lg sm:rounded-xl border border-[#93c5fd] bg-white text-[#2563eb] text-xs font-medium shadow-2xs hover:bg-blue-50/50 transition-colors cursor-pointer"
+              class="px-2.5 sm:px-4 py-1 rounded-lg sm:rounded-xl border border-[#93c5fd] bg-white text-[#2563eb] text-[11px] sm:text-xs font-medium shadow-2xs hover:bg-blue-50/50 transition-colors shrink-0 cursor-pointer"
             >
               Simple data
             </button>
           </div>
-          <p class="text-[#475569] text-xs sm:text-[13px] font-normal mt-0.5">
+          <p class="text-[#475569] text-[11px] sm:text-xs md:text-[13px] font-normal mt-0.5 leading-normal">
             Real-time visibilty into receivables, sales, cash, expenses, and operational performance
           </p>
         </div>
@@ -88,14 +88,14 @@
             class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9.5px] sm:text-[10px] font-bold tracking-wider text-[#94a3b8] uppercase block">RECEIVABLES</span>
-              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug whitespace-nowrap">
+              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">RECEIVABLES</span>
+              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug">
                 Total Accounts Receivable
               </h3>
               <div class="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap">
                 Rp 8,450,000,000.-
               </div>
-              <div class="text-[10.5px] sm:text-[11px] text-[#94a3b8] font-normal mt-0.5 whitespace-nowrap">
+              <div class="text-[10px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug">
                 Overdue AR: Rp 1,100,000,000.-
               </div>
             </div>
@@ -114,14 +114,14 @@
             class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9.5px] sm:text-[10px] font-bold tracking-wider text-[#94a3b8] uppercase block">CURRENT MONTH</span>
-              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug whitespace-nowrap">
+              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">CURRENT MONTH</span>
+              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug">
                 Due Invoices This Month
               </h3>
               <div class="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap">
                 Rp 2,100,000,000.-
               </div>
-              <div class="text-[10.5px] sm:text-[11px] text-[#94a3b8] font-normal mt-0.5 whitespace-nowrap">
+              <div class="text-[10px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug">
                 Outstanding invoices due in september
               </div>
             </div>
@@ -137,14 +137,14 @@
             class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9.5px] sm:text-[10px] font-bold tracking-wider text-[#94a3b8] uppercase block">SALES</span>
-              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug whitespace-nowrap">
+              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">SALES</span>
+              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug">
                 Sales Orders This Month
               </h3>
               <div class="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap">
                 Rp 5,800,000,000.-
               </div>
-              <div class="text-[10.5px] sm:text-[11px] text-[#94a3b8] font-normal mt-0.5 whitespace-nowrap">
+              <div class="text-[10px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug">
                 +18.4% vs Last month
               </div>
             </div>
@@ -163,14 +163,14 @@
             class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9.5px] sm:text-[10px] font-bold tracking-wider text-[#94a3b8] uppercase block">LIQUIDITY</span>
-              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug whitespace-nowrap">
+              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">LIQUIDITY</span>
+              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug">
                 Cash & Bank Balance
               </h3>
               <div class="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap">
                 Rp 6,720,000,000.-
               </div>
-              <div class="text-[10.5px] sm:text-[11px] text-[#94a3b8] font-normal mt-0.5 whitespace-nowrap">
+              <div class="text-[10px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug">
                 Project month-end: Rp 5,150,000,000.-
               </div>
             </div>
@@ -202,11 +202,11 @@
             <div>
               <div class="flex items-start justify-between gap-2 mb-2">
                 <div>
-                  <span class="text-[9.5px] sm:text-[10px] font-bold tracking-wider text-[#94a3b8] uppercase block">SALES ANALYSIS</span>
+                  <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">SALES ANALYSIS</span>
                   <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5">12-Month Sales Trend</h3>
-                  <div class="text-[10.5px] sm:text-xs text-[#64748b] font-normal mt-0.5">Revenue vs Sales Orders</div>
+                  <div class="text-[10px] sm:text-xs text-[#64748b] font-normal mt-0.5">Revenue vs Sales Orders</div>
                 </div>
-                <div class="flex items-center gap-3 text-xs font-semibold text-[#182849]">
+                <div class="flex items-center gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-semibold text-[#182849]">
                   <span>Revenue</span>
                   <span>Sales Orders</span>
                 </div>
@@ -268,7 +268,7 @@
               </div>
 
               <!-- Month X-Axis Labels -->
-              <div class="flex justify-between pl-8 pr-3 text-[10px] text-[#64748b] font-normal mt-1">
+              <div class="flex justify-between pl-6 sm:pl-8 pr-2 sm:pr-3 text-[8.5px] sm:text-[10px] text-[#64748b] font-normal mt-1">
                 <span>Oct</span>
                 <span>Nov</span>
                 <span>Des</span>
@@ -289,17 +289,17 @@
             class="lg:col-span-5 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9.5px] sm:text-[10px] font-bold tracking-wider text-[#94a3b8] uppercase block">EXECUTIVE HIGHLIGHTS</span>
+              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">EXECUTIVE HIGHLIGHTS</span>
               <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5 mb-2.5">What needs attention</h3>
 
               <div class="flex flex-col gap-2">
                 @for (item of highlights; track item.label) {
-                  <div class="bg-[#eff6ff] rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:py-1.75 flex items-center justify-between">
-                    <div class="flex items-center gap-2 min-w-0">
-                      <span class="w-3.5 h-3.5 rounded-[2.5px] bg-[#3b82f6] shrink-0"></span>
-                      <span class="text-[11px] sm:text-[11.5px] font-bold text-[#182849] whitespace-nowrap">{{ item.label }}</span>
+                  <div class="bg-[#eff6ff] rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:py-1.75 flex items-center justify-between gap-2 min-w-0">
+                    <div class="flex items-center gap-2 min-w-0 flex-1">
+                      <span class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-[2px] sm:rounded-[2.5px] bg-[#3b82f6] shrink-0"></span>
+                      <span class="text-[10.5px] sm:text-[11.5px] font-bold text-[#182849] truncate">{{ item.label }}</span>
                     </div>
-                    <span class="text-[10.5px] sm:text-[11.5px] font-bold text-[#182849] shrink-0 pl-2 whitespace-nowrap">{{ item.value }}</span>
+                    <span class="text-[10px] sm:text-[11.5px] font-bold text-[#182849] shrink-0 whitespace-nowrap pl-1">{{ item.value }}</span>
                   </div>
                 }
               </div>
