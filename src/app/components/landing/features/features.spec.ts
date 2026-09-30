@@ -56,4 +56,15 @@ describe('Features', () => {
     component.setHoveredCard(null);
     expect(component.hoveredCard()).toBeNull();
   });
+
+  it('should ensure all bottom-anchored layers use origin-bottom and no upward translateY', () => {
+    for (const card of component.cards) {
+      const bottomLayers = card.layers.filter((l) => l.bottomPct === 0);
+      expect(bottomLayers.length).toBeGreaterThan(0);
+      for (const layer of bottomLayers) {
+        expect(layer.hoverClass).toContain('origin-bottom');
+        expect(layer.hoverClass).not.toContain('-translate-y');
+      }
+    }
+  });
 });

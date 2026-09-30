@@ -62,7 +62,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 43.94,
           heightPct: 99.07,
-          hoverClass: 'group-hover:-translate-y-2 group-hover:scale-[1.02]',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9411.png',
@@ -71,11 +71,11 @@ export class Features {
           h: 108,
           z: 20,
           leftPct: 18.69,
-          topPct: 49.3,
+          bottomPct: 0,
           widthPct: 34.85,
           heightPct: 50.23,
           hoverClass:
-            'group-hover:-translate-x-3 group-hover:-translate-y-3 group-hover:-rotate-6 group-hover:scale-105',
+            'origin-bottom-left group-hover:scale-105 group-hover:-rotate-3',
         },
         {
           name: 'Group 9409.png',
@@ -84,11 +84,11 @@ export class Features {
           h: 85,
           z: 20,
           leftPct: 57.58,
-          topPct: 64.19,
+          bottomPct: 0,
           widthPct: 29.55,
           heightPct: 39.53,
           hoverClass:
-            'group-hover:translate-x-2.5 group-hover:-translate-y-2.5 group-hover:rotate-3 group-hover:scale-105',
+            'origin-bottom group-hover:translate-x-1.5 group-hover:scale-105',
         },
       ],
     },
@@ -109,7 +109,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 47.73,
           heightPct: 95.81,
-          hoverClass: 'group-hover:-translate-y-2 group-hover:scale-[1.01]',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9638.png',
@@ -135,7 +135,7 @@ export class Features {
           widthPct: 34.85,
           heightPct: 22.79,
           hoverClass:
-            'group-hover:translate-x-2 group-hover:-translate-y-3 group-hover:scale-105',
+            'origin-bottom group-hover:translate-x-2 group-hover:scale-105',
         },
       ],
     },
@@ -156,7 +156,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 67.42,
           heightPct: 83.72,
-          hoverClass: 'group-hover:-translate-y-1.5 group-hover:scale-[1.01]',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9639.png',
@@ -203,7 +203,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 51.77,
           heightPct: 97.67,
-          hoverClass: 'group-hover:-translate-y-1.5',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9642.png',
@@ -212,11 +212,11 @@ export class Features {
           h: 149,
           z: 20,
           leftPct: 14.39,
-          topPct: 29.3,
+          bottomPct: 0,
           widthPct: 24.75,
           heightPct: 69.3,
           hoverClass:
-            'group-hover:-translate-x-3 group-hover:-translate-y-2 group-hover:scale-105',
+            'origin-bottom group-hover:-translate-x-2 group-hover:scale-105',
         },
         {
           name: 'Group 9417.png',
@@ -250,7 +250,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 64.9,
           heightPct: 92.09,
-          hoverClass: 'group-hover:-translate-y-1.5 group-hover:scale-[1.01]',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9644.png',
@@ -305,10 +305,11 @@ export class Features {
           h: 194,
           z: 10,
           leftPct: 7.58,
-          topPct: 11.16,
+          bottomPct: 0,
           widthPct: 38.89,
           heightPct: 90.23,
-          hoverClass: 'group-hover:-translate-x-2 group-hover:-translate-y-2',
+          hoverClass:
+            'origin-bottom group-hover:-translate-x-1.5 group-hover:scale-105',
         },
         {
           name: 'Group 9423.png',
@@ -320,7 +321,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 95.96,
           heightPct: 95.81,
-          hoverClass: 'group-hover:-translate-y-1.5 group-hover:scale-[1.01]',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9430.png',
@@ -333,7 +334,7 @@ export class Features {
           widthPct: 25.51,
           heightPct: 28.84,
           hoverClass:
-            'group-hover:translate-x-2 group-hover:-translate-y-3.5 group-hover:scale-105',
+            'origin-bottom group-hover:translate-x-2 group-hover:scale-105',
         },
       ],
     },
@@ -354,7 +355,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 68.69,
           heightPct: 87.91,
-          hoverClass: 'group-hover:scale-[1.02]',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9458.png',
@@ -392,7 +393,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 18.43,
           heightPct: 18.14,
-          hoverClass: 'group-hover:translate-y-2 group-hover:scale-105',
+          hoverClass: 'origin-bottom group-hover:scale-105',
         },
       ],
     },
@@ -413,7 +414,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 70.71,
           heightPct: 87.91,
-          hoverClass: 'group-hover:-translate-y-1.5 group-hover:scale-[1.01]',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9434.png',
@@ -422,10 +423,11 @@ export class Features {
           h: 158,
           z: 20,
           leftPct: 7.58,
-          topPct: 25.58,
+          bottomPct: 0,
           widthPct: 31.57,
           heightPct: 73.49,
-          hoverClass: 'group-hover:-translate-x-2 group-hover:-translate-y-2',
+          hoverClass:
+            'origin-bottom group-hover:-translate-x-1.5 group-hover:scale-105',
         },
         {
           name: 'Group 9651.png',
@@ -471,7 +473,7 @@ export class Features {
           bottomPct: 0,
           widthPct: 77.53,
           heightPct: 82.33,
-          hoverClass: 'group-hover:-translate-y-1.5 group-hover:scale-[1.01]',
+          hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
           name: 'Group 9474.png',
@@ -480,11 +482,11 @@ export class Features {
           h: 168,
           z: 20,
           leftPct: 4.29,
-          topPct: 21.86,
+          bottomPct: 0,
           widthPct: 85.86,
           heightPct: 78.14,
           hoverClass:
-            'group-hover:-translate-x-3.5 group-hover:-translate-y-2.5 group-hover:scale-110',
+            'origin-bottom group-hover:-translate-x-2 group-hover:scale-105',
         },
         {
           name: 'Group 9474 (1).png',

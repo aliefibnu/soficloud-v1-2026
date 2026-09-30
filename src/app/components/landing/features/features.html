@@ -48,7 +48,7 @@
                 class="absolute pointer-events-none will-change-transform transition-all duration-500 ease-out {{ layer.hoverClass }}"
                 [style.left.%]="layer.leftPct"
                 [style.top.%]="layer.topPct !== undefined ? layer.topPct : null"
-                [style.bottom.%]="layer.bottomPct !== undefined ? layer.bottomPct : null"
+                [style.bottom]="layer.bottomPct !== undefined ? (layer.bottomPct === 0 ? '-1px' : layer.bottomPct + '%') : null"
                 [style.width.%]="layer.widthPct"
                 [style.height.%]="layer.heightPct"
                 [style.zIndex]="layer.z"
@@ -59,6 +59,7 @@
                   [height]="layer.h"
                   alt=""
                   class="w-full h-full object-contain pointer-events-none"
+                  [class.object-bottom]="layer.bottomPct !== undefined"
                   [priority]="card.id <= 3"
                 />
               </div>
