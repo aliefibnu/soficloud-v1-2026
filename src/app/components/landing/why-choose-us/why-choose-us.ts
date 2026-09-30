@@ -127,10 +127,10 @@ export class WhyChooseUs {
       return 'translate(-50%, -50%) scale(1)';
     }
 
-    // Responsive horizontal distance matching Figma spacing
-    const baseSpacing = 320;
+    // Responsive horizontal distance matching compact Figma spacing
+    const baseSpacing = 295;
     const xTranslate = offset * baseSpacing;
-    const scale = Math.max(0.75, 1 - Math.abs(offset) * 0.07);
+    const scale = Math.max(0.76, 1 - Math.abs(offset) * 0.07);
 
     return `translate(calc(-50% + ${xTranslate}px), -50%) scale(${scale})`;
   }
@@ -138,7 +138,7 @@ export class WhyChooseUs {
   getCardOpacity(offset: number): number {
     const abs = Math.abs(offset);
     if (abs === 0) return 1;
-    if (abs === 1) return 0.7;
+    if (abs === 1) return 0.72;
     if (abs === 2) return 0.35;
     return 0;
   }
@@ -199,7 +199,7 @@ export class WhyChooseUs {
   }
 
   private handleSwipe(startX: number, endX: number): void {
-    const threshold = 40;
+    const threshold = 35;
     const diff = endX - startX;
     if (diff > threshold) {
       this.prev();
