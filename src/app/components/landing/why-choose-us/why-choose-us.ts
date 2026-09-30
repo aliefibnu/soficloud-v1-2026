@@ -38,7 +38,6 @@ export class WhyChooseUs {
   readonly hoveredIndex = signal<number | null>(null);
 
   private touchStartX = 0;
-  private touchEndX = 0;
   private isMouseDown = false;
   private mouseStartX = 0;
 
@@ -128,10 +127,10 @@ export class WhyChooseUs {
       return 'translate(-50%, -50%) scale(1)';
     }
 
-    // Responsive horizontal distance: 360px on desktop, scaling smoothly
-    const baseSpacing = 360;
+    // Responsive horizontal distance matching Figma spacing
+    const baseSpacing = 320;
     const xTranslate = offset * baseSpacing;
-    const scale = Math.max(0.72, 1 - Math.abs(offset) * 0.08);
+    const scale = Math.max(0.75, 1 - Math.abs(offset) * 0.07);
 
     return `translate(calc(-50% + ${xTranslate}px), -50%) scale(${scale})`;
   }
@@ -139,8 +138,8 @@ export class WhyChooseUs {
   getCardOpacity(offset: number): number {
     const abs = Math.abs(offset);
     if (abs === 0) return 1;
-    if (abs === 1) return 0.65;
-    if (abs === 2) return 0.3;
+    if (abs === 1) return 0.7;
+    if (abs === 2) return 0.35;
     return 0;
   }
 
@@ -152,8 +151,8 @@ export class WhyChooseUs {
   getCardFilter(offset: number): string {
     const abs = Math.abs(offset);
     if (abs === 0) return 'none';
-    if (abs === 1) return 'blur(1px)';
-    return 'blur(2.5px)';
+    if (abs === 1) return 'blur(0.5px)';
+    return 'blur(2px)';
   }
 
   next(): void {
@@ -183,8 +182,8 @@ export class WhyChooseUs {
   }
 
   onTouchEnd(event: TouchEvent): void {
-    this.touchEndX = event.changedTouches[0].clientX;
-    this.handleSwipe(this.touchStartX, this.touchEndX);
+    const touchEndX = event.changedTouches[0].clientX;
+    this.handleSwipe(this.touchStartX, touchEndX);
   }
 
   onMouseDown(event: MouseEvent): void {
@@ -200,7 +199,7 @@ export class WhyChooseUs {
   }
 
   private handleSwipe(startX: number, endX: number): void {
-    const threshold = 45;
+    const threshold = 40;
     const diff = endX - startX;
     if (diff > threshold) {
       this.prev();
