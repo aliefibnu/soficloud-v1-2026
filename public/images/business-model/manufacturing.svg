@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 223 156" fill="none" class="bm-illustration bm-manufacturing w-full h-auto">
+  <defs>
+    <style>
+      @keyframes bm-spin-cw {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes bm-spin-ccw {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(-360deg); }
+      }
+      @keyframes bm-robot-cycle {
+        0%, 100% { transform: rotate(0deg); }
+        30% { transform: rotate(-5deg); }
+        70% { transform: rotate(4deg); }
+      }
+      @keyframes bm-claw-cycle {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(0.90, 1.10); }
+      }
+      @keyframes bm-box-bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-2px); }
+      }
+      .bm-illustration:hover .bm-gear-1,
+      :root:hover .bm-gear-1,
+      .group:hover .bm-gear-1 {
+        animation: bm-spin-cw 4s linear infinite;
+      }
+      .bm-illustration:hover .bm-gear-2,
+      :root:hover .bm-gear-2,
+      .group:hover .bm-gear-2 {
+        animation: bm-spin-ccw 2.8s linear infinite;
+      }
+      .bm-illustration:hover .bm-gear-3,
+      :root:hover .bm-gear-3,
+      .group:hover .bm-gear-3 {
+        animation: bm-spin-cw 2.2s linear infinite;
+      }
+      .bm-illustration:hover .bm-arm-group,
+      :root:hover .bm-arm-group,
+      .group:hover .bm-arm-group {
+        animation: bm-robot-cycle 3s ease-in-out infinite;
+      }
+      .bm-illustration:hover .bm-claw,
+      :root:hover .bm-claw,
+      .group:hover .bm-claw {
+        animation: bm-claw-cycle 1.5s ease-in-out infinite;
+      }
+      .bm-illustration:hover .bm-box,
+      :root:hover .bm-box,
+      .group:hover .bm-box {
+        animation: bm-box-bounce 1.5s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bm-gear-1, .bm-gear-2, .bm-gear-3, .bm-arm-group, .bm-claw, .bm-box {
+          animation: none !important;
+        }
+      }
+    </style>
+  </defs>
+
+  <!-- Backdrop -->
+  <rect x="25" y="8" width="189" height="148" rx="26" fill="#C4D8F5"/>
+
+  <!-- Machine Base (Bottom Center/Right) -->
+  <g id="mfg-base">
+    <rect x="83" y="146" width="86" height="9" rx="4.5" fill="#1D5CDC"/>
+    <rect x="92" y="104" width="36" height="42" fill="#365AD2"/>
+    <rect x="128" y="104" width="43" height="42" fill="#1E74D9"/>
+    <!-- Ventilation grill: 4 vertical rounded white bars -->
+    <rect x="96" y="127" width="3" height="14" rx="1.5" fill="#FFFFFF"/>
+    <rect x="102" y="127" width="3" height="14" rx="1.5" fill="#FFFFFF"/>
+    <rect x="108" y="127" width="3" height="14" rx="1.5" fill="#FFFFFF"/>
+    <rect x="114" y="127" width="3" height="14" rx="1.5" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Turret Shoulder Joint Base -->
+  <g id="mfg-turret">
+    <circle cx="128" cy="84" r="22" fill="#365AD2"/>
+    <circle cx="128" cy="84" r="16" fill="#1E74D9"/>
+    <circle cx="128" cy="84" r="10" fill="#EBF2FD"/>
+    <circle cx="128" cy="84" r="5" fill="#1E74D9"/>
+  </g>
+
+  <!-- Articulated Industrial Robot Arm -->
+  <g class="bm-arm-group" style="transform-origin: 128px 84px;">
+    <!-- Upper Arm Segment -->
+    <polygon points="119,86 98,27 119,21 138,82" fill="#619AEA"/>
+    <!-- White accent highlights -->
+    <line x1="123" y1="38" x2="130" y2="41" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="126" y1="46" x2="133" y2="49" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Elbow Joint -->
+    <circle cx="108" cy="23" r="13" fill="#365AD2"/>
+    <circle cx="108" cy="23" r="9" fill="#1E74D9"/>
+    <circle cx="108" cy="23" r="6" fill="#FFFFFF"/>
+
+    <!-- Forearm Segment (Arched towards wrist) -->
+    <path d="M 108 14 C 90 12 76 10 62 13 L 62 25 C 76 22 90 28 108 30 Z" fill="#619AEA"/>
+
+    <!-- Wrist Joint -->
+    <circle cx="62" cy="13" r="8" fill="#365AD2"/>
+    <circle cx="62" cy="13" r="4.5" fill="#FFFFFF"/>
+
+    <!-- Wrist Collar -->
+    <rect x="50" y="9" width="6" height="16" rx="2" fill="#EBF2FD"/>
+
+    <!-- Caliper Gripper / Claw -->
+    <g class="bm-claw" style="transform-origin: 52px 18px;">
+      <!-- Upper Prong -->
+      <path d="M 52 14 C 38 12 28 14 20 20 C 17 24 17 30 20 34 L 24 31 C 21 27 21 23 23 22 C 28 18 38 18 52 20 Z" fill="#1D5CDC"/>
+      <!-- Lower Prong -->
+      <path d="M 50 25 C 38 27 30 36 24 44 C 21 48 26 49 32 49 C 39 49 44 41 50 32 Z" fill="#1D5CDC"/>
+    </g>
+  </g>
+
+  <!-- Red Package / Product Box -->
+  <g class="bm-box" style="transform-origin: 186px 135px;">
+    <!-- Open left flap -->
+    <path d="M 166 115 L 153 126 L 153 155 L 166 155 Z" fill="#FFC0B9"/>
+    <!-- Main box body -->
+    <rect x="166" y="115" width="54" height="40" rx="3" fill="#CB1C29"/>
+    <!-- Top inner flap fold -->
+    <polygon points="166,115 174,121 220,121 220,115" fill="#E24B57"/>
+    <!-- Handle cutout -->
+    <rect x="180" y="122" width="18" height="5" rx="2.5" fill="#FFFFFF"/>
+    <!-- Barcode / Shipping Label -->
+    <rect x="199" y="143" width="11" height="6" rx="1.5" fill="#FFC0B9"/>
+  </g>
+
+  <!-- Gears Cluster -->
+  <g id="mfg-gears">
+    <!-- Gear 1 (Large) -->
+    <g class="bm-gear-1" style="transform-origin: 33.5px 81px;">
+      <path d="M 51.63 84.68 L 57.71 90.47 L 54.11 96.85 L 46.01 94.63 L 43.72 96.42 L 43.93 104.82 L 36.87 106.78 L 32.71 99.48 L 29.82 99.13 L 24.03 105.21 L 17.65 101.61 L 19.87 93.51 L 18.08 91.22 L 9.68 91.43 L 7.72 84.37 L 15.02 80.21 L 15.37 77.32 L 9.29 71.53 L 12.89 65.15 L 20.99 67.37 L 23.28 65.58 L 23.07 57.18 L 30.13 55.22 L 34.29 62.52 L 37.18 62.87 L 42.97 56.79 L 49.35 60.39 L 47.13 68.49 L 48.92 70.78 L 57.32 70.57 L 59.28 77.63 L 51.98 81.79 Z" fill="#CB1C29"/>
+      <circle cx="33.5" cy="81" r="10" fill="#FFC0B9"/>
+      <circle cx="33.5" cy="81" r="7" fill="none" stroke="#CB1C29" stroke-width="1.5"/>
+    </g>
+
+    <!-- Gear 2 (Medium) -->
+    <g class="bm-gear-2" style="transform-origin: 70px 94px;">
+      <path d="M 80.09 99.51 L 81.92 104.67 L 77.15 108.31 L 72.66 105.19 L 70.27 105.50 L 66.71 109.66 L 61.18 107.35 L 61.64 101.89 L 60.18 99.98 L 54.80 98.98 L 54.03 93.04 L 58.98 90.71 L 59.91 88.49 L 58.08 83.33 L 62.85 79.69 L 67.34 82.81 L 69.73 82.50 L 73.29 78.34 L 78.82 80.65 L 78.36 86.11 L 79.82 88.02 L 85.20 89.02 L 85.97 94.96 L 81.02 97.29 Z" fill="#CB1C29"/>
+      <circle cx="70" cy="94" r="6.5" fill="#FFC0B9"/>
+    </g>
+
+    <!-- Gear 3 (Small) -->
+    <g class="bm-gear-3" style="transform-origin: 49.5px 113.5px;">
+      <path d="M 57.96 114.35 L 61.80 117.72 L 59.38 121.95 L 54.53 120.35 L 52.99 121.25 L 52.00 126.26 L 47.12 126.28 L 46.08 121.28 L 44.54 120.40 L 39.70 122.04 L 37.24 117.83 L 41.05 114.43 L 41.04 112.65 L 37.20 109.28 L 39.62 105.05 L 44.47 106.65 L 46.01 105.75 L 47.00 100.74 L 51.88 100.72 L 52.92 105.72 L 54.46 106.60 L 59.30 104.96 L 61.76 109.17 L 57.95 112.57 Z" fill="#CB1C29"/>
+      <circle cx="49.5" cy="113.5" r="4.5" fill="#FFC0B9"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 40" fill="none">
+  <defs>
+    <pattern id="part-barrier-stripes" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="4" height="8" fill="#FFC0B9"/><rect x="4" width="4" height="8" fill="#FFFFFF"/>
+    </pattern>
+  </defs>
+  <rect x="4" y="0" width="7" height="33" rx="3.5" fill="#CB1C29"/><rect x="34" y="0" width="7" height="33" rx="3.5" fill="#CB1C29"/>
+  <rect x="1" y="30" width="13" height="3" rx="1.5" fill="#CB1C29"/><rect x="31" y="30" width="13" height="3" rx="1.5" fill="#CB1C29"/>
+  <rect x="0" y="4" width="46" height="7.5" rx="2" fill="url(#part-barrier-stripes)"/><rect x="0" y="15" width="46" height="7.5" rx="2" fill="url(#part-barrier-stripes)"/>
+</svg>

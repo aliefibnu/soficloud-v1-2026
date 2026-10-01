@@ -1,0 +1,262 @@
+/* Animation Keyframes for Business Model Illustrations */
+@keyframes bm-spin-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bm-spin-ccw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes bm-robot-cycle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-5deg);
+  }
+  70% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes bm-claw-cycle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9, 1.1);
+  }
+}
+
+@keyframes bm-box-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes bm-truck-drive {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-3px, -1px);
+  }
+  50% {
+    transform: translate(-6px, 0px);
+  }
+  75% {
+    transform: translate(-2px, -1.5px);
+  }
+}
+
+@keyframes bm-wheel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes bm-boxes-wobble {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(1.8deg) translateY(-1px);
+  }
+  70% {
+    transform: rotate(-1.5deg) translateY(0.5px);
+  }
+}
+
+@keyframes bm-speed-line {
+  0% {
+    opacity: 0;
+    transform: translateX(6px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+
+@keyframes bm-crane-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(0.8deg);
+  }
+}
+
+@keyframes bm-crane-hoist {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes bm-barrier-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes bm-wrench-turn {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  70% {
+    transform: rotate(-8deg);
+  }
+}
+
+@keyframes bm-briefcase-bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.015);
+  }
+}
+
+/* Card hover animation activations */
+.bm-illustration {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.group:hover .bm-illustration {
+  transform: scale(1.04);
+}
+
+.group:hover .bm-gear-1 {
+  animation: bm-spin-cw 4s linear infinite;
+}
+
+.group:hover .bm-gear-2 {
+  animation: bm-spin-ccw 2.8s linear infinite;
+}
+
+.group:hover .bm-gear-3 {
+  animation: bm-spin-cw 2.2s linear infinite;
+}
+
+.group:hover .bm-arm-group {
+  animation: bm-robot-cycle 3s ease-in-out infinite;
+}
+
+.group:hover .bm-claw {
+  animation: bm-claw-cycle 1.5s ease-in-out infinite;
+}
+
+.group:hover .bm-box {
+  animation: bm-box-bounce 1.5s ease-in-out infinite;
+}
+
+.group:hover .bm-truck {
+  animation: bm-truck-drive 1.8s ease-in-out infinite;
+}
+
+.group:hover .bm-wheel {
+  animation: bm-wheel-spin 0.9s linear infinite;
+}
+
+.group:hover .bm-boxes {
+  animation: bm-boxes-wobble 1.8s ease-in-out infinite;
+}
+
+.bm-speed-lines {
+  display: none;
+}
+
+.group:hover .bm-speed-lines {
+  display: block;
+}
+
+.bm-speed-line-1 {
+  animation: bm-speed-line 0.8s ease-out infinite;
+}
+
+.bm-speed-line-2 {
+  animation: bm-speed-line 0.8s ease-out infinite 0.4s;
+}
+
+.group:hover .bm-crane-arm {
+  animation: bm-crane-sway 2.5s ease-in-out infinite;
+}
+
+.group:hover .bm-crane-hook {
+  animation: bm-crane-hoist 2.2s ease-in-out infinite;
+}
+
+.group:hover .bm-barrier {
+  animation: bm-barrier-pulse 1.8s ease-in-out infinite;
+}
+
+.group:hover .bm-wrench {
+  animation: bm-wrench-turn 1.4s ease-in-out infinite;
+}
+
+.group:hover .bm-briefcase {
+  animation: bm-briefcase-bounce 2s ease-in-out infinite;
+}
+
+/* Accessibility: respect user prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .bm-illustration,
+  .bm-gear-1,
+  .bm-gear-2,
+  .bm-gear-3,
+  .bm-arm-group,
+  .bm-claw,
+  .bm-box,
+  .bm-truck,
+  .bm-wheel,
+  .bm-boxes,
+  .bm-speed-line-1,
+  .bm-speed-line-2,
+  .bm-crane-arm,
+  .bm-crane-hook,
+  .bm-barrier,
+  .bm-wrench,
+  .bm-briefcase {
+    animation: none !important;
+    transform: none !important;
+  }
+}

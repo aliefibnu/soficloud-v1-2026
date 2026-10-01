@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219 145" fill="none" class="bm-illustration bm-distribution w-full h-auto">
+  <defs>
+    <style>
+      @keyframes bm-truck-drive {
+        0%, 100% { transform: translate(0, 0); }
+        25% { transform: translate(-3px, -1px); }
+        50% { transform: translate(-6px, 0px); }
+        75% { transform: translate(-2px, -1.5px); }
+      }
+      @keyframes bm-wheel-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(-360deg); }
+      }
+      @keyframes bm-boxes-wobble {
+        0%, 100% { transform: rotate(0deg); }
+        30% { transform: rotate(1.8deg) translateY(-1px); }
+        70% { transform: rotate(-1.5deg) translateY(0.5px); }
+      }
+      @keyframes bm-speed-line {
+        0% { opacity: 0; transform: translateX(6px); }
+        50% { opacity: 1; }
+        100% { opacity: 0; transform: translateX(-8px); }
+      }
+      .bm-illustration:hover .bm-truck,
+      :root:hover .bm-truck,
+      .group:hover .bm-truck {
+        animation: bm-truck-drive 1.8s ease-in-out infinite;
+      }
+      .bm-illustration:hover .bm-wheel,
+      :root:hover .bm-wheel,
+      .group:hover .bm-wheel {
+        animation: bm-wheel-spin 0.9s linear infinite;
+      }
+      .bm-illustration:hover .bm-boxes,
+      :root:hover .bm-boxes,
+      .group:hover .bm-boxes {
+        animation: bm-boxes-wobble 1.8s ease-in-out infinite;
+      }
+      .bm-illustration:hover .bm-speed-lines,
+      :root:hover .bm-speed-lines,
+      .group:hover .bm-speed-lines {
+        display: block;
+      }
+      .bm-speed-lines {
+        display: none;
+      }
+      .bm-speed-line-1 {
+        animation: bm-speed-line 0.8s ease-out infinite;
+      }
+      .bm-speed-line-2 {
+        animation: bm-speed-line 0.8s ease-out infinite 0.4s;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bm-truck, .bm-wheel, .bm-boxes, .bm-speed-line-1, .bm-speed-line-2 {
+          animation: none !important;
+        }
+      }
+    </style>
+  </defs>
+
+  <!-- Backdrop -->
+  <rect x="15" y="0" width="189" height="145" rx="26" fill="#C4D8F5"/>
+
+  <!-- Speed motion lines behind truck (visible on hover) -->
+  <g class="bm-speed-lines">
+    <line class="bm-speed-line-1" x1="10" y1="108" x2="0" y2="108" stroke="#619AEA" stroke-width="2.5" stroke-linecap="round"/>
+    <line class="bm-speed-line-2" x1="14" y1="116" x2="4" y2="116" stroke="#619AEA" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Truck Group -->
+  <g class="bm-truck" style="transform-origin: 100px 120px;">
+    <!-- Container Body -->
+    <rect x="72" y="37" width="128" height="91" rx="4" fill="#1E74D9"/>
+    <!-- Top & Bottom Rails -->
+    <rect x="70" y="36" width="132" height="4" rx="2" fill="#365AD2"/>
+    <rect x="72" y="122" width="128" height="6" fill="#365AD2"/>
+
+    <!-- Vertical Container Slats (12 pill stripes) -->
+    <rect x="80" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="89" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="98" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="107" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="116" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="125" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="134" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="143" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="152" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="161" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="170" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="179" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+    <rect x="188" y="44" width="4.5" height="74" rx="2.2" fill="#EBF2FD"/>
+
+    <!-- Underbody chassis rail -->
+    <rect x="72" y="123" width="128" height="8" fill="#619AEA"/>
+
+    <!-- Cab Body -->
+    <path d="M 0 127 L 18 127 A 18 18 0 0 1 52 127 L 72 127 L 72 40 L 37 40 L 0 95 Z" fill="#365AD2"/>
+
+    <!-- Windshield (2 Panes with Pillar) -->
+    <polygon points="16,88 38,88 38,50 35,50" fill="#EBF2FD"/>
+    <rect x="44" y="50" width="20" height="38" rx="2" fill="#EBF2FD"/>
+
+    <!-- Door Handle -->
+    <rect x="53" y="96" width="12" height="5" rx="2.5" fill="#EBF2FD"/>
+
+    <!-- Front Wheel -->
+    <g class="bm-wheel" style="transform-origin: 35px 123.5px;">
+      <!-- Tire -->
+      <circle cx="35" cy="123.5" r="17.5" fill="#365AD2"/>
+      <!-- Rim -->
+      <circle cx="35" cy="123.5" r="10.5" fill="#619AEA"/>
+      <!-- Hub -->
+      <circle cx="35" cy="123.5" r="4.5" fill="#1E74D9"/>
+      <!-- Wheel spoke notches for rotation visibility -->
+      <circle cx="35" cy="117.5" r="1.5" fill="#FFFFFF"/>
+      <circle cx="35" cy="129.5" r="1.5" fill="#FFFFFF"/>
+      <circle cx="29" cy="123.5" r="1.5" fill="#FFFFFF"/>
+      <circle cx="41" cy="123.5" r="1.5" fill="#FFFFFF"/>
+    </g>
+  </g>
+
+  <!-- Stacked Cargo Packages (Foreground) -->
+  <g class="bm-boxes" style="transform-origin: 175px 140px;">
+    <!-- Top Box (Open flap style) -->
+    <g id="dist-box-top">
+      <path d="M 167 71 L 160 83 L 167 86 Z" fill="#FFC0B9"/>
+      <path d="M 208 71 L 216 83 L 208 86 Z" fill="#FFC0B9"/>
+      <rect x="167" y="71" width="41" height="31" rx="3" fill="#CB1C29"/>
+      <rect x="177" y="75" width="16" height="4.5" rx="2" fill="#FFFFFF"/>
+      <rect x="170" y="94" width="9" height="5" rx="1.5" fill="#FFC0B9"/>
+    </g>
+
+    <!-- Bottom Right Box -->
+    <g id="dist-box-bottom-right">
+      <path d="M 210 103 L 217 116 L 210 120 Z" fill="#FFC0B9"/>
+      <rect x="157" y="103" width="53" height="41" rx="3" fill="#CB1C29"/>
+      <rect x="173" y="108" width="20" height="5" rx="2.5" fill="#FFFFFF"/>
+      <rect x="160" y="133" width="10" height="6" rx="1.5" fill="#FFC0B9"/>
+    </g>
+
+    <!-- Bottom Left Box -->
+    <g id="dist-box-bottom-left">
+      <path d="M 121 117 L 115 128 L 121 131 Z" fill="#FFC0B9"/>
+      <rect x="121" y="117" width="34" height="27" rx="3" fill="#CB1C29"/>
+      <rect x="129" y="121" width="14" height="4" rx="2" fill="#FFFFFF"/>
+    </g>
+  </g>
+</svg>
