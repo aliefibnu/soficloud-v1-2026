@@ -67,35 +67,106 @@
       "WATCH_VIDEO": "Tonton video demonstrasi Soficloud"
     },
     "UI_MOCKUP": {
-      "TARGET_REVENUE": "Target Revenue",
-      "APPROVAL_TODAY": "Approval Hari ini",
-      "APPROVAL_DOCUMENTS": "18 dokumen",
-      "MANAGEMENT_OVERVIEW": "Management Overview",
-      "DATE": "Rabu, 18 Maret 2026",
-      "GREETING": "Selamat datang, {{name}}",
-      "PERIOD_CURRENT_MONTH": "Bulan berjalan",
-      "PERIOD_THIS_QUARTER": "Kuartal ini",
-      "PERIOD_THIS_YEAR": "Tahun ini",
+      "HEADER": {
+        "LOGO_ALT": "Logo SOFICloud",
+        "WORKSPACE": "Enterprise Workspace",
+        "PREV_MONTH": "Bulan sebelumnya",
+        "NEXT_MONTH": "Bulan berikutnya",
+        "DATE_FORMAT": "{{month}} {{year}}",
+        "NOTIFICATIONS_ARIA": "Buka notifikasi",
+        "PROFILE_ARIA": "Avatar profil pengguna"
+      },
+      "NOTIFICATIONS": {
+        "TITLE": "Executive Alerts",
+        "MARK_READ": "Tandai sudah dibaca",
+        "ALERT_1_TITLE": "5 Pesanan Berisiko mengalami keterlambatan pengiriman",
+        "ALERT_1_TIME": "10 mnt lalu",
+        "ALERT_2_TITLE": "Anggaran OPEX telah mencapai ambang batas 80,4%",
+        "ALERT_2_TIME": "1 jam lalu",
+        "ALERT_3_TITLE": "Faktur Jatuh Tempo Rp 2,1 Miliar menunggu konfirmasi",
+        "ALERT_3_TIME": "3 jam lalu"
+      },
+      "PROFILE": {
+        "NAME": "Aditya Pratama",
+        "ROLE": "VP of Operations",
+        "STATUS": "Online",
+        "BADGE": "Admin"
+      },
       "NAV": {
+        "ARIA_LABEL": "Navigasi bilah samping",
         "DASHBOARD": "Dashboard",
-        "FINANCE": "Finance",
-        "SALES": "Sales",
-        "PURCHASING": "Purchasing",
+        "PROCUREMENT": "Procurement",
+        "SERVICE": "Service",
         "INVENTORY": "Inventory",
-        "PRODUCTION": "Production",
-        "PROJECT": "Project",
-        "ANALYTICS": "Analytics"
+        "MFG_PLANNING": "Manufacturing Planning",
+        "MANUFACTURING": "Manufacturing",
+        "SALES": "Sales",
+        "GL": "General Ledger",
+        "AP": "Account Payable",
+        "AR": "Account Receivable",
+        "CASH_BANK": "Cash & Bank",
+        "PROCESS": "Process",
+        "REPORT": "Report",
+        "STATIC_DATA": "Static Data",
+        "MISCELLANEOUS": "Miscellaneous",
+        "MAINTENANCE": "Maintenance",
+        "SETTING_FAV": "Setting Favorite Menu",
+        "UPLOAD_REPORT": "Upload Report Menu",
+        "MANUAL_BOOK": "Manual Book"
+      },
+      "DASHBOARD": {
+        "BREADCRUMB": "SOFICloud / Management View",
+        "TITLE": "Executive Dashboard",
+        "SIMPLE_DATA": "Simple data",
+        "DESCRIPTION": "Visibilitas real-time untuk piutang, penjualan, kas, pengeluaran, dan performa operasional"
       },
       "METRICS": {
-        "REVENUE": "Revenue",
-        "GROSS_PROFIT": "Gross Profit",
-        "INVENTORY_VALUE": "Inventory Value",
-        "AR_OUTSTANDING": "AR Outstanding",
-        "LOCATIONS_COUNT": "42 lokasi",
-        "OVERDUE_COUNT": "12 Jatuh tempo"
+        "RECEIVABLES": {
+          "TAG": "RECEIVABLES",
+          "TITLE": "Total Accounts Receivable",
+          "OVERDUE_LABEL": "Overdue AR"
+        },
+        "CURRENT_MONTH": {
+          "TAG": "CURRENT MONTH",
+          "TITLE": "Due Invoices This Month",
+          "SUBTEXT": "Faktur belum lunas jatuh tempo di {{month}}"
+        },
+        "SALES": {
+          "TAG": "SALES",
+          "TITLE": "Sales Orders This Month",
+          "GROWTH": "{{growth}} vs Bulan lalu"
+        },
+        "LIQUIDITY": {
+          "TAG": "LIQUIDITY",
+          "TITLE": "Cash & Bank Balance",
+          "PROJECTED": "Proyeksi akhir bulan: {{amount}}"
+        }
       },
-      "SALES_PERFORMANCE": "Sales Performance",
-      "REVENUE_GROSS_PROFIT": "Revenue & gross profit",
+      "MOBILE_TABS": {
+        "ARIA_LABEL": "Tab wawasan eksekutif",
+        "SALES_TREND": "Sales Trend",
+        "KEY_HIGHLIGHTS": "Key Highlights ({{count}})"
+      },
+      "CHART": {
+        "TAG": "SALES ANALYSIS",
+        "TITLE": "12-Month Sales Trend",
+        "SUBTITLE": "Pendapatan vs Pesanan Penjualan",
+        "REVENUE": "Revenue",
+        "SALES_ORDERS": "Sales Orders",
+        "REVENUE_LABEL": "Revenue:",
+        "SALES_ORDERS_LABEL": "Sales Orders:"
+      },
+      "HIGHLIGHTS": {
+        "TAG": "EXECUTIVE HIGHLIGHTS",
+        "TITLE": "What needs attention",
+        "OUTSTANDING_ORDERS": "Outstanding Sales Orders",
+        "OPEX_BUDGET": "OPEX Budget vs Actual",
+        "CASH_COVERAGE": "Operating Cash Coverage",
+        "MONTHS_VALUE": "{{count}} bulan",
+        "PRODUCTION_PLAN": "Production Plan vs Actual",
+        "ORDERS_AT_RISK": "Orders at Risk",
+        "ORDERS_VALUE": "{{count}} orders"
+      },
       "MONTHS": {
         "JAN": "Jan",
         "FEB": "Feb",
@@ -103,32 +174,26 @@
         "APR": "Apr",
         "MAY": "Mei",
         "JUN": "Jun",
-        "JUL": "Jul"
+        "JUL": "Jul",
+        "AUG": "Agu",
+        "SEP": "Sep",
+        "OCT": "Okt",
+        "NOV": "Nov",
+        "DEC": "Des"
       },
-      "WEEKS": {
-        "W1": "Mg 1",
-        "W2": "Mg 2",
-        "W3": "Mg 3",
-        "W4": "Mg 4",
-        "W5": "Mg 5",
-        "W6": "Mg 6",
-        "W7": "Mg 7"
-      },
-      "HEALTH": {
-        "CASH_POSITION": "Cash position",
-        "CASH_POSITION_VALUE": "sehat",
-        "ORDER_FULFILMENT": "Order fulfilment",
-        "INVENTORY_ALERT": "Inventory alert",
-        "INVENTORY_ALERT_VALUE": "8 item",
-        "INVENTORY_ALERT_VALUE_QTR": "4 item",
-        "INVENTORY_ALERT_VALUE_YR": "2 item"
-      },
-      "ARIA": {
-        "TARGET_REVENUE_CARD": "Target Revenue Card",
-        "APPROVAL_STATUS_CARD": "Approval Status Card",
-        "USER_PROFILE": "User Profile",
-        "SIDEBAR_NAV": "Dashboard Sidebar Navigation",
-        "PERIOD_SELECTOR": "Filter periode waktu dashboard"
+      "MONTHS_FULL": {
+        "JANUARY": "Januari",
+        "FEBRUARY": "Februari",
+        "MARCH": "Maret",
+        "APRIL": "April",
+        "MAY": "Mei",
+        "JUNE": "Juni",
+        "JULY": "Juli",
+        "AUGUST": "Agustus",
+        "SEPTEMBER": "September",
+        "OCTOBER": "Oktober",
+        "NOVEMBER": "November",
+        "DECEMBER": "Desember"
       }
     }
   },

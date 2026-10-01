@@ -67,35 +67,106 @@
       "WATCH_VIDEO": "Soficloud 데모 영상 시청"
     },
     "UI_MOCKUP": {
-      "TARGET_REVENUE": "목표 매출",
-      "APPROVAL_TODAY": "오늘의 결재",
-      "APPROVAL_DOCUMENTS": "18건의 문서",
-      "MANAGEMENT_OVERVIEW": "경영 개요",
-      "DATE": "2026년 3월 18일 수요일",
-      "GREETING": "환영합니다, {{name}}",
-      "PERIOD_CURRENT_MONTH": "당월",
-      "PERIOD_THIS_QUARTER": "이번 분기",
-      "PERIOD_THIS_YEAR": "올해",
+      "HEADER": {
+        "LOGO_ALT": "SOFICloud 로고",
+        "WORKSPACE": "Enterprise Workspace",
+        "PREV_MONTH": "이전 달",
+        "NEXT_MONTH": "다음 달",
+        "DATE_FORMAT": "{{year}}년 {{month}}",
+        "NOTIFICATIONS_ARIA": "알림 열기",
+        "PROFILE_ARIA": "사용자 프로필 아바타"
+      },
+      "NOTIFICATIONS": {
+        "TITLE": "경영진 알림",
+        "MARK_READ": "모두 읽음으로 표시",
+        "ALERT_1_TITLE": "배송 지연 위험 주문 5건",
+        "ALERT_1_TIME": "10분 전",
+        "ALERT_2_TITLE": "OPEX 예산 80.4% 임계값 도달",
+        "ALERT_2_TIME": "1시간 전",
+        "ALERT_3_TITLE": "21억 루피아 만기 인보이스 승인 대기 중",
+        "ALERT_3_TIME": "3시간 전"
+      },
+      "PROFILE": {
+        "NAME": "Aditya Pratama",
+        "ROLE": "운영 부사장",
+        "STATUS": "온라인",
+        "BADGE": "관리자"
+      },
       "NAV": {
+        "ARIA_LABEL": "사이드바 탐색",
         "DASHBOARD": "대시보드",
-        "FINANCE": "재무",
-        "SALES": "영업",
-        "PURCHASING": "구매",
+        "PROCUREMENT": "조달",
+        "SERVICE": "서비스",
         "INVENTORY": "재고",
-        "PRODUCTION": "생산",
-        "PROJECT": "프로젝트",
-        "ANALYTICS": "분석"
+        "MFG_PLANNING": "생산 계획",
+        "MANUFACTURING": "제조",
+        "SALES": "영업",
+        "GL": "총계정원장",
+        "AP": "외상매입금",
+        "AR": "외상매출금",
+        "CASH_BANK": "현금 및 은행",
+        "PROCESS": "프로세스",
+        "REPORT": "보고서",
+        "STATIC_DATA": "기초 데이터",
+        "MISCELLANEOUS": "기타",
+        "MAINTENANCE": "유지보수",
+        "SETTING_FAV": "즐겨찾기 메뉴 설정",
+        "UPLOAD_REPORT": "보고서 업로드 메뉴",
+        "MANUAL_BOOK": "매뉴얼"
+      },
+      "DASHBOARD": {
+        "BREADCRUMB": "SOFICloud / 경영 뷰",
+        "TITLE": "경영진 대시보드",
+        "SIMPLE_DATA": "간이 데이터",
+        "DESCRIPTION": "미수금, 매출, 자금, 비용 및 운영 성과를 실시간으로 가시화"
       },
       "METRICS": {
-        "REVENUE": "매출",
-        "GROSS_PROFIT": "매출총이익",
-        "INVENTORY_VALUE": "재고 자산",
-        "AR_OUTSTANDING": "미수금 잔액",
-        "LOCATIONS_COUNT": "42개 위치",
-        "OVERDUE_COUNT": "12건 만기"
+        "RECEIVABLES": {
+          "TAG": "미수금",
+          "TITLE": "총 외상매출금",
+          "OVERDUE_LABEL": "만기 초과 미수금"
+        },
+        "CURRENT_MONTH": {
+          "TAG": "당월",
+          "TITLE": "이번 달 만기 인보이스",
+          "SUBTEXT": "{{month}} 만기 도래 미결제 인보이스"
+        },
+        "SALES": {
+          "TAG": "영업",
+          "TITLE": "이번 달 수주 실적",
+          "GROWTH": "전월 대비 {{growth}}"
+        },
+        "LIQUIDITY": {
+          "TAG": "유동성",
+          "TITLE": "현금 및 은행 잔고",
+          "PROJECTED": "월말 예상 잔고: {{amount}}"
+        }
       },
-      "SALES_PERFORMANCE": "매출 실적",
-      "REVENUE_GROSS_PROFIT": "매출 및 매출총이익",
+      "MOBILE_TABS": {
+        "ARIA_LABEL": "경영 인사이트 탭",
+        "SALES_TREND": "매출 추세",
+        "KEY_HIGHLIGHTS": "주요 하이라이트 ({{count}})"
+      },
+      "CHART": {
+        "TAG": "매출 분석",
+        "TITLE": "12개월 매출 추이",
+        "SUBTITLE": "매출액 vs 수주액",
+        "REVENUE": "매출액",
+        "SALES_ORDERS": "수주액",
+        "REVENUE_LABEL": "매출액:",
+        "SALES_ORDERS_LABEL": "수주액:"
+      },
+      "HIGHLIGHTS": {
+        "TAG": "경영진 하이라이트",
+        "TITLE": "주의가 필요한 항목",
+        "OUTSTANDING_ORDERS": "미체결 수주 잔고",
+        "OPEX_BUDGET": "OPEX 예산 vs 실적",
+        "CASH_COVERAGE": "운영 자금 충당 기간",
+        "MONTHS_VALUE": "{{count}}개월",
+        "PRODUCTION_PLAN": "생산 계획 vs 실적",
+        "ORDERS_AT_RISK": "위험 주문",
+        "ORDERS_VALUE": "{{count}}건"
+      },
       "MONTHS": {
         "JAN": "1월",
         "FEB": "2월",
@@ -103,32 +174,26 @@
         "APR": "4월",
         "MAY": "5월",
         "JUN": "6월",
-        "JUL": "7월"
+        "JUL": "7월",
+        "AUG": "8월",
+        "SEP": "9월",
+        "OCT": "10월",
+        "NOV": "11월",
+        "DEC": "12월"
       },
-      "WEEKS": {
-        "W1": "1주",
-        "W2": "2주",
-        "W3": "3주",
-        "W4": "4주",
-        "W5": "5주",
-        "W6": "6주",
-        "W7": "7주"
-      },
-      "HEALTH": {
-        "CASH_POSITION": "자금 현황",
-        "CASH_POSITION_VALUE": "양호",
-        "ORDER_FULFILMENT": "주문 처리율",
-        "INVENTORY_ALERT": "재고 경고",
-        "INVENTORY_ALERT_VALUE": "8개 항목",
-        "INVENTORY_ALERT_VALUE_QTR": "4개 항목",
-        "INVENTORY_ALERT_VALUE_YR": "2개 항목"
-      },
-      "ARIA": {
-        "TARGET_REVENUE_CARD": "목표 매출 카드",
-        "APPROVAL_STATUS_CARD": "결재 현황 카드",
-        "USER_PROFILE": "사용자 프로필",
-        "SIDEBAR_NAV": "대시보드 사이드 탐색",
-        "PERIOD_SELECTOR": "대시보드 기간 필터"
+      "MONTHS_FULL": {
+        "JANUARY": "1월",
+        "FEBRUARY": "2월",
+        "MARCH": "3월",
+        "APRIL": "4월",
+        "MAY": "5월",
+        "JUNE": "6월",
+        "JULY": "7월",
+        "AUGUST": "8월",
+        "SEPTEMBER": "9월",
+        "OCTOBER": "10월",
+        "NOVEMBER": "11월",
+        "DECEMBER": "12월"
       }
     }
   },

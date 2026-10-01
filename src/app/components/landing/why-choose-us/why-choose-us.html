@@ -3,7 +3,7 @@
   aria-labelledby="why-choose-us-heading"
 >
   <div
-    class="absolute top-0 inset-x-0 h-72.5 sm:h-77.5 md:h-82.5 bg-linear-to-b from-[#336DEC] via-[#3572EF] 55% to-white pointer-events-none"
+    class="absolute top-0 inset-x-0 h-75 sm:h-80 md:h-86 bg-linear-to-b from-[#336DEC] via-[#3572EF] 55% to-white pointer-events-none"
     aria-hidden="true"
   ></div>
 
@@ -23,7 +23,7 @@
     </div>
 
     <div
-      class="relative w-full h-67.5 sm:h-71.25 md:h-75 flex items-center justify-center overflow-visible touch-pan-y"
+      class="relative w-full h-70 min-[420px]:h-71.25 sm:h-75 md:h-78.75 flex items-center justify-center overflow-visible touch-pan-y"
       (touchstart)="onTouchStart($event)"
       (touchend)="onTouchEnd($event)"
       (mousedown)="onMouseDown($event)"
@@ -37,7 +37,7 @@
         @let isCenter = offset === 0;
 
         <article
-          class="carousel-card absolute top-1/2 left-1/2 w-67.5 min-[420px]:w-75 sm:w-82.5 md:w-87.5 h-61.25 sm:h-65 md:h-68.75 rounded-2xl p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center will-change-transform cursor-pointer"
+          class="carousel-card absolute top-1/2 left-1/2 w-67.5 min-[420px]:w-75 sm:w-82.5 md:w-87.5 h-63.75 min-[420px]:h-65 sm:h-68.75 md:h-72.5 rounded-2xl p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center will-change-transform cursor-pointer"
           [class.bg-white]="isCenter"
           [class.border]="isCenter"
           [class.border-slate-100/80]="isCenter"
@@ -66,15 +66,15 @@
           (click)="onCardClick(i, offset)"
         >
           <div
-            class="h-14.5 sm:h-16 flex items-center justify-center w-full"
+            class="h-18 min-[420px]:h-20 sm:h-22 md:h-24 flex items-center justify-center w-full"
             aria-hidden="true"
           >
             <img
               [ngSrc]="card.icon"
               alt=""
-              [width]="72"
-              [height]="72"
-              class="max-h-12 sm:max-h-14.5 w-auto object-contain pointer-events-none drop-shadow-xs transition-all duration-500"
+              [width]="96"
+              [height]="96"
+              class="max-h-16 min-[420px]:max-h-17 sm:max-h-19 md:max-h-21 w-auto object-contain pointer-events-none drop-shadow-xs transition-all duration-500"
               [class.grayscale]="!isCenter"
               [class.opacity-40]="!isCenter"
               [class.opacity-100]="isCenter"

@@ -115,6 +115,17 @@ describe('WhyChooseUs', () => {
     expect(heading?.textContent).toContain('Mengapa Perusahaan Memilih SOFICloud?');
   });
 
+  it('should render card images with 96x96 dimensions and enlarged size classes', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const firstImg = compiled.querySelector<HTMLImageElement>('.carousel-card img');
+    expect(firstImg).toBeTruthy();
+    expect(firstImg?.getAttribute('width')).toBe('96');
+    expect(firstImg?.getAttribute('height')).toBe('96');
+    expect(firstImg?.className).toContain('max-h-16');
+    expect(firstImg?.className).toContain('md:max-h-21');
+  });
+
   it('should automatically advance to next card after 5 seconds', () => {
     vi.useFakeTimers();
     component.startAutoPlay();
