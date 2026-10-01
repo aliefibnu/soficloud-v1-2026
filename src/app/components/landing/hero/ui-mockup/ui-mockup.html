@@ -10,7 +10,7 @@
     <header
       class="w-full bg-white border-b border-slate-200/80 px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 relative z-30"
     >
-      <div class="w-32 sm:w-44 shrink-0 flex items-center">
+      <div class="w-28 sm:w-44 shrink-0 flex items-center">
         <img
           src="/soficloud-logo.svg"
           alt="SOFICloud Logo"
@@ -75,7 +75,7 @@
           </button>
         </div>
 
-        <div class="relative">
+        <div class="hidden sm:block relative">
           <button
             type="button"
             (click)="toggleNotifications($event)"
@@ -155,7 +155,7 @@
           }
         </div>
 
-        <div class="relative">
+        <div class="hidden sm:block relative">
           <button
             type="button"
             (click)="toggleProfile($event)"
