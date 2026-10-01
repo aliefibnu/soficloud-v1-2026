@@ -67,35 +67,106 @@
       "WATCH_VIDEO": "观看Soficloud产品演示视频"
     },
     "UI_MOCKUP": {
-      "TARGET_REVENUE": "目标营收",
-      "APPROVAL_TODAY": "今日审批",
-      "APPROVAL_DOCUMENTS": "18 份文档",
-      "MANAGEMENT_OVERVIEW": "管理概览",
-      "DATE": "2026年3月18日 星期三",
-      "GREETING": "欢迎，{{name}}",
-      "PERIOD_CURRENT_MONTH": "本月",
-      "PERIOD_THIS_QUARTER": "本季度",
-      "PERIOD_THIS_YEAR": "本年度",
+      "HEADER": {
+        "LOGO_ALT": "SOFICloud 标志",
+        "WORKSPACE": "Enterprise Workspace",
+        "PREV_MONTH": "上个月",
+        "NEXT_MONTH": "下个月",
+        "DATE_FORMAT": "{{year}}年{{month}}",
+        "NOTIFICATIONS_ARIA": "打开通知",
+        "PROFILE_ARIA": "用户个人头像"
+      },
+      "NOTIFICATIONS": {
+        "TITLE": "高管预警",
+        "MARK_READ": "标为已读",
+        "ALERT_1_TITLE": "5 笔订单面临发货延迟风险",
+        "ALERT_1_TIME": "10分钟前",
+        "ALERT_2_TITLE": "OPEX 预算达到 80.4% 阈值",
+        "ALERT_2_TIME": "1小时前",
+        "ALERT_3_TITLE": "21 亿印尼盾到期发票等待确认",
+        "ALERT_3_TIME": "3小时前"
+      },
+      "PROFILE": {
+        "NAME": "Aditya Pratama",
+        "ROLE": "运营副总裁",
+        "STATUS": "在线",
+        "BADGE": "管理员"
+      },
       "NAV": {
+        "ARIA_LABEL": "侧边栏导航",
         "DASHBOARD": "仪表板",
-        "FINANCE": "财务",
-        "SALES": "销售",
-        "PURCHASING": "采购",
+        "PROCUREMENT": "采购",
+        "SERVICE": "服务",
         "INVENTORY": "库存",
-        "PRODUCTION": "生产",
-        "PROJECT": "项目",
-        "ANALYTICS": "分析"
+        "MFG_PLANNING": "生产计划",
+        "MANUFACTURING": "生产制造",
+        "SALES": "销售",
+        "GL": "总账",
+        "AP": "应付账款",
+        "AR": "应收账款",
+        "CASH_BANK": "现金与银行",
+        "PROCESS": "流程处理",
+        "REPORT": "报表",
+        "STATIC_DATA": "基础数据",
+        "MISCELLANEOUS": "其他杂项",
+        "MAINTENANCE": "系统维护",
+        "SETTING_FAV": "收藏菜单设置",
+        "UPLOAD_REPORT": "报表上传菜单",
+        "MANUAL_BOOK": "操作手册"
+      },
+      "DASHBOARD": {
+        "BREADCRUMB": "SofiCloud / 管理视图",
+        "TITLE": "高管仪表板",
+        "SIMPLE_DATA": "简略数据",
+        "DESCRIPTION": "实时掌握应收账款、销售、现金、费用与运营绩效"
       },
       "METRICS": {
-        "REVENUE": "营收",
-        "GROSS_PROFIT": "毛利润",
-        "INVENTORY_VALUE": "库存价值",
-        "AR_OUTSTANDING": "应收账款未结",
-        "LOCATIONS_COUNT": "42 个地点",
-        "OVERDUE_COUNT": "12 笔逾期"
+        "RECEIVABLES": {
+          "TAG": "应收账款",
+          "TITLE": "应收账款总额",
+          "OVERDUE_LABEL": "逾期应收"
+        },
+        "CURRENT_MONTH": {
+          "TAG": "本月",
+          "TITLE": "本月到期发票",
+          "SUBTEXT": "{{month}}到期的未结发票"
+        },
+        "SALES": {
+          "TAG": "销售",
+          "TITLE": "本月销售订单",
+          "GROWTH": "环比上月 {{growth}}"
+        },
+        "LIQUIDITY": {
+          "TAG": "流动资金",
+          "TITLE": "现金与银行余额",
+          "PROJECTED": "月末预测: {{amount}}"
+        }
       },
-      "SALES_PERFORMANCE": "销售业绩",
-      "REVENUE_GROSS_PROFIT": "营收与毛利",
+      "MOBILE_TABS": {
+        "ARIA_LABEL": "高管洞察选项卡",
+        "SALES_TREND": "销售趋势",
+        "KEY_HIGHLIGHTS": "核心亮点 ({{count}})"
+      },
+      "CHART": {
+        "TAG": "销售分析",
+        "TITLE": "12个月销售趋势",
+        "SUBTITLE": "营收 vs 销售订单",
+        "REVENUE": "营收",
+        "SALES_ORDERS": "销售订单",
+        "REVENUE_LABEL": "营收:",
+        "SALES_ORDERS_LABEL": "销售订单:"
+      },
+      "HIGHLIGHTS": {
+        "TAG": "高管亮点",
+        "TITLE": "需关注事项",
+        "OUTSTANDING_ORDERS": "未结销售订单",
+        "OPEX_BUDGET": "OPEX 预算 vs 实际",
+        "CASH_COVERAGE": "运营资金覆盖期",
+        "MONTHS_VALUE": "{{count}}个月",
+        "PRODUCTION_PLAN": "生产计划 vs 实际",
+        "ORDERS_AT_RISK": "风险订单",
+        "ORDERS_VALUE": "{{count}}笔订单"
+      },
       "MONTHS": {
         "JAN": "1月",
         "FEB": "2月",
@@ -103,32 +174,26 @@
         "APR": "4月",
         "MAY": "5月",
         "JUN": "6月",
-        "JUL": "7月"
+        "JUL": "7月",
+        "AUG": "8月",
+        "SEP": "9月",
+        "OCT": "10月",
+        "NOV": "11月",
+        "DEC": "12月"
       },
-      "WEEKS": {
-        "W1": "第1周",
-        "W2": "第2周",
-        "W3": "第3周",
-        "W4": "第4周",
-        "W5": "第5周",
-        "W6": "第6周",
-        "W7": "第7周"
-      },
-      "HEALTH": {
-        "CASH_POSITION": "资金状况",
-        "CASH_POSITION_VALUE": "良好",
-        "ORDER_FULFILMENT": "订单履约",
-        "INVENTORY_ALERT": "库存预警",
-        "INVENTORY_ALERT_VALUE": "8 项",
-        "INVENTORY_ALERT_VALUE_QTR": "4 项",
-        "INVENTORY_ALERT_VALUE_YR": "2 项"
-      },
-      "ARIA": {
-        "TARGET_REVENUE_CARD": "目标营收卡片",
-        "APPROVAL_STATUS_CARD": "审批状态卡片",
-        "USER_PROFILE": "用户个人资料",
-        "SIDEBAR_NAV": "仪表板侧边导航",
-        "PERIOD_SELECTOR": "仪表板时间周期筛选"
+      "MONTHS_FULL": {
+        "JANUARY": "1月",
+        "FEBRUARY": "2月",
+        "MARCH": "3月",
+        "APRIL": "4月",
+        "MAY": "5月",
+        "JUNE": "6月",
+        "JULY": "7月",
+        "AUGUST": "8月",
+        "SEPTEMBER": "9月",
+        "OCTOBER": "10月",
+        "NOVEMBER": "11月",
+        "DECEMBER": "12月"
       }
     }
   },

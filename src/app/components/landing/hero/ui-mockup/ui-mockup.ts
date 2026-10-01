@@ -1,21 +1,24 @@
 import { Component, computed, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface NavMenuItem {
   readonly id: string;
-  readonly label: string;
+  readonly labelKey: string;
   readonly active?: boolean;
 }
 
 export interface HighlightItem {
-  readonly label: string;
-  readonly value: string;
+  readonly labelKey: string;
+  readonly value?: string;
+  readonly valueKey?: string;
+  readonly valueParams?: Record<string, unknown>;
 }
 
 export interface MockAlertItem {
   readonly id: string;
   readonly type: 'danger' | 'warning' | 'info';
-  readonly title: string;
-  readonly time: string;
+  readonly titleKey: string;
+  readonly timeKey: string;
 }
 
 export interface ChartDot {
@@ -24,7 +27,7 @@ export interface ChartDot {
 }
 
 export interface ChartPointData {
-  readonly monthName: string;
+  readonly monthKey: string;
   readonly x: number;
   readonly xPercent: number;
   readonly revY: number;
@@ -34,7 +37,7 @@ export interface ChartPointData {
 }
 
 export interface MonthDashboardData {
-  readonly month: string;
+  readonly monthKey: string;
   readonly year: number;
   readonly receivables: {
     readonly total: string;
@@ -46,7 +49,7 @@ export interface MonthDashboardData {
   };
   readonly sales: {
     readonly orders: string;
-    readonly growth: string;
+    readonly growthRate: string;
   };
   readonly liquidity: {
     readonly balance: string;
@@ -56,12 +59,18 @@ export interface MonthDashboardData {
   readonly chartSalesOrderPoints: string;
   readonly chartRevenueDots: readonly ChartDot[];
   readonly chartPointsData: readonly ChartPointData[];
-  readonly highlights: readonly HighlightItem[];
+  readonly highlightsData: {
+    readonly outstandingOrders: string;
+    readonly opexBudget: string;
+    readonly cashCoverageMonths: string;
+    readonly productionPlan: string;
+    readonly ordersAtRiskCount: number;
+  };
 }
 
 const BASE_CHART_MONTHS: readonly ChartPointData[] = [
   {
-    monthName: 'October',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.OCTOBER',
     x: 60,
     xPercent: 11.11,
     revY: 98,
@@ -70,7 +79,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
     salesOrders: 'Rp 860,000,000.-',
   },
   {
-    monthName: 'November',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.NOVEMBER',
     x: 104,
     xPercent: 19.26,
     revY: 91,
@@ -79,7 +88,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
     salesOrders: 'Rp 1,350,000,000.-',
   },
   {
-    monthName: 'December',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.DECEMBER',
     x: 148,
     xPercent: 27.41,
     revY: 81,
@@ -88,7 +97,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
     salesOrders: 'Rp 2,100,000,000.-',
   },
   {
-    monthName: 'January',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JANUARY',
     x: 192,
     xPercent: 35.56,
     revY: 93,
@@ -97,7 +106,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
     salesOrders: 'Rp 1,250,000,000.-',
   },
   {
-    monthName: 'February',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.FEBRUARY',
     x: 236,
     xPercent: 43.7,
     revY: 75,
@@ -106,7 +115,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
     salesOrders: 'Rp 2,690,000,000.-',
   },
   {
-    monthName: 'March',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.MARCH',
     x: 280,
     xPercent: 51.85,
     revY: 69,
@@ -115,7 +124,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
     salesOrders: 'Rp 3,650,000,000.-',
   },
   {
-    monthName: 'April',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.APRIL',
     x: 324,
     xPercent: 60.0,
     revY: 82,
@@ -124,7 +133,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
     salesOrders: 'Rp 2,310,000,000.-',
   },
   {
-    monthName: 'May',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.MAY',
     x: 368,
     xPercent: 68.15,
     revY: 62,
@@ -133,7 +142,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
     salesOrders: 'Rp 3,940,000,000.-',
   },
   {
-    monthName: 'June',
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JUNE',
     x: 412,
     xPercent: 76.3,
     revY: 72,
@@ -145,6 +154,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
 
 @Component({
   selector: 'app-ui-mockup',
+  imports: [TranslatePipe],
   templateUrl: './ui-mockup.html',
   host: {
     class: 'relative block w-full text-left font-dm-sans',
@@ -155,7 +165,7 @@ const BASE_CHART_MONTHS: readonly ChartPointData[] = [
 export class UiMockup {
   readonly monthDatasets: readonly MonthDashboardData[] = [
     {
-      month: 'July',
+      monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JULY',
       year: 2026,
       receivables: {
         total: 'Rp 7,920,000,000.-',
@@ -167,7 +177,7 @@ export class UiMockup {
       },
       sales: {
         orders: 'Rp 4,900,000,000.-',
-        growth: '+8.2% vs Last month',
+        growthRate: '+8.2%',
       },
       liquidity: {
         balance: 'Rp 5,840,000,000.-',
@@ -190,7 +200,7 @@ export class UiMockup {
       chartPointsData: [
         ...BASE_CHART_MONTHS,
         {
-          monthName: 'July',
+          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JULY',
           x: 456,
           xPercent: 84.44,
           revY: 48,
@@ -199,7 +209,7 @@ export class UiMockup {
           salesOrders: 'Rp 5,380,000,000.-',
         },
         {
-          monthName: 'August',
+          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.AUGUST',
           x: 500,
           xPercent: 92.59,
           revY: 62,
@@ -208,16 +218,16 @@ export class UiMockup {
           salesOrders: 'Rp 4,040,000,000.-',
         },
       ],
-      highlights: [
-        { label: 'Outstanding Sales Orders', value: 'Rp 2,750,000,000.-' },
-        { label: 'OPEX Budget vs Actual', value: 'Rp 2,450,000,000.-' },
-        { label: 'Operating Cash Coverage', value: '2.1 months' },
-        { label: 'Production Plan vs Actual', value: '11,200 (76.8%)' },
-        { label: 'Orders at Risk', value: '3 orders' },
-      ],
+      highlightsData: {
+        outstandingOrders: 'Rp 2,750,000,000.-',
+        opexBudget: 'Rp 2,450,000,000.-',
+        cashCoverageMonths: '2.1',
+        productionPlan: '11,200 (76.8%)',
+        ordersAtRiskCount: 3,
+      },
     },
     {
-      month: 'August',
+      monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.AUGUST',
       year: 2026,
       receivables: {
         total: 'Rp 8,150,000,000.-',
@@ -229,7 +239,7 @@ export class UiMockup {
       },
       sales: {
         orders: 'Rp 5,300,000,000.-',
-        growth: '+14.5% vs Last month',
+        growthRate: '+14.5%',
       },
       liquidity: {
         balance: 'Rp 6,250,000,000.-',
@@ -252,7 +262,7 @@ export class UiMockup {
       chartPointsData: [
         ...BASE_CHART_MONTHS,
         {
-          monthName: 'July',
+          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JULY',
           x: 456,
           xPercent: 84.44,
           revY: 42,
@@ -261,7 +271,7 @@ export class UiMockup {
           salesOrders: 'Rp 5,770,000,000.-',
         },
         {
-          monthName: 'August',
+          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.AUGUST',
           x: 500,
           xPercent: 92.59,
           revY: 58,
@@ -270,16 +280,16 @@ export class UiMockup {
           salesOrders: 'Rp 4,420,000,000.-',
         },
       ],
-      highlights: [
-        { label: 'Outstanding Sales Orders', value: 'Rp 2,980,000,000.-' },
-        { label: 'OPEX Budget vs Actual', value: 'Rp 2,620,000,000.-' },
-        { label: 'Operating Cash Coverage', value: '2.2 months' },
-        { label: 'Production Plan vs Actual', value: '11,900 (78.5%)' },
-        { label: 'Orders at Risk', value: '4 orders' },
-      ],
+      highlightsData: {
+        outstandingOrders: 'Rp 2,980,000,000.-',
+        opexBudget: 'Rp 2,620,000,000.-',
+        cashCoverageMonths: '2.2',
+        productionPlan: '11,900 (78.5%)',
+        ordersAtRiskCount: 4,
+      },
     },
     {
-      month: 'September',
+      monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.SEPTEMBER',
       year: 2026,
       receivables: {
         total: 'Rp 8,450,000,000.-',
@@ -291,7 +301,7 @@ export class UiMockup {
       },
       sales: {
         orders: 'Rp 5,800,000,000.-',
-        growth: '+18.4% vs Last month',
+        growthRate: '+18.4%',
       },
       liquidity: {
         balance: 'Rp 6,720,000,000.-',
@@ -314,7 +324,7 @@ export class UiMockup {
       chartPointsData: [
         ...BASE_CHART_MONTHS,
         {
-          monthName: 'July',
+          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JULY',
           x: 456,
           xPercent: 84.44,
           revY: 38,
@@ -323,7 +333,7 @@ export class UiMockup {
           salesOrders: 'Rp 6,060,000,000.-',
         },
         {
-          monthName: 'August',
+          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.AUGUST',
           x: 500,
           xPercent: 92.59,
           revY: 54,
@@ -332,13 +342,13 @@ export class UiMockup {
           salesOrders: 'Rp 4,810,000,000.-',
         },
       ],
-      highlights: [
-        { label: 'Outstanding Sales Orders', value: 'Rp 3,250,000,000.-' },
-        { label: 'OPEX Budget vs Actual', value: 'Rp 2,800,000,000.-' },
-        { label: 'Operating Cash Coverage', value: '2.4 months' },
-        { label: 'Production Plan vs Actual', value: '12,500 (80.4%)' },
-        { label: 'Orders at Risk', value: '5 orders' },
-      ],
+      highlightsData: {
+        outstandingOrders: 'Rp 3,250,000,000.-',
+        opexBudget: 'Rp 2,800,000,000.-',
+        cashCoverageMonths: '2.4',
+        productionPlan: '12,500 (80.4%)',
+        ordersAtRiskCount: 5,
+      },
     },
   ];
 
@@ -348,7 +358,7 @@ export class UiMockup {
     () => this.monthDatasets[this.selectedMonthIndex()],
   );
 
-  readonly currentMonthName = computed(() => this.currentData().month);
+  readonly currentMonthKey = computed(() => this.currentData().monthKey);
 
   readonly hoveredMonthIndex = signal<number | null>(null);
 
@@ -380,20 +390,20 @@ export class UiMockup {
     {
       id: '1',
       type: 'danger',
-      title: '5 Orders at Risk of shipping delay',
-      time: '10m ago',
+      titleKey: 'HERO.UI_MOCKUP.NOTIFICATIONS.ALERT_1_TITLE',
+      timeKey: 'HERO.UI_MOCKUP.NOTIFICATIONS.ALERT_1_TIME',
     },
     {
       id: '2',
       type: 'warning',
-      title: 'OPEX Budget reached 80.4% threshold',
-      time: '1h ago',
+      titleKey: 'HERO.UI_MOCKUP.NOTIFICATIONS.ALERT_2_TITLE',
+      timeKey: 'HERO.UI_MOCKUP.NOTIFICATIONS.ALERT_2_TIME',
     },
     {
       id: '3',
       type: 'info',
-      title: 'Rp 2.1B Due Invoices awaiting confirmation',
-      time: '3h ago',
+      titleKey: 'HERO.UI_MOCKUP.NOTIFICATIONS.ALERT_3_TITLE',
+      timeKey: 'HERO.UI_MOCKUP.NOTIFICATIONS.ALERT_3_TIME',
     },
   ];
 
@@ -438,26 +448,52 @@ export class UiMockup {
   }
 
   readonly navItems: readonly NavMenuItem[] = [
-    { id: 'dashboard', label: 'Dashboard', active: true },
-    { id: 'procurement', label: 'Procurement' },
-    { id: 'service', label: 'Service' },
-    { id: 'inventory', label: 'Inventory' },
-    { id: 'mfg-planning', label: 'Manufacturing Planning' },
-    { id: 'manufacturing', label: 'Manufacturing' },
-    { id: 'sales', label: 'Sales' },
-    { id: 'gl', label: 'General Ledger' },
-    { id: 'ap', label: 'Account Payable' },
-    { id: 'ar', label: 'Account Receivable' },
-    { id: 'cash-bank', label: 'Cash & Bank' },
-    { id: 'process', label: 'Process' },
-    { id: 'report', label: 'Report' },
-    { id: 'static-data', label: 'Static Data' },
-    { id: 'miscellaneous', label: 'Miscellaneous' },
-    { id: 'maintenance', label: 'Maintenance' },
-    { id: 'setting-fav', label: 'Setting Favorite Menu' },
-    { id: 'upload-report', label: 'Upload Report Menu' },
-    { id: 'manual-book', label: 'Manual Book' },
+    { id: 'dashboard', labelKey: 'HERO.UI_MOCKUP.NAV.DASHBOARD', active: true },
+    { id: 'procurement', labelKey: 'HERO.UI_MOCKUP.NAV.PROCUREMENT' },
+    { id: 'service', labelKey: 'HERO.UI_MOCKUP.NAV.SERVICE' },
+    { id: 'inventory', labelKey: 'HERO.UI_MOCKUP.NAV.INVENTORY' },
+    { id: 'mfg-planning', labelKey: 'HERO.UI_MOCKUP.NAV.MFG_PLANNING' },
+    { id: 'manufacturing', labelKey: 'HERO.UI_MOCKUP.NAV.MANUFACTURING' },
+    { id: 'sales', labelKey: 'HERO.UI_MOCKUP.NAV.SALES' },
+    { id: 'gl', labelKey: 'HERO.UI_MOCKUP.NAV.GL' },
+    { id: 'ap', labelKey: 'HERO.UI_MOCKUP.NAV.AP' },
+    { id: 'ar', labelKey: 'HERO.UI_MOCKUP.NAV.AR' },
+    { id: 'cash-bank', labelKey: 'HERO.UI_MOCKUP.NAV.CASH_BANK' },
+    { id: 'process', labelKey: 'HERO.UI_MOCKUP.NAV.PROCESS' },
+    { id: 'report', labelKey: 'HERO.UI_MOCKUP.NAV.REPORT' },
+    { id: 'static-data', labelKey: 'HERO.UI_MOCKUP.NAV.STATIC_DATA' },
+    { id: 'miscellaneous', labelKey: 'HERO.UI_MOCKUP.NAV.MISCELLANEOUS' },
+    { id: 'maintenance', labelKey: 'HERO.UI_MOCKUP.NAV.MAINTENANCE' },
+    { id: 'setting-fav', labelKey: 'HERO.UI_MOCKUP.NAV.SETTING_FAV' },
+    { id: 'upload-report', labelKey: 'HERO.UI_MOCKUP.NAV.UPLOAD_REPORT' },
+    { id: 'manual-book', labelKey: 'HERO.UI_MOCKUP.NAV.MANUAL_BOOK' },
   ];
 
-  readonly highlights = computed(() => this.currentData().highlights);
+  readonly highlights = computed<readonly HighlightItem[]>(() => {
+    const data = this.currentData().highlightsData;
+    return [
+      {
+        labelKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.OUTSTANDING_ORDERS',
+        value: data.outstandingOrders,
+      },
+      {
+        labelKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.OPEX_BUDGET',
+        value: data.opexBudget,
+      },
+      {
+        labelKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.CASH_COVERAGE',
+        valueKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.MONTHS_VALUE',
+        valueParams: { count: data.cashCoverageMonths },
+      },
+      {
+        labelKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.PRODUCTION_PLAN',
+        value: data.productionPlan,
+      },
+      {
+        labelKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.ORDERS_AT_RISK',
+        valueKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.ORDERS_VALUE',
+        valueParams: { count: data.ordersAtRiskCount },
+      },
+    ];
+  });
 }

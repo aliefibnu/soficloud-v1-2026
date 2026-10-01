@@ -67,35 +67,106 @@
       "WATCH_VIDEO": "Soficloudデモ動画を視聴"
     },
     "UI_MOCKUP": {
-      "TARGET_REVENUE": "目標売上",
-      "APPROVAL_TODAY": "本日の承認",
-      "APPROVAL_DOCUMENTS": "18件の書類",
-      "MANAGEMENT_OVERVIEW": "経営概要",
-      "DATE": "2026年3月18日 水曜日",
-      "GREETING": "ようこそ、{{name}}",
-      "PERIOD_CURRENT_MONTH": "当月",
-      "PERIOD_THIS_QUARTER": "当四半期",
-      "PERIOD_THIS_YEAR": "当年",
+      "HEADER": {
+        "LOGO_ALT": "SOFICloud ロゴ",
+        "WORKSPACE": "Enterprise Workspace",
+        "PREV_MONTH": "前月",
+        "NEXT_MONTH": "翌月",
+        "DATE_FORMAT": "{{year}}年{{month}}",
+        "NOTIFICATIONS_ARIA": "通知を開く",
+        "PROFILE_ARIA": "ユーザープロフィールアバター"
+      },
+      "NOTIFICATIONS": {
+        "TITLE": "エグゼクティブアラート",
+        "MARK_READ": "既読にする",
+        "ALERT_1_TITLE": "配送遅延リスクのある注文が5件あります",
+        "ALERT_1_TIME": "10分前",
+        "ALERT_2_TITLE": "OPEX予算が80.4%のしきい値に達しました",
+        "ALERT_2_TIME": "1時間前",
+        "ALERT_3_TITLE": "21億ルピアの期日請求書が確認待ちです",
+        "ALERT_3_TIME": "3時間前"
+      },
+      "PROFILE": {
+        "NAME": "Aditya Pratama",
+        "ROLE": "運用統括責任者",
+        "STATUS": "オンライン",
+        "BADGE": "管理者"
+      },
       "NAV": {
+        "ARIA_LABEL": "サイドバーナビゲーション",
         "DASHBOARD": "ダッシュボード",
-        "FINANCE": "財務",
-        "SALES": "販売",
-        "PURCHASING": "購買",
+        "PROCUREMENT": "調達",
+        "SERVICE": "サービス",
         "INVENTORY": "在庫",
-        "PRODUCTION": "生産",
-        "PROJECT": "プロジェクト",
-        "ANALYTICS": "分析"
+        "MFG_PLANNING": "生産計画",
+        "MANUFACTURING": "製造",
+        "SALES": "販売",
+        "GL": "総勘定元帳",
+        "AP": "買掛金",
+        "AR": "売掛金",
+        "CASH_BANK": "現金・銀行",
+        "PROCESS": "プロセス",
+        "REPORT": "レポート",
+        "STATIC_DATA": "マスタデータ",
+        "MISCELLANEOUS": "その他",
+        "MAINTENANCE": "保守管理",
+        "SETTING_FAV": "お気に入りメニュー設定",
+        "UPLOAD_REPORT": "レポートアップロードメニュー",
+        "MANUAL_BOOK": "マニュアル"
+      },
+      "DASHBOARD": {
+        "BREADCRUMB": "SofiCloud / 経営ビュー",
+        "TITLE": "エグゼクティブダッシュボード",
+        "SIMPLE_DATA": "簡易データ",
+        "DESCRIPTION": "売掛金、売上、資金、経費、業務パフォーマンスをリアルタイムで可視化"
       },
       "METRICS": {
-        "REVENUE": "売上高",
-        "GROSS_PROFIT": "売上総利益",
-        "INVENTORY_VALUE": "在庫資産額",
-        "AR_OUTSTANDING": "売掛金残高",
-        "LOCATIONS_COUNT": "42拠点",
-        "OVERDUE_COUNT": "12件期日超過"
+        "RECEIVABLES": {
+          "TAG": "売掛金",
+          "TITLE": "売掛金総額",
+          "OVERDUE_LABEL": "期日超過売掛金"
+        },
+        "CURRENT_MONTH": {
+          "TAG": "当月",
+          "TITLE": "今月の期日到来請求書",
+          "SUBTEXT": "{{month}}期日到来の未決済請求書"
+        },
+        "SALES": {
+          "TAG": "販売",
+          "TITLE": "今月の受注高",
+          "GROWTH": "前月比 {{growth}}"
+        },
+        "LIQUIDITY": {
+          "TAG": "流動性",
+          "TITLE": "現金・預金残高",
+          "PROJECTED": "月末予測残高: {{amount}}"
+        }
       },
-      "SALES_PERFORMANCE": "売上パフォーマンス",
-      "REVENUE_GROSS_PROFIT": "売上高＆売上総利益",
+      "MOBILE_TABS": {
+        "ARIA_LABEL": "経営インサイトタブ",
+        "SALES_TREND": "売上トレンド",
+        "KEY_HIGHLIGHTS": "重要ハイライト ({{count}})"
+      },
+      "CHART": {
+        "TAG": "売上分析",
+        "TITLE": "12ヶ月の売上推移",
+        "SUBTITLE": "売上高 vs 受注高",
+        "REVENUE": "売上高",
+        "SALES_ORDERS": "受注高",
+        "REVENUE_LABEL": "売上高:",
+        "SALES_ORDERS_LABEL": "受注高:"
+      },
+      "HIGHLIGHTS": {
+        "TAG": "重要ハイライト",
+        "TITLE": "対応が必要な項目",
+        "OUTSTANDING_ORDERS": "未処理受注残高",
+        "OPEX_BUDGET": "OPEX予算 vs 実績",
+        "CASH_COVERAGE": "事業資金カバレッジ",
+        "MONTHS_VALUE": "{{count}}ヶ月",
+        "PRODUCTION_PLAN": "生産計画 vs 実績",
+        "ORDERS_AT_RISK": "遅延リスク注文",
+        "ORDERS_VALUE": "{{count}}件"
+      },
       "MONTHS": {
         "JAN": "1月",
         "FEB": "2月",
@@ -103,32 +174,26 @@
         "APR": "4月",
         "MAY": "5月",
         "JUN": "6月",
-        "JUL": "7月"
+        "JUL": "7月",
+        "AUG": "8月",
+        "SEP": "9月",
+        "OCT": "10月",
+        "NOV": "11月",
+        "DEC": "12月"
       },
-      "WEEKS": {
-        "W1": "第1週",
-        "W2": "第2週",
-        "W3": "第3週",
-        "W4": "第4週",
-        "W5": "第5週",
-        "W6": "第6週",
-        "W7": "第7週"
-      },
-      "HEALTH": {
-        "CASH_POSITION": "資金状況",
-        "CASH_POSITION_VALUE": "健全",
-        "ORDER_FULFILMENT": "注文履行率",
-        "INVENTORY_ALERT": "在庫アラート",
-        "INVENTORY_ALERT_VALUE": "8件",
-        "INVENTORY_ALERT_VALUE_QTR": "4件",
-        "INVENTORY_ALERT_VALUE_YR": "2件"
-      },
-      "ARIA": {
-        "TARGET_REVENUE_CARD": "目標売上カード",
-        "APPROVAL_STATUS_CARD": "承認ステータスカード",
-        "USER_PROFILE": "ユーザープロフィール",
-        "SIDEBAR_NAV": "ダッシュボードサイドナビゲーション",
-        "PERIOD_SELECTOR": "ダッシュボード期間フィルター"
+      "MONTHS_FULL": {
+        "JANUARY": "1月",
+        "FEBRUARY": "2月",
+        "MARCH": "3月",
+        "APRIL": "4月",
+        "MAY": "5月",
+        "JUNE": "6月",
+        "JULY": "7月",
+        "AUGUST": "8月",
+        "SEPTEMBER": "9月",
+        "OCTOBER": "10月",
+        "NOVEMBER": "11月",
+        "DECEMBER": "12月"
       }
     }
   },

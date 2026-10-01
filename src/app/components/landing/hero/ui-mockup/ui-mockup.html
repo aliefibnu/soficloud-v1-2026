@@ -13,7 +13,7 @@
       <div class="w-28 sm:w-44 shrink-0 flex items-center">
         <img
           src="/soficloud-logo.svg"
-          alt="SOFICloud Logo"
+          [alt]="'HERO.UI_MOCKUP.HEADER.LOGO_ALT' | translate"
           class="h-4.5 sm:h-6 w-auto object-contain select-none pointer-events-none"
         />
       </div>
@@ -21,7 +21,7 @@
       <div
         class="hidden md:block text-[#334155] text-xs sm:text-[13px] font-medium tracking-tight"
       >
-        Enterprise Workspace
+        {{ 'HERO.UI_MOCKUP.HEADER.WORKSPACE' | translate }}
       </div>
 
       <div class="flex items-center gap-1.5 sm:gap-2.5">
@@ -32,7 +32,7 @@
             type="button"
             (click)="prevMonth()"
             class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer"
-            aria-label="Previous month"
+            [attr.aria-label]="'HERO.UI_MOCKUP.HEADER.PREV_MONTH' | translate"
           >
             <svg
               class="w-3 h-3"
@@ -51,13 +51,13 @@
           <span
             class="text-[#334155] text-[10.5px] sm:text-xs font-semibold px-1.5 select-none whitespace-nowrap min-w-22 text-center"
           >
-            {{ currentMonthName() }} 2026
+            {{ 'HERO.UI_MOCKUP.HEADER.DATE_FORMAT' | translate: { month: (currentMonthKey() | translate), year: 2026 } }}
           </span>
           <button
             type="button"
             (click)="nextMonth()"
             class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer"
-            aria-label="Next month"
+            [attr.aria-label]="'HERO.UI_MOCKUP.HEADER.NEXT_MONTH' | translate"
           >
             <svg
               class="w-3 h-3"
@@ -80,7 +80,7 @@
             type="button"
             (click)="toggleNotifications($event)"
             class="relative w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-lg border border-slate-200/80 bg-white hover:bg-slate-50 text-slate-600 hover:text-[#2563eb] flex items-center justify-center transition-colors cursor-pointer shadow-2xs"
-            aria-label="Open notifications"
+            [attr.aria-label]="'HERO.UI_MOCKUP.HEADER.NOTIFICATIONS_ARIA' | translate"
             [attr.aria-expanded]="isNotificationsOpen()"
           >
             <svg
@@ -115,7 +115,7 @@
                 class="flex items-center justify-between pb-2 border-b border-slate-100"
               >
                 <span class="text-xs font-bold text-[#182849]"
-                  >Executive Alerts</span
+                  >{{ 'HERO.UI_MOCKUP.NOTIFICATIONS.TITLE' | translate }}</span
                 >
                 @if (unreadCount() > 0) {
                   <button
@@ -123,7 +123,7 @@
                     (click)="markAllAsRead($event)"
                     class="text-[10px] text-[#2563eb] hover:underline font-semibold cursor-pointer"
                   >
-                    Mark as read
+                    {{ 'HERO.UI_MOCKUP.NOTIFICATIONS.MARK_READ' | translate }}
                   </button>
                 }
               </div>
@@ -142,10 +142,10 @@
                       <p
                         class="text-[11px] text-[#1e293b] font-medium leading-snug line-clamp-2"
                       >
-                        {{ alert.title }}
+                        {{ alert.titleKey | translate }}
                       </p>
                       <span class="text-[9px] text-slate-400 mt-0.5 block">{{
-                        alert.time
+                        alert.timeKey | translate
                       }}</span>
                     </div>
                   </div>
@@ -160,7 +160,7 @@
             type="button"
             (click)="toggleProfile($event)"
             class="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-full bg-[#141b36] hover:ring-2 hover:ring-[#2563eb]/50 text-white flex items-center justify-center font-bold text-xs shadow-xs select-none shrink-0 transition-all cursor-pointer"
-            aria-label="User profile avatar"
+            [attr.aria-label]="'HERO.UI_MOCKUP.HEADER.PROFILE_ARIA' | translate"
             [attr.aria-expanded]="isProfileOpen()"
           >
             A
@@ -181,10 +181,10 @@
                 </div>
                 <div class="min-w-0">
                   <div class="text-xs font-bold text-[#182849] truncate">
-                    Aditya Pratama
+                    {{ 'HERO.UI_MOCKUP.PROFILE.NAME' | translate }}
                   </div>
                   <div class="text-[10px] text-slate-500 truncate">
-                    VP of Operations
+                    {{ 'HERO.UI_MOCKUP.PROFILE.ROLE' | translate }}
                   </div>
                 </div>
               </div>
@@ -193,11 +193,11 @@
               >
                 <span class="flex items-center gap-1">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  Online
+                  {{ 'HERO.UI_MOCKUP.PROFILE.STATUS' | translate }}
                 </span>
                 <span
                   class="px-1.5 py-0.5 rounded bg-blue-50 text-[#2563eb] font-semibold text-[9px]"
-                  >Admin</span
+                  >{{ 'HERO.UI_MOCKUP.PROFILE.BADGE' | translate }}</span
                 >
               </div>
             </div>
@@ -209,21 +209,21 @@
     <div class="flex flex-row">
       <aside
         class="hidden md:flex w-44 lg:w-48 xl:w-52 shrink-0 flex-col bg-white border-r border-slate-200/80 py-2.5 px-2 gap-0.5"
-        aria-label="Sidebar navigation"
+        [attr.aria-label]="'HERO.UI_MOCKUP.NAV.ARIA_LABEL' | translate"
       >
         @for (item of navItems; track item.id) {
           @if (item.active) {
             <div
               class="flex items-center justify-between px-2.5 py-0.75 sm:py-1 rounded-md bg-[#ebf3fe] text-[#1e293b] font-semibold text-[11px] sm:text-[11.5px] shadow-2xs select-none"
             >
-              <span class="truncate">{{ item.label }}</span>
+              <span class="truncate">{{ item.labelKey | translate }}</span>
               <span class="w-3 h-3 rounded-xs bg-[#2563eb] shrink-0"></span>
             </div>
           } @else {
             <div
               class="flex items-center justify-between px-2.5 py-0.75 sm:py-1 rounded-md text-[#94a3b8] hover:text-[#475569] font-normal text-[11px] sm:text-[11.5px] transition-colors select-none"
             >
-              <span class="truncate">{{ item.label }}</span>
+              <span class="truncate">{{ item.labelKey | translate }}</span>
               <span class="w-3 h-3 rounded-xs border border-[#cbd5e1] shrink-0"></span>
             </div>
           }
@@ -232,20 +232,20 @@
 
       <main class="flex-1 p-3 sm:p-5 lg:p-6 flex flex-col gap-3 sm:gap-4 min-w-0 bg-[#f0f4f9]">
         <div class="flex flex-col gap-0.5">
-          <span class="text-[#2563eb] font-semibold text-[11px] sm:text-xs">SofiCloud / Management View</span>
+          <span class="text-[#2563eb] font-semibold text-[11px] sm:text-xs">{{ 'HERO.UI_MOCKUP.DASHBOARD.BREADCRUMB' | translate }}</span>
           <div class="flex items-center justify-between gap-2">
             <h2 class="text-lg sm:text-2xl lg:text-[28px] font-bold text-[#182849] tracking-tight leading-tight truncate">
-              Executive Dashboard
+              {{ 'HERO.UI_MOCKUP.DASHBOARD.TITLE' | translate }}
             </h2>
             <button
               type="button"
               class="px-2.5 sm:px-4 py-1 rounded-lg sm:rounded-xl border border-[#93c5fd] bg-white text-[#2563eb] text-[11px] sm:text-xs font-medium shadow-2xs hover:bg-blue-50/50 transition-colors shrink-0 cursor-pointer"
             >
-              Simple data
+              {{ 'HERO.UI_MOCKUP.DASHBOARD.SIMPLE_DATA' | translate }}
             </button>
           </div>
           <p class="text-[#475569] text-[11px] sm:text-xs md:text-[13px] font-normal mt-0.5 leading-normal">
-            Real-time visibility into receivables, sales, cash, expenses, and operational performance
+            {{ 'HERO.UI_MOCKUP.DASHBOARD.DESCRIPTION' | translate }}
           </p>
         </div>
 
@@ -254,15 +254,17 @@
             class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">RECEIVABLES</span>
+              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">
+                {{ 'HERO.UI_MOCKUP.METRICS.RECEIVABLES.TAG' | translate }}
+              </span>
               <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
-                Total Accounts Receivable
+                {{ 'HERO.UI_MOCKUP.METRICS.RECEIVABLES.TITLE' | translate }}
               </h3>
               <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
                 {{ currentData().receivables.total }}
               </div>
               <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
-                Overdue AR: {{ currentData().receivables.overdue }}
+                {{ 'HERO.UI_MOCKUP.METRICS.RECEIVABLES.OVERDUE_LABEL' | translate }}: {{ currentData().receivables.overdue }}
               </div>
             </div>
             <div class="flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-2.5" aria-hidden="true">
@@ -279,15 +281,17 @@
             class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">CURRENT MONTH</span>
+              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">
+                {{ 'HERO.UI_MOCKUP.METRICS.CURRENT_MONTH.TAG' | translate }}
+              </span>
               <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
-                Due Invoices This Month
+                {{ 'HERO.UI_MOCKUP.METRICS.CURRENT_MONTH.TITLE' | translate }}
               </h3>
               <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
                 {{ currentData().currentMonth.due }}
               </div>
               <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
-                Outstanding invoices due in {{ currentMonthName().toLowerCase() }}
+                {{ 'HERO.UI_MOCKUP.METRICS.CURRENT_MONTH.SUBTEXT' | translate: { month: (currentMonthKey() | translate) } }}
               </div>
             </div>
             <div class="pt-2 sm:pt-2.5">
@@ -310,15 +314,17 @@
             class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">SALES</span>
+              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">
+                {{ 'HERO.UI_MOCKUP.METRICS.SALES.TAG' | translate }}
+              </span>
               <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
-                Sales Orders This Month
+                {{ 'HERO.UI_MOCKUP.METRICS.SALES.TITLE' | translate }}
               </h3>
               <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
                 {{ currentData().sales.orders }}
               </div>
               <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
-                {{ currentData().sales.growth }}
+                {{ 'HERO.UI_MOCKUP.METRICS.SALES.GROWTH' | translate: { growth: currentData().sales.growthRate } }}
               </div>
             </div>
             <div class="flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-2.5" aria-hidden="true">
@@ -335,15 +341,17 @@
             class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">LIQUIDITY</span>
+              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">
+                {{ 'HERO.UI_MOCKUP.METRICS.LIQUIDITY.TAG' | translate }}
+              </span>
               <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
-                Cash & Bank Balance
+                {{ 'HERO.UI_MOCKUP.METRICS.LIQUIDITY.TITLE' | translate }}
               </h3>
               <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
                 {{ currentData().liquidity.balance }}
               </div>
               <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
-                Project month-end: {{ currentData().liquidity.projected }}
+                {{ 'HERO.UI_MOCKUP.METRICS.LIQUIDITY.PROJECTED' | translate: { amount: currentData().liquidity.projected } }}
               </div>
             </div>
             <div class="pt-1.5 sm:pt-2 h-5 sm:h-6 w-full overflow-hidden" aria-hidden="true">
@@ -365,11 +373,10 @@
           </div>
         </div>
 
-        <!-- Mobile Segmented Tab Switcher (Visible only on < lg) -->
         <div
           class="flex lg:hidden bg-slate-200/80 p-1 rounded-xl gap-1 select-none"
           role="tablist"
-          aria-label="Executive insights tabs"
+          [attr.aria-label]="'HERO.UI_MOCKUP.MOBILE_TABS.ARIA_LABEL' | translate"
         >
           <button
             type="button"
@@ -382,7 +389,7 @@
             [class.shadow-2xs]="activeMobileTab() === 'chart'"
             [class.text-slate-500]="activeMobileTab() !== 'chart'"
           >
-            Sales Trend
+            {{ 'HERO.UI_MOCKUP.MOBILE_TABS.SALES_TREND' | translate }}
           </button>
           <button
             type="button"
@@ -395,7 +402,7 @@
             [class.shadow-2xs]="activeMobileTab() === 'highlights'"
             [class.text-slate-500]="activeMobileTab() !== 'highlights'"
           >
-            Key Highlights ({{ highlights().length }})
+            {{ 'HERO.UI_MOCKUP.MOBILE_TABS.KEY_HIGHLIGHTS' | translate: { count: highlights().length } }}
           </button>
         </div>
 
@@ -407,13 +414,19 @@
             <div>
               <div class="flex items-start justify-between gap-2 mb-2">
                 <div>
-                  <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">SALES ANALYSIS</span>
-                  <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5">12-Month Sales Trend</h3>
-                  <div class="text-[10px] sm:text-xs text-[#64748b] font-normal mt-0.5">Revenue vs Sales Orders</div>
+                  <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">
+                    {{ 'HERO.UI_MOCKUP.CHART.TAG' | translate }}
+                  </span>
+                  <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5">
+                    {{ 'HERO.UI_MOCKUP.CHART.TITLE' | translate }}
+                  </h3>
+                  <div class="text-[10px] sm:text-xs text-[#64748b] font-normal mt-0.5">
+                    {{ 'HERO.UI_MOCKUP.CHART.SUBTITLE' | translate }}
+                  </div>
                 </div>
                 <div class="flex items-center gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-semibold text-[#182849]">
-                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#2563eb]"></span>Revenue</span>
-                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#60a5fa]"></span>Sales Orders</span>
+                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#2563eb]"></span>{{ 'HERO.UI_MOCKUP.CHART.REVENUE' | translate }}</span>
+                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#60a5fa]"></span>{{ 'HERO.UI_MOCKUP.CHART.SALES_ORDERS' | translate }}</span>
                 </div>
               </div>
 
@@ -430,17 +443,16 @@
                       class="relative bg-[#182849] text-white rounded-xl shadow-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-xs font-dm-sans whitespace-nowrap border border-slate-700/60"
                     >
                       <div class="font-bold text-slate-200 text-[10.5px] sm:text-xs mb-1">
-                        {{ pt.monthName }} 2026
+                        {{ 'HERO.UI_MOCKUP.HEADER.DATE_FORMAT' | translate: { month: (pt.monthKey | translate), year: 2026 } }}
                       </div>
                       <div class="flex items-center justify-between gap-3 text-[9.5px] sm:text-[10.5px]">
-                        <span class="text-[#60a5fa] font-medium">Revenue:</span>
+                        <span class="text-[#60a5fa] font-medium">{{ 'HERO.UI_MOCKUP.CHART.REVENUE_LABEL' | translate }}</span>
                         <span class="font-bold text-white">{{ pt.revenue }}</span>
                       </div>
                       <div class="flex items-center justify-between gap-3 text-[9.5px] sm:text-[10.5px]">
-                        <span class="text-[#93c5fd] font-medium">Sales Orders:</span>
+                        <span class="text-[#93c5fd] font-medium">{{ 'HERO.UI_MOCKUP.CHART.SALES_ORDERS_LABEL' | translate }}</span>
                         <span class="font-bold text-white">{{ pt.salesOrders }}</span>
                       </div>
-                      <!-- Downward pointing diamond caret -->
                       <div
                         class="absolute -bottom-1 w-2.5 h-2.5 bg-[#182849] border-r border-b border-slate-700/60"
                         [style.left]="hoveredMonthIndex() === 0 ? '15%' : (hoveredMonthIndex() === 10 ? '85%' : '50%')"
@@ -505,7 +517,6 @@
                   />
 
                   @if (hoveredChartPoint(); as pt) {
-                    <!-- Vertical dashed crosshair line -->
                     <line
                       [attr.x1]="pt.x"
                       y1="12"
@@ -516,7 +527,6 @@
                       stroke-dasharray="3,3"
                     />
 
-                    <!-- Revenue halo and target dot -->
                     <circle
                       [attr.cx]="pt.x"
                       [attr.cy]="pt.revY"
@@ -533,7 +543,6 @@
                       fill="#2563eb"
                     />
 
-                    <!-- Sales Orders halo and target dot -->
                     <circle
                       [attr.cx]="pt.x"
                       [attr.cy]="pt.orderY"
@@ -551,7 +560,6 @@
                     />
                   }
 
-                  <!-- 11 transparent interactive columns for mouse hover detection -->
                   @for (pt of currentData().chartPointsData; track pt.x; let i = $index) {
                     <rect
                       [attr.x]="38 + i * 44"
@@ -568,17 +576,17 @@
               </div>
 
               <div class="flex justify-between pl-6 sm:pl-8 pr-2 sm:pr-3 text-[8.5px] sm:text-[10px] text-[#64748b] font-normal mt-1">
-                <span>Oct</span>
-                <span class="max-sm:hidden">Nov</span>
-                <span>Des</span>
-                <span class="max-sm:hidden">Jan</span>
-                <span>Feb</span>
-                <span class="max-sm:hidden">Mar</span>
-                <span>Apr</span>
-                <span class="max-sm:hidden">May</span>
-                <span>Jun</span>
-                <span class="max-sm:hidden">Jul</span>
-                <span>Aug</span>
+                <span>{{ 'HERO.UI_MOCKUP.MONTHS.OCT' | translate }}</span>
+                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.NOV' | translate }}</span>
+                <span>{{ 'HERO.UI_MOCKUP.MONTHS.DEC' | translate }}</span>
+                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.JAN' | translate }}</span>
+                <span>{{ 'HERO.UI_MOCKUP.MONTHS.FEB' | translate }}</span>
+                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.MAR' | translate }}</span>
+                <span>{{ 'HERO.UI_MOCKUP.MONTHS.APR' | translate }}</span>
+                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.MAY' | translate }}</span>
+                <span>{{ 'HERO.UI_MOCKUP.MONTHS.JUN' | translate }}</span>
+                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.JUL' | translate }}</span>
+                <span>{{ 'HERO.UI_MOCKUP.MONTHS.AUG' | translate }}</span>
               </div>
             </div>
           </div>
@@ -588,17 +596,29 @@
             [class.max-lg:hidden]="activeMobileTab() !== 'highlights'"
           >
             <div>
-              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">EXECUTIVE HIGHLIGHTS</span>
-              <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5 mb-2.5">What needs attention</h3>
+              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">
+                {{ 'HERO.UI_MOCKUP.HIGHLIGHTS.TAG' | translate }}
+              </span>
+              <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5 mb-2.5">
+                {{ 'HERO.UI_MOCKUP.HIGHLIGHTS.TITLE' | translate }}
+              </h3>
 
               <div class="flex flex-col gap-2">
-                @for (item of highlights(); track item.label) {
+                @for (item of highlights(); track item.labelKey) {
                   <div class="bg-[#eff6ff] rounded-lg sm:rounded-xl px-2.5 py-2 sm:py-1.75 flex items-center justify-between gap-2 min-w-0">
                     <div class="flex items-center gap-2 min-w-0 flex-1">
                       <span class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-xs sm:rounded-[2.5px] bg-[#3b82f6] shrink-0"></span>
-                      <span class="text-[10.5px] sm:text-[11.5px] font-bold text-[#182849] wrap-break-word sm:truncate leading-tight">{{ item.label }}</span>
+                      <span class="text-[10.5px] sm:text-[11.5px] font-bold text-[#182849] wrap-break-word sm:truncate leading-tight">
+                        {{ item.labelKey | translate }}
+                      </span>
                     </div>
-                    <span class="text-[10px] sm:text-[11.5px] font-bold text-[#182849] shrink-0 whitespace-nowrap pl-1">{{ item.value }}</span>
+                    <span class="text-[10px] sm:text-[11.5px] font-bold text-[#182849] shrink-0 whitespace-nowrap pl-1">
+                      @if (item.valueKey) {
+                        {{ item.valueKey | translate: item.valueParams }}
+                      } @else {
+                        {{ item.value }}
+                      }
+                    </span>
                   </div>
                 }
               </div>
