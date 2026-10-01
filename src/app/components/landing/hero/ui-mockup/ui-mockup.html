@@ -377,13 +377,51 @@
                   <div class="text-[10px] sm:text-xs text-[#64748b] font-normal mt-0.5">Revenue vs Sales Orders</div>
                 </div>
                 <div class="flex items-center gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-semibold text-[#182849]">
-                  <span>Revenue</span>
-                  <span>Sales Orders</span>
+                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#2563eb]"></span>Revenue</span>
+                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#60a5fa]"></span>Sales Orders</span>
                 </div>
               </div>
 
-              <div class="w-full h-32 sm:h-36 pt-1">
-                <svg class="w-full h-full" viewBox="0 0 540 120" preserveAspectRatio="none" aria-hidden="true">
+              <div class="relative w-full h-32 sm:h-36 pt-1" (mouseleave)="clearHoveredMonth()">
+                @if (hoveredChartPoint(); as pt) {
+                  <div
+                    class="absolute z-20 pointer-events-none -top-13 sm:-top-15 transition-all duration-150 ease-out"
+                    [style.left.%]="pt.xPercent"
+                    [style.transform]="hoveredMonthIndex() === 0 ? 'translateX(-15%)' : (hoveredMonthIndex() === 10 ? 'translateX(-85%)' : 'translateX(-50%)')"
+                    role="tooltip"
+                    aria-live="polite"
+                  >
+                    <div
+                      class="relative bg-[#182849] text-white rounded-xl shadow-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-xs font-dm-sans whitespace-nowrap border border-slate-700/60"
+                    >
+                      <div class="font-bold text-slate-200 text-[10.5px] sm:text-xs mb-1">
+                        {{ pt.monthName }} 2026
+                      </div>
+                      <div class="flex items-center justify-between gap-3 text-[9.5px] sm:text-[10.5px]">
+                        <span class="text-[#60a5fa] font-medium">Revenue:</span>
+                        <span class="font-bold text-white">{{ pt.revenue }}</span>
+                      </div>
+                      <div class="flex items-center justify-between gap-3 text-[9.5px] sm:text-[10.5px]">
+                        <span class="text-[#93c5fd] font-medium">Sales Orders:</span>
+                        <span class="font-bold text-white">{{ pt.salesOrders }}</span>
+                      </div>
+                      <!-- Downward pointing diamond caret -->
+                      <div
+                        class="absolute -bottom-1 w-2.5 h-2.5 bg-[#182849] border-r border-b border-slate-700/60"
+                        [style.left]="hoveredMonthIndex() === 0 ? '15%' : (hoveredMonthIndex() === 10 ? '85%' : '50%')"
+                        style="transform: translateX(-50%) rotate(45deg);"
+                      ></div>
+                    </div>
+                  </div>
+                }
+
+                <svg
+                  class="w-full h-full"
+                  viewBox="0 0 540 120"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                  (mouseleave)="clearHoveredMonth()"
+                >
                   <g class="text-[#64748b] text-[9.5px] font-normal font-dm-sans" fill="currentColor">
                     <text x="5" y="16">10 B</text>
                     <line x1="38" y1="12" x2="535" y2="12" stroke="#e2e8f0" stroke-width="1" />
@@ -430,6 +468,67 @@
                     stroke-linejoin="round"
                     [attr.points]="currentData().chartSalesOrderPoints"
                   />
+
+                  @if (hoveredChartPoint(); as pt) {
+                    <!-- Vertical dashed crosshair line -->
+                    <line
+                      [attr.x1]="pt.x"
+                      y1="12"
+                      [attr.x2]="pt.x"
+                      y2="116"
+                      stroke="#94a3b8"
+                      stroke-width="1.2"
+                      stroke-dasharray="3,3"
+                    />
+
+                    <!-- Revenue halo and target dot -->
+                    <circle
+                      [attr.cx]="pt.x"
+                      [attr.cy]="pt.revY"
+                      r="6.5"
+                      fill="#2563eb"
+                      fill-opacity="0.2"
+                      stroke="#2563eb"
+                      stroke-width="1.5"
+                    />
+                    <circle
+                      [attr.cx]="pt.x"
+                      [attr.cy]="pt.revY"
+                      r="2.8"
+                      fill="#2563eb"
+                    />
+
+                    <!-- Sales Orders halo and target dot -->
+                    <circle
+                      [attr.cx]="pt.x"
+                      [attr.cy]="pt.orderY"
+                      r="6.5"
+                      fill="#60a5fa"
+                      fill-opacity="0.25"
+                      stroke="#60a5fa"
+                      stroke-width="1.5"
+                    />
+                    <circle
+                      [attr.cx]="pt.x"
+                      [attr.cy]="pt.orderY"
+                      r="2.6"
+                      fill="#60a5fa"
+                    />
+                  }
+
+                  <!-- 11 transparent interactive columns for mouse hover detection -->
+                  @for (pt of currentData().chartPointsData; track pt.x; let i = $index) {
+                    <rect
+                      [attr.x]="38 + i * 44"
+                      y="0"
+                      width="44"
+                      height="120"
+                      fill="transparent"
+                      pointer-events="all"
+                      class="cursor-pointer"
+                      (mouseenter)="setHoveredMonth(i)"
+                    />
+                  }
                 </svg>
               </div>
 

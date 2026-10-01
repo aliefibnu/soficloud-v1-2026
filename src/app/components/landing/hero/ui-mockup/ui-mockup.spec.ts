@@ -242,4 +242,77 @@ describe('UiMockup', () => {
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
     expect(component.isProfileOpen()).toBe(false);
   });
+
+  it('should display floating tooltip, crosshair line, and vertex halos when hovering a chart column, and dismiss on leave', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // Initially no hover state
+    expect(component.hoveredMonthIndex()).toBeNull();
+    expect(component.hoveredChartPoint()).toBeNull();
+    expect(compiled.querySelector('[role="tooltip"]')).toBeNull();
+    expect(compiled.querySelector('line[stroke-dasharray="3,3"]')).toBeNull();
+
+    // Hover over July column (index 9, x=456)
+    component.setHoveredMonth(9);
+    fixture.detectChanges();
+
+    expect(component.hoveredMonthIndex()).toBe(9);
+    const point = component.hoveredChartPoint();
+    expect(point).toBeTruthy();
+    expect(point?.monthName).toBe('July');
+
+    const tooltip = compiled.querySelector('[role="tooltip"]');
+    expect(tooltip).toBeTruthy();
+    expect(tooltip?.textContent).toContain('July 2026');
+    expect(tooltip?.textContent).toContain('Revenue:');
+    expect(tooltip?.textContent).toContain('Sales Orders:');
+
+    // Dashed crosshair line
+    const crosshair = compiled.querySelector('line[stroke-dasharray="3,3"]');
+    expect(crosshair).toBeTruthy();
+    expect(crosshair?.getAttribute('x1')).toBe('456');
+    expect(crosshair?.getAttribute('x2')).toBe('456');
+
+    // Halos
+    const halos = compiled.querySelectorAll('circle[r="6.5"]');
+    expect(halos.length).toBe(2); // One for revenue, one for sales orders
+
+    // Clear hover
+    component.clearHoveredMonth();
+    fixture.detectChanges();
+
+    expect(component.hoveredMonthIndex()).toBeNull();
+    expect(component.hoveredChartPoint()).toBeNull();
+    expect(compiled.querySelector('[role="tooltip"]')).toBeNull();
+    expect(compiled.querySelector('line[stroke-dasharray="3,3"]')).toBeNull();
+  });
+
+  it('should adjust tooltip transform for leftmost (Oct) and rightmost (Aug) columns', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // Hover leftmost column (Oct - index 0)
+    component.setHoveredMonth(0);
+    fixture.detectChanges();
+    let tooltip = compiled.querySelector('[role="tooltip"]') as HTMLElement;
+    expect(tooltip).toBeTruthy();
+    expect(tooltip.style.transform).toBe('translateX(-15%)');
+    expect(tooltip.textContent).toContain('October 2026');
+
+    // Hover rightmost column (Aug - index 10)
+    component.setHoveredMonth(10);
+    fixture.detectChanges();
+    tooltip = compiled.querySelector('[role="tooltip"]') as HTMLElement;
+    expect(tooltip).toBeTruthy();
+    expect(tooltip.style.transform).toBe('translateX(-85%)');
+    expect(tooltip.textContent).toContain('August 2026');
+
+    // Hover middle column (Feb - index 4)
+    component.setHoveredMonth(4);
+    fixture.detectChanges();
+    tooltip = compiled.querySelector('[role="tooltip"]') as HTMLElement;
+    expect(tooltip).toBeTruthy();
+    expect(tooltip.style.transform).toBe('translateX(-50%)');
+    expect(tooltip.textContent).toContain('February 2026');
+  });
 });
+
