@@ -29,7 +29,7 @@ describe('UiMockup', () => {
 
   it('should render header elements including workspace, date, and user avatar', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Enterprice Workspace');
+    expect(compiled.textContent).toContain('Enterprise Workspace');
     expect(compiled.textContent).toContain('September 2026');
 
     const avatar = compiled.querySelector('[aria-label="User profile avatar"]');
@@ -142,5 +142,104 @@ describe('UiMockup', () => {
 
     expect(compiled.textContent).toContain('Orders at Risk');
     expect(compiled.textContent).toContain('5 orders');
+  });
+
+  it('should cycle through 3 monthly datasets and dynamically update dashboard metrics and chart dots', () => {
+    expect(component.selectedMonthIndex()).toBe(2); // September default
+    expect(component.currentMonthName()).toBe('September');
+    expect(fixture.nativeElement.textContent).toContain('Rp 8,450,000,000.-');
+    expect(fixture.nativeElement.textContent).toContain('Rp 5,800,000,000.-');
+    expect(fixture.nativeElement.textContent).toContain('5 orders');
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    let peakDot = compiled.querySelector('circle[cx="456"]');
+    expect(peakDot?.getAttribute('cy')).toBe('38');
+
+    // Step backward to August
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(1); // August
+    expect(component.currentMonthName()).toBe('August');
+    expect(fixture.nativeElement.textContent).toContain('August 2026');
+    expect(fixture.nativeElement.textContent).toContain(
+      'Outstanding invoices due in august',
+    );
+    expect(fixture.nativeElement.textContent).toContain('Rp 8,150,000,000.-');
+    expect(fixture.nativeElement.textContent).toContain('Rp 5,300,000,000.-');
+    expect(fixture.nativeElement.textContent).toContain('4 orders');
+    peakDot = compiled.querySelector('circle[cx="456"]');
+    expect(peakDot?.getAttribute('cy')).toBe('42');
+
+    // Step backward to July
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(0); // July
+    expect(component.currentMonthName()).toBe('July');
+    expect(fixture.nativeElement.textContent).toContain('July 2026');
+    expect(fixture.nativeElement.textContent).toContain(
+      'Outstanding invoices due in july',
+    );
+    expect(fixture.nativeElement.textContent).toContain('Rp 7,920,000,000.-');
+    expect(fixture.nativeElement.textContent).toContain('Rp 4,900,000,000.-');
+    expect(fixture.nativeElement.textContent).toContain('3 orders');
+    peakDot = compiled.querySelector('circle[cx="456"]');
+    expect(peakDot?.getAttribute('cy')).toBe('48');
+
+    // Step forward back to August then September
+    component.nextMonth();
+    component.nextMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(2); // September
+    expect(component.currentMonthName()).toBe('September');
+    expect(fixture.nativeElement.textContent).toContain('Rp 5,800,000,000.-');
+    peakDot = compiled.querySelector('circle[cx="456"]');
+    expect(peakDot?.getAttribute('cy')).toBe('38');
+  });
+
+  it('should toggle notifications drawer and mark alerts as read', () => {
+    expect(component.isNotificationsOpen()).toBe(false);
+    expect(component.unreadCount()).toBe(3);
+
+    component.toggleNotifications();
+    expect(component.isNotificationsOpen()).toBe(true);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('Executive Alerts');
+    expect(fixture.nativeElement.textContent).toContain(
+      '5 Orders at Risk of shipping delay',
+    );
+
+    component.markAllAsRead();
+    expect(component.unreadCount()).toBe(0);
+  });
+
+  it('should toggle user profile popover and display user info', () => {
+    expect(component.isProfileOpen()).toBe(false);
+
+    component.toggleProfile();
+    expect(component.isProfileOpen()).toBe(true);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('Aditya Pratama');
+    expect(fixture.nativeElement.textContent).toContain('VP of Operations');
+  });
+
+  it('should close all open dropdowns on closeAllDropdowns, document click, or escape key', () => {
+    component.isNotificationsOpen.set(true);
+    component.isProfileOpen.set(true);
+
+    component.closeAllDropdowns();
+    expect(component.isNotificationsOpen()).toBe(false);
+    expect(component.isProfileOpen()).toBe(false);
+
+    // Document click
+    component.isNotificationsOpen.set(true);
+    component.onDocumentClick();
+    expect(component.isNotificationsOpen()).toBe(false);
+
+    // Escape key
+    component.isProfileOpen.set(true);
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(component.isProfileOpen()).toBe(false);
   });
 });
