@@ -331,5 +331,26 @@
         "DESC": "プロジェクト、契約、業務請求、承認、キャッシュフロー、収益性分析により、サービスビジネスの整然とした管理を実現。"
       }
     }
+  },
+  "CTA": {
+    "TITLE": "SOFICloud ERPに\nご興味がありますか？",
+    "DESCRIPTION": "SOFICloudは、企業のビジネスプロセスをより統合的、安定的、かつ容易に監視・管理できるよう支援します。御社のERPニーズについてぜひご相談ください。",
+    "SCHEDULE_DEMO": "デモを予約する",
+    "CONTACT_US": "お問い合わせ",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "お客様のビジネスニーズを支援するSOFICloud ERP担当者",
+    "ARIA": {
+      "SECTION": "SOFICloud ERP コールトゥアクション",
+      "SCHEDULE_DEMO": "SOFICloud ERP デモを予約する",
+      "CONTACT_US": "SOFICloud ERP チームにお問い合わせ",
+      "PHONE": "SOFICloud オフィスに電話: +62 778 416 0250",
+      "WHATSAPP": "SOFICloud WhatsAppに連絡: +62 811 7774 744",
+      "EMAIL": "メールを送信: hello@inforsys.co.id"
+    }
   }
 }

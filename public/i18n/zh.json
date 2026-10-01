@@ -331,5 +331,26 @@
         "DESC": "项目、合同、运营计费、审批、现金流与盈利能力分析，助专业服务业务井然有序。"
       }
     }
+  },
+  "CTA": {
+    "TITLE": "对 SOFICloud ERP\n感兴趣？",
+    "DESCRIPTION": "SOFICloud 随时准备协助企业更一体化、受控且易于监控地管理业务流程。请联系我们的团队，探讨您企业的 ERP 需求。",
+    "SCHEDULE_DEMO": "预约演示",
+    "CONTACT_US": "联系我们",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "随时为您提供业务支持的 SOFICloud ERP 代表",
+    "ARIA": {
+      "SECTION": "SOFICloud ERP 行动号召",
+      "SCHEDULE_DEMO": "预约 SOFICloud ERP 演示",
+      "CONTACT_US": "联系 SOFICloud ERP 团队",
+      "PHONE": "致电 SOFICloud 办公室: +62 778 416 0250",
+      "WHATSAPP": "通过 WhatsApp 联系 SOFICloud: +62 811 7774 744",
+      "EMAIL": "发送邮件至 hello@inforsys.co.id"
+    }
   }
 }

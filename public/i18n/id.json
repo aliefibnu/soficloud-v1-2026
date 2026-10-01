@@ -331,5 +331,26 @@
         "DESC": "Project, contract, operational billing, approval, cash flow, dan profitability analysis untuk bisnis jasa yang lebih tertata."
       }
     }
+  },
+  "CTA": {
+    "TITLE": "Tertarik Dengan\nSOFICloud ERP?",
+    "DESCRIPTION": "SOFICloud siap membantu perusahaan mengelola proses bisnis secara lebih terintegrasi, terkontrol, dan mudah dipantau. Hubungi tim kami untuk berdiskusi mengenai kebutuhan ERP perusahaan Anda.",
+    "SCHEDULE_DEMO": "Jadwalkan Demo",
+    "CONTACT_US": "Kontak kami",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "Representatif SOFICloud ERP siap membantu kebutuhan bisnis Anda",
+    "ARIA": {
+      "SECTION": "Ajakan Bertindak SOFICloud ERP",
+      "SCHEDULE_DEMO": "Jadwalkan Demo SOFICloud ERP",
+      "CONTACT_US": "Hubungi tim SOFICloud ERP",
+      "PHONE": "Telepon kantor SOFICloud di +62 778 416 0250",
+      "WHATSAPP": "Hubungi WhatsApp SOFICloud di +62 811 7774 744",
+      "EMAIL": "Kirim email ke hello@inforsys.co.id"
+    }
   }
 }
