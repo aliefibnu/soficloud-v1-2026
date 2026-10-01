@@ -53,7 +53,7 @@ const EN_TRANSLATIONS = {
         MANUAL_BOOK: 'Manual Book',
       },
       DASHBOARD: {
-        BREADCRUMB: 'SofiCloud / Management View',
+        BREADCRUMB: 'SOFICloud / Management View',
         TITLE: 'Executive Dashboard',
         SIMPLE_DATA: 'Simple data',
         DESCRIPTION:
@@ -215,7 +215,7 @@ describe('UiMockup', () => {
 
   it('should render Executive Dashboard header, breadcrumb, simple data button, and subtitle', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('SofiCloud / Management View');
+    expect(compiled.textContent).toContain('SOFICloud / Management View');
     expect(compiled.textContent).toContain('Executive Dashboard');
     expect(compiled.textContent).toContain('Simple data');
     expect(compiled.textContent).toContain(
@@ -513,7 +513,7 @@ describe('UiMockup', () => {
             PROFILE_ARIA: 'Avatar profil pengguna',
           },
           DASHBOARD: {
-            BREADCRUMB: 'SofiCloud / Tampilan Manajemen',
+            BREADCRUMB: 'SOFICloud / Tampilan Manajemen',
             TITLE: 'Dashboard Eksekutif',
             SIMPLE_DATA: 'Data sederhana',
             DESCRIPTION: 'Visibilitas real-time untuk piutang, penjualan, kas, pengeluaran, dan performa operasional',
