@@ -70,7 +70,9 @@ describe('UiMockup', () => {
     expect(compiled.textContent).toContain('SofiCloud / Management View');
     expect(compiled.textContent).toContain('Executive Dashboard');
     expect(compiled.textContent).toContain('Simple data');
-    expect(compiled.textContent).toContain('Real-time visibilty into receivables, sales, cash, expenses, and operational performance');
+    expect(compiled.textContent).toContain(
+      'Real-time visibility into receivables, sales, cash, expenses, and operational performance',
+    );
   });
 
   it('should render all 4 KPI metric cards with accurate values and descriptions', () => {
@@ -313,6 +315,38 @@ describe('UiMockup', () => {
     expect(tooltip).toBeTruthy();
     expect(tooltip.style.transform).toBe('translateX(-50%)');
     expect(tooltip.textContent).toContain('February 2026');
+  });
+
+  it('should initialize activeMobileTab with chart and allow switching to highlights', () => {
+    expect(component.activeMobileTab()).toBe('chart');
+
+    component.setActiveMobileTab('highlights');
+    expect(component.activeMobileTab()).toBe('highlights');
+
+    component.setActiveMobileTab('chart');
+    expect(component.activeMobileTab()).toBe('chart');
+  });
+
+  it('should render mobile tab switcher with proper ARIA attributes and update on tab clicks', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const tablist = compiled.querySelector('[role="tablist"]');
+    expect(tablist).toBeTruthy();
+
+    const tabs = compiled.querySelectorAll('[role="tab"]');
+    expect(tabs.length).toBe(2);
+
+    const chartTab = tabs[0] as HTMLButtonElement;
+    const highlightsTab = tabs[1] as HTMLButtonElement;
+
+    expect(chartTab.getAttribute('aria-selected')).toBe('true');
+    expect(highlightsTab.getAttribute('aria-selected')).toBe('false');
+
+    highlightsTab.click();
+    fixture.detectChanges();
+
+    expect(component.activeMobileTab()).toBe('highlights');
+    expect(chartTab.getAttribute('aria-selected')).toBe('false');
+    expect(highlightsTab.getAttribute('aria-selected')).toBe('true');
   });
 });
 

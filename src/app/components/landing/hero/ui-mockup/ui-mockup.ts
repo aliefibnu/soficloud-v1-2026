@@ -366,6 +366,12 @@ export class UiMockup {
     this.hoveredMonthIndex.set(null);
   }
 
+  readonly activeMobileTab = signal<'chart' | 'highlights'>('chart');
+
+  setActiveMobileTab(tab: 'chart' | 'highlights'): void {
+    this.activeMobileTab.set(tab);
+  }
+
   readonly isNotificationsOpen = signal<boolean>(false);
   readonly unreadCount = signal<number>(3);
   readonly isProfileOpen = signal<boolean>(false);

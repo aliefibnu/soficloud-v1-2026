@@ -1,4 +1,4 @@
-<div class="relative w-full max-w-6xl xl:max-w-7xl mx-auto px-1 sm:px-2 md:px-4 text-left font-dm-sans">
+<div class="relative w-full max-w-6xl xl:max-w-7xl mx-auto px-2 sm:px-3 md:px-4 text-left font-dm-sans">
   <div
     class="pointer-events-none absolute -inset-x-3 sm:-inset-x-6 top-4 bottom-8 bg-linear-to-b from-[#1d44eb]/15 via-[#182849]/10 to-transparent rounded-[40px] blur-3xl -z-10 opacity-70"
     aria-hidden="true"
@@ -245,27 +245,27 @@
             </button>
           </div>
           <p class="text-[#475569] text-[11px] sm:text-xs md:text-[13px] font-normal mt-0.5 leading-normal">
-            Real-time visibilty into receivables, sales, cash, expenses, and operational performance
+            Real-time visibility into receivables, sales, cash, expenses, and operational performance
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3.5">
           <div
-            class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
+            class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">RECEIVABLES</span>
-              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug">
+              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">RECEIVABLES</span>
+              <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
                 Total Accounts Receivable
               </h3>
-              <div class="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap">
+              <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
                 {{ currentData().receivables.total }}
               </div>
-              <div class="text-[10px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug">
+              <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
                 Overdue AR: {{ currentData().receivables.overdue }}
               </div>
             </div>
-            <div class="flex items-end gap-1 sm:gap-1.5 pt-2.5" aria-hidden="true">
+            <div class="flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-2.5" aria-hidden="true">
               <div class="flex-1 h-2 bg-[#93c5fd] rounded-xs"></div>
               <div class="flex-1 h-3.5 bg-[#60a5fa] rounded-xs"></div>
               <div class="flex-1 h-2.5 bg-[#93c5fd] rounded-xs"></div>
@@ -276,21 +276,21 @@
           </div>
 
           <div
-            class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
+            class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">CURRENT MONTH</span>
-              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug">
+              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">CURRENT MONTH</span>
+              <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
                 Due Invoices This Month
               </h3>
-              <div class="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap">
+              <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
                 {{ currentData().currentMonth.due }}
               </div>
-              <div class="text-[10px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug">
+              <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
                 Outstanding invoices due in {{ currentMonthName().toLowerCase() }}
               </div>
             </div>
-            <div class="pt-2.5">
+            <div class="pt-2 sm:pt-2.5">
               <div
                 class="w-full h-1.5 sm:h-2 bg-[#dbeafe] rounded-full overflow-hidden"
                 role="progressbar"
@@ -307,21 +307,21 @@
           </div>
 
           <div
-            class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
+            class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">SALES</span>
-              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug">
+              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">SALES</span>
+              <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
                 Sales Orders This Month
               </h3>
-              <div class="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap">
+              <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
                 {{ currentData().sales.orders }}
               </div>
-              <div class="text-[10px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug">
+              <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
                 {{ currentData().sales.growth }}
               </div>
             </div>
-            <div class="flex items-end gap-1 sm:gap-1.5 pt-2.5" aria-hidden="true">
+            <div class="flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-2.5" aria-hidden="true">
               <div class="flex-1 h-2 bg-[#93c5fd] rounded-xs"></div>
               <div class="flex-1 h-3.5 bg-[#60a5fa] rounded-xs"></div>
               <div class="flex-1 h-2.5 bg-[#93c5fd] rounded-xs"></div>
@@ -332,21 +332,21 @@
           </div>
 
           <div
-            class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
+            class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">LIQUIDITY</span>
-              <h3 class="text-xs sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug">
+              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">LIQUIDITY</span>
+              <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
                 Cash & Bank Balance
               </h3>
-              <div class="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap">
+              <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
                 {{ currentData().liquidity.balance }}
               </div>
-              <div class="text-[10px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug">
+              <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
                 Project month-end: {{ currentData().liquidity.projected }}
               </div>
             </div>
-            <div class="pt-2 h-5 sm:h-6 w-full overflow-hidden" aria-hidden="true">
+            <div class="pt-1.5 sm:pt-2 h-5 sm:h-6 w-full overflow-hidden" aria-hidden="true">
               <svg class="w-full h-full" viewBox="0 0 160 24" fill="none" preserveAspectRatio="none">
                 <path
                   d="M 5,16 C 20,8 30,18 45,13 C 60,8 70,18 85,13 C 100,8 110,18 125,13 C 140,8 150,16 158,13"
@@ -365,9 +365,44 @@
           </div>
         </div>
 
+        <!-- Mobile Segmented Tab Switcher (Visible only on < lg) -->
+        <div
+          class="flex lg:hidden bg-slate-200/80 p-1 rounded-xl gap-1 select-none"
+          role="tablist"
+          aria-label="Executive insights tabs"
+        >
+          <button
+            type="button"
+            role="tab"
+            (click)="setActiveMobileTab('chart')"
+            [attr.aria-selected]="activeMobileTab() === 'chart'"
+            class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer text-center"
+            [class.bg-white]="activeMobileTab() === 'chart'"
+            [class.text-[#182849]]="activeMobileTab() === 'chart'"
+            [class.shadow-2xs]="activeMobileTab() === 'chart'"
+            [class.text-slate-500]="activeMobileTab() !== 'chart'"
+          >
+            Sales Trend
+          </button>
+          <button
+            type="button"
+            role="tab"
+            (click)="setActiveMobileTab('highlights')"
+            [attr.aria-selected]="activeMobileTab() === 'highlights'"
+            class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer text-center"
+            [class.bg-white]="activeMobileTab() === 'highlights'"
+            [class.text-[#182849]]="activeMobileTab() === 'highlights'"
+            [class.shadow-2xs]="activeMobileTab() === 'highlights'"
+            [class.text-slate-500]="activeMobileTab() !== 'highlights'"
+          >
+            Key Highlights ({{ highlights().length }})
+          </button>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-3.5">
           <div
             class="lg:col-span-7 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
+            [class.max-lg:hidden]="activeMobileTab() !== 'chart'"
           >
             <div>
               <div class="flex items-start justify-between gap-2 mb-2">
@@ -534,15 +569,15 @@
 
               <div class="flex justify-between pl-6 sm:pl-8 pr-2 sm:pr-3 text-[8.5px] sm:text-[10px] text-[#64748b] font-normal mt-1">
                 <span>Oct</span>
-                <span>Nov</span>
+                <span class="max-sm:hidden">Nov</span>
                 <span>Des</span>
-                <span>Jan</span>
+                <span class="max-sm:hidden">Jan</span>
                 <span>Feb</span>
-                <span>Mar</span>
+                <span class="max-sm:hidden">Mar</span>
                 <span>Apr</span>
-                <span>May</span>
+                <span class="max-sm:hidden">May</span>
                 <span>Jun</span>
-                <span>Jul</span>
+                <span class="max-sm:hidden">Jul</span>
                 <span>Aug</span>
               </div>
             </div>
@@ -550,6 +585,7 @@
 
           <div
             class="lg:col-span-5 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
+            [class.max-lg:hidden]="activeMobileTab() !== 'highlights'"
           >
             <div>
               <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">EXECUTIVE HIGHLIGHTS</span>
@@ -557,10 +593,10 @@
 
               <div class="flex flex-col gap-2">
                 @for (item of highlights(); track item.label) {
-                  <div class="bg-[#eff6ff] rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:py-1.75 flex items-center justify-between gap-2 min-w-0">
+                  <div class="bg-[#eff6ff] rounded-lg sm:rounded-xl px-2.5 py-2 sm:py-1.75 flex items-center justify-between gap-2 min-w-0">
                     <div class="flex items-center gap-2 min-w-0 flex-1">
                       <span class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-xs sm:rounded-[2.5px] bg-[#3b82f6] shrink-0"></span>
-                      <span class="text-[10.5px] sm:text-[11.5px] font-bold text-[#182849] truncate">{{ item.label }}</span>
+                      <span class="text-[10.5px] sm:text-[11.5px] font-bold text-[#182849] break-words sm:truncate leading-tight">{{ item.label }}</span>
                     </div>
                     <span class="text-[10px] sm:text-[11.5px] font-bold text-[#182849] shrink-0 whitespace-nowrap pl-1">{{ item.value }}</span>
                   </div>
