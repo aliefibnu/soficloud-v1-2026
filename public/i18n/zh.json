@@ -238,5 +238,33 @@
         "DESCRIPTION": "实时报表、交互式仪表盘与商业分析助力管理层做出更明智的决策。"
       }
     }
+  },
+  "BUSINESS_MODEL": {
+    "HEADING": "适用于各种商业模式的\nSOFICloud",
+    "SUBTITLE": "一个可根据各企业业务流程特性、组织架构及运营需求进行灵活配置的统一 ERP 平台。",
+    "CTA_LEARN_MORE": "了解更多",
+    "ARIA": {
+      "SECTION": "商业模式",
+      "CARD": "{{title}}商业模式",
+      "LEARN_MORE": "了解有关{{title}}解决方案的更多信息"
+    },
+    "CARDS": {
+      "MANUFACTURING": {
+        "TITLE": "Manufacturing",
+        "DESC": "物料计划、采购、库存、BOM、工艺路线、生产工单、车间作业、成本核算到财务的无缝集成。"
+      },
+      "DISTRIBUTION": {
+        "TITLE": "Distribution & Trading",
+        "DESC": "销售订单、采购、多仓库库存、发货、发票以及应收应付账款全程集中跟踪管理。"
+      },
+      "CONSTRUCTION": {
+        "TITLE": "Construction & Project",
+        "DESC": "连接询价、项目预算、采购、工程实施、进度计费与付款。在一个流程中监控每个项目的状态和成本。"
+      },
+      "SERVICES": {
+        "TITLE": "Services",
+        "DESC": "项目、合同、运营计费、审批、现金流与盈利能力分析，助专业服务业务井然有序。"
+      }
+    }
   }
 }

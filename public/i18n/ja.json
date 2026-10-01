@@ -238,5 +238,33 @@
         "DESCRIPTION": "リアルタイムレポートと直感的なダッシュボードで、経営層の迅速な意思決定を強力に支援。"
       }
     }
+  },
+  "BUSINESS_MODEL": {
+    "HEADING": "多様なビジネスモデルに対応する\nSOFICloud",
+    "SUBTITLE": "各企業のビジネスプロセスの特性、組織構造、運用ニーズに合わせて柔軟に構成できる統合型ERPプラットフォーム。",
+    "CTA_LEARN_MORE": "詳細を見る",
+    "ARIA": {
+      "SECTION": "ビジネスモデル",
+      "CARD": "{{title}}ビジネスモデル",
+      "LEARN_MORE": "{{title}}ソリューションの詳細を見る"
+    },
+    "CARDS": {
+      "MANUFACTURING": {
+        "TITLE": "Manufacturing",
+        "DESC": "資材計画、調達、在庫、BOM、ルーティング、製造指図、現場管理、原価計算から財務までを一元管理。"
+      },
+      "DISTRIBUTION": {
+        "TITLE": "Distribution & Trading",
+        "DESC": "販売注文、仕入、複数倉庫の在庫管理、出荷、請求、売掛金・買掛金モニタリングを1つのワークフローで実現。"
+      },
+      "CONSTRUCTION": {
+        "TITLE": "Construction & Project",
+        "DESC": "RFQ、プロジェクト予算、調達、現場施工、進捗請求、支払をシームレスに連携。プロジェクトの進捗と原価を1つのフローで把握。"
+      },
+      "SERVICES": {
+        "TITLE": "Services",
+        "DESC": "プロジェクト、契約、業務請求、承認、キャッシュフロー、収益性分析により、サービスビジネスの整然とした管理を実現。"
+      }
+    }
   }
 }
