@@ -331,5 +331,26 @@
         "DESC": "프로젝트, 계약, 운영 청구, 승인, 자금 흐름 및 수익성 분석을 통해 서비스 비즈니스를 더욱 체계적으로 관리합니다."
       }
     }
+  },
+  "CTA": {
+    "TITLE": "SOFICloud ERP에\n관심이 있으신가요?",
+    "DESCRIPTION": "SOFICloud는 기업이 비즈니스 프로세스를 보다 통합적이고 통제되며 모니터링하기 쉽게 관리할 수 있도록 지원합니다. 귀사의 ERP 요구 사항을 상의하려면 저희 팀에 문의하세요.",
+    "SCHEDULE_DEMO": "데모 예약하기",
+    "CONTACT_US": "문의하기",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "비즈니스 요구 사항을 지원할 준비가 된 SOFICloud ERP 담당자",
+    "ARIA": {
+      "SECTION": "SOFICloud ERP 행동 촉구",
+      "SCHEDULE_DEMO": "SOFICloud ERP 데모 예약하기",
+      "CONTACT_US": "SOFICloud ERP 팀에 문의하기",
+      "PHONE": "SOFICloud 사무실 전화: +62 778 416 0250",
+      "WHATSAPP": "SOFICloud WhatsApp 문의: +62 811 7774 744",
+      "EMAIL": "이메일 보내기: hello@inforsys.co.id"
+    }
   }
 }

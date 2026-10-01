@@ -1,9 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  imports: [],
   selector: 'app-cta',
-  styles: ``,
+  imports: [NgOptimizedImage, TranslatePipe],
   templateUrl: './cta.html',
+  host: {
+    class: 'relative block w-full overflow-hidden',
+  },
 })
-export class Cta {}
+export class Cta {
+  readonly scheduleDemo = output<void>();
+  readonly contactUs = output<void>();
+
+  onScheduleDemo(): void {
+    this.scheduleDemo.emit();
+  }
+
+  onContactUs(): void {
+    this.contactUs.emit();
+  }
+}

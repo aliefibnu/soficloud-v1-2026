@@ -331,5 +331,26 @@
         "DESC": "Projects, contracts, operational billing, approvals, cash flow, and profitability analysis for more structured service businesses."
       }
     }
+  },
+  "CTA": {
+    "TITLE": "Interested in\nSOFICloud ERP?",
+    "DESCRIPTION": "SOFICloud is ready to help companies manage business processes more integrated, controlled, and easy to monitor. Contact our team to discuss your company's ERP needs.",
+    "SCHEDULE_DEMO": "Schedule Demo",
+    "CONTACT_US": "Contact Us",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "SOFICloud ERP representative ready to assist your business needs",
+    "ARIA": {
+      "SECTION": "SOFICloud ERP Call to Action",
+      "SCHEDULE_DEMO": "Schedule a SOFICloud ERP Demo",
+      "CONTACT_US": "Contact SOFICloud ERP team",
+      "PHONE": "Call SOFICloud office at +62 778 416 0250",
+      "WHATSAPP": "Chat with SOFICloud on WhatsApp at +62 811 7774 744",
+      "EMAIL": "Send email to hello@inforsys.co.id"
+    }
   }
 }
