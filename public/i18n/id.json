@@ -238,5 +238,33 @@
         "DESCRIPTION": "Laporan real-time, dashboard interaktif, dan analitik membantu management mengambil keputusan lebih tepat."
       }
     }
+  },
+  "BUSINESS_MODEL": {
+    "HEADING": "SOFICloud untuk Berbagai\nModel Bisnis",
+    "SUBTITLE": "Satu platform ERP yang dapat dikonfigurasi mengikuti karakter proses bisnis, struktur organisasi, dan kebutuhan operasional setiap perusahaan.",
+    "CTA_LEARN_MORE": "Pelajari Selengkapnya",
+    "ARIA": {
+      "SECTION": "Model Bisnis",
+      "CARD": "Model bisnis {{title}}",
+      "LEARN_MORE": "Pelajari selengkapnya tentang solusi {{title}}"
+    },
+    "CARDS": {
+      "MANUFACTURING": {
+        "TITLE": "Manufacturing",
+        "DESC": "Material planning, procurement, inventory, BOM, routing, production order, shop floor, costing, hingga finance yang saling terintegrasi."
+      },
+      "DISTRIBUTION": {
+        "TITLE": "Distribution & Trading",
+        "DESC": "Sales order, purchasing, multi-warehouse inventory, delivery, invoicing, serta monitoring piutang dan hutang dalam satu alur kerja."
+      },
+      "CONSTRUCTION": {
+        "TITLE": "Construction & Project",
+        "DESC": "Hubungkan RFQ, project budget, pengadaan, pelaksanaan pekerjaan, progress billing, dan pembayaran. Pantau status serta biaya setiap proyek dalam satu alur."
+      },
+      "SERVICES": {
+        "TITLE": "Services",
+        "DESC": "Project, contract, operational billing, approval, cash flow, dan profitability analysis untuk bisnis jasa yang lebih tertata."
+      }
+    }
   }
 }

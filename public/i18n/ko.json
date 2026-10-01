@@ -238,5 +238,33 @@
         "DESCRIPTION": "실시간 보고서, 대화형 대시보드, 비즈니스 분석을 통해 경영진의 신속하고 정확한 의사결정을 돕습니다."
       }
     }
+  },
+  "BUSINESS_MODEL": {
+    "HEADING": "다양한 비즈니스 모델을 위한\nSOFICloud",
+    "SUBTITLE": "각 기업의 비즈니스 프로세스 특성, 조직 구조, 운영 요구사항에 맞춰 유연하게 구성할 수 있는 단일 ERP 플랫폼입니다.",
+    "CTA_LEARN_MORE": "자세히 알아보기",
+    "ARIA": {
+      "SECTION": "비즈니스 모델",
+      "CARD": "{{title}} 비즈니스 모델",
+      "LEARN_MORE": "{{title}} 솔루션에 대해 자세히 알아보기"
+    },
+    "CARDS": {
+      "MANUFACTURING": {
+        "TITLE": "Manufacturing",
+        "DESC": "자재 계획, 구매, 재고, BOM, 라우팅, 작업 지시, 생산 현장 관리, 원가 계산 및 재무까지 유기적으로 통합 지원합니다."
+      },
+      "DISTRIBUTION": {
+        "TITLE": "Distribution & Trading",
+        "DESC": "판매 주문, 구매, 다중 창고 재고, 배송, 인보이스, 미수금 및 미지급금 모니터링을 단일 워크플로에서 관리합니다."
+      },
+      "CONSTRUCTION": {
+        "TITLE": "Construction & Project",
+        "DESC": "RFQ, 프로젝트 예산, 조달, 공사 수행, 기성 청구 및 지급을 연계하여 모든 프로젝트의 상태와 비용을 단일 흐름으로 파악합니다."
+      },
+      "SERVICES": {
+        "TITLE": "Services",
+        "DESC": "프로젝트, 계약, 운영 청구, 승인, 자금 흐름 및 수익성 분석을 통해 서비스 비즈니스를 더욱 체계적으로 관리합니다."
+      }
+    }
   }
 }

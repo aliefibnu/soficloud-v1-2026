@@ -238,5 +238,33 @@
         "DESCRIPTION": "Real-time reports, interactive dashboards, and analytics help leadership make precise business decisions."
       }
     }
+  },
+  "BUSINESS_MODEL": {
+    "HEADING": "SOFICloud for Diverse\nBusiness Models",
+    "SUBTITLE": "A single ERP platform configurable to match the business process character, organizational structure, and operational needs of every company.",
+    "CTA_LEARN_MORE": "Learn More",
+    "ARIA": {
+      "SECTION": "Business Models",
+      "CARD": "{{title}} business model",
+      "LEARN_MORE": "Learn more about {{title}} solutions"
+    },
+    "CARDS": {
+      "MANUFACTURING": {
+        "TITLE": "Manufacturing",
+        "DESC": "Material planning, procurement, inventory, BOM, routing, production order, shop floor, costing, to seamlessly integrated finance."
+      },
+      "DISTRIBUTION": {
+        "TITLE": "Distribution & Trading",
+        "DESC": "Sales orders, purchasing, multi-warehouse inventory, delivery, invoicing, and receivables & payables monitoring in one workflow."
+      },
+      "CONSTRUCTION": {
+        "TITLE": "Construction & Project",
+        "DESC": "Connect RFQ, project budget, procurement, execution, progress billing, and payments. Monitor status and costs of every project in one flow."
+      },
+      "SERVICES": {
+        "TITLE": "Services",
+        "DESC": "Projects, contracts, operational billing, approvals, cash flow, and profitability analysis for more structured service businesses."
+      }
+    }
   }
 }

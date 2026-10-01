@@ -1,1 +1,112 @@
-<p>business-model works!</p>
+<section
+  class="relative w-full py-14 sm:py-18 lg:py-20 bg-white overflow-hidden"
+  aria-labelledby="business-model-heading"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7 lg:gap-8 items-start">
+      <!-- Left Column: Header + Card 01 + Card 02 -->
+      <div class="flex flex-col gap-6 sm:gap-7 lg:gap-8">
+        <!-- Section Header -->
+        <div class="flex flex-col justify-end pt-1 lg:pt-2 pb-1 lg:pb-2">
+          <h2
+            id="business-model-heading"
+            class="font-inter font-bold text-3xl sm:text-4xl lg:text-[40px] text-[#182849] tracking-[-0.02em] leading-[1.18] whitespace-pre-line"
+          >
+            {{ 'BUSINESS_MODEL.HEADING' | translate }}
+          </h2>
+          <p
+            class="mt-3.5 sm:mt-4 font-dm-sans font-normal text-sm sm:text-[15px] lg:text-base text-slate-600 leading-relaxed max-w-xl"
+          >
+            {{ 'BUSINESS_MODEL.SUBTITLE' | translate }}
+          </p>
+        </div>
+
+        <!-- Left Cards (01, 02) -->
+        @for (card of leftCards; track card.id) {
+          <ng-container
+            *ngTemplateOutlet="cardTemplate; context: { $implicit: card }"
+          />
+        }
+      </div>
+
+      <!-- Right Column: Card 03 + Card 04 -->
+      <div class="flex flex-col gap-6 sm:gap-7 lg:gap-8">
+        @for (card of rightCards; track card.id) {
+          <ng-container
+            *ngTemplateOutlet="cardTemplate; context: { $implicit: card }"
+          />
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reusable Card Template -->
+<ng-template #cardTemplate let-card>
+  <article
+    class="group relative bg-white rounded-3xl border border-slate-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-blue-950/6 hover:-translate-y-1 transition-all duration-300 p-6 sm:p-7 md:p-8 min-h-[300px] sm:min-h-[318px] flex flex-col justify-between overflow-hidden"
+    [attr.aria-label]="
+      'BUSINESS_MODEL.ARIA.CARD'
+        | translate: { title: (card.titleKey | translate) }
+    "
+  >
+    <!-- Card Number (Top Right) -->
+    <span
+      class="absolute top-6 right-6 sm:top-7 sm:right-8 font-inter font-bold text-xl sm:text-2xl text-[#182849] select-none pointer-events-none"
+      aria-hidden="true"
+    >
+      {{ card.number }}
+    </span>
+
+    <!-- Content Body: Left (Title + Desc + Button) & Right (Illustration) -->
+    <div
+      class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 h-full"
+    >
+      <!-- Text & Button Column -->
+      <div
+        class="flex flex-col justify-between flex-1 min-w-0 pr-0 sm:pr-2 h-full"
+      >
+        <div>
+          <h3
+            class="font-inter font-bold text-xl sm:text-[22px] md:text-2xl text-[#182849] tracking-tight leading-snug"
+          >
+            {{ card.titleKey | translate }}
+          </h3>
+          <p
+            class="mt-2.5 sm:mt-3 font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-sm text-slate-600 leading-relaxed max-w-[310px]"
+          >
+            {{ card.descKey | translate }}
+          </p>
+        </div>
+
+        <div class="mt-6 sm:mt-8 pt-1">
+          <a
+            href="#contact"
+            class="w-fit inline-flex items-center justify-center px-6 py-2.5 rounded-xl font-dm-sans font-semibold text-sm sm:text-[14.5px] text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            [attr.aria-label]="
+              'BUSINESS_MODEL.ARIA.LEARN_MORE'
+                | translate: { title: (card.titleKey | translate) }
+            "
+          >
+            {{ 'BUSINESS_MODEL.CTA_LEARN_MORE' | translate }}
+          </a>
+        </div>
+      </div>
+
+      <!-- Illustration Column -->
+      <div
+        class="shrink-0 flex items-center justify-center sm:justify-end self-center w-full sm:w-[210px] md:w-[230px]"
+        aria-hidden="true"
+      >
+        <img
+          [ngSrc]="card.image"
+          [width]="card.width"
+          [height]="card.height"
+          alt=""
+          class="object-contain w-auto h-auto max-h-36 sm:max-h-40 md:max-h-44 pointer-events-none drop-shadow-xs transition-transform duration-300 group-hover:scale-105"
+          [priority]="card.id === 'manufacturing' || card.id === 'construction'"
+        />
+      </div>
+    </div>
+  </article>
+</ng-template>
