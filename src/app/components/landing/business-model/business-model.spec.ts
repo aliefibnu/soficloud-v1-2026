@@ -125,7 +125,7 @@ describe('BusinessModel', () => {
     expect(cardNumbers).toEqual(['01', '02', '03', '04']);
   });
 
-  it('should render card titles and webp illustrations correctly', () => {
+  it('should render card titles and animated SVG illustrations correctly', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const titles = Array.from(compiled.querySelectorAll('h3')).map((h3) =>
@@ -138,18 +138,24 @@ describe('BusinessModel', () => {
       'Services',
     ]);
 
-    const images = Array.from(compiled.querySelectorAll('img'));
-    expect(images.length).toBe(4);
+    const svgs = Array.from(compiled.querySelectorAll('svg.bm-illustration'));
+    expect(svgs.length).toBe(4);
 
-    const srcList = images.map((img) => img.getAttribute('src'));
-    expect(srcList.some((src) => src?.includes('manufacturing.webp'))).toBe(true);
-    expect(
-      srcList.some((src) => src?.includes('distribution-trading.webp')),
-    ).toBe(true);
-    expect(
-      srcList.some((src) => src?.includes('construction-project.webp')),
-    ).toBe(true);
-    expect(srcList.some((src) => src?.includes('services.webp'))).toBe(true);
+    expect(compiled.querySelector('.bm-manufacturing')).toBeTruthy();
+    expect(compiled.querySelector('.bm-manufacturing .bm-gear-1')).toBeTruthy();
+    expect(compiled.querySelector('.bm-manufacturing .bm-arm-group')).toBeTruthy();
+
+    expect(compiled.querySelector('.bm-distribution')).toBeTruthy();
+    expect(compiled.querySelector('.bm-distribution .bm-truck')).toBeTruthy();
+    expect(compiled.querySelector('.bm-distribution .bm-wheel')).toBeTruthy();
+
+    expect(compiled.querySelector('.bm-construction')).toBeTruthy();
+    expect(compiled.querySelector('.bm-construction .bm-crane-arm')).toBeTruthy();
+    expect(compiled.querySelector('.bm-construction .bm-crane-hook')).toBeTruthy();
+
+    expect(compiled.querySelector('.bm-services')).toBeTruthy();
+    expect(compiled.querySelector('.bm-services .bm-wrench')).toBeTruthy();
+    expect(compiled.querySelector('.bm-services .bm-gear-1')).toBeTruthy();
   });
 
   it('should render CTA buttons for each card', () => {
