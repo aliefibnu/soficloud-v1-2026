@@ -179,4 +179,37 @@ describe('BusinessModel', () => {
     const buttons = compiled.querySelectorAll('article a');
     expect(buttons[0]?.textContent?.trim()).toBe('Learn More');
   });
+
+  it('should have responsive card ordering with illustration on top on mobile and text column containing heading, body, and button in order', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const articles = compiled.querySelectorAll('article');
+
+    articles.forEach((article) => {
+      const illustrationCol = article.querySelector('svg.bm-illustration')?.closest('div');
+      expect(illustrationCol).toBeTruthy();
+      expect(illustrationCol?.classList.contains('order-1')).toBe(true);
+      expect(illustrationCol?.classList.contains('sm:order-2')).toBe(true);
+
+      const textCol = article.querySelector('h3')?.closest('.order-2');
+      expect(textCol).toBeTruthy();
+      expect(textCol?.classList.contains('sm:order-1')).toBe(true);
+
+      // Verify internal order inside text column: heading -> body -> button
+      const heading = textCol?.querySelector('h3');
+      const body = textCol?.querySelector('p');
+      const button = textCol?.querySelector('a');
+
+      expect(heading).toBeTruthy();
+      expect(body).toBeTruthy();
+      expect(button).toBeTruthy();
+
+      expect(
+        Boolean(heading!.compareDocumentPosition(body!) & Node.DOCUMENT_POSITION_FOLLOWING),
+      ).toBe(true);
+      expect(
+        Boolean(body!.compareDocumentPosition(button!) & Node.DOCUMENT_POSITION_FOLLOWING),
+      ).toBe(true);
+    });
+  });
 });
