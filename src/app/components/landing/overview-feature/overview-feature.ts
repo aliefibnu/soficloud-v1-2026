@@ -8,13 +8,15 @@ import { LanguageService } from '../../../systems/lib/language.service';
   imports: [NgOptimizedImage, TranslatePipe],
   templateUrl: './overview-feature.html',
   styles: `
-    @keyframes floating-monitor {
+    @keyframes pulse-circles {
       0%,
       100% {
-        transform: translateY(0);
+        transform: scale(0.96);
+        opacity: 0.85;
       }
       50% {
-        transform: translateY(-8px);
+        transform: scale(1.04);
+        opacity: 1;
       }
     }
 
@@ -49,8 +51,8 @@ import { LanguageService } from '../../../systems/lib/language.service';
       }
     }
 
-    .animate-floating-monitor {
-      animation: floating-monitor 6s ease-in-out infinite;
+    .animate-pulse-circles {
+      animation: pulse-circles 3.6s ease-in-out infinite;
     }
 
     .animate-floating-card-left {
@@ -66,7 +68,7 @@ import { LanguageService } from '../../../systems/lib/language.service';
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .animate-floating-monitor,
+      .animate-pulse-circles,
       .animate-floating-card-left,
       .animate-floating-card-right,
       .animate-pulse-ring {
