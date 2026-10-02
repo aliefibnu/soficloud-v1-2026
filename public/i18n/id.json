@@ -332,6 +332,25 @@
       }
     }
   },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "Existing Customers",
+    "SUBTITLE": "Telah menggunakan SOFICloud untuk mendukung proses bisnis dan operasional.",
+    "CARDS": {
+      "INDUSTRY_TITLE": "Berbagai Industri",
+      "INDUSTRY_DESC": "Pengalaman pada beragam karakter dan model bisnis.",
+      "TEAM_TITLE": "Tim Implementasi Berpengalaman",
+      "TEAM_DESC": "Memahami aplikasi dan proses bisnis perusahaan.",
+      "SUPPORT_TITLE": "After-Sales Support",
+      "SUPPORT_DESC": "Dukungan berkelanjutan setelah implementasi."
+    },
+    "CTA_EXPERIENCE": "Lihat Pengalaman Bisnis",
+    "ARIA": {
+      "SECTION": "Pelanggan SOFICloud",
+      "CUSTOMER_CARD": "Perusahaan pelanggan {{name}}",
+      "SELECT_CUSTOMER": "Pilih perusahaan {{name}}"
+    }
+  },
   "CTA": {
     "TITLE": "Tertarik Dengan\nSOFICloud ERP?",
     "DESCRIPTION": "SOFICloud siap membantu perusahaan mengelola proses bisnis secara lebih terintegrasi, terkontrol, dan mudah dipantau. Hubungi tim kami untuk berdiskusi mengenai kebutuhan ERP perusahaan Anda.",
@@ -354,3 +373,4 @@
     }
   }
 }
+

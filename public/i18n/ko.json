@@ -332,6 +332,25 @@
       }
     }
   },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "Existing Customers",
+    "SUBTITLE": "비즈니스 프로세스와 운영을 지원하기 위해 SOFICloud를 사용하고 있습니다.",
+    "CARDS": {
+      "INDUSTRY_TITLE": "다양한 산업군",
+      "INDUSTRY_DESC": "다양한 비즈니스 특성과 모델에 대한 풍부한 경험.",
+      "TEAM_TITLE": "숙련된 구축 전문 팀",
+      "TEAM_DESC": "애플리케이션과 기업의 비즈니스 프로세스에 대한 깊은 이해.",
+      "SUPPORT_TITLE": "사후 관리 지원 (After-Sales Support)",
+      "SUPPORT_DESC": "구축 이후에도 지속적이고 신뢰할 수 있는 지원 제공."
+    },
+    "CTA_EXPERIENCE": "비즈니스 도입 사례 보기",
+    "ARIA": {
+      "SECTION": "SOFICloud 고객사",
+      "CUSTOMER_CARD": "고객사 {{name}}",
+      "SELECT_CUSTOMER": "{{name}} 선택"
+    }
+  },
   "CTA": {
     "TITLE": "SOFICloud ERP에\n관심이 있으신가요?",
     "DESCRIPTION": "SOFICloud는 기업이 비즈니스 프로세스를 보다 통합적이고 통제되며 모니터링하기 쉽게 관리할 수 있도록 지원합니다. 귀사의 ERP 요구 사항을 상의하려면 저희 팀에 문의하세요.",
@@ -354,3 +373,4 @@
     }
   }
 }
+

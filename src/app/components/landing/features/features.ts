@@ -50,7 +50,7 @@ export class Features {
       id: 1,
       titleKey: 'FEATURES.CARDS.FINANCIAL.TITLE',
       descKey: 'FEATURES.CARDS.FINANCIAL.DESC',
-      topBg: '#FCD5D0',
+      topBg: 'linear-gradient(180deg, #FFEFED 0%, #FBCBC5 100%)',
       domeBg: '#FFF1EE',
       layers: [
         {
@@ -97,7 +97,7 @@ export class Features {
       id: 2,
       titleKey: 'FEATURES.CARDS.SALES.TITLE',
       descKey: 'FEATURES.CARDS.SALES.DESC',
-      topBg: '#CCE0F8',
+      topBg: 'linear-gradient(180deg, #EDF3FB 0%, #C3D7F7 100%)',
       domeBg: '#EDF5FE',
       layers: [
         {
@@ -144,7 +144,7 @@ export class Features {
       id: 3,
       titleKey: 'FEATURES.CARDS.PROCUREMENT.TITLE',
       descKey: 'FEATURES.CARDS.PROCUREMENT.DESC',
-      topBg: '#CBE1E1',
+      topBg: 'linear-gradient(180deg, #DBE9E9 0%, #C9DEDE 100%)',
       domeBg: '#EDF6F6',
       layers: [
         {
@@ -191,7 +191,7 @@ export class Features {
       id: 4,
       titleKey: 'FEATURES.CARDS.INVENTORY.TITLE',
       descKey: 'FEATURES.CARDS.INVENTORY.DESC',
-      topBg: '#B4F5F5',
+      topBg: 'linear-gradient(180deg, #DEFCFC 0%, #1EEBEB 100%)',
       domeBg: '#E0FAFA',
       layers: [
         {
@@ -238,7 +238,7 @@ export class Features {
       id: 5,
       titleKey: 'FEATURES.CARDS.MANUFACTURING.TITLE',
       descKey: 'FEATURES.CARDS.MANUFACTURING.DESC',
-      topBg: '#F8C8C8',
+      topBg: 'linear-gradient(180deg, #FDF1F1 0%, #F7BABB 100%)',
       domeBg: '#FDF2F2',
       layers: [
         {
@@ -296,7 +296,7 @@ export class Features {
       id: 6,
       titleKey: 'FEATURES.CARDS.PROJECT.TITLE',
       descKey: 'FEATURES.CARDS.PROJECT.DESC',
-      topBg: '#B8D3F8',
+      topBg: 'linear-gradient(180deg, #D7E4FA 0%, #72A0ED 100%)',
       domeBg: '#E8F1FC',
       layers: [
         {
@@ -343,7 +343,7 @@ export class Features {
       id: 7,
       titleKey: 'FEATURES.CARDS.WORKFLOW.TITLE',
       descKey: 'FEATURES.CARDS.WORKFLOW.DESC',
-      topBg: '#BED1F6',
+      topBg: 'linear-gradient(180deg, #D7E4FA 0%, #828AC9 100%)',
       domeBg: '#EAF1FD',
       layers: [
         {
@@ -402,7 +402,7 @@ export class Features {
       id: 8,
       titleKey: 'FEATURES.CARDS.ANALYTICS.TITLE',
       descKey: 'FEATURES.CARDS.ANALYTICS.DESC',
-      topBg: '#BEE7E7',
+      topBg: 'linear-gradient(180deg, #DBE9E9 0%, #A1E8E8 100%)',
       domeBg: '#E7F9F9',
       layers: [
         {
@@ -461,7 +461,7 @@ export class Features {
       id: 9,
       titleKey: 'FEATURES.CARDS.SECURITY.TITLE',
       descKey: 'FEATURES.CARDS.SECURITY.DESC',
-      topBg: '#F7BDBD',
+      topBg: 'linear-gradient(180deg, #FAD1D1 0%, #F7ADAC 100%)',
       domeBg: '#FDE8E7',
       layers: [
         {

@@ -332,6 +332,25 @@
       }
     }
   },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "Existing Customers",
+    "SUBTITLE": "ビジネスプロセスと業務運営を支援するためにSOFICloudを導入しています。",
+    "CARDS": {
+      "INDUSTRY_TITLE": "多様な業界",
+      "INDUSTRY_DESC": "多様なビジネス特性とモデルにおける豊富な実績。",
+      "TEAM_TITLE": "経験豊富な導入チーム",
+      "TEAM_DESC": "アプリケーションと企業の業務プロセスを深く理解。",
+      "SUPPORT_TITLE": "アフターサポート",
+      "SUPPORT_DESC": "導入後も継続的で安心なサポートを提供。"
+    },
+    "CTA_EXPERIENCE": "導入実績・ビジネス経験を見る",
+    "ARIA": {
+      "SECTION": "SOFICloudの導入企業",
+      "CUSTOMER_CARD": "導入企業 {{name}}",
+      "SELECT_CUSTOMER": "{{name}} を選択"
+    }
+  },
   "CTA": {
     "TITLE": "SOFICloud ERPに\nご興味がありますか？",
     "DESCRIPTION": "SOFICloudは、企業のビジネスプロセスをより統合的、安定的、かつ容易に監視・管理できるよう支援します。御社のERPニーズについてぜひご相談ください。",
@@ -354,3 +373,4 @@
     }
   }
 }
+

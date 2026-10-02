@@ -332,6 +332,25 @@
       }
     }
   },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "Existing Customers",
+    "SUBTITLE": "已采用 SOFICloud 全面支持其业务流程与运营管理。",
+    "CARDS": {
+      "INDUSTRY_TITLE": "多元行业覆盖",
+      "INDUSTRY_DESC": "在多元商业特征与业务模式中积累了深厚经验。",
+      "TEAM_TITLE": "资深实施专家团队",
+      "TEAM_DESC": "深入理解系统应用与企业核心业务流程。",
+      "SUPPORT_TITLE": "完善售后支持",
+      "SUPPORT_DESC": "上线实施后提供持续稳健的长期支持。"
+    },
+    "CTA_EXPERIENCE": "查看业务实战经验",
+    "ARIA": {
+      "SECTION": "SOFICloud 客户案例",
+      "CUSTOMER_CARD": "客户企业 {{name}}",
+      "SELECT_CUSTOMER": "选择企业 {{name}}"
+    }
+  },
   "CTA": {
     "TITLE": "对 SOFICloud ERP\n感兴趣？",
     "DESCRIPTION": "SOFICloud 随时准备协助企业更一体化、受控且易于监控地管理业务流程。请联系我们的团队，探讨您企业的 ERP 需求。",
@@ -354,3 +373,4 @@
     }
   }
 }
+
