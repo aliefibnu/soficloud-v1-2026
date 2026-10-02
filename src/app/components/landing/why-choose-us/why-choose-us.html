@@ -100,47 +100,55 @@
       }
     </div>
 
-    <div class="flex items-center justify-center gap-3 sm:gap-3.5 mt-5 sm:mt-6 md:mt-7">
+    <div class="flex items-center justify-center gap-32 min-[420px]:gap-40 sm:gap-48 md:gap-56 mt-5 sm:mt-6 md:mt-7">
       <button
         type="button"
-        class="group w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-slate-50 border border-slate-200/80 hover:border-slate-300 text-[#2563EB] hover:text-[#1D3FE0] shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2 cursor-pointer"
+        class="group w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white shadow-[0_4px_14px_rgba(24,40,73,0.08)] hover:shadow-[0_6px_20px_rgba(24,40,73,0.14)] flex items-center justify-center transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3AE1] focus-visible:ring-offset-2 cursor-pointer"
         (click)="prev()"
         [attr.aria-label]="'WHY_CHOOSE_US.ARIA.PREV_BUTTON' | translate"
       >
         <svg
-          class="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform group-hover:-translate-x-0.5"
+          class="w-4.5 h-3.5 sm:w-5 sm:h-4 transition-transform group-hover:-translate-x-0.5 scale-x-[-1]"
+          viewBox="0 0 409 328"
           fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
           aria-hidden="true"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2.5"
-            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+            d="M237.05 11.7931C240.87 8.02017 245.397 5.03688 250.37 3.01353C255.344 0.990185 260.667 -0.033522 266.037 0.000837067C271.406 0.0351961 276.716 1.12714 281.663 3.21397C286.61 5.3008 291.098 8.3417 294.87 12.1632L383.87 102.283C417.16 135.693 417.2 190.123 383.71 223.733L295.05 314.793C291.326 318.716 286.86 321.86 281.911 324.044C276.962 326.228 271.629 327.407 266.221 327.513C260.813 327.62 255.438 326.652 250.407 324.665C245.376 322.678 240.79 319.712 236.914 315.939C233.039 312.165 229.951 307.66 227.829 302.685C225.708 297.709 224.596 292.361 224.558 286.952C224.519 281.544 225.555 276.181 227.605 271.175C229.655 266.17 232.678 261.621 236.5 257.793L288.35 204.513H40.89C30.0453 204.513 19.6447 200.205 11.9763 192.537C4.30796 184.868 0 174.468 0 163.623C0 152.778 4.30796 142.378 11.9763 134.71C19.6447 127.041 30.0453 122.733 40.89 122.733H289.1L236.72 69.7333C232.943 65.9108 229.957 61.3815 227.932 56.4044C225.906 51.4273 224.882 46.0997 224.916 40.7264C224.95 35.3531 226.043 30.0393 228.132 25.0885C230.221 20.1377 233.265 15.6471 237.09 11.8732L237.05 11.7931Z"
+            fill="url(#why-choose-us-arrow-gradient)"
           />
+          <defs>
+            <linearGradient
+              id="why-choose-us-arrow-gradient"
+              x1="242.5"
+              y1="-61"
+              x2="240.454"
+              y2="363.509"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#1E3AE1" />
+              <stop offset="0.593624" stop-color="#1D74D9" stop-opacity="0.55" />
+              <stop offset="1" stop-color="#D8E3F7" />
+            </linearGradient>
+          </defs>
         </svg>
       </button>
 
       <button
         type="button"
-        class="group w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-slate-50 border border-slate-200/80 hover:border-slate-300 text-[#2563EB] hover:text-[#1D3FE0] shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-200 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2 cursor-pointer"
+        class="group w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white shadow-[0_4px_14px_rgba(24,40,73,0.08)] hover:shadow-[0_6px_20px_rgba(24,40,73,0.14)] flex items-center justify-center transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3AE1] focus-visible:ring-offset-2 cursor-pointer"
         (click)="next()"
         [attr.aria-label]="'WHY_CHOOSE_US.ARIA.NEXT_BUTTON' | translate"
       >
         <svg
-          class="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform group-hover:translate-x-0.5"
+          class="w-4.5 h-3.5 sm:w-5 sm:h-4 transition-transform group-hover:translate-x-0.5"
+          viewBox="0 0 409 328"
           fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
           aria-hidden="true"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2.5"
-            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+            d="M237.05 11.7931C240.87 8.02017 245.397 5.03688 250.37 3.01353C255.344 0.990185 260.667 -0.033522 266.037 0.000837067C271.406 0.0351961 276.716 1.12714 281.663 3.21397C286.61 5.3008 291.098 8.3417 294.87 12.1632L383.87 102.283C417.16 135.693 417.2 190.123 383.71 223.733L295.05 314.793C291.326 318.716 286.86 321.86 281.911 324.044C276.962 326.228 271.629 327.407 266.221 327.513C260.813 327.62 255.438 326.652 250.407 324.665C245.376 322.678 240.79 319.712 236.914 315.939C233.039 312.165 229.951 307.66 227.829 302.685C225.708 297.709 224.596 292.361 224.558 286.952C224.519 281.544 225.555 276.181 227.605 271.175C229.655 266.17 232.678 261.621 236.5 257.793L288.35 204.513H40.89C30.0453 204.513 19.6447 200.205 11.9763 192.537C4.30796 184.868 0 174.468 0 163.623C0 152.778 4.30796 142.378 11.9763 134.71C19.6447 127.041 30.0453 122.733 40.89 122.733H289.1L236.72 69.7333C232.943 65.9108 229.957 61.3815 227.932 56.4044C225.906 51.4273 224.882 46.0997 224.916 40.7264C224.95 35.3531 226.043 30.0393 228.132 25.0885C230.221 20.1377 233.265 15.6471 237.09 11.8732L237.05 11.7931Z"
+            fill="url(#why-choose-us-arrow-gradient)"
           />
         </svg>
       </button>
