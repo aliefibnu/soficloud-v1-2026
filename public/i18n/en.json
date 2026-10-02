@@ -266,5 +266,25 @@
         "DESC": "Projects, contracts, operational billing, approvals, cash flow, and profitability analysis for more structured service businesses."
       }
     }
+  },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "Existing Customers",
+    "SUBTITLE": "Have been using SOFICloud to support their business processes and operations.",
+    "CARDS": {
+      "INDUSTRY_TITLE": "Various Industries",
+      "INDUSTRY_DESC": "Experience across diverse business models and characteristics.",
+      "TEAM_TITLE": "Experienced Implementation Team",
+      "TEAM_DESC": "Deep understanding of applications and corporate business processes.",
+      "SUPPORT_TITLE": "After-Sales Support",
+      "SUPPORT_DESC": "Continuous, reliable support after implementation."
+    },
+    "CTA_EXPERIENCE": "View Business Experience",
+    "ARIA": {
+      "SECTION": "SOFICloud Customers",
+      "CUSTOMER_CARD": "Customer company {{name}}",
+      "SELECT_CUSTOMER": "Select company {{name}}"
+    }
   }
 }
+
