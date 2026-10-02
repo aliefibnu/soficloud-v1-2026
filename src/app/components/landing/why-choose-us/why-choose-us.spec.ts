@@ -102,11 +102,100 @@ describe('WhyChooseUs', () => {
     expect(component.currentIndex()).toBe(2);
   });
 
+  afterEach(() => {
+    component?.stopAutoPlay();
+    vi.useRealTimers();
+  });
+
   it('should render the heading text', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const heading = compiled.querySelector('#why-choose-us-heading');
     expect(heading).toBeTruthy();
     expect(heading?.textContent).toContain('Mengapa Perusahaan Memilih SOFICloud?');
+  });
+
+  it('should render card images with 96x96 dimensions and enlarged size classes', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const firstImg = compiled.querySelector<HTMLImageElement>('.carousel-card img');
+    expect(firstImg).toBeTruthy();
+    expect(firstImg?.getAttribute('width')).toBe('96');
+    expect(firstImg?.getAttribute('height')).toBe('96');
+    expect(firstImg?.className).toContain('max-h-16');
+    expect(firstImg?.className).toContain('md:max-h-21');
+  });
+
+  it('should automatically advance to next card after 5 seconds', () => {
+    vi.useFakeTimers();
+    component.startAutoPlay();
+    expect(component.currentIndex()).toBe(0);
+
+    vi.advanceTimersByTime(5000);
+    expect(component.currentIndex()).toBe(1);
+
+    vi.advanceTimersByTime(5000);
+    expect(component.currentIndex()).toBe(2);
+  });
+
+  it('should pause autoplay on mouseenter and resume on mouseleave', () => {
+    vi.useFakeTimers();
+    component.startAutoPlay();
+    expect(component.currentIndex()).toBe(0);
+
+    component.onMouseEnter();
+    expect(component.isHovered()).toBe(true);
+
+    vi.advanceTimersByTime(10000);
+    expect(component.currentIndex()).toBe(0);
+
+    component.onMouseLeave();
+    expect(component.isHovered()).toBe(false);
+
+    vi.advanceTimersByTime(5000);
+    expect(component.currentIndex()).toBe(1);
+  });
+
+  it('should pause and resume autoplay on host mouseenter and mouseleave DOM events', () => {
+    vi.useFakeTimers();
+    component.startAutoPlay();
+    const hostEl = fixture.nativeElement as HTMLElement;
+
+    hostEl.dispatchEvent(new MouseEvent('mouseenter'));
+    expect(component.isHovered()).toBe(true);
+
+    vi.advanceTimersByTime(10000);
+    expect(component.currentIndex()).toBe(0);
+
+    hostEl.dispatchEvent(new MouseEvent('mouseleave'));
+    expect(component.isHovered()).toBe(false);
+
+    vi.advanceTimersByTime(5000);
+    expect(component.currentIndex()).toBe(1);
+  });
+
+  it('should reset autoplay timer on manual navigation', () => {
+    vi.useFakeTimers();
+    component.startAutoPlay();
+    expect(component.currentIndex()).toBe(0);
+
+    vi.advanceTimersByTime(3000);
+    component.next();
+    expect(component.currentIndex()).toBe(1);
+
+    vi.advanceTimersByTime(3000);
+    expect(component.currentIndex()).toBe(1);
+
+    vi.advanceTimersByTime(2000);
+    expect(component.currentIndex()).toBe(2);
+  });
+
+  it('should stop autoplay when destroyed', () => {
+    vi.useFakeTimers();
+    component.startAutoPlay();
+    fixture.destroy();
+
+    vi.advanceTimersByTime(10000);
+    expect(component.currentIndex()).toBe(0);
   });
 });

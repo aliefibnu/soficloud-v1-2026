@@ -1,1 +1,137 @@
-<p>cta works!</p>
+<section
+  class="relative w-full py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 bg-white overflow-hidden"
+  aria-labelledby="cta-heading"
+>
+  <!-- Decorative background wave band behind card (z-0 to remain visible above section background) -->
+  <div
+    class="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 md:top-[22%] md:translate-y-0 h-44 sm:h-56 md:h-72 lg:h-80 w-full overflow-hidden select-none z-0"
+    aria-hidden="true"
+  >
+    <svg
+      class="w-full h-full"
+      viewBox="0 0 1440 280"
+      fill="none"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,0 L1440,0 L1440,180 C1200,195 1000,195 800,190 C600,185 300,175 0,205 Z"
+        fill="#3874db"
+      />
+    </svg>
+  </div>
+
+  <div
+    class="relative z-10 w-full max-w-7xl xl:max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-0"
+  >
+    <div
+      class="relative bg-white rounded-xl shadow-[0_12px_45px_-5px_rgba(0,0,0,0.08)] border border-slate-100/90 overflow-hidden flex flex-col md:flex-row items-stretch"
+    >
+      <!-- Left Column: Photo of Representative (528px width, 3:4 aspect ratio matching Figma) -->
+      <div
+        class="relative w-full md:w-[42%] lg:w-[45%] xl:w-[528px] shrink-0 h-64 sm:h-80 md:h-auto md:min-h-[500px] lg:min-h-[580px] xl:min-h-[704px] bg-slate-100 overflow-hidden"
+      >
+        <img
+          ngSrc="/images/cta/cta_image.webp"
+          width="528"
+          height="704"
+          priority
+          [alt]="'CTA.IMAGE_ALT' | translate"
+          class="w-full h-full object-cover object-[center_20%] md:object-center select-none pointer-events-none"
+        />
+      </div>
+
+      <!-- Right Column: Content with exact Figma spacing and 117px left indentation -->
+      <div
+        class="flex-1 min-w-0 flex flex-col justify-center px-5 sm:px-8 md:px-7 lg:px-12 xl:pl-[117px] xl:pr-16 py-8 sm:py-10 md:py-10 lg:py-12 xl:py-[72px]"
+      >
+        <!-- Heading: 48px DM Sans Bold with 54px line-height matching Figma -->
+        <h2
+          id="cta-heading"
+          class="font-dm-sans font-bold text-2xl sm:text-3xl md:text-[28px] lg:text-[38px] xl:text-[48px] text-[#182849] leading-tight xl:leading-[54px] tracking-[-0.02em] whitespace-pre-line"
+        >
+          {{ 'CTA.TITLE' | translate }}
+        </h2>
+
+        <!-- Description: 14px DM Sans Regular with max-w-[495px] for exact 3-line wrap -->
+        <p
+          class="mt-3.5 sm:mt-5 md:mt-4 lg:mt-6 xl:mt-[38px] font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-[14px] text-slate-600 leading-relaxed lg:leading-[21px] max-w-[495px]"
+        >
+          {{ 'CTA.DESCRIPTION' | translate }}
+        </p>
+
+        <!-- Action Buttons: 48px height, exact pill/rounded styling and DM Sans Semibold -->
+        <div
+          class="mt-5 sm:mt-6 md:mt-6 lg:mt-8 xl:mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
+        >
+          <button
+            type="button"
+            (click)="onScheduleDemo()"
+            [attr.aria-label]="'CTA.ARIA.SCHEDULE_DEMO' | translate"
+            class="group relative overflow-hidden inline-flex items-center justify-center h-12 px-6 sm:px-7 rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] text-white font-dm-sans text-sm sm:text-[15.5px] font-semibold shadow-xs hover:shadow-md hover:brightness-105 active:scale-[0.98] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer w-full sm:w-auto"
+          >
+            <span class="relative z-10">{{ 'CTA.SCHEDULE_DEMO' | translate }}</span>
+          </button>
+
+          <button
+            type="button"
+            (click)="onContactUs()"
+            [attr.aria-label]="'CTA.ARIA.CONTACT_US' | translate"
+            class="group relative inline-flex items-center justify-center h-12 px-6 sm:px-7 rounded-xl border border-[#2563eb] bg-white text-[#2563eb] font-dm-sans text-sm sm:text-[15.5px] font-semibold hover:bg-blue-50/50 active:scale-[0.98] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] cursor-pointer w-full sm:w-auto"
+          >
+            <span>{{ 'CTA.CONTACT_US' | translate }}</span>
+          </button>
+        </div>
+
+        <!-- Contact Information List with Dividers: 284px width, 93px vertical rhythm -->
+        <div
+          class="mt-6 sm:mt-8 md:mt-7 lg:mt-9 xl:mt-[52px] w-full max-w-full sm:max-w-[320px] md:max-w-[284px] flex flex-col"
+        >
+          <!-- Phone -->
+          <div class="border-t border-slate-200/90 pt-4 pb-4 sm:pt-5 sm:pb-5 md:pt-4 md:pb-4 lg:pt-5 lg:pb-5 xl:pt-6 xl:pb-6">
+            <span class="block font-dm-sans font-normal text-xs sm:text-[13px] text-slate-400 capitalize leading-none">
+              {{ 'CTA.PHONE_LABEL' | translate }}
+            </span>
+            <a
+              href="tel:+627784160250"
+              [attr.aria-label]="'CTA.ARIA.PHONE' | translate"
+              class="mt-2.5 sm:mt-3 md:mt-2.5 lg:mt-3 xl:mt-3.5 inline-block font-dm-sans font-bold text-sm sm:text-base md:text-sm lg:text-[15.5px] xl:text-[16.5px] text-[#182849] hover:text-[#1d44eb] transition-colors leading-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] rounded-xs"
+            >
+              {{ 'CTA.PHONE_VALUE' | translate }}
+            </a>
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="border-t border-slate-200/90 pt-4 pb-4 sm:pt-5 sm:pb-5 md:pt-4 md:pb-4 lg:pt-5 lg:pb-5 xl:pt-6 xl:pb-6">
+            <span class="block font-dm-sans font-normal text-xs sm:text-[13px] text-slate-400 leading-none">
+              {{ 'CTA.WHATSAPP_LABEL' | translate }}
+            </span>
+            <a
+              href="https://wa.me/628117774744"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="'CTA.ARIA.WHATSAPP' | translate"
+              class="mt-2.5 sm:mt-3 md:mt-2.5 lg:mt-3 xl:mt-3.5 inline-block font-dm-sans font-bold text-sm sm:text-base md:text-sm lg:text-[15.5px] xl:text-[16.5px] text-[#182849] hover:text-[#1d44eb] transition-colors leading-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] rounded-xs"
+            >
+              {{ 'CTA.WHATSAPP_VALUE' | translate }}
+            </a>
+          </div>
+
+          <!-- Email -->
+          <div class="border-t border-slate-200/90 pt-4 pb-1 sm:pt-5 sm:pb-1 md:pt-4 md:pb-1 lg:pt-5 lg:pb-1 xl:pt-6 xl:pb-1">
+            <span class="block font-dm-sans font-normal text-xs sm:text-[13px] text-slate-400 capitalize leading-none">
+              {{ 'CTA.EMAIL_LABEL' | translate }}
+            </span>
+            <a
+              href="mailto:hello@inforsys.co.id"
+              [attr.aria-label]="'CTA.ARIA.EMAIL' | translate"
+              class="mt-2.5 sm:mt-3 md:mt-2.5 lg:mt-3 xl:mt-3.5 inline-block font-dm-sans font-bold text-sm sm:text-base md:text-sm lg:text-[15.5px] xl:text-[16.5px] text-[#182849] hover:text-[#1d44eb] transition-colors leading-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] rounded-xs break-all sm:break-normal"
+            >
+              {{ 'CTA.EMAIL_VALUE' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

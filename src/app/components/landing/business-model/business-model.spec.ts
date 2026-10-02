@@ -125,7 +125,7 @@ describe('BusinessModel', () => {
     expect(cardNumbers).toEqual(['01', '02', '03', '04']);
   });
 
-  it('should render card titles and webp illustrations correctly', () => {
+  it('should render card titles and animated SVG illustrations correctly', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const titles = Array.from(compiled.querySelectorAll('h3')).map((h3) =>
@@ -138,18 +138,24 @@ describe('BusinessModel', () => {
       'Services',
     ]);
 
-    const images = Array.from(compiled.querySelectorAll('img'));
-    expect(images.length).toBe(4);
+    const svgs = Array.from(compiled.querySelectorAll('svg.bm-illustration'));
+    expect(svgs.length).toBe(4);
 
-    const srcList = images.map((img) => img.getAttribute('src'));
-    expect(srcList.some((src) => src?.includes('manufacturing.webp'))).toBe(true);
-    expect(
-      srcList.some((src) => src?.includes('distribution-trading.webp')),
-    ).toBe(true);
-    expect(
-      srcList.some((src) => src?.includes('construction-project.webp')),
-    ).toBe(true);
-    expect(srcList.some((src) => src?.includes('services.webp'))).toBe(true);
+    expect(compiled.querySelector('.bm-manufacturing')).toBeTruthy();
+    expect(compiled.querySelector('.bm-manufacturing .bm-gear-1')).toBeTruthy();
+    expect(compiled.querySelector('.bm-manufacturing .bm-arm-group')).toBeTruthy();
+
+    expect(compiled.querySelector('.bm-distribution')).toBeTruthy();
+    expect(compiled.querySelector('.bm-distribution .bm-truck')).toBeTruthy();
+    expect(compiled.querySelector('.bm-distribution .bm-wheel')).toBeTruthy();
+
+    expect(compiled.querySelector('.bm-construction')).toBeTruthy();
+    expect(compiled.querySelector('.bm-construction .bm-crane-arm')).toBeTruthy();
+    expect(compiled.querySelector('.bm-construction .bm-crane-hook')).toBeTruthy();
+
+    expect(compiled.querySelector('.bm-services')).toBeTruthy();
+    expect(compiled.querySelector('.bm-services .bm-wrench')).toBeTruthy();
+    expect(compiled.querySelector('.bm-services .bm-gear-1')).toBeTruthy();
   });
 
   it('should render CTA buttons for each card', () => {
@@ -172,5 +178,38 @@ describe('BusinessModel', () => {
 
     const buttons = compiled.querySelectorAll('article a');
     expect(buttons[0]?.textContent?.trim()).toBe('Learn More');
+  });
+
+  it('should have responsive card ordering with illustration on top on mobile and text column containing heading, body, and button in order', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const articles = compiled.querySelectorAll('article');
+
+    articles.forEach((article) => {
+      const illustrationCol = article.querySelector('svg.bm-illustration')?.closest('div');
+      expect(illustrationCol).toBeTruthy();
+      expect(illustrationCol?.classList.contains('order-1')).toBe(true);
+      expect(illustrationCol?.classList.contains('sm:order-2')).toBe(true);
+
+      const textCol = article.querySelector('h3')?.closest('.order-2');
+      expect(textCol).toBeTruthy();
+      expect(textCol?.classList.contains('sm:order-1')).toBe(true);
+
+      // Verify internal order inside text column: heading -> body -> button
+      const heading = textCol?.querySelector('h3');
+      const body = textCol?.querySelector('p');
+      const button = textCol?.querySelector('a');
+
+      expect(heading).toBeTruthy();
+      expect(body).toBeTruthy();
+      expect(button).toBeTruthy();
+
+      expect(
+        Boolean(heading!.compareDocumentPosition(body!) & Node.DOCUMENT_POSITION_FOLLOWING),
+      ).toBe(true);
+      expect(
+        Boolean(body!.compareDocumentPosition(button!) & Node.DOCUMENT_POSITION_FOLLOWING),
+      ).toBe(true);
+    });
   });
 });

@@ -1,5 +1,12 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '../../../systems/lib/language.service';
 
@@ -29,17 +36,67 @@ export interface WhyChooseUsCard {
     'aria-label': 'Mengapa Perusahaan Memilih SOFICloud',
     '(keydown.arrowLeft)': 'prev()',
     '(keydown.arrowRight)': 'next()',
+    '(mouseenter)': 'onMouseEnter()',
+    '(mouseleave)': 'onMouseLeave()',
+    '(focusin)': 'onMouseEnter()',
+    '(focusout)': 'onMouseLeave()',
   },
 })
 export class WhyChooseUs {
   protected readonly languageService = inject(LanguageService);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly currentIndex = signal<number>(0);
+  readonly isHovered = signal<boolean>(false);
   readonly hoveredIndex = signal<number | null>(null);
+
+  private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
+  readonly autoPlayDelayMs = 5000;
 
   private touchStartX = 0;
   private isMouseDown = false;
   private mouseStartX = 0;
+
+  constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.startAutoPlay();
+      this.destroyRef.onDestroy(() => this.stopAutoPlay());
+    }
+  }
+
+  startAutoPlay(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.stopAutoPlay();
+    this.autoPlayTimer = setInterval(() => {
+      if (!this.isHovered()) {
+        this.next();
+      }
+    }, this.autoPlayDelayMs);
+  }
+
+  stopAutoPlay(): void {
+    if (this.autoPlayTimer !== null) {
+      clearInterval(this.autoPlayTimer);
+      this.autoPlayTimer = null;
+    }
+  }
+
+  resetAutoPlay(): void {
+    if (!this.isHovered()) {
+      this.startAutoPlay();
+    }
+  }
+
+  onMouseEnter(): void {
+    this.isHovered.set(true);
+    this.stopAutoPlay();
+  }
+
+  onMouseLeave(): void {
+    this.isHovered.set(false);
+    this.startAutoPlay();
+  }
 
   readonly cards: readonly WhyChooseUsCard[] = [
     {
@@ -157,17 +214,20 @@ export class WhyChooseUs {
 
   next(): void {
     this.currentIndex.update((prev) => (prev + 1) % this.cards.length);
+    this.resetAutoPlay();
   }
 
   prev(): void {
     this.currentIndex.update(
       (prev) => (prev - 1 + this.cards.length) % this.cards.length,
     );
+    this.resetAutoPlay();
   }
 
   goTo(index: number): void {
     if (index >= 0 && index < this.cards.length) {
       this.currentIndex.set(index);
+      this.resetAutoPlay();
     }
   }
 
@@ -178,15 +238,20 @@ export class WhyChooseUs {
   }
 
   onTouchStart(event: TouchEvent): void {
+    this.stopAutoPlay();
     this.touchStartX = event.touches[0].clientX;
   }
 
   onTouchEnd(event: TouchEvent): void {
     const touchEndX = event.changedTouches[0].clientX;
     this.handleSwipe(this.touchStartX, touchEndX);
+    if (!this.isHovered()) {
+      this.startAutoPlay();
+    }
   }
 
   onMouseDown(event: MouseEvent): void {
+    this.stopAutoPlay();
     this.isMouseDown = true;
     this.mouseStartX = event.clientX;
   }
@@ -196,6 +261,9 @@ export class WhyChooseUs {
     this.isMouseDown = false;
     const mouseEndX = event.clientX;
     this.handleSwipe(this.mouseStartX, mouseEndX);
+    if (!this.isHovered()) {
+      this.startAutoPlay();
+    }
   }
 
   private handleSwipe(startX: number, endX: number): void {
