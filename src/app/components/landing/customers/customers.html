@@ -82,18 +82,12 @@
 
       <!-- Right Column: Top Spotlight Row, Animated Circuit Stage, Center Showcase Card, Bottom Dual Marquee (7 cols on lg) -->
       <div class="lg:col-span-7 relative flex flex-col items-center overflow-hidden">
-        <!-- 1. Top Row: Fixed Center Spotlight + Infinite Sliding Track -->
+        <!-- 1. Top Row: Sliding Infinite Track of Logos with Dynamic Active Spotlight -->
         <div
           class="relative z-20 w-full h-[64px] flex items-center justify-center overflow-hidden mb-2"
           (mouseenter)="pauseRotation()"
           (mouseleave)="resumeRotation()"
         >
-          <!-- Fixed Center Blue Spotlight Frame (Never moves) -->
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-28 h-14 rounded-2xl border-2 border-[#1C73E8] shadow-[0_0_22px_rgba(28,115,232,0.4)] pointer-events-none z-20"
-            aria-hidden="true"
-          ></div>
-
           <!-- Sliding Infinite Track of Logos -->
           <div
             class="flex items-center gap-4 will-change-transform z-10"
@@ -106,11 +100,18 @@
               <button
                 type="button"
                 (click)="selectCustomer(customer.virtualIdx)"
-                class="relative flex-shrink-0 w-28 h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-200/90 hover:border-[#1C73E8] shadow-sm hover:shadow-md hover:shadow-blue-500/10 p-2 flex items-center justify-center transition-all duration-300 cursor-pointer focus:outline-none"
+                class="relative flex-shrink-0 w-28 h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border p-2 flex items-center justify-center transition-all duration-300 cursor-pointer focus:outline-none"
+                [class.border-2]="customer.virtualIdx === virtualIndex()"
+                [class.border-[#1C73E8]]="customer.virtualIdx === virtualIndex()"
+                [class.shadow-[0_0_22px_rgba(28,115,232,0.4)]]="customer.virtualIdx === virtualIndex()"
                 [class.opacity-100]="customer.virtualIdx === virtualIndex()"
                 [class.scale-100]="customer.virtualIdx === virtualIndex()"
+                [class.z-20]="customer.virtualIdx === virtualIndex()"
+                [class.border-slate-200/90]="customer.virtualIdx !== virtualIndex()"
+                [class.shadow-sm]="customer.virtualIdx !== virtualIndex()"
                 [class.opacity-60]="customer.virtualIdx !== virtualIndex()"
                 [class.scale-95]="customer.virtualIdx !== virtualIndex()"
+                [class.z-10]="customer.virtualIdx !== virtualIndex()"
                 [attr.aria-label]="
                   'CUSTOMERS.ARIA.SELECT_CUSTOMER'
                     | translate: { name: customer.name }
@@ -266,7 +267,7 @@
 
           <!-- Center Showcase Card (Sitting in center of this stage, above the SVG lines) -->
           <article
-            class="group/showcase relative z-10 w-[280px] rounded-3xl bg-white hover:bg-[#F0F5FE] border border-slate-100 hover:border-blue-200 shadow-[0_14px_34px_rgba(35,36,78,0.07)] hover:shadow-[0_18px_40px_rgba(35,36,78,0.12)] p-4 sm:p-5 flex flex-col items-center justify-center transition-all duration-300"
+            class="group/showcase relative z-10 w-[290px] sm:w-[305px] min-h-[250px] sm:min-h-[256px] rounded-[26px] bg-white hover:bg-[#F0F5FE] border border-slate-100 hover:border-blue-200 shadow-[0_16px_36px_rgba(35,36,78,0.08)] hover:shadow-[0_20px_42px_rgba(35,36,78,0.12)] py-5 px-6 sm:py-5.5 sm:px-7 flex flex-col items-center justify-between transition-all duration-300"
             (mouseenter)="pauseRotation()"
             (mouseleave)="resumeRotation()"
             [attr.aria-label]="
@@ -274,21 +275,21 @@
                 | translate: { name: activeCustomer().name }
             "
           >
-            <!-- Inner Container with Interactive Transition Logo -->
+            <!-- Inner Container with Interactive Transition Logo (No background, seamless) -->
             <div
-              class="w-full rounded-2xl bg-[#F8FAFC]/90 group-hover/showcase:bg-white border border-slate-100/90 group-hover/showcase:border-blue-200/70 p-4 sm:p-5 flex flex-col items-center justify-center min-h-[115px] sm:min-h-[120px] overflow-hidden transition-all duration-300"
+              class="w-full flex-1 flex flex-col items-center justify-center min-h-[136px] py-1 overflow-hidden transition-all duration-300"
             >
-              <div class="h-12 w-full flex items-center justify-center">
+              <div class="h-16 w-full flex items-center justify-center">
                 <img
                   [src]="activeCustomer().logo"
                   [alt]="activeCustomer().name"
                   [class.logo-switch-active]="isLogoTransitioning()"
-                  class="max-h-12 max-w-[85%] object-contain select-none"
+                  class="max-h-[52px] max-w-[85%] object-contain select-none"
                 />
               </div>
               <p
                 [class.logo-switch-active]="isLogoTransitioning()"
-                class="mt-2 text-xs text-slate-500 group-hover/showcase:text-[#182849] font-dm-sans font-normal text-center truncate max-w-full px-2 transition-colors duration-300"
+                class="mt-3 text-xs sm:text-sm text-slate-400 group-hover/showcase:text-slate-600 font-dm-sans font-normal text-center truncate max-w-full px-2 transition-colors duration-300"
               >
                 {{ activeCustomer().name }}
               </p>
@@ -297,7 +298,7 @@
             <!-- CTA Link: Lihat Pengalaman Bisnis (DM Sans Bold, #1C73E8) -->
             <a
               href="javascript:void(0)"
-              class="mt-3.5 inline-flex items-center gap-2 font-dm-sans font-bold text-sm text-[#1C73E8] hover:text-blue-700 transition-colors group/cta focus:outline-none focus:ring-2 focus:ring-[#1C73E8] focus:ring-offset-2 rounded"
+              class="mt-3 inline-flex items-center gap-2 font-dm-sans font-bold text-sm text-[#1C73E8] hover:text-blue-700 transition-colors group/cta focus:outline-none focus:ring-2 focus:ring-[#1C73E8] focus:ring-offset-2 rounded"
             >
               <span>{{ 'CUSTOMERS.CTA_EXPERIENCE' | translate }}</span>
               <svg

@@ -371,6 +371,42 @@
       "WHATSAPP": "Chat with SOFICloud on WhatsApp at +62 811 7774 744",
       "EMAIL": "Send email to hello@inforsys.co.id"
     }
+  },
+  "FOOTER": {
+    "COMPANY_NAME": "PT Inforsys Indonesia",
+    "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+    "ADDRESS_LINE2": "Agung Podomoro Land Batam",
+    "ADDRESS_LINE3": "Kepulauan Riau 29464, Indonesia",
+    "PHONE": "+62 778 416 0250",
+    "EMAIL": "hello@inforsys.co.id",
+    "ABOUT_US": {
+      "TITLE": "About Us",
+      "KENALI": "Kenali SofiCloud",
+      "ABOUT": "About Inforsys",
+      "TERMS": "Terms & Conditions",
+      "PRIVACY": "Privacy Policy"
+    },
+    "CUSTOMERS": {
+      "TITLE": "Customers",
+      "MANUFACTURING": "Manufacturing",
+      "DISTRIBUTION": "Distribution",
+      "CONSTRUCTION": "Construction & Project",
+      "SERVICES": "Services"
+    },
+    "SUPPORT": {
+      "TITLE": "Support",
+      "IMPLEMENTATION": "Software Implementation",
+      "TRAINING": "Training & Re-Implementation",
+      "MAINTENANCE": "Annual Software Maintenance",
+      "CUSTOMIZE": "Customize Module"
+    },
+    "COPYRIGHT": "© 1998 – 2026 PT Inforsys Indonesia",
+    "ARIA": {
+      "SECTION": "SOFICloud Website Footer",
+      "PHONE": "Call phone number +62 778 416 0250",
+      "EMAIL": "Send email to hello@inforsys.co.id",
+      "LOGO": "SOFICloud Logo"
+    }
   }
 }
 

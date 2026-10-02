@@ -29,7 +29,7 @@ export class LanguageService {
   readonly languages: readonly LanguageOption[] = LANGUAGE_OPTIONS;
   private readonly storageKey = 'app-lang';
 
-  readonly currentLanguage = signal<Language>('en');
+  readonly currentLanguage = signal<Language>('id');
   readonly selectedLanguageOption = computed<LanguageOption>(() => {
     const current = this.currentLanguage();
     return this.languages.find((lang) => lang.code === current) ?? this.languages[0];
@@ -45,19 +45,19 @@ export class LanguageService {
     }
 
     this.translate.addLangs([...this.supportedLanguages]);
-    this.translate.setFallbackLang('en');
+    this.translate.setFallbackLang('id');
 
-    let language = 'en';
+    let language = 'id';
 
     if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
       const savedLang = localStorage.getItem(this.storageKey);
       const browserLang = this.translate.getBrowserLang();
-      language = savedLang ?? browserLang ?? 'en';
+      language = savedLang ?? browserLang ?? 'id';
     }
 
     const selected = this.supportedLanguages.includes(language as Language)
       ? (language as Language)
-      : 'en';
+      : 'id';
 
     this.currentLanguage.set(selected);
     if (this.document?.documentElement) {

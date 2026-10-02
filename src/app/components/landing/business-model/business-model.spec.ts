@@ -37,19 +37,19 @@ describe('BusinessModel', () => {
         },
         CARDS: {
           MANUFACTURING: {
-            TITLE: 'Manufacturing',
+            TITLE: 'Manufaktur',
             DESC: 'Material planning, procurement, inventory, BOM, routing, production order, shop floor, costing, hingga finance yang saling terintegrasi.',
           },
           DISTRIBUTION: {
-            TITLE: 'Distribution & Trading',
+            TITLE: 'Distribusi & Perdagangan',
             DESC: 'Sales order, purchasing, multi-warehouse inventory, delivery, invoicing, serta monitoring piutang dan hutang dalam satu alur kerja.',
           },
           CONSTRUCTION: {
-            TITLE: 'Construction & Project',
+            TITLE: 'Konstruksi & Proyek',
             DESC: 'Hubungkan RFQ, project budget, pengadaan, pelaksanaan pekerjaan, progress billing, dan pembayaran. Pantau status serta biaya setiap proyek dalam satu alur.',
           },
           SERVICES: {
-            TITLE: 'Services',
+            TITLE: 'Jasa & Layanan',
             DESC: 'Project, contract, operational billing, approval, cash flow, dan profitability analysis untuk bisnis jasa yang lebih tertata.',
           },
         },
@@ -132,10 +132,10 @@ describe('BusinessModel', () => {
       h3.textContent?.trim(),
     );
     expect(titles).toEqual([
-      'Manufacturing',
-      'Distribution & Trading',
-      'Construction & Project',
-      'Services',
+      'Manufaktur',
+      'Distribusi & Perdagangan',
+      'Konstruksi & Proyek',
+      'Jasa & Layanan',
     ]);
 
     const svgs = Array.from(compiled.querySelectorAll('svg.bm-illustration'));

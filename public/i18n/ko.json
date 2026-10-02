@@ -315,26 +315,26 @@
     },
     "CARDS": {
       "MANUFACTURING": {
-        "TITLE": "Manufacturing",
+        "TITLE": "제조업",
         "DESC": "자재 계획, 구매, 재고, BOM, 라우팅, 작업 지시, 생산 현장 관리, 원가 계산 및 재무까지 유기적으로 통합 지원합니다."
       },
       "DISTRIBUTION": {
-        "TITLE": "Distribution & Trading",
+        "TITLE": "유통 및 무역",
         "DESC": "판매 주문, 구매, 다중 창고 재고, 배송, 인보이스, 미수금 및 미지급금 모니터링을 단일 워크플로에서 관리합니다."
       },
       "CONSTRUCTION": {
-        "TITLE": "Construction & Project",
+        "TITLE": "건설 및 프로젝트",
         "DESC": "RFQ, 프로젝트 예산, 조달, 공사 수행, 기성 청구 및 지급을 연계하여 모든 프로젝트의 상태와 비용을 단일 흐름으로 파악합니다."
       },
       "SERVICES": {
-        "TITLE": "Services",
+        "TITLE": "서비스업",
         "DESC": "프로젝트, 계약, 운영 청구, 승인, 자금 흐름 및 수익성 분석을 통해 서비스 비즈니스를 더욱 체계적으로 관리합니다."
       }
     }
   },
   "CUSTOMERS": {
     "STAT": "50+",
-    "HEADING": "Existing Customers",
+    "HEADING": "주요 고객사",
     "SUBTITLE": "비즈니스 프로세스와 운영을 지원하기 위해 SOFICloud를 사용하고 있습니다.",
     "CARDS": {
       "INDUSTRY_TITLE": "다양한 산업군",
@@ -370,6 +370,42 @@
       "PHONE": "SOFICloud 사무실 전화: +62 778 416 0250",
       "WHATSAPP": "SOFICloud WhatsApp 문의: +62 811 7774 744",
       "EMAIL": "이메일 보내기: hello@inforsys.co.id"
+    }
+  },
+  "FOOTER": {
+    "COMPANY_NAME": "PT Inforsys Indonesia",
+    "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+    "ADDRESS_LINE2": "Agung Podomoro Land Batam",
+    "ADDRESS_LINE3": "Kepulauan Riau 29464, Indonesia",
+    "PHONE": "+62 778 416 0250",
+    "EMAIL": "hello@inforsys.co.id",
+    "ABOUT_US": {
+      "TITLE": "회사 소개",
+      "KENALI": "SOFICloud 소개",
+      "ABOUT": "Inforsys 소개",
+      "TERMS": "이용약관",
+      "PRIVACY": "개인정보처리방침"
+    },
+    "CUSTOMERS": {
+      "TITLE": "고객 분야",
+      "MANUFACTURING": "제조업",
+      "DISTRIBUTION": "유통 및 무역",
+      "CONSTRUCTION": "건설 및 프로젝트",
+      "SERVICES": "서비스업"
+    },
+    "SUPPORT": {
+      "TITLE": "고객 지원",
+      "IMPLEMENTATION": "소프트웨어 구축",
+      "TRAINING": "교육 및 재구축 지원",
+      "MAINTENANCE": "연간 소프트웨어 유지보수",
+      "CUSTOMIZE": "모듈 커스터마이징"
+    },
+    "COPYRIGHT": "© 1998 – 2026 PT Inforsys Indonesia",
+    "ARIA": {
+      "SECTION": "SOFICloud 웹사이트 푸터",
+      "PHONE": "+62 778 416 0250 전화 걸기",
+      "EMAIL": "hello@inforsys.co.id 메일 보내기",
+      "LOGO": "SOFICloud 로고"
     }
   }
 }
