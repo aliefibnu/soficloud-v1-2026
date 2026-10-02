@@ -25,14 +25,14 @@ describe('Customers', () => {
     translateService.setTranslation('id', {
       CUSTOMERS: {
         STAT: '50+',
-        HEADING: 'Existing Customers',
+        HEADING: 'Pelanggan Kami',
         SUBTITLE: 'Telah menggunakan SOFICloud untuk mendukung proses bisnis dan operasional.',
         CARDS: {
           INDUSTRY_TITLE: 'Berbagai Industri',
           INDUSTRY_DESC: 'Pengalaman pada beragam karakter dan model bisnis.',
           TEAM_TITLE: 'Tim Implementasi Berpengalaman',
           TEAM_DESC: 'Memahami aplikasi dan proses bisnis perusahaan.',
-          SUPPORT_TITLE: 'After-Sales Support',
+          SUPPORT_TITLE: 'Dukungan Purna Jual',
           SUPPORT_DESC: 'Dukungan berkelanjutan setelah implementasi.',
         },
         CTA_EXPERIENCE: 'Lihat Pengalaman Bisnis',
@@ -62,7 +62,7 @@ describe('Customers', () => {
   it('should render the hero stat 50+ and heading', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('50+');
-    expect(compiled.textContent).toContain('Existing Customers');
+    expect(compiled.textContent).toContain('Pelanggan Kami');
     expect(compiled.textContent).toContain('Berbagai Industri');
     expect(compiled.textContent).toContain('Lihat Pengalaman Bisnis');
   });

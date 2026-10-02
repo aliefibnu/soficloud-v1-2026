@@ -1,1 +1,196 @@
-<p>footer works!</p>
+<footer
+  class="w-full bg-[#074DB8] text-white overflow-hidden select-none"
+  [attr.aria-label]="'FOOTER.ARIA.SECTION' | translate"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 items-start">
+      <!-- Column 1: Logo & Company Information (4 cols on lg) -->
+      <div class="lg:col-span-4 flex flex-col items-start">
+        <!-- Logo container: White rounded card with soft shadow -->
+        <div
+          class="bg-white rounded-2xl py-3 px-5 sm:px-6 inline-flex items-center justify-center shadow-xs select-none"
+        >
+          <img
+            ngSrc="/soficloud-logo.svg"
+            [alt]="'FOOTER.ARIA.LOGO' | translate"
+            width="322"
+            height="74"
+            class="h-8 sm:h-9 w-auto object-contain"
+          />
+        </div>
+
+        <!-- Company Name -->
+        <h3
+          class="mt-6 font-dm-sans font-bold text-base sm:text-lg text-white tracking-[-0.01em] leading-snug"
+        >
+          {{ 'FOOTER.COMPANY_NAME' | translate }}
+        </h3>
+
+        <!-- Address (3 lines) -->
+        <address
+          class="mt-2.5 font-dm-sans font-normal not-italic text-sm sm:text-[14.5px] text-white/85 leading-relaxed flex flex-col"
+        >
+          <span>{{ 'FOOTER.ADDRESS_LINE1' | translate }}</span>
+          <span>{{ 'FOOTER.ADDRESS_LINE2' | translate }}</span>
+          <span>{{ 'FOOTER.ADDRESS_LINE3' | translate }}</span>
+        </address>
+
+        <!-- Phone & Email -->
+        <div class="mt-5 flex flex-col gap-1.5">
+          <a
+            href="tel:+627784160250"
+            [attr.aria-label]="'FOOTER.ARIA.PHONE' | translate"
+            class="font-dm-sans font-bold text-sm sm:text-base text-white hover:text-white/80 transition-colors inline-block focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs w-fit"
+          >
+            {{ 'FOOTER.PHONE' | translate }}
+          </a>
+          <a
+            href="mailto:hello@inforsys.co.id"
+            [attr.aria-label]="'FOOTER.ARIA.EMAIL' | translate"
+            class="font-dm-sans font-bold text-sm sm:text-base text-white hover:text-white/80 transition-colors inline-block focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs w-fit"
+          >
+            {{ 'FOOTER.EMAIL' | translate }}
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: About Us (2 cols on lg) -->
+      <div class="lg:col-span-2 flex flex-col">
+        <h3
+          class="font-dm-sans font-bold text-base sm:text-lg text-white tracking-[-0.01em] leading-snug mb-4 sm:mb-5"
+        >
+          {{ 'FOOTER.ABOUT_US.TITLE' | translate }}
+        </h3>
+        <ul class="flex flex-col gap-2.5 sm:gap-3 font-dm-sans font-normal text-sm sm:text-[14.5px] text-white/85">
+          <li>
+            <a
+              href="#features"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.ABOUT_US.KENALI' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="#overview"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.ABOUT_US.ABOUT' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.ABOUT_US.TERMS' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.ABOUT_US.PRIVACY' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Customers (3 cols on lg) -->
+      <div class="lg:col-span-3 flex flex-col">
+        <h3
+          class="font-dm-sans font-bold text-base sm:text-lg text-white tracking-[-0.01em] leading-snug mb-4 sm:mb-5"
+        >
+          {{ 'FOOTER.CUSTOMERS.TITLE' | translate }}
+        </h3>
+        <ul class="flex flex-col gap-2.5 sm:gap-3 font-dm-sans font-normal text-sm sm:text-[14.5px] text-white/85">
+          <li>
+            <a
+              href="#business-model"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.CUSTOMERS.MANUFACTURING' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="#business-model"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.CUSTOMERS.DISTRIBUTION' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="#business-model"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.CUSTOMERS.CONSTRUCTION' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="#business-model"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.CUSTOMERS.SERVICES' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Support (3 cols on lg) -->
+      <div class="lg:col-span-3 flex flex-col">
+        <h3
+          class="font-dm-sans font-bold text-base sm:text-lg text-white tracking-[-0.01em] leading-snug mb-4 sm:mb-5"
+        >
+          {{ 'FOOTER.SUPPORT.TITLE' | translate }}
+        </h3>
+        <ul class="flex flex-col gap-2.5 sm:gap-3 font-dm-sans font-normal text-sm sm:text-[14.5px] text-white/85">
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.SUPPORT.IMPLEMENTATION' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.SUPPORT.TRAINING' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.SUPPORT.MAINTENANCE' | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-xs"
+            >
+              {{ 'FOOTER.SUPPORT.CUSTOMIZE' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Divider & Copyright -->
+    <div
+      class="border-t border-white/20 mt-12 sm:mt-16 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+    >
+      <p class="font-dm-sans font-normal text-xs sm:text-sm text-white/70 leading-normal">
+        {{ 'FOOTER.COPYRIGHT' | translate }}
+      </p>
+    </div>
+  </div>
+</footer>

@@ -20,8 +20,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withFetch()),
     provideTranslateService({
-      fallbackLang: 'en',
-      lang: 'en',
+      fallbackLang: 'id',
+      lang: 'id',
       loader: provideTranslateHttpLoader({
         prefix: '/i18n/',
         suffix: '.json',
