@@ -1,0 +1,25 @@
+<button
+  type="button"
+  (click)="scrollToHero()"
+  [attr.aria-label]="'COMMON.BACK_TO_TOP' | translate"
+  [class]="
+    'group fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] text-white shadow-md hover:shadow-lg hover:brightness-105 active:scale-95 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer ' +
+    (isVisible()
+      ? 'opacity-100 scale-100 pointer-events-auto'
+      : 'opacity-0 scale-90 pointer-events-none')
+  "
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="w-5 h-5 transition-transform duration-200 group-hover:-translate-y-0.5"
+    aria-hidden="true"
+  >
+    <polyline points="18 15 12 9 6 15" />
+  </svg>
+</button>
