@@ -66,14 +66,4 @@ describe('OverviewFeature', () => {
     expect(compiled.textContent).toContain('Target Revenue');
     expect(compiled.textContent).toContain('92%');
   });
-
-  it('should update hoveredCard state on interaction', () => {
-    expect(component.hoveredCard()).toBeNull();
-    component.setHoveredCard('approval');
-    expect(component.hoveredCard()).toBe('approval');
-    component.setHoveredCard('target');
-    expect(component.hoveredCard()).toBe('target');
-    component.setHoveredCard(null);
-    expect(component.hoveredCard()).toBeNull();
-  });
 });

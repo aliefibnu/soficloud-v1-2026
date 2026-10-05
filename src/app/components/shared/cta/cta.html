@@ -1,8 +1,9 @@
 <section
-  class="relative w-full py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 bg-white overflow-hidden"
+  id="support"
+  class="relative w-full py-section bg-white overflow-hidden scroll-mt-20"
   aria-labelledby="cta-heading"
 >
-  <!-- Decorative background wave band behind card (z-0 to remain visible above section background) -->
+  <div id="contact" class="absolute -top-20" aria-hidden="true"></div>
   <div
     class="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 md:top-[22%] md:translate-y-0 h-44 sm:h-56 md:h-72 lg:h-80 w-full overflow-hidden select-none z-0"
     aria-hidden="true"
@@ -22,14 +23,13 @@
   </div>
 
   <div
-    class="relative z-10 w-full max-w-7xl xl:max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-0"
+    class="relative z-10 w-full max-w-7xl xl:max-w-310 mx-auto px-4 sm:px-6 lg:px-8 xl:px-0"
   >
     <div
       class="relative bg-white rounded-xl shadow-[0_12px_45px_-5px_rgba(0,0,0,0.08)] border-y border-r border-slate-100/90 overflow-hidden flex flex-col md:flex-row items-stretch"
     >
-      <!-- Left Column: Photo of Representative (528px width, 3:4 aspect ratio matching Figma) -->
       <div
-        class="relative w-full md:w-[42%] lg:w-[45%] xl:w-[528px] shrink-0 h-64 sm:h-80 md:h-auto md:min-h-[500px] lg:min-h-[580px] xl:min-h-[704px] bg-slate-100 overflow-hidden"
+        class="relative w-full md:w-[42%] lg:w-[45%] xl:w-132 shrink-0 h-64 sm:h-80 md:h-auto md:min-h-125 lg:min-h-145 xl:min-h-176 bg-slate-100 overflow-hidden"
       >
         <img
           ngSrc="/images/cta/cta_image.webp"
@@ -41,26 +41,22 @@
         />
       </div>
 
-      <!-- Right Column: Content with exact Figma spacing and 117px left indentation -->
       <div
-        class="flex-1 min-w-0 flex flex-col justify-center px-5 sm:px-8 md:px-7 lg:px-12 xl:pl-[117px] xl:pr-16 py-8 sm:py-10 md:py-10 lg:py-12 xl:py-[72px]"
+        class="flex-1 min-w-0 flex flex-col justify-center px-5 sm:px-8 md:px-7 lg:px-12 xl:pl-29.25 xl:pr-16 py-8 sm:py-10 md:py-10 lg:py-12 xl:py-18"
       >
-        <!-- Heading: 48px DM Sans Bold with 54px line-height matching Figma -->
         <h2
           id="cta-heading"
-          class="font-dm-sans font-bold text-2xl sm:text-3xl md:text-[28px] lg:text-[38px] xl:text-[48px] text-[#182849] leading-tight xl:leading-[54px] tracking-[-0.02em] whitespace-pre-line"
+          class="font-dm-sans font-bold text-2xl sm:text-3xl md:text-[28px] lg:text-[38px] xl:text-[48px] text-[#182849] leading-tight xl:leading-13.5 tracking-[-0.02em] whitespace-pre-line"
         >
           {{ 'CTA.TITLE' | translate }}
         </h2>
 
-        <!-- Description: 14px DM Sans Regular with max-w-[495px] for exact 3-line wrap -->
         <p
-          class="mt-3.5 sm:mt-5 md:mt-4 lg:mt-6 xl:mt-[38px] font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-[14px] text-slate-600 leading-relaxed lg:leading-[21px] max-w-[495px]"
+          class="mt-3.5 sm:mt-5 md:mt-4 lg:mt-6 xl:mt-9.5 font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-[14px] text-slate-600 leading-relaxed lg:leading-5.25 max-w-123.75"
         >
           {{ 'CTA.DESCRIPTION' | translate }}
         </p>
 
-        <!-- Action Buttons: 48px height, exact pill/rounded styling and DM Sans Semibold -->
         <div
           class="mt-5 sm:mt-6 md:mt-6 lg:mt-8 xl:mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
         >
@@ -83,9 +79,8 @@
           </button>
         </div>
 
-        <!-- Contact Information List with Dividers: 284px width, 93px vertical rhythm -->
         <div
-          class="mt-6 sm:mt-8 md:mt-7 lg:mt-9 xl:mt-[52px] w-full max-w-full sm:max-w-[320px] md:max-w-[284px] flex flex-col"
+          class="mt-6 sm:mt-8 md:mt-7 lg:mt-9 xl:mt-13 w-full max-w-full sm:max-w-[320px] md:max-w-71 flex flex-col"
         >
           <!-- Phone -->
           <div
