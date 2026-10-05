@@ -1,12 +1,12 @@
 <section
-  class="relative w-full py-9 sm:py-12 md:py-16 lg:py-18 bg-white overflow-hidden"
+  id="resources"
+  class="relative w-full py-9 sm:py-12 md:py-16 lg:py-18 bg-white overflow-hidden scroll-mt-20"
   aria-labelledby="business-model-heading"
 >
+  <div id="business-model" class="absolute -top-20" aria-hidden="true"></div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 xl:gap-7 items-start">
-      <!-- Left Column: Header + Card 01 + Card 02 -->
       <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
-        <!-- Section Header -->
         <div class="flex flex-col justify-end pt-1 lg:pt-1.5 pb-1 lg:pb-1.5">
           <h2
             id="business-model-heading"
@@ -21,13 +21,11 @@
           </p>
         </div>
 
-        <!-- Left Cards (01, 02) -->
         @for (card of leftCards; track card.id) {
           <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
         }
       </div>
 
-      <!-- Right Column: Card 03 + Card 04 -->
       <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
         @for (card of rightCards; track card.id) {
           <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
@@ -37,15 +35,13 @@
   </div>
 </section>
 
-<!-- Reusable Card Template -->
 <ng-template #cardTemplate let-card>
   <article
-    class="group relative bg-white rounded-xl sm:rounded-2xl border border-slate-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-blue-950/6 hover:-translate-y-1 transition-all duration-300 p-4 sm:p-5 lg:px-5.5 xl:px-7 lg:py-5 xl:py-6 min-h-fit sm:min-h-[238px] lg:min-h-[248px] flex flex-col justify-center overflow-hidden"
+    class="group relative bg-white rounded-xl sm:rounded-2xl border border-slate-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-blue-950/6 hover:-translate-y-1 transition-all duration-300 p-4 sm:p-5 lg:px-5.5 xl:px-7 lg:py-5 xl:py-6 min-h-fit sm:min-h-59.5 lg:min-h-62 flex flex-col justify-center overflow-hidden"
     [attr.aria-label]="
       'BUSINESS_MODEL.ARIA.CARD' | translate: { title: (card.titleKey | translate) }
     "
   >
-    <!-- Card Number (Top Right) -->
     <span
       class="absolute top-3.5 right-4 sm:top-4.5 sm:right-5 lg:top-5 lg:right-6 font-inter font-bold text-base sm:text-lg lg:text-xl text-[#182849] select-none pointer-events-none z-10"
       aria-hidden="true"
@@ -53,22 +49,18 @@
       {{ card.number }}
     </span>
 
-    <!-- Content Body: Responsive Flex (Mobile: Column, Desktop: Row) -->
     <div
       class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-3.5 sm:gap-4 lg:gap-5 xl:gap-6 w-full my-auto"
     >
-      <!-- Text & Button Column: on mobile order-2 (under illustration), on sm+ order-1 (left side) -->
       <div
         class="w-full sm:w-auto flex flex-col justify-center flex-1 min-w-0 pr-0 sm:pr-2 lg:pr-3 order-2 sm:order-1 text-left"
       >
         <div>
-          <!-- Heading -->
           <h3
             class="font-inter font-bold text-base sm:text-lg md:text-xl lg:text-lg xl:text-[21.5px] text-[#182849] tracking-tight leading-snug"
           >
             {{ card.titleKey | translate }}
           </h3>
-          <!-- Body Text -->
           <p
             class="mt-1.5 sm:mt-2.5 md:mt-3 font-dm-sans font-normal text-[11px] sm:text-[12px] md:text-[12px] lg:text-[11.5px] xl:text-[12.5px] text-slate-600 leading-relaxed max-w-none sm:max-w-xs lg:max-w-sm xl:max-w-md"
           >
@@ -76,11 +68,10 @@
           </p>
         </div>
 
-        <!-- Button -->
         <div class="mt-3.5 sm:mt-4 lg:mt-4.5 pt-0.5">
           <a
             href="#contact"
-            class="w-fit inline-flex items-center justify-center px-4.5 sm:px-5 py-2 min-h-[40px] sm:min-h-[42px] rounded-xl font-dm-sans font-semibold text-xs sm:text-[13px] md:text-[13.5px] text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            class="w-fit inline-flex items-center justify-center px-4.5 sm:px-5 py-2 min-h-10 sm:min-h-10.5 rounded-xl font-dm-sans font-semibold text-xs sm:text-[13px] md:text-[13.5px] text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             [attr.aria-label]="
               'BUSINESS_MODEL.ARIA.LEARN_MORE' | translate: { title: (card.titleKey | translate) }
             "
@@ -90,9 +81,8 @@
         </div>
       </div>
 
-      <!-- Illustration Column: on mobile order-1 (at top), on sm+ order-2 (right side) -->
       <div
-        class="w-full max-w-[144px] min-[400px]:max-w-[166px] sm:w-[158px] md:w-[176px] lg:w-[153px] xl:w-[194px] 2xl:w-[202px] sm:max-w-none shrink-0 flex items-center justify-center sm:justify-end self-center mx-auto sm:mx-0 select-none pointer-events-none drop-shadow-xs order-1 sm:order-2 pt-1 sm:pt-0"
+        class="w-full max-w-36 min-[400px]:max-w-41.5 sm:w-39.5 md:w-44 lg:w-38.25 xl:w-48.5 2xl:w-50.5 sm:max-w-none shrink-0 flex items-center justify-center sm:justify-end self-center mx-auto sm:mx-0 select-none pointer-events-none drop-shadow-xs order-1 sm:order-2 pt-1 sm:pt-0"
         aria-hidden="true"
       >
         @switch (card.id) {

@@ -120,6 +120,9 @@ export class Navbar {
   }
 
   onScheduleDemo(): void {
-    // Demo scheduling trigger
+    if (typeof document !== 'undefined') {
+      const el = document.getElementById('support') || document.getElementById('contact');
+      el?.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }
