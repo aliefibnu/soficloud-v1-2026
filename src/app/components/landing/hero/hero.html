@@ -1,4 +1,4 @@
-<section id="hero" class="relative w-full pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-section overflow-x-clip">
+<section id="hero" class="relative w-full pt-10 sm:pt-16 md:pt-20 lg:pt-24 pb-section overflow-x-clip">
   <!-- blue shade/gradients -->
   <div
     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none"
@@ -23,13 +23,14 @@
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
     <div
-      class="inline-flex items-center gap-2 rounded-full border border-[#93c5fd]/70 bg-[#eff6ff]/80 px-4.5 py-1.5 sm:px-5 sm:py-1.5 text-[11px] sm:text-[12.5px] font-semibold uppercase tracking-wider text-[#1d64ec] shadow-2xs backdrop-blur-xs mb-5 sm:mb-7 transition-colors"
+      class="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-[#93c5fd]/70 bg-[#eff6ff]/80 px-3.5 py-1 sm:px-5 sm:py-1.5 text-[10.5px] sm:text-[12.5px] font-semibold uppercase tracking-wider text-[#1d64ec] shadow-2xs backdrop-blur-xs mb-4 sm:mb-7 transition-colors"
     >
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#1d64ec] sm:hidden" aria-hidden="true"></span>
       <span>{{ 'HERO.BADGE' | translate }}</span>
     </div>
 
     <h1
-      class="font-inter font-extrabold text-[#182849] text-[30px] sm:text-[38px] md:text-[56px] lg:text-[66px] xl:text-[76px] leading-[1.14] sm:leading-[1.08] md:leading-[1.04] tracking-[-0.035em] max-w-6xl mb-4 sm:mb-5"
+      class="font-inter font-extrabold text-[#182849] text-[28px] sm:text-[38px] md:text-[56px] lg:text-[66px] xl:text-[76px] leading-[1.12] sm:leading-[1.08] md:leading-[1.04] tracking-[-0.03em] sm:tracking-[-0.035em] max-w-sm sm:max-w-6xl mb-3.5 sm:mb-5 text-balance"
     >
       <span class="block md:whitespace-nowrap">{{ 'HERO.TITLE_LINE_1' | translate }}</span>
       <span class="block md:whitespace-nowrap">
@@ -39,34 +40,42 @@
     </h1>
 
     <p
-      class="font-dm-sans font-normal text-[#182849]/80 text-[15px] sm:text-[16.5px] md:text-[17.5px] lg:text-[18.5px] leading-relaxed max-w-4xl md:whitespace-nowrap"
+      class="font-dm-sans font-normal text-[#182849]/75 sm:text-[#182849]/80 text-[14px] sm:text-[16.5px] md:text-[17.5px] lg:text-[18.5px] leading-relaxed max-w-xs sm:max-w-4xl md:whitespace-nowrap text-balance"
     >
       {{ 'HERO.SUBTITLE' | translate }}
     </p>
 
-    <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto">
+    <div class="mt-6 sm:mt-7 flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-full max-w-85 sm:max-w-none sm:w-auto">
       <button
         type="button"
         (click)="onContact()"
         [attr.aria-label]="'HERO.ARIA.CONTACT_US' | translate"
-        class="group relative overflow-hidden w-full sm:w-auto inline-flex items-center justify-center px-6.5 py-2.5 sm:px-7 sm:py-2.5 rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] text-white font-display text-[15px] sm:text-xl font-semibold shadow-xs hover:shadow-md active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
+        class="group relative overflow-hidden flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 sm:px-7 sm:py-2.5 rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] text-white font-display text-[13.5px] sm:text-xl font-semibold shadow-xs hover:shadow-md active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
       >
-        <span class="relative z-10">{{ 'HERO.ACTIONS.CONTACT_US' | translate }}</span>
+        <span class="relative z-10 whitespace-nowrap">{{ 'HERO.ACTIONS.CONTACT_US' | translate }}</span>
       </button>
 
       <button
         type="button"
         (click)="onWatchVideo()"
         [attr.aria-label]="'HERO.ARIA.WATCH_VIDEO' | translate"
-        class="group relative overflow-hidden w-full sm:w-auto inline-flex items-center justify-center px-6.5 py-2.5 sm:px-7 sm:py-2.5 rounded-xl border border-transparent bg-origin-border [background-clip:padding-box,border-box] bg-[linear-gradient(white,white),linear-gradient(to_right,#1d44eb,#3b82f6)] font-display text-[15px] sm:text-xl font-semibold shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-[#1d44eb]/6 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
+        class="group relative overflow-hidden flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 sm:gap-2.5 px-4 py-2.5 sm:px-7 sm:py-2.5 rounded-xl border border-transparent bg-origin-border [background-clip:padding-box,border-box] bg-[linear-gradient(white,white),linear-gradient(to_right,#1d44eb,#3b82f6)] font-display text-[13.5px] sm:text-xl font-semibold shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-[#1d44eb]/6 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
       >
-        <span class="relative z-10 bg-linear-to-r from-[#1d44eb] to-[#3b82f6] bg-clip-text text-transparent">
+        <svg
+          class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-[#1d44eb] shrink-0"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          aria-hidden="true"
+        >
+          <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+        </svg>
+        <span class="relative z-10 bg-linear-to-r from-[#1d44eb] to-[#3b82f6] bg-clip-text text-transparent whitespace-nowrap">
           {{ 'HERO.ACTIONS.WATCH_VIDEO' | translate }}
         </span>
       </button>
     </div>
 
-    <div class="mt-10 sm:mt-14 md:mt-16 w-full max-w-6xl xl:max-w-7xl">
+    <div class="mt-7 sm:mt-14 md:mt-16 w-full max-w-6xl xl:max-w-7xl">
       <app-ui-mockup />
     </div>
   </div>

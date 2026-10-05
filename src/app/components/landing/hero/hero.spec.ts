@@ -134,4 +134,21 @@ describe('Hero', () => {
     const uiMockup = compiled.querySelector('app-ui-mockup');
     expect(uiMockup).toBeTruthy();
   });
+
+  it('should include design enhancements like text-balance, play icon, and status dot', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const h1 = compiled.querySelector('h1');
+    expect(h1?.classList.contains('text-balance')).toBe(true);
+
+    const videoButton = compiled.querySelectorAll('.mt-6 button')[1];
+    const playSvg = videoButton?.querySelector('svg');
+    expect(playSvg).toBeTruthy();
+    expect(playSvg?.getAttribute('aria-hidden')).toBe('true');
+    expect(playSvg?.classList.contains('sm:hidden')).toBe(false);
+
+    const badge = compiled.querySelector('.inline-flex');
+    const dot = badge?.querySelector('span.rounded-full');
+    expect(dot).toBeTruthy();
+    expect(dot?.classList.contains('sm:hidden')).toBe(true);
+  });
 });
