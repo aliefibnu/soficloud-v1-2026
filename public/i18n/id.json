@@ -5,7 +5,8 @@
   "COMMON": {
     "WELCOME": "Selamat Datang",
     "HOME": "Beranda",
-    "LANGUAGE": "Bahasa"
+    "LANGUAGE": "Bahasa",
+    "BACK_TO_TOP": "Kembali ke atas"
   },
   "HEADER": {
     "NAV": {

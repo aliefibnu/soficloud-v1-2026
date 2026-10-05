@@ -5,7 +5,8 @@
   "COMMON": {
     "WELCOME": "Welcome",
     "HOME": "Home",
-    "LANGUAGE": "Language"
+    "LANGUAGE": "Language",
+    "BACK_TO_TOP": "Back to top"
   },
   "HEADER": {
     "NAV": {

@@ -5,7 +5,8 @@
   "COMMON": {
     "WELCOME": "欢迎",
     "HOME": "首页",
-    "LANGUAGE": "语言"
+    "LANGUAGE": "语言",
+    "BACK_TO_TOP": "回到顶部"
   },
   "HEADER": {
     "NAV": {

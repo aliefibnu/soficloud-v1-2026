@@ -5,7 +5,8 @@
   "COMMON": {
     "WELCOME": "환영합니다",
     "HOME": "홈",
-    "LANGUAGE": "언어"
+    "LANGUAGE": "언어",
+    "BACK_TO_TOP": "맨 위로 이동"
   },
   "HEADER": {
     "NAV": {
