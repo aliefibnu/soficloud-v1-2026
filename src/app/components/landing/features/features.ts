@@ -54,8 +54,8 @@ export class Features {
       domeBg: '#FFF1EE',
       layers: [
         {
-          name: 'Group 9442.png',
-          src: '/images/features/1/Group 9442.png',
+          name: 'Group 9442.webp',
+          src: '/images/features/1/Group 9442.webp',
           w: 174,
           h: 213,
           z: 10,
@@ -66,8 +66,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9411.png',
-          src: '/images/features/1/Group 9411.png',
+          name: 'Group 9411.webp',
+          src: '/images/features/1/Group 9411.webp',
           w: 138,
           h: 108,
           z: 20,
@@ -79,8 +79,8 @@ export class Features {
             'origin-bottom-left group-hover:scale-105 group-hover:-rotate-3',
         },
         {
-          name: 'Group 9409.png',
-          src: '/images/features/1/Group 9409.png',
+          name: 'Group 9409.webp',
+          src: '/images/features/1/Group 9409.webp',
           w: 117,
           h: 85,
           z: 20,
@@ -101,8 +101,8 @@ export class Features {
       domeBg: '#EDF5FE',
       layers: [
         {
-          name: 'Group 9440.png',
-          src: '/images/features/2/Group 9440.png',
+          name: 'Group 9440.webp',
+          src: '/images/features/2/Group 9440.webp',
           w: 189,
           h: 206,
           z: 10,
@@ -113,8 +113,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9638.png',
-          src: '/images/features/2/Group 9638.png',
+          name: 'Group 9638.webp',
+          src: '/images/features/2/Group 9638.webp',
           w: 97,
           h: 92,
           z: 20,
@@ -126,8 +126,8 @@ export class Features {
             'group-hover:-translate-x-3 group-hover:-translate-y-1.5 group-hover:rotate-45 group-hover:scale-105',
         },
         {
-          name: 'Group 9637.png',
-          src: '/images/features/2/Group 9637.png',
+          name: 'Group 9637.webp',
+          src: '/images/features/2/Group 9637.webp',
           w: 138,
           h: 49,
           z: 20,
@@ -148,8 +148,8 @@ export class Features {
       domeBg: '#EDF6F6',
       layers: [
         {
-          name: 'Group 9446.png',
-          src: '/images/features/3/Group 9446.png',
+          name: 'Group 9446.webp',
+          src: '/images/features/3/Group 9446.webp',
           w: 267,
           h: 180,
           z: 10,
@@ -160,8 +160,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9639.png',
-          src: '/images/features/3/Group 9639.png',
+          name: 'Group 9639.webp',
+          src: '/images/features/3/Group 9639.webp',
           w: 125,
           h: 84,
           z: 20,
@@ -173,8 +173,8 @@ export class Features {
             'group-hover:translate-x-3 group-hover:-translate-y-3.5 group-hover:scale-105',
         },
         {
-          name: 'Group 9641.png',
-          src: '/images/features/3/Group 9641.png',
+          name: 'Group 9641.webp',
+          src: '/images/features/3/Group 9641.webp',
           w: 81,
           h: 55,
           z: 20,
@@ -195,8 +195,8 @@ export class Features {
       domeBg: '#E0FAFA',
       layers: [
         {
-          name: 'Group 9416.png',
-          src: '/images/features/4/Group 9416.png',
+          name: 'Group 9416.webp',
+          src: '/images/features/4/Group 9416.webp',
           w: 205,
           h: 210,
           z: 10,
@@ -207,8 +207,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9642.png',
-          src: '/images/features/4/Group 9642.png',
+          name: 'Group 9642.webp',
+          src: '/images/features/4/Group 9642.webp',
           w: 98,
           h: 149,
           z: 20,
@@ -220,8 +220,8 @@ export class Features {
             'origin-bottom group-hover:-translate-x-2 group-hover:scale-105',
         },
         {
-          name: 'Group 9417.png',
-          src: '/images/features/4/Group 9417.png',
+          name: 'Group 9417.webp',
+          src: '/images/features/4/Group 9417.webp',
           w: 116,
           h: 93,
           z: 25,
@@ -242,8 +242,8 @@ export class Features {
       domeBg: '#FDF2F2',
       layers: [
         {
-          name: 'Group 9643.png',
-          src: '/images/features/5/Group 9643.png',
+          name: 'Group 9643.webp',
+          src: '/images/features/5/Group 9643.webp',
           w: 257,
           h: 198,
           z: 10,
@@ -254,8 +254,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9644.png',
-          src: '/images/features/5/Group 9644.png',
+          name: 'Group 9644.webp',
+          src: '/images/features/5/Group 9644.webp',
           w: 131,
           h: 57,
           z: 20,
@@ -266,8 +266,8 @@ export class Features {
           hoverClass: 'group-hover:translate-x-3.5 group-hover:scale-105',
         },
         {
-          name: 'Group 9645.png',
-          src: '/images/features/5/Group 9645.png',
+          name: 'Group 9645.webp',
+          src: '/images/features/5/Group 9645.webp',
           w: 93,
           h: 93,
           z: 20,
@@ -279,8 +279,8 @@ export class Features {
             'group-hover:-translate-y-3 group-hover:rotate-45 group-hover:scale-105',
         },
         {
-          name: 'Group 9646.png',
-          src: '/images/features/5/Group 9646.png',
+          name: 'Group 9646.webp',
+          src: '/images/features/5/Group 9646.webp',
           w: 52,
           h: 52,
           z: 25,
@@ -300,8 +300,8 @@ export class Features {
       domeBg: '#E8F1FC',
       layers: [
         {
-          name: 'Group 9649.png',
-          src: '/images/features/6/Group 9649.png',
+          name: 'Group 9649.webp',
+          src: '/images/features/6/Group 9649.webp',
           w: 154,
           h: 194,
           z: 10,
@@ -313,8 +313,8 @@ export class Features {
             'origin-bottom group-hover:-translate-x-1.5 group-hover:scale-105',
         },
         {
-          name: 'Group 9423.png',
-          src: '/images/features/6/Group 9423.png',
+          name: 'Group 9423.webp',
+          src: '/images/features/6/Group 9423.webp',
           w: 380,
           h: 206,
           z: 15,
@@ -325,8 +325,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9430.png',
-          src: '/images/features/6/Group 9430.png',
+          name: 'Group 9430.webp',
+          src: '/images/features/6/Group 9430.webp',
           w: 101,
           h: 62,
           z: 20,
@@ -347,8 +347,8 @@ export class Features {
       domeBg: '#EAF1FD',
       layers: [
         {
-          name: 'Group 9461.png',
-          src: '/images/features/7/Group 9461.png',
+          name: 'Group 9461.webp',
+          src: '/images/features/7/Group 9461.webp',
           w: 272,
           h: 189,
           z: 10,
@@ -359,8 +359,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9458.png',
-          src: '/images/features/7/Group 9458.png',
+          name: 'Group 9458.webp',
+          src: '/images/features/7/Group 9458.webp',
           w: 67,
           h: 67,
           z: 20,
@@ -372,8 +372,8 @@ export class Features {
             'group-hover:-translate-x-3 group-hover:-translate-y-3 group-hover:scale-110',
         },
         {
-          name: 'Group 9419.png',
-          src: '/images/features/7/Group 9419.png',
+          name: 'Group 9419.webp',
+          src: '/images/features/7/Group 9419.webp',
           w: 142,
           h: 120,
           z: 20,
@@ -385,8 +385,8 @@ export class Features {
             'group-hover:translate-x-2.5 group-hover:-translate-y-2 group-hover:-rotate-6',
         },
         {
-          name: 'Group 9420.png',
-          src: '/images/features/7/Group 9420.png',
+          name: 'Group 9420.webp',
+          src: '/images/features/7/Group 9420.webp',
           w: 73,
           h: 39,
           z: 20,
@@ -406,8 +406,8 @@ export class Features {
       domeBg: '#E7F9F9',
       layers: [
         {
-          name: 'Group 9473.png',
-          src: '/images/features/8/Group 9473.png',
+          name: 'Group 9473.webp',
+          src: '/images/features/8/Group 9473.webp',
           w: 280,
           h: 189,
           z: 10,
@@ -418,8 +418,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9434.png',
-          src: '/images/features/8/Group 9434.png',
+          name: 'Group 9434.webp',
+          src: '/images/features/8/Group 9434.webp',
           w: 125,
           h: 158,
           z: 20,
@@ -431,8 +431,8 @@ export class Features {
             'origin-bottom group-hover:-translate-x-1.5 group-hover:scale-105',
         },
         {
-          name: 'Group 9651.png',
-          src: '/images/features/8/Group 9651.png',
+          name: 'Group 9651.webp',
+          src: '/images/features/8/Group 9651.webp',
           w: 110,
           h: 74,
           z: 20,
@@ -444,8 +444,8 @@ export class Features {
             'group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:scale-105',
         },
         {
-          name: 'Group 9473 (1).png',
-          src: '/images/features/8/Group 9473 (1).png',
+          name: 'Group 9473 (1).webp',
+          src: '/images/features/8/Group 9473 (1).webp',
           w: 52,
           h: 52,
           z: 25,
@@ -465,8 +465,8 @@ export class Features {
       domeBg: '#FDE8E7',
       layers: [
         {
-          name: 'Group 9474 (2).png',
-          src: '/images/features/9/Group 9474 (2).png',
+          name: 'Group 9474 (2).webp',
+          src: '/images/features/9/Group 9474 (2).webp',
           w: 307,
           h: 177,
           z: 10,
@@ -477,8 +477,8 @@ export class Features {
           hoverClass: 'origin-bottom group-hover:scale-[1.02]',
         },
         {
-          name: 'Group 9474.png',
-          src: '/images/features/9/Group 9474.png',
+          name: 'Group 9474.webp',
+          src: '/images/features/9/Group 9474.webp',
           w: 340,
           h: 168,
           z: 20,
@@ -490,8 +490,8 @@ export class Features {
             'origin-bottom group-hover:-translate-x-2 group-hover:scale-105',
         },
         {
-          name: 'Group 9474 (1).png',
-          src: '/images/features/9/Group 9474 (1).png',
+          name: 'Group 9474 (1).webp',
+          src: '/images/features/9/Group 9474 (1).webp',
           w: 331,
           h: 167,
           z: 25,
