@@ -61,10 +61,6 @@
 
           <div
             class="absolute left-[4%] sm:left-[6%] top-[53%] sm:top-[54%] z-30 will-change-transform animate-floating-card-left"
-            (mouseenter)="setHoveredCard('approval')"
-            (mouseleave)="setHoveredCard(null)"
-            [class.scale-105]="hoveredCard() === 'approval'"
-            [class.shadow-2xl]="hoveredCard() === 'approval'"
           >
             <div
               class="bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 md:p-4 shadow-xl shadow-blue-900/10 border border-slate-100/90 transition-all duration-300 min-w-31.25 sm:min-w-38.75 md:min-w-42.5"
@@ -91,7 +87,7 @@
               >
                 <div
                   class="h-full bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] rounded-full transition-all duration-1000"
-                  style="width: 75%;"
+                  style="width: 75%"
                 ></div>
               </div>
             </div>
@@ -99,10 +95,6 @@
 
           <div
             class="absolute right-[4%] sm:right-[6%] top-[13%] sm:top-[15%] z-30 will-change-transform animate-floating-card-right"
-            (mouseenter)="setHoveredCard('target')"
-            (mouseleave)="setHoveredCard(null)"
-            [class.scale-105]="hoveredCard() === 'target'"
-            [class.shadow-2xl]="hoveredCard() === 'target'"
           >
             <div
               class="bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 md:p-4 shadow-xl shadow-blue-900/10 border border-slate-100/90 flex flex-col items-center justify-center transition-all duration-300 min-w-21.25 sm:min-w-27.5 md:min-w-30"

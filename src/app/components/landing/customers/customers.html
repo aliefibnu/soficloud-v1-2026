@@ -1,1 +1,397 @@
-<p>customers works!</p>
+<section
+  class="relative w-full py-10 sm:py-12 lg:py-16 bg-white overflow-hidden"
+  aria-labelledby="customers-heading"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-center">
+      <!-- Left Column: Stat, Headings, and 3 Staggered Benefit Cards (5 cols on lg) -->
+      <div class="lg:col-span-5 flex flex-col justify-center">
+        <!-- Hero Stat 50+ (Inter Extra Bold, #23244E) -->
+        <span
+          class="font-inter font-extrabold text-5xl sm:text-6xl lg:text-[72px] text-[#23244E] tracking-tight leading-none select-none"
+        >
+          {{ 'CUSTOMERS.STAT' | translate }}
+        </span>
+
+        <!-- Heading (DM Sans Bold, #23244E) -->
+        <h2
+          id="customers-heading"
+          class="mt-2.5 sm:mt-3 font-dm-sans font-bold text-2xl sm:text-[28px] lg:text-[32px] text-[#23244E] leading-tight"
+        >
+          {{ 'CUSTOMERS.HEADING' | translate }}
+        </h2>
+
+        <!-- Subtitle (DM Sans Regular, #23244E) -->
+        <p
+          class="mt-2 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] leading-relaxed max-w-md"
+        >
+          {{ 'CUSTOMERS.SUBTITLE' | translate }}
+        </p>
+
+        <!-- 3 Staggered Benefit Cards -->
+        <div class="mt-6 sm:mt-8 flex flex-col gap-3 sm:gap-3.5 w-full max-w-lg">
+          <!-- Card 1: Berbagai Industri -->
+          <article
+            class="group w-full max-w-[340px] rounded-[20px] border-2 border-[#2F65F6] bg-white hover:bg-[#F0F5FE] p-4 sm:p-5 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default"
+          >
+            <h3
+              class="font-dm-sans font-bold text-base sm:text-[17px] text-[#23244E] leading-snug"
+            >
+              {{ 'CUSTOMERS.CARDS.INDUSTRY_TITLE' | translate }}
+            </h3>
+            <p
+              class="mt-1 font-dm-sans font-normal text-xs sm:text-sm text-[#23244E]/80 leading-relaxed"
+            >
+              {{ 'CUSTOMERS.CARDS.INDUSTRY_DESC' | translate }}
+            </p>
+          </article>
+
+          <!-- Card 2: Tim Implementasi Berpengalaman (Indented rightwards to match screenshot) -->
+          <article
+            class="group w-full max-w-[350px] ml-5 sm:ml-9 lg:ml-12 rounded-[20px] border-2 border-[#2F65F6] bg-white hover:bg-[#F0F5FE] p-4 sm:p-5 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default"
+          >
+            <h3
+              class="font-dm-sans font-bold text-base sm:text-[17px] text-[#23244E] leading-snug"
+            >
+              {{ 'CUSTOMERS.CARDS.TEAM_TITLE' | translate }}
+            </h3>
+            <p
+              class="mt-1 font-dm-sans font-normal text-xs sm:text-sm text-[#23244E]/80 leading-relaxed"
+            >
+              {{ 'CUSTOMERS.CARDS.TEAM_DESC' | translate }}
+            </p>
+          </article>
+
+          <!-- Card 3: After-Sales Support -->
+          <article
+            class="group w-full max-w-[340px] rounded-[20px] border-2 border-[#2F65F6] bg-white hover:bg-[#F0F5FE] p-4 sm:p-5 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default"
+          >
+            <h3
+              class="font-dm-sans font-bold text-base sm:text-[17px] text-[#23244E] leading-snug"
+            >
+              {{ 'CUSTOMERS.CARDS.SUPPORT_TITLE' | translate }}
+            </h3>
+            <p
+              class="mt-1 font-dm-sans font-normal text-xs sm:text-sm text-[#23244E]/80 leading-relaxed"
+            >
+              {{ 'CUSTOMERS.CARDS.SUPPORT_DESC' | translate }}
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Right Column: Top Spotlight Row, Animated Circuit Stage, Center Showcase Card, Bottom Dual Marquee (7 cols on lg) -->
+      <div class="lg:col-span-7 relative flex flex-col items-center overflow-hidden">
+        <!-- 1. Top Row: Sliding Infinite Track of Logos with Dynamic Active Spotlight -->
+        <div
+          class="relative z-20 w-full h-[64px] flex items-center justify-center overflow-hidden mb-2"
+          (mouseenter)="pauseRotation()"
+          (mouseleave)="resumeRotation()"
+        >
+          <!-- Sliding Infinite Track of Logos -->
+          <div
+            class="flex items-center gap-4 will-change-transform z-10"
+            [class.transition-transform]="isSlidingSmooth()"
+            [class.duration-700]="isSlidingSmooth()"
+            [class.ease-[cubic-bezier(0.2,0.8,0.2,1)]]="isSlidingSmooth()"
+            [style.transform]="trackTransform()"
+          >
+            @for (customer of infiniteTopCustomers; track customer.virtualIdx) {
+              <button
+                type="button"
+                (click)="selectCustomer(customer.virtualIdx)"
+                class="relative flex-shrink-0 w-28 h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border p-2 flex items-center justify-center transition-all duration-300 cursor-pointer focus:outline-none"
+                [class.border-2]="customer.virtualIdx === virtualIndex()"
+                [class.border-[#1C73E8]]="customer.virtualIdx === virtualIndex()"
+                [class.shadow-[0_0_22px_rgba(28,115,232,0.4)]]="customer.virtualIdx === virtualIndex()"
+                [class.opacity-100]="customer.virtualIdx === virtualIndex()"
+                [class.scale-100]="customer.virtualIdx === virtualIndex()"
+                [class.z-20]="customer.virtualIdx === virtualIndex()"
+                [class.border-slate-200/90]="customer.virtualIdx !== virtualIndex()"
+                [class.shadow-sm]="customer.virtualIdx !== virtualIndex()"
+                [class.opacity-60]="customer.virtualIdx !== virtualIndex()"
+                [class.scale-95]="customer.virtualIdx !== virtualIndex()"
+                [class.z-10]="customer.virtualIdx !== virtualIndex()"
+                [attr.aria-label]="
+                  'CUSTOMERS.ARIA.SELECT_CUSTOMER'
+                    | translate: { name: customer.name }
+                "
+                [attr.aria-pressed]="customer.virtualIdx === virtualIndex()"
+              >
+                <img
+                  [src]="customer.logo"
+                  [alt]="customer.name"
+                  class="max-h-8 max-w-[85%] object-contain select-none"
+                  loading="lazy"
+                />
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- 2. Circuit Stage: SVG Canvas + Center Showcase Card (Fixed 370px height stage) -->
+        <div class="relative w-full h-[370px] flex items-center justify-center">
+          <!-- SVG Circuit Canvas (Exact pixel geometry matching reference screenshot 104754.png) -->
+          <svg
+            class="absolute inset-0 w-full h-full pointer-events-none z-0"
+            viewBox="0 0 750 370"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <filter
+                id="circuit-glow"
+                filterUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="750"
+                height="370"
+              >
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- A. Top Horizontal Baseline (y = 20) -->
+            <line
+              x1="20"
+              y1="20"
+              x2="730"
+              y2="20"
+              stroke="#E2E8F0"
+              stroke-width="1.5"
+            />
+
+            <!-- B. Base Circuit Lines (Neutral gray #E2E8F0, exact geometry from reference) -->
+            <!-- 1. Upper Right: drops down from top baseline, curves left into card right edge -->
+            <path
+              d="M 515 100 L 530 100 Q 545 100 545 85 L 545 20"
+              fill="none"
+              stroke="#E2E8F0"
+              stroke-width="1.5"
+            />
+
+            <!-- 2. Lower Right: from center card, vertical 1 down, horizontal 1 right, vertical 2 straight down to bottom baseline -->
+            <path
+              d="M 515 175 L 545 175 Q 560 175 560 190 L 560 235 Q 560 250 575 250 L 615 250 Q 630 250 630 265 L 630 350"
+              fill="none"
+              stroke="#E2E8F0"
+              stroke-width="1.5"
+            />
+
+            <!-- 3. Left Path: from center card, vertical 1 down, horizontal 1 left, vertical 2 straight down to bottom baseline -->
+            <path
+              d="M 235 175 L 205 175 Q 190 175 190 190 L 190 235 Q 190 250 175 250 L 105 250 Q 90 250 90 265 L 90 350"
+              fill="none"
+              stroke="#E2E8F0"
+              stroke-width="1.5"
+            />
+
+            <!-- C. Bottom Horizontal Baseline (y = 350, strictly ABOVE bottom logo cards) -->
+            <line
+              x1="20"
+              y1="350"
+              x2="730"
+              y2="350"
+              stroke="#E2E8F0"
+              stroke-width="1.5"
+            />
+
+            <!-- D. Blue Pulses (Run ONCE per PT cycle, linear speed, vanish completely) -->
+            @if (isLineAnimating()) {
+              <!-- Pulse 1: Upper Right (from card up vertical to top baseline) -->
+              <path
+                d="M 515 100 L 530 100 Q 545 100 545 85 L 545 20"
+                fill="none"
+                stroke="#1C73E8"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                class="pulse-upper-right"
+                filter="url(#circuit-glow)"
+              />
+
+              <!-- Pulse 2: Lower Right (flows through horizontal 1, vertical 1, horizontal 2, to vertical 2) -->
+              <path
+                d="M 515 175 L 545 175 Q 560 175 560 190 L 560 235 Q 560 250 575 250 L 615 250 Q 630 250 630 265 L 630 350"
+                fill="none"
+                stroke="#1C73E8"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                class="pulse-lower-right"
+                filter="url(#circuit-glow)"
+              />
+
+              <!-- Pulse 3: Left (flows through horizontal 1, vertical 1, horizontal 2, to vertical 2) -->
+              <path
+                d="M 235 175 L 205 175 Q 190 175 190 190 L 190 235 Q 190 250 175 250 L 105 250 Q 90 250 90 265 L 90 350"
+                fill="none"
+                stroke="#1C73E8"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                class="pulse-left"
+                filter="url(#circuit-glow)"
+              />
+
+              <!-- Pulse 4: Bottom Horizontal (flows from left to right along bottom line) -->
+              <line
+                x1="20"
+                y1="350"
+                x2="730"
+                y2="350"
+                stroke="#1C73E8"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                class="pulse-bottom-horizontal"
+                filter="url(#circuit-glow)"
+              />
+            }
+
+            <!-- E. Top Indicator Segment (Shows active PT position, rendered on top of pulse so indicator overlaps pulse) -->
+            <g
+              [style.transform]="indicatorTransform()"
+              class="transition-transform duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
+            >
+              <line
+                x1="0"
+                y1="20"
+                x2="50"
+                y2="20"
+                stroke="#1C73E8"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </g>
+          </svg>
+
+          <!-- Center Showcase Card (Sitting in center of this stage, above the SVG lines) -->
+          <article
+            class="group/showcase relative z-10 w-[290px] sm:w-[305px] min-h-[250px] sm:min-h-[256px] rounded-[26px] bg-white hover:bg-[#F0F5FE] border border-slate-100 hover:border-blue-200 shadow-[0_16px_36px_rgba(35,36,78,0.08)] hover:shadow-[0_20px_42px_rgba(35,36,78,0.12)] py-5 px-6 sm:py-5.5 sm:px-7 flex flex-col items-center justify-between transition-all duration-300"
+            (mouseenter)="pauseRotation()"
+            (mouseleave)="resumeRotation()"
+            [attr.aria-label]="
+              'CUSTOMERS.ARIA.CUSTOMER_CARD'
+                | translate: { name: activeCustomer().name }
+            "
+          >
+            <!-- Inner Container with Interactive Transition Logo (No background, seamless) -->
+            <div
+              class="w-full flex-1 flex flex-col items-center justify-center min-h-[136px] py-1 overflow-hidden transition-all duration-300"
+            >
+              <div class="h-16 w-full flex items-center justify-center">
+                <img
+                  [src]="activeCustomer().logo"
+                  [alt]="activeCustomer().name"
+                  [class.logo-switch-active]="isLogoTransitioning()"
+                  class="max-h-[52px] max-w-[85%] object-contain select-none"
+                />
+              </div>
+              <p
+                [class.logo-switch-active]="isLogoTransitioning()"
+                class="mt-3 text-xs sm:text-sm text-slate-400 group-hover/showcase:text-slate-600 font-dm-sans font-normal text-center truncate max-w-full px-2 transition-colors duration-300"
+              >
+                {{ activeCustomer().name }}
+              </p>
+            </div>
+
+            <!-- CTA Link: Lihat Pengalaman Bisnis (DM Sans Bold, #1C73E8) -->
+            <a
+              href="javascript:void(0)"
+              class="mt-3 inline-flex items-center gap-2 font-dm-sans font-bold text-sm text-[#1C73E8] hover:text-blue-700 transition-colors group/cta focus:outline-none focus:ring-2 focus:ring-[#1C73E8] focus:ring-offset-2 rounded"
+            >
+              <span>{{ 'CUSTOMERS.CTA_EXPERIENCE' | translate }}</span>
+              <svg
+                class="w-4 h-4 transform group-hover/cta:translate-x-1.5 transition-transform duration-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </a>
+          </article>
+        </div>
+
+        <!-- 3. Bottom Rows: Dual Infinite Marquee (Strictly positioned BELOW the circuit stage) -->
+        <div class="relative z-20 w-full flex flex-col gap-2.5 sm:gap-3 mt-4 marquee-mask overflow-hidden">
+          <!-- Row 1: Marquee (Starts with Kubota, ISK, ATL, BSI) -->
+          <div class="relative w-full overflow-hidden py-1">
+            <div
+              class="marquee-track-right hover:[animation-play-state:paused] flex items-center gap-3"
+            >
+              @for (customer of bottomRow1; track 'r1a-' + customer.id) {
+                <div
+                  class="group/item flex-shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  [attr.aria-label]="customer.name"
+                >
+                  <img
+                    [src]="customer.logo"
+                    [alt]="customer.name"
+                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    loading="lazy"
+                  />
+                </div>
+              }
+              <!-- Duplicate for seamless infinite loop -->
+              @for (customer of bottomRow1; track 'r1b-' + customer.id) {
+                <div
+                  class="group/item flex-shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  [attr.aria-label]="customer.name"
+                >
+                  <img
+                    [src]="customer.logo"
+                    [alt]="customer.name"
+                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    loading="lazy"
+                  />
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Row 2: Marquee (Starts with Eagle KSP, Suntech, Fanindo, Lytech) -->
+          <div class="relative w-full overflow-hidden py-1">
+            <div
+              class="marquee-track-left hover:[animation-play-state:paused] flex items-center gap-3"
+            >
+              @for (customer of bottomRow2; track 'r2a-' + customer.id) {
+                <div
+                  class="group/item flex-shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  [attr.aria-label]="customer.name"
+                >
+                  <img
+                    [src]="customer.logo"
+                    [alt]="customer.name"
+                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    loading="lazy"
+                  />
+                </div>
+              }
+              <!-- Duplicate for seamless infinite loop -->
+              @for (customer of bottomRow2; track 'r2b-' + customer.id) {
+                <div
+                  class="group/item flex-shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  [attr.aria-label]="customer.name"
+                >
+                  <img
+                    [src]="customer.logo"
+                    [alt]="customer.name"
+                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    loading="lazy"
+                  />
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

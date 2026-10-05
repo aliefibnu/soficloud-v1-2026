@@ -331,5 +331,82 @@
         "DESC": "Projects, contracts, operational billing, approvals, cash flow, and profitability analysis for more structured service businesses."
       }
     }
+  },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "Existing Customers",
+    "SUBTITLE": "Have been using SOFICloud to support their business processes and operations.",
+    "CARDS": {
+      "INDUSTRY_TITLE": "Various Industries",
+      "INDUSTRY_DESC": "Experience across diverse business models and characteristics.",
+      "TEAM_TITLE": "Experienced Implementation Team",
+      "TEAM_DESC": "Deep understanding of applications and corporate business processes.",
+      "SUPPORT_TITLE": "After-Sales Support",
+      "SUPPORT_DESC": "Continuous, reliable support after implementation."
+    },
+    "CTA_EXPERIENCE": "View Business Experience",
+    "ARIA": {
+      "SECTION": "SOFICloud Customers",
+      "CUSTOMER_CARD": "Customer company {{name}}",
+      "SELECT_CUSTOMER": "Select company {{name}}"
+    }
+  },
+  "CTA": {
+    "TITLE": "Interested in\nSOFICloud ERP?",
+    "DESCRIPTION": "SOFICloud is ready to help companies manage business processes more integrated, controlled, and easy to monitor. Contact our team to discuss your company's ERP needs.",
+    "SCHEDULE_DEMO": "Schedule Demo",
+    "CONTACT_US": "Contact Us",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "SOFICloud ERP representative ready to assist your business needs",
+    "ARIA": {
+      "SECTION": "SOFICloud ERP Call to Action",
+      "SCHEDULE_DEMO": "Schedule a SOFICloud ERP Demo",
+      "CONTACT_US": "Contact SOFICloud ERP team",
+      "PHONE": "Call SOFICloud office at +62 778 416 0250",
+      "WHATSAPP": "Chat with SOFICloud on WhatsApp at +62 811 7774 744",
+      "EMAIL": "Send email to hello@inforsys.co.id"
+    }
+  },
+  "FOOTER": {
+    "COMPANY_NAME": "PT Inforsys Indonesia",
+    "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+    "ADDRESS_LINE2": "Agung Podomoro Land Batam",
+    "ADDRESS_LINE3": "Kepulauan Riau 29464, Indonesia",
+    "PHONE": "+62 778 416 0250",
+    "EMAIL": "hello@inforsys.co.id",
+    "ABOUT_US": {
+      "TITLE": "About Us",
+      "KENALI": "Kenali SofiCloud",
+      "ABOUT": "About Inforsys",
+      "TERMS": "Terms & Conditions",
+      "PRIVACY": "Privacy Policy"
+    },
+    "CUSTOMERS": {
+      "TITLE": "Customers",
+      "MANUFACTURING": "Manufacturing",
+      "DISTRIBUTION": "Distribution",
+      "CONSTRUCTION": "Construction & Project",
+      "SERVICES": "Services"
+    },
+    "SUPPORT": {
+      "TITLE": "Support",
+      "IMPLEMENTATION": "Software Implementation",
+      "TRAINING": "Training & Re-Implementation",
+      "MAINTENANCE": "Annual Software Maintenance",
+      "CUSTOMIZE": "Customize Module"
+    },
+    "COPYRIGHT": "© 1998 – 2026 PT Inforsys Indonesia",
+    "ARIA": {
+      "SECTION": "SOFICloud Website Footer",
+      "PHONE": "Call phone number +62 778 416 0250",
+      "EMAIL": "Send email to hello@inforsys.co.id",
+      "LOGO": "SOFICloud Logo"
+    }
   }
 }
+

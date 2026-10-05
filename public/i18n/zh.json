@@ -315,21 +315,98 @@
     },
     "CARDS": {
       "MANUFACTURING": {
-        "TITLE": "Manufacturing",
+        "TITLE": "制造业",
         "DESC": "物料计划、采购、库存、BOM、工艺路线、生产工单、车间作业、成本核算到财务的无缝集成。"
       },
       "DISTRIBUTION": {
-        "TITLE": "Distribution & Trading",
+        "TITLE": "分销与贸易",
         "DESC": "销售订单、采购、多仓库库存、发货、发票以及应收应付账款全程集中跟踪管理。"
       },
       "CONSTRUCTION": {
-        "TITLE": "Construction & Project",
+        "TITLE": "建筑与工程项目",
         "DESC": "连接询价、项目预算、采购、工程实施、进度计费与付款。在一个流程中监控每个项目的状态和成本。"
       },
       "SERVICES": {
-        "TITLE": "Services",
+        "TITLE": "服务业",
         "DESC": "项目、合同、运营计费、审批、现金流与盈利能力分析，助专业服务业务井然有序。"
       }
     }
+  },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "现有客户",
+    "SUBTITLE": "已采用 SOFICloud 全面支持其业务流程与运营管理。",
+    "CARDS": {
+      "INDUSTRY_TITLE": "多元行业覆盖",
+      "INDUSTRY_DESC": "在多元商业特征与业务模式中积累了深厚经验。",
+      "TEAM_TITLE": "资深实施专家团队",
+      "TEAM_DESC": "深入理解系统应用与企业核心业务流程。",
+      "SUPPORT_TITLE": "完善售后支持",
+      "SUPPORT_DESC": "上线实施后提供持续稳健的长期支持。"
+    },
+    "CTA_EXPERIENCE": "查看业务实战经验",
+    "ARIA": {
+      "SECTION": "SOFICloud 客户案例",
+      "CUSTOMER_CARD": "客户企业 {{name}}",
+      "SELECT_CUSTOMER": "选择企业 {{name}}"
+    }
+  },
+  "CTA": {
+    "TITLE": "对 SOFICloud ERP\n感兴趣？",
+    "DESCRIPTION": "SOFICloud 随时准备协助企业更一体化、受控且易于监控地管理业务流程。请联系我们的团队，探讨您企业的 ERP 需求。",
+    "SCHEDULE_DEMO": "预约演示",
+    "CONTACT_US": "联系我们",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "随时为您提供业务支持的 SOFICloud ERP 代表",
+    "ARIA": {
+      "SECTION": "SOFICloud ERP 行动号召",
+      "SCHEDULE_DEMO": "预约 SOFICloud ERP 演示",
+      "CONTACT_US": "联系 SOFICloud ERP 团队",
+      "PHONE": "致电 SOFICloud 办公室: +62 778 416 0250",
+      "WHATSAPP": "通过 WhatsApp 联系 SOFICloud: +62 811 7774 744",
+      "EMAIL": "发送邮件至 hello@inforsys.co.id"
+    }
+  },
+  "FOOTER": {
+    "COMPANY_NAME": "PT Inforsys Indonesia",
+    "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+    "ADDRESS_LINE2": "Agung Podomoro Land Batam",
+    "ADDRESS_LINE3": "Kepulauan Riau 29464, Indonesia",
+    "PHONE": "+62 778 416 0250",
+    "EMAIL": "hello@inforsys.co.id",
+    "ABOUT_US": {
+      "TITLE": "关于我们",
+      "KENALI": "认识 SOFICloud",
+      "ABOUT": "关于 Inforsys",
+      "TERMS": "服务条款",
+      "PRIVACY": "隐私政策"
+    },
+    "CUSTOMERS": {
+      "TITLE": "客户领域",
+      "MANUFACTURING": "制造业",
+      "DISTRIBUTION": "分销与贸易",
+      "CONSTRUCTION": "建筑与工程项目",
+      "SERVICES": "服务业"
+    },
+    "SUPPORT": {
+      "TITLE": "支持服务",
+      "IMPLEMENTATION": "系统实施服务",
+      "TRAINING": "培训与二次实施",
+      "MAINTENANCE": "软件年度维护",
+      "CUSTOMIZE": "功能模块定制"
+    },
+    "COPYRIGHT": "© 1998 – 2026 PT Inforsys Indonesia",
+    "ARIA": {
+      "SECTION": "SOFICloud 网站页脚",
+      "PHONE": "致电 +62 778 416 0250",
+      "EMAIL": "发送邮件至 hello@inforsys.co.id",
+      "LOGO": "SOFICloud 标识"
+    }
   }
 }
+

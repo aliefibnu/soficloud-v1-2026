@@ -37,19 +37,19 @@ describe('BusinessModel', () => {
         },
         CARDS: {
           MANUFACTURING: {
-            TITLE: 'Manufacturing',
+            TITLE: 'Manufaktur',
             DESC: 'Material planning, procurement, inventory, BOM, routing, production order, shop floor, costing, hingga finance yang saling terintegrasi.',
           },
           DISTRIBUTION: {
-            TITLE: 'Distribution & Trading',
+            TITLE: 'Distribusi & Perdagangan',
             DESC: 'Sales order, purchasing, multi-warehouse inventory, delivery, invoicing, serta monitoring piutang dan hutang dalam satu alur kerja.',
           },
           CONSTRUCTION: {
-            TITLE: 'Construction & Project',
+            TITLE: 'Konstruksi & Proyek',
             DESC: 'Hubungkan RFQ, project budget, pengadaan, pelaksanaan pekerjaan, progress billing, dan pembayaran. Pantau status serta biaya setiap proyek dalam satu alur.',
           },
           SERVICES: {
-            TITLE: 'Services',
+            TITLE: 'Jasa & Layanan',
             DESC: 'Project, contract, operational billing, approval, cash flow, dan profitability analysis untuk bisnis jasa yang lebih tertata.',
           },
         },
@@ -132,10 +132,10 @@ describe('BusinessModel', () => {
       h3.textContent?.trim(),
     );
     expect(titles).toEqual([
-      'Manufacturing',
-      'Distribution & Trading',
-      'Construction & Project',
-      'Services',
+      'Manufaktur',
+      'Distribusi & Perdagangan',
+      'Konstruksi & Proyek',
+      'Jasa & Layanan',
     ]);
 
     const svgs = Array.from(compiled.querySelectorAll('svg.bm-illustration'));
@@ -178,5 +178,38 @@ describe('BusinessModel', () => {
 
     const buttons = compiled.querySelectorAll('article a');
     expect(buttons[0]?.textContent?.trim()).toBe('Learn More');
+  });
+
+  it('should have responsive card ordering with illustration on top on mobile and text column containing heading, body, and button in order', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const articles = compiled.querySelectorAll('article');
+
+    articles.forEach((article) => {
+      const illustrationCol = article.querySelector('svg.bm-illustration')?.closest('div');
+      expect(illustrationCol).toBeTruthy();
+      expect(illustrationCol?.classList.contains('order-1')).toBe(true);
+      expect(illustrationCol?.classList.contains('sm:order-2')).toBe(true);
+
+      const textCol = article.querySelector('h3')?.closest('.order-2');
+      expect(textCol).toBeTruthy();
+      expect(textCol?.classList.contains('sm:order-1')).toBe(true);
+
+      // Verify internal order inside text column: heading -> body -> button
+      const heading = textCol?.querySelector('h3');
+      const body = textCol?.querySelector('p');
+      const button = textCol?.querySelector('a');
+
+      expect(heading).toBeTruthy();
+      expect(body).toBeTruthy();
+      expect(button).toBeTruthy();
+
+      expect(
+        Boolean(heading!.compareDocumentPosition(body!) & Node.DOCUMENT_POSITION_FOLLOWING),
+      ).toBe(true);
+      expect(
+        Boolean(body!.compareDocumentPosition(button!) & Node.DOCUMENT_POSITION_FOLLOWING),
+      ).toBe(true);
+    });
   });
 });

@@ -83,10 +83,4 @@ import { LanguageService } from '../../../systems/lib/language.service';
 })
 export class OverviewFeature {
   protected readonly languageService = inject(LanguageService);
-
-  readonly hoveredCard = signal<string | null>(null);
-
-  setHoveredCard(card: string | null): void {
-    this.hoveredCard.set(card);
-  }
 }

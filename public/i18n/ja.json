@@ -315,21 +315,98 @@
     },
     "CARDS": {
       "MANUFACTURING": {
-        "TITLE": "Manufacturing",
+        "TITLE": "製造業",
         "DESC": "資材計画、調達、在庫、BOM、ルーティング、製造指図、現場管理、原価計算から財務までを一元管理。"
       },
       "DISTRIBUTION": {
-        "TITLE": "Distribution & Trading",
+        "TITLE": "流通・貿易",
         "DESC": "販売注文、仕入、複数倉庫の在庫管理、出荷、請求、売掛金・買掛金モニタリングを1つのワークフローで実現。"
       },
       "CONSTRUCTION": {
-        "TITLE": "Construction & Project",
+        "TITLE": "建設・プロジェクト",
         "DESC": "RFQ、プロジェクト予算、調達、現場施工、進捗請求、支払をシームレスに連携。プロジェクトの進捗と原価を1つのフローで把握。"
       },
       "SERVICES": {
-        "TITLE": "Services",
+        "TITLE": "サービス業",
         "DESC": "プロジェクト、契約、業務請求、承認、キャッシュフロー、収益性分析により、サービスビジネスの整然とした管理を実現。"
       }
     }
+  },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "導入企業実績",
+    "SUBTITLE": "ビジネスプロセスと業務運営を支援するためにSOFICloudを導入しています。",
+    "CARDS": {
+      "INDUSTRY_TITLE": "多様な業界",
+      "INDUSTRY_DESC": "多様なビジネス特性とモデルにおける豊富な実績。",
+      "TEAM_TITLE": "経験豊富な導入チーム",
+      "TEAM_DESC": "アプリケーションと企業の業務プロセスを深く理解。",
+      "SUPPORT_TITLE": "アフターサポート",
+      "SUPPORT_DESC": "導入後も継続的で安心なサポートを提供。"
+    },
+    "CTA_EXPERIENCE": "導入実績・ビジネス経験を見る",
+    "ARIA": {
+      "SECTION": "SOFICloudの導入企業",
+      "CUSTOMER_CARD": "導入企業 {{name}}",
+      "SELECT_CUSTOMER": "{{name}} を選択"
+    }
+  },
+  "CTA": {
+    "TITLE": "SOFICloud ERPに\nご興味がありますか？",
+    "DESCRIPTION": "SOFICloudは、企業のビジネスプロセスをより統合的、安定的、かつ容易に監視・管理できるよう支援します。御社のERPニーズについてぜひご相談ください。",
+    "SCHEDULE_DEMO": "デモを予約する",
+    "CONTACT_US": "お問い合わせ",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "お客様のビジネスニーズを支援するSOFICloud ERP担当者",
+    "ARIA": {
+      "SECTION": "SOFICloud ERP コールトゥアクション",
+      "SCHEDULE_DEMO": "SOFICloud ERP デモを予約する",
+      "CONTACT_US": "SOFICloud ERP チームにお問い合わせ",
+      "PHONE": "SOFICloud オフィスに電話: +62 778 416 0250",
+      "WHATSAPP": "SOFICloud WhatsAppに連絡: +62 811 7774 744",
+      "EMAIL": "メールを送信: hello@inforsys.co.id"
+    }
+  },
+  "FOOTER": {
+    "COMPANY_NAME": "PT Inforsys Indonesia",
+    "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+    "ADDRESS_LINE2": "Agung Podomoro Land Batam",
+    "ADDRESS_LINE3": "Kepulauan Riau 29464, Indonesia",
+    "PHONE": "+62 778 416 0250",
+    "EMAIL": "hello@inforsys.co.id",
+    "ABOUT_US": {
+      "TITLE": "会社概要",
+      "KENALI": "SOFICloudについて",
+      "ABOUT": "Inforsysについて",
+      "TERMS": "利用規約",
+      "PRIVACY": "プライバシーポリシー"
+    },
+    "CUSTOMERS": {
+      "TITLE": "導入分野",
+      "MANUFACTURING": "製造業",
+      "DISTRIBUTION": "流通・商社",
+      "CONSTRUCTION": "建設・プロジェクト",
+      "SERVICES": "サービス業"
+    },
+    "SUPPORT": {
+      "TITLE": "サポート",
+      "IMPLEMENTATION": "導入支援・構築",
+      "TRAINING": "トレーニング・再導入支援",
+      "MAINTENANCE": "年間ソフトウェア保守",
+      "CUSTOMIZE": "モジュールカスタマイズ"
+    },
+    "COPYRIGHT": "© 1998 – 2026 PT Inforsys Indonesia",
+    "ARIA": {
+      "SECTION": "SOFICloudウェブサイトフッター",
+      "PHONE": "+62 778 416 0250 へ電話",
+      "EMAIL": "hello@inforsys.co.id へメール送信",
+      "LOGO": "SOFICloudロゴ"
+    }
   }
 }
+

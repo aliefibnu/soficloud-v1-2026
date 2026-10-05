@@ -315,21 +315,98 @@
     },
     "CARDS": {
       "MANUFACTURING": {
-        "TITLE": "Manufacturing",
+        "TITLE": "Manufaktur",
         "DESC": "Material planning, procurement, inventory, BOM, routing, production order, shop floor, costing, hingga finance yang saling terintegrasi."
       },
       "DISTRIBUTION": {
-        "TITLE": "Distribution & Trading",
+        "TITLE": "Distribusi & Perdagangan",
         "DESC": "Sales order, purchasing, multi-warehouse inventory, delivery, invoicing, serta monitoring piutang dan hutang dalam satu alur kerja."
       },
       "CONSTRUCTION": {
-        "TITLE": "Construction & Project",
+        "TITLE": "Konstruksi & Proyek",
         "DESC": "Hubungkan RFQ, project budget, pengadaan, pelaksanaan pekerjaan, progress billing, dan pembayaran. Pantau status serta biaya setiap proyek dalam satu alur."
       },
       "SERVICES": {
-        "TITLE": "Services",
+        "TITLE": "Jasa & Layanan",
         "DESC": "Project, contract, operational billing, approval, cash flow, dan profitability analysis untuk bisnis jasa yang lebih tertata."
       }
     }
+  },
+  "CUSTOMERS": {
+    "STAT": "50+",
+    "HEADING": "Pelanggan Kami",
+    "SUBTITLE": "Telah menggunakan SOFICloud untuk mendukung proses bisnis dan operasional.",
+    "CARDS": {
+      "INDUSTRY_TITLE": "Berbagai Industri",
+      "INDUSTRY_DESC": "Pengalaman pada beragam karakter dan model bisnis.",
+      "TEAM_TITLE": "Tim Implementasi Berpengalaman",
+      "TEAM_DESC": "Memahami aplikasi dan proses bisnis perusahaan.",
+      "SUPPORT_TITLE": "Dukungan Purna Jual",
+      "SUPPORT_DESC": "Dukungan berkelanjutan setelah implementasi."
+    },
+    "CTA_EXPERIENCE": "Lihat Pengalaman Bisnis",
+    "ARIA": {
+      "SECTION": "Pelanggan SOFICloud",
+      "CUSTOMER_CARD": "Perusahaan pelanggan {{name}}",
+      "SELECT_CUSTOMER": "Pilih perusahaan {{name}}"
+    }
+  },
+  "CTA": {
+    "TITLE": "Tertarik Dengan\nSOFICloud ERP?",
+    "DESCRIPTION": "SOFICloud siap membantu perusahaan mengelola proses bisnis secara lebih terintegrasi, terkontrol, dan mudah dipantau. Hubungi tim kami untuk berdiskusi mengenai kebutuhan ERP perusahaan Anda.",
+    "SCHEDULE_DEMO": "Jadwalkan Demo",
+    "CONTACT_US": "Kontak kami",
+    "PHONE_LABEL": "Phone",
+    "PHONE_VALUE": "+62 778 416 0250",
+    "WHATSAPP_LABEL": "WhatsApp",
+    "WHATSAPP_VALUE": "+62 811 7774 744",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_VALUE": "hello@inforsys.co.id",
+    "IMAGE_ALT": "Representatif SOFICloud ERP siap membantu kebutuhan bisnis Anda",
+    "ARIA": {
+      "SECTION": "Ajakan Bertindak SOFICloud ERP",
+      "SCHEDULE_DEMO": "Jadwalkan Demo SOFICloud ERP",
+      "CONTACT_US": "Hubungi tim SOFICloud ERP",
+      "PHONE": "Telepon kantor SOFICloud di +62 778 416 0250",
+      "WHATSAPP": "Hubungi WhatsApp SOFICloud di +62 811 7774 744",
+      "EMAIL": "Kirim email ke hello@inforsys.co.id"
+    }
+  },
+  "FOOTER": {
+    "COMPANY_NAME": "PT Inforsys Indonesia",
+    "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+    "ADDRESS_LINE2": "Agung Podomoro Land Batam",
+    "ADDRESS_LINE3": "Kepulauan Riau 29464, Indonesia",
+    "PHONE": "+62 778 416 0250",
+    "EMAIL": "hello@inforsys.co.id",
+    "ABOUT_US": {
+      "TITLE": "About Us",
+      "KENALI": "Kenali SofiCloud",
+      "ABOUT": "About Inforsys",
+      "TERMS": "Terms & Conditions",
+      "PRIVACY": "Privacy Policy"
+    },
+    "CUSTOMERS": {
+      "TITLE": "Customers",
+      "MANUFACTURING": "Manufacturing",
+      "DISTRIBUTION": "Distribution",
+      "CONSTRUCTION": "Construction & Project",
+      "SERVICES": "Services"
+    },
+    "SUPPORT": {
+      "TITLE": "Support",
+      "IMPLEMENTATION": "Software Implementation",
+      "TRAINING": "Training & Re-Implementation",
+      "MAINTENANCE": "Annual Software Maintenance",
+      "CUSTOMIZE": "Customize Module"
+    },
+    "COPYRIGHT": "© 1998 – 2026 PT Inforsys Indonesia",
+    "ARIA": {
+      "SECTION": "Footer Situs SOFICloud",
+      "PHONE": "Hubungi telepon +62 778 416 0250",
+      "EMAIL": "Kirim email ke hello@inforsys.co.id",
+      "LOGO": "Logo SOFICloud"
+    }
   }
 }
+

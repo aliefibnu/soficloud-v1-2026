@@ -30,7 +30,7 @@ describe('Navbar', () => {
   it('should have navigation links and language options', () => {
     expect(component.navLinks.length).toBeGreaterThan(0);
     expect(component.languages.length).toBe(5);
-    expect(component.selectedLang.code).toBe('en');
+    expect(component.selectedLang.code).toBe('id');
   });
 
   it('should toggle and close language dropdown menu', () => {
@@ -42,13 +42,13 @@ describe('Navbar', () => {
   });
 
   it('should select language and close language menu', () => {
-    const targetLang: LanguageOption = { code: 'id', label: 'Bahasa Indonesia', flag: '🇮🇩' };
+    const targetLang: LanguageOption = { code: 'en', label: 'English', flag: '🇬🇧' };
     component.isLangMenuOpen.set(true);
 
     component.selectLang(targetLang);
 
-    expect(languageService.getLanguage()).toBe('id');
-    expect(component.selectedLang.code).toBe('id');
+    expect(languageService.getLanguage()).toBe('en');
+    expect(component.selectedLang.code).toBe('en');
     expect(component.isLangMenuOpen()).toBe(false);
   });
 
