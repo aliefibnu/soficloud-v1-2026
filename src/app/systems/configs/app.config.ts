@@ -12,10 +12,12 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { routes } from '../routes/app.routes';
 import { LanguageService } from '../lib/language.service';
+import { provideCustomImageLoader } from '../lib/image-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideCustomImageLoader(),
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withFetch()),

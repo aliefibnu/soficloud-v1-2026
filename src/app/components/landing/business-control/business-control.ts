@@ -52,7 +52,6 @@ export class BusinessControl {
   readonly isExpenseVisible = signal<boolean>(true);
   readonly isIncomeVisible = signal<boolean>(true);
   readonly hoveredIndex = signal<number | null>(null);
-  readonly selectedIndex = signal<number | null>(6);
   readonly isMenuOpen = signal<boolean>(false);
   readonly copyFeedback = signal<boolean>(false);
 
@@ -89,16 +88,11 @@ export class BusinessControl {
     { id: 10, x: 560, monthKey: 'BUSINESS_CONTROL.MONTHS.JAN_2026', periodLabel: 'Jan 2026', expense: 230, income: 475 },
   ];
 
-  readonly activePointIndex = computed<number>(() => {
-    const hovered = this.hoveredIndex();
-    if (hovered !== null) return hovered;
-    const selected = this.selectedIndex();
-    return selected !== null ? selected : 6;
-  });
+  readonly activePointIndex = computed<number | null>(() => this.hoveredIndex());
 
   readonly activePoint = computed<DataPoint | null>(() => {
     const idx = this.activePointIndex();
-    return this.dataPoints[idx] ?? null;
+    return idx !== null ? (this.dataPoints[idx] ?? null) : null;
   });
 
   readonly incomePath = computed<string>(() => {
@@ -143,8 +137,8 @@ export class BusinessControl {
     this.hoveredIndex.set(index);
   }
 
-  selectPoint(index: number): void {
-    this.selectedIndex.set(index);
+  selectPoint(index: number | null): void {
+    this.hoveredIndex.set(index);
   }
 
   toggleMenu(event: MouseEvent): void {
@@ -159,7 +153,6 @@ export class BusinessControl {
   resetView(): void {
     this.isExpenseVisible.set(true);
     this.isIncomeVisible.set(true);
-    this.selectedIndex.set(6);
     this.hoveredIndex.set(null);
     this.closeMenu();
   }
@@ -178,6 +171,9 @@ export class BusinessControl {
     const target = event.target as HTMLElement | null;
     if (target && !target.closest('.chart-menu-container')) {
       this.closeMenu();
+    }
+    if (target && !target.closest('.chart-interactive-area')) {
+      this.hoveredIndex.set(null);
     }
   }
 

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { OverviewFeature } from './overview-feature';
 import { LanguageService } from '../../../systems/lib/language.service';
+import { provideCustomImageLoader } from '../../../systems/lib/image-loader';
 
 describe('OverviewFeature', () => {
   let component: OverviewFeature;
@@ -16,6 +17,7 @@ describe('OverviewFeature', () => {
           fallbackLang: 'en',
           lang: 'id',
         }),
+        provideCustomImageLoader(),
         LanguageService,
       ],
     }).compileComponents();
@@ -55,7 +57,9 @@ describe('OverviewFeature', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const heading = compiled.querySelector('#overview-feature-heading');
     expect(heading).toBeTruthy();
-    expect(heading?.textContent).toContain('SOFICloud, Software ERP Andal dengan Beragam Fitur Unggulan');
+    expect(heading?.textContent).toContain(
+      'SOFICloud, Software ERP Andal dengan Beragam Fitur Unggulan',
+    );
   });
 
   it('should render the floating cards with labels and values', () => {
@@ -65,5 +69,27 @@ describe('OverviewFeature', () => {
     expect(compiled.textContent).toContain('18 dokumen');
     expect(compiled.textContent).toContain('Target Revenue');
     expect(compiled.textContent).toContain('92%');
+  });
+
+  it('should render responsive image attributes for glow and computer images', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const images = compiled.querySelectorAll('img');
+    const glowImg = Array.from(images).find((img) => img.getAttribute('src')?.includes('glow'));
+    const computerImg = Array.from(images).find((img) =>
+      img.getAttribute('src')?.includes('computer'),
+    );
+
+    expect(glowImg).toBeTruthy();
+    expect(glowImg?.getAttribute('srcset')).toContain('glow-418w.webp 418w');
+    expect(glowImg?.getAttribute('srcset')).toContain('glow.webp 521w');
+    expect(glowImg?.getAttribute('sizes')).toContain('(max-width: 640px) 418px, 521px');
+    expect(glowImg?.getAttribute('loading')).toBe('lazy');
+
+    expect(computerImg).toBeTruthy();
+    expect(computerImg?.getAttribute('srcset')).toContain('computer-309w.webp 309w');
+    expect(computerImg?.getAttribute('srcset')).toContain('computer.webp 417w');
+    expect(computerImg?.getAttribute('sizes')).toContain('(max-width: 640px) 309px, 417px');
+    expect(computerImg?.getAttribute('loading')).toBe('lazy');
   });
 });
