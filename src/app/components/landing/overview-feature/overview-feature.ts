@@ -8,15 +8,23 @@ import { LanguageService } from '../../../systems/lib/language.service';
   imports: [NgOptimizedImage, TranslatePipe],
   templateUrl: './overview-feature.html',
   styles: `
-    @keyframes pulse-circles {
-      0%,
-      100% {
-        transform: scale(0.96);
-        opacity: 0.85;
+    @keyframes ring-zoom-fade {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
       }
-      50% {
-        transform: scale(1.04);
+      10% {
         opacity: 1;
+      }
+      55% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 0.45;
+      }
+      100% {
+        transform: scale(1.15);
+        opacity: 0;
       }
     }
 
@@ -51,8 +59,30 @@ import { LanguageService } from '../../../systems/lib/language.service';
       }
     }
 
-    .animate-pulse-circles {
-      animation: pulse-circles 3.6s ease-in-out infinite;
+    .glow-core {
+      background: radial-gradient(
+        circle closest-side,
+        rgba(124, 176, 247, 0) 0%,
+        rgba(124, 176, 247, 0) 40%,
+        rgba(124, 176, 247, 0.9) 52%,
+        rgba(168, 201, 249, 0) 62%
+      );
+    }
+
+    .glow-ring {
+      --ring-duration: 8.4s;
+      opacity: 0;
+      background: radial-gradient(
+        circle closest-side,
+        rgba(124, 176, 247, 0) 0%,
+        rgba(124, 176, 247, 0) 70%,
+        rgba(118, 172, 246, 0.95) 81%,
+        rgba(140, 187, 248, 0.8) 92%,
+        rgba(160, 198, 249, 0.5) 98%,
+        rgba(168, 201, 249, 0) 100%
+      );
+      animation: ring-zoom-fade var(--ring-duration) linear infinite;
+      animation-delay: calc(var(--i) * var(--ring-duration) / -4);
     }
 
     .animate-floating-card-left {
@@ -68,12 +98,17 @@ import { LanguageService } from '../../../systems/lib/language.service';
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .animate-pulse-circles,
       .animate-floating-card-left,
       .animate-floating-card-right,
       .animate-pulse-ring {
         animation: none !important;
         transform: none !important;
+      }
+
+      .glow-ring {
+        animation: none;
+        opacity: 0.6;
+        transform: scale(calc(0.55 + var(--i) * 0.15));
       }
     }
   `,
@@ -83,4 +118,6 @@ import { LanguageService } from '../../../systems/lib/language.service';
 })
 export class OverviewFeature {
   protected readonly languageService = inject(LanguageService);
+
+  protected readonly rings = [0, 1, 2, 3];
 }
