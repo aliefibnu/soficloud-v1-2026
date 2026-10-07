@@ -106,4 +106,38 @@ describe('Customers', () => {
     vi.advanceTimersByTime(3500);
     expect(component.activeCustomerIndex()).toBe(3);
   });
+
+  it('should generate 11 visible cards with active card centered at offset 0', () => {
+    const cards = component.visibleCards();
+    expect(cards.length).toBe(11);
+
+    const centerCard = cards.find((c) => c.offset === 0);
+    expect(centerCard).toBeDefined();
+    expect(centerCard?.isActive).toBe(true);
+    expect(centerCard?.customer.name).toBe('PT. Sanipak Indonesia');
+
+    // 5 cards on left, 5 cards on right
+    expect(cards.filter((c) => c.offset < 0).length).toBe(5);
+    expect(cards.filter((c) => c.offset > 0).length).toBe(5);
+  });
+
+  it('should seamlessly loop infinitely past the last customer without delay', () => {
+    component.activeCustomerIndex.set(9); // PT. Adhya Tirta Lampung
+    expect(component.activeCustomer().name).toBe('PT. Adhya Tirta Lampung');
+
+    vi.advanceTimersByTime(3200); // Trigger auto-advance
+    expect(component.activeCustomerIndex()).toBe(0); // Loops directly to Madeira
+    expect(component.activeCustomer().name).toBe('PT. Madeira Threads Indonesia');
+
+    const centerCard = component.visibleCards().find((c) => c.offset === 0);
+    expect(centerCard?.customer.name).toBe('PT. Madeira Threads Indonesia');
+  });
+
+  it('should switch customer instantly with 0ms delay when selectCustomer is called', () => {
+    component.selectCustomer(7); // PT. Bandar Sumatra Indonesia
+    expect(component.activeCustomerIndex()).toBe(7);
+    expect(component.activeCustomer().name).toBe(
+      'PT. Bandar Sumatra Indonesia'
+    );
+  });
 });

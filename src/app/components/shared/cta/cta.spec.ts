@@ -175,7 +175,10 @@ describe('Cta', () => {
     const imageCol = compiled.querySelector('img')?.parentElement;
     expect(imageCol?.classList.contains('w-full')).toBe(true);
     expect(imageCol?.classList.contains('md:w-[42%]')).toBe(true);
-    expect(imageCol?.classList.contains('xl:w-[528px]')).toBe(true);
+    expect(
+      imageCol?.classList.contains('xl:w-[528px]') ||
+        imageCol?.classList.contains('xl:w-132')
+    ).toBe(true);
 
     const buttonGroup = compiled.querySelector('button')?.parentElement;
     expect(buttonGroup?.classList.contains('flex-col')).toBe(true);

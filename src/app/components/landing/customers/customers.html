@@ -88,39 +88,33 @@
           (mouseenter)="pauseRotation()"
           (mouseleave)="resumeRotation()"
         >
-          <!-- Sliding Infinite Track of Logos -->
-          <div
-            class="flex items-center gap-4 will-change-transform z-10"
-            [class.transition-transform]="isSlidingSmooth()"
-            [class.duration-700]="isSlidingSmooth()"
-            [class.ease-[cubic-bezier(0.2,0.8,0.2,1)]]="isSlidingSmooth()"
-            [style.transform]="trackTransform()"
-          >
-            @for (customer of infiniteTopCustomers; track customer.virtualIdx) {
+          <!-- Dynamic Circular Window of Logos (Zero delay, always centered) -->
+          <div class="flex items-center justify-center gap-4 z-10">
+            @for (card of visibleCards(); track card.offset) {
               <button
                 type="button"
-                (click)="selectCustomer(customer.virtualIdx)"
-                class="relative flex-shrink-0 w-28 h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border p-2 flex items-center justify-center transition-all duration-300 cursor-pointer focus:outline-none"
-                [class.border-2]="customer.virtualIdx === virtualIndex()"
-                [class.border-[#1C73E8]]="customer.virtualIdx === virtualIndex()"
-                [class.shadow-[0_0_22px_rgba(28,115,232,0.4)]]="customer.virtualIdx === virtualIndex()"
-                [class.opacity-100]="customer.virtualIdx === virtualIndex()"
-                [class.scale-100]="customer.virtualIdx === virtualIndex()"
-                [class.z-20]="customer.virtualIdx === virtualIndex()"
-                [class.border-slate-200/90]="customer.virtualIdx !== virtualIndex()"
-                [class.shadow-sm]="customer.virtualIdx !== virtualIndex()"
-                [class.opacity-60]="customer.virtualIdx !== virtualIndex()"
-                [class.scale-95]="customer.virtualIdx !== virtualIndex()"
-                [class.z-10]="customer.virtualIdx !== virtualIndex()"
+                (click)="selectCustomer(card.customerIndex)"
+                class="relative flex-shrink-0 w-28 h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border p-2 flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none"
+                [class.border-2]="card.isActive"
+                [class.border-[#1C73E8]]="card.isActive"
+                [class.shadow-[0_0_22px_rgba(28,115,232,0.4)]]="card.isActive"
+                [class.opacity-100]="card.isActive"
+                [class.scale-100]="card.isActive"
+                [class.z-20]="card.isActive"
+                [class.border-slate-200/90]="!card.isActive"
+                [class.shadow-sm]="!card.isActive"
+                [class.opacity-60]="!card.isActive"
+                [class.scale-95]="!card.isActive"
+                [class.z-10]="!card.isActive"
                 [attr.aria-label]="
                   'CUSTOMERS.ARIA.SELECT_CUSTOMER'
-                    | translate: { name: customer.name }
+                    | translate: { name: card.customer.name }
                 "
-                [attr.aria-pressed]="customer.virtualIdx === virtualIndex()"
+                [attr.aria-pressed]="card.isActive"
               >
                 <img
-                  [src]="customer.logo"
-                  [alt]="customer.name"
+                  [src]="card.customer.logo"
+                  [alt]="card.customer.name"
                   class="max-h-8 max-w-[85%] object-contain select-none"
                   loading="lazy"
                 />
