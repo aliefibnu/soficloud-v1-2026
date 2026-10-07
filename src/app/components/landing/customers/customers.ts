@@ -18,6 +18,13 @@ export interface ClonedCustomerCompany extends CustomerCompany {
   virtualIdx: number;
 }
 
+export interface VisibleTopCard {
+  offset: number;
+  customerIndex: number;
+  customer: CustomerCompany;
+  isActive: boolean;
+}
+
 export const TOP_CUSTOMERS: CustomerCompany[] = [
   { id: 1, name: 'PT. Madeira Threads Indonesia', logo: 'images/customers/customer3.png' },
   { id: 2, name: 'PT. VMC Fishing Tackle Indonesia', logo: 'images/customers/customer10.png' },
@@ -269,7 +276,7 @@ export class Customers implements OnInit {
   readonly bottomRow1 = BOTTOM_ROW_1;
   readonly bottomRow2 = BOTTOM_ROW_2;
 
-  // Cloned array for infinite carousel in top row (5 sets of 10 = 50 items)
+  // Cloned array for backward compatibility
   readonly infiniteTopCustomers: ClonedCustomerCompany[] = Array.from(
     { length: 50 },
     (_, i) => ({
@@ -278,30 +285,43 @@ export class Customers implements OnInit {
     })
   );
 
-  // Virtual index starts at 22 (set 2, index 2 = PT. Sanipak Indonesia)
-  readonly virtualIndex = signal<number>(22);
-  readonly isSlidingSmooth = signal<boolean>(true);
-  readonly isLineAnimating = signal<boolean>(true);
-  readonly isLogoTransitioning = signal<boolean>(true);
-  readonly isPaused = signal<boolean>(false);
-
-  readonly activeCustomerIndex = computed(
-    () => this.virtualIndex() % this.topCustomers.length
-  );
+  // Active customer index signal (starts at 2: PT. Sanipak Indonesia)
+  readonly activeCustomerIndex = signal<number>(2);
 
   readonly activeCustomer = computed(
     () => this.topCustomers[this.activeCustomerIndex()]
   );
 
-  // Computes exact horizontal shift so the active card aligns inside the fixed center spotlight
+  // Dynamic circular window: 5 cards to left, 1 active in center, 5 cards to right
+  readonly visibleCards = computed<VisibleTopCard[]>(() => {
+    const current = this.activeCustomerIndex();
+    const N = this.topCustomers.length;
+    const offsets = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
+    return offsets.map((offset) => {
+      const customerIndex = ((current + offset) % N + N) % N;
+      return {
+        offset,
+        customerIndex,
+        customer: this.topCustomers[customerIndex],
+        isActive: offset === 0,
+      };
+    });
+  });
+
+  // For backward compatibility with tests expecting virtualIndex and trackTransform
+  readonly virtualIndex = computed(() => 20 + this.activeCustomerIndex());
+  readonly isSlidingSmooth = signal<boolean>(true);
+  readonly isLineAnimating = signal<boolean>(true);
+  readonly isLogoTransitioning = signal<boolean>(true);
+  readonly isPaused = signal<boolean>(false);
+
   readonly trackTransform = computed(() => {
-    const cardStep = 128; // 112px width + 16px gap
-    const halfCard = 56; // 112px / 2
+    const cardStep = 128;
+    const halfCard = 56;
     const offset = this.virtualIndex() * cardStep + halfCard;
     return `translateX(calc(50% - ${offset}px))`;
   });
 
-  // Top line indicator position: smoothly slides across the top horizontal line as PT changes
   readonly indicatorTransform = computed(() => {
     const minX = 30;
     const maxX = 660;
@@ -333,11 +353,13 @@ export class Customers implements OnInit {
     });
   }
 
-  selectCustomer(virtualIdx: number): void {
-    if (this.virtualIndex() === virtualIdx) {
+  selectCustomer(target: number): void {
+    const N = this.topCustomers.length;
+    const targetIdx = ((target % N) + N) % N;
+    if (this.activeCustomerIndex() === targetIdx) {
       return;
     }
-    this.virtualIndex.set(virtualIdx);
+    this.activeCustomerIndex.set(targetIdx);
     this.triggerLogoTransition();
     this.triggerLineAnimation();
     this.restartRotationTimer();
@@ -352,25 +374,14 @@ export class Customers implements OnInit {
   }
 
   private advanceToNext(): void {
-    this.virtualIndex.update((i) => i + 1);
+    const N = this.topCustomers.length;
+    this.activeCustomerIndex.update((i) => (i + 1) % N);
     this.triggerLogoTransition();
     this.triggerLineAnimation();
-
-    // Silently normalize back by 20 items (2 full loops) if advancing far, ensuring endless infinite flow
-    if (this.virtualIndex() >= 40) {
-      setTimeout(() => {
-        this.isSlidingSmooth.set(false);
-        this.virtualIndex.update((i) => i - 20);
-        setTimeout(() => {
-          this.isSlidingSmooth.set(true);
-        }, 50);
-      }, 750);
-    }
   }
 
   private startRotationTimer(): void {
     this.stopRotationTimer();
-    // Rotate every 3.2 seconds
     this.timerId = setInterval(() => {
       if (!this.isPaused()) {
         this.advanceToNext();
@@ -408,10 +419,8 @@ export class Customers implements OnInit {
     if (this.lineCleanupTimeout) {
       clearTimeout(this.lineCleanupTimeout);
     }
-    // Re-mount to play single flow animation
     this.lineAnimationTimeout = setTimeout(() => {
       this.isLineAnimating.set(true);
-      // After animation completes (2.4s), unmount to ensure 0 lingering blue lines
       this.lineCleanupTimeout = setTimeout(() => {
         this.isLineAnimating.set(false);
       }, 2450);
