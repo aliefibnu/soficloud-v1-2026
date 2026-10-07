@@ -33,19 +33,15 @@
             class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 overflow-hidden rounded-[28px] sm:rounded-[36px] md:rounded-[44px]"
             aria-hidden="true"
           >
-            <div
-              class="w-[88%] aspect-square will-change-transform animate-pulse-circles flex items-center justify-center"
-            >
-              <img
-                ngSrc="/images/overview-feature/glow.webp"
-                ngSrcset="418w, 521w"
-                sizes="(max-width: 640px) 418px, 521px"
-                width="521"
-                height="521"
-                alt=""
-                class="w-full h-full object-contain pointer-events-none select-none"
-              />
-            </div>
+              <div
+                class="glow-core absolute w-[88%] aspect-square rounded-full"
+              ></div>
+              @for (ring of rings; track ring) {
+                <div
+                  class="glow-ring absolute w-[88%] aspect-square rounded-full will-change-transform"
+                  [style.--i]="ring"
+                ></div>
+              }
           </div>
 
           <div
