@@ -26,8 +26,10 @@ export class Navbar {
 
   readonly navLinks: readonly NavLink[] = [
     { key: 'HEADER.NAV.FEATURES', href: '#features' },
-    { key: 'HEADER.NAV.RESOURCES', href: '#resources' },
-    { key: 'HEADER.NAV.SUPPORT', href: '#support' },
+    { key: 'HEADER.NAV.SOLUTIONS', href: '#solutions' },
+    { key: 'HEADER.NAV.ABOUT', href: '#why-choose-us' },
+    { key: 'HEADER.NAV.PRICING', href: '#pricing' },
+    { key: 'HEADER.NAV.CONTACT', href: '#contact' },
   ];
 
   readonly isLangMenuOpen = signal(false);

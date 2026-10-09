@@ -141,10 +141,10 @@ describe('Hero', () => {
     expect(h1?.classList.contains('text-balance')).toBe(true);
 
     const videoButton = compiled.querySelectorAll('.mt-6 button')[1];
-    const playSvg = videoButton?.querySelector('svg');
-    expect(playSvg).toBeTruthy();
-    expect(playSvg?.getAttribute('aria-hidden')).toBe('true');
-    expect(playSvg?.classList.contains('sm:hidden')).toBe(false);
+    const playIcon = videoButton?.querySelector('img');
+    expect(playIcon).toBeTruthy();
+    expect(playIcon?.getAttribute('aria-hidden')).toBe('true');
+    expect(playIcon?.classList.contains('sm:hidden')).toBe(false);
 
     const badge = compiled.querySelector('.inline-flex');
     const dot = badge?.querySelector('span.rounded-full');

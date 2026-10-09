@@ -11,6 +11,10 @@
   "HEADER": {
     "NAV": {
       "FEATURES": "Fitur",
+      "SOLUTIONS": "Solusi",
+      "ABOUT": "Kenali SOFICloud",
+      "PRICING": "Harga",
+      "CONTACT": "Kontak",
       "RESOURCES": "Sumber Daya",
       "SUPPORT": "Dukungan"
     },

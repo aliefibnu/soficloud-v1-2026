@@ -11,6 +11,10 @@
   "HEADER": {
     "NAV": {
       "FEATURES": "功能特性",
+      "SOLUTIONS": "解决方案",
+      "ABOUT": "认识 SOFICloud",
+      "PRICING": "价格",
+      "CONTACT": "联系我们",
       "RESOURCES": "资源中心",
       "SUPPORT": "支持服务"
     },

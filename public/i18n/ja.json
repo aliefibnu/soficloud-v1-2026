@@ -11,6 +11,10 @@
   "HEADER": {
     "NAV": {
       "FEATURES": "機能",
+      "SOLUTIONS": "ソリューション",
+      "ABOUT": "SOFICloudについて",
+      "PRICING": "料金",
+      "CONTACT": "お問い合わせ",
       "RESOURCES": "リソース",
       "SUPPORT": "サポート"
     },

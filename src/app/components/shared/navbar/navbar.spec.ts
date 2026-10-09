@@ -27,8 +27,15 @@ describe('Navbar', () => {
     expect(component.isMobileLangSheetOpen()).toBe(false);
   });
 
-  it('should have navigation links and language options', () => {
-    expect(component.navLinks.length).toBeGreaterThan(0);
+  it('should have 5 navigation links and language options', () => {
+    expect(component.navLinks.length).toBe(5);
+    expect(component.navLinks.map((l) => l.key)).toEqual([
+      'HEADER.NAV.FEATURES',
+      'HEADER.NAV.SOLUTIONS',
+      'HEADER.NAV.ABOUT',
+      'HEADER.NAV.PRICING',
+      'HEADER.NAV.CONTACT',
+    ]);
     expect(component.languages.length).toBe(5);
     expect(component.selectedLang.code).toBe('id');
   });
