@@ -1,9 +1,9 @@
 <header
-  class="relative w-full bg-white font-sans py-4 sm:py-4.5 border-b border-x border-gray-200/70 shadow-[0_8px_24px_-4px_rgba(24,40,73,0.08),0_2px_8px_-2px_rgba(24,40,73,0.04)] md:rounded-b-[15px] transition-[border-radius] duration-200"
+  class="relative w-full bg-white font-sans py-4 sm:py-4.5 border-b border-x border-gray-200/70 shadow-[0_8px_24px_-4px_rgba(24,40,73,0.08),0_2px_8px_-2px_rgba(24,40,73,0.04)] lg:rounded-b-[15px] transition-[border-radius] duration-200"
   [class.rounded-b-4xl]="!isMobileMenuOpen()"
   [class.rounded-b-none]="isMobileMenuOpen()"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative flex items-center justify-between gap-4 md:gap-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative flex items-center justify-between gap-4 lg:gap-10">
     <a href="/" class="flex items-center shrink-0">
       <img
         ngSrc="/soficloud-logo.svg"
@@ -16,20 +16,20 @@
     </a>
 
     <nav
-      class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 lg:gap-10"
+      class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-5 xl:gap-8"
       [attr.aria-label]="'HEADER.ARIA.MAIN_NAV' | translate"
     >
       @for (link of navLinks; track link.key) {
         <a
           [href]="link.href"
-          class="text-[15.5px] lg:text-[16px] font-bold text-[#182849] tracking-[-0.01em] transition-all hover:text-[#1d64ec] hover:opacity-85"
+          class="text-[15px] xl:text-[16px] font-bold text-[#182849] tracking-[-0.01em] whitespace-nowrap transition-all hover:text-[#1d64ec] hover:opacity-85"
         >
           {{ link.key | translate }}
         </a>
       }
     </nav>
 
-    <div class="hidden md:flex items-center gap-4.5 shrink-0">
+    <div class="hidden lg:flex items-center gap-4.5 shrink-0">
       <div class="relative inline-block text-left">
         <button
           type="button"
@@ -114,7 +114,7 @@
 
     <button
       type="button"
-      class="inline-flex h-11 w-11 md:hidden flex-col items-center justify-center gap-1.5 rounded-xl text-[#182849] transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] motion-reduce:transition-none cursor-pointer"
+      class="inline-flex h-11 w-11 lg:hidden flex-col items-center justify-center gap-1.5 rounded-xl text-[#182849] transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] motion-reduce:transition-none cursor-pointer"
       (click)="toggleMobileMenu()"
       [attr.aria-expanded]="isMobileMenuOpen()"
       aria-controls="mobile-menu"
@@ -143,7 +143,7 @@
   <!-- mobile menu backdrop overlay -->
   @if (isMobileMenuOpen()) {
     <div
-      class="fixed inset-0 top-0 bg-[#0f0f19]/30 backdrop-blur-[2px] -z-10 md:hidden animate-fade-in motion-reduce:animate-none"
+      class="fixed inset-0 top-0 bg-[#0f0f19]/30 backdrop-blur-[2px] -z-10 lg:hidden animate-fade-in motion-reduce:animate-none"
       (click)="closeMobileMenu()"
       aria-hidden="true"
     ></div>
@@ -153,7 +153,7 @@
   <div
     id="mobile-menu"
     [hidden]="!isMobileMenuOpen()"
-    class="absolute top-full left-0 right-0 z-40 bg-white border-b border-x border-gray-200/70 rounded-b-4xl shadow-[0_16px_36px_-4px_rgba(24,40,73,0.14)] md:hidden origin-top animate-dropdown motion-reduce:animate-none"
+    class="absolute top-full left-0 right-0 z-40 bg-white border-b border-x border-gray-200/70 rounded-b-4xl shadow-[0_16px_36px_-4px_rgba(24,40,73,0.14)] lg:hidden origin-top animate-dropdown motion-reduce:animate-none"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-3 pb-5">
       <nav class="flex flex-col" [attr.aria-label]="'HEADER.ARIA.MOBILE_NAV' | translate">
@@ -212,7 +212,7 @@
   <!-- mobile language bottom sheet (mobile viewport only) -->
   @if (isMobileLangSheetOpen()) {
     <div
-      class="fixed inset-0 z-50 md:hidden"
+      class="fixed inset-0 z-50 lg:hidden"
       aria-labelledby="mobile-lang-title"
       role="dialog"
       aria-modal="true"
