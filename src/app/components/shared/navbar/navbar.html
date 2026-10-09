@@ -39,20 +39,14 @@
           aria-haspopup="listbox"
           [attr.aria-label]="('LANGUAGES.' + selectedLang.code) | translate"
         >
-          <svg
-            class="h-4 w-4 text-cyan-500 shrink-0 block"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+          <img
+            ngSrc="/images/navbar/language.svg"
+            alt=""
             aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-            <path d="M2 12h20" />
-          </svg>
+            width="16"
+            height="16"
+            class="h-4 w-4 shrink-0 block"
+          />
           <span class="uppercase font-semibold leading-none">{{ selectedLang.code }}</span>
           <svg
             class="h-3.5 w-3.5 text-[#182849]/60 transition-transform duration-200 motion-reduce:transition-none"
@@ -183,20 +177,14 @@
             aria-haspopup="dialog"
             [attr.aria-label]="('LANGUAGES.' + selectedLang.code) | translate"
           >
-            <svg
-              class="h-4 w-4 text-cyan-500 shrink-0 block"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+            <img
+              ngSrc="/images/navbar/language.svg"
+              alt=""
               aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-              <path d="M2 12h20" />
-            </svg>
+              width="16"
+              height="16"
+              class="h-4 w-4 shrink-0 block"
+            />
             <span class="uppercase font-semibold leading-none">{{ selectedLang.code }}</span>
             <svg
               class="h-3.5 w-3.5 text-[#182849]/60 transition-transform duration-200 motion-reduce:transition-none"
