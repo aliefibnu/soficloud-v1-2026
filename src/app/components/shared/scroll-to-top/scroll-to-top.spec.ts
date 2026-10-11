@@ -44,6 +44,19 @@ describe('ScrollToTop', () => {
     expect(button?.getAttribute('aria-label')).toBeTruthy();
   });
 
+  it('should render the custom arrow icon with decorative accessibility attributes', async () => {
+    component.isVisible.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const img = compiled.querySelector('img');
+    expect(img).toBeTruthy();
+    expect(img?.getAttribute('aria-hidden')).toBe('true');
+    expect(img?.getAttribute('alt')).toBe('');
+    expect(img?.getAttribute('src') || img?.getAttribute('ng-reflect-ng-src')).toContain('Vector.svg');
+  });
+
   it('should call scrollIntoView if hero element exists, or scrollTo if not', () => {
     const heroMock = document.createElement('div');
     heroMock.id = 'hero';
