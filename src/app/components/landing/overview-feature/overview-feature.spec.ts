@@ -71,20 +71,18 @@ describe('OverviewFeature', () => {
     expect(compiled.textContent).toContain('92%');
   });
 
-  it('should render responsive image attributes for glow and computer images', () => {
+  it('should render glow animation elements and responsive computer image', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
+    const glowCore = compiled.querySelector('.glow-core');
+    const glowRings = compiled.querySelectorAll('.glow-ring');
+    expect(glowCore).toBeTruthy();
+    expect(glowRings.length).toBeGreaterThan(0);
+
     const images = compiled.querySelectorAll('img');
-    const glowImg = Array.from(images).find((img) => img.getAttribute('src')?.includes('glow'));
     const computerImg = Array.from(images).find((img) =>
       img.getAttribute('src')?.includes('computer'),
     );
-
-    expect(glowImg).toBeTruthy();
-    expect(glowImg?.getAttribute('srcset')).toContain('glow-418w.webp 418w');
-    expect(glowImg?.getAttribute('srcset')).toContain('glow.webp 521w');
-    expect(glowImg?.getAttribute('sizes')).toContain('(max-width: 640px) 418px, 521px');
-    expect(glowImg?.getAttribute('loading')).toBe('lazy');
 
     expect(computerImg).toBeTruthy();
     expect(computerImg?.getAttribute('srcset')).toContain('computer-309w.webp 309w');
