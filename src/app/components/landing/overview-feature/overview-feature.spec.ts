@@ -71,23 +71,20 @@ describe('OverviewFeature', () => {
     expect(compiled.textContent).toContain('92%');
   });
 
-  it('should render glow animation elements and responsive computer image', () => {
+  it('should render the dashboard mockup image and glow elements', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
+    const mockupImg = compiled.querySelector('img');
     const glowCore = compiled.querySelector('.glow-core');
     const glowRings = compiled.querySelectorAll('.glow-ring');
+
+    expect(mockupImg).toBeTruthy();
+    expect(mockupImg?.getAttribute('src')).toContain('dashboard mockup.svg');
+    expect(mockupImg?.getAttribute('width')).toBe('417');
+    expect(mockupImg?.getAttribute('height')).toBe('461');
+    expect(mockupImg?.getAttribute('loading')).toBe('lazy');
+
     expect(glowCore).toBeTruthy();
-    expect(glowRings.length).toBeGreaterThan(0);
-
-    const images = compiled.querySelectorAll('img');
-    const computerImg = Array.from(images).find((img) =>
-      img.getAttribute('src')?.includes('computer'),
-    );
-
-    expect(computerImg).toBeTruthy();
-    expect(computerImg?.getAttribute('srcset')).toContain('computer-309w.webp 309w');
-    expect(computerImg?.getAttribute('srcset')).toContain('computer.webp 417w');
-    expect(computerImg?.getAttribute('sizes')).toContain('(max-width: 640px) 309px, 417px');
-    expect(computerImg?.getAttribute('loading')).toBe('lazy');
+    expect(glowRings.length).toBe(4);
   });
 });

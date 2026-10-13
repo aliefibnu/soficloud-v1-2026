@@ -36,6 +36,28 @@ describe('BusinessControl', () => {
         CONTENT_TITLE: 'Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat',
         CONTENT_DESC: 'Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view.',
         CTA_BUTTON: 'Lihat Kapabilitas',
+        CARDS: {
+          REALTIME: {
+            TAB: 'Monitoring Real-Time',
+            TITLE: 'Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat',
+            DESC: 'Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view.',
+          },
+          CONNECTED: {
+            TAB: 'Proses Terhubung',
+            TITLE: 'Seluruh Proses Bisnis Terhubung Dalam Satu Sistem.',
+            DESC: 'Data mengalir dari Sales ke Procurement, Inventory, Manufacturing, Project, hingga Finance & Accounting tanpa input berulang.',
+          },
+          WORKFLOW: {
+            TAB: 'Workflow & Approval',
+            TITLE: 'Workflow & Approval Terstruktur Sesuai Kebijakan Perusahaan.',
+            DESC: 'Dokumen bergerak melalui tahapan Diajukan, Ditinjau, Disetujui, Diproses, dan Selesai, lengkap dengan approval chain serta audit trail.',
+          },
+          INSIGHT: {
+            TAB: 'Insight Keuangan',
+            TITLE: 'Insight Keuangan Dan Biaya Untuk Keputusan Yang Lebih Cerdas.',
+            DESC: 'Revenue, gross margin, cash flow, AR/AP, inventory value, budget versus actual, cost, dan profitability dapat dianalisa dalam satu financial surface.',
+          },
+        },
       },
     });
     translateService.use('id');
@@ -167,5 +189,90 @@ describe('BusinessControl', () => {
 
     component.onDocumentClick(mockEvent);
     expect(component.hoveredIndex()).toBe(5);
+  });
+
+  it('should initialize 4 stacking cards properly', () => {
+    expect(component.cards.length).toBe(4);
+    expect(component.activeCardIndex()).toBe(0);
+    expect(component.cards.map((c) => c.key)).toEqual([
+      'REALTIME',
+      'CONNECTED',
+      'WORKFLOW',
+      'INSIGHT',
+    ]);
+  });
+
+  it('should navigate between cards with nextCard and prevCard', () => {
+    expect(component.activeCardIndex()).toBe(0);
+    component.nextCard();
+    expect(component.activeCardIndex()).toBe(1);
+    component.nextCard();
+    expect(component.activeCardIndex()).toBe(2);
+    component.nextCard();
+    expect(component.activeCardIndex()).toBe(3);
+    component.nextCard(); // at max, should stay at 3
+    expect(component.activeCardIndex()).toBe(3);
+
+    component.prevCard();
+    expect(component.activeCardIndex()).toBe(2);
+    component.prevCard();
+    expect(component.activeCardIndex()).toBe(1);
+    component.prevCard();
+    expect(component.activeCardIndex()).toBe(0);
+    component.prevCard(); // at min, should stay at 0
+    expect(component.activeCardIndex()).toBe(0);
+  });
+
+  it('should allow selecting process nodes in Card 2', () => {
+    expect(component.processNodes.length).toBe(7);
+    expect(component.activeProcessNodeId()).toBe('01');
+    expect(component.selectedNode().title).toBe('Sales');
+
+    component.selectProcessNode('03');
+    expect(component.activeProcessNodeId()).toBe('03');
+    expect(component.selectedNode().title).toBe('Inventory');
+  });
+
+  it('should advance and reset approval step in Card 3', () => {
+    expect(component.approvalStep()).toBe(2);
+    component.approveStep();
+    expect(component.approvalStep()).toBe(3);
+    component.resetApproval();
+    expect(component.approvalStep()).toBe(1);
+  });
+
+  it('should update item quantities and recalculate total in Card 3', () => {
+    const initialTotal = component.approvalTotal();
+    expect(initialTotal).toBe(7800000);
+
+    // Increase qty of item 1
+    component.updateItemQty(1, 1);
+    expect(component.approvalTotal()).toBe(7800000 + 1800000);
+
+    // Decrease qty of item 1
+    component.updateItemQty(1, -1);
+    expect(component.approvalTotal()).toBe(7800000);
+  });
+
+  it('should filter projects and select projects in Card 4', () => {
+    expect(component.allProjects.length).toBe(5);
+    expect(component.filteredProjects().length).toBe(5);
+
+    component.setProjectFilter('completed');
+    expect(component.filteredProjects().every((p) => p.category === 'completed')).toBe(true);
+    expect(component.filteredProjects().length).toBe(3);
+
+    component.setProjectFilter('in-progress');
+    expect(component.filteredProjects().every((p) => p.category === 'in-progress')).toBe(true);
+    expect(component.filteredProjects().length).toBe(2);
+
+    component.setProjectFilter('all');
+    expect(component.filteredProjects().length).toBe(5);
+
+    expect(component.selectedProjectName()).toBeNull();
+    component.toggleProjectSelection('Hauni Protos / M2607');
+    expect(component.selectedProjectName()).toBe('Hauni Protos / M2607');
+    component.toggleProjectSelection('Hauni Protos / M2607');
+    expect(component.selectedProjectName()).toBeNull();
   });
 });
