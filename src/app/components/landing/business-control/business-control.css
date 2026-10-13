@@ -1,0 +1,145 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.cards-scroll-track {
+  position: relative;
+  width: 100%;
+  height: 340vh;
+}
+
+.cards-sticky-frame {
+  position: sticky;
+  top: 5rem;
+  width: 100%;
+  z-index: 20;
+}
+
+.cards-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 640px;
+  border-radius: 2.25rem;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .cards-viewport {
+    min-height: 620px;
+    border-radius: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards-viewport {
+    min-height: 590px;
+    border-radius: 2.75rem;
+  }
+}
+
+.stacking-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity;
+  border-radius: inherit;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-1 {
+  z-index: 10;
+  transform: scale(var(--card1-scale, 1));
+  opacity: var(--card1-opacity, 1);
+}
+
+.card-2 {
+  z-index: 20;
+  transform: translate3d(var(--card2-x, 100%), 0, 0) scale(var(--card2-scale, 1));
+  opacity: var(--card2-opacity, 1);
+  box-shadow: -28px 0 50px -5px rgba(24, 40, 73, 0.18);
+}
+
+.card-3 {
+  z-index: 30;
+  transform: translate3d(var(--card3-x, 100%), 0, 0) scale(var(--card3-scale, 1));
+  opacity: var(--card3-opacity, 1);
+  box-shadow: -28px 0 50px -5px rgba(24, 40, 73, 0.2);
+}
+
+.card-4 {
+  z-index: 40;
+  transform: translate3d(var(--card4-x, 100%), 0, 0);
+  box-shadow: -28px 0 50px -5px rgba(24, 40, 73, 0.22);
+}
+
+/* Subtle pulse animation for connected node indicators */
+@keyframes nodePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.pulse-node {
+  animation: nodePulse 2.5s infinite ease-in-out;
+}
+
+/* Custom scrollbar for inner scrollable cards on smaller viewports */
+.card-scroll-area::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.card-scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+
+.card-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+/* Fallback & Accessibility for users preferring reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cards-scroll-track {
+    height: auto !important;
+  }
+
+  .cards-sticky-frame {
+    position: static !important;
+  }
+
+  .cards-viewport {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+    overflow: visible !important;
+    min-height: auto !important;
+  }
+
+  .stacking-card {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .pulse-node {
+    animation: none !important;
+  }
+}

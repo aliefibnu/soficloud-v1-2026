@@ -48,6 +48,28 @@
     "OPTIONS_MENU": "Opsi Grafik",
     "RESET_VIEW": "Reset Tampilan",
     "EXPORT_DATA": "Ekspor Ringkasan",
+    "CARDS": {
+      "REALTIME": {
+        "TAB": "Monitoring Real-Time",
+        "TITLE": "Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat",
+        "DESC": "Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view."
+      },
+      "CONNECTED": {
+        "TAB": "Proses Terhubung",
+        "TITLE": "Seluruh Proses Bisnis Terhubung Dalam Satu Sistem.",
+        "DESC": "Data mengalir dari Sales ke Procurement, Inventory, Manufacturing, Project, hingga Finance & Accounting tanpa input berulang."
+      },
+      "WORKFLOW": {
+        "TAB": "Workflow & Approval",
+        "TITLE": "Workflow & Approval Terstruktur Sesuai Kebijakan Perusahaan.",
+        "DESC": "Dokumen bergerak melalui tahapan Diajukan, Ditinjau, Disetujui, Diproses, dan Selesai, lengkap dengan approval chain serta audit trail."
+      },
+      "INSIGHT": {
+        "TAB": "Insight Keuangan",
+        "TITLE": "Insight Keuangan Dan Biaya Untuk Keputusan Yang Lebih Cerdas.",
+        "DESC": "Revenue, gross margin, cash flow, AR/AP, inventory value, budget versus actual, cost, dan profitability dapat dianalisa dalam satu financial surface."
+      }
+    },
     "MONTHS": {
       "AUG_2025": "August 2025",
       "SEP_2025": "September 2025",

@@ -1,6 +1,12 @@
-<section class="w-full py-section px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  <div class="text-center mb-10 md:mb-14">
+<section
+  id="business-control"
+  class="relative w-full py-section px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20 overflow-x-clip"
+  aria-labelledby="business-control-heading"
+>
+  <!-- Section Header -->
+  <div class="text-center mb-8 md:mb-12">
     <h2
+      id="business-control-heading"
       class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] tracking-tight leading-tight"
     >
       {{ 'BUSINESS_CONTROL.HEADER_TITLE' | translate }}
@@ -12,340 +18,906 @@
     </p>
   </div>
 
-  <div
-    class="rounded-3xl sm:rounded-[36px] md:rounded-[44px] bg-linear-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-6 sm:p-10 lg:p-14 relative shadow-sm border border-blue-100/80"
-  >
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-      <div class="lg:col-span-7 flex flex-col">
-        <div
-          class="bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 p-5 sm:p-7 border border-slate-100/90 relative select-none"
+  <!-- Scroll-Driven Stacking Cards Track -->
+  <div #scrollTrack class="cards-scroll-track">
+    <!-- Sticky Viewport pinned below header -->
+    <div class="cards-sticky-frame">
+      <!-- The 4 Stacking Cards Viewport -->
+      <div #cardsViewport class="cards-viewport border border-blue-100/80 shadow-md">
+        <!-- ===============================================================
+             CARD 1: REAL-TIME MONITORING (INCOME & EXPENSE CHART)
+             =============================================================== -->
+        <article
+          class="stacking-card card-1 bg-linear-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-5 sm:p-7 lg:p-9 xl:p-10 justify-center card-scroll-area overflow-y-auto"
+          aria-label="Card 1: Real-Time Business Control"
         >
-          <div class="flex items-center justify-between gap-4 mb-4">
-            <h4 class="text-xs sm:text-sm font-bold text-slate-700 tracking-wide uppercase">
-              {{ 'BUSINESS_CONTROL.CHART_TITLE' | translate }}
-            </h4>
-
-            <div class="relative chart-menu-container">
-              <button
-                type="button"
-                (click)="toggleMenu($event)"
-                [attr.aria-label]="'BUSINESS_CONTROL.OPTIONS_MENU' | translate"
-                class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-100/80 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-700 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                <svg
-                  class="w-4 h-4 fill-current"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
-                  />
-                </svg>
-              </button>
-
-              @if (isMenuOpen()) {
-                <div
-                  class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-2xl border border-slate-100 py-1.5 z-20 animate-in fade-in zoom-in-95 duration-150"
-                >
-                  <button
-                    type="button"
-                    (click)="resetView()"
-                    class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer"
-                  >
-                    <svg
-                      class="w-3.5 h-3.5 text-slate-400"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                      />
-                    </svg>
-                    {{ 'BUSINESS_CONTROL.RESET_VIEW' | translate }}
-                  </button>
-                  <button
-                    type="button"
-                    (click)="exportData()"
-                    class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer"
-                  >
-                    <svg
-                      class="w-3.5 h-3.5 text-slate-400"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                      />
-                    </svg>
-                    {{ 'BUSINESS_CONTROL.EXPORT_DATA' | translate }}
-                  </button>
-                </div>
-              }
-            </div>
-          </div>
-
-          <div
-            class="relative w-full chart-interactive-area"
-            (mouseleave)="setHoveredIndex(null)"
-          >
-            @if (activePoint(); as pt) {
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <!-- Left: Interactive Chart -->
+            <div class="lg:col-span-7 flex flex-col">
               <div
-                class="absolute z-10 pointer-events-none transition-all duration-150 ease-out -top-2 transform -translate-x-1/2 -translate-y-full bg-slate-900/90 backdrop-blur-md text-white text-[11px] rounded-xl px-3 py-2 shadow-xl border border-slate-700/50"
-                [style.left.%]="((pt.x - chartLeft) / (chartRight - chartLeft)) * 86 + 8"
+                class="bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 p-4 sm:p-6 border border-slate-100/90 relative select-none"
               >
-                <div class="font-semibold text-slate-300 pb-1 border-b border-slate-700/60 mb-1">
-                  {{ pt.monthKey | translate }}
+                <div class="flex items-center justify-between gap-4 mb-3 sm:mb-4">
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-700 tracking-wide uppercase">
+                    {{ 'BUSINESS_CONTROL.CHART_TITLE' | translate }}
+                  </h4>
+
+                  <div class="relative chart-menu-container">
+                    <button
+                      type="button"
+                      (click)="toggleMenu($event)"
+                      [attr.aria-label]="'BUSINESS_CONTROL.OPTIONS_MENU' | translate"
+                      class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-100/80 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-700 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    >
+                      <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                      </svg>
+                    </button>
+
+                    @if (isMenuOpen()) {
+                      <div
+                        class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-2xl border border-slate-100 py-1.5 z-20 animate-in fade-in zoom-in-95 duration-150"
+                      >
+                        <button
+                          type="button"
+                          (click)="resetView()"
+                          class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer"
+                        >
+                          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                          </svg>
+                          {{ 'BUSINESS_CONTROL.RESET_VIEW' | translate }}
+                        </button>
+                        <button
+                          type="button"
+                          (click)="exportData()"
+                          class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer"
+                        >
+                          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                          {{ 'BUSINESS_CONTROL.EXPORT_DATA' | translate }}
+                        </button>
+                      </div>
+                    }
+                  </div>
                 </div>
-                @if (isIncomeVisible()) {
-                  <div class="flex items-center justify-between gap-3 text-[#60a5fa]">
-                    <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}:</span>
-                    <span class="font-bold font-mono">{{ formatCurrency(pt.income) }}</span>
-                  </div>
-                }
-                @if (isExpenseVisible()) {
-                  <div class="flex items-center justify-between gap-3 text-[#f87171]">
-                    <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}:</span>
-                    <span class="font-bold font-mono">{{ formatCurrency(pt.expense) }}</span>
-                  </div>
-                }
+
                 <div
-                  class="absolute left-1/2 -bottom-1 -translate-x-1/2 w-2 h-2 bg-slate-900/90 rotate-45 border-r border-b border-slate-700/50"
-                ></div>
-              </div>
-            }
-
-            <svg
-              [attr.viewBox]="'0 0 ' + svgWidth + ' ' + svgHeight"
-              class="w-full h-auto overflow-visible select-none"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Real-time Income and Expense Chart"
-              (mouseleave)="setHoveredIndex(null)"
-            >
-              @for (grid of yGridLines; track grid.value) {
-                <line
-                  [attr.x1]="chartLeft"
-                  [attr.y1]="grid.y"
-                  [attr.x2]="chartRight"
-                  [attr.y2]="grid.y"
-                  stroke="#f1f5f9"
-                  stroke-width="1.2"
-                />
-                <text
-                  [attr.x]="chartLeft - 8"
-                  [attr.y]="grid.y"
-                  dominant-baseline="central"
-                  text-anchor="end"
-                  class="text-[10px] fill-slate-400 font-medium tracking-tight"
+                  class="relative w-full chart-interactive-area"
+                  (mouseleave)="setHoveredIndex(null)"
                 >
-                  {{ grid.label }}
-                </text>
-              }
+                  @if (activePoint(); as pt) {
+                    <div
+                      class="absolute z-20 pointer-events-none -top-1 sm:-top-2 transform -translate-x-1/2 bg-[#1e293b] text-white text-[11px] rounded-lg py-1.5 px-3 shadow-xl transition-all duration-75 border border-slate-700"
+                      [style.left]="(pt.x / svgWidth) * 100 + '%'"
+                    >
+                      <div class="font-bold border-b border-slate-700 pb-1 mb-1 text-[10px] text-slate-300">
+                        {{ pt.periodLabel }}
+                      </div>
+                      <div class="flex flex-col gap-0.5">
+                        @if (isIncomeVisible()) {
+                          <div class="flex items-center gap-1.5 text-blue-300 font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}:</span>
+                            <span>{{ formatCurrency(pt.income) }}</span>
+                          </div>
+                        }
+                        @if (isExpenseVisible()) {
+                          <div class="flex items-center gap-1.5 text-red-300 font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-red-400"></span>
+                            <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}:</span>
+                            <span>{{ formatCurrency(pt.expense) }}</span>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  }
 
-              @for (month of monthAxes; track month.x) {
-                <line
-                  [attr.x1]="month.x"
-                  [attr.y1]="chartTop"
-                  [attr.x2]="month.x"
-                  [attr.y2]="chartBottom"
-                  stroke="#f1f5f9"
-                  stroke-width="1.2"
-                />
-              }
+                  <svg
+                    [attr.viewBox]="'0 0 ' + svgWidth + ' ' + svgHeight"
+                    class="w-full h-auto overflow-visible"
+                    aria-label="Grafik Pendapatan dan Pengeluaran"
+                  >
+                    <defs>
+                      <linearGradient id="income-grad-c1" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.25" />
+                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0" />
+                      </linearGradient>
+                      <linearGradient id="expense-grad-c1" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ef4444" stop-opacity="0.2" />
+                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0.0" />
+                      </linearGradient>
+                    </defs>
 
-              @if (activePoint(); as pt) {
-                <line
-                  [attr.x1]="pt.x"
-                  [attr.y1]="chartTop"
-                  [attr.x2]="pt.x"
-                  [attr.y2]="chartBottom"
-                  stroke="#cbd5e1"
-                  stroke-width="1.5"
-                  stroke-dasharray="3,3"
-                  class="transition-opacity duration-200"
-                />
-              }
+                    <!-- Horizontal Grid Lines -->
+                    @for (grid of yGridLines; track grid.value) {
+                      <g class="transition-opacity">
+                        <line
+                          [attr.x1]="chartLeft"
+                          [attr.y1]="grid.y"
+                          [attr.x2]="chartRight"
+                          [attr.y2]="grid.y"
+                          stroke="#f1f5f9"
+                          stroke-width="1.5"
+                          stroke-dasharray="4,4"
+                        />
+                        <text
+                          [attr.x]="chartLeft - 10"
+                          [attr.y]="grid.y + 4"
+                          text-anchor="end"
+                          class="text-[10px] sm:text-[11px] fill-slate-400 font-medium select-none"
+                        >
+                          {{ grid.label }}
+                        </text>
+                      </g>
+                    }
 
-              @if (isExpenseVisible()) {
-                <path
-                  [attr.d]="expensePath()"
-                  fill="none"
-                  stroke="#f87171"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="transition-opacity duration-300"
-                />
-              }
-
-              @if (isIncomeVisible()) {
-                <path
-                  [attr.d]="incomePath()"
-                  fill="none"
-                  stroke="#3b82f6"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="transition-opacity duration-300"
-                />
-              }
-
-              @if (isExpenseVisible()) {
-                @for (pt of dataPoints; track pt.id) {
-                  <g class="cursor-pointer">
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="getYForValue(pt.expense)"
-                      [attr.r]="activePointIndex() === pt.id ? 5.5 : 3.5"
-                      fill="#f87171"
-                      stroke="#ffffff"
-                      stroke-width="1.5"
-                      class="transition-all duration-200"
-                    />
-                    @if (activePointIndex() === pt.id) {
-                      <circle
-                        [attr.cx]="pt.x"
-                        [attr.cy]="getYForValue(pt.expense)"
-                        r="9"
-                        fill="none"
-                        stroke="#f87171"
-                        stroke-width="1.5"
-                        stroke-opacity="0.4"
-                        class="animate-pulse"
+                    <!-- Area Fills -->
+                    @if (isIncomeVisible()) {
+                      <path
+                        [attr.d]="incomeAreaPath()"
+                        fill="url(#income-grad-c1)"
+                        class="transition-opacity duration-300"
                       />
                     }
-                  </g>
-                }
-              }
+                    @if (isExpenseVisible()) {
+                      <path
+                        [attr.d]="expenseAreaPath()"
+                        fill="url(#expense-grad-c1)"
+                        class="transition-opacity duration-300"
+                      />
+                    }
 
-              @if (isIncomeVisible()) {
-                @for (pt of dataPoints; track pt.id) {
-                  <g class="cursor-pointer">
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="getYForValue(pt.income)"
-                      [attr.r]="activePointIndex() === pt.id ? 5.5 : 3.5"
-                      fill="#3b82f6"
-                      stroke="#ffffff"
-                      stroke-width="1.5"
-                      class="transition-all duration-200"
-                    />
-                    @if (activePointIndex() === pt.id) {
-                      <circle
-                        [attr.cx]="pt.x"
-                        [attr.cy]="getYForValue(pt.income)"
-                        r="9"
+                    <!-- Chart Lines -->
+                    @if (isIncomeVisible()) {
+                      <path
+                        [attr.d]="incomePath()"
                         fill="none"
                         stroke="#3b82f6"
-                        stroke-width="1.5"
-                        stroke-opacity="0.4"
-                        class="animate-pulse"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        class="drop-shadow-sm transition-all duration-300"
                       />
                     }
-                  </g>
-                }
-              }
+                    @if (isExpenseVisible()) {
+                      <path
+                        [attr.d]="expensePath()"
+                        fill="none"
+                        stroke="#f87171"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        class="drop-shadow-sm transition-all duration-300"
+                      />
+                    }
 
-              @for (pt of dataPoints; track pt.id) {
-                <rect
-                  [attr.x]="pt.x - 23.75"
-                  [attr.y]="chartTop"
-                  width="47.5"
-                  [attr.height]="chartBottom - chartTop"
-                  fill="transparent"
-                  pointer-events="all"
-                  class="cursor-pointer"
-                  (mouseenter)="setHoveredIndex(pt.id)"
-                  (click)="setHoveredIndex(pt.id)"
-                />
-              }
+                    <!-- Data Points & Interactive Columns -->
+                    @for (pt of pointsWithCoords(); track pt.id) {
+                      <rect
+                        [attr.x]="pt.x - 20"
+                        [attr.y]="chartTop"
+                        width="40"
+                        [attr.height]="chartBottom - chartTop + 20"
+                        fill="transparent"
+                        class="cursor-pointer"
+                        (mouseenter)="setHoveredIndex(pt.id)"
+                        (click)="selectPoint(pt.id)"
+                      />
 
-              @for (month of monthAxes; track month.x) {
-                <g
-                  [attr.transform]="
-                    'translate(' + month.x + ', ' + (chartBottom + 16) + ') rotate(-25)'
-                  "
-                >
-                  <text
-                    x="0"
-                    y="0"
-                    text-anchor="end"
-                    class="text-[10px] sm:text-[11px] fill-slate-400 font-medium tracking-tight"
+                      @if (activePointIndex() === pt.id) {
+                        <line
+                          [attr.x1]="pt.x"
+                          [attr.y1]="chartTop"
+                          [attr.x2]="pt.x"
+                          [attr.y2]="chartBottom"
+                          stroke="#cbd5e1"
+                          stroke-width="1.5"
+                          stroke-dasharray="3,3"
+                        />
+                        @if (isIncomeVisible()) {
+                          <circle
+                            [attr.cx]="pt.x"
+                            [attr.cy]="pt.incomeY"
+                            r="9"
+                            fill="none"
+                            stroke="#3b82f6"
+                            stroke-width="1.5"
+                            stroke-opacity="0.4"
+                            class="animate-pulse pointer-events-none"
+                          />
+                        }
+                        @if (isExpenseVisible()) {
+                          <circle
+                            [attr.cx]="pt.x"
+                            [attr.cy]="pt.expenseY"
+                            r="9"
+                            fill="none"
+                            stroke="#f87171"
+                            stroke-width="1.5"
+                            stroke-opacity="0.4"
+                            class="animate-pulse pointer-events-none"
+                          />
+                        }
+                      }
+
+                      @if (isIncomeVisible()) {
+                        <circle
+                          [attr.cx]="pt.x"
+                          [attr.cy]="pt.incomeY"
+                          [attr.r]="activePointIndex() === pt.id ? 6 : 4"
+                          fill="#ffffff"
+                          stroke="#2563eb"
+                          [attr.stroke-width]="activePointIndex() === pt.id ? 3 : 2.5"
+                          class="transition-all duration-150 pointer-events-none"
+                        />
+                      }
+
+                      @if (isExpenseVisible()) {
+                        <circle
+                          [attr.cx]="pt.x"
+                          [attr.cy]="pt.expenseY"
+                          [attr.r]="activePointIndex() === pt.id ? 6 : 4"
+                          fill="#ffffff"
+                          stroke="#ef4444"
+                          [attr.stroke-width]="activePointIndex() === pt.id ? 3 : 2.5"
+                          class="transition-all duration-150 pointer-events-none"
+                        />
+                      }
+                    }
+
+                    <!-- Month X-Axis -->
+                    @for (month of monthAxes; track month.x) {
+                      <g [attr.transform]="'translate(' + month.x + ', ' + (chartBottom + 16) + ') rotate(-25)'">
+                        <text x="0" y="0" text-anchor="end" class="text-[10px] sm:text-[11px] fill-slate-400 font-medium tracking-tight">
+                          {{ month.translationKey | translate }}
+                        </text>
+                      </g>
+                    }
+                  </svg>
+                </div>
+
+                <div class="flex items-center justify-center gap-6 mt-3">
+                  <button
+                    type="button"
+                    (click)="toggleExpense()"
+                    [class.opacity-40]="!isExpenseVisible()"
+                    class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1.5 px-3 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
+                    [attr.aria-pressed]="isExpenseVisible()"
                   >
-                    {{ month.translationKey | translate }}
-                  </text>
-                </g>
-              }
-            </svg>
-          </div>
+                    <span class="w-5 h-2.5 rounded-sm bg-[#fee2e2] border border-[#f87171] inline-block shadow-2xs"></span>
+                    <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}</span>
+                  </button>
 
-          <div class="flex items-center justify-center gap-6 mt-3">
-            <button
-              type="button"
-              (click)="toggleExpense()"
-              [class.opacity-40]="!isExpenseVisible()"
-              class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1.5 px-3 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
-              [attr.aria-pressed]="isExpenseVisible()"
-              title="Toggle Expense series"
-            >
-              <span
-                class="w-5 h-2.5 rounded-sm bg-[#fee2e2] border border-[#f87171] inline-block shadow-2xs"
-              ></span>
-              <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}</span>
-            </button>
+                  <button
+                    type="button"
+                    (click)="toggleIncome()"
+                    [class.opacity-40]="!isIncomeVisible()"
+                    class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1.5 px-3 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
+                    [attr.aria-pressed]="isIncomeVisible()"
+                  >
+                    <span class="w-5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#3b82f6] inline-block shadow-2xs"></span>
+                    <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}</span>
+                  </button>
+                </div>
 
-            <button
-              type="button"
-              (click)="toggleIncome()"
-              [class.opacity-40]="!isIncomeVisible()"
-              class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1.5 px-3 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
-              [attr.aria-pressed]="isIncomeVisible()"
-              title="Toggle Income series"
-            >
-              <span
-                class="w-5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#3b82f6] inline-block shadow-2xs"
-              ></span>
-              <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}</span>
-            </button>
-          </div>
-
-          @if (copyFeedback()) {
-            <div
-              class="absolute bottom-3 right-3 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg animate-in fade-in duration-150"
-            >
-              ✓ Data copied to clipboard
+                @if (copyFeedback()) {
+                  <div
+                    class="absolute bottom-3 right-3 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg animate-in fade-in duration-150"
+                  >
+                    ✓ Data copied to clipboard
+                  </div>
+                }
+              </div>
             </div>
-          }
-        </div>
-      </div>
 
-      <div class="lg:col-span-5 flex flex-col justify-center space-y-5 lg:pl-4">
-        <h3
-          class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+            <!-- Right: Content & CTA -->
+            <div class="lg:col-span-5 flex flex-col justify-center space-y-4 sm:space-y-5 lg:pl-4">
+              <h3
+                class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+              >
+                {{ 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE' | translate }}
+              </h3>
+
+              <p class="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed">
+                {{ 'BUSINESS_CONTROL.CARDS.REALTIME.DESC' | translate }}
+              </p>
+
+              <div class="pt-1 sm:pt-2">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-xs sm:text-sm lg:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===============================================================
+             CARD 2: CONNECTED BUSINESS PROCESS (MONITOR + 7 PROCESS NODES)
+             =============================================================== -->
+        <article
+          class="stacking-card card-2 bg-linear-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-5 sm:p-7 lg:p-9 xl:p-10 justify-center card-scroll-area overflow-y-auto"
+          aria-label="Card 2: Seluruh Proses Bisnis Terhubung Dalam Satu Sistem"
         >
-          {{ 'BUSINESS_CONTROL.CONTENT_TITLE' | translate }}
-        </h3>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <!-- Left: Interactive Business Flow -->
+            <div class="lg:col-span-7 flex flex-col">
+              <div
+                class="bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 p-4 sm:p-5 border border-slate-100/90 relative select-none"
+              >
+                <!-- Live Node Indicator Banner -->
+                <div class="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-slate-100">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-[11px] sm:text-xs font-bold text-slate-700 tracking-wide">
+                      MODUL: {{ selectedNode().title }} ({{ selectedNode().subtitle }})
+                    </span>
+                  </div>
+                  <span class="text-[10px] sm:text-[11px] font-semibold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                    {{ selectedNode().status }}
+                  </span>
+                </div>
 
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-          {{ 'BUSINESS_CONTROL.CONTENT_DESC' | translate }}
-        </p>
+                <!-- 7 Interactive Process Modules Surrounding the Center Display -->
+                <div class="relative w-full py-1">
+                  <!-- Row 1 Nodes: Inventory, Procurement, Sales -->
+                  <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-3">
+                    <!-- 03 Inventory -->
+                    <button
+                      type="button"
+                      (click)="selectProcessNode('03')"
+                      [class]="
+                        activeProcessNodeId() === '03'
+                          ? 'p-2 sm:p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 shadow-sm text-left transition-all cursor-pointer scale-[1.02]'
+                          : 'p-2 sm:p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-slate-100/80 text-left transition-all cursor-pointer'
+                      "
+                    >
+                      <div class="flex items-center justify-between mb-1">
+                        <span class="text-[9px] font-bold text-slate-400 font-mono">03</span>
+                        <span class="w-2 h-2 rounded-full" [class]="activeProcessNodeId() === '03' ? 'bg-blue-600' : 'bg-slate-300'"></span>
+                      </div>
+                      <div class="text-[11px] sm:text-xs font-bold text-[#182849] leading-tight">Inventory</div>
+                      <div class="text-[9px] sm:text-[10px] text-slate-500 truncate">Stock Allocated</div>
+                    </button>
 
-        <div class="pt-2">
-          <button
-            type="button"
-            class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
-          </button>
-        </div>
+                    <!-- 02 Procurement -->
+                    <button
+                      type="button"
+                      (click)="selectProcessNode('02')"
+                      [class]="
+                        activeProcessNodeId() === '02'
+                          ? 'p-2 sm:p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 shadow-sm text-left transition-all cursor-pointer scale-[1.02]'
+                          : 'p-2 sm:p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-slate-100/80 text-left transition-all cursor-pointer'
+                      "
+                    >
+                      <div class="flex items-center justify-between mb-1">
+                        <span class="text-[9px] font-bold text-slate-400 font-mono">02</span>
+                        <span class="w-2 h-2 rounded-full" [class]="activeProcessNodeId() === '02' ? 'bg-blue-600' : 'bg-slate-300'"></span>
+                      </div>
+                      <div class="text-[11px] sm:text-xs font-bold text-[#182849] leading-tight">Procurement</div>
+                      <div class="text-[9px] sm:text-[10px] text-slate-500 truncate">MRP Demand</div>
+                    </button>
+
+                    <!-- 01 Sales -->
+                    <button
+                      type="button"
+                      (click)="selectProcessNode('01')"
+                      [class]="
+                        activeProcessNodeId() === '01'
+                          ? 'p-2 sm:p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 shadow-sm text-left transition-all cursor-pointer scale-[1.02]'
+                          : 'p-2 sm:p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-slate-100/80 text-left transition-all cursor-pointer'
+                      "
+                    >
+                      <div class="flex items-center justify-between mb-1">
+                        <span class="text-[9px] font-bold text-slate-400 font-mono">01</span>
+                        <span class="w-2 h-2 rounded-full" [class]="activeProcessNodeId() === '01' ? 'bg-blue-600' : 'bg-slate-300'"></span>
+                      </div>
+                      <div class="text-[11px] sm:text-xs font-bold text-[#182849] leading-tight">Sales</div>
+                      <div class="text-[9px] sm:text-[10px] text-slate-500 truncate">SO Confirmed</div>
+                    </button>
+                  </div>
+
+                  <!-- Center: Interactive Monitor Display -->
+                  <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center my-2">
+                    <!-- Left Mid Node: Production -->
+                    <div class="sm:col-span-3 flex flex-col gap-2">
+                      <button
+                        type="button"
+                        (click)="selectProcessNode('04')"
+                        [class]="
+                          activeProcessNodeId() === '04'
+                            ? 'p-2 sm:p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 shadow-sm text-left transition-all cursor-pointer scale-[1.02]'
+                            : 'p-2 sm:p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-slate-100/80 text-left transition-all cursor-pointer'
+                        "
+                      >
+                        <div class="flex items-center justify-between mb-1">
+                          <span class="text-[9px] font-bold text-slate-400 font-mono">04</span>
+                          <span class="w-2 h-2 rounded-full" [class]="activeProcessNodeId() === '04' ? 'bg-blue-600' : 'bg-slate-300'"></span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs font-bold text-[#182849] leading-tight">Production</div>
+                        <div class="text-[9px] sm:text-[10px] text-slate-500 truncate">MO Released</div>
+                      </button>
+
+                      <button
+                        type="button"
+                        (click)="selectProcessNode('06')"
+                        [class]="
+                          activeProcessNodeId() === '06'
+                            ? 'p-2 sm:p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 shadow-sm text-left transition-all cursor-pointer scale-[1.02]'
+                            : 'p-2 sm:p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-slate-100/80 text-left transition-all cursor-pointer'
+                        "
+                      >
+                        <div class="flex items-center justify-between mb-1">
+                          <span class="text-[9px] font-bold text-slate-400 font-mono">06</span>
+                          <span class="w-2 h-2 rounded-full" [class]="activeProcessNodeId() === '06' ? 'bg-blue-600' : 'bg-slate-300'"></span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs font-bold text-[#182849] leading-tight">Project</div>
+                        <div class="text-[9px] sm:text-[10px] text-slate-500 truncate">Project Initiated</div>
+                      </button>
+                    </div>
+
+                    <!-- Center Display Monitor Mockup -->
+                    <div class="sm:col-span-6 flex flex-col items-center">
+                      <div class="w-full bg-[#182849] rounded-2xl p-2.5 shadow-2xl border-4 border-slate-800 text-white relative">
+                        <!-- Top Monitor Bar -->
+                        <div class="flex items-center justify-between border-b border-slate-700/80 pb-1.5 mb-2 px-1">
+                          <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-red-400"></span>
+                            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            <span class="text-[10px] font-medium text-slate-300 ml-1">SOFI ERP Master</span>
+                          </div>
+                          <span class="text-[9px] text-blue-300">Selamat datang, Andik</span>
+                        </div>
+
+                        <!-- 4 Metric Cards inside monitor -->
+                        <div class="grid grid-cols-4 gap-1 mb-2">
+                          <div class="bg-slate-800/80 p-1 rounded text-center">
+                            <div class="text-[8px] text-slate-400">Sales</div>
+                            <div class="text-[10px] font-bold text-blue-300">12.3M</div>
+                          </div>
+                          <div class="bg-slate-800/80 p-1 rounded text-center">
+                            <div class="text-[8px] text-slate-400">Procure</div>
+                            <div class="text-[10px] font-bold text-sky-300">2.5M</div>
+                          </div>
+                          <div class="bg-slate-800/80 p-1 rounded text-center">
+                            <div class="text-[8px] text-slate-400">Stock</div>
+                            <div class="text-[10px] font-bold text-emerald-300">15.8M</div>
+                          </div>
+                          <div class="bg-slate-800/80 p-1 rounded text-center">
+                            <div class="text-[8px] text-slate-400">Output</div>
+                            <div class="text-[10px] font-bold text-amber-300">4.6M</div>
+                          </div>
+                        </div>
+
+                        <!-- Mini Chart Preview -->
+                        <div class="bg-slate-800/50 rounded p-1.5 border border-slate-700/50">
+                          <div class="flex items-center justify-between text-[9px] text-slate-300 mb-1">
+                            <span>Revenue & Gross Profit</span>
+                            <span class="text-emerald-400 font-bold">+18.5%</span>
+                          </div>
+                          <svg viewBox="0 0 200 45" class="w-full h-8 overflow-visible">
+                            <path d="M 0,35 Q 30,10 60,25 T 120,15 T 180,8 T 200,12" fill="none" stroke="#60a5fa" stroke-width="2.5" />
+                            <path d="M 0,40 Q 30,30 60,35 T 120,28 T 180,22 T 200,25" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2,2" />
+                          </svg>
+                        </div>
+
+                        <!-- Selected module live context snippet -->
+                        <div class="mt-2 text-[9px] bg-blue-950/80 text-blue-200 px-2 py-1 rounded border border-blue-800/60 truncate">
+                          ⚡ {{ selectedNode().detail }}
+                        </div>
+                      </div>
+
+                      <!-- Monitor Stand Pedestal -->
+                      <div class="w-10 h-3 bg-slate-400 rounded-b-md"></div>
+                      <div class="w-20 h-1.5 bg-slate-300 rounded-full shadow-inner"></div>
+                    </div>
+
+                    <!-- Right Mid Node: General Ledger & Dashboard -->
+                    <div class="sm:col-span-3 flex flex-col gap-2">
+                      <button
+                        type="button"
+                        (click)="selectProcessNode('05')"
+                        [class]="
+                          activeProcessNodeId() === '05'
+                            ? 'p-2 sm:p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 shadow-sm text-left transition-all cursor-pointer scale-[1.02]'
+                            : 'p-2 sm:p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-slate-100/80 text-left transition-all cursor-pointer'
+                        "
+                      >
+                        <div class="flex items-center justify-between mb-1">
+                          <span class="text-[9px] font-bold text-slate-400 font-mono">05</span>
+                          <span class="w-2 h-2 rounded-full" [class]="activeProcessNodeId() === '05' ? 'bg-blue-600' : 'bg-slate-300'"></span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs font-bold text-[#182849] leading-tight">General Ledger</div>
+                        <div class="text-[9px] sm:text-[10px] text-slate-500 truncate">Posted to GL</div>
+                      </button>
+
+                      <button
+                        type="button"
+                        (click)="selectProcessNode('07')"
+                        [class]="
+                          activeProcessNodeId() === '07'
+                            ? 'p-2 sm:p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 shadow-sm text-left transition-all cursor-pointer scale-[1.02]'
+                            : 'p-2 sm:p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-slate-100/80 text-left transition-all cursor-pointer'
+                        "
+                      >
+                        <div class="flex items-center justify-between mb-1">
+                          <span class="text-[9px] font-bold text-slate-400 font-mono">07</span>
+                          <span class="w-2 h-2 rounded-full" [class]="activeProcessNodeId() === '07' ? 'bg-blue-600' : 'bg-slate-300'"></span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs font-bold text-[#182849] leading-tight">Dashboard</div>
+                        <div class="text-[9px] sm:text-[10px] text-slate-500 truncate">Data Refreshed</div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Content & CTA -->
+            <div class="lg:col-span-5 flex flex-col justify-center space-y-4 sm:space-y-5 lg:pl-4">
+              <h3
+                class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+              >
+                {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE' | translate }}
+              </h3>
+
+              <p class="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed">
+                {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.DESC' | translate }}
+              </p>
+
+              <div class="pt-1 sm:pt-2">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-xs sm:text-sm lg:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===============================================================
+             CARD 3: STRUCTURED WORKFLOW & APPROVALS
+             =============================================================== -->
+        <article
+          class="stacking-card card-3 bg-linear-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-5 sm:p-7 lg:p-9 xl:p-10 justify-center card-scroll-area overflow-y-auto"
+          aria-label="Card 3: Workflow & Approval Terstruktur Sesuai Kebijakan Perusahaan"
+        >
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <!-- Left: Interactive Approval Mockup -->
+            <div class="lg:col-span-7 flex flex-col">
+              <div
+                class="bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 p-4 sm:p-5 border border-slate-100/90 relative select-none"
+              >
+                <!-- Card Header with Status Stepper -->
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-800 tracking-wider uppercase">
+                    STATUS APPROVAL
+                  </h4>
+
+                  <div class="flex items-center gap-1.5">
+                    @if (approvalStep() < 3) {
+                      <button
+                        type="button"
+                        (click)="approveStep()"
+                        class="px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold transition cursor-pointer shadow-xs active:scale-95"
+                      >
+                        Setujui Tahap {{ approvalStep() }}
+                      </button>
+                    } @else {
+                      <button
+                        type="button"
+                        (click)="resetApproval()"
+                        class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold transition cursor-pointer shadow-xs active:scale-95"
+                      >
+                        Reset Alur
+                      </button>
+                    }
+                  </div>
+                </div>
+
+                <!-- Approval Stepper Line -->
+                <div class="grid grid-cols-3 gap-2 items-center mb-3.5 bg-slate-50/70 p-2.5 rounded-xl border border-slate-100">
+                  <!-- Step 1: Manager -->
+                  <div class="flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                      ✓
+                    </span>
+                    <div class="min-w-0">
+                      <div class="text-[10px] font-bold text-[#182849] truncate">MARKETING MANAGER</div>
+                      <div class="text-[9px] text-slate-500 truncate">Atqiya Warda Syakira</div>
+                    </div>
+                  </div>
+
+                  <!-- Step 2: Finance -->
+                  <div class="flex items-center gap-2 border-l border-slate-200 pl-2">
+                    <span
+                      class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                      [class]="approvalStep() >= 2 ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600'"
+                    >
+                      {{ approvalStep() >= 3 ? '✓' : '2' }}
+                    </span>
+                    <div class="min-w-0">
+                      <div class="text-[10px] font-bold text-[#182849] truncate">ACCOUNTING & FINANCE</div>
+                      <div class="text-[9px] text-slate-500 truncate">
+                        {{ approvalStep() >= 3 ? 'Disetujui, Hanifah' : 'waiting approval, Hanifah' }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Step 3: Director -->
+                  <div class="flex items-center gap-2 border-l border-slate-200 pl-2">
+                    <span
+                      class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                      [class]="approvalStep() >= 3 ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'"
+                    >
+                      {{ approvalStep() >= 3 ? '✓' : '3' }}
+                    </span>
+                    <div class="min-w-0">
+                      <div class="text-[10px] font-bold text-[#182849] truncate">DIRECTOR</div>
+                      <div class="text-[9px] text-slate-500 truncate">
+                        {{ approvalStep() >= 3 ? 'Disetujui, Nabilla' : 'waiting approval, Nabilla' }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Form Fields Summary -->
+                <div class="grid grid-cols-2 gap-2 text-[10px] mb-3">
+                  <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 flex flex-col gap-1">
+                    <div class="flex justify-between"><span class="text-slate-400">Request No.</span><span class="font-bold text-slate-700">28-07-0009</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Date</span><span class="text-slate-700">06 June 2025</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Create By</span><span class="text-slate-700">Nabilla Warda</span></div>
+                  </div>
+                  <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 flex flex-col gap-1">
+                    <div class="flex justify-between"><span class="text-slate-400">Purpose</span><span class="font-bold text-slate-700">Business Trip</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Description</span><span class="text-slate-700 truncate">Trip To Jakarta</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Division</span><span class="text-slate-700">GEN - GENERAL</span></div>
+                  </div>
+                </div>
+
+                <!-- Approval Items Table -->
+                <div class="rounded-xl border border-slate-200 overflow-hidden text-[11px]">
+                  <div class="bg-[#1d4ed8] text-white font-bold grid grid-cols-12 px-2.5 py-1.5 text-[10px]">
+                    <div class="col-span-4">Item Request</div>
+                    <div class="col-span-3">COA</div>
+                    <div class="col-span-2 text-center">Qty</div>
+                    <div class="col-span-3 text-right">Amount</div>
+                  </div>
+
+                  @for (item of approvalItems(); track item.id) {
+                    <div class="grid grid-cols-12 px-2.5 py-2 items-center border-t border-slate-100 bg-white hover:bg-slate-50/80 transition">
+                      <div class="col-span-4 font-semibold text-slate-800 text-[10px] sm:text-[11px] truncate">
+                        {{ item.requestNo }}
+                      </div>
+                      <div class="col-span-3 text-slate-500 text-[9px] sm:text-[10px] truncate">
+                        {{ item.coa }}
+                      </div>
+                      <div class="col-span-2 flex items-center justify-center gap-1">
+                        <button
+                          type="button"
+                          (click)="updateItemQty(item.id, -1)"
+                          class="w-4 h-4 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] font-bold cursor-pointer"
+                        >
+                          -
+                        </button>
+                        <span class="font-bold text-slate-800 text-[10px] w-4 text-center">{{ item.qty }}</span>
+                        <button
+                          type="button"
+                          (click)="updateItemQty(item.id, 1)"
+                          class="w-4 h-4 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] font-bold cursor-pointer"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <div class="col-span-3 text-right font-bold text-blue-700 text-[10px] sm:text-[11px]">
+                        Rp {{ (item.price * item.qty).toLocaleString('id-ID') }}
+                      </div>
+                    </div>
+                  }
+
+                  <div class="bg-slate-50 px-3 py-2 border-t border-slate-200 flex justify-between items-center text-xs">
+                    <span class="font-semibold text-slate-600">Total : IDR</span>
+                    <span class="font-extrabold text-blue-800 text-sm">
+                      Rp {{ approvalTotal().toLocaleString('id-ID') }}
+                    </span>
+                  </div>
+                </div>
+
+                @if (approvalActionFeedback()) {
+                  <div class="mt-2 text-center text-[11px] font-semibold text-emerald-700 bg-emerald-50 py-1 rounded-lg border border-emerald-200 animate-in fade-in duration-150">
+                    {{ approvalActionFeedback() }}
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- Right: Content & CTA -->
+            <div class="lg:col-span-5 flex flex-col justify-center space-y-4 sm:space-y-5 lg:pl-4">
+              <h3
+                class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+              >
+                {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE' | translate }}
+              </h3>
+
+              <p class="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed">
+                {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.DESC' | translate }}
+              </p>
+
+              <div class="pt-1 sm:pt-2">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-xs sm:text-sm lg:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===============================================================
+             CARD 4: FINANCIAL & PROJECT COST CONTROL
+             =============================================================== -->
+        <article
+          class="stacking-card card-4 bg-linear-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-5 sm:p-7 lg:p-9 xl:p-10 justify-center card-scroll-area overflow-y-auto"
+          aria-label="Card 4: Insight Keuangan Dan Biaya Untuk Keputusan Yang Lebih Cerdas"
+        >
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <!-- Left: Financial & Cost Control Surface -->
+            <div class="lg:col-span-7 flex flex-col">
+              <div
+                class="bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 p-4 sm:p-5 border border-slate-100/90 relative select-none"
+              >
+                <!-- Header -->
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2.5 mb-3">
+                  <div>
+                    <h4 class="text-xs sm:text-sm font-bold text-slate-800">
+                      Project Revenue & Cost Control
+                    </h4>
+                    <p class="text-[10px] text-slate-400">Project Portfolio overview</p>
+                  </div>
+                  <span class="text-[10px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
+                    Real-Time Analysis
+                  </span>
+                </div>
+
+                <!-- 4 KPI Metrics in a row -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+                  <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="text-[9px] text-slate-500">Total Budget</div>
+                    <div class="text-xs sm:text-sm font-extrabold text-[#182849]">Rp 12.62 M</div>
+                  </div>
+                  <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="text-[9px] text-slate-500">Actual Cost</div>
+                    <div class="text-xs sm:text-sm font-extrabold text-blue-700">Rp 6.56 M</div>
+                  </div>
+                  <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="text-[9px] text-slate-500">Billed to Customer</div>
+                    <div class="text-xs sm:text-sm font-extrabold text-indigo-700">Rp 6.62 M</div>
+                  </div>
+                  <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="text-[9px] text-slate-500">Billed - Cost</div>
+                    <div class="text-xs sm:text-sm font-extrabold text-emerald-700">+Rp 0.06 M</div>
+                  </div>
+                </div>
+
+                <!-- 2-column layout: Projects vs Portfolio Pulse -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                  <!-- Left: Project Control (Budget vs Actual) -->
+                  <div class="sm:col-span-8 flex flex-col">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-[11px] font-bold text-slate-700">Budget vs Actual Cost</span>
+                      <div class="flex items-center gap-1 text-[9px]">
+                        <button
+                          type="button"
+                          (click)="setProjectFilter('all')"
+                          [class]="projectFilter() === 'all' ? 'px-2 py-0.5 rounded bg-blue-600 text-white font-bold' : 'px-2 py-0.5 rounded bg-slate-100 text-slate-600'"
+                        >
+                          All
+                        </button>
+                        <button
+                          type="button"
+                          (click)="setProjectFilter('in-progress')"
+                          [class]="projectFilter() === 'in-progress' ? 'px-2 py-0.5 rounded bg-blue-600 text-white font-bold' : 'px-2 py-0.5 rounded bg-slate-100 text-slate-600'"
+                        >
+                          Active
+                        </button>
+                        <button
+                          type="button"
+                          (click)="setProjectFilter('completed')"
+                          [class]="projectFilter() === 'completed' ? 'px-2 py-0.5 rounded bg-blue-600 text-white font-bold' : 'px-2 py-0.5 rounded bg-slate-100 text-slate-600'"
+                        >
+                          Done
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1.5 max-h-38 overflow-y-auto pr-1">
+                      @for (proj of filteredProjects(); track proj.id) {
+                        <button
+                          type="button"
+                          (click)="toggleProjectSelection(proj.name)"
+                          class="w-full text-left p-1.5 rounded-lg border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 transition cursor-pointer"
+                          [class.bg-blue-50]="selectedProjectName() === proj.name"
+                        >
+                          <div class="flex justify-between items-center text-[10px] mb-1">
+                            <span class="font-bold text-[#182849] truncate">{{ proj.name }}</span>
+                            <span class="text-blue-700 font-semibold">{{ proj.progress }}%</span>
+                          </div>
+                          <!-- Progress Bar -->
+                          <div class="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                            <div
+                              class="h-full rounded-full bg-linear-to-r from-blue-500 to-indigo-600 transition-all duration-500"
+                              [style.width.%]="proj.progress"
+                            ></div>
+                          </div>
+                          <div class="flex justify-between items-center text-[9px] text-slate-400 mt-1">
+                            <span>{{ proj.statusText }}</span>
+                            <span class="text-slate-600 font-medium">B: {{ proj.budget }}</span>
+                          </div>
+                        </button>
+                      }
+                    </div>
+                  </div>
+
+                  <!-- Right: Portfolio Pulse & Utilization Gauge -->
+                  <div class="sm:col-span-4 bg-slate-50/80 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+                    <div>
+                      <div class="text-[10px] font-bold text-slate-700 mb-1">Cost Utilization</div>
+                      <div class="text-2xl font-black text-[#182849] tracking-tight">51,99%</div>
+                      <div class="text-[9px] text-slate-500">Of Budget Used</div>
+                      <div class="w-full h-2 rounded-full bg-slate-200 overflow-hidden mt-2">
+                        <div class="h-full rounded-full bg-blue-600" style="width: 52%"></div>
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-1 pt-2 mt-2 border-t border-slate-200 text-center text-[9px]">
+                      <div>
+                        <div class="font-bold text-[#182849]">08</div>
+                        <div class="text-slate-400 text-[8px]">In prog</div>
+                      </div>
+                      <div>
+                        <div class="font-bold text-emerald-600">04</div>
+                        <div class="text-slate-400 text-[8px]">Done</div>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-500">02</div>
+                        <div class="text-slate-400 text-[8px]">Wait</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Content & CTA -->
+            <div class="lg:col-span-5 flex flex-col justify-center space-y-4 sm:space-y-5 lg:pl-4">
+              <h3
+                class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+              >
+                {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE' | translate }}
+              </h3>
+
+              <p class="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed">
+                {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.DESC' | translate }}
+              </p>
+
+              <div class="pt-1 sm:pt-2">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-xs sm:text-sm lg:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </div>

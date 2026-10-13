@@ -48,6 +48,28 @@
     "OPTIONS_MENU": "Chart Options",
     "RESET_VIEW": "Reset View",
     "EXPORT_DATA": "Export Summary",
+    "CARDS": {
+      "REALTIME": {
+        "TAB": "Real-Time Monitoring",
+        "TITLE": "Real-Time Business Monitoring for Faster Decision-Making",
+        "DESC": "Sales, cash position, inventory alert, outstanding process, production, project, and business KPIs available in one management view."
+      },
+      "CONNECTED": {
+        "TAB": "Connected Processes",
+        "TITLE": "All Business Processes Connected in One System.",
+        "DESC": "Data flows seamlessly from Sales to Procurement, Inventory, Manufacturing, Projects, through to Finance & Accounting without duplicate input."
+      },
+      "WORKFLOW": {
+        "TAB": "Workflow & Approval",
+        "TITLE": "Structured Workflow & Approvals Aligned with Company Policy.",
+        "DESC": "Documents progress through Submitted, Reviewed, Approved, In-Process, and Completed stages, complete with multi-level approval chains and audit trails."
+      },
+      "INSIGHT": {
+        "TAB": "Financial Insights",
+        "TITLE": "Financial & Cost Insights for Smarter Decision-Making.",
+        "DESC": "Revenue, gross margin, cash flow, AR/AP, inventory value, budget versus actual, cost, and profitability can all be analyzed in a unified financial surface."
+      }
+    },
     "MONTHS": {
       "AUG_2025": "August 2025",
       "SEP_2025": "September 2025",
