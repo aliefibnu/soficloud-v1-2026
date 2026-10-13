@@ -31,35 +31,37 @@
             aria-hidden="true"
           >
             <svg
-              class="absolute -bottom-0.5 inset-x-0 w-full h-[35%] pointer-events-none"
+              class="absolute -bottom-0.5 inset-x-0 w-full h-[28%] pointer-events-none"
               viewBox="0 0 396 70"
               preserveAspectRatio="none"
               aria-hidden="true"
             >
-              <path d="M -40 75 Q 198 -10 436 75 Z" [attr.fill]="card.domeBg" />
+              <path d="M 0 70 Q 198 0 396 70 L 396 70 L 0 70 Z" [attr.fill]="card.domeBg" />
             </svg>
 
-            @for (layer of card.layers; track layer.name) {
-              <div
-                class="absolute pointer-events-none will-change-transform transition-all duration-500 ease-out {{ layer.hoverClass }}"
-                [style.left.%]="layer.leftPct"
-                [style.top.%]="layer.topPct !== undefined ? layer.topPct : null"
-                [style.bottom]="layer.bottomPct !== undefined ? (layer.bottomPct === 0 ? '-1px' : layer.bottomPct + '%') : null"
-                [style.width.%]="layer.widthPct"
-                [style.height.%]="layer.heightPct"
-                [style.zIndex]="layer.z"
-              >
-                <img
-                  [ngSrc]="layer.src"
-                  [width]="layer.w"
-                  [height]="layer.h"
-                  alt=""
-                  class="w-full h-full object-contain pointer-events-none"
-                  [class.object-bottom]="layer.bottomPct !== undefined"
-                  [priority]="card.id <= 3"
-                />
-              </div>
-            }
+            <div class="absolute inset-0 translate-y-[10px] pointer-events-none">
+              @for (layer of card.layers; track layer.name) {
+                <div
+                  class="absolute pointer-events-none will-change-transform transition-all duration-500 ease-out {{ layer.hoverClass }}"
+                  [style.left.%]="layer.leftPct"
+                  [style.top.%]="layer.topPct !== undefined ? layer.topPct : null"
+                  [style.bottom]="layer.bottomPct !== undefined ? (layer.bottomPct === 0 ? '-1px' : layer.bottomPct + '%') : null"
+                  [style.width.%]="layer.widthPct"
+                  [style.height.%]="layer.heightPct"
+                  [style.zIndex]="layer.z"
+                >
+                  <img
+                    [ngSrc]="layer.src"
+                    [width]="layer.w"
+                    [height]="layer.h"
+                    alt=""
+                    class="w-full h-full object-contain pointer-events-none"
+                    [class.object-bottom]="layer.bottomPct !== undefined"
+                    [priority]="card.id <= 3"
+                  />
+                </div>
+              }
+            </div>
           </div>
 
           <div class="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
