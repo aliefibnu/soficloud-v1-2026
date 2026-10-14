@@ -22,7 +22,8 @@ describe('Features', () => {
     translateService.setTranslation('id', {
       FEATURES: {
         HEADING: '9 Fitur Utama SOFICloud',
-        SUBTITLE: 'Kapabilitas yang saling terhubung untuk menjalankan proses operasional dan menghasilkan informasi management yang konsisten.',
+        SUBTITLE:
+          'Kapabilitas yang saling terhubung untuk menjalankan proses operasional dan menghasilkan informasi management yang konsisten.',
         CTA_LEARN_MORE: 'Pelajari Selengkapnya',
         CARDS: {
           FINANCIAL: {
