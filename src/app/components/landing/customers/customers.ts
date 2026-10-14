@@ -94,29 +94,55 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
   imports: [TranslatePipe],
   selector: 'app-customers',
   styles: `
-    /* Flow pulse animations: linear (steady constant speed), runs ONCE to destination, then fades out */
+    /* Flow pulse animations: independent linear loops flowing continuously */
+    .pulse-top-horizontal {
+      stroke-dasharray: 80 1200;
+      stroke-dashoffset: 80;
+      animation: pulseFlowTopHoriz 3s linear infinite;
+    }
+
     .pulse-upper-right {
       stroke-dasharray: 40 180;
       stroke-dashoffset: 40;
-      animation: pulseFlowRightUp 2.4s linear forwards;
+      animation: pulseFlowRightUp 2.8s linear infinite;
     }
 
     .pulse-lower-right {
       stroke-dasharray: 50 600;
       stroke-dashoffset: 50;
-      animation: pulseFlowRightVert2 2.4s linear forwards;
+      animation: pulseFlowRightVert2 3.2s linear infinite;
     }
 
     .pulse-left {
       stroke-dasharray: 50 600;
       stroke-dashoffset: 50;
-      animation: pulseFlowLeftVert2 2.4s linear forwards;
+      animation: pulseFlowLeftVert2 3.2s linear infinite;
     }
 
     .pulse-bottom-horizontal {
       stroke-dasharray: 80 1200;
       stroke-dashoffset: 80;
-      animation: pulseFlowBottomHoriz 2.4s linear forwards;
+      animation: pulseFlowBottomHoriz 3s linear infinite;
+    }
+
+    @keyframes pulseFlowTopHoriz {
+      0% {
+        opacity: 0;
+        stroke-dashoffset: 80;
+      }
+      8% {
+        opacity: 1;
+      }
+      88% {
+        opacity: 1;
+      }
+      96% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+        stroke-dashoffset: -710;
+      }
     }
 
     @keyframes pulseFlowRightUp {
@@ -124,13 +150,13 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
         opacity: 0;
         stroke-dashoffset: 40;
       }
-      8% {
+      10% {
         opacity: 1;
       }
       85% {
         opacity: 1;
       }
-      96% {
+      95% {
         opacity: 0;
       }
       100% {
@@ -144,13 +170,13 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
         opacity: 0;
         stroke-dashoffset: 50;
       }
-      8% {
+      10% {
         opacity: 1;
       }
       85% {
         opacity: 1;
       }
-      96% {
+      95% {
         opacity: 0;
       }
       100% {
@@ -164,13 +190,13 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
         opacity: 0;
         stroke-dashoffset: 50;
       }
-      8% {
+      10% {
         opacity: 1;
       }
       85% {
         opacity: 1;
       }
-      96% {
+      95% {
         opacity: 0;
       }
       100% {
@@ -184,13 +210,13 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
         opacity: 0;
         stroke-dashoffset: 80;
       }
-      6% {
+      8% {
         opacity: 1;
       }
       88% {
         opacity: 1;
       }
-      97% {
+      96% {
         opacity: 0;
       }
       100% {
@@ -199,23 +225,64 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       }
     }
 
-    /* Interactive logo transition in center card */
+    /* Rich interactive transition when active PT switches in center showcase card */
     .logo-switch-active {
-      animation: logoPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: logoRichSwitch 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
     }
 
-    @keyframes logoPop {
+    .name-switch-active {
+      animation: nameRichSwitch 0.6s 0.08s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .card-switch-pulse {
+      animation: cardHighlightPulse 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes logoRichSwitch {
       0% {
         opacity: 0;
-        transform: scale(0.85) translateY(4px);
+        transform: perspective(500px) rotateX(18deg) translateY(16px) scale(0.85);
+        filter: blur(4px);
       }
       50% {
         opacity: 0.95;
-        transform: scale(1.03) translateY(-1px);
+        transform: perspective(500px) rotateX(-4deg) translateY(-2px) scale(1.05);
+        filter: blur(0px);
+      }
+      75% {
+        transform: perspective(500px) rotateX(1deg) translateY(1px) scale(0.99);
       }
       100% {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: perspective(500px) rotateX(0deg) translateY(0) scale(1);
+        filter: blur(0px);
+      }
+    }
+
+    @keyframes nameRichSwitch {
+      0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+      }
+      60% {
+        opacity: 0.9;
+        transform: translateY(-1px) scale(1.01);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes cardHighlightPulse {
+      0% {
+        box-shadow: 0 16px 36px rgba(35, 36, 78, 0.08);
+      }
+      45% {
+        box-shadow: 0 20px 48px rgba(28, 115, 232, 0.22), 0 0 0 2px rgba(28, 115, 232, 0.3);
+      }
+      100% {
+        box-shadow: 0 16px 36px rgba(35, 36, 78, 0.08);
       }
     }
 
@@ -266,6 +333,59 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
         transparent
       );
     }
+
+    /* Top active spotlight switch animation: slides smoothly from right to left with luminous pulse */
+    .spotlight-switch-active {
+      animation: spotlightSwitchAnim 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .inactive-track-slide {
+      animation: trackSlideLeft 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes spotlightSwitchAnim {
+      0% {
+        transform: translateX(40px) scale(0.92);
+        opacity: 0.7;
+        box-shadow: 0 0 0 rgba(28, 115, 232, 0);
+      }
+      50% {
+        transform: translateX(-2px) scale(1.03);
+        box-shadow: 0 0 28px rgba(28, 115, 232, 0.55);
+      }
+      100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+        box-shadow: 0 0 22px rgba(28, 115, 232, 0.35);
+      }
+    }
+
+    @keyframes trackSlideLeft {
+      0% {
+        transform: translateX(40px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-top-horizontal,
+      .pulse-upper-right,
+      .pulse-lower-right,
+      .pulse-left,
+      .pulse-bottom-horizontal,
+      .marquee-track-right,
+      .marquee-track-left,
+      .logo-switch-active,
+      .name-switch-active,
+      .card-switch-pulse,
+      .spotlight-switch-active,
+      .inactive-track-slide {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   `,
   templateUrl: './customers.html',
 })
@@ -308,8 +428,9 @@ export class Customers implements OnInit {
     });
   });
 
-  // For backward compatibility with tests expecting virtualIndex and trackTransform
-  readonly virtualIndex = computed(() => 20 + this.activeCustomerIndex());
+  // Track position signal starting at index 22 (Sanipak)
+  readonly currentVirtual = signal<number>(22);
+  readonly virtualIndex = computed(() => this.currentVirtual());
   readonly isSlidingSmooth = signal<boolean>(true);
   readonly isLineAnimating = signal<boolean>(true);
   readonly isLogoTransitioning = signal<boolean>(true);
@@ -360,8 +481,8 @@ export class Customers implements OnInit {
       return;
     }
     this.activeCustomerIndex.set(targetIdx);
+    this.currentVirtual.set(20 + targetIdx);
     this.triggerLogoTransition();
-    this.triggerLineAnimation();
     this.restartRotationTimer();
   }
 
@@ -375,9 +496,16 @@ export class Customers implements OnInit {
 
   private advanceToNext(): void {
     const N = this.topCustomers.length;
-    this.activeCustomerIndex.update((i) => (i + 1) % N);
+    const current = this.activeCustomerIndex();
+    const nextIdx = (current + 1) % N;
+    this.activeCustomerIndex.set(nextIdx);
+    const nextVirt = this.currentVirtual() + 1;
+    if (nextVirt % N === nextIdx && nextVirt < 40) {
+      this.currentVirtual.set(nextVirt);
+    } else {
+      this.currentVirtual.set(20 + nextIdx);
+    }
     this.triggerLogoTransition();
-    this.triggerLineAnimation();
   }
 
   private startRotationTimer(): void {
@@ -412,18 +540,6 @@ export class Customers implements OnInit {
   }
 
   private triggerLineAnimation(): void {
-    this.isLineAnimating.set(false);
-    if (this.lineAnimationTimeout) {
-      clearTimeout(this.lineAnimationTimeout);
-    }
-    if (this.lineCleanupTimeout) {
-      clearTimeout(this.lineCleanupTimeout);
-    }
-    this.lineAnimationTimeout = setTimeout(() => {
-      this.isLineAnimating.set(true);
-      this.lineCleanupTimeout = setTimeout(() => {
-        this.isLineAnimating.set(false);
-      }, 2450);
-    }, 20);
+    this.isLineAnimating.set(true);
   }
 }
