@@ -79,7 +79,7 @@ describe('OverviewFeature', () => {
     const glowRings = compiled.querySelectorAll('.glow-ring');
 
     expect(mockupImg).toBeTruthy();
-    expect(mockupImg?.getAttribute('src')).toContain('dashboard mockup.svg');
+    expect(mockupImg?.getAttribute('src')).toMatch(/dashboard-(stand|mockup)\.svg/);
     expect(mockupImg?.getAttribute('width')).toBe('417');
     expect(mockupImg?.getAttribute('height')).toBe('461');
     expect(mockupImg?.getAttribute('loading')).toBe('lazy');
