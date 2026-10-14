@@ -220,6 +220,20 @@
         "OCTOBER": "October",
         "NOVEMBER": "November",
         "DECEMBER": "December"
+      },
+      "FLOATING": {
+        "PROJECT_CASH": {
+          "TAG": "PROJECT CASH",
+          "SUBTEXT": "Estimated month-end balance",
+          "ARIA_LABEL": "Project Cash preview"
+        },
+        "BUDGET_UTILIZATION": {
+          "TAG": "BUDGET UTILIZATION",
+          "OPEX_USED": "OPEX Used",
+          "MO_READY": "Mo ready for execution",
+          "OPEX_ARIA_LABEL": "Budget utilization OPEX percentage",
+          "MO_ARIA_LABEL": "Budget utilization execution readiness"
+        }
       }
     }
   },
@@ -435,4 +449,3 @@
     }
   }
 }
-

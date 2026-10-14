@@ -63,6 +63,12 @@ export interface RawMonthPoint {
   readonly salesOrders: string;
 }
 
+export interface FloatingBudgetCardData {
+  readonly opexPercent: number;
+  readonly executionPercent: number;
+  readonly executionBars: readonly number[];
+}
+
 export interface MonthDashboardData {
   readonly monthKey: string;
   readonly year: number;
@@ -94,6 +100,7 @@ export interface MonthDashboardData {
     readonly productionPlan: string;
     readonly ordersAtRiskCount: number;
   };
+  readonly floatingBudget: FloatingBudgetCardData;
 }
 
 const BASE_CHART_RAW_MONTHS: readonly RawMonthPoint[] = [
@@ -251,6 +258,11 @@ export class UiMockup {
         productionPlan: '11,200 (76.8%)',
         ordersAtRiskCount: 3,
       },
+      floatingBudget: {
+        opexPercent: 54,
+        executionPercent: 88,
+        executionBars: [32, 68, 48, 85],
+      },
     },
     {
       monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.AUGUST',
@@ -301,6 +313,11 @@ export class UiMockup {
         cashCoverageMonths: '2.2',
         productionPlan: '11,900 (78.5%)',
         ordersAtRiskCount: 4,
+      },
+      floatingBudget: {
+        opexPercent: 58,
+        executionPercent: 91,
+        executionBars: [35, 75, 52, 92],
       },
     },
     {
@@ -361,12 +378,15 @@ export class UiMockup {
         productionPlan: '12,500 (80.4%)',
         ordersAtRiskCount: 5,
       },
+      floatingBudget: {
+        opexPercent: 62,
+        executionPercent: 94,
+        executionBars: [38, 81, 57, 100],
+      },
     },
   ];
 
-  readonly currentData = computed(
-    () => this.monthDatasets[this.selectedMonthIndex()],
-  );
+  readonly currentData = computed(() => this.monthDatasets[this.selectedMonthIndex()]);
 
   readonly currentMonthKey = computed(() => this.currentData().monthKey);
 
@@ -435,17 +455,21 @@ export class UiMockup {
   });
 
   readonly chartRevenuePoints = computed(() =>
-    this.chartPointsData().map((p) => `${p.x},${p.revY}`).join(' ')
+    this.chartPointsData()
+      .map((p) => `${p.x},${p.revY}`)
+      .join(' '),
   );
 
   readonly chartSalesOrderPoints = computed(() =>
-    this.chartPointsData().map((p) => `${p.x},${p.orderY}`).join(' ')
+    this.chartPointsData()
+      .map((p) => `${p.x},${p.orderY}`)
+      .join(' '),
   );
 
   readonly chartRevenueDots = computed(() =>
     this.chartPointsData()
       .filter((_, i) => i >= 2)
-      .map((p) => ({ cx: p.x, cy: p.revY }))
+      .map((p) => ({ cx: p.x, cy: p.revY })),
   );
 
   readonly hoveredMonthIndex = signal<number | null>(null);
@@ -587,4 +611,8 @@ export class UiMockup {
       },
     ];
   });
+
+  readonly donutArcBlue = computed(() => 'M 40.0,12.0 A 28,28 0 1,1 15.75,54.0');
+  readonly donutArcTeal = computed(() => 'M 15.75,54.0 A 28,28 0 0,1 12.95,32.75');
+  readonly donutTrackGray = computed(() => 'M 12.95,32.75 A 28,28 0 0,1 40.0,12.0');
 }

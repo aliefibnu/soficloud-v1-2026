@@ -220,6 +220,20 @@
         "OCTOBER": "10월",
         "NOVEMBER": "11월",
         "DECEMBER": "12월"
+      },
+      "FLOATING": {
+        "PROJECT_CASH": {
+          "TAG": "PROJECT CASH",
+          "SUBTEXT": "월말 예상 잔액",
+          "ARIA_LABEL": "프로젝트 현금 미리보기"
+        },
+        "BUDGET_UTILIZATION": {
+          "TAG": "BUDGET UTILIZATION",
+          "OPEX_USED": "OPEX 사용됨",
+          "MO_READY": "실행 준비 완료",
+          "OPEX_ARIA_LABEL": "예산 활용도 OPEX 비율",
+          "MO_ARIA_LABEL": "실행 준비율"
+        }
       }
     }
   },
@@ -435,4 +449,3 @@
     }
   }
 }
-

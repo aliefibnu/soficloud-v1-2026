@@ -220,6 +220,20 @@
         "OCTOBER": "Oktober",
         "NOVEMBER": "November",
         "DECEMBER": "Desember"
+      },
+      "FLOATING": {
+        "PROJECT_CASH": {
+          "TAG": "PROJECT CASH",
+          "SUBTEXT": "Estimasi saldo akhir bulan",
+          "ARIA_LABEL": "Pratinjau Project Cash"
+        },
+        "BUDGET_UTILIZATION": {
+          "TAG": "UTILISASI ANGGARAN",
+          "OPEX_USED": "OPEX Digunakan",
+          "MO_READY": "MO siap eksekusi",
+          "OPEX_ARIA_LABEL": "Persentase utilisasi anggaran OPEX",
+          "MO_ARIA_LABEL": "Kesiapan eksekusi anggaran"
+        }
       }
     }
   },
@@ -435,4 +449,3 @@
     }
   }
 }
-

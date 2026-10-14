@@ -133,6 +133,20 @@ const EN_TRANSLATIONS = {
         NOVEMBER: 'November',
         DECEMBER: 'December',
       },
+      FLOATING: {
+        PROJECT_CASH: {
+          TAG: 'PROJECT CASH',
+          SUBTEXT: 'Estimated month-end balance',
+          ARIA_LABEL: 'Project Cash preview',
+        },
+        BUDGET_UTILIZATION: {
+          TAG: 'BUDGET UTILIZATION',
+          OPEX_USED: 'OPEX Used',
+          MO_READY: 'Mo ready for execution',
+          OPEX_ARIA_LABEL: 'Budget utilization OPEX percentage',
+          MO_ARIA_LABEL: 'Budget utilization execution readiness',
+        },
+      },
     },
   },
 };
@@ -329,9 +343,7 @@ describe('UiMockup', () => {
     expect(component.selectedMonthIndex()).toBe(1); // August
     expect(component.currentMonthKey()).toBe('HERO.UI_MOCKUP.MONTHS_FULL.AUGUST');
     expect(fixture.nativeElement.textContent).toContain('August 2026');
-    expect(fixture.nativeElement.textContent).toContain(
-      'Outstanding invoices due in August',
-    );
+    expect(fixture.nativeElement.textContent).toContain('Outstanding invoices due in August');
     expect(fixture.nativeElement.textContent).toContain('Rp 8,150,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('Rp 5,300,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('4 orders');
@@ -347,9 +359,7 @@ describe('UiMockup', () => {
     expect(component.selectedMonthIndex()).toBe(0); // July
     expect(component.currentMonthKey()).toBe('HERO.UI_MOCKUP.MONTHS_FULL.JULY');
     expect(fixture.nativeElement.textContent).toContain('July 2026');
-    expect(fixture.nativeElement.textContent).toContain(
-      'Outstanding invoices due in July',
-    );
+    expect(fixture.nativeElement.textContent).toContain('Outstanding invoices due in July');
     expect(fixture.nativeElement.textContent).toContain('Rp 7,920,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('Rp 4,900,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('3 orders');
@@ -404,7 +414,9 @@ describe('UiMockup', () => {
     expect(component.yTicks()[0].label).toBe('8 B');
 
     // Verify next month button is disabled
-    const nextBtn = fixture.nativeElement.querySelector('header button[aria-label="Next month"]') as HTMLButtonElement;
+    const nextBtn = fixture.nativeElement.querySelector(
+      'header button[aria-label="Next month"]',
+    ) as HTMLButtonElement;
     expect(nextBtn.disabled).toBe(true);
 
     // Attempting nextMonth does not advance
@@ -439,7 +451,9 @@ describe('UiMockup', () => {
     expect(component.selectedMonthIndex()).toBe(1);
 
     // Next at August should be disabled
-    const nextBtn = fixture.nativeElement.querySelector('header button[aria-label="Next month"]') as HTMLButtonElement;
+    const nextBtn = fixture.nativeElement.querySelector(
+      'header button[aria-label="Next month"]',
+    ) as HTMLButtonElement;
     expect(nextBtn.disabled).toBe(true);
     component.nextMonth();
     expect(component.selectedMonthIndex()).toBe(1);
@@ -473,9 +487,7 @@ describe('UiMockup', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.textContent).toContain('Executive Alerts');
-    expect(fixture.nativeElement.textContent).toContain(
-      '5 Orders at Risk of shipping delay',
-    );
+    expect(fixture.nativeElement.textContent).toContain('5 Orders at Risk of shipping delay');
 
     component.markAllAsRead();
     expect(component.unreadCount()).toBe(0);
@@ -546,7 +558,10 @@ describe('UiMockup', () => {
     // Halos / Hover markers
     const chartContainer = compiled.querySelector('.relative.w-full.h-40');
     const halos = Array.from(chartContainer?.querySelectorAll('div') || []).filter(
-      (el) => el.classList.contains('w-3.5') && el.classList.contains('h-3.5') && el.classList.contains('rounded-full'),
+      (el) =>
+        el.classList.contains('w-3.5') &&
+        el.classList.contains('h-3.5') &&
+        el.classList.contains('rounded-full'),
     );
     expect(halos.length).toBe(2); // One for revenue (#2563eb), one for sales orders (#60a5fa)
 
@@ -559,7 +574,10 @@ describe('UiMockup', () => {
     expect(compiled.querySelector('[role="tooltip"]')).toBeNull();
     expect(compiled.querySelector('line[stroke-dasharray="3,3"]')).toBeNull();
     const halosAfter = Array.from(chartContainer?.querySelectorAll('div') || []).filter(
-      (el) => el.classList.contains('w-3.5') && el.classList.contains('h-3.5') && el.classList.contains('rounded-full'),
+      (el) =>
+        el.classList.contains('w-3.5') &&
+        el.classList.contains('h-3.5') &&
+        el.classList.contains('rounded-full'),
     );
     expect(halosAfter.length).toBe(0);
   });
@@ -641,7 +659,8 @@ describe('UiMockup', () => {
           DASHBOARD: {
             BREADCRUMB: 'SOFICloud / Tampilan Manajemen',
             TITLE: 'Dashboard Eksekutif',
-            DESCRIPTION: 'Visibilitas real-time untuk piutang, penjualan, kas, pengeluaran, dan performa operasional',
+            DESCRIPTION:
+              'Visibilitas real-time untuk piutang, penjualan, kas, pengeluaran, dan performa operasional',
           },
           NAV: {
             DASHBOARD: 'Dashboard',
@@ -729,9 +748,13 @@ describe('UiMockup', () => {
     expect(headerRow).toBeTruthy();
 
     // Legend whitespace and shrink classes
-    const legendRevenue = compiled.querySelector('span.w-2.h-2.rounded-full.bg-\\[\\#2563eb\\].shrink-0');
+    const legendRevenue = compiled.querySelector(
+      'span.w-2.h-2.rounded-full.bg-\\[\\#2563eb\\].shrink-0',
+    );
     expect(legendRevenue).toBeTruthy();
-    const legendOrders = compiled.querySelector('span.w-2.h-2.rounded-full.bg-\\[\\#60a5fa\\].shrink-0');
+    const legendOrders = compiled.querySelector(
+      'span.w-2.h-2.rounded-full.bg-\\[\\#60a5fa\\].shrink-0',
+    );
     expect(legendOrders).toBeTruthy();
 
     // Chart container height
@@ -751,13 +774,17 @@ describe('UiMockup', () => {
     // HTML Y-axis labels
     const chartInner = compiled.querySelector('.relative.w-full.h-full');
     const yAxisLabels = Array.from(chartInner?.querySelectorAll('span') || []).filter(
-      (el) => el.classList.contains('pointer-events-none') && el.classList.contains('-translate-y-1/2'),
+      (el) =>
+        el.classList.contains('pointer-events-none') && el.classList.contains('-translate-y-1/2'),
     );
     expect(yAxisLabels.length).toBe(component.yTicks().length);
 
     // HTML Revenue dots
     const revenueDots = Array.from(chartInner?.querySelectorAll('div') || []).filter(
-      (el) => el.classList.contains('w-1.5') && el.classList.contains('h-1.5') && el.classList.contains('rounded-full'),
+      (el) =>
+        el.classList.contains('w-1.5') &&
+        el.classList.contains('h-1.5') &&
+        el.classList.contains('rounded-full'),
     );
     expect(revenueDots.length).toBe(component.chartRevenueDots().length);
 
@@ -775,7 +802,9 @@ describe('UiMockup', () => {
     let monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
     expect(monthLabels.length).toBe(10);
     expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Jul');
-    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(false);
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(
+      false,
+    );
 
     // 2. August
     fixture.componentRef.setInput('currentDate', new Date(2026, 7, 20));
@@ -783,7 +812,9 @@ describe('UiMockup', () => {
     monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
     expect(monthLabels.length).toBe(11);
     expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Aug');
-    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(false);
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(
+      false,
+    );
 
     // 3. September
     fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10));
@@ -791,6 +822,96 @@ describe('UiMockup', () => {
     monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
     expect(monthLabels.length).toBe(12);
     expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Sep');
-    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(false);
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(
+      false,
+    );
+  });
+
+  it('should render all 3 floating preview cards with localized labels and values', () => {
+    fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10)); // September 2026
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // 1. PROJECT CASH Card
+    const projectCashCard = compiled.querySelector('[aria-label="Project Cash preview"]');
+    expect(projectCashCard).toBeTruthy();
+    expect(projectCashCard?.textContent).toContain('PROJECT CASH');
+    expect(projectCashCard?.textContent).toContain('Rp 5,150,000,000.-');
+    expect(projectCashCard?.textContent).toContain('Estimated month-end balance');
+    const projectCashBar = projectCashCard?.querySelector(
+      '.bg-linear-to-r.from-\\[\\#169697\\].to-\\[\\#17babc\\]',
+    );
+    expect(projectCashBar).toBeTruthy();
+
+    // 2. BUDGET UTILIZATION Card (Top Right Donut)
+    const budgetOpexCard = compiled.querySelector(
+      '[aria-label="Budget utilization OPEX percentage"]',
+    );
+    expect(budgetOpexCard).toBeTruthy();
+    expect(budgetOpexCard?.textContent).toContain('BUDGET UTILIZATION');
+    expect(budgetOpexCard?.textContent).toContain('62%');
+    expect(budgetOpexCard?.textContent).toContain('OPEX Used');
+    const donutPaths = budgetOpexCard?.querySelectorAll('svg path');
+    expect(donutPaths?.length).toBe(3); // gray track, blue arc, teal arc
+
+    // 3. BUDGET UTILIZATION Card (Bottom Right 94% Mo Ready)
+    const budgetMoCard = compiled.querySelector(
+      '[aria-label="Budget utilization execution readiness"]',
+    );
+    expect(budgetMoCard).toBeTruthy();
+    expect(budgetMoCard?.textContent).toContain('BUDGET UTILIZATION');
+    expect(budgetMoCard?.textContent).toContain('94%');
+    expect(budgetMoCard?.textContent).toContain('Mo ready for execution');
+    const moBars = budgetMoCard?.querySelectorAll('[style*="height"]');
+    expect(moBars?.length).toBe(4);
+    expect((moBars?.[0] as HTMLElement)?.style.height).toBe('38%');
+    expect((moBars?.[1] as HTMLElement)?.style.height).toBe('81%');
+    expect((moBars?.[2] as HTMLElement)?.style.height).toBe('57%');
+    expect((moBars?.[3] as HTMLElement)?.style.height).toBe('100%');
+  });
+
+  it('should dynamically update floating cards when navigating through monthly datasets', () => {
+    fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10)); // September 2026
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // September defaults
+    expect(compiled.querySelector('[aria-label="Project Cash preview"]')?.textContent).toContain(
+      'Rp 5,150,000,000.-',
+    );
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization OPEX percentage"]')?.textContent,
+    ).toContain('62%');
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization execution readiness"]')?.textContent,
+    ).toContain('94%');
+
+    // Step back to August
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(1);
+    expect(compiled.querySelector('[aria-label="Project Cash preview"]')?.textContent).toContain(
+      'Rp 4,950,000,000.-',
+    );
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization OPEX percentage"]')?.textContent,
+    ).toContain('58%');
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization execution readiness"]')?.textContent,
+    ).toContain('91%');
+
+    // Step back to July
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(0);
+    expect(compiled.querySelector('[aria-label="Project Cash preview"]')?.textContent).toContain(
+      'Rp 4,700,000,000.-',
+    );
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization OPEX percentage"]')?.textContent,
+    ).toContain('54%');
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization execution readiness"]')?.textContent,
+    ).toContain('88%');
   });
 });
