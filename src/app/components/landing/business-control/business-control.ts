@@ -1,15 +1,16 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
-  OnDestroy,
-  PLATFORM_ID,
   computed,
   inject,
   signal,
   viewChild,
+  ElementRef,
+  PLATFORM_ID,
+  OnDestroy,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import { Router, NavigationStart } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../../systems/lib/language.service';
 
@@ -33,114 +34,348 @@ export interface MonthAxis {
   readonly translationKey: string;
 }
 
-export interface StackingCardInfo {
-  readonly id: number;
-  readonly key: string;
-  readonly tabKey: string;
-  readonly titleKey: string;
-  readonly descKey: string;
-  readonly badge: string;
-}
-
-export interface ProcessNode {
+export interface ProcessCard {
   readonly id: string;
-  readonly number: string;
+  readonly step: string;
   readonly title: string;
   readonly subtitle: string;
-  readonly iconType: 'cart' | 'procure' | 'inventory' | 'production' | 'gl' | 'project' | 'dashboard';
-  readonly metric: string;
-  readonly detail: string;
-  readonly status: string;
+  readonly icon: string;
+  readonly iconWidth: number;
+  readonly iconHeight: number;
 }
 
-export interface ApprovalItem {
-  readonly id: number;
-  readonly requestNo: string;
-  readonly coa: string;
-  readonly uom: string;
-  readonly price: number;
-  qty: number;
-}
-
-export interface PortfolioProject {
+export interface ProjectCostItem {
   readonly id: string;
   readonly name: string;
-  readonly statusText: string;
-  readonly category: 'completed' | 'in-progress';
-  readonly progress: number;
-  readonly budget: string;
-  readonly cost: string;
-  readonly variance: string;
+  readonly status: string;
+  readonly percent: number;
+  readonly percentLabel: string;
+}
+
+export interface ProjectKpiMetric {
+  readonly label: string;
+  readonly value: string;
 }
 
 @Component({
   selector: 'app-business-control',
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, NgOptimizedImage],
   templateUrl: './business-control.html',
-  styleUrl: './business-control.css',
   host: {
     class: 'block w-full',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'closeMenu()',
+    '(window:scroll)': 'onWindowScroll()',
+    '(window:resize)': 'onWindowResize()',
+    '(window:hashchange)': 'onHashChange()',
+    '(window:popstate)': 'onPopState()',
+    '(window:wheel)': 'onUserScrollInterruption()',
+    '(window:touchstart)': 'onUserScrollInterruption()',
+    '(window:scrollend)': 'onScrollEnd()',
   },
 })
-export class BusinessControl implements AfterViewInit, OnDestroy {
+export class BusinessControl implements OnDestroy {
   protected readonly languageService = inject(LanguageService);
   protected readonly translate = inject(TranslateService);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
+  readonly isBrowser = isPlatformBrowser(this.platformId);
+  private readonly router = inject(Router, { optional: true });
+  private routerSub: Subscription | null = null;
 
-  readonly scrollTrackRef = viewChild<ElementRef<HTMLElement>>('scrollTrack');
-  readonly cardsViewportRef = viewChild<ElementRef<HTMLElement>>('cardsViewport');
+  readonly trackRef = viewChild<ElementRef<HTMLElement>>('trackRef');
 
-  private scrollListenerRemover: (() => void) | null = null;
-  private resizeObserver: ResizeObserver | null = null;
-  private animationFrameId: number | null = null;
+  readonly scrollProgress = signal<number>(0);
+  readonly isNavigating = signal<boolean>(false);
+  private rafId: number | null = null;
+  private navSettleTimeoutId: ReturnType<typeof setTimeout> | null = null;
+  private navSafetyTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  /* =====================================================================
-   * STACKING CARDS CONFIGURATION & ACTIVE STATE
-   * ===================================================================== */
-  readonly cards: readonly StackingCardInfo[] = [
+  constructor() {
+    if (this.isBrowser && this.router) {
+      this.routerSub = this.router.events.subscribe((event) => {
+        if (event instanceof NavigationStart) {
+          const hashIdx = event.url.indexOf('#');
+          if (hashIdx !== -1) {
+            this.checkAndHandleAnchor(event.url.slice(hashIdx + 1));
+          } else if (event.url === '/' || event.url === '') {
+            this.checkAndHandleAnchor('hero');
+          }
+        }
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.clearNavTimers();
+    if (this.rafId !== null && typeof cancelAnimationFrame !== 'undefined') {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+    if (this.routerSub) {
+      this.routerSub.unsubscribe();
+      this.routerSub = null;
+    }
+  }
+
+  readonly processCards: readonly ProcessCard[] = [
     {
-      id: 0,
-      key: 'REALTIME',
-      tabKey: 'BUSINESS_CONTROL.CARDS.REALTIME.TAB',
-      titleKey: 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE',
-      descKey: 'BUSINESS_CONTROL.CARDS.REALTIME.DESC',
-      badge: '01',
+      id: 'sales',
+      step: '01',
+      title: 'Sales',
+      subtitle: 'SO Confirmed',
+      icon: '/images/business-control/1sales.svg',
+      iconWidth: 47,
+      iconHeight: 46,
     },
     {
-      id: 1,
-      key: 'CONNECTED',
-      tabKey: 'BUSINESS_CONTROL.CARDS.CONNECTED.TAB',
-      titleKey: 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE',
-      descKey: 'BUSINESS_CONTROL.CARDS.CONNECTED.DESC',
-      badge: '02',
+      id: 'procurement',
+      step: '02',
+      title: 'Procurement',
+      subtitle: 'MRP Demand',
+      icon: '/images/business-control/2procurement.svg',
+      iconWidth: 58,
+      iconHeight: 36,
     },
     {
-      id: 2,
-      key: 'WORKFLOW',
-      tabKey: 'BUSINESS_CONTROL.CARDS.WORKFLOW.TAB',
-      titleKey: 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE',
-      descKey: 'BUSINESS_CONTROL.CARDS.WORKFLOW.DESC',
-      badge: '03',
+      id: 'inventory',
+      step: '03',
+      title: 'Inventory',
+      subtitle: 'Stock Allocated',
+      icon: '/images/business-control/3inventory.svg',
+      iconWidth: 42,
+      iconHeight: 40,
     },
     {
-      id: 3,
-      key: 'INSIGHT',
-      tabKey: 'BUSINESS_CONTROL.CARDS.INSIGHT.TAB',
-      titleKey: 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE',
-      descKey: 'BUSINESS_CONTROL.CARDS.INSIGHT.DESC',
-      badge: '04',
+      id: 'production',
+      step: '04',
+      title: 'Production',
+      subtitle: 'MO Released',
+      icon: '/images/business-control/4production.svg',
+      iconWidth: 47,
+      iconHeight: 36,
+    },
+    {
+      id: 'general-ledger',
+      step: '05',
+      title: 'General Ledger',
+      subtitle: 'Posted to GL',
+      icon: '/images/business-control/5general ledger.svg',
+      iconWidth: 47,
+      iconHeight: 35,
+    },
+    {
+      id: 'project',
+      step: '06',
+      title: 'Project',
+      subtitle: 'Project Initiated',
+      icon: '/images/business-control/6project.svg',
+      iconWidth: 45,
+      iconHeight: 35,
+    },
+    {
+      id: 'dashboard',
+      step: '07',
+      title: 'Dashboard',
+      subtitle: 'Data Refreshed',
+      icon: '/images/business-control/7dashboard.svg',
+      iconWidth: 46,
+      iconHeight: 35,
     },
   ];
 
-  readonly activeCardIndex = signal<number>(0);
-  readonly cardProgress = signal<readonly number[]>([1, 0, 0, 0]);
+  readonly salesCard = this.processCards[0];
+  readonly procurementCard = this.processCards[1];
+  readonly inventoryCard = this.processCards[2];
+  readonly productionCard = this.processCards[3];
+  readonly generalLedgerCard = this.processCards[4];
+  readonly projectCard = this.processCards[5];
+  readonly dashboardCard = this.processCards[6];
 
-  /* =====================================================================
-   * CARD 1: REAL-TIME INCOME & EXPENSE CHART (EXISTING FUNCTIONALITY)
-   * ===================================================================== */
+  readonly projectKpiMetrics: readonly ProjectKpiMetric[] = [
+    { label: 'Total Budget', value: 'Rp12.62' },
+    { label: 'Actual Cost', value: 'Rp6.56' },
+    { label: 'Billed To Customer', value: 'Rp6.62' },
+    { label: 'Billed – Actual Cost', value: 'Rp59.56' },
+  ];
+
+  readonly projectCostItems: readonly ProjectCostItem[] = [
+    {
+      id: 'hauni',
+      name: 'Hauni Protos /M2607',
+      status: 'Completed | 28.4% billed',
+      percent: 68.8,
+      percentLabel: '68,8%',
+    },
+    {
+      id: 'woodfire',
+      name: 'Woodfire LNG / EH01',
+      status: 'Completed | Fully billed',
+      percent: 73.3,
+      percentLabel: '73,3%',
+    },
+    {
+      id: 'mclaren',
+      name: 'McLaren / MCD SUB1',
+      status: 'In Progress',
+      percent: 42.0,
+      percentLabel: '42,0%',
+    },
+    {
+      id: 'tanggo',
+      name: 'Tanggo / JBT-LYG1',
+      status: 'Completed | Partially billed',
+      percent: 41.7,
+      percentLabel: '41,7',
+    },
+    {
+      id: 'petrobras',
+      name: 'Petrobras / PBR FPSO',
+      status: 'In Progress',
+      percent: 8.3,
+      percentLabel: '8,3%',
+    },
+  ];
+
+  readonly progress12 = computed<number>(() => {
+    const p = this.scrollProgress();
+    // Stacking animation begins only after the card is truly centered and settled in the viewport
+    const start = 0.14;
+    const end = 0.38;
+    const t = Math.min(Math.max((p - start) / (end - start), 0), 1);
+    return t * t * (3 - 2 * t);
+  });
+
+  readonly progress23 = computed<number>(() => {
+    const p = this.scrollProgress();
+    // Card 2 stays settled, then Card 3 stacks in front-bottom
+    const start = 0.46;
+    const end = 0.70;
+    const t = Math.min(Math.max((p - start) / (end - start), 0), 1);
+    return t * t * (3 - 2 * t);
+  });
+
+  readonly progress34 = computed<number>(() => {
+    const p = this.scrollProgress();
+    // Card 3 stays settled, then Card 4 stacks in front-bottom
+    const start = 0.78;
+    const end = 0.98;
+    const t = Math.min(Math.max((p - start) / (end - start), 0), 1);
+    return t * t * (3 - 2 * t);
+  });
+
+  // Alias for backward compatibility if referenced
+  readonly transitionProgress = computed<number>(() => this.progress12());
+
+  readonly activeCard = computed<0 | 1 | 2 | 3>(() => {
+    if (this.progress34() >= 0.5) return 3;
+    if (this.progress23() >= 0.5) return 2;
+    if (this.progress12() >= 0.5) return 1;
+    return 0;
+  });
+
+  // PREVIEW CARD 1 (Chart, lowest layer in stack)
+  readonly card1Transform = computed<string>(() => {
+    const t1 = this.progress12();
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    const translateY = -16 * t1 - 16 * t2 - 16 * t3;
+    const scale = 1 - 0.04 * t1 - 0.04 * t2 - 0.04 * t3;
+    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+  });
+
+  readonly card1Opacity = computed<number>(() => {
+    const t1 = this.progress12();
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    return 1 - 0.30 * t1 - 0.20 * t2 - 0.15 * t3;
+  });
+
+  // PREVIEW CARD 2 (Connected processes, 2nd layer in stack)
+  readonly card2Transform = computed<string>(() => {
+    const t1 = this.progress12();
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    let translateY: number;
+    let scale: number;
+    if (t2 > 0) {
+      // Moves back/up as Cards 3 & 4 enter in front-bottom
+      translateY = 16 - 32 * t2 - 16 * t3;
+      scale = 1 - 0.04 * t2 - 0.04 * t3;
+    } else {
+      // Rises from below to front-bottom (+16px)
+      translateY = 100 * (1 - t1) + 16 * t1;
+      scale = 0.96 + 0.04 * t1;
+    }
+    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+  });
+
+  readonly card2Opacity = computed<number>(() => {
+    const t1 = this.progress12();
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    if (t2 > 0) {
+      return 1 - 0.30 * t2 - 0.20 * t3;
+    }
+    return Math.min(Math.max(t1 * 1.5, 0), 1);
+  });
+
+  // PREVIEW CARD 3 (Workflow & approval, 3rd layer in stack)
+  readonly card3Transform = computed<string>(() => {
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    let translateY: number;
+    let scale: number;
+    if (t3 > 0) {
+      // Moves back/up as Card 4 enters in front-bottom
+      translateY = 20 - 36 * t3;
+      scale = 1 - 0.04 * t3;
+    } else {
+      // Rises from below to front-bottom (+20px)
+      translateY = 100 * (1 - t2) + 20 * t2;
+      scale = 0.96 + 0.04 * t2;
+    }
+    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+  });
+
+  readonly card3Opacity = computed<number>(() => {
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    if (t3 > 0) {
+      return 1 - 0.30 * t3;
+    }
+    return Math.min(Math.max(t2 * 1.5, 0), 1);
+  });
+
+  // PREVIEW CARD 4 (Project Revenue & Cost Control, top layer in stack, front-bottom)
+  readonly card4Transform = computed<string>(() => {
+    const t3 = this.progress34();
+    const translateY = 100 * (1 - t3) + 24 * t3;
+    const scale = 0.96 + 0.04 * t3;
+    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+  });
+
+  readonly card4Opacity = computed<number>(() => {
+    const t3 = this.progress34();
+    return Math.min(Math.max(t3 * 1.5, 0), 1);
+  });
+
+  // RIGHT COLUMN: Cross-fade opacities (no stacking effect)
+  readonly text1Opacity = computed<number>(() => {
+    return 1 - this.progress12();
+  });
+
+  readonly text2Opacity = computed<number>(() => {
+    return this.progress12() * (1 - this.progress23());
+  });
+
+  readonly text3Opacity = computed<number>(() => {
+    return this.progress23() * (1 - this.progress34());
+  });
+
+  readonly text4Opacity = computed<number>(() => {
+    return this.progress34();
+  });
+
   readonly svgWidth = 620;
   readonly svgHeight = 290;
   readonly chartTop = 25;
@@ -152,6 +387,7 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
   readonly isExpenseVisible = signal<boolean>(true);
   readonly isIncomeVisible = signal<boolean>(true);
   readonly hoveredIndex = signal<number | null>(null);
+  readonly selectedIndex = signal<number | null>(6);
   readonly isMenuOpen = signal<boolean>(false);
   readonly copyFeedback = signal<boolean>(false);
 
@@ -175,24 +411,106 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
   ];
 
   readonly dataPoints: readonly DataPoint[] = [
-    { id: 0, x: 85, monthKey: 'BUSINESS_CONTROL.MONTHS.AUG_2025', periodLabel: 'Early Aug 2025', expense: 210, income: 270 },
-    { id: 1, x: 132.5, monthKey: 'BUSINESS_CONTROL.MONTHS.AUG_2025', periodLabel: 'Late Aug 2025', expense: 215, income: 395 },
-    { id: 2, x: 180, monthKey: 'BUSINESS_CONTROL.MONTHS.SEP_2025', periodLabel: 'Early Sep 2025', expense: 205, income: 275 },
-    { id: 3, x: 227.5, monthKey: 'BUSINESS_CONTROL.MONTHS.SEP_2025', periodLabel: 'Late Sep 2025', expense: 295, income: 235 },
-    { id: 4, x: 275, monthKey: 'BUSINESS_CONTROL.MONTHS.OCT_2025', periodLabel: 'Early Oct 2025', expense: 265, income: 275 },
-    { id: 5, x: 322.5, monthKey: 'BUSINESS_CONTROL.MONTHS.OCT_2025', periodLabel: 'Late Oct 2025', expense: 270, income: 280 },
-    { id: 6, x: 370, monthKey: 'BUSINESS_CONTROL.MONTHS.NOV_2025', periodLabel: 'Early Nov 2025', expense: 460, income: 165 },
-    { id: 7, x: 417.5, monthKey: 'BUSINESS_CONTROL.MONTHS.NOV_2025', periodLabel: 'Late Nov 2025', expense: 245, income: 380 },
-    { id: 8, x: 465, monthKey: 'BUSINESS_CONTROL.MONTHS.DEC_2025', periodLabel: 'Early Dec 2025', expense: 255, income: 265 },
-    { id: 9, x: 512.5, monthKey: 'BUSINESS_CONTROL.MONTHS.DEC_2025', periodLabel: 'Late Dec 2025', expense: 280, income: 400 },
-    { id: 10, x: 560, monthKey: 'BUSINESS_CONTROL.MONTHS.JAN_2026', periodLabel: 'Jan 2026', expense: 230, income: 475 },
+    {
+      id: 0,
+      x: 85,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.AUG_2025',
+      periodLabel: 'Early Aug 2025',
+      expense: 210,
+      income: 270,
+    },
+    {
+      id: 1,
+      x: 132.5,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.AUG_2025',
+      periodLabel: 'Late Aug 2025',
+      expense: 215,
+      income: 395,
+    },
+    {
+      id: 2,
+      x: 180,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.SEP_2025',
+      periodLabel: 'Early Sep 2025',
+      expense: 205,
+      income: 275,
+    },
+    {
+      id: 3,
+      x: 227.5,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.SEP_2025',
+      periodLabel: 'Late Sep 2025',
+      expense: 295,
+      income: 235,
+    },
+    {
+      id: 4,
+      x: 275,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.OCT_2025',
+      periodLabel: 'Early Oct 2025',
+      expense: 265,
+      income: 275,
+    },
+    {
+      id: 5,
+      x: 322.5,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.OCT_2025',
+      periodLabel: 'Late Oct 2025',
+      expense: 270,
+      income: 280,
+    },
+    {
+      id: 6,
+      x: 370,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.NOV_2025',
+      periodLabel: 'Early Nov 2025',
+      expense: 460,
+      income: 165,
+    },
+    {
+      id: 7,
+      x: 417.5,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.NOV_2025',
+      periodLabel: 'Late Nov 2025',
+      expense: 245,
+      income: 380,
+    },
+    {
+      id: 8,
+      x: 465,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.DEC_2025',
+      periodLabel: 'Early Dec 2025',
+      expense: 255,
+      income: 265,
+    },
+    {
+      id: 9,
+      x: 512.5,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.DEC_2025',
+      periodLabel: 'Late Dec 2025',
+      expense: 280,
+      income: 400,
+    },
+    {
+      id: 10,
+      x: 560,
+      monthKey: 'BUSINESS_CONTROL.MONTHS.JAN_2026',
+      periodLabel: 'Jan 2026',
+      expense: 230,
+      income: 475,
+    },
   ];
 
-  readonly activePointIndex = computed<number | null>(() => this.hoveredIndex());
+  readonly activePointIndex = computed<number>(() => {
+    const hovered = this.hoveredIndex();
+    if (hovered !== null) return hovered;
+    const selected = this.selectedIndex();
+    return selected !== null ? selected : 6;
+  });
 
   readonly activePoint = computed<DataPoint | null>(() => {
     const idx = this.activePointIndex();
-    return idx !== null ? (this.dataPoints[idx] ?? null) : null;
+    return this.dataPoints[idx] ?? null;
   });
 
   readonly incomePath = computed<string>(() => {
@@ -211,389 +529,6 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
     return this.calculateCatmullRomSpline(coords);
   });
 
-  readonly incomeAreaPath = computed<string>(() => {
-    if (this.dataPoints.length === 0) return '';
-    const firstX = this.dataPoints[0].x;
-    const lastX = this.dataPoints[this.dataPoints.length - 1].x;
-    const curve = this.incomePath();
-    return `${curve} L ${lastX},${this.chartBottom} L ${firstX},${this.chartBottom} Z`;
-  });
-
-  readonly expenseAreaPath = computed<string>(() => {
-    if (this.dataPoints.length === 0) return '';
-    const firstX = this.dataPoints[0].x;
-    const lastX = this.dataPoints[this.dataPoints.length - 1].x;
-    const curve = this.expensePath();
-    return `${curve} L ${lastX},${this.chartBottom} L ${firstX},${this.chartBottom} Z`;
-  });
-
-  readonly pointsWithCoords = computed(() => {
-    return this.dataPoints.map((pt) => ({
-      ...pt,
-      incomeY: this.getYForValue(pt.income),
-      expenseY: this.getYForValue(pt.expense),
-    }));
-  });
-
-  /* =====================================================================
-   * CARD 2: CONNECTED BUSINESS PROCESS (MONITOR + 7 PROCESS NODES)
-   * ===================================================================== */
-  readonly processNodes: readonly ProcessNode[] = [
-    {
-      id: '01',
-      number: '01',
-      title: 'Sales',
-      subtitle: 'SO Confirmed',
-      iconType: 'cart',
-      metric: 'Rp 12,3M',
-      detail: '128 SO confirmed hari ini. Alur otomatis meneruskan demand ke Procurement & Inventory.',
-      status: 'Terhubung ke Procurement',
-    },
-    {
-      id: '02',
-      number: '02',
-      title: 'Procurement',
-      subtitle: 'MRP Demand',
-      iconType: 'procure',
-      metric: 'Rp 2,5M',
-      detail: 'Kebutuhan material otomatis dikalkulasi dari Sales Order & jadwal Produksi tanpa input ulang.',
-      status: 'Material Planning Aktif',
-    },
-    {
-      id: '03',
-      number: '03',
-      title: 'Inventory',
-      subtitle: 'Stock Allocated',
-      iconType: 'inventory',
-      metric: 'Rp 15,8M',
-      detail: 'Stock dialokasikan secara real-time pada multi-warehouse, mencegah over-promising & delay.',
-      status: 'Multi-Warehouse Sync',
-    },
-    {
-      id: '04',
-      number: '04',
-      title: 'Production',
-      subtitle: 'MO Released',
-      iconType: 'production',
-      metric: 'Rp 4,6M',
-      detail: 'Manufacturing Order dilepas dengan routing & BOM presisi. Lacak progres shop floor instan.',
-      status: 'Routing & BOM Terverifikasi',
-    },
-    {
-      id: '05',
-      number: '05',
-      title: 'General Ledger',
-      subtitle: 'Posted to GL',
-      iconType: 'gl',
-      metric: 'Jurnal Otomatis',
-      detail: 'Setiap transaksi Sales, Pembelian, dan Biaya langsung tercatat di GL secara akurat.',
-      status: 'Jurnal Terposting Real-Time',
-    },
-    {
-      id: '06',
-      number: '06',
-      title: 'Project',
-      subtitle: 'Project Initiated',
-      iconType: 'project',
-      metric: '14 Active',
-      detail: 'Milestone proyek, pengadaan khusus, dan timesheet terikat langsung ke anggaran proyek.',
-      status: 'Cost Control Terpantau',
-    },
-    {
-      id: '07',
-      number: '07',
-      title: 'Dashboard',
-      subtitle: 'Data Refreshed',
-      iconType: 'dashboard',
-      metric: '100% Live',
-      detail: 'Executive summary & operasional tersinkronisasi detik demi detik untuk keputusan cepat.',
-      status: 'Executive View Siaga',
-    },
-  ];
-
-  readonly activeProcessNodeId = signal<string>('01');
-  readonly selectedNode = computed<ProcessNode>(() => {
-    const id = this.activeProcessNodeId();
-    return this.processNodes.find((n) => n.id === id) ?? this.processNodes[0];
-  });
-
-  /* =====================================================================
-   * CARD 3: STRUCTURED WORKFLOW & APPROVALS
-   * ===================================================================== */
-  readonly approvalStep = signal<number>(2); // 1: Manager, 2: Finance, 3: Director
-  readonly approvalActionFeedback = signal<string | null>(null);
-
-  readonly approvalItems = signal<ApprovalItem[]>([
-    {
-      id: 1,
-      requestNo: 'Hotel Ticket - AWS',
-      coa: '600.013 - Travel Expenses',
-      uom: 'PIECES',
-      price: 1800000,
-      qty: 2,
-    },
-    {
-      id: 2,
-      requestNo: 'Flight Ticket - NS',
-      coa: '600.013 - Travel Expenses',
-      uom: 'PIECES',
-      price: 2100000,
-      qty: 2,
-    },
-  ]);
-
-  readonly approvalTotal = computed<number>(() => {
-    return this.approvalItems().reduce((acc, item) => acc + item.price * item.qty, 0);
-  });
-
-  /* =====================================================================
-   * CARD 4: FINANCIAL & PROJECT REVENUE / COST CONTROL
-   * ===================================================================== */
-  readonly projectFilter = signal<'all' | 'in-progress' | 'completed'>('all');
-  readonly selectedProjectName = signal<string | null>(null);
-
-  readonly allProjects: readonly PortfolioProject[] = [
-    {
-      id: 'p1',
-      name: 'Hauni Protos / M2607',
-      statusText: 'Completed | 28.4% billed',
-      category: 'completed',
-      progress: 68.8,
-      budget: 'Rp 4,20 M',
-      cost: 'Rp 2,89 M',
-      variance: '+18.4%',
-    },
-    {
-      id: 'p2',
-      name: 'Woodfire LNG / EH01',
-      statusText: 'Completed | Fully billed',
-      category: 'completed',
-      progress: 72.3,
-      budget: 'Rp 3,50 M',
-      cost: 'Rp 2,53 M',
-      variance: '+12.1%',
-    },
-    {
-      id: 'p3',
-      name: 'McLaren / MCD SUB1',
-      statusText: 'In Progress',
-      category: 'in-progress',
-      progress: 43.0,
-      budget: 'Rp 2,80 M',
-      cost: 'Rp 1,20 M',
-      variance: '+7.5%',
-    },
-    {
-      id: 'p4',
-      name: 'Tanggo / JBT-LYG1',
-      statusText: 'Completed | Partially billed',
-      category: 'completed',
-      progress: 41.7,
-      budget: 'Rp 1,50 M',
-      cost: 'Rp 0,62 M',
-      variance: '+5.0%',
-    },
-    {
-      id: 'p5',
-      name: 'Petrobras / PBR FPSO',
-      statusText: 'In Progress',
-      category: 'in-progress',
-      progress: 6.3,
-      budget: 'Rp 0,62 M',
-      cost: 'Rp 0,04 M',
-      variance: '+0.8%',
-    },
-  ];
-
-  readonly filteredProjects = computed<readonly PortfolioProject[]>(() => {
-    const filter = this.projectFilter();
-    if (filter === 'all') return this.allProjects;
-    return this.allProjects.filter((p) => p.category === filter);
-  });
-
-  /* =====================================================================
-   * LIFECYCLE HOOKS & SCROLL DRIVER
-   * ===================================================================== */
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.initScrollDriver();
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.scrollListenerRemover) {
-      this.scrollListenerRemover();
-      this.scrollListenerRemover = null;
-    }
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-      this.resizeObserver = null;
-    }
-    if (this.animationFrameId !== null && typeof cancelAnimationFrame !== 'undefined') {
-      cancelAnimationFrame(this.animationFrameId);
-      this.animationFrameId = null;
-    }
-  }
-
-  private initScrollDriver(): void {
-    const trackEl = this.scrollTrackRef()?.nativeElement;
-    const viewportEl = this.cardsViewportRef()?.nativeElement;
-    if (!trackEl || !viewportEl) return;
-
-    const onScrollOrResize = (): void => {
-      if (this.animationFrameId !== null) return;
-
-      this.animationFrameId = requestAnimationFrame(() => {
-        this.animationFrameId = null;
-        this.updateScrollProgress(trackEl, viewportEl);
-      });
-    };
-
-    window.addEventListener('scroll', onScrollOrResize, { passive: true });
-    window.addEventListener('resize', onScrollOrResize, { passive: true });
-
-    if (typeof ResizeObserver !== 'undefined') {
-      this.resizeObserver = new ResizeObserver(() => {
-        onScrollOrResize();
-      });
-      this.resizeObserver.observe(trackEl);
-    }
-
-    this.scrollListenerRemover = () => {
-      window.removeEventListener('scroll', onScrollOrResize);
-      window.removeEventListener('resize', onScrollOrResize);
-    };
-
-    // Initial calculation
-    onScrollOrResize();
-  }
-
-  private smoothEase(start: number, end: number, current: number): number {
-    if (current <= start) return 0;
-    if (current >= end) return 1;
-    const t = (current - start) / (end - start);
-    return t * t * t * (t * (t * 6 - 15) + 10);
-  }
-
-  private getStickyTopOffset(trackEl: HTMLElement): number {
-    const stickyEl = trackEl.querySelector<HTMLElement>('.cards-sticky-frame');
-    if (stickyEl && typeof window !== 'undefined') {
-      const topStr = window.getComputedStyle(stickyEl).top;
-      const parsed = parseFloat(topStr);
-      if (!Number.isNaN(parsed) && parsed > 0) {
-        return parsed;
-      }
-    }
-    return 80;
-  }
-
-  private updateScrollProgress(trackEl: HTMLElement, viewportEl: HTMLElement): void {
-    const rect = trackEl.getBoundingClientRect();
-    const windowH = window.innerHeight;
-    const stickyTop = this.getStickyTopOffset(trackEl);
-
-    const scrollDistance = -rect.top + stickyTop;
-    const maxScroll = rect.height - windowH;
-
-    if (maxScroll <= 0) return;
-
-    const rawProgress = Math.max(0, Math.min(scrollDistance / maxScroll, 1));
-
-    // Snappy transitions with generous unstacked reading zones (~50% equivalent scroll space per card)
-    // Card 1 rest / read: [0.00, 0.21] (~115vh uncovered)
-    // Card 2 snaps in: [0.21, 0.24] (~16.5vh) | Card 2 rest / read: [0.24, 0.47] (~126vh uncovered by Card 3)
-    // Card 3 snaps in: [0.47, 0.50] (~16.5vh) | Card 3 rest / read: [0.50, 0.73] (~126vh uncovered by Card 4)
-    // Card 4 snaps in: [0.73, 0.76] (~16.5vh) | Card 4 rest / read: [0.76, 1.00] (~132vh uncovered)
-    const p2 = this.smoothEase(0.21, 0.24, rawProgress);
-    const p3 = this.smoothEase(0.47, 0.50, rawProgress);
-    const p4 = this.smoothEase(0.73, 0.76, rawProgress);
-
-    const card2TranslateX = (1 - p2) * 100;
-    const card3TranslateX = (1 - p3) * 100;
-    const card4TranslateX = (1 - p4) * 100;
-
-    // Subtle scale down and opacity for covered cards underneath
-    const card1Scale = 1 - 0.035 * p2;
-    const card1Opacity = 1 - 0.08 * p2;
-
-    const card2Scale = 1 - 0.035 * p3;
-    const card2Opacity = 1 - 0.08 * p3;
-
-    const card3Scale = 1 - 0.035 * p4;
-    const card3Opacity = 1 - 0.08 * p4;
-
-    viewportEl.style.setProperty('--card2-x', `${card2TranslateX.toFixed(2)}%`);
-    viewportEl.style.setProperty('--card3-x', `${card3TranslateX.toFixed(2)}%`);
-    viewportEl.style.setProperty('--card4-x', `${card4TranslateX.toFixed(2)}%`);
-
-    // Prevent shadow from encroaching into previous card when waiting offscreen
-    viewportEl.style.setProperty('--card2-shadow', p2 > 0.005 ? '1' : '0');
-    viewportEl.style.setProperty('--card3-shadow', p3 > 0.005 ? '1' : '0');
-    viewportEl.style.setProperty('--card4-shadow', p4 > 0.005 ? '1' : '0');
-
-    viewportEl.style.setProperty('--card1-scale', card1Scale.toFixed(3));
-    viewportEl.style.setProperty('--card1-opacity', card1Opacity.toFixed(3));
-    viewportEl.style.setProperty('--card2-scale', card2Scale.toFixed(3));
-    viewportEl.style.setProperty('--card2-opacity', card2Opacity.toFixed(3));
-    viewportEl.style.setProperty('--card3-scale', card3Scale.toFixed(3));
-    viewportEl.style.setProperty('--card3-opacity', card3Opacity.toFixed(3));
-
-    this.cardProgress.set([1, p2, p3, p4]);
-
-    // Determine current active card index
-    if (p4 > 0.5) {
-      this.activeCardIndex.set(3);
-    } else if (p3 > 0.5) {
-      this.activeCardIndex.set(2);
-    } else if (p2 > 0.5) {
-      this.activeCardIndex.set(1);
-    } else {
-      this.activeCardIndex.set(0);
-    }
-  }
-
-  scrollToCard(targetIndex: number): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    const trackEl = this.scrollTrackRef()?.nativeElement;
-    if (!trackEl) return;
-
-    const rect = trackEl.getBoundingClientRect();
-    const scrollY = window.scrollY;
-    const trackTop = rect.top + scrollY;
-    const windowH = window.innerHeight;
-    const maxScroll = rect.height - windowH;
-    const stickyTop = this.getStickyTopOffset(trackEl);
-
-    // Fractional scroll positions targeting the rest zone (jeda) of each card
-    const targetProgress = [0.10, 0.35, 0.61, 0.88][targetIndex] ?? 0;
-    const targetScrollY = trackTop - stickyTop + targetProgress * maxScroll;
-
-    window.scrollTo({
-      top: Math.max(0, targetScrollY),
-      behavior: 'smooth',
-    });
-
-    this.activeCardIndex.set(targetIndex);
-  }
-
-  nextCard(): void {
-    const current = this.activeCardIndex();
-    if (current < this.cards.length - 1) {
-      this.scrollToCard(current + 1);
-    }
-  }
-
-  prevCard(): void {
-    const current = this.activeCardIndex();
-    if (current > 0) {
-      this.scrollToCard(current - 1);
-    }
-  }
-
-  /* =====================================================================
-   * CARD 1: CHART METHODS
-   * ===================================================================== */
   getYForValue(value: number): number {
     const ratio = Math.max(0, Math.min(value, this.maxY)) / this.maxY;
     return this.chartBottom - ratio * (this.chartBottom - this.chartTop);
@@ -620,8 +555,8 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
     this.hoveredIndex.set(index);
   }
 
-  selectPoint(index: number | null): void {
-    this.hoveredIndex.set(index);
+  selectPoint(index: number): void {
+    this.selectedIndex.set(index);
   }
 
   toggleMenu(event: MouseEvent): void {
@@ -636,6 +571,7 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
   resetView(): void {
     this.isExpenseVisible.set(true);
     this.isIncomeVisible.set(true);
+    this.selectedIndex.set(6);
     this.hoveredIndex.set(null);
     this.closeMenu();
   }
@@ -655,9 +591,145 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
     if (target && !target.closest('.chart-menu-container')) {
       this.closeMenu();
     }
-    if (target && !target.closest('.chart-interactive-area')) {
-      this.hoveredIndex.set(null);
+    this.handlePotentialAnchorClick(event);
+  }
+
+  private handlePotentialAnchorClick(event: MouseEvent): void {
+    if (!this.isBrowser) return;
+    const target = event.target as HTMLElement | null;
+    const anchor = target?.closest('a');
+    if (!anchor) return;
+
+    if (anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+
+    const href = anchor.getAttribute('href') || anchor.getAttribute('routerLink');
+    if (!href) return;
+
+    if (href.startsWith('#')) {
+      this.checkAndHandleAnchor(href.slice(1));
+    } else if (href === '/' || href.startsWith('/#')) {
+      const hashIdx = href.indexOf('#');
+      const targetId = hashIdx !== -1 ? href.slice(hashIdx + 1) : 'hero';
+      this.checkAndHandleAnchor(targetId);
     }
+  }
+
+  checkAndHandleAnchor(anchorId: string): void {
+    if (!this.isBrowser) return;
+    const trackEl = this.trackRef()?.nativeElement;
+    if (!trackEl) return;
+
+    const cleanId = anchorId.replace(/^#/, '').trim();
+    if (!cleanId && cleanId !== '') return;
+
+    const trackRect = trackEl.getBoundingClientRect();
+    const windowH = typeof window !== 'undefined' ? window.innerHeight : 800;
+    const trackHeight = trackRect.height > 0 ? trackRect.height : windowH * 4.2;
+    const stickyOffset = this.getStickyOffset();
+    const currentScroll = stickyOffset - trackRect.top;
+    const totalScroll = Math.max(0, trackHeight - windowH);
+
+    let isBelow = false;
+    let isAbove = false;
+
+    if (cleanId === '' || cleanId === 'hero' || cleanId === 'top') {
+      isAbove = true;
+    } else {
+      const targetEl = document.getElementById(cleanId);
+      if (targetEl) {
+        const targetRect = targetEl.getBoundingClientRect();
+        isBelow = targetRect.top >= trackRect.bottom;
+        isAbove = targetRect.bottom <= trackRect.top;
+      } else {
+        const knownBelow = [
+          'overview',
+          'features',
+          'why-choose-us',
+          'about',
+          'solutions',
+          'pricing',
+          'contact',
+          'resources',
+          'customers',
+          'business-model',
+        ];
+        if (knownBelow.includes(cleanId)) {
+          isBelow = true;
+        } else if (cleanId === 'hero') {
+          isAbove = true;
+        }
+      }
+    }
+
+    if (isBelow) {
+      const isBeforeEnd = currentScroll < totalScroll || this.scrollProgress() < 1;
+      if (isBeforeEnd) {
+        this.startAnchorNavigation(1);
+      }
+    } else if (isAbove) {
+      const isPastStart = currentScroll > 0 || this.scrollProgress() > 0;
+      if (isPastStart) {
+        this.startAnchorNavigation(0);
+      }
+    }
+  }
+
+  startAnchorNavigation(targetProgress: number): void {
+    this.clearNavTimers();
+    this.isNavigating.set(true);
+    this.scrollProgress.set(targetProgress);
+
+    this.navSettleTimeoutId = setTimeout(() => {
+      this.finishAnchorNavigation();
+    }, 150);
+
+    this.navSafetyTimeoutId = setTimeout(() => {
+      this.finishAnchorNavigation();
+    }, 2500);
+  }
+
+  finishAnchorNavigation(): void {
+    if (!this.isNavigating()) return;
+    this.clearNavTimers();
+    this.isNavigating.set(false);
+    this.updateScrollProgress();
+  }
+
+  clearNavTimers(): void {
+    if (this.navSettleTimeoutId !== null) {
+      clearTimeout(this.navSettleTimeoutId);
+      this.navSettleTimeoutId = null;
+    }
+    if (this.navSafetyTimeoutId !== null) {
+      clearTimeout(this.navSafetyTimeoutId);
+      this.navSafetyTimeoutId = null;
+    }
+  }
+
+  onScrollEnd(): void {
+    if (this.isNavigating()) {
+      this.finishAnchorNavigation();
+    }
+  }
+
+  onUserScrollInterruption(): void {
+    if (this.isNavigating()) {
+      this.finishAnchorNavigation();
+    }
+  }
+
+  onHashChange(): void {
+    if (!this.isBrowser) return;
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      this.checkAndHandleAnchor(hash);
+    }
+  }
+
+  onPopState(): void {
+    if (!this.isBrowser) return;
+    const hash = window.location.hash.slice(1);
+    this.checkAndHandleAnchor(hash || 'hero');
   }
 
   private calculateCatmullRomSpline(points: readonly { x: number; y: number }[]): string {
@@ -684,69 +756,70 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
     return path;
   }
 
-  /* =====================================================================
-   * CARD 2: CONNECTED PROCESS METHODS
-   * ===================================================================== */
-  selectProcessNode(id: string): void {
-    this.activeProcessNodeId.set(id);
-  }
+  onWindowScroll(): void {
+    if (!this.isBrowser) return;
 
-  /* =====================================================================
-   * CARD 3: WORKFLOW & APPROVAL METHODS
-   * ===================================================================== */
-  approveStep(): void {
-    const current = this.approvalStep();
-    if (current < 3) {
-      this.approvalStep.set(current + 1);
-      this.showFeedback(
-        current === 1
-          ? 'Disetujui oleh Marketing Manager ✓'
-          : current === 2
-            ? 'Disetujui oleh Accounting & Finance ✓'
-            : 'Persetujuan Selesai ✓'
-      );
-    } else {
-      // Completed, toggle back or notify
-      this.showFeedback('Semua tahapan persetujuan telah diselesaikan ✓');
+    if (this.isNavigating()) {
+      if (this.navSettleTimeoutId !== null) {
+        clearTimeout(this.navSettleTimeoutId);
+      }
+      this.navSettleTimeoutId = setTimeout(() => {
+        this.finishAnchorNavigation();
+      }, 150);
+      return;
     }
+
+    if (this.rafId !== null) return;
+    this.rafId = requestAnimationFrame(() => {
+      this.rafId = null;
+      this.updateScrollProgress();
+    });
   }
 
-  resetApproval(): void {
-    this.approvalStep.set(1);
-    this.showFeedback('Alur persetujuan direset ke status awal');
+  onWindowResize(): void {
+    if (!this.isBrowser) return;
+    this.updateScrollProgress();
   }
 
-  updateItemQty(id: number, delta: number): void {
-    this.approvalItems.update((items) =>
-      items.map((item) => {
-        if (item.id === id) {
-          const newQty = Math.max(1, Math.min(item.qty + delta, 99));
-          return { ...item, qty: newQty };
-        }
-        return item;
-      })
-    );
+  private getStickyOffset(): number {
+    if (typeof window === 'undefined') return 80;
+    if (window.innerWidth < 640) return 64;
+    if (window.innerWidth < 1024) return 72;
+    return 80;
   }
 
-  private showFeedback(message: string): void {
-    this.approvalActionFeedback.set(message);
-    setTimeout(() => {
-      this.approvalActionFeedback.set(null);
-    }, 2500);
-  }
-
-  /* =====================================================================
-   * CARD 4: FINANCIAL & PROJECT METHODS
-   * ===================================================================== */
-  setProjectFilter(filter: 'all' | 'in-progress' | 'completed'): void {
-    this.projectFilter.set(filter);
-  }
-
-  toggleProjectSelection(name: string): void {
-    if (this.selectedProjectName() === name) {
-      this.selectedProjectName.set(null);
-    } else {
-      this.selectedProjectName.set(name);
+  updateScrollProgress(): void {
+    const el = this.trackRef()?.nativeElement;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+    const totalScroll = rect.height - windowHeight;
+    if (totalScroll <= 0) {
+      this.scrollProgress.set(0);
+      return;
     }
+    const stickyOffset = this.getStickyOffset();
+    const currentScroll = stickyOffset - rect.top;
+    const progress = Math.min(Math.max(currentScroll / totalScroll, 0), 1);
+    this.scrollProgress.set(progress);
+  }
+
+  setScrollProgress(progress: number): void {
+    this.scrollProgress.set(Math.min(Math.max(progress, 0), 1));
+  }
+
+  goToCard(index: number): void {
+    if (!this.isBrowser) return;
+    const el = this.trackRef()?.nativeElement;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const totalScroll = rect.height - windowHeight;
+    const stickyOffset = this.getStickyOffset();
+    const targets = [0.07, 0.42, 0.74, 0.99];
+    const targetProgress = targets[index] ?? 0;
+    const targetScrollY = window.scrollY + rect.top - stickyOffset + targetProgress * totalScroll;
+    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
   }
 }
+
