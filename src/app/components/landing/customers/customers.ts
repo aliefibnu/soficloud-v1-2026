@@ -317,6 +317,13 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       }
     }
 
+    /* Infinite top customer marquee: moves right-to-left continuously */
+    .marquee-track-top {
+      display: flex;
+      width: max-content;
+      animation: marqueeToLeft 38s linear infinite;
+    }
+
     .marquee-mask {
       mask-image: linear-gradient(
         to right,
@@ -334,47 +341,13 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       );
     }
 
-    /* Top active spotlight switch animation: slides smoothly from right to left with luminous pulse */
-    .spotlight-switch-active {
-      animation: spotlightSwitchAnim 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .inactive-track-slide {
-      animation: trackSlideLeft 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes spotlightSwitchAnim {
-      0% {
-        transform: translateX(40px) scale(0.92);
-        opacity: 0.7;
-        box-shadow: 0 0 0 rgba(28, 115, 232, 0);
-      }
-      50% {
-        transform: translateX(-2px) scale(1.03);
-        box-shadow: 0 0 28px rgba(28, 115, 232, 0.55);
-      }
-      100% {
-        transform: translateX(0) scale(1);
-        opacity: 1;
-        box-shadow: 0 0 22px rgba(28, 115, 232, 0.35);
-      }
-    }
-
-    @keyframes trackSlideLeft {
-      0% {
-        transform: translateX(40px);
-      }
-      100% {
-        transform: translateX(0);
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .pulse-top-horizontal,
       .pulse-upper-right,
       .pulse-lower-right,
       .pulse-left,
       .pulse-bottom-horizontal,
+      .marquee-track-top,
       .marquee-track-right,
       .marquee-track-left,
       .logo-switch-active,
@@ -496,15 +469,8 @@ export class Customers implements OnInit {
 
   private advanceToNext(): void {
     const N = this.topCustomers.length;
-    const current = this.activeCustomerIndex();
-    const nextIdx = (current + 1) % N;
-    this.activeCustomerIndex.set(nextIdx);
-    const nextVirt = this.currentVirtual() + 1;
-    if (nextVirt % N === nextIdx && nextVirt < 40) {
-      this.currentVirtual.set(nextVirt);
-    } else {
-      this.currentVirtual.set(20 + nextIdx);
-    }
+    this.activeCustomerIndex.update((i) => (i + 1) % N);
+    this.currentVirtual.set(20 + this.activeCustomerIndex());
     this.triggerLogoTransition();
   }
 

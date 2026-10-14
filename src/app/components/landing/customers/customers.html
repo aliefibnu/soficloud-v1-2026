@@ -82,47 +82,82 @@
 
       <!-- Right Column: Top Spotlight Row, Animated Circuit Stage, Center Showcase Card, Bottom Dual Marquee (7 cols on lg) -->
       <div class="lg:col-span-7 relative flex flex-col items-center overflow-hidden">
-        <!-- 1. Top Row: Sliding Infinite Track of Logos with Smooth Active/Non-Active Transitions -->
+        <!-- 1. Top Row: Infinite Marquee of Logos with Dynamic Active PT Glow Border (Matches Cuplikan layar 2026-10-14 214301.png) -->
         <div
-          class="relative z-20 w-full h-[68px] flex items-center overflow-hidden mb-2 marquee-mask"
+          class="relative z-20 w-full overflow-hidden py-1 mb-2 marquee-mask"
           (mouseenter)="pauseRotation()"
           (mouseleave)="resumeRotation()"
         >
           <div
-            class="flex items-center gap-4 will-change-transform transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
-            [style.transform]="trackTransform()"
+            class="marquee-track-top hover:[animation-play-state:paused] flex items-center gap-3"
           >
-            @for (card of infiniteTopCustomers; track card.virtualIdx) {
+            @for (customer of topCustomers; track 'top-a-' + customer.id) {
               <button
                 type="button"
-                (click)="selectCustomer(card.virtualIdx)"
-                class="relative flex-shrink-0 w-28 h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer focus:outline-none select-none"
-                [class.border-[#1C73E8]]="card.virtualIdx === virtualIndex()"
-                [class.bg-[#EFF6FF]]="card.virtualIdx === virtualIndex()"
-                [class.shadow-[0_0_22px_rgba(28,115,232,0.4)]]="card.virtualIdx === virtualIndex()"
-                [class.scale-100]="card.virtualIdx === virtualIndex()"
-                [class.opacity-100]="card.virtualIdx === virtualIndex()"
-                [class.z-20]="card.virtualIdx === virtualIndex()"
-                [class.border-slate-200/80]="card.virtualIdx !== virtualIndex()"
-                [class.bg-white]="card.virtualIdx !== virtualIndex()"
-                [class.shadow-sm]="card.virtualIdx !== virtualIndex()"
-                [class.scale-95]="card.virtualIdx !== virtualIndex()"
-                [class.opacity-60]="card.virtualIdx !== virtualIndex()"
-                [class.z-10]="card.virtualIdx !== virtualIndex()"
-                [class.hover:opacity-100]="card.virtualIdx !== virtualIndex()"
-                [class.hover:border-blue-300]="card.virtualIdx !== virtualIndex()"
-                [class.hover:bg-[#EFF6FF]]="card.virtualIdx !== virtualIndex()"
+                (click)="selectCustomer(customer.id - 1)"
+                class="relative flex-shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer focus:outline-none select-none"
+                [class.border-[#1C73E8]]="customer.id === activeCustomer().id"
+                [class.bg-[#EFF6FF]]="customer.id === activeCustomer().id"
+                [class.shadow-[0_0_22px_rgba(28,115,232,0.45)]]="customer.id === activeCustomer().id"
+                [class.scale-105]="customer.id === activeCustomer().id"
+                [class.opacity-100]="customer.id === activeCustomer().id"
+                [class.z-20]="customer.id === activeCustomer().id"
+                [class.border-slate-200/80]="customer.id !== activeCustomer().id"
+                [class.bg-white]="customer.id !== activeCustomer().id"
+                [class.shadow-sm]="customer.id !== activeCustomer().id"
+                [class.scale-95]="customer.id !== activeCustomer().id"
+                [class.opacity-75]="customer.id !== activeCustomer().id"
+                [class.z-10]="customer.id !== activeCustomer().id"
+                [class.hover:opacity-100]="customer.id !== activeCustomer().id"
+                [class.hover:border-blue-300]="customer.id !== activeCustomer().id"
+                [class.hover:bg-[#EFF6FF]]="customer.id !== activeCustomer().id"
                 [attr.aria-label]="
                   'CUSTOMERS.ARIA.SELECT_CUSTOMER'
-                    | translate: { name: card.name }
+                    | translate: { name: customer.name }
                 "
-                [attr.aria-pressed]="card.virtualIdx === virtualIndex()"
+                [attr.aria-pressed]="customer.id === activeCustomer().id"
               >
                 <img
-                  [src]="card.logo"
-                  [alt]="card.name"
+                  [src]="customer.logo"
+                  [alt]="customer.name"
                   class="max-h-7 sm:max-h-8 max-w-[82%] object-contain pointer-events-none transition-transform duration-500 ease-out"
-                  [class.scale-105]="card.virtualIdx === virtualIndex()"
+                  [class.scale-105]="customer.id === activeCustomer().id"
+                  loading="lazy"
+                />
+              </button>
+            }
+            <!-- Duplicate for seamless infinite marquee loop -->
+            @for (customer of topCustomers; track 'top-b-' + customer.id) {
+              <button
+                type="button"
+                (click)="selectCustomer(customer.id - 1)"
+                class="relative flex-shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer focus:outline-none select-none"
+                [class.border-[#1C73E8]]="customer.id === activeCustomer().id"
+                [class.bg-[#EFF6FF]]="customer.id === activeCustomer().id"
+                [class.shadow-[0_0_22px_rgba(28,115,232,0.45)]]="customer.id === activeCustomer().id"
+                [class.scale-105]="customer.id === activeCustomer().id"
+                [class.opacity-100]="customer.id === activeCustomer().id"
+                [class.z-20]="customer.id === activeCustomer().id"
+                [class.border-slate-200/80]="customer.id !== activeCustomer().id"
+                [class.bg-white]="customer.id !== activeCustomer().id"
+                [class.shadow-sm]="customer.id !== activeCustomer().id"
+                [class.scale-95]="customer.id !== activeCustomer().id"
+                [class.opacity-75]="customer.id !== activeCustomer().id"
+                [class.z-10]="customer.id !== activeCustomer().id"
+                [class.hover:opacity-100]="customer.id !== activeCustomer().id"
+                [class.hover:border-blue-300]="customer.id !== activeCustomer().id"
+                [class.hover:bg-[#EFF6FF]]="customer.id !== activeCustomer().id"
+                [attr.aria-label]="
+                  'CUSTOMERS.ARIA.SELECT_CUSTOMER'
+                    | translate: { name: customer.name }
+                "
+                [attr.aria-pressed]="customer.id === activeCustomer().id"
+              >
+                <img
+                  [src]="customer.logo"
+                  [alt]="customer.name"
+                  class="max-h-7 sm:max-h-8 max-w-[82%] object-contain pointer-events-none transition-transform duration-500 ease-out"
+                  [class.scale-105]="customer.id === activeCustomer().id"
                   loading="lazy"
                 />
               </button>
