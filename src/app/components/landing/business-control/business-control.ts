@@ -475,10 +475,22 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
     return t * t * t * (t * (t * 6 - 15) + 10);
   }
 
+  private getStickyTopOffset(trackEl: HTMLElement): number {
+    const stickyEl = trackEl.querySelector<HTMLElement>('.cards-sticky-frame');
+    if (stickyEl && typeof window !== 'undefined') {
+      const topStr = window.getComputedStyle(stickyEl).top;
+      const parsed = parseFloat(topStr);
+      if (!Number.isNaN(parsed) && parsed > 0) {
+        return parsed;
+      }
+    }
+    return 80;
+  }
+
   private updateScrollProgress(trackEl: HTMLElement, viewportEl: HTMLElement): void {
     const rect = trackEl.getBoundingClientRect();
     const windowH = window.innerHeight;
-    const stickyTop = 80; // approximate top offset for sticky frame
+    const stickyTop = this.getStickyTopOffset(trackEl);
 
     const scrollDistance = -rect.top + stickyTop;
     const maxScroll = rect.height - windowH;
@@ -487,10 +499,14 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
 
     const rawProgress = Math.max(0, Math.min(scrollDistance / maxScroll, 1));
 
-    // Smooth transition phases with rest buffer zones
-    const p2 = this.smoothEase(0.06, 0.34, rawProgress);
-    const p3 = this.smoothEase(0.38, 0.66, rawProgress);
-    const p4 = this.smoothEase(0.70, 0.98, rawProgress);
+    // Snappy transitions with generous unstacked reading zones (~50% equivalent scroll space per card)
+    // Card 1 rest / read: [0.00, 0.21] (~115vh uncovered)
+    // Card 2 snaps in: [0.21, 0.24] (~16.5vh) | Card 2 rest / read: [0.24, 0.47] (~126vh uncovered by Card 3)
+    // Card 3 snaps in: [0.47, 0.50] (~16.5vh) | Card 3 rest / read: [0.50, 0.73] (~126vh uncovered by Card 4)
+    // Card 4 snaps in: [0.73, 0.76] (~16.5vh) | Card 4 rest / read: [0.76, 1.00] (~132vh uncovered)
+    const p2 = this.smoothEase(0.21, 0.24, rawProgress);
+    const p3 = this.smoothEase(0.47, 0.50, rawProgress);
+    const p4 = this.smoothEase(0.73, 0.76, rawProgress);
 
     const card2TranslateX = (1 - p2) * 100;
     const card3TranslateX = (1 - p3) * 100;
@@ -510,6 +526,11 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
     viewportEl.style.setProperty('--card3-x', `${card3TranslateX.toFixed(2)}%`);
     viewportEl.style.setProperty('--card4-x', `${card4TranslateX.toFixed(2)}%`);
 
+    // Prevent shadow from encroaching into previous card when waiting offscreen
+    viewportEl.style.setProperty('--card2-shadow', p2 > 0.005 ? '1' : '0');
+    viewportEl.style.setProperty('--card3-shadow', p3 > 0.005 ? '1' : '0');
+    viewportEl.style.setProperty('--card4-shadow', p4 > 0.005 ? '1' : '0');
+
     viewportEl.style.setProperty('--card1-scale', card1Scale.toFixed(3));
     viewportEl.style.setProperty('--card1-opacity', card1Opacity.toFixed(3));
     viewportEl.style.setProperty('--card2-scale', card2Scale.toFixed(3));
@@ -520,11 +541,11 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
     this.cardProgress.set([1, p2, p3, p4]);
 
     // Determine current active card index
-    if (p4 > 0.45) {
+    if (p4 > 0.5) {
       this.activeCardIndex.set(3);
-    } else if (p3 > 0.45) {
+    } else if (p3 > 0.5) {
       this.activeCardIndex.set(2);
-    } else if (p2 > 0.45) {
+    } else if (p2 > 0.5) {
       this.activeCardIndex.set(1);
     } else {
       this.activeCardIndex.set(0);
@@ -542,10 +563,10 @@ export class BusinessControl implements AfterViewInit, OnDestroy {
     const trackTop = rect.top + scrollY;
     const windowH = window.innerHeight;
     const maxScroll = rect.height - windowH;
-    const stickyTop = 80;
+    const stickyTop = this.getStickyTopOffset(trackEl);
 
-    // Approximate fractional scroll positions for each card
-    const targetProgress = [0, 0.35, 0.68, 0.98][targetIndex] ?? 0;
+    // Fractional scroll positions targeting the rest zone (jeda) of each card
+    const targetProgress = [0.10, 0.35, 0.61, 0.88][targetIndex] ?? 0;
     const targetScrollY = trackTop - stickyTop + targetProgress * maxScroll;
 
     window.scrollTo({
