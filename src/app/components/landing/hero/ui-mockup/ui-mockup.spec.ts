@@ -304,6 +304,15 @@ describe('UiMockup', () => {
     let peakDot = compiled.querySelector('circle[cx="456"]');
     expect(peakDot?.getAttribute('cy')).toBe('38');
 
+    const progressBar = compiled.querySelector('[role="progressbar"]');
+    expect(progressBar?.getAttribute('aria-valuenow')).toBe('58');
+
+    const sparkline = compiled.querySelector('svg path[stroke="#2563eb"]');
+    expect(sparkline?.getAttribute('d')).toContain('M 5,16 C 20,8');
+
+    let recBars = compiled.querySelectorAll('.grid > div:first-child [style*="height"]');
+    expect((recBars[5] as HTMLElement)?.style.height).toBe('100%');
+
     // Step backward to August
     component.prevMonth();
     fixture.detectChanges();
@@ -318,6 +327,10 @@ describe('UiMockup', () => {
     expect(fixture.nativeElement.textContent).toContain('4 orders');
     peakDot = compiled.querySelector('circle[cx="456"]');
     expect(peakDot?.getAttribute('cy')).toBe('42');
+    expect(progressBar?.getAttribute('aria-valuenow')).toBe('52');
+    expect(sparkline?.getAttribute('d')).toContain('M 5,16 C 20,10');
+    recBars = compiled.querySelectorAll('.grid > div:first-child [style*="height"]');
+    expect((recBars[5] as HTMLElement)?.style.height).toBe('88%');
 
     // Step backward to July
     component.prevMonth();
@@ -333,6 +346,10 @@ describe('UiMockup', () => {
     expect(fixture.nativeElement.textContent).toContain('3 orders');
     peakDot = compiled.querySelector('circle[cx="456"]');
     expect(peakDot?.getAttribute('cy')).toBe('48');
+    expect(progressBar?.getAttribute('aria-valuenow')).toBe('46');
+    expect(sparkline?.getAttribute('d')).toContain('M 5,18 C 20,12');
+    recBars = compiled.querySelectorAll('.grid > div:first-child [style*="height"]');
+    expect((recBars[5] as HTMLElement)?.style.height).toBe('75%');
 
     // Step forward back to August then September
     component.nextMonth();
@@ -343,6 +360,10 @@ describe('UiMockup', () => {
     expect(fixture.nativeElement.textContent).toContain('Rp 5,800,000,000.-');
     peakDot = compiled.querySelector('circle[cx="456"]');
     expect(peakDot?.getAttribute('cy')).toBe('38');
+    expect(progressBar?.getAttribute('aria-valuenow')).toBe('58');
+    expect(sparkline?.getAttribute('d')).toContain('M 5,16 C 20,8');
+    recBars = compiled.querySelectorAll('.grid > div:first-child [style*="height"]');
+    expect((recBars[5] as HTMLElement)?.style.height).toBe('100%');
   });
 
   it('should toggle notifications drawer and mark alerts as read', () => {

@@ -42,6 +42,7 @@ export interface MonthDashboardData {
   readonly receivables: {
     readonly total: string;
     readonly overdue: string;
+    readonly bars: readonly number[];
   };
   readonly currentMonth: {
     readonly due: string;
@@ -50,10 +51,13 @@ export interface MonthDashboardData {
   readonly sales: {
     readonly orders: string;
     readonly growthRate: string;
+    readonly bars: readonly number[];
   };
   readonly liquidity: {
     readonly balance: string;
     readonly projected: string;
+    readonly sparklinePrimaryPath: string;
+    readonly sparklineSecondaryPath: string;
   };
   readonly chartRevenuePoints: string;
   readonly chartSalesOrderPoints: string;
@@ -170,6 +174,7 @@ export class UiMockup {
       receivables: {
         total: 'Rp 7,920,000,000.-',
         overdue: 'Rp 850,000,000.-',
+        bars: [30, 50, 35, 65, 45, 75],
       },
       currentMonth: {
         due: 'Rp 1,650,000,000.-',
@@ -178,10 +183,15 @@ export class UiMockup {
       sales: {
         orders: 'Rp 4,900,000,000.-',
         growthRate: '+8.2%',
+        bars: [25, 45, 35, 55, 50, 70],
       },
       liquidity: {
         balance: 'Rp 5,840,000,000.-',
         projected: 'Rp 4,700,000,000.-',
+        sparklinePrimaryPath:
+          'M 5,18 C 20,12 30,20 45,16 C 60,11 70,20 85,16 C 100,11 110,20 125,16 C 140,11 150,18 158,15',
+        sparklineSecondaryPath:
+          'M 0,20 C 15,23 25,15 40,19 C 55,24 65,15 80,20 C 95,24 105,16 120,20 C 135,24 145,16 158,20',
       },
       chartRevenuePoints:
         '60,98 104,91 148,81 192,93 236,75 280,69 324,82 368,62 412,72 456,48 500,62',
@@ -232,6 +242,7 @@ export class UiMockup {
       receivables: {
         total: 'Rp 8,150,000,000.-',
         overdue: 'Rp 980,000,000.-',
+        bars: [35, 60, 45, 75, 60, 88],
       },
       currentMonth: {
         due: 'Rp 1,890,000,000.-',
@@ -240,10 +251,15 @@ export class UiMockup {
       sales: {
         orders: 'Rp 5,300,000,000.-',
         growthRate: '+14.5%',
+        bars: [35, 55, 50, 70, 65, 85],
       },
       liquidity: {
         balance: 'Rp 6,250,000,000.-',
         projected: 'Rp 4,950,000,000.-',
+        sparklinePrimaryPath:
+          'M 5,16 C 20,10 30,18 45,14 C 60,9 70,18 85,14 C 100,9 110,18 125,14 C 140,9 150,17 158,14',
+        sparklineSecondaryPath:
+          'M 0,18 C 15,21 25,12 40,17 C 55,22 65,12 80,18 C 95,22 105,13 120,18 C 135,22 145,13 158,18',
       },
       chartRevenuePoints:
         '60,98 104,91 148,81 192,93 236,75 280,69 324,82 368,62 412,72 456,42 500,58',
@@ -294,6 +310,7 @@ export class UiMockup {
       receivables: {
         total: 'Rp 8,450,000,000.-',
         overdue: 'Rp 1,100,000,000.-',
+        bars: [40, 70, 50, 90, 70, 100],
       },
       currentMonth: {
         due: 'Rp 2,100,000,000.-',
@@ -302,10 +319,15 @@ export class UiMockup {
       sales: {
         orders: 'Rp 5,800,000,000.-',
         growthRate: '+18.4%',
+        bars: [35, 65, 55, 85, 75, 100],
       },
       liquidity: {
         balance: 'Rp 6,720,000,000.-',
         projected: 'Rp 5,150,000,000.-',
+        sparklinePrimaryPath:
+          'M 5,16 C 20,8 30,18 45,13 C 60,8 70,18 85,13 C 100,8 110,18 125,13 C 140,8 150,16 158,13',
+        sparklineSecondaryPath:
+          'M 0,18 C 15,21 25,10 40,16 C 55,22 65,10 80,17 C 95,23 105,11 120,17 C 135,22 145,11 158,18',
       },
       chartRevenuePoints:
         '60,98 104,91 148,81 192,93 236,75 280,69 324,82 368,62 412,72 456,38 500,54',
