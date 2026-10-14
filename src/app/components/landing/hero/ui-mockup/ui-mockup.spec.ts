@@ -184,6 +184,18 @@ describe('UiMockup', () => {
     expect(avatar?.textContent?.trim()).toBe('A');
   });
 
+  it('should keep workspace title centered with absolute positioning classes', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const workspaceTitle = Array.from(compiled.querySelectorAll('header div')).find((el) =>
+      el.textContent?.trim().includes('Enterprise Workspace'),
+    );
+    expect(workspaceTitle).toBeTruthy();
+    expect(workspaceTitle?.classList.contains('absolute')).toBe(true);
+    expect(workspaceTitle?.classList.contains('left-1/2')).toBe(true);
+    expect(workspaceTitle?.classList.contains('-translate-x-1/2')).toBe(true);
+    expect(workspaceTitle?.classList.contains('-translate-y-1/2')).toBe(true);
+  });
+
   it('should render all 19 sidebar menu items with Dashboard active', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(component.navItems.length).toBe(19);

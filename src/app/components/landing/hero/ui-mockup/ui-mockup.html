@@ -19,7 +19,7 @@
       </div>
 
       <div
-        class="hidden md:block text-[#334155] text-xs sm:text-[13px] font-medium tracking-tight"
+        class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[#334155] text-xs sm:text-[13px] font-medium tracking-tight pointer-events-none select-none max-w-xs truncate text-center"
       >
         {{ 'HERO.UI_MOCKUP.HEADER.WORKSPACE' | translate }}
       </div>
@@ -50,7 +50,7 @@
             </svg>
           </button>
           <span
-            class="text-[#334155] text-[10.5px] sm:text-xs font-semibold px-1.5 select-none whitespace-nowrap min-w-22 text-center"
+            class="text-[#334155] text-[10.5px] sm:text-xs font-semibold px-1.5 select-none whitespace-nowrap min-w-24 sm:min-w-28 text-center"
           >
             {{ 'HERO.UI_MOCKUP.HEADER.DATE_FORMAT' | translate: { month: (currentMonthKey() | translate), year: 2026 } }}
           </span>
