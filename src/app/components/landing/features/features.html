@@ -21,7 +21,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 xl:gap-8">
       @for (card of cards; track card.id) {
         <article
-          class="group relative bg-white rounded-2xl border border-slate-100/90 shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:shadow-blue-950/8 hover:-translate-y-1.5 flex flex-col overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-[0px_3px_15px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out hover:shadow-[0px_10px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 flex flex-col overflow-hidden"
           (mouseenter)="setHoveredCard(card.id)"
           (mouseleave)="setHoveredCard(null)"
         >
@@ -37,7 +37,7 @@
               preserveAspectRatio="none"
               aria-hidden="true"
             >
-              <ellipse cx="195.5" cy="214" rx="195.5" ry="85" [attr.fill]="card.domeBg" />
+              <ellipse cx="195.5" cy="214" rx="195.5" ry="42.5" [attr.fill]="card.domeBg" />
             </svg>
 
             @for (layer of card.layers; track layer.name) {
