@@ -55,7 +55,6 @@ const EN_TRANSLATIONS = {
       DASHBOARD: {
         BREADCRUMB: 'SOFICloud / Management View',
         TITLE: 'Executive Dashboard',
-        SIMPLE_DATA: 'Simple data',
         DESCRIPTION:
           'Real-time visibility into receivables, sales, cash, expenses, and operational performance',
       },
@@ -213,11 +212,11 @@ describe('UiMockup', () => {
     expect(activeItem?.textContent).toContain('Dashboard');
   });
 
-  it('should render Executive Dashboard header, breadcrumb, simple data button, and subtitle', () => {
+  it('should render Executive Dashboard header, breadcrumb, and subtitle', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('SOFICloud / Management View');
     expect(compiled.textContent).toContain('Executive Dashboard');
-    expect(compiled.textContent).toContain('Simple data');
+    expect(compiled.textContent).not.toContain('Simple data');
     expect(compiled.textContent).toContain(
       'Real-time visibility into receivables, sales, cash, expenses, and operational performance',
     );
@@ -515,7 +514,6 @@ describe('UiMockup', () => {
           DASHBOARD: {
             BREADCRUMB: 'SOFICloud / Tampilan Manajemen',
             TITLE: 'Dashboard Eksekutif',
-            SIMPLE_DATA: 'Data sederhana',
             DESCRIPTION: 'Visibilitas real-time untuk piutang, penjualan, kas, pengeluaran, dan performa operasional',
           },
           NAV: {
@@ -586,7 +584,7 @@ describe('UiMockup', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Ruang Kerja Perusahaan');
     expect(compiled.textContent).toContain('Dashboard Eksekutif');
-    expect(compiled.textContent).toContain('Data sederhana');
+    expect(compiled.textContent).not.toContain('Data sederhana');
     expect(compiled.textContent).toContain('PIUTANG');
     expect(compiled.textContent).toContain('Total Piutang Usaha');
     expect(compiled.textContent).toContain('Piutang Jatuh Tempo: Rp 1,100,000,000.-');

@@ -144,7 +144,6 @@
       "DASHBOARD": {
         "BREADCRUMB": "SOFICloud / 経営ビュー",
         "TITLE": "エグゼクティブダッシュボード",
-        "SIMPLE_DATA": "簡易データ",
         "DESCRIPTION": "売掛金、売上、資金、経費、業務パフォーマンスをリアルタイムで可視化"
       },
       "METRICS": {
