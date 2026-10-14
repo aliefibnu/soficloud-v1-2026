@@ -83,7 +83,7 @@ describe('Features', () => {
 
   it('should ensure all bottom-anchored layers use origin-bottom and no upward translateY', () => {
     for (const card of component.cards) {
-      const bottomLayers = card.layers.filter((l) => l.bottomPct === 0);
+      const bottomLayers = card.layers.filter((l) => l.bottomPct !== undefined);
       expect(bottomLayers.length).toBeGreaterThan(0);
       for (const layer of bottomLayers) {
         expect(layer.hoverClass).toContain('origin-bottom');
