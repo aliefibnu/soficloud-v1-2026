@@ -31,7 +31,8 @@
           <button
             type="button"
             (click)="prevMonth()"
-            class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer"
+            [disabled]="selectedMonthIndex() <= 0"
+            class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-slate-500"
             [attr.aria-label]="'HERO.UI_MOCKUP.HEADER.PREV_MONTH' | translate"
           >
             <svg
@@ -56,7 +57,8 @@
           <button
             type="button"
             (click)="nextMonth()"
-            class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer"
+            [disabled]="selectedMonthIndex() >= currentMonthIndex()"
+            class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-slate-500"
             [attr.aria-label]="'HERO.UI_MOCKUP.HEADER.NEXT_MONTH' | translate"
           >
             <svg
@@ -435,7 +437,7 @@
                   <div
                     class="absolute z-20 pointer-events-none -top-13 sm:-top-15 transition-all duration-150 ease-out"
                     [style.left.%]="pt.xPercent"
-                    [style.transform]="hoveredMonthIndex() === 0 ? 'translateX(-15%)' : (hoveredMonthIndex() === 10 ? 'translateX(-85%)' : 'translateX(-50%)')"
+                    [style.transform]="hoveredMonthIndex() === 0 ? 'translateX(-15%)' : (hoveredMonthIndex() === chartPointsData().length - 1 ? 'translateX(-85%)' : 'translateX(-50%)')"
                     role="tooltip"
                     aria-live="polite"
                   >
@@ -455,7 +457,7 @@
                       </div>
                       <div
                         class="absolute -bottom-1 w-2.5 h-2.5 bg-[#182849] border-r border-b border-slate-700/60"
-                        [style.left]="hoveredMonthIndex() === 0 ? '15%' : (hoveredMonthIndex() === 10 ? '85%' : '50%')"
+                        [style.left]="hoveredMonthIndex() === 0 ? '15%' : (hoveredMonthIndex() === chartPointsData().length - 1 ? '85%' : '50%')"
                         style="transform: translateX(-50%) rotate(45deg);"
                       ></div>
                     </div>
@@ -470,23 +472,10 @@
                   (mouseleave)="clearHoveredMonth()"
                 >
                   <g class="text-[#64748b] text-[9.5px] font-normal font-dm-sans" fill="currentColor">
-                    <text x="5" y="16">10 B</text>
-                    <line x1="38" y1="12" x2="535" y2="12" stroke="#e2e8f0" stroke-width="1" />
-
-                    <text x="5" y="38">8 B</text>
-                    <line x1="38" y1="34" x2="535" y2="34" stroke="#e2e8f0" stroke-width="1" />
-
-                    <text x="5" y="60">6 B</text>
-                    <line x1="38" y1="56" x2="535" y2="56" stroke="#e2e8f0" stroke-width="1" />
-
-                    <text x="5" y="82">4 B</text>
-                    <line x1="38" y1="78" x2="535" y2="78" stroke="#e2e8f0" stroke-width="1" />
-
-                    <text x="5" y="104">2 B</text>
-                    <line x1="38" y1="100" x2="535" y2="100" stroke="#e2e8f0" stroke-width="1" />
-
-                    <text x="18" y="118">0</text>
-                    <line x1="38" y1="116" x2="535" y2="116" stroke="#e2e8f0" stroke-width="1" />
+                    @for (tick of yTicks(); track tick.lineY) {
+                      <text [attr.x]="tick.textX" [attr.y]="tick.textY">{{ tick.label }}</text>
+                      <line x1="38" [attr.y1]="tick.lineY" x2="535" [attr.y2]="tick.lineY" stroke="#e2e8f0" stroke-width="1" />
+                    }
                   </g>
 
                   <polyline
@@ -495,9 +484,9 @@
                     stroke-width="1.8"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    [attr.points]="currentData().chartRevenuePoints"
+                    [attr.points]="chartRevenuePoints()"
                   />
-                  @for (dot of currentData().chartRevenueDots; track dot.cx) {
+                  @for (dot of chartRevenueDots(); track dot.cx) {
                     <circle
                       [attr.cx]="dot.cx"
                       [attr.cy]="dot.cy"
@@ -513,7 +502,7 @@
                     stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    [attr.points]="currentData().chartSalesOrderPoints"
+                    [attr.points]="chartSalesOrderPoints()"
                   />
 
                   @if (hoveredChartPoint(); as pt) {
@@ -560,11 +549,11 @@
                     />
                   }
 
-                  @for (pt of currentData().chartPointsData; track pt.x; let i = $index) {
+                  @for (pt of chartPointsData(); track pt.monthKey; let i = $index) {
                     <rect
-                      [attr.x]="38 + i * 44"
+                      [attr.x]="pt.rectX"
                       y="0"
-                      width="44"
+                      [attr.width]="pt.rectWidth"
                       height="120"
                       fill="transparent"
                       pointer-events="all"
@@ -575,18 +564,16 @@
                 </svg>
               </div>
 
-              <div class="flex justify-between pl-6 sm:pl-8 pr-2 sm:pr-3 text-[8.5px] sm:text-[10px] text-[#64748b] font-normal mt-1">
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.OCT' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.NOV' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.DEC' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.JAN' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.FEB' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.MAR' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.APR' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.MAY' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.JUN' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.JUL' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.AUG' | translate }}</span>
+              <div class="relative w-full h-4 mt-1 text-[8.5px] sm:text-[10px] text-[#64748b] font-normal">
+                @for (pt of chartPointsData(); track pt.monthKey; let i = $index; let last = $last) {
+                  <span
+                    class="absolute -translate-x-1/2 whitespace-nowrap select-none"
+                    [class.max-sm:hidden]="i % 2 !== 0 && !last"
+                    [style.left.%]="pt.xPercent"
+                  >
+                    {{ pt.shortMonthKey | translate }}
+                  </span>
+                }
               </div>
             </div>
           </div>
