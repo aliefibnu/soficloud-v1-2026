@@ -352,9 +352,7 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       .marquee-track-left,
       .logo-switch-active,
       .name-switch-active,
-      .card-switch-pulse,
-      .spotlight-switch-active,
-      .inactive-track-slide {
+      .card-switch-pulse {
         animation: none !important;
         transition: none !important;
       }
