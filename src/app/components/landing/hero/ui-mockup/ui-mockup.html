@@ -414,25 +414,43 @@
             [class.max-lg:hidden]="activeMobileTab() !== 'chart'"
           >
             <div>
-              <div class="flex items-start justify-between gap-2 mb-2">
+              <div
+                class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2"
+              >
                 <div>
-                  <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">
+                  <span
+                    class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block"
+                  >
                     {{ 'HERO.UI_MOCKUP.CHART.TAG' | translate }}
                   </span>
                   <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5">
                     {{ 'HERO.UI_MOCKUP.CHART.TITLE' | translate }}
                   </h3>
-                  <div class="text-[10px] sm:text-xs text-[#64748b] font-normal mt-0.5">
+                  <div
+                    class="text-[10px] sm:text-xs text-[#64748b] font-normal mt-0.5"
+                  >
                     {{ 'HERO.UI_MOCKUP.CHART.SUBTITLE' | translate }}
                   </div>
                 </div>
-                <div class="flex items-center gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-semibold text-[#182849]">
-                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#2563eb]"></span>{{ 'HERO.UI_MOCKUP.CHART.REVENUE' | translate }}</span>
-                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#60a5fa]"></span>{{ 'HERO.UI_MOCKUP.CHART.SALES_ORDERS' | translate }}</span>
+                <div
+                  class="flex items-center flex-wrap gap-2.5 sm:gap-3 gap-y-1 text-[11px] sm:text-xs font-semibold text-[#182849]"
+                >
+                  <span class="inline-flex items-center gap-1.5 whitespace-nowrap"
+                    ><span
+                      class="w-2 h-2 rounded-full bg-[#2563eb] shrink-0"
+                    ></span
+                    >{{ 'HERO.UI_MOCKUP.CHART.REVENUE' | translate }}</span
+                  >
+                  <span class="inline-flex items-center gap-1.5 whitespace-nowrap"
+                    ><span
+                      class="w-2 h-2 rounded-full bg-[#60a5fa] shrink-0"
+                    ></span
+                    >{{ 'HERO.UI_MOCKUP.CHART.SALES_ORDERS' | translate }}</span
+                  >
                 </div>
               </div>
 
-              <div class="relative w-full h-32 sm:h-36 pt-1" (mouseleave)="clearHoveredMonth()">
+              <div class="relative w-full h-40 sm:h-36 pt-1" (mouseleave)="clearHoveredMonth()">
                 @if (hoveredChartPoint(); as pt) {
                   <div
                     class="absolute z-20 pointer-events-none -top-13 sm:-top-15 transition-all duration-150 ease-out"
@@ -464,111 +482,121 @@
                   </div>
                 }
 
-                <svg
-                  class="w-full h-full"
-                  viewBox="0 0 540 120"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                  (mouseleave)="clearHoveredMonth()"
-                >
-                  <g class="text-[#64748b] text-[9.5px] font-normal font-dm-sans" fill="currentColor">
-                    @for (tick of yTicks(); track tick.lineY) {
-                      <text [attr.x]="tick.textX" [attr.y]="tick.textY">{{ tick.label }}</text>
-                      <line x1="38" [attr.y1]="tick.lineY" x2="535" [attr.y2]="tick.lineY" stroke="#e2e8f0" stroke-width="1" />
-                    }
-                  </g>
+                <div class="relative w-full h-full">
+                  <svg
+                    class="w-full h-full"
+                    viewBox="0 0 540 120"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                    (mouseleave)="clearHoveredMonth()"
+                  >
+                    <g fill="currentColor">
+                      @for (tick of yTicks(); track tick.lineY) {
+                        <line
+                          x1="38"
+                          [attr.y1]="tick.lineY"
+                          x2="535"
+                          [attr.y2]="tick.lineY"
+                          stroke="#e2e8f0"
+                          stroke-width="1"
+                          vector-effect="non-scaling-stroke"
+                        />
+                      }
+                    </g>
 
-                  <polyline
-                    fill="none"
-                    stroke="#2563eb"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    [attr.points]="chartRevenuePoints()"
-                  />
-                  @for (dot of chartRevenueDots(); track dot.cx) {
-                    <circle
-                      [attr.cx]="dot.cx"
-                      [attr.cy]="dot.cy"
-                      r="2.2"
-                      fill="#2563eb"
-                      class="transition-all duration-300"
-                    />
-                  }
-
-                  <polyline
-                    fill="none"
-                    stroke="#60a5fa"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    [attr.points]="chartSalesOrderPoints()"
-                  />
-
-                  @if (hoveredChartPoint(); as pt) {
-                    <line
-                      [attr.x1]="pt.x"
-                      y1="12"
-                      [attr.x2]="pt.x"
-                      y2="116"
-                      stroke="#94a3b8"
-                      stroke-width="1.2"
-                      stroke-dasharray="3,3"
-                    />
-
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="pt.revY"
-                      r="6.5"
-                      fill="#2563eb"
-                      fill-opacity="0.2"
+                    <polyline
+                      fill="none"
                       stroke="#2563eb"
-                      stroke-width="1.5"
-                    />
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="pt.revY"
-                      r="2.8"
-                      fill="#2563eb"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      vector-effect="non-scaling-stroke"
+                      [attr.points]="chartRevenuePoints()"
                     />
 
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="pt.orderY"
-                      r="6.5"
-                      fill="#60a5fa"
-                      fill-opacity="0.25"
+                    <polyline
+                      fill="none"
                       stroke="#60a5fa"
                       stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      vector-effect="non-scaling-stroke"
+                      [attr.points]="chartSalesOrderPoints()"
                     />
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="pt.orderY"
-                      r="2.6"
-                      fill="#60a5fa"
-                    />
+
+                    @if (hoveredChartPoint(); as pt) {
+                      <line
+                        [attr.x1]="pt.x"
+                        y1="12"
+                        [attr.x2]="pt.x"
+                        y2="116"
+                        stroke="#94a3b8"
+                        stroke-width="1.2"
+                        stroke-dasharray="3,3"
+                        vector-effect="non-scaling-stroke"
+                      />
+                    }
+
+                    @for (pt of chartPointsData(); track pt.monthKey; let i = $index) {
+                      <rect
+                        [attr.x]="pt.rectX"
+                        y="0"
+                        [attr.width]="pt.rectWidth"
+                        height="120"
+                        fill="transparent"
+                        pointer-events="all"
+                        class="cursor-pointer"
+                        (mouseenter)="setHoveredMonth(i)"
+                      />
+                    }
+                  </svg>
+
+                  @for (tick of yTicks(); track tick.lineY) {
+                    <span
+                      class="absolute pointer-events-none -translate-y-1/2 whitespace-nowrap text-[8px] sm:text-[9.5px] leading-none text-[#64748b]"
+                      [style.top.%]="(tick.lineY / 120) * 100"
+                      [style.right]="'calc(100% - 7.04% + 3px)'"
+                    >
+                      <span class="sm:hidden">{{ tick.label.replace(' ', '') }}</span>
+                      <span class="hidden sm:inline">{{ tick.label }}</span>
+                    </span>
                   }
 
-                  @for (pt of chartPointsData(); track pt.monthKey; let i = $index) {
-                    <rect
-                      [attr.x]="pt.rectX"
-                      y="0"
-                      [attr.width]="pt.rectWidth"
-                      height="120"
-                      fill="transparent"
-                      pointer-events="all"
-                      class="cursor-pointer"
-                      (mouseenter)="setHoveredMonth(i)"
-                    />
+                  @for (dot of chartRevenueDots(); track dot.cx) {
+                    <div
+                      class="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#2563eb] transition-all duration-300"
+                      [style.left.%]="(dot.cx / 540) * 100"
+                      [style.top.%]="(dot.cy / 120) * 100"
+                    ></div>
                   }
-                </svg>
+
+                  @if (hoveredChartPoint(); as pt) {
+                    <div
+                      class="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full border-[1.5px] border-[#2563eb] bg-[#2563eb]/20 flex items-center justify-center transition-all duration-150"
+                      [style.left.%]="(pt.x / 540) * 100"
+                      [style.top.%]="(pt.revY / 120) * 100"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#2563eb]"></span>
+                    </div>
+
+                    <div
+                      class="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full border-[1.5px] border-[#60a5fa] bg-[#60a5fa]/20 flex items-center justify-center transition-all duration-150"
+                      [style.left.%]="(pt.x / 540) * 100"
+                      [style.top.%]="(pt.orderY / 120) * 100"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#60a5fa]"></span>
+                    </div>
+                  }
+                </div>
               </div>
 
-              <div class="relative w-full h-4 mt-1 text-[8.5px] sm:text-[10px] text-[#64748b] font-normal">
+              <div
+                class="relative w-full h-4 mt-1 text-[8px] sm:text-[10px] text-[#64748b] font-normal"
+              >
                 @for (pt of chartPointsData(); track pt.monthKey; let i = $index; let last = $last) {
                   <span
                     class="absolute -translate-x-1/2 whitespace-nowrap select-none"
-                    [class.max-sm:hidden]="i % 2 !== 0 && !last"
+                    [class.max-[340px]:hidden]="(chartPointsData().length - 1 - i) % 2 !== 0"
                     [style.left.%]="pt.xPercent"
                   >
                     {{ pt.shortMonthKey | translate }}

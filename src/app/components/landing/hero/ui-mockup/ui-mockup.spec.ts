@@ -543,9 +543,12 @@ describe('UiMockup', () => {
     expect(crosshair?.getAttribute('x1')).toBe(point?.x.toString());
     expect(crosshair?.getAttribute('x2')).toBe(point?.x.toString());
 
-    // Halos
-    const halos = compiled.querySelectorAll('circle[r="6.5"]');
-    expect(halos.length).toBe(2); // One for revenue, one for sales orders
+    // Halos / Hover markers
+    const chartContainer = compiled.querySelector('.relative.w-full.h-40');
+    const halos = Array.from(chartContainer?.querySelectorAll('div') || []).filter(
+      (el) => el.classList.contains('w-3.5') && el.classList.contains('h-3.5') && el.classList.contains('rounded-full'),
+    );
+    expect(halos.length).toBe(2); // One for revenue (#2563eb), one for sales orders (#60a5fa)
 
     // Clear hover
     component.clearHoveredMonth();
@@ -555,6 +558,10 @@ describe('UiMockup', () => {
     expect(component.hoveredChartPoint()).toBeNull();
     expect(compiled.querySelector('[role="tooltip"]')).toBeNull();
     expect(compiled.querySelector('line[stroke-dasharray="3,3"]')).toBeNull();
+    const halosAfter = Array.from(chartContainer?.querySelectorAll('div') || []).filter(
+      (el) => el.classList.contains('w-3.5') && el.classList.contains('h-3.5') && el.classList.contains('rounded-full'),
+    );
+    expect(halosAfter.length).toBe(0);
   });
 
   it('should adjust tooltip transform for leftmost (Oct) and rightmost columns', () => {
@@ -712,5 +719,78 @@ describe('UiMockup', () => {
     expect(compiled.textContent).toContain('Perlu diperhatikan');
     expect(compiled.textContent).toContain('2.4 bulan');
     expect(compiled.textContent).toContain('5 pesanan');
+  });
+
+  it('should apply mobile-friendly layout and HTML overlays to 12-Month Sales Trend card', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // Header layout
+    const headerRow = compiled.querySelector('.flex.flex-col.sm\\:flex-row.sm\\:items-start');
+    expect(headerRow).toBeTruthy();
+
+    // Legend whitespace and shrink classes
+    const legendRevenue = compiled.querySelector('span.w-2.h-2.rounded-full.bg-\\[\\#2563eb\\].shrink-0');
+    expect(legendRevenue).toBeTruthy();
+    const legendOrders = compiled.querySelector('span.w-2.h-2.rounded-full.bg-\\[\\#60a5fa\\].shrink-0');
+    expect(legendOrders).toBeTruthy();
+
+    // Chart container height
+    const chartContainer = compiled.querySelector('.h-40.sm\\:h-36');
+    expect(chartContainer).toBeTruthy();
+
+    // SVG non-scaling-stroke
+    const nonScalingElements = compiled.querySelectorAll('[vector-effect="non-scaling-stroke"]');
+    expect(nonScalingElements.length).toBeGreaterThan(0);
+
+    // No SVG <circle> or <text> inside SVG
+    const svgCircles = compiled.querySelectorAll('svg circle');
+    expect(svgCircles.length).toBe(0);
+    const svgTexts = compiled.querySelectorAll('svg text');
+    expect(svgTexts.length).toBe(0);
+
+    // HTML Y-axis labels
+    const chartInner = compiled.querySelector('.relative.w-full.h-full');
+    const yAxisLabels = Array.from(chartInner?.querySelectorAll('span') || []).filter(
+      (el) => el.classList.contains('pointer-events-none') && el.classList.contains('-translate-y-1/2'),
+    );
+    expect(yAxisLabels.length).toBe(component.yTicks().length);
+
+    // HTML Revenue dots
+    const revenueDots = Array.from(chartInner?.querySelectorAll('div') || []).filter(
+      (el) => el.classList.contains('w-1.5') && el.classList.contains('h-1.5') && el.classList.contains('rounded-full'),
+    );
+    expect(revenueDots.length).toBe(component.chartRevenueDots().length);
+
+    // Month labels: the last (current) month is never hidden below 340px
+    const monthLabels = compiled.querySelectorAll('.relative.w-full.h-4 span');
+    expect(monthLabels.length).toBe(component.chartPointsData().length);
+    const lastMonthLabel = monthLabels[monthLabels.length - 1];
+    expect(lastMonthLabel.classList.contains('max-[340px]:hidden')).toBe(false);
+  });
+
+  it('should preserve month visibility and chart span for July, August, and September datasets', () => {
+    // 1. July
+    fixture.componentRef.setInput('currentDate', new Date(2026, 6, 15));
+    fixture.detectChanges();
+    let monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
+    expect(monthLabels.length).toBe(10);
+    expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Jul');
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(false);
+
+    // 2. August
+    fixture.componentRef.setInput('currentDate', new Date(2026, 7, 20));
+    fixture.detectChanges();
+    monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
+    expect(monthLabels.length).toBe(11);
+    expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Aug');
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(false);
+
+    // 3. September
+    fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10));
+    fixture.detectChanges();
+    monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
+    expect(monthLabels.length).toBe(12);
+    expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Sep');
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(false);
   });
 });
