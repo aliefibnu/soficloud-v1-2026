@@ -133,14 +133,14 @@
     <!-- Backdrop -->
     <rect x="37" y="20" width="378" height="289" rx="46" fill="#C4D8F5" />
 
-    <!-- Static column behind the shoulder joint -->
-    <path d="M 206 207 L 206 170 L 293 170 L 293 207 Z" fill="#619AEA" />
+    <!-- Static column behind the shoulder joint (generous vertical coverage to avoid any animation gaps) -->
+    <path d="M 206 207 L 206 148 L 295 148 L 295 207 Z" fill="#619AEA" />
 
     <!-- Articulated Industrial Robot Arm -->
     <g class="bm-arm-group" style="transform-origin: 244px 166px">
-      <!-- Upper arm + forearm silhouette -->
+      <!-- Upper arm + forearm silhouette (extended down into base to prevent seams when rotating) -->
       <path
-        d="M 78 29 L 116 14 L 199 21 L 232 51 L 288 131 Q 298 146 293 161 L 293 170 L 206 170 L 217 140 L 194 66 L 182 60 L 120 41 L 108 50 L 96 58 Z"
+        d="M 78 29 L 116 14 L 199 21 L 232 51 L 288 131 Q 298 146 293 161 L 295 220 L 200 220 L 206 170 L 217 140 L 194 66 L 182 60 L 120 41 L 108 50 L 96 58 Z"
         fill="#619AEA"
       />
 
@@ -159,13 +159,10 @@
       <circle cx="114" cy="24.5" r="19" fill="#3558D2" />
       <circle cx="114" cy="24.5" r="11.5" fill="#EBF2FD" />
 
-      <!-- Wrist collar plate -->
-      <line x1="77" y1="31" x2="93" y2="57" stroke="#EBF2FD" stroke-width="11" stroke-linecap="round" />
-
-      <!-- Caliper gripper / claw -->
-      <g class="bm-claw" style="transform-origin: 84px 45px">
+      <!-- Caliper gripper / claw (placed behind white collar plate so white cuff covers claw base) -->
+      <g class="bm-claw" style="transform-origin: 85px 44px">
         <path
-          d="M 74 36 L 58 29 L 33 43 L 27 66"
+          d="M 78 35 L 58 29 L 33 43 L 27 66"
           stroke="url(#mfg-claw-grad)"
           stroke-width="8"
           stroke-linecap="round"
@@ -173,7 +170,7 @@
           fill="none"
         />
         <path
-          d="M 90 62 L 85 77 L 65 92 L 43 89"
+          d="M 89 57 L 85 77 L 65 92 L 43 89"
           stroke="url(#mfg-claw-grad)"
           stroke-width="8"
           stroke-linecap="round"
@@ -181,6 +178,9 @@
           fill="none"
         />
       </g>
+
+      <!-- Wrist collar plate (positioned on top of claw as boundary cuff) -->
+      <line x1="77" y1="31" x2="93" y2="57" stroke="#EBF2FD" stroke-width="13" stroke-linecap="round" />
     </g>
 
     <!-- Machine base -->
@@ -206,35 +206,42 @@
     <!-- Red package / product box -->
     <g class="bm-box" style="transform-origin: 360px 270px">
       <!-- Flaps -->
-      <path d="M 310 228 L 296 252 Q 291 261 301 261 H 320 V 228 Z" fill="#C81A27" />
-      <path d="M 411 228 L 425 252 Q 430 261 420 261 H 400 V 228 Z" fill="#C81A27" />
+      <path d="M 310 228 L 296 252 Q 291 261 301 261 H 320 V 228 Z" fill="#CB1C29" />
+      <path d="M 411 228 L 425 252 Q 430 261 420 261 H 400 V 228 Z" fill="#CB1C29" />
       <!-- Main body -->
-      <rect x="308" y="228" width="105" height="81" rx="4" fill="#C81A27" />
+      <rect x="308" y="228" width="105" height="81" rx="4" fill="#CB1C29" />
       <!-- Pink left strip -->
-      <rect x="308" y="228" width="13" height="81" rx="5" fill="#FFBFB8" />
+      <rect x="308" y="228" width="13" height="81" rx="5" fill="#FFC0B9" />
       <!-- Handle cutout -->
       <rect x="340" y="236" width="41" height="10" rx="5" fill="#FFEDEA" />
       <!-- Label -->
       <rect x="387" y="290" width="20" height="13" rx="5" fill="#FFEDEA" />
     </g>
 
-    <!-- Gears cluster -->
+    <!-- Gears cluster (Pixel-perfect style & gaps matching reference) -->
     <g id="mfg-gears">
+      <!-- Gear 1 (Large, top-left) -->
       <g class="bm-gear-1" style="transform-origin: 55px 160px">
-        <path d="M 92.3 147.1 L 102.3 151.7 L 102.3 168.3 L 92.3 172.9 L 90.5 177.3 L 94.3 187.6 L 82.6 199.3 L 72.3 195.5 L 67.9 197.3 L 63.3 207.3 L 46.7 207.3 L 42.1 197.3 L 37.7 195.5 L 27.4 199.3 L 15.7 187.6 L 19.5 177.3 L 17.7 172.9 L 7.7 168.3 L 7.7 151.7 L 17.7 147.1 L 19.5 142.7 L 15.7 132.4 L 27.4 120.7 L 37.7 124.5 L 42.1 122.7 L 46.7 112.7 L 63.3 112.7 L 67.9 122.7 L 72.3 124.5 L 82.6 120.7 L 94.3 132.4 L 90.5 142.7 Z" fill="#C81A27" stroke="#C81A27" stroke-width="4" stroke-linejoin="round" />
+        <path d="M 92.3 147.1 L 102.3 151.7 L 102.3 168.3 L 92.3 172.9 L 90.5 177.3 L 94.3 187.6 L 82.6 199.3 L 72.3 195.5 L 67.9 197.3 L 63.3 207.3 L 46.7 207.3 L 42.1 197.3 L 37.7 195.5 L 27.4 199.3 L 15.7 187.6 L 19.5 177.3 L 17.7 172.9 L 7.7 168.3 L 7.7 151.7 L 17.7 147.1 L 19.5 142.7 L 15.7 132.4 L 27.4 120.7 L 37.7 124.5 L 42.1 122.7 L 46.7 112.7 L 63.3 112.7 L 67.9 122.7 L 72.3 124.5 L 82.6 120.7 L 94.3 132.4 L 90.5 142.7 Z" fill="#CB1C29" stroke="#CB1C29" stroke-width="4" stroke-linejoin="round" />
         <circle cx="55" cy="160" r="24.5" fill="#C4D8F5" />
-        <circle cx="55" cy="160" r="21" fill="#FFBFB8" />
+        <circle cx="55" cy="160" r="21" fill="#FFC0B9" />
         <circle cx="55" cy="160" r="13.5" fill="#C4D8F5" />
       </g>
+
+      <!-- Gear 2 (Medium, middle-right) -->
       <g class="bm-gear-2" style="transform-origin: 127.3px 186.7px">
-        <path d="M 150.9 184.6 L 156.2 188.8 L 153.8 198.5 L 147.2 199.6 L 145.5 202.0 L 146.3 208.6 L 137.7 213.8 L 132.2 209.9 L 129.4 210.3 L 125.2 215.6 L 115.5 213.2 L 114.4 206.6 L 112.0 204.9 L 105.4 205.7 L 100.2 197.1 L 104.1 191.6 L 103.7 188.8 L 98.4 184.6 L 100.8 174.9 L 107.4 173.8 L 109.1 171.4 L 108.3 164.8 L 116.9 159.6 L 122.4 163.5 L 125.2 163.1 L 129.4 157.8 L 139.1 160.2 L 140.2 166.8 L 142.6 168.5 L 149.2 167.7 L 154.4 176.3 L 150.5 181.8 Z" fill="#C81A27" stroke="#C81A27" stroke-width="4" stroke-linejoin="round" />
-        <circle cx="127.3" cy="186.7" r="16.7" fill="#FFBFB8" />
-        <circle cx="127.3" cy="186.7" r="9" fill="#C4D8F5" />
+        <path d="M 150.9 184.6 L 156.2 188.8 L 153.8 198.5 L 147.2 199.6 L 145.5 202.0 L 146.3 208.6 L 137.7 213.8 L 132.2 209.9 L 129.4 210.3 L 125.2 215.6 L 115.5 213.2 L 114.4 206.6 L 112.0 204.9 L 105.4 205.7 L 100.2 197.1 L 104.1 191.6 L 103.7 188.8 L 98.4 184.6 L 100.8 174.9 L 107.4 173.8 L 109.1 171.4 L 108.3 164.8 L 116.9 159.6 L 122.4 163.5 L 125.2 163.1 L 129.4 157.8 L 139.1 160.2 L 140.2 166.8 L 142.6 168.5 L 149.2 167.7 L 154.4 176.3 L 150.5 181.8 Z" fill="#CB1C29" stroke="#CB1C29" stroke-width="4" stroke-linejoin="round" />
+        <circle cx="127.3" cy="186.7" r="17.5" fill="#C4D8F5" />
+        <circle cx="127.3" cy="186.7" r="15" fill="#FFC0B9" />
+        <circle cx="127.3" cy="186.7" r="9.5" fill="#C4D8F5" />
       </g>
-      <g class="bm-gear-3" style="transform-origin: 86px 224px">
-        <path d="M 103.8 221.8 L 108.0 224.8 L 106.4 232.2 L 101.4 233.2 L 100.1 235.0 L 101.0 240.1 L 94.6 244.2 L 90.3 241.4 L 88.2 241.8 L 85.2 246.0 L 77.8 244.4 L 76.8 239.4 L 75.0 238.1 L 69.9 239.0 L 65.8 232.6 L 68.6 228.3 L 68.2 226.2 L 64.0 223.2 L 65.6 215.8 L 70.6 214.8 L 71.9 213.0 L 71.0 207.9 L 77.4 203.8 L 81.7 206.6 L 83.8 206.2 L 86.8 202.0 L 94.2 203.6 L 95.2 208.6 L 97.0 209.9 L 102.1 209.0 L 106.2 215.4 L 103.4 219.7 Z" fill="#C81A27" stroke="#C81A27" stroke-width="4" stroke-linejoin="round" />
-        <circle cx="86" cy="224" r="11" fill="#FFBFB8" />
-        <circle cx="86" cy="224" r="6.3" fill="#C4D8F5" />
+
+      <!-- Gear 3 (Small, bottom-center) -->
+      <g class="bm-gear-3" style="transform-origin: 84.1px 226.3px">
+        <path d="M 101.9 224.1 L 106.1 227.1 L 104.5 234.5 L 99.5 235.5 L 98.2 237.3 L 99.1 242.4 L 92.7 246.5 L 88.4 243.7 L 86.3 244.1 L 83.3 248.3 L 75.9 246.7 L 74.9 241.7 L 73.1 240.4 L 68.0 241.3 L 63.9 234.9 L 66.7 230.6 L 66.3 228.5 L 62.1 225.5 L 63.7 218.1 L 68.7 217.1 L 70.0 215.3 L 69.1 210.2 L 75.5 206.1 L 79.8 208.9 L 81.9 208.5 L 84.9 204.3 L 92.3 205.9 L 93.3 210.9 L 95.1 212.2 L 100.2 211.3 L 104.3 217.7 L 101.5 222.0 Z" fill="#CB1C29" stroke="#CB1C29" stroke-width="4" stroke-linejoin="round" />
+        <circle cx="84.1" cy="226.3" r="12.5" fill="#C4D8F5" />
+        <circle cx="84.1" cy="226.3" r="10.5" fill="#FFC0B9" />
+        <circle cx="84.1" cy="226.3" r="6.5" fill="#C4D8F5" />
       </g>
     </g>
   </svg>
