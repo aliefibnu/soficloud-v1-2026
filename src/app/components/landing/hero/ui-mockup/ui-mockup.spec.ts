@@ -55,7 +55,6 @@ const EN_TRANSLATIONS = {
       DASHBOARD: {
         BREADCRUMB: 'SOFICloud / Management View',
         TITLE: 'Executive Dashboard',
-        SIMPLE_DATA: 'Simple data',
         DESCRIPTION:
           'Real-time visibility into receivables, sales, cash, expenses, and operational performance',
       },
@@ -134,6 +133,20 @@ const EN_TRANSLATIONS = {
         NOVEMBER: 'November',
         DECEMBER: 'December',
       },
+      FLOATING: {
+        PROJECT_CASH: {
+          TAG: 'PROJECT CASH',
+          SUBTEXT: 'Estimated month-end balance',
+          ARIA_LABEL: 'Project Cash preview',
+        },
+        BUDGET_UTILIZATION: {
+          TAG: 'BUDGET UTILIZATION',
+          OPEX_USED: 'OPEX Used',
+          MO_READY: 'Mo ready for execution',
+          OPEX_ARIA_LABEL: 'Budget utilization OPEX percentage',
+          MO_ARIA_LABEL: 'Budget utilization execution readiness',
+        },
+      },
     },
   },
 };
@@ -185,6 +198,18 @@ describe('UiMockup', () => {
     expect(avatar?.textContent?.trim()).toBe('A');
   });
 
+  it('should keep workspace title centered with absolute positioning classes', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const workspaceTitle = Array.from(compiled.querySelectorAll('header div')).find((el) =>
+      el.textContent?.trim().includes('Enterprise Workspace'),
+    );
+    expect(workspaceTitle).toBeTruthy();
+    expect(workspaceTitle?.classList.contains('absolute')).toBe(true);
+    expect(workspaceTitle?.classList.contains('left-1/2')).toBe(true);
+    expect(workspaceTitle?.classList.contains('-translate-x-1/2')).toBe(true);
+    expect(workspaceTitle?.classList.contains('-translate-y-1/2')).toBe(true);
+  });
+
   it('should render all 19 sidebar menu items with Dashboard active', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(component.navItems.length).toBe(19);
@@ -213,11 +238,11 @@ describe('UiMockup', () => {
     expect(activeItem?.textContent).toContain('Dashboard');
   });
 
-  it('should render Executive Dashboard header, breadcrumb, simple data button, and subtitle', () => {
+  it('should render Executive Dashboard header, breadcrumb, and subtitle', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('SOFICloud / Management View');
     expect(compiled.textContent).toContain('Executive Dashboard');
-    expect(compiled.textContent).toContain('Simple data');
+    expect(compiled.textContent).not.toContain('Simple data');
     expect(compiled.textContent).toContain(
       'Real-time visibility into receivables, sales, cash, expenses, and operational performance',
     );
@@ -300,10 +325,17 @@ describe('UiMockup', () => {
     expect(fixture.nativeElement.textContent).toContain('Rp 8,450,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('Rp 5,800,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('5 orders');
+    expect(component.chartPointsData().length).toBe(12);
 
     const compiled = fixture.nativeElement as HTMLElement;
-    let peakDot = compiled.querySelector('circle[cx="456"]');
-    expect(peakDot?.getAttribute('cy')).toBe('38');
+    const progressBar = compiled.querySelector('[role="progressbar"]');
+    expect(progressBar?.getAttribute('aria-valuenow')).toBe('58');
+
+    const sparkline = compiled.querySelector('svg path[stroke="#2563eb"]');
+    expect(sparkline?.getAttribute('d')).toContain('M 5,16 C 20,8');
+
+    let recBars = compiled.querySelectorAll('.grid > div:first-child [style*="height"]');
+    expect((recBars[5] as HTMLElement)?.style.height).toBe('100%');
 
     // Step backward to August
     component.prevMonth();
@@ -311,14 +343,15 @@ describe('UiMockup', () => {
     expect(component.selectedMonthIndex()).toBe(1); // August
     expect(component.currentMonthKey()).toBe('HERO.UI_MOCKUP.MONTHS_FULL.AUGUST');
     expect(fixture.nativeElement.textContent).toContain('August 2026');
-    expect(fixture.nativeElement.textContent).toContain(
-      'Outstanding invoices due in August',
-    );
+    expect(fixture.nativeElement.textContent).toContain('Outstanding invoices due in August');
     expect(fixture.nativeElement.textContent).toContain('Rp 8,150,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('Rp 5,300,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('4 orders');
-    peakDot = compiled.querySelector('circle[cx="456"]');
-    expect(peakDot?.getAttribute('cy')).toBe('42');
+    expect(component.chartPointsData().length).toBe(11);
+    expect(progressBar?.getAttribute('aria-valuenow')).toBe('52');
+    expect(sparkline?.getAttribute('d')).toContain('M 5,16 C 20,10');
+    recBars = compiled.querySelectorAll('.grid > div:first-child [style*="height"]');
+    expect((recBars[5] as HTMLElement)?.style.height).toBe('88%');
 
     // Step backward to July
     component.prevMonth();
@@ -326,14 +359,15 @@ describe('UiMockup', () => {
     expect(component.selectedMonthIndex()).toBe(0); // July
     expect(component.currentMonthKey()).toBe('HERO.UI_MOCKUP.MONTHS_FULL.JULY');
     expect(fixture.nativeElement.textContent).toContain('July 2026');
-    expect(fixture.nativeElement.textContent).toContain(
-      'Outstanding invoices due in July',
-    );
+    expect(fixture.nativeElement.textContent).toContain('Outstanding invoices due in July');
     expect(fixture.nativeElement.textContent).toContain('Rp 7,920,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('Rp 4,900,000,000.-');
     expect(fixture.nativeElement.textContent).toContain('3 orders');
-    peakDot = compiled.querySelector('circle[cx="456"]');
-    expect(peakDot?.getAttribute('cy')).toBe('48');
+    expect(component.chartPointsData().length).toBe(10);
+    expect(progressBar?.getAttribute('aria-valuenow')).toBe('46');
+    expect(sparkline?.getAttribute('d')).toContain('M 5,18 C 20,12');
+    recBars = compiled.querySelectorAll('.grid > div:first-child [style*="height"]');
+    expect((recBars[5] as HTMLElement)?.style.height).toBe('75%');
 
     // Step forward back to August then September
     component.nextMonth();
@@ -342,8 +376,106 @@ describe('UiMockup', () => {
     expect(component.selectedMonthIndex()).toBe(2); // September
     expect(component.currentMonthKey()).toBe('HERO.UI_MOCKUP.MONTHS_FULL.SEPTEMBER');
     expect(fixture.nativeElement.textContent).toContain('Rp 5,800,000,000.-');
-    peakDot = compiled.querySelector('circle[cx="456"]');
-    expect(peakDot?.getAttribute('cy')).toBe('38');
+    expect(component.chartPointsData().length).toBe(12);
+    expect(progressBar?.getAttribute('aria-valuenow')).toBe('58');
+    expect(sparkline?.getAttribute('d')).toContain('M 5,16 C 20,8');
+    recBars = compiled.querySelectorAll('.grid > div:first-child [style*="height"]');
+    expect((recBars[5] as HTMLElement)?.style.height).toBe('100%');
+  });
+
+  it('should plot data only up to July when mocked date is July and prevent future navigation', () => {
+    fixture.componentRef.setInput('currentDate', new Date(2026, 6, 15));
+    fixture.detectChanges();
+
+    expect(component.currentMonthIndex()).toBe(0); // July
+    expect(component.selectedMonthIndex()).toBe(0);
+    expect(component.chartPointsData().length).toBe(10);
+
+    const points = component.chartPointsData();
+    expect(points[0].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.OCTOBER');
+    expect(points[0].x).toBe(50); // Left edge
+    expect(points[points.length - 1].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.JULY');
+    expect(points[points.length - 1].x).toBe(535); // Right edge (spread across full chart)
+    expect(points[points.length - 1].xPercent).toBeCloseTo(99.07, 1);
+
+    // Verify hover rects are seamlessly continuous without gaps
+    for (let i = 0; i < points.length - 1; i++) {
+      expect(points[i + 1].rectX).toBeCloseTo(points[i].rectX + points[i].rectWidth, 0);
+    }
+
+    // Verify no August or September points rendered
+    const hasAugust = points.some((p) => p.monthKey.includes('AUGUST'));
+    const hasSeptember = points.some((p) => p.monthKey.includes('SEPTEMBER'));
+    expect(hasAugust).toBe(false);
+    expect(hasSeptember).toBe(false);
+
+    // Verify Y-axis scale adjusts to 8B
+    expect(component.yMax()).toBe(8);
+    expect(component.yTicks()[0].label).toBe('8 B');
+
+    // Verify next month button is disabled
+    const nextBtn = fixture.nativeElement.querySelector(
+      'header button[aria-label="Next month"]',
+    ) as HTMLButtonElement;
+    expect(nextBtn.disabled).toBe(true);
+
+    // Attempting nextMonth does not advance
+    component.nextMonth();
+    expect(component.selectedMonthIndex()).toBe(0);
+  });
+
+  it('should plot data up to August when mocked date is August, with no September point', () => {
+    fixture.componentRef.setInput('currentDate', new Date(2026, 7, 20));
+    fixture.detectChanges();
+
+    expect(component.currentMonthIndex()).toBe(1); // August
+    expect(component.selectedMonthIndex()).toBe(1);
+    expect(component.chartPointsData().length).toBe(11);
+
+    const points = component.chartPointsData();
+    expect(points[0].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.OCTOBER');
+    expect(points[0].x).toBe(50); // Left edge
+    expect(points[points.length - 1].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.AUGUST');
+    expect(points[points.length - 1].x).toBe(535); // Right edge (spread across full chart)
+
+    const hasSeptember = points.some((p) => p.monthKey.includes('SEPTEMBER'));
+    expect(hasSeptember).toBe(false);
+
+    // Can navigate back to July, but not forward to September
+    component.prevMonth();
+    expect(component.selectedMonthIndex()).toBe(0);
+    expect(component.chartPointsData().length).toBe(10);
+    expect(component.chartPointsData()[9].x).toBe(535);
+
+    component.nextMonth();
+    expect(component.selectedMonthIndex()).toBe(1);
+
+    // Next at August should be disabled
+    const nextBtn = fixture.nativeElement.querySelector(
+      'header button[aria-label="Next month"]',
+    ) as HTMLButtonElement;
+    expect(nextBtn.disabled).toBe(true);
+    component.nextMonth();
+    expect(component.selectedMonthIndex()).toBe(1);
+  });
+
+  it('should plot all 12 months up to September when mocked date is September', () => {
+    fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10));
+    fixture.detectChanges();
+
+    expect(component.currentMonthIndex()).toBe(2); // September
+    expect(component.selectedMonthIndex()).toBe(2);
+    expect(component.chartPointsData().length).toBe(12);
+
+    const points = component.chartPointsData();
+    expect(points[0].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.OCTOBER');
+    expect(points[0].x).toBe(50); // Left edge
+    expect(points[points.length - 1].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.SEPTEMBER');
+    expect(points[points.length - 1].x).toBe(535); // Right edge
+
+    // Y-axis adjusts to 10B because September revenue is 8.2B
+    expect(component.yMax()).toBe(10);
+    expect(component.yTicks()[0].label).toBe('10 B');
   });
 
   it('should toggle notifications drawer and mark alerts as read', () => {
@@ -355,9 +487,7 @@ describe('UiMockup', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.textContent).toContain('Executive Alerts');
-    expect(fixture.nativeElement.textContent).toContain(
-      '5 Orders at Risk of shipping delay',
-    );
+    expect(fixture.nativeElement.textContent).toContain('5 Orders at Risk of shipping delay');
 
     component.markAllAsRead();
     expect(component.unreadCount()).toBe(0);
@@ -404,7 +534,7 @@ describe('UiMockup', () => {
     expect(compiled.querySelector('[role="tooltip"]')).toBeNull();
     expect(compiled.querySelector('line[stroke-dasharray="3,3"]')).toBeNull();
 
-    // Hover over July column (index 9, x=456)
+    // Hover over July column (index 9)
     component.setHoveredMonth(9);
     fixture.detectChanges();
 
@@ -422,12 +552,18 @@ describe('UiMockup', () => {
     // Dashed crosshair line
     const crosshair = compiled.querySelector('line[stroke-dasharray="3,3"]');
     expect(crosshair).toBeTruthy();
-    expect(crosshair?.getAttribute('x1')).toBe('456');
-    expect(crosshair?.getAttribute('x2')).toBe('456');
+    expect(crosshair?.getAttribute('x1')).toBe(point?.x.toString());
+    expect(crosshair?.getAttribute('x2')).toBe(point?.x.toString());
 
-    // Halos
-    const halos = compiled.querySelectorAll('circle[r="6.5"]');
-    expect(halos.length).toBe(2); // One for revenue, one for sales orders
+    // Halos / Hover markers
+    const chartContainer = compiled.querySelector('.relative.w-full.h-40');
+    const halos = Array.from(chartContainer?.querySelectorAll('div') || []).filter(
+      (el) =>
+        el.classList.contains('w-3.5') &&
+        el.classList.contains('h-3.5') &&
+        el.classList.contains('rounded-full'),
+    );
+    expect(halos.length).toBe(2); // One for revenue (#2563eb), one for sales orders (#60a5fa)
 
     // Clear hover
     component.clearHoveredMonth();
@@ -437,9 +573,16 @@ describe('UiMockup', () => {
     expect(component.hoveredChartPoint()).toBeNull();
     expect(compiled.querySelector('[role="tooltip"]')).toBeNull();
     expect(compiled.querySelector('line[stroke-dasharray="3,3"]')).toBeNull();
+    const halosAfter = Array.from(chartContainer?.querySelectorAll('div') || []).filter(
+      (el) =>
+        el.classList.contains('w-3.5') &&
+        el.classList.contains('h-3.5') &&
+        el.classList.contains('rounded-full'),
+    );
+    expect(halosAfter.length).toBe(0);
   });
 
-  it('should adjust tooltip transform for leftmost (Oct) and rightmost (Aug) columns', () => {
+  it('should adjust tooltip transform for leftmost (Oct) and rightmost columns', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     // Hover leftmost column (Oct - index 0)
@@ -450,13 +593,14 @@ describe('UiMockup', () => {
     expect(tooltip.style.transform).toBe('translateX(-15%)');
     expect(tooltip.textContent).toContain('October 2026');
 
-    // Hover rightmost column (Aug - index 10)
-    component.setHoveredMonth(10);
+    // Hover rightmost column (index length - 1)
+    const rightmostIndex = component.chartPointsData().length - 1;
+    component.setHoveredMonth(rightmostIndex);
     fixture.detectChanges();
     tooltip = compiled.querySelector('[role="tooltip"]') as HTMLElement;
     expect(tooltip).toBeTruthy();
     expect(tooltip.style.transform).toBe('translateX(-85%)');
-    expect(tooltip.textContent).toContain('August 2026');
+    expect(tooltip.textContent).toContain('September 2026');
 
     // Hover middle column (Feb - index 4)
     component.setHoveredMonth(4);
@@ -515,8 +659,8 @@ describe('UiMockup', () => {
           DASHBOARD: {
             BREADCRUMB: 'SOFICloud / Tampilan Manajemen',
             TITLE: 'Dashboard Eksekutif',
-            SIMPLE_DATA: 'Data sederhana',
-            DESCRIPTION: 'Visibilitas real-time untuk piutang, penjualan, kas, pengeluaran, dan performa operasional',
+            DESCRIPTION:
+              'Visibilitas real-time untuk piutang, penjualan, kas, pengeluaran, dan performa operasional',
           },
           NAV: {
             DASHBOARD: 'Dashboard',
@@ -586,7 +730,7 @@ describe('UiMockup', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Ruang Kerja Perusahaan');
     expect(compiled.textContent).toContain('Dashboard Eksekutif');
-    expect(compiled.textContent).toContain('Data sederhana');
+    expect(compiled.textContent).not.toContain('Data sederhana');
     expect(compiled.textContent).toContain('PIUTANG');
     expect(compiled.textContent).toContain('Total Piutang Usaha');
     expect(compiled.textContent).toContain('Piutang Jatuh Tempo: Rp 1,100,000,000.-');
@@ -594,5 +738,180 @@ describe('UiMockup', () => {
     expect(compiled.textContent).toContain('Perlu diperhatikan');
     expect(compiled.textContent).toContain('2.4 bulan');
     expect(compiled.textContent).toContain('5 pesanan');
+  });
+
+  it('should apply mobile-friendly layout and HTML overlays to 12-Month Sales Trend card', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // Header layout
+    const headerRow = compiled.querySelector('.flex.flex-col.sm\\:flex-row.sm\\:items-start');
+    expect(headerRow).toBeTruthy();
+
+    // Legend whitespace and shrink classes
+    const legendRevenue = compiled.querySelector(
+      'span.w-2.h-2.rounded-full.bg-\\[\\#2563eb\\].shrink-0',
+    );
+    expect(legendRevenue).toBeTruthy();
+    const legendOrders = compiled.querySelector(
+      'span.w-2.h-2.rounded-full.bg-\\[\\#60a5fa\\].shrink-0',
+    );
+    expect(legendOrders).toBeTruthy();
+
+    // Chart container height
+    const chartContainer = compiled.querySelector('.h-40.sm\\:h-36');
+    expect(chartContainer).toBeTruthy();
+
+    // SVG non-scaling-stroke
+    const nonScalingElements = compiled.querySelectorAll('[vector-effect="non-scaling-stroke"]');
+    expect(nonScalingElements.length).toBeGreaterThan(0);
+
+    // No SVG <circle> or <text> inside SVG
+    const svgCircles = compiled.querySelectorAll('svg circle');
+    expect(svgCircles.length).toBe(0);
+    const svgTexts = compiled.querySelectorAll('svg text');
+    expect(svgTexts.length).toBe(0);
+
+    // HTML Y-axis labels
+    const chartInner = compiled.querySelector('.relative.w-full.h-full');
+    const yAxisLabels = Array.from(chartInner?.querySelectorAll('span') || []).filter(
+      (el) =>
+        el.classList.contains('pointer-events-none') && el.classList.contains('-translate-y-1/2'),
+    );
+    expect(yAxisLabels.length).toBe(component.yTicks().length);
+
+    // HTML Revenue dots
+    const revenueDots = Array.from(chartInner?.querySelectorAll('div') || []).filter(
+      (el) =>
+        el.classList.contains('w-1.5') &&
+        el.classList.contains('h-1.5') &&
+        el.classList.contains('rounded-full'),
+    );
+    expect(revenueDots.length).toBe(component.chartRevenueDots().length);
+
+    // Month labels: the last (current) month is never hidden below 340px
+    const monthLabels = compiled.querySelectorAll('.relative.w-full.h-4 span');
+    expect(monthLabels.length).toBe(component.chartPointsData().length);
+    const lastMonthLabel = monthLabels[monthLabels.length - 1];
+    expect(lastMonthLabel.classList.contains('max-[340px]:hidden')).toBe(false);
+  });
+
+  it('should preserve month visibility and chart span for July, August, and September datasets', () => {
+    // 1. July
+    fixture.componentRef.setInput('currentDate', new Date(2026, 6, 15));
+    fixture.detectChanges();
+    let monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
+    expect(monthLabels.length).toBe(10);
+    expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Jul');
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(
+      false,
+    );
+
+    // 2. August
+    fixture.componentRef.setInput('currentDate', new Date(2026, 7, 20));
+    fixture.detectChanges();
+    monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
+    expect(monthLabels.length).toBe(11);
+    expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Aug');
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(
+      false,
+    );
+
+    // 3. September
+    fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10));
+    fixture.detectChanges();
+    monthLabels = fixture.nativeElement.querySelectorAll('.relative.w-full.h-4 span');
+    expect(monthLabels.length).toBe(12);
+    expect(monthLabels[monthLabels.length - 1].textContent.trim()).toBe('Sep');
+    expect(monthLabels[monthLabels.length - 1].classList.contains('max-[340px]:hidden')).toBe(
+      false,
+    );
+  });
+
+  it('should render all 3 floating preview cards with localized labels and values', () => {
+    fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10)); // September 2026
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // 1. PROJECT CASH Card
+    const projectCashCard = compiled.querySelector('[aria-label="Project Cash preview"]');
+    expect(projectCashCard).toBeTruthy();
+    expect(projectCashCard?.textContent).toContain('PROJECT CASH');
+    expect(projectCashCard?.textContent).toContain('Rp 5,150,000,000.-');
+    expect(projectCashCard?.textContent).toContain('Estimated month-end balance');
+    const projectCashBar = projectCashCard?.querySelector(
+      '.bg-linear-to-r.from-\\[\\#169697\\].to-\\[\\#17babc\\]',
+    );
+    expect(projectCashBar).toBeTruthy();
+
+    // 2. BUDGET UTILIZATION Card (Top Right Donut)
+    const budgetOpexCard = compiled.querySelector(
+      '[aria-label="Budget utilization OPEX percentage"]',
+    );
+    expect(budgetOpexCard).toBeTruthy();
+    expect(budgetOpexCard?.textContent).toContain('BUDGET UTILIZATION');
+    expect(budgetOpexCard?.textContent).toContain('62%');
+    expect(budgetOpexCard?.textContent).toContain('OPEX Used');
+    const donutPaths = budgetOpexCard?.querySelectorAll('svg path');
+    expect(donutPaths?.length).toBe(3); // gray track, blue arc, teal arc
+
+    // 3. BUDGET UTILIZATION Card (Bottom Right 94% Mo Ready)
+    const budgetMoCard = compiled.querySelector(
+      '[aria-label="Budget utilization execution readiness"]',
+    );
+    expect(budgetMoCard).toBeTruthy();
+    expect(budgetMoCard?.textContent).toContain('BUDGET UTILIZATION');
+    expect(budgetMoCard?.textContent).toContain('94%');
+    expect(budgetMoCard?.textContent).toContain('Mo ready for execution');
+    const moBars = budgetMoCard?.querySelectorAll('[style*="height"]');
+    expect(moBars?.length).toBe(4);
+    expect((moBars?.[0] as HTMLElement)?.style.height).toBe('38%');
+    expect((moBars?.[1] as HTMLElement)?.style.height).toBe('81%');
+    expect((moBars?.[2] as HTMLElement)?.style.height).toBe('57%');
+    expect((moBars?.[3] as HTMLElement)?.style.height).toBe('100%');
+  });
+
+  it('should dynamically update floating cards when navigating through monthly datasets', () => {
+    fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10)); // September 2026
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // September defaults
+    expect(compiled.querySelector('[aria-label="Project Cash preview"]')?.textContent).toContain(
+      'Rp 5,150,000,000.-',
+    );
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization OPEX percentage"]')?.textContent,
+    ).toContain('62%');
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization execution readiness"]')?.textContent,
+    ).toContain('94%');
+
+    // Step back to August
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(1);
+    expect(compiled.querySelector('[aria-label="Project Cash preview"]')?.textContent).toContain(
+      'Rp 4,950,000,000.-',
+    );
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization OPEX percentage"]')?.textContent,
+    ).toContain('58%');
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization execution readiness"]')?.textContent,
+    ).toContain('91%');
+
+    // Step back to July
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(0);
+    expect(compiled.querySelector('[aria-label="Project Cash preview"]')?.textContent).toContain(
+      'Rp 4,700,000,000.-',
+    );
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization OPEX percentage"]')?.textContent,
+    ).toContain('54%');
+    expect(
+      compiled.querySelector('[aria-label="Budget utilization execution readiness"]')?.textContent,
+    ).toContain('88%');
   });
 });

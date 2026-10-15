@@ -144,7 +144,6 @@
       "DASHBOARD": {
         "BREADCRUMB": "SOFICloud / 経営ビュー",
         "TITLE": "エグゼクティブダッシュボード",
-        "SIMPLE_DATA": "簡易データ",
         "DESCRIPTION": "売掛金、売上、資金、経費、業務パフォーマンスをリアルタイムで可視化"
       },
       "METRICS": {
@@ -221,6 +220,20 @@
         "OCTOBER": "10月",
         "NOVEMBER": "11月",
         "DECEMBER": "12月"
+      },
+      "FLOATING": {
+        "PROJECT_CASH": {
+          "TAG": "PROJECT CASH",
+          "SUBTEXT": "月末予測残高",
+          "ARIA_LABEL": "プロジェクトキャッシュプレビュー"
+        },
+        "BUDGET_UTILIZATION": {
+          "TAG": "BUDGET UTILIZATION",
+          "OPEX_USED": "OPEX使用率",
+          "MO_READY": "実行準備完了",
+          "OPEX_ARIA_LABEL": "予算使用率 OPEX",
+          "MO_ARIA_LABEL": "製造指図実行準備率"
+        }
       }
     }
   },
@@ -436,4 +449,3 @@
     }
   }
 }
-

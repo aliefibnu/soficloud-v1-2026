@@ -1,11 +1,13 @@
-<div class="relative w-full max-w-6xl xl:max-w-7xl mx-auto px-2 sm:px-3 md:px-4 text-left font-dm-sans">
+<div
+  class="relative w-full max-w-6xl xl:max-w-7xl mx-auto px-2 sm:px-3 md:px-4 text-left font-dm-sans"
+>
   <div
     class="pointer-events-none absolute -inset-x-3 sm:-inset-x-6 top-4 bottom-8 bg-linear-to-b from-[#1d44eb]/15 via-[#182849]/10 to-transparent rounded-[40px] blur-3xl -z-10 opacity-70"
     aria-hidden="true"
   ></div>
 
   <div
-    class="relative w-full rounded-2xl sm:rounded-3xl bg-[#f0f4f9] border border-slate-200/90 shadow-[0_25px_70px_-15px_rgba(15,23,42,0.18)] overflow-hidden"
+    class="mockup-bottom-fade relative w-full rounded-2xl sm:rounded-3xl bg-[#f0f4f9] border border-slate-200/90 shadow-[0_25px_70px_-15px_rgba(15,23,42,0.18)] overflow-hidden"
   >
     <header
       class="w-full bg-white border-b border-slate-200/80 px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 relative z-30"
@@ -19,7 +21,7 @@
       </div>
 
       <div
-        class="hidden md:block text-[#334155] text-xs sm:text-[13px] font-medium tracking-tight"
+        class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[#334155] text-xs sm:text-[13px] font-medium tracking-tight pointer-events-none select-none max-w-xs truncate text-center"
       >
         {{ 'HERO.UI_MOCKUP.HEADER.WORKSPACE' | translate }}
       </div>
@@ -31,15 +33,11 @@
           <button
             type="button"
             (click)="prevMonth()"
-            class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer"
+            [disabled]="selectedMonthIndex() <= 0"
+            class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-slate-500"
             [attr.aria-label]="'HERO.UI_MOCKUP.HEADER.PREV_MONTH' | translate"
           >
-            <svg
-              class="w-3 h-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -49,22 +47,21 @@
             </svg>
           </button>
           <span
-            class="text-[#334155] text-[10.5px] sm:text-xs font-semibold px-1.5 select-none whitespace-nowrap min-w-22 text-center"
+            class="text-[#334155] text-[10.5px] sm:text-xs font-semibold px-1.5 select-none whitespace-nowrap min-w-24 sm:min-w-28 text-center"
           >
-            {{ 'HERO.UI_MOCKUP.HEADER.DATE_FORMAT' | translate: { month: (currentMonthKey() | translate), year: 2026 } }}
+            {{
+              'HERO.UI_MOCKUP.HEADER.DATE_FORMAT'
+                | translate: { month: (currentMonthKey() | translate), year: 2026 }
+            }}
           </span>
           <button
             type="button"
             (click)="nextMonth()"
-            class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer"
+            [disabled]="selectedMonthIndex() >= currentMonthIndex()"
+            class="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded flex items-center justify-center text-slate-500 hover:text-[#2563eb] hover:bg-white transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-slate-500"
             [attr.aria-label]="'HERO.UI_MOCKUP.HEADER.NEXT_MONTH' | translate"
           >
-            <svg
-              class="w-3 h-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -111,12 +108,10 @@
               (click)="$event.stopPropagation()"
               class="absolute right-0 mt-1.5 w-68 sm:w-72 bg-white border border-slate-200/90 rounded-xl shadow-xl p-2.5 z-40 text-left"
             >
-              <div
-                class="flex items-center justify-between pb-2 border-b border-slate-100"
-              >
-                <span class="text-xs font-bold text-[#182849]"
-                  >{{ 'HERO.UI_MOCKUP.NOTIFICATIONS.TITLE' | translate }}</span
-                >
+              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                <span class="text-xs font-bold text-[#182849]">{{
+                  'HERO.UI_MOCKUP.NOTIFICATIONS.TITLE' | translate
+                }}</span>
                 @if (unreadCount() > 0) {
                   <button
                     type="button"
@@ -139,9 +134,7 @@
                       [class.bg-blue-500]="alert.type === 'info'"
                     ></span>
                     <div class="flex-1 min-w-0">
-                      <p
-                        class="text-[11px] text-[#1e293b] font-medium leading-snug line-clamp-2"
-                      >
+                      <p class="text-[11px] text-[#1e293b] font-medium leading-snug line-clamp-2">
                         {{ alert.titleKey | translate }}
                       </p>
                       <span class="text-[9px] text-slate-400 mt-0.5 block">{{
@@ -171,9 +164,7 @@
               (click)="$event.stopPropagation()"
               class="absolute right-0 mt-1.5 w-52 sm:w-56 bg-white border border-slate-200/90 rounded-xl shadow-xl p-3 z-40 text-left"
             >
-              <div
-                class="flex items-center gap-2.5 pb-2.5 border-b border-slate-100"
-              >
+              <div class="flex items-center gap-2.5 pb-2.5 border-b border-slate-100">
                 <div
                   class="w-8 h-8 rounded-full bg-[#141b36] text-white flex items-center justify-center font-bold text-sm shadow-xs shrink-0"
                 >
@@ -230,19 +221,17 @@
 
       <main class="flex-1 p-3 sm:p-5 lg:p-6 flex flex-col gap-3 sm:gap-4 min-w-0 bg-[#f0f4f9]">
         <div class="flex flex-col gap-0.5">
-          <span class="text-[#2563eb] font-semibold text-[11px] sm:text-xs">{{ 'HERO.UI_MOCKUP.DASHBOARD.BREADCRUMB' | translate }}</span>
-          <div class="flex items-center justify-between gap-2">
-            <h2 class="text-lg sm:text-2xl lg:text-[28px] font-bold text-[#182849] tracking-tight leading-tight truncate">
-              {{ 'HERO.UI_MOCKUP.DASHBOARD.TITLE' | translate }}
-            </h2>
-            <button
-              type="button"
-              class="px-2.5 sm:px-4 py-1 rounded-lg sm:rounded-xl border border-[#93c5fd] bg-white text-[#2563eb] text-[11px] sm:text-xs font-medium shadow-2xs hover:bg-blue-50/50 transition-colors shrink-0 cursor-pointer"
-            >
-              {{ 'HERO.UI_MOCKUP.DASHBOARD.SIMPLE_DATA' | translate }}
-            </button>
-          </div>
-          <p class="text-[#475569] text-[11px] sm:text-xs md:text-[13px] font-normal mt-0.5 leading-normal">
+          <span class="text-[#2563eb] font-semibold text-[11px] sm:text-xs">{{
+            'HERO.UI_MOCKUP.DASHBOARD.BREADCRUMB' | translate
+          }}</span>
+          <h2
+            class="text-lg sm:text-2xl lg:text-[28px] font-bold text-[#182849] tracking-tight leading-tight truncate"
+          >
+            {{ 'HERO.UI_MOCKUP.DASHBOARD.TITLE' | translate }}
+          </h2>
+          <p
+            class="text-[#475569] text-[11px] sm:text-xs md:text-[13px] font-normal mt-0.5 leading-normal"
+          >
             {{ 'HERO.UI_MOCKUP.DASHBOARD.DESCRIPTION' | translate }}
           </p>
         </div>
@@ -252,26 +241,42 @@
             class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">
+              <span
+                class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate"
+              >
                 {{ 'HERO.UI_MOCKUP.METRICS.RECEIVABLES.TAG' | translate }}
               </span>
-              <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
+              <h3
+                class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1"
+              >
                 {{ 'HERO.UI_MOCKUP.METRICS.RECEIVABLES.TITLE' | translate }}
               </h3>
-              <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
+              <div
+                class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate"
+              >
                 {{ currentData().receivables.total }}
               </div>
-              <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
-                {{ 'HERO.UI_MOCKUP.METRICS.RECEIVABLES.OVERDUE_LABEL' | translate }}: {{ currentData().receivables.overdue }}
+              <div
+                class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate"
+              >
+                {{ 'HERO.UI_MOCKUP.METRICS.RECEIVABLES.OVERDUE_LABEL' | translate }}:
+                {{ currentData().receivables.overdue }}
               </div>
             </div>
-            <div class="flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-2.5" aria-hidden="true">
-              <div class="flex-1 h-2 bg-[#93c5fd] rounded-xs"></div>
-              <div class="flex-1 h-3.5 bg-[#60a5fa] rounded-xs"></div>
-              <div class="flex-1 h-2.5 bg-[#93c5fd] rounded-xs"></div>
-              <div class="flex-1 h-4.5 bg-[#3b82f6] rounded-xs"></div>
-              <div class="flex-1 h-3.5 bg-[#60a5fa] rounded-xs"></div>
-              <div class="flex-1 h-5 bg-[#1d4ed8] rounded-xs"></div>
+            <div
+              class="flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-2.5 h-7 sm:h-8"
+              aria-hidden="true"
+            >
+              @for (bar of currentData().receivables.bars; track $index; let i = $index) {
+                <div
+                  class="flex-1 rounded-xs transition-all duration-300 ease-out"
+                  [class.bg-[#93c5fd]]="i === 0 || i === 2"
+                  [class.bg-[#60a5fa]]="i === 1 || i === 4"
+                  [class.bg-[#3b82f6]]="i === 3"
+                  [class.bg-[#1d4ed8]]="i === 5"
+                  [style.height.%]="bar"
+                ></div>
+              }
             </div>
           </div>
 
@@ -279,20 +284,31 @@
             class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">
+              <span
+                class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate"
+              >
                 {{ 'HERO.UI_MOCKUP.METRICS.CURRENT_MONTH.TAG' | translate }}
               </span>
-              <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
+              <h3
+                class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1"
+              >
                 {{ 'HERO.UI_MOCKUP.METRICS.CURRENT_MONTH.TITLE' | translate }}
               </h3>
-              <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
+              <div
+                class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate"
+              >
                 {{ currentData().currentMonth.due }}
               </div>
-              <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
-                {{ 'HERO.UI_MOCKUP.METRICS.CURRENT_MONTH.SUBTEXT' | translate: { month: (currentMonthKey() | translate) } }}
+              <div
+                class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate"
+              >
+                {{
+                  'HERO.UI_MOCKUP.METRICS.CURRENT_MONTH.SUBTEXT'
+                    | translate: { month: (currentMonthKey() | translate) }
+                }}
               </div>
             </div>
-            <div class="pt-2 sm:pt-2.5">
+            <div class="pt-2 sm:pt-2.5 h-7 sm:h-8 flex items-end">
               <div
                 class="w-full h-1.5 sm:h-2 bg-[#dbeafe] rounded-full overflow-hidden"
                 role="progressbar"
@@ -301,7 +317,7 @@
                 aria-valuemax="100"
               >
                 <div
-                  class="h-full bg-[#2563eb] rounded-full transition-all duration-300"
+                  class="h-full bg-[#2563eb] rounded-full transition-all duration-300 ease-out"
                   [style.width.%]="currentData().currentMonth.progressPercent"
                 ></div>
               </div>
@@ -312,26 +328,44 @@
             class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">
+              <span
+                class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate"
+              >
                 {{ 'HERO.UI_MOCKUP.METRICS.SALES.TAG' | translate }}
               </span>
-              <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
+              <h3
+                class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1"
+              >
                 {{ 'HERO.UI_MOCKUP.METRICS.SALES.TITLE' | translate }}
               </h3>
-              <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
+              <div
+                class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate"
+              >
                 {{ currentData().sales.orders }}
               </div>
-              <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
-                {{ 'HERO.UI_MOCKUP.METRICS.SALES.GROWTH' | translate: { growth: currentData().sales.growthRate } }}
+              <div
+                class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate"
+              >
+                {{
+                  'HERO.UI_MOCKUP.METRICS.SALES.GROWTH'
+                    | translate: { growth: currentData().sales.growthRate }
+                }}
               </div>
             </div>
-            <div class="flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-2.5" aria-hidden="true">
-              <div class="flex-1 h-2 bg-[#93c5fd] rounded-xs"></div>
-              <div class="flex-1 h-3.5 bg-[#60a5fa] rounded-xs"></div>
-              <div class="flex-1 h-2.5 bg-[#93c5fd] rounded-xs"></div>
-              <div class="flex-1 h-4.5 bg-[#3b82f6] rounded-xs"></div>
-              <div class="flex-1 h-3.5 bg-[#60a5fa] rounded-xs"></div>
-              <div class="flex-1 h-5 bg-[#1d4ed8] rounded-xs"></div>
+            <div
+              class="flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-2.5 h-7 sm:h-8"
+              aria-hidden="true"
+            >
+              @for (bar of currentData().sales.bars; track $index; let i = $index) {
+                <div
+                  class="flex-1 rounded-xs transition-all duration-300 ease-out"
+                  [class.bg-[#93c5fd]]="i === 0 || i === 2"
+                  [class.bg-[#60a5fa]]="i === 1 || i === 4"
+                  [class.bg-[#3b82f6]]="i === 3"
+                  [class.bg-[#1d4ed8]]="i === 5"
+                  [style.height.%]="bar"
+                ></div>
+              }
             </div>
           </div>
 
@@ -339,32 +373,50 @@
             class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border border-slate-200/70 shadow-[0_4px_16px_-4px_rgba(15,23,42,0.06)] flex flex-col justify-between"
           >
             <div>
-              <span class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate">
+              <span
+                class="text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block truncate"
+              >
                 {{ 'HERO.UI_MOCKUP.METRICS.LIQUIDITY.TAG' | translate }}
               </span>
-              <h3 class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1">
+              <h3
+                class="text-[11px] sm:text-[12.5px] font-bold text-[#182849] mt-0.5 leading-snug line-clamp-2 sm:line-clamp-1"
+              >
                 {{ 'HERO.UI_MOCKUP.METRICS.LIQUIDITY.TITLE' | translate }}
               </h3>
-              <div class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate">
+              <div
+                class="text-[12px] sm:text-[14.5px] lg:text-[15.5px] font-extrabold text-[#182849] mt-1 whitespace-nowrap truncate"
+              >
                 {{ currentData().liquidity.balance }}
               </div>
-              <div class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate">
-                {{ 'HERO.UI_MOCKUP.METRICS.LIQUIDITY.PROJECTED' | translate: { amount: currentData().liquidity.projected } }}
+              <div
+                class="text-[9.5px] sm:text-[10.5px] text-[#94a3b8] font-normal mt-0.5 leading-snug truncate"
+              >
+                {{
+                  'HERO.UI_MOCKUP.METRICS.LIQUIDITY.PROJECTED'
+                    | translate: { amount: currentData().liquidity.projected }
+                }}
               </div>
             </div>
-            <div class="pt-1.5 sm:pt-2 h-5 sm:h-6 w-full overflow-hidden" aria-hidden="true">
-              <svg class="w-full h-full" viewBox="0 0 160 24" fill="none" preserveAspectRatio="none">
+            <div class="pt-1.5 sm:pt-2 h-7 sm:h-8 w-full overflow-hidden" aria-hidden="true">
+              <svg
+                class="w-full h-full"
+                viewBox="0 0 160 24"
+                fill="none"
+                preserveAspectRatio="none"
+              >
                 <path
-                  d="M 5,16 C 20,8 30,18 45,13 C 60,8 70,18 85,13 C 100,8 110,18 125,13 C 140,8 150,16 158,13"
+                  [attr.d]="currentData().liquidity.sparklinePrimaryPath"
                   stroke="#2563eb"
                   stroke-width="1.8"
                   stroke-linecap="round"
+                  class="transition-all duration-300 ease-out"
                 />
                 <path
-                  d="M 0,18 C 15,21 25,10 40,16 C 55,22 65,10 80,17 C 95,23 105,11 120,17 C 135,22 145,11 158,18"
+                  [attr.d]="currentData().liquidity.sparklineSecondaryPath"
                   stroke="#60a5fa"
                   stroke-width="1.4"
                   stroke-linecap="round"
+                  class="transition-all duration-300 ease-out"
                 />
               </svg>
             </div>
@@ -400,7 +452,10 @@
             [class.shadow-2xs]="activeMobileTab() === 'highlights'"
             [class.text-slate-500]="activeMobileTab() !== 'highlights'"
           >
-            {{ 'HERO.UI_MOCKUP.MOBILE_TABS.KEY_HIGHLIGHTS' | translate: { count: highlights().length } }}
+            {{
+              'HERO.UI_MOCKUP.MOBILE_TABS.KEY_HIGHLIGHTS'
+                | translate: { count: highlights().length }
+            }}
           </button>
         </div>
 
@@ -410,9 +465,11 @@
             [class.max-lg:hidden]="activeMobileTab() !== 'chart'"
           >
             <div>
-              <div class="flex items-start justify-between gap-2 mb-2">
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                 <div>
-                  <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">
+                  <span
+                    class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block"
+                  >
                     {{ 'HERO.UI_MOCKUP.CHART.TAG' | translate }}
                   </span>
                   <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5">
@@ -422,18 +479,32 @@
                     {{ 'HERO.UI_MOCKUP.CHART.SUBTITLE' | translate }}
                   </div>
                 </div>
-                <div class="flex items-center gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-semibold text-[#182849]">
-                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#2563eb]"></span>{{ 'HERO.UI_MOCKUP.CHART.REVENUE' | translate }}</span>
-                  <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#60a5fa]"></span>{{ 'HERO.UI_MOCKUP.CHART.SALES_ORDERS' | translate }}</span>
+                <div
+                  class="flex items-center flex-wrap gap-2.5 sm:gap-3 gap-y-1 text-[11px] sm:text-xs font-semibold text-[#182849]"
+                >
+                  <span class="inline-flex items-center gap-1.5 whitespace-nowrap"
+                    ><span class="w-2 h-2 rounded-full bg-[#2563eb] shrink-0"></span
+                    >{{ 'HERO.UI_MOCKUP.CHART.REVENUE' | translate }}</span
+                  >
+                  <span class="inline-flex items-center gap-1.5 whitespace-nowrap"
+                    ><span class="w-2 h-2 rounded-full bg-[#60a5fa] shrink-0"></span
+                    >{{ 'HERO.UI_MOCKUP.CHART.SALES_ORDERS' | translate }}</span
+                  >
                 </div>
               </div>
 
-              <div class="relative w-full h-32 sm:h-36 pt-1" (mouseleave)="clearHoveredMonth()">
+              <div class="relative w-full h-40 sm:h-36 pt-1" (mouseleave)="clearHoveredMonth()">
                 @if (hoveredChartPoint(); as pt) {
                   <div
                     class="absolute z-20 pointer-events-none -top-13 sm:-top-15 transition-all duration-150 ease-out"
                     [style.left.%]="pt.xPercent"
-                    [style.transform]="hoveredMonthIndex() === 0 ? 'translateX(-15%)' : (hoveredMonthIndex() === 10 ? 'translateX(-85%)' : 'translateX(-50%)')"
+                    [style.transform]="
+                      hoveredMonthIndex() === 0
+                        ? 'translateX(-15%)'
+                        : hoveredMonthIndex() === chartPointsData().length - 1
+                          ? 'translateX(-85%)'
+                          : 'translateX(-50%)'
+                    "
                     role="tooltip"
                     aria-live="polite"
                   >
@@ -441,150 +512,188 @@
                       class="relative bg-[#182849] text-white rounded-xl shadow-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-xs font-dm-sans whitespace-nowrap border border-slate-700/60"
                     >
                       <div class="font-bold text-slate-200 text-[10.5px] sm:text-xs mb-1">
-                        {{ 'HERO.UI_MOCKUP.HEADER.DATE_FORMAT' | translate: { month: (pt.monthKey | translate), year: 2026 } }}
+                        {{
+                          'HERO.UI_MOCKUP.HEADER.DATE_FORMAT'
+                            | translate: { month: (pt.monthKey | translate), year: 2026 }
+                        }}
                       </div>
-                      <div class="flex items-center justify-between gap-3 text-[9.5px] sm:text-[10.5px]">
-                        <span class="text-[#60a5fa] font-medium">{{ 'HERO.UI_MOCKUP.CHART.REVENUE_LABEL' | translate }}</span>
+                      <div
+                        class="flex items-center justify-between gap-3 text-[9.5px] sm:text-[10.5px]"
+                      >
+                        <span class="text-[#60a5fa] font-medium">{{
+                          'HERO.UI_MOCKUP.CHART.REVENUE_LABEL' | translate
+                        }}</span>
                         <span class="font-bold text-white">{{ pt.revenue }}</span>
                       </div>
-                      <div class="flex items-center justify-between gap-3 text-[9.5px] sm:text-[10.5px]">
-                        <span class="text-[#93c5fd] font-medium">{{ 'HERO.UI_MOCKUP.CHART.SALES_ORDERS_LABEL' | translate }}</span>
+                      <div
+                        class="flex items-center justify-between gap-3 text-[9.5px] sm:text-[10.5px]"
+                      >
+                        <span class="text-[#93c5fd] font-medium">{{
+                          'HERO.UI_MOCKUP.CHART.SALES_ORDERS_LABEL' | translate
+                        }}</span>
                         <span class="font-bold text-white">{{ pt.salesOrders }}</span>
                       </div>
                       <div
                         class="absolute -bottom-1 w-2.5 h-2.5 bg-[#182849] border-r border-b border-slate-700/60"
-                        [style.left]="hoveredMonthIndex() === 0 ? '15%' : (hoveredMonthIndex() === 10 ? '85%' : '50%')"
-                        style="transform: translateX(-50%) rotate(45deg);"
+                        [style.left]="
+                          hoveredMonthIndex() === 0
+                            ? '15%'
+                            : hoveredMonthIndex() === chartPointsData().length - 1
+                              ? '85%'
+                              : '50%'
+                        "
+                        style="transform: translateX(-50%) rotate(45deg)"
                       ></div>
                     </div>
                   </div>
                 }
 
-                <svg
-                  class="w-full h-full"
-                  viewBox="0 0 540 120"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                  (mouseleave)="clearHoveredMonth()"
-                >
-                  <g class="text-[#64748b] text-[9.5px] font-normal font-dm-sans" fill="currentColor">
-                    <text x="5" y="16">10 B</text>
-                    <line x1="38" y1="12" x2="535" y2="12" stroke="#e2e8f0" stroke-width="1" />
+                <div class="relative w-full h-full">
+                  <svg
+                    class="w-full h-full"
+                    viewBox="0 0 540 120"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                    (mouseleave)="clearHoveredMonth()"
+                  >
+                    <defs>
+                      <linearGradient id="revenueAreaGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#2563eb" stop-opacity="0.12" />
+                        <stop offset="65%" stop-color="#2563eb" stop-opacity="0.04" />
+                        <stop offset="100%" stop-color="#2563eb" stop-opacity="0" />
+                      </linearGradient>
+                    </defs>
 
-                    <text x="5" y="38">8 B</text>
-                    <line x1="38" y1="34" x2="535" y2="34" stroke="#e2e8f0" stroke-width="1" />
+                    <g fill="currentColor">
+                      @for (tick of yTicks(); track tick.lineY) {
+                        <line
+                          x1="38"
+                          [attr.y1]="tick.lineY"
+                          x2="535"
+                          [attr.y2]="tick.lineY"
+                          stroke="#e2e8f0"
+                          stroke-width="1"
+                          vector-effect="non-scaling-stroke"
+                        />
+                      }
+                    </g>
 
-                    <text x="5" y="60">6 B</text>
-                    <line x1="38" y1="56" x2="535" y2="56" stroke="#e2e8f0" stroke-width="1" />
-
-                    <text x="5" y="82">4 B</text>
-                    <line x1="38" y1="78" x2="535" y2="78" stroke="#e2e8f0" stroke-width="1" />
-
-                    <text x="5" y="104">2 B</text>
-                    <line x1="38" y1="100" x2="535" y2="100" stroke="#e2e8f0" stroke-width="1" />
-
-                    <text x="18" y="118">0</text>
-                    <line x1="38" y1="116" x2="535" y2="116" stroke="#e2e8f0" stroke-width="1" />
-                  </g>
-
-                  <polyline
-                    fill="none"
-                    stroke="#2563eb"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    [attr.points]="currentData().chartRevenuePoints"
-                  />
-                  @for (dot of currentData().chartRevenueDots; track dot.cx) {
-                    <circle
-                      [attr.cx]="dot.cx"
-                      [attr.cy]="dot.cy"
-                      r="2.2"
-                      fill="#2563eb"
-                      class="transition-all duration-300"
+                    <!-- Primary Revenue Area Gradient Fill -->
+                    <path
+                      [attr.d]="chartRevenueAreaPath()"
+                      fill="url(#revenueAreaGradient)"
+                      class="transition-all duration-300 ease-out"
                     />
+
+                    <!-- Smooth Secondary Sales Order Line -->
+                    <path
+                      fill="none"
+                      stroke="#60a5fa"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      vector-effect="non-scaling-stroke"
+                      class="transition-all duration-300 ease-out"
+                      [attr.d]="chartSalesOrderPath()"
+                    />
+
+                    <!-- Smooth Primary Revenue Line -->
+                    <path
+                      fill="none"
+                      stroke="#2563eb"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      vector-effect="non-scaling-stroke"
+                      class="transition-all duration-300 ease-out"
+                      [attr.d]="chartRevenuePath()"
+                    />
+
+                    @if (hoveredChartPoint(); as pt) {
+                      <line
+                        [attr.x1]="pt.x"
+                        y1="12"
+                        [attr.x2]="pt.x"
+                        y2="116"
+                        stroke="#94a3b8"
+                        stroke-width="1.2"
+                        stroke-dasharray="3,3"
+                        vector-effect="non-scaling-stroke"
+                      />
+                    }
+
+                    @for (pt of chartPointsData(); track pt.monthKey; let i = $index) {
+                      <rect
+                        [attr.x]="pt.rectX"
+                        y="0"
+                        [attr.width]="pt.rectWidth"
+                        height="120"
+                        fill="transparent"
+                        pointer-events="all"
+                        class="cursor-pointer"
+                        (mouseenter)="setHoveredMonth(i)"
+                      />
+                    }
+                  </svg>
+
+                  @for (tick of yTicks(); track tick.lineY) {
+                    <span
+                      class="absolute pointer-events-none -translate-y-1/2 whitespace-nowrap text-[8px] sm:text-[9.5px] leading-none text-[#64748b]"
+                      [style.top.%]="(tick.lineY / 120) * 100"
+                      [style.right]="'calc(100% - 7.04% + 3px)'"
+                    >
+                      <span class="sm:hidden">{{ tick.label.replace(' ', '') }}</span>
+                      <span class="hidden sm:inline">{{ tick.label }}</span>
+                    </span>
                   }
 
-                  <polyline
-                    fill="none"
-                    stroke="#60a5fa"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    [attr.points]="currentData().chartSalesOrderPoints"
-                  />
+                  @for (dot of chartRevenueDots(); track dot.cx) {
+                    <div
+                      class="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#2563eb] ring-2 ring-white shadow-2xs transition-all duration-300"
+                      [style.left.%]="(dot.cx / 540) * 100"
+                      [style.top.%]="(dot.cy / 120) * 100"
+                    ></div>
+                  }
 
                   @if (hoveredChartPoint(); as pt) {
-                    <line
-                      [attr.x1]="pt.x"
-                      y1="12"
-                      [attr.x2]="pt.x"
-                      y2="116"
-                      stroke="#94a3b8"
-                      stroke-width="1.2"
-                      stroke-dasharray="3,3"
-                    />
+                    <div
+                      class="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full border-[1.5px] border-[#2563eb] bg-[#2563eb]/20 flex items-center justify-center transition-all duration-150"
+                      [style.left.%]="(pt.x / 540) * 100"
+                      [style.top.%]="(pt.revY / 120) * 100"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#2563eb]"></span>
+                    </div>
 
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="pt.revY"
-                      r="6.5"
-                      fill="#2563eb"
-                      fill-opacity="0.2"
-                      stroke="#2563eb"
-                      stroke-width="1.5"
-                    />
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="pt.revY"
-                      r="2.8"
-                      fill="#2563eb"
-                    />
-
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="pt.orderY"
-                      r="6.5"
-                      fill="#60a5fa"
-                      fill-opacity="0.25"
-                      stroke="#60a5fa"
-                      stroke-width="1.5"
-                    />
-                    <circle
-                      [attr.cx]="pt.x"
-                      [attr.cy]="pt.orderY"
-                      r="2.6"
-                      fill="#60a5fa"
-                    />
+                    <div
+                      class="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full border-[1.5px] border-[#60a5fa] bg-[#60a5fa]/20 flex items-center justify-center transition-all duration-150"
+                      [style.left.%]="(pt.x / 540) * 100"
+                      [style.top.%]="(pt.orderY / 120) * 100"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#60a5fa]"></span>
+                    </div>
                   }
-
-                  @for (pt of currentData().chartPointsData; track pt.x; let i = $index) {
-                    <rect
-                      [attr.x]="38 + i * 44"
-                      y="0"
-                      width="44"
-                      height="120"
-                      fill="transparent"
-                      pointer-events="all"
-                      class="cursor-pointer"
-                      (mouseenter)="setHoveredMonth(i)"
-                    />
-                  }
-                </svg>
+                </div>
               </div>
 
-              <div class="flex justify-between pl-6 sm:pl-8 pr-2 sm:pr-3 text-[8.5px] sm:text-[10px] text-[#64748b] font-normal mt-1">
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.OCT' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.NOV' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.DEC' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.JAN' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.FEB' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.MAR' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.APR' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.MAY' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.JUN' | translate }}</span>
-                <span class="max-sm:hidden">{{ 'HERO.UI_MOCKUP.MONTHS.JUL' | translate }}</span>
-                <span>{{ 'HERO.UI_MOCKUP.MONTHS.AUG' | translate }}</span>
+              <div
+                class="relative w-full h-4 mt-1 text-[8px] sm:text-[10px] text-[#64748b] font-normal"
+              >
+                @for (
+                  pt of chartPointsData();
+                  track pt.monthKey;
+                  let i = $index;
+                  let last = $last
+                ) {
+                  <span
+                    class="absolute whitespace-nowrap select-none"
+                    [class.-translate-x-1/2]="!last"
+                    [class.-translate-x-full]="last"
+                    [class.max-[340px]:hidden]="(chartPointsData().length - 1 - i) % 2 !== 0"
+                    [style.left.%]="pt.xPercent"
+                  >
+                    {{ pt.shortMonthKey | translate }}
+                  </span>
+                }
               </div>
             </div>
           </div>
@@ -594,7 +703,9 @@
             [class.max-lg:hidden]="activeMobileTab() !== 'highlights'"
           >
             <div>
-              <span class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block">
+              <span
+                class="text-[9px] sm:text-[9.5px] font-bold tracking-wider text-[#94a3b8] uppercase block"
+              >
                 {{ 'HERO.UI_MOCKUP.HIGHLIGHTS.TAG' | translate }}
               </span>
               <h3 class="text-xs sm:text-sm font-bold text-[#182849] mt-0.5 mb-2.5">
@@ -603,14 +714,22 @@
 
               <div class="flex flex-col gap-2">
                 @for (item of highlights(); track item.labelKey) {
-                  <div class="bg-[#eff6ff] rounded-lg sm:rounded-xl px-2.5 py-2 sm:py-1.75 flex items-center justify-between gap-2 min-w-0">
+                  <div
+                    class="bg-[#eff6ff] rounded-lg sm:rounded-xl px-2.5 py-2 sm:py-1.75 flex items-center justify-between gap-2 min-w-0"
+                  >
                     <div class="flex items-center gap-2 min-w-0 flex-1">
-                      <span class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-xs sm:rounded-[2.5px] bg-[#3b82f6] shrink-0"></span>
-                      <span class="text-[10.5px] sm:text-[11.5px] font-bold text-[#182849] wrap-break-word sm:truncate leading-tight">
+                      <span
+                        class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-xs sm:rounded-[2.5px] bg-[#3b82f6] shrink-0"
+                      ></span>
+                      <span
+                        class="text-[10.5px] sm:text-[11.5px] font-bold text-[#182849] wrap-break-word sm:truncate leading-tight"
+                      >
                         {{ item.labelKey | translate }}
                       </span>
                     </div>
-                    <span class="text-[10px] sm:text-[11.5px] font-bold text-[#182849] shrink-0 whitespace-nowrap pl-1">
+                    <span
+                      class="text-[10px] sm:text-[11.5px] font-bold text-[#182849] shrink-0 whitespace-nowrap pl-1"
+                    >
                       @if (item.valueKey) {
                         {{ item.valueKey | translate: item.valueParams }}
                       } @else {
@@ -625,5 +744,115 @@
         </div>
       </main>
     </div>
+
+    <!-- Disappearing shade overlay (Figma gradient wash) -->
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-16 sm:h-20 lg:h-24 bg-linear-to-t from-white via-white/70 via-35% to-transparent z-20"
+      aria-hidden="true"
+    ></div>
   </div>
+
+  <!-- Floating Card 1: PROJECT CASH (Left) -->
+  <aside
+    class="hidden md:flex absolute -left-5 lg:-left-12 xl:-left-16 top-[37%] -translate-y-1/2 z-30 w-48 sm:w-52 lg:w-56 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4.5 sm:p-5 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col justify-between transition-all duration-300 hover:-translate-y-[calc(50%+4px)] select-none pointer-events-auto"
+    [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.ARIA_LABEL' | translate"
+  >
+    <div>
+      <span
+        class="text-[9px] sm:text-[10px] font-reguler tracking-wider text-[#64748b] uppercase block"
+      >
+        {{ 'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.TAG' | translate }}
+      </span>
+      <div
+        class="text-sm sm:text-base lg:text-[17px] font-semibold text-[#182849] mt-1 tracking-tight"
+      >
+        {{ currentData().liquidity.projected }}
+      </div>
+      <p class="text-[10px] sm:text-[11px] text-[#64748b] font-normal leading-snug mt-0.5">
+        {{ 'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.SUBTEXT' | translate }}
+      </p>
+    </div>
+
+    <div class="mt-3.5 w-full h-1.5 sm:h-2 bg-slate-100 rounded-full overflow-hidden">
+      <div class="h-full rounded-full bg-linear-to-r from-[#169697] to-[#17babc] w-full"></div>
+    </div>
+  </aside>
+
+  <!-- Floating Card 2: BUDGET UTILIZATION - OPEX 62% (Top Right) -->
+  <aside
+    class="hidden sm:flex absolute -right-5 sm:-right-6 lg:-right-10 xl:-right-12 top-10 sm:top-12 lg:top-14 z-30 w-36 sm:w-40 lg:w-42 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
+    [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_ARIA_LABEL' | translate"
+  >
+    <span
+      class="text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-[#64748b] uppercase block text-center"
+    >
+      {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.TAG' | translate }}
+    </span>
+
+    <div class="relative w-18 h-18 sm:w-20 sm:h-20 my-1.5 sm:my-2 flex items-center justify-center">
+      <svg class="w-full h-full" viewBox="0 0 80 80" fill="none">
+        <path
+          [attr.d]="donutTrackGray()"
+          stroke="#e2e8f0"
+          stroke-width="7.5"
+          stroke-linecap="round"
+        />
+        <path
+          [attr.d]="donutArcBlue()"
+          stroke="#2563eb"
+          stroke-width="7.5"
+          stroke-linecap="round"
+        />
+        <path
+          [attr.d]="donutArcTeal()"
+          stroke="#14b8a6"
+          stroke-width="7.5"
+          stroke-linecap="round"
+        />
+      </svg>
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <span class="text-base sm:text-lg font-bold text-[#182849]">
+          {{ currentData().floatingBudget.opexPercent }}%
+        </span>
+      </div>
+    </div>
+
+    <span class="text-[11px] sm:text-xs font-medium text-[#64748b]">
+      {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_USED' | translate }}
+    </span>
+  </aside>
+
+  <!-- Floating Card 3: BUDGET UTILIZATION - 94% Mo Ready (Bottom Right) -->
+  <aside
+    class="hidden md:flex absolute -right-8 sm:-right-10 lg:-right-15 xl:-right-18 bottom-16 sm:bottom-20 lg:bottom-24 z-30 w-38 sm:w-42 lg:w-44 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col justify-between transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
+    [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_ARIA_LABEL' | translate"
+  >
+    <div>
+      <span
+        class="text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-[#64748b] uppercase block"
+      >
+        {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.TAG' | translate }}
+      </span>
+      <div class="text-xl sm:text-2xl font-bold text-[#182849] mt-0.5 tracking-tight">
+        {{ currentData().floatingBudget.executionPercent }}%
+      </div>
+      <p class="text-[10px] sm:text-[11px] text-[#64748b] font-normal leading-snug mt-0.5 mb-2 sm:mb-2.5">
+        {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_READY' | translate }}
+      </p>
+    </div>
+
+    <div class="flex items-end gap-1.5 sm:gap-2 h-6 sm:h-7" aria-hidden="true">
+      @for (bar of currentData().floatingBudget.executionBars; track $index; let i = $index) {
+        <div
+          class="flex-1 rounded-t-sm sm:rounded-t-md transition-all duration-300 ease-out"
+          [class.bg-linear-to-r]="true"
+          [class.from-[#2563eb]]="i % 2 === 0"
+          [class.to-[#3b82f6]]="i % 2 === 0"
+          [class.from-[#0d9488]]="i % 2 !== 0"
+          [class.to-[#14b8a6]]="i % 2 !== 0"
+          [style.height.%]="bar"
+        ></div>
+      }
+    </div>
+  </aside>
 </div>

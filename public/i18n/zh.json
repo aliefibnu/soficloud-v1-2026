@@ -144,7 +144,6 @@
       "DASHBOARD": {
         "BREADCRUMB": "SOFICloud / 管理视图",
         "TITLE": "高管仪表板",
-        "SIMPLE_DATA": "简略数据",
         "DESCRIPTION": "实时掌握应收账款、销售、现金、费用与运营绩效"
       },
       "METRICS": {
@@ -221,6 +220,20 @@
         "OCTOBER": "10月",
         "NOVEMBER": "11月",
         "DECEMBER": "12月"
+      },
+      "FLOATING": {
+        "PROJECT_CASH": {
+          "TAG": "PROJECT CASH",
+          "SUBTEXT": "预计月末余额",
+          "ARIA_LABEL": "预计现金预览"
+        },
+        "BUDGET_UTILIZATION": {
+          "TAG": "BUDGET UTILIZATION",
+          "OPEX_USED": "运营支出已用",
+          "MO_READY": "准备执行",
+          "OPEX_ARIA_LABEL": "预算使用率",
+          "MO_ARIA_LABEL": "生产就绪率"
+        }
       }
     }
   },
@@ -436,4 +449,3 @@
     }
   }
 }
-
