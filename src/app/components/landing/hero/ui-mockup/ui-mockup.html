@@ -556,6 +556,14 @@
                     aria-hidden="true"
                     (mouseleave)="clearHoveredMonth()"
                   >
+                    <defs>
+                      <linearGradient id="revenueAreaGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#2563eb" stop-opacity="0.12" />
+                        <stop offset="65%" stop-color="#2563eb" stop-opacity="0.04" />
+                        <stop offset="100%" stop-color="#2563eb" stop-opacity="0" />
+                      </linearGradient>
+                    </defs>
+
                     <g fill="currentColor">
                       @for (tick of yTicks(); track tick.lineY) {
                         <line
@@ -570,24 +578,35 @@
                       }
                     </g>
 
-                    <polyline
-                      fill="none"
-                      stroke="#2563eb"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      vector-effect="non-scaling-stroke"
-                      [attr.points]="chartRevenuePoints()"
+                    <!-- Primary Revenue Area Gradient Fill -->
+                    <path
+                      [attr.d]="chartRevenueAreaPath()"
+                      fill="url(#revenueAreaGradient)"
+                      class="transition-all duration-300 ease-out"
                     />
 
-                    <polyline
+                    <!-- Smooth Secondary Sales Order Line -->
+                    <path
                       fill="none"
                       stroke="#60a5fa"
-                      stroke-width="1.5"
+                      stroke-width="1.6"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       vector-effect="non-scaling-stroke"
-                      [attr.points]="chartSalesOrderPoints()"
+                      class="transition-all duration-300 ease-out"
+                      [attr.d]="chartSalesOrderPath()"
+                    />
+
+                    <!-- Smooth Primary Revenue Line -->
+                    <path
+                      fill="none"
+                      stroke="#2563eb"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      vector-effect="non-scaling-stroke"
+                      class="transition-all duration-300 ease-out"
+                      [attr.d]="chartRevenuePath()"
                     />
 
                     @if (hoveredChartPoint(); as pt) {
@@ -630,7 +649,7 @@
 
                   @for (dot of chartRevenueDots(); track dot.cx) {
                     <div
-                      class="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#2563eb] transition-all duration-300"
+                      class="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#2563eb] ring-2 ring-white shadow-2xs transition-all duration-300"
                       [style.left.%]="(dot.cx / 540) * 100"
                       [style.top.%]="(dot.cy / 120) * 100"
                     ></div>
@@ -666,7 +685,9 @@
                   let last = $last
                 ) {
                   <span
-                    class="absolute -translate-x-1/2 whitespace-nowrap select-none"
+                    class="absolute whitespace-nowrap select-none"
+                    [class.-translate-x-1/2]="!last"
+                    [class.-translate-x-full]="last"
                     [class.max-[340px]:hidden]="(chartPointsData().length - 1 - i) % 2 !== 0"
                     [style.left.%]="pt.xPercent"
                   >

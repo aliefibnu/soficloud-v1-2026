@@ -395,8 +395,8 @@ describe('UiMockup', () => {
     expect(points[0].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.OCTOBER');
     expect(points[0].x).toBe(50); // Left edge
     expect(points[points.length - 1].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.JULY');
-    expect(points[points.length - 1].x).toBe(512); // Right edge (spread across full chart)
-    expect(points[points.length - 1].xPercent).toBeCloseTo(94.81, 1);
+    expect(points[points.length - 1].x).toBe(535); // Right edge (spread across full chart)
+    expect(points[points.length - 1].xPercent).toBeCloseTo(99.07, 1);
 
     // Verify hover rects are seamlessly continuous without gaps
     for (let i = 0; i < points.length - 1; i++) {
@@ -436,7 +436,7 @@ describe('UiMockup', () => {
     expect(points[0].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.OCTOBER');
     expect(points[0].x).toBe(50); // Left edge
     expect(points[points.length - 1].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.AUGUST');
-    expect(points[points.length - 1].x).toBe(512); // Right edge (spread across full chart)
+    expect(points[points.length - 1].x).toBe(535); // Right edge (spread across full chart)
 
     const hasSeptember = points.some((p) => p.monthKey.includes('SEPTEMBER'));
     expect(hasSeptember).toBe(false);
@@ -445,7 +445,7 @@ describe('UiMockup', () => {
     component.prevMonth();
     expect(component.selectedMonthIndex()).toBe(0);
     expect(component.chartPointsData().length).toBe(10);
-    expect(component.chartPointsData()[9].x).toBe(512);
+    expect(component.chartPointsData()[9].x).toBe(535);
 
     component.nextMonth();
     expect(component.selectedMonthIndex()).toBe(1);
@@ -471,7 +471,7 @@ describe('UiMockup', () => {
     expect(points[0].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.OCTOBER');
     expect(points[0].x).toBe(50); // Left edge
     expect(points[points.length - 1].monthKey).toBe('HERO.UI_MOCKUP.MONTHS_FULL.SEPTEMBER');
-    expect(points[points.length - 1].x).toBe(512); // Right edge
+    expect(points[points.length - 1].x).toBe(535); // Right edge
 
     // Y-axis adjusts to 10B because September revenue is 8.2B
     expect(component.yMax()).toBe(10);

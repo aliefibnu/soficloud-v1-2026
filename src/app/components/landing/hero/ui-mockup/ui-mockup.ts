@@ -7,7 +7,7 @@ export const CURRENT_DATE = new InjectionToken<Date | (() => Date)>('CURRENT_DAT
 });
 
 export const CHART_X_START = 50;
-export const CHART_X_END = 512;
+export const CHART_X_END = 535;
 
 export interface NavMenuItem {
   readonly id: string;
@@ -453,6 +453,48 @@ export class UiMockup {
       };
     });
   });
+
+  private buildSmoothPath(pts: readonly { x: number; y: number }[], tension = 0.16): string {
+    const n = pts.length;
+    if (n === 0) return '';
+    if (n === 1) return `M ${pts[0].x},${pts[0].y}`;
+    if (n === 2) return `M ${pts[0].x},${pts[0].y} L ${pts[1].x},${pts[1].y}`;
+
+    let path = `M ${pts[0].x},${pts[0].y}`;
+
+    for (let i = 0; i < n - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[Math.min(n - 1, i + 2)];
+
+      const cp1x = Number((p1.x + (p2.x - p0.x) * tension).toFixed(1));
+      const cp1y = Number((p1.y + (p2.y - p0.y) * tension).toFixed(1));
+      const cp2x = Number((p2.x - (p3.x - p1.x) * tension).toFixed(1));
+      const cp2y = Number((p2.y - (p3.y - p1.y) * tension).toFixed(1));
+
+      path += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`;
+    }
+
+    return path;
+  }
+
+  readonly chartRevenuePath = computed(() =>
+    this.buildSmoothPath(this.chartPointsData().map((p) => ({ x: p.x, y: p.revY }))),
+  );
+
+  readonly chartRevenueAreaPath = computed(() => {
+    const pts = this.chartPointsData();
+    if (pts.length === 0) return '';
+    const linePath = this.chartRevenuePath();
+    const lastX = pts[pts.length - 1].x;
+    const firstX = pts[0].x;
+    return `${linePath} L ${lastX},116 L ${firstX},116 Z`;
+  });
+
+  readonly chartSalesOrderPath = computed(() =>
+    this.buildSmoothPath(this.chartPointsData().map((p) => ({ x: p.x, y: p.orderY }))),
+  );
 
   readonly chartRevenuePoints = computed(() =>
     this.chartPointsData()
