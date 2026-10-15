@@ -7,7 +7,7 @@
   ></div>
 
   <div
-    class="relative w-full rounded-2xl sm:rounded-3xl bg-[#f0f4f9] border border-slate-200/90 shadow-[0_25px_70px_-15px_rgba(15,23,42,0.18)] overflow-hidden"
+    class="mockup-bottom-fade relative w-full rounded-2xl sm:rounded-3xl bg-[#f0f4f9] border border-slate-200/90 shadow-[0_25px_70px_-15px_rgba(15,23,42,0.18)] overflow-hidden"
   >
     <header
       class="w-full bg-white border-b border-slate-200/80 px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 relative z-30"
@@ -744,6 +744,12 @@
         </div>
       </main>
     </div>
+
+    <!-- Disappearing shade overlay (Figma gradient wash) -->
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-16 sm:h-20 lg:h-24 bg-linear-to-t from-white via-white/70 via-35% to-transparent z-20"
+      aria-hidden="true"
+    ></div>
   </div>
 
   <!-- Floating Card 1: PROJECT CASH (Left) -->
@@ -818,7 +824,7 @@
 
   <!-- Floating Card 3: BUDGET UTILIZATION - 94% Mo Ready (Bottom Right) -->
   <aside
-    class="hidden md:flex absolute -right-8 sm:-right-10 lg:-right-15 xl:-right-18 bottom-8 sm:bottom-10 lg:bottom-12 z-30 w-38 sm:w-42 lg:w-44 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col justify-between transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
+    class="hidden md:flex absolute -right-8 sm:-right-10 lg:-right-15 xl:-right-18 bottom-16 sm:bottom-20 lg:bottom-24 z-30 w-38 sm:w-42 lg:w-44 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col justify-between transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
     [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_ARIA_LABEL' | translate"
   >
     <div>
