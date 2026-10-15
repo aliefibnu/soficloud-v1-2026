@@ -753,63 +753,63 @@
 
   <!-- Floating Card 2: BUDGET UTILIZATION - OPEX 62% (Top Right) -->
   <aside
-    class="hidden sm:flex absolute -right-7 sm:-right-8 lg:-right-13 xl:-right-18 top-10 sm:top-12 lg:top-14 z-30 w-42 sm:w-46 lg:w-48 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
+    class="hidden sm:flex absolute -right-5 sm:-right-6 lg:-right-10 xl:-right-12 top-10 sm:top-12 lg:top-14 z-30 w-36 sm:w-40 lg:w-42 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
     [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_ARIA_LABEL' | translate"
   >
     <span
-      class="text-[10px] sm:text-[11px] font-semibold tracking-wider text-[#64748b] uppercase block text-center"
+      class="text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-[#64748b] uppercase block text-center"
     >
       {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.TAG' | translate }}
     </span>
 
-    <div class="relative w-22 h-22 sm:w-24 sm:h-24 my-2 flex items-center justify-center">
+    <div class="relative w-18 h-18 sm:w-20 sm:h-20 my-1.5 sm:my-2 flex items-center justify-center">
       <svg class="w-full h-full" viewBox="0 0 80 80" fill="none">
         <path
           [attr.d]="donutTrackGray()"
           stroke="#e2e8f0"
-          stroke-width="8"
+          stroke-width="7.5"
           stroke-linecap="round"
         />
         <path
           [attr.d]="donutArcBlue()"
           stroke="#2563eb"
-          stroke-width="8"
+          stroke-width="7.5"
           stroke-linecap="round"
         />
         <path
           [attr.d]="donutArcTeal()"
           stroke="#14b8a6"
-          stroke-width="8"
+          stroke-width="7.5"
           stroke-linecap="round"
         />
       </svg>
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span class="text-lg sm:text-xl font-extrabold text-[#182849]">
+        <span class="text-base sm:text-lg font-bold text-[#182849]">
           {{ currentData().floatingBudget.opexPercent }}%
         </span>
       </div>
     </div>
 
-    <span class="text-xs sm:text-[13px] font-medium text-[#64748b]">
+    <span class="text-[11px] sm:text-xs font-medium text-[#64748b]">
       {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_USED' | translate }}
     </span>
   </aside>
 
   <!-- Floating Card 3: BUDGET UTILIZATION - 94% Mo Ready (Bottom Right) -->
   <aside
-    class="hidden md:flex absolute -right-7 sm:-right-8 lg:-right-13 xl:-right-18 bottom-8 sm:bottom-10 lg:bottom-12 z-30 w-44 sm:w-48 lg:w-52 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col justify-between transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
+    class="hidden md:flex absolute -right-8 sm:-right-10 lg:-right-15 xl:-right-18 bottom-8 sm:bottom-10 lg:bottom-12 z-30 w-38 sm:w-42 lg:w-44 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col justify-between transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
     [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_ARIA_LABEL' | translate"
   >
     <div>
       <span
-        class="text-[9px] sm:text-[10px] font-reguler tracking-wider text-[#64748b] uppercase block"
+        class="text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-[#64748b] uppercase block"
       >
         {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.TAG' | translate }}
       </span>
-      <div class="text-2xl sm:text-3xl font-semibold text-[#182849] mt-0.5 tracking-tight">
+      <div class="text-xl sm:text-2xl font-bold text-[#182849] mt-0.5 tracking-tight">
         {{ currentData().floatingBudget.executionPercent }}%
       </div>
-      <p class="text-[10.5px] sm:text-[11.5px] text-[#64748b] font-normal leading-snug mt-0.5 mb-3">
+      <p class="text-[10px] sm:text-[11px] text-[#64748b] font-normal leading-snug mt-0.5 mb-2 sm:mb-2.5">
         {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_READY' | translate }}
       </p>
     </div>
