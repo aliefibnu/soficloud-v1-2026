@@ -5,7 +5,12 @@ import {
   inject,
   DestroyRef,
   OnInit,
+  viewChild,
+  ElementRef,
+  PLATFORM_ID,
+  NgZone,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
 export interface CustomerCompany {
@@ -362,6 +367,14 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
 })
 export class Customers implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly ngZone = inject(NgZone);
+
+  readonly topMarqueeContainer = viewChild<ElementRef<HTMLElement>>('topContainer');
+  readonly topMarqueeTrack = viewChild<ElementRef<HTMLElement>>('topTrack');
+
+  private positionRafId: number | null = null;
+  private lastCheckTime = 0;
 
   readonly topCustomers = TOP_CUSTOMERS;
   readonly bottomRow1 = BOTTOM_ROW_1;
@@ -429,10 +442,12 @@ export class Customers implements OnInit {
 
   ngOnInit(): void {
     this.startRotationTimer();
+    this.startCenterTracker();
     this.triggerLineAnimation();
 
     this.destroyRef.onDestroy(() => {
       this.stopRotationTimer();
+      this.stopCenterTracker();
       if (this.logoTransitionTimeout) {
         clearTimeout(this.logoTransitionTimeout);
       }
@@ -465,7 +480,85 @@ export class Customers implements OnInit {
     this.isPaused.set(false);
   }
 
+  private startCenterTracker(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    this.ngZone.runOutsideAngular(() => {
+      const check = (timestamp: number) => {
+        if (timestamp - this.lastCheckTime >= 40) {
+          this.lastCheckTime = timestamp;
+          this.checkCenterCard();
+        }
+        this.positionRafId = requestAnimationFrame(check);
+      };
+
+      this.positionRafId = requestAnimationFrame(check);
+    });
+  }
+
+  private stopCenterTracker(): void {
+    if (this.positionRafId !== null) {
+      cancelAnimationFrame(this.positionRafId);
+      this.positionRafId = null;
+    }
+  }
+
+  private checkCenterCard(): void {
+    if (this.isPaused()) {
+      return;
+    }
+
+    const containerEl = this.topMarqueeContainer()?.nativeElement;
+    const trackEl = this.topMarqueeTrack()?.nativeElement;
+    if (!containerEl || !trackEl) {
+      return;
+    }
+
+    const containerRect = containerEl.getBoundingClientRect();
+    if (containerRect.width === 0) {
+      return;
+    }
+
+    const centerX = containerRect.left + containerRect.width / 2;
+    const cards = trackEl.querySelectorAll<HTMLElement>('.top-customer-card');
+    if (!cards.length) {
+      return;
+    }
+
+    let closestIndex = -1;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < cards.length; i++) {
+      const card = cards[i];
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const dist = Math.abs(cardCenter - centerX);
+
+      if (dist < minDistance) {
+        minDistance = dist;
+        const idx = card.getAttribute('data-index');
+        if (idx !== null) {
+          closestIndex = Number(idx);
+        }
+      }
+    }
+
+    if (closestIndex !== -1 && closestIndex !== this.activeCustomerIndex()) {
+      this.ngZone.run(() => {
+        this.activeCustomerIndex.set(closestIndex);
+        this.currentVirtual.set(20 + closestIndex);
+        this.triggerLogoTransition();
+      });
+    }
+  }
+
   private advanceToNext(): void {
+    const containerEl = this.topMarqueeContainer()?.nativeElement;
+    if (containerEl && containerEl.getBoundingClientRect().width > 0) {
+      return;
+    }
     const N = this.topCustomers.length;
     this.activeCustomerIndex.update((i) => (i + 1) % N);
     this.currentVirtual.set(20 + this.activeCustomerIndex());
