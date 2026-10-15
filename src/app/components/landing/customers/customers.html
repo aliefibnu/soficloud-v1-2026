@@ -82,40 +82,82 @@
 
       <!-- Right Column: Top Spotlight Row, Animated Circuit Stage, Center Showcase Card, Bottom Dual Marquee (7 cols on lg) -->
       <div class="lg:col-span-7 relative flex flex-col items-center overflow-hidden">
-        <!-- 1. Top Row: Sliding Infinite Track of Logos with Dynamic Active Spotlight -->
+        <!-- 1. Top Row: Infinite Marquee of Logos with Dynamic Active PT Glow Border (Matches Cuplikan layar 2026-10-14 214301.png) -->
         <div
-          class="relative z-20 w-full h-[64px] flex items-center justify-center overflow-hidden mb-2"
+          class="relative z-20 w-full overflow-hidden py-1 mb-2 marquee-mask"
           (mouseenter)="pauseRotation()"
           (mouseleave)="resumeRotation()"
         >
-          <!-- Dynamic Circular Window of Logos (Zero delay, always centered) -->
-          <div class="flex items-center justify-center gap-4 z-10">
-            @for (card of visibleCards(); track card.offset) {
+          <div
+            class="marquee-track-top hover:[animation-play-state:paused] flex items-center gap-3"
+          >
+            @for (customer of topCustomers; track 'top-a-' + customer.id) {
               <button
                 type="button"
-                (click)="selectCustomer(card.customerIndex)"
-                class="relative flex-shrink-0 w-28 h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border p-2 flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none"
-                [class.border-2]="card.isActive"
-                [class.border-[#1C73E8]]="card.isActive"
-                [class.shadow-[0_0_22px_rgba(28,115,232,0.4)]]="card.isActive"
-                [class.opacity-100]="card.isActive"
-                [class.scale-100]="card.isActive"
-                [class.z-20]="card.isActive"
-                [class.border-slate-200/90]="!card.isActive"
-                [class.shadow-sm]="!card.isActive"
-                [class.opacity-60]="!card.isActive"
-                [class.scale-95]="!card.isActive"
-                [class.z-10]="!card.isActive"
+                (click)="selectCustomer(customer.id - 1)"
+                class="relative flex-shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer focus:outline-none select-none"
+                [class.border-[#1C73E8]]="customer.id === activeCustomer().id"
+                [class.bg-[#EFF6FF]]="customer.id === activeCustomer().id"
+                [class.shadow-[0_0_22px_rgba(28,115,232,0.45)]]="customer.id === activeCustomer().id"
+                [class.scale-105]="customer.id === activeCustomer().id"
+                [class.opacity-100]="customer.id === activeCustomer().id"
+                [class.z-20]="customer.id === activeCustomer().id"
+                [class.border-slate-200/80]="customer.id !== activeCustomer().id"
+                [class.bg-white]="customer.id !== activeCustomer().id"
+                [class.shadow-sm]="customer.id !== activeCustomer().id"
+                [class.scale-95]="customer.id !== activeCustomer().id"
+                [class.opacity-75]="customer.id !== activeCustomer().id"
+                [class.z-10]="customer.id !== activeCustomer().id"
+                [class.hover:opacity-100]="customer.id !== activeCustomer().id"
+                [class.hover:border-blue-300]="customer.id !== activeCustomer().id"
+                [class.hover:bg-[#EFF6FF]]="customer.id !== activeCustomer().id"
                 [attr.aria-label]="
                   'CUSTOMERS.ARIA.SELECT_CUSTOMER'
-                    | translate: { name: card.customer.name }
+                    | translate: { name: customer.name }
                 "
-                [attr.aria-pressed]="card.isActive"
+                [attr.aria-pressed]="customer.id === activeCustomer().id"
               >
                 <img
-                  [src]="card.customer.logo"
-                  [alt]="card.customer.name"
-                  class="max-h-8 max-w-[85%] object-contain select-none"
+                  [src]="customer.logo"
+                  [alt]="customer.name"
+                  class="max-h-7 sm:max-h-8 max-w-[82%] object-contain pointer-events-none transition-transform duration-500 ease-out"
+                  [class.scale-105]="customer.id === activeCustomer().id"
+                  loading="lazy"
+                />
+              </button>
+            }
+            <!-- Duplicate for seamless infinite marquee loop -->
+            @for (customer of topCustomers; track 'top-b-' + customer.id) {
+              <button
+                type="button"
+                (click)="selectCustomer(customer.id - 1)"
+                class="relative flex-shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer focus:outline-none select-none"
+                [class.border-[#1C73E8]]="customer.id === activeCustomer().id"
+                [class.bg-[#EFF6FF]]="customer.id === activeCustomer().id"
+                [class.shadow-[0_0_22px_rgba(28,115,232,0.45)]]="customer.id === activeCustomer().id"
+                [class.scale-105]="customer.id === activeCustomer().id"
+                [class.opacity-100]="customer.id === activeCustomer().id"
+                [class.z-20]="customer.id === activeCustomer().id"
+                [class.border-slate-200/80]="customer.id !== activeCustomer().id"
+                [class.bg-white]="customer.id !== activeCustomer().id"
+                [class.shadow-sm]="customer.id !== activeCustomer().id"
+                [class.scale-95]="customer.id !== activeCustomer().id"
+                [class.opacity-75]="customer.id !== activeCustomer().id"
+                [class.z-10]="customer.id !== activeCustomer().id"
+                [class.hover:opacity-100]="customer.id !== activeCustomer().id"
+                [class.hover:border-blue-300]="customer.id !== activeCustomer().id"
+                [class.hover:bg-[#EFF6FF]]="customer.id !== activeCustomer().id"
+                [attr.aria-label]="
+                  'CUSTOMERS.ARIA.SELECT_CUSTOMER'
+                    | translate: { name: customer.name }
+                "
+                [attr.aria-pressed]="customer.id === activeCustomer().id"
+              >
+                <img
+                  [src]="customer.logo"
+                  [alt]="customer.name"
+                  class="max-h-7 sm:max-h-8 max-w-[82%] object-contain pointer-events-none transition-transform duration-500 ease-out"
+                  [class.scale-105]="customer.id === activeCustomer().id"
                   loading="lazy"
                 />
               </button>
@@ -193,75 +235,71 @@
               stroke-width="1.5"
             />
 
-            <!-- D. Blue Pulses (Run ONCE per PT cycle, linear speed, vanish completely) -->
-            @if (isLineAnimating()) {
-              <!-- Pulse 1: Upper Right (from card up vertical to top baseline) -->
-              <path
-                d="M 515 100 L 530 100 Q 545 100 545 85 L 545 20"
-                fill="none"
-                stroke="#1C73E8"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                class="pulse-upper-right"
-                filter="url(#circuit-glow)"
-              />
+            <!-- D. Blue Pulses (Independent flowing animations, decoupled from PT timer) -->
+            <!-- Pulse Top: Flows right to left along top baseline (y = 20) -->
+            <line
+              x1="730"
+              y1="20"
+              x2="20"
+              y2="20"
+              stroke="#1C73E8"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              class="pulse-top-horizontal"
+              filter="url(#circuit-glow)"
+            />
 
-              <!-- Pulse 2: Lower Right (flows through horizontal 1, vertical 1, horizontal 2, to vertical 2) -->
-              <path
-                d="M 515 175 L 545 175 Q 560 175 560 190 L 560 235 Q 560 250 575 250 L 615 250 Q 630 250 630 265 L 630 350"
-                fill="none"
-                stroke="#1C73E8"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                class="pulse-lower-right"
-                filter="url(#circuit-glow)"
-              />
+            <!-- Pulse 1: Upper Right (from card up vertical to top baseline) -->
+            <path
+              d="M 515 100 L 530 100 Q 545 100 545 85 L 545 20"
+              fill="none"
+              stroke="#1C73E8"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              class="pulse-upper-right"
+              filter="url(#circuit-glow)"
+            />
 
-              <!-- Pulse 3: Left (flows through horizontal 1, vertical 1, horizontal 2, to vertical 2) -->
-              <path
-                d="M 235 175 L 205 175 Q 190 175 190 190 L 190 235 Q 190 250 175 250 L 105 250 Q 90 250 90 265 L 90 350"
-                fill="none"
-                stroke="#1C73E8"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                class="pulse-left"
-                filter="url(#circuit-glow)"
-              />
+            <!-- Pulse 2: Lower Right (flows through horizontal 1, vertical 1, horizontal 2, to vertical 2) -->
+            <path
+              d="M 515 175 L 545 175 Q 560 175 560 190 L 560 235 Q 560 250 575 250 L 615 250 Q 630 250 630 265 L 630 350"
+              fill="none"
+              stroke="#1C73E8"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              class="pulse-lower-right"
+              filter="url(#circuit-glow)"
+            />
 
-              <!-- Pulse 4: Bottom Horizontal (flows from left to right along bottom line) -->
-              <line
-                x1="20"
-                y1="350"
-                x2="730"
-                y2="350"
-                stroke="#1C73E8"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                class="pulse-bottom-horizontal"
-                filter="url(#circuit-glow)"
-              />
-            }
+            <!-- Pulse 3: Left (flows through horizontal 1, vertical 1, horizontal 2, to vertical 2) -->
+            <path
+              d="M 235 175 L 205 175 Q 190 175 190 190 L 190 235 Q 190 250 175 250 L 105 250 Q 90 250 90 265 L 90 350"
+              fill="none"
+              stroke="#1C73E8"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              class="pulse-left"
+              filter="url(#circuit-glow)"
+            />
 
-            <!-- E. Top Indicator Segment (Shows active PT position, rendered on top of pulse so indicator overlaps pulse) -->
-            <g
-              [style.transform]="indicatorTransform()"
-              class="transition-transform duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
-            >
-              <line
-                x1="0"
-                y1="20"
-                x2="50"
-                y2="20"
-                stroke="#1C73E8"
-                stroke-width="3"
-                stroke-linecap="round"
-              />
-            </g>
+            <!-- Pulse 4: Bottom Horizontal (flows along bottom baseline) -->
+            <line
+              x1="20"
+              y1="350"
+              x2="730"
+              y2="350"
+              stroke="#1C73E8"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              class="pulse-bottom-horizontal"
+              filter="url(#circuit-glow)"
+            />
           </svg>
 
           <!-- Center Showcase Card (Sitting in center of this stage, above the SVG lines) -->
           <article
             class="group/showcase relative z-10 w-[290px] sm:w-[305px] min-h-[250px] sm:min-h-[256px] rounded-[26px] bg-white hover:bg-[#F0F5FE] border border-slate-100 hover:border-blue-200 shadow-[0_16px_36px_rgba(35,36,78,0.08)] hover:shadow-[0_20px_42px_rgba(35,36,78,0.12)] py-5 px-6 sm:py-5.5 sm:px-7 flex flex-col items-center justify-between transition-all duration-300"
+            [class.card-switch-pulse]="isLogoTransitioning()"
             (mouseenter)="pauseRotation()"
             (mouseleave)="resumeRotation()"
             [attr.aria-label]="
@@ -282,7 +320,7 @@
                 />
               </div>
               <p
-                [class.logo-switch-active]="isLogoTransitioning()"
+                [class.name-switch-active]="isLogoTransitioning()"
                 class="mt-3 text-xs sm:text-sm text-slate-400 group-hover/showcase:text-slate-600 font-dm-sans font-normal text-center truncate max-w-full px-2 transition-colors duration-300"
               >
                 {{ activeCustomer().name }}

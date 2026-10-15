@@ -21,7 +21,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 xl:gap-8">
       @for (card of cards; track card.id) {
         <article
-          class="group relative bg-white rounded-2xl border border-slate-100/90 shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:shadow-blue-950/8 hover:-translate-y-1.5 flex flex-col overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-[0px_3px_15px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out hover:shadow-[0px_10px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 flex flex-col overflow-hidden"
           (mouseenter)="setHoveredCard(card.id)"
           (mouseleave)="setHoveredCard(null)"
         >
@@ -30,38 +30,37 @@
             [style.background]="card.topBg"
             aria-hidden="true"
           >
+            <!-- Dome / Tone-on-tone Blob Background -->
             <svg
-              class="absolute -bottom-0.5 inset-x-0 w-full h-[28%] pointer-events-none"
-              viewBox="0 0 396 70"
+              class="absolute inset-0 w-full h-full pointer-events-none z-0"
+              viewBox="0 0 391 214"
               preserveAspectRatio="none"
               aria-hidden="true"
             >
-              <path d="M 0 70 Q 198 0 396 70 L 396 70 L 0 70 Z" [attr.fill]="card.domeBg" />
+              <ellipse cx="195.5" cy="214" rx="195.5" ry="42.5" [attr.fill]="card.domeBg" />
             </svg>
 
-            <div class="absolute inset-0 translate-y-[10px] pointer-events-none">
-              @for (layer of card.layers; track layer.name) {
-                <div
-                  class="absolute pointer-events-none will-change-transform transition-all duration-500 ease-out {{ layer.hoverClass }}"
-                  [style.left.%]="layer.leftPct"
-                  [style.top.%]="layer.topPct !== undefined ? layer.topPct : null"
-                  [style.bottom]="layer.bottomPct !== undefined ? (layer.bottomPct === 0 ? '-1px' : layer.bottomPct + '%') : null"
-                  [style.width.%]="layer.widthPct"
-                  [style.height.%]="layer.heightPct"
-                  [style.zIndex]="layer.z"
-                >
-                  <img
-                    [ngSrc]="layer.src"
-                    [width]="layer.w"
-                    [height]="layer.h"
-                    alt=""
-                    class="w-full h-full object-contain pointer-events-none"
-                    [class.object-bottom]="layer.bottomPct !== undefined"
-                    [priority]="card.id <= 3"
-                  />
-                </div>
-              }
-            </div>
+            @for (layer of card.layers; track layer.name) {
+              <div
+                class="absolute pointer-events-none will-change-transform transition-all duration-300 ease-out {{ layer.hoverClass }}"
+                [style.left.%]="layer.leftPct !== undefined ? layer.leftPct : null"
+                [style.top.%]="layer.topPct !== undefined ? layer.topPct : null"
+                [style.bottom]="layer.bottomPct !== undefined ? (layer.bottomPct === 0 ? '-1px' : layer.bottomPct + '%') : null"
+                [style.width.%]="layer.widthPct !== undefined ? layer.widthPct : null"
+                [style.height.%]="layer.heightPct !== undefined ? layer.heightPct : null"
+                [style.zIndex]="layer.z"
+              >
+                <img
+                  [ngSrc]="layer.src"
+                  [width]="layer.w"
+                  [height]="layer.h"
+                  alt=""
+                  class="w-full h-full object-contain pointer-events-none"
+                  [class.object-bottom]="layer.bottomPct !== undefined"
+                  [priority]="card.id <= 3"
+                />
+              </div>
+            }
           </div>
 
           <div class="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">

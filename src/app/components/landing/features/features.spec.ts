@@ -22,7 +22,8 @@ describe('Features', () => {
     translateService.setTranslation('id', {
       FEATURES: {
         HEADING: '9 Fitur Utama SOFICloud',
-        SUBTITLE: 'Kapabilitas yang saling terhubung untuk menjalankan proses operasional dan menghasilkan informasi management yang konsisten.',
+        SUBTITLE:
+          'Kapabilitas yang saling terhubung untuk menjalankan proses operasional dan menghasilkan informasi management yang konsisten.',
         CTA_LEARN_MORE: 'Pelajari Selengkapnya',
         CARDS: {
           FINANCIAL: {
@@ -83,7 +84,7 @@ describe('Features', () => {
 
   it('should ensure all bottom-anchored layers use origin-bottom and no upward translateY', () => {
     for (const card of component.cards) {
-      const bottomLayers = card.layers.filter((l) => l.bottomPct === 0);
+      const bottomLayers = card.layers.filter((l) => l.bottomPct !== undefined);
       expect(bottomLayers.length).toBeGreaterThan(0);
       for (const layer of bottomLayers) {
         expect(layer.hoverClass).toContain('origin-bottom');
