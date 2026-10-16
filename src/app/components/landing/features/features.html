@@ -21,7 +21,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 xl:gap-8">
       @for (card of cards; track card.id) {
         <article
-          class="group relative bg-white rounded-2xl shadow-[0px_3px_15px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out hover:shadow-[0px_10px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 flex flex-col overflow-hidden"
+          class="group relative bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.06)] border border-slate-100/80 transition-all duration-300 ease-out hover:shadow-[0px_12px_32px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 flex flex-col overflow-hidden"
           (mouseenter)="setHoveredCard(card.id)"
           (mouseleave)="setHoveredCard(null)"
         >
@@ -64,23 +64,16 @@
           </div>
 
           <div class="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
-            <div>
-              <h3
-                class="font-dm-sans font-bold text-xl sm:text-[22px] text-[#182849] leading-snug tracking-[-0.01em] min-h-14 sm:min-h-16"
-              >
-                {{ card.titleKey | translate }}
-              </h3>
-              <p
-                class="mt-3.5 font-dm-sans font-normal text-sm sm:text-[15px] text-slate-600 leading-relaxed min-h-18 sm:min-h-20"
-              >
-                {{ card.descKey | translate }}
-              </p>
-            </div>
+            <h3
+              class="font-dm-sans font-bold text-xl sm:text-[22px] text-[#182849] leading-snug tracking-[-0.01em] min-h-14 sm:min-h-16 flex items-start"
+            >
+              {{ card.titleKey | translate }}
+            </h3>
 
-            <div class="mt-7 pt-1">
+            <div class="mt-6 sm:mt-7">
               <a
                 href="#contact"
-                class="w-fit inline-flex items-center justify-center px-6 py-2.5 rounded-xl font-dm-sans font-semibold text-sm sm:text-[15px] text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                class="w-full inline-flex items-center justify-center px-6 py-3 rounded-xl font-dm-sans font-semibold text-sm sm:text-[15px] text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.99] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
               >
                 {{ 'FEATURES.CTA_LEARN_MORE' | translate }}
               </a>

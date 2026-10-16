@@ -62,7 +62,7 @@ describe('Features', () => {
     expect(articles.length).toBe(9);
   });
 
-  it('should render correct title and button on the first card', () => {
+  it('should render correct title and full-width button on the first card without description paragraphs', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const firstTitle = compiled.querySelector('article h3');
@@ -70,6 +70,10 @@ describe('Features', () => {
 
     const firstBtn = compiled.querySelector('article a');
     expect(firstBtn?.textContent?.trim()).toBe('Pelajari Selengkapnya');
+    expect(firstBtn?.classList.contains('w-full')).toBe(true);
+
+    const cardParagraphs = compiled.querySelectorAll('article p');
+    expect(cardParagraphs.length).toBe(0);
   });
 
   it('should update hoveredCard state when setHoveredCard is called', () => {
