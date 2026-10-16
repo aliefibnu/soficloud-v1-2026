@@ -914,4 +914,23 @@ describe('UiMockup', () => {
       compiled.querySelector('[aria-label="Budget utilization execution readiness"]')?.textContent,
     ).toContain('88%');
   });
+
+  it('should apply floating animation classes to the floating preview card wrappers', () => {
+    fixture.componentRef.setInput('currentDate', new Date(2026, 8, 10));
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const cashAnim = compiled.querySelector('.animate-floating-card-left');
+    expect(cashAnim).toBeTruthy();
+    expect(cashAnim?.querySelector('[aria-label="Project Cash preview"]')).toBeTruthy();
+
+    const opexAnim = compiled.querySelector('.animate-floating-card-top-right');
+    expect(opexAnim).toBeTruthy();
+    expect(opexAnim?.querySelector('[aria-label="Budget utilization OPEX percentage"]')).toBeTruthy();
+
+    const moAnim = compiled.querySelector('.animate-floating-card-bottom-right');
+    expect(moAnim).toBeTruthy();
+    expect(moAnim?.querySelector('[aria-label="Budget utilization execution readiness"]')).toBeTruthy();
+  });
 });
+
