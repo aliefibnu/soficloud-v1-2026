@@ -753,106 +753,130 @@
   </div>
 
   <!-- Floating Card 1: PROJECT CASH (Left) -->
-  <aside
-    class="hidden md:flex absolute -left-5 lg:-left-12 xl:-left-16 top-[37%] -translate-y-1/2 z-30 w-48 sm:w-52 lg:w-56 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4.5 sm:p-5 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col justify-between transition-all duration-300 hover:-translate-y-[calc(50%+4px)] select-none pointer-events-auto"
-    [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.ARIA_LABEL' | translate"
+  <div
+    class="hidden md:block absolute -left-5 lg:-left-12 xl:-left-16 top-[37%] -translate-y-1/2 z-30 pointer-events-none"
   >
-    <div>
-      <span
-        class="text-[9px] sm:text-[10px] font-reguler tracking-wider text-[#64748b] uppercase block"
+    <div
+      class="will-change-transform animate-floating-card-left hover:[animation-play-state:paused] pointer-events-auto"
+    >
+      <aside
+        class="w-48 sm:w-52 lg:w-56 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4.5 sm:p-5 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
+        [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.ARIA_LABEL' | translate"
       >
-        {{ 'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.TAG' | translate }}
-      </span>
-      <div
-        class="text-sm sm:text-base lg:text-[17px] font-semibold text-[#182849] mt-1 tracking-tight"
-      >
-        {{ currentData().liquidity.projected }}
-      </div>
-      <p class="text-[10px] sm:text-[11px] text-[#64748b] font-normal leading-snug mt-0.5">
-        {{ 'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.SUBTEXT' | translate }}
-      </p>
-    </div>
+        <div>
+          <span
+            class="text-[9px] sm:text-[10px] font-reguler tracking-wider text-[#64748b] uppercase block"
+          >
+            {{ 'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.TAG' | translate }}
+          </span>
+          <div
+            class="text-sm sm:text-base lg:text-[17px] font-semibold text-[#182849] mt-1 tracking-tight"
+          >
+            {{ currentData().liquidity.projected }}
+          </div>
+          <p class="text-[10px] sm:text-[11px] text-[#64748b] font-normal leading-snug mt-0.5">
+            {{ 'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.SUBTEXT' | translate }}
+          </p>
+        </div>
 
-    <div class="mt-3.5 w-full h-1.5 sm:h-2 bg-slate-100 rounded-full overflow-hidden">
-      <div class="h-full rounded-full bg-linear-to-r from-[#169697] to-[#17babc] w-full"></div>
+        <div class="mt-3.5 w-full h-1.5 sm:h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div class="h-full rounded-full bg-linear-to-r from-[#169697] to-[#17babc] w-full"></div>
+        </div>
+      </aside>
     </div>
-  </aside>
+  </div>
 
   <!-- Floating Card 2: BUDGET UTILIZATION - OPEX 62% (Top Right) -->
-  <aside
-    class="hidden sm:flex absolute -right-5 sm:-right-6 lg:-right-10 xl:-right-12 top-10 sm:top-12 lg:top-14 z-30 w-36 sm:w-40 lg:w-42 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
-    [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_ARIA_LABEL' | translate"
+  <div
+    class="hidden sm:block absolute -right-5 sm:-right-6 lg:-right-10 xl:-right-12 top-10 sm:top-12 lg:top-14 z-30 pointer-events-none"
   >
-    <span
-      class="text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-[#64748b] uppercase block text-center"
+    <div
+      class="will-change-transform animate-floating-card-top-right hover:[animation-play-state:paused] pointer-events-auto"
     >
-      {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.TAG' | translate }}
-    </span>
-
-    <div class="relative w-18 h-18 sm:w-20 sm:h-20 my-1.5 sm:my-2 flex items-center justify-center">
-      <svg class="w-full h-full" viewBox="0 0 80 80" fill="none">
-        <path
-          [attr.d]="donutTrackGray()"
-          stroke="#e2e8f0"
-          stroke-width="7.5"
-          stroke-linecap="round"
-        />
-        <path
-          [attr.d]="donutArcBlue()"
-          stroke="#2563eb"
-          stroke-width="7.5"
-          stroke-linecap="round"
-        />
-        <path
-          [attr.d]="donutArcTeal()"
-          stroke="#14b8a6"
-          stroke-width="7.5"
-          stroke-linecap="round"
-        />
-      </svg>
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span class="text-base sm:text-lg font-bold text-[#182849]">
-          {{ currentData().floatingBudget.opexPercent }}%
+      <aside
+        class="w-36 sm:w-40 lg:w-42 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
+        [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_ARIA_LABEL' | translate"
+      >
+        <span
+          class="text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-[#64748b] uppercase block text-center"
+        >
+          {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.TAG' | translate }}
         </span>
-      </div>
-    </div>
 
-    <span class="text-[11px] sm:text-xs font-medium text-[#64748b]">
-      {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_USED' | translate }}
-    </span>
-  </aside>
+        <div class="relative w-18 h-18 sm:w-20 sm:h-20 my-1.5 sm:my-2 flex items-center justify-center">
+          <svg class="w-full h-full" viewBox="0 0 80 80" fill="none">
+            <path
+              [attr.d]="donutTrackGray()"
+              stroke="#e2e8f0"
+              stroke-width="7.5"
+              stroke-linecap="round"
+            />
+            <path
+              [attr.d]="donutArcBlue()"
+              stroke="#2563eb"
+              stroke-width="7.5"
+              stroke-linecap="round"
+            />
+            <path
+              [attr.d]="donutArcTeal()"
+              stroke="#14b8a6"
+              stroke-width="7.5"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span class="text-base sm:text-lg font-bold text-[#182849]">
+              {{ currentData().floatingBudget.opexPercent }}%
+            </span>
+          </div>
+        </div>
+
+        <span class="text-[11px] sm:text-xs font-medium text-[#64748b]">
+          {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_USED' | translate }}
+        </span>
+      </aside>
+    </div>
+  </div>
 
   <!-- Floating Card 3: BUDGET UTILIZATION - 94% Mo Ready (Bottom Right) -->
-  <aside
-    class="hidden md:flex absolute -right-8 sm:-right-10 lg:-right-15 xl:-right-18 bottom-16 sm:bottom-20 lg:bottom-24 z-30 w-38 sm:w-42 lg:w-44 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex-col justify-between transition-all duration-300 hover:-translate-y-1 select-none pointer-events-auto"
-    [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_ARIA_LABEL' | translate"
+  <div
+    class="hidden md:block absolute -right-8 sm:-right-10 lg:-right-15 xl:-right-18 bottom-16 sm:bottom-20 lg:bottom-24 z-30 pointer-events-none"
   >
-    <div>
-      <span
-        class="text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-[#64748b] uppercase block"
+    <div
+      class="will-change-transform animate-floating-card-bottom-right hover:[animation-play-state:paused] pointer-events-auto"
+    >
+      <aside
+        class="w-38 sm:w-42 lg:w-44 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
+        [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_ARIA_LABEL' | translate"
       >
-        {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.TAG' | translate }}
-      </span>
-      <div class="text-xl sm:text-2xl font-bold text-[#182849] mt-0.5 tracking-tight">
-        {{ currentData().floatingBudget.executionPercent }}%
-      </div>
-      <p class="text-[10px] sm:text-[11px] text-[#64748b] font-normal leading-snug mt-0.5 mb-2 sm:mb-2.5">
-        {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_READY' | translate }}
-      </p>
-    </div>
+        <div>
+          <span
+            class="text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-[#64748b] uppercase block"
+          >
+            {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.TAG' | translate }}
+          </span>
+          <div class="text-xl sm:text-2xl font-bold text-[#182849] mt-0.5 tracking-tight">
+            {{ currentData().floatingBudget.executionPercent }}%
+          </div>
+          <p class="text-[10px] sm:text-[11px] text-[#64748b] font-normal leading-snug mt-0.5 mb-2 sm:mb-2.5">
+            {{ 'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_READY' | translate }}
+          </p>
+        </div>
 
-    <div class="flex items-end gap-1.5 sm:gap-2 h-6 sm:h-7" aria-hidden="true">
-      @for (bar of currentData().floatingBudget.executionBars; track $index; let i = $index) {
-        <div
-          class="flex-1 rounded-t-sm sm:rounded-t-md transition-all duration-300 ease-out"
-          [class.bg-linear-to-r]="true"
-          [class.from-[#2563eb]]="i % 2 === 0"
-          [class.to-[#3b82f6]]="i % 2 === 0"
-          [class.from-[#0d9488]]="i % 2 !== 0"
-          [class.to-[#14b8a6]]="i % 2 !== 0"
-          [style.height.%]="bar"
-        ></div>
-      }
+        <div class="flex items-end gap-1.5 sm:gap-2 h-6 sm:h-7" aria-hidden="true">
+          @for (bar of currentData().floatingBudget.executionBars; track $index; let i = $index) {
+            <div
+              class="flex-1 rounded-t-sm sm:rounded-t-md transition-all duration-300 ease-out"
+              [class.bg-linear-to-r]="true"
+              [class.from-[#2563eb]]="i % 2 === 0"
+              [class.to-[#3b82f6]]="i % 2 === 0"
+              [class.from-[#0d9488]]="i % 2 !== 0"
+              [class.to-[#14b8a6]]="i % 2 !== 0"
+              [style.height.%]="bar"
+            ></div>
+          }
+        </div>
+      </aside>
     </div>
-  </aside>
+  </div>
 </div>

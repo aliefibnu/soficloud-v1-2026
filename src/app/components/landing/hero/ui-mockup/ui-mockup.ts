@@ -201,6 +201,57 @@ const BASE_CHART_RAW_MONTHS: readonly RawMonthPoint[] = [
         transparent 100%
       );
     }
+
+    @keyframes floating-card-left {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-8px) rotate(-0.5deg);
+      }
+    }
+
+    @keyframes floating-card-top-right {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(7px) rotate(0.5deg);
+      }
+    }
+
+    @keyframes floating-card-bottom-right {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-7px) rotate(-0.5deg);
+      }
+    }
+
+    .animate-floating-card-left {
+      animation: floating-card-left 5.5s ease-in-out infinite 0.2s;
+    }
+
+    .animate-floating-card-top-right {
+      animation: floating-card-top-right 6s ease-in-out infinite 0.9s;
+    }
+
+    .animate-floating-card-bottom-right {
+      animation: floating-card-bottom-right 6.5s ease-in-out infinite 1.7s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-floating-card-left,
+      .animate-floating-card-top-right,
+      .animate-floating-card-bottom-right {
+        animation: none !important;
+        transform: none !important;
+      }
+    }
   `,
   host: {
     class: 'relative block w-full text-left font-dm-sans',
