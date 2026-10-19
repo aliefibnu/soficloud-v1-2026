@@ -18,10 +18,12 @@
       class="rounded-3xl sm:rounded-[36px] md:rounded-[40px] bg-linear-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-4 sm:p-6 lg:p-9 relative shadow-sm border border-blue-100/80 w-full"
     >
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
-        <div class="lg:col-span-7 relative flex flex-col h-110 sm:h-115 lg:h-120">
-          <!-- PREVIEW CARD 1: Interactive Income and Expense Chart (Stacked behind) -->
+        <div
+          class="lg:col-span-7 relative flex flex-col h-105 sm:h-110 lg:h-115 overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 border border-slate-100/90"
+        >
+          <!-- PREVIEW CARD 1: Interactive Income and Expense Chart (Base layer) -->
           <div
-            class="preview-card-1 absolute inset-x-0 top-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 p-4 sm:p-5 lg:p-6 border border-slate-100/90 select-none will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-1 absolute inset-0 bg-white p-4 sm:p-5 lg:p-6 select-none will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card1Transform()"
@@ -331,9 +333,9 @@
             }
           </div>
 
-          <!-- PREVIEW CARD 2: Connected Processes (Stacked in front-bottom) -->
+          <!-- PREVIEW CARD 2: Connected Processes (Covers Card 1) -->
           <div
-            class="preview-card-2 absolute inset-x-0 top-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-100/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out"
+            class="preview-card-2 absolute inset-0 bg-white shadow-[0_-8px_30px_rgba(15,23,42,0.12)] p-3 sm:p-4 lg:p-5 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card2Transform()"
@@ -593,9 +595,9 @@
             </div>
           </div>
 
-          <!-- PREVIEW CARD 3: Workflow & Approval (Stacked in front-bottom) -->
+          <!-- PREVIEW CARD 3: Workflow & Approval (Covers Card 2) -->
           <div
-            class="preview-card-3 absolute inset-x-0 top-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-100/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-3 absolute inset-0 bg-white shadow-[0_-8px_30px_rgba(15,23,42,0.12)] p-3 sm:p-4 lg:p-5 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card3Transform()"
@@ -956,9 +958,9 @@
             </div>
           </div>
 
-          <!-- PREVIEW CARD 4: Project Revenue & Cost Control (Stacked in front-bottom) -->
+          <!-- PREVIEW CARD 4: Project Revenue & Cost Control (Covers Card 3) -->
           <div
-            class="preview-card-4 absolute inset-x-0 top-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-100/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-4 absolute inset-0 bg-white shadow-[0_-8px_30px_rgba(15,23,42,0.12)] p-3 sm:p-4 lg:p-5 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card4Transform()"
