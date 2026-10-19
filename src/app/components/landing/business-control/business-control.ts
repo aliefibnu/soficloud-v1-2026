@@ -7,6 +7,7 @@ import {
   ElementRef,
   PLATFORM_ID,
   OnDestroy,
+  AfterViewInit,
 } from '@angular/core';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { Router, NavigationStart } from '@angular/router';
@@ -74,7 +75,7 @@ export interface ProjectKpiMetric {
     '(window:scrollend)': 'onScrollEnd()',
   },
 })
-export class BusinessControl implements OnDestroy {
+export class BusinessControl implements OnDestroy, AfterViewInit {
   protected readonly languageService = inject(LanguageService);
   protected readonly translate = inject(TranslateService);
   private readonly platformId = inject(PLATFORM_ID);
@@ -86,9 +87,12 @@ export class BusinessControl implements OnDestroy {
 
   readonly scrollProgress = signal<number>(0);
   readonly isNavigating = signal<boolean>(false);
+  readonly isSnapping = signal<boolean>(false);
   private rafId: number | null = null;
   private navSettleTimeoutId: ReturnType<typeof setTimeout> | null = null;
   private navSafetyTimeoutId: ReturnType<typeof setTimeout> | null = null;
+  private snapCooldownId: ReturnType<typeof setTimeout> | null = null;
+  private touchStartY = 0;
 
   constructor() {
     if (this.isBrowser && this.router) {
@@ -105,8 +109,22 @@ export class BusinessControl implements OnDestroy {
     }
   }
 
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) return;
+    const track = this.trackRef()?.nativeElement;
+    if (track) {
+      track.addEventListener('wheel', this.onTrackWheel, { passive: false });
+      track.addEventListener('touchstart', this.onTrackTouchStart, { passive: true });
+      track.addEventListener('touchmove', this.onTrackTouchMove, { passive: false });
+    }
+  }
+
   ngOnDestroy(): void {
     this.clearNavTimers();
+    if (this.snapCooldownId !== null) {
+      clearTimeout(this.snapCooldownId);
+      this.snapCooldownId = null;
+    }
     if (this.rafId !== null && typeof cancelAnimationFrame !== 'undefined') {
       cancelAnimationFrame(this.rafId);
       this.rafId = null;
@@ -114,6 +132,14 @@ export class BusinessControl implements OnDestroy {
     if (this.routerSub) {
       this.routerSub.unsubscribe();
       this.routerSub = null;
+    }
+    if (this.isBrowser) {
+      const track = this.trackRef()?.nativeElement;
+      if (track) {
+        track.removeEventListener('wheel', this.onTrackWheel);
+        track.removeEventListener('touchstart', this.onTrackTouchStart);
+        track.removeEventListener('touchmove', this.onTrackTouchMove);
+      }
     }
   }
 
@@ -275,88 +301,51 @@ export class BusinessControl implements OnDestroy {
 
   // PREVIEW CARD 1 (Chart, lowest layer in stack)
   readonly card1Transform = computed<string>(() => {
-    const t1 = this.progress12();
-    const t2 = this.progress23();
-    const t3 = this.progress34();
-    const translateY = -16 * t1 - 16 * t2 - 16 * t3;
-    const scale = 1 - 0.04 * t1 - 0.04 * t2 - 0.04 * t3;
-    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+    return 'translate3d(0, 0.0px, 0) scale(1.000)';
   });
 
   readonly card1Opacity = computed<number>(() => {
-    const t1 = this.progress12();
-    const t2 = this.progress23();
-    const t3 = this.progress34();
-    return 1 - 0.30 * t1 - 0.20 * t2 - 0.15 * t3;
+    return this.progress12() >= 1 ? 0 : 1;
   });
 
-  // PREVIEW CARD 2 (Connected processes, 2nd layer in stack)
+  // PREVIEW CARD 2 (Connected processes, covers Card 1)
   readonly card2Transform = computed<string>(() => {
     const t1 = this.progress12();
-    const t2 = this.progress23();
-    const t3 = this.progress34();
-    let translateY: number;
-    let scale: number;
-    if (t2 > 0) {
-      // Moves back/up as Cards 3 & 4 enter in front-bottom
-      translateY = 16 - 32 * t2 - 16 * t3;
-      scale = 1 - 0.04 * t2 - 0.04 * t3;
-    } else {
-      // Rises from below to front-bottom (+16px)
-      translateY = 100 * (1 - t1) + 16 * t1;
-      scale = 0.96 + 0.04 * t1;
-    }
-    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+    const translateY = 100 * (1 - t1);
+    return `translate3d(0, ${translateY.toFixed(1)}%, 0) scale(1.000)`;
   });
 
   readonly card2Opacity = computed<number>(() => {
     const t1 = this.progress12();
     const t2 = this.progress23();
-    const t3 = this.progress34();
-    if (t2 > 0) {
-      return 1 - 0.30 * t2 - 0.20 * t3;
-    }
-    return Math.min(Math.max(t1 * 1.5, 0), 1);
+    if (t2 >= 1) return 0;
+    return t1 > 0 ? 1 : 0;
   });
 
-  // PREVIEW CARD 3 (Workflow & approval, 3rd layer in stack)
+  // PREVIEW CARD 3 (Workflow & approval, covers Card 2)
   readonly card3Transform = computed<string>(() => {
     const t2 = this.progress23();
-    const t3 = this.progress34();
-    let translateY: number;
-    let scale: number;
-    if (t3 > 0) {
-      // Moves back/up as Card 4 enters in front-bottom
-      translateY = 20 - 36 * t3;
-      scale = 1 - 0.04 * t3;
-    } else {
-      // Rises from below to front-bottom (+20px)
-      translateY = 100 * (1 - t2) + 20 * t2;
-      scale = 0.96 + 0.04 * t2;
-    }
-    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+    const translateY = 100 * (1 - t2);
+    return `translate3d(0, ${translateY.toFixed(1)}%, 0) scale(1.000)`;
   });
 
   readonly card3Opacity = computed<number>(() => {
     const t2 = this.progress23();
     const t3 = this.progress34();
-    if (t3 > 0) {
-      return 1 - 0.30 * t3;
-    }
-    return Math.min(Math.max(t2 * 1.5, 0), 1);
+    if (t3 >= 1) return 0;
+    return t2 > 0 ? 1 : 0;
   });
 
-  // PREVIEW CARD 4 (Project Revenue & Cost Control, top layer in stack, front-bottom)
+  // PREVIEW CARD 4 (Project Revenue & Cost Control, covers Card 3)
   readonly card4Transform = computed<string>(() => {
     const t3 = this.progress34();
-    const translateY = 100 * (1 - t3) + 24 * t3;
-    const scale = 0.96 + 0.04 * t3;
-    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+    const translateY = 100 * (1 - t3);
+    return `translate3d(0, ${translateY.toFixed(1)}%, 0) scale(1.000)`;
   });
 
   readonly card4Opacity = computed<number>(() => {
     const t3 = this.progress34();
-    return Math.min(Math.max(t3 * 1.5, 0), 1);
+    return t3 > 0 ? 1 : 0;
   });
 
   // RIGHT COLUMN: Cross-fade opacities (no stacking effect)
@@ -710,6 +699,7 @@ export class BusinessControl implements OnDestroy {
     if (this.isNavigating()) {
       this.finishAnchorNavigation();
     }
+    this.isSnapping.set(false);
   }
 
   onUserScrollInterruption(): void {
@@ -821,5 +811,95 @@ export class BusinessControl implements OnDestroy {
     const targetScrollY = window.scrollY + rect.top - stickyOffset + targetProgress * totalScroll;
     window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
   }
+
+  snapToCard(index: number): void {
+    if (this.isSnapping()) return;
+    this.isSnapping.set(true);
+    this.goToCard(index);
+
+    if (this.snapCooldownId !== null) {
+      clearTimeout(this.snapCooldownId);
+    }
+    this.snapCooldownId = setTimeout(() => {
+      this.isSnapping.set(false);
+      this.snapCooldownId = null;
+    }, 600);
+  }
+
+  readonly onTrackWheel = (event: WheelEvent): void => {
+    if (!this.isBrowser || this.isNavigating()) return;
+
+    const el = this.trackRef()?.nativeElement;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const stickyOffset = this.getStickyOffset();
+    const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+    const isPinned = rect.top <= stickyOffset + 10 && rect.bottom >= windowHeight + 10;
+
+    if (!isPinned) return;
+
+    const currentCard = this.activeCard();
+
+    if (this.isSnapping()) {
+      event.preventDefault();
+      return;
+    }
+
+    if (event.deltaY > 15) {
+      if (currentCard < 3) {
+        event.preventDefault();
+        this.snapToCard(currentCard + 1);
+      }
+    } else if (event.deltaY < -15) {
+      if (currentCard > 0) {
+        event.preventDefault();
+        this.snapToCard(currentCard - 1);
+      }
+    }
+  };
+
+  readonly onTrackTouchStart = (event: TouchEvent): void => {
+    if (event.touches.length > 0) {
+      this.touchStartY = event.touches[0].clientY;
+    }
+  };
+
+  readonly onTrackTouchMove = (event: TouchEvent): void => {
+    if (!this.isBrowser || this.isNavigating() || event.touches.length === 0) return;
+
+    const el = this.trackRef()?.nativeElement;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const stickyOffset = this.getStickyOffset();
+    const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+    const isPinned = rect.top <= stickyOffset + 10 && rect.bottom >= windowHeight + 10;
+
+    if (!isPinned) return;
+
+    const currentCard = this.activeCard();
+    const currentY = event.touches[0].clientY;
+    const deltaY = this.touchStartY - currentY;
+
+    if (this.isSnapping()) {
+      event.preventDefault();
+      return;
+    }
+
+    if (deltaY > 35) {
+      if (currentCard < 3) {
+        event.preventDefault();
+        this.touchStartY = currentY;
+        this.snapToCard(currentCard + 1);
+      }
+    } else if (deltaY < -35) {
+      if (currentCard > 0) {
+        event.preventDefault();
+        this.touchStartY = currentY;
+        this.snapToCard(currentCard - 1);
+      }
+    }
+  };
 }
 

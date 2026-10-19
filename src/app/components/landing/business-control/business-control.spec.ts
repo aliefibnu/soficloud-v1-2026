@@ -172,9 +172,9 @@ describe('BusinessControl', () => {
     expect(component.card3Opacity()).toBe(0);
     expect(component.card4Opacity()).toBe(0);
     expect(component.card1Transform()).toContain('translate3d(0, 0.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, 100.0px, 0)');
-    expect(component.card3Transform()).toContain('translate3d(0, 100.0px, 0)');
-    expect(component.card4Transform()).toContain('translate3d(0, 100.0px, 0)');
+    expect(component.card2Transform()).toContain('translate3d(0, 100.0%, 0)');
+    expect(component.card3Transform()).toContain('translate3d(0, 100.0%, 0)');
+    expect(component.card4Transform()).toContain('translate3d(0, 100.0%, 0)');
   });
 
   it('should keep card 1 settled and not start stacking while progress is below 0.14 in center screen', () => {
@@ -184,11 +184,11 @@ describe('BusinessControl', () => {
     expect(component.progress34()).toBe(0);
     expect(component.activeCard()).toBe(0);
     expect(component.card1Transform()).toContain('translate3d(0, 0.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, 100.0px, 0)');
+    expect(component.card2Transform()).toContain('translate3d(0, 100.0%, 0)');
     expect(component.card2Opacity()).toBe(0);
   });
 
-  it('should transition to card 2 stacking in front-bottom and text 2 fading in around progress 0.42', () => {
+  it('should transition to card 2 covering card 1 and text 2 fading in around progress 0.42', () => {
     component.setScrollProgress(0.42);
     expect(component.progress12()).toBe(1);
     expect(component.progress23()).toBe(0);
@@ -198,19 +198,17 @@ describe('BusinessControl', () => {
     expect(component.text2Opacity()).toBe(1);
     expect(component.text3Opacity()).toBe(0);
     expect(component.text4Opacity()).toBe(0);
-    expect(component.card1Opacity()).toBe(0.7);
+    expect(component.card1Opacity()).toBe(0);
     expect(component.card2Opacity()).toBe(1);
     expect(component.card3Opacity()).toBe(0);
     expect(component.card4Opacity()).toBe(0);
 
-    // Stacking positioning: Card 1 is behind at -16px, Card 2 is in front at +16px (front-bottom, no X offset)
-    expect(component.card1Transform()).toContain('translate3d(0, -16.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, 16.0px, 0)');
-    expect(component.card1Transform()).not.toContain('translateX');
-    expect(component.card2Transform()).not.toContain('translateX');
+    // Full cover positioning: Card 1 at 0px, Card 2 cleanly covers Card 1 at 0%
+    expect(component.card1Transform()).toContain('translate3d(0, 0.0px, 0)');
+    expect(component.card2Transform()).toContain('translate3d(0, 0.0%, 0)');
   });
 
-  it('should transition to card 3 stacking in front-bottom and text 3 fading in around progress 0.74', () => {
+  it('should transition to card 3 covering card 2 and text 3 fading in around progress 0.74', () => {
     component.setScrollProgress(0.74);
     expect(component.progress12()).toBe(1);
     expect(component.progress23()).toBe(1);
@@ -220,18 +218,17 @@ describe('BusinessControl', () => {
     expect(component.text2Opacity()).toBe(0);
     expect(component.text3Opacity()).toBe(1);
     expect(component.text4Opacity()).toBe(0);
-    expect(component.card1Opacity()).toBeCloseTo(0.5, 4);
-    expect(component.card2Opacity()).toBeCloseTo(0.7, 4);
+    expect(component.card1Opacity()).toBe(0);
+    expect(component.card2Opacity()).toBe(0);
     expect(component.card3Opacity()).toBe(1);
     expect(component.card4Opacity()).toBe(0);
 
-    // Stacking positioning: Card 1 at -32px, Card 2 at -16px, Card 3 in front at +20px
-    expect(component.card1Transform()).toContain('translate3d(0, -32.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, -16.0px, 0)');
-    expect(component.card3Transform()).toContain('translate3d(0, 20.0px, 0)');
+    // Full cover positioning: Card 3 cleanly covers Card 2 at 0%
+    expect(component.card2Transform()).toContain('translate3d(0, 0.0%, 0)');
+    expect(component.card3Transform()).toContain('translate3d(0, 0.0%, 0)');
   });
 
-  it('should transition to card 4 stacking in front-bottom and text 4 fading in at progress 1.0', () => {
+  it('should transition to card 4 covering card 3 and text 4 fading in at progress 1.0', () => {
     component.setScrollProgress(1);
     expect(component.progress12()).toBe(1);
     expect(component.progress23()).toBe(1);
@@ -241,17 +238,14 @@ describe('BusinessControl', () => {
     expect(component.text2Opacity()).toBe(0);
     expect(component.text3Opacity()).toBe(0);
     expect(component.text4Opacity()).toBe(1);
-    expect(component.card1Opacity()).toBeCloseTo(0.35, 4);
-    expect(component.card2Opacity()).toBeCloseTo(0.5, 4);
-    expect(component.card3Opacity()).toBeCloseTo(0.7, 4);
+    expect(component.card1Opacity()).toBe(0);
+    expect(component.card2Opacity()).toBe(0);
+    expect(component.card3Opacity()).toBe(0);
     expect(component.card4Opacity()).toBe(1);
 
-    // Stacking positioning: Card 1 at -48px, Card 2 at -32px, Card 3 at -16px, Card 4 in front at +24px (strictly vertical)
-    expect(component.card1Transform()).toContain('translate3d(0, -48.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, -32.0px, 0)');
-    expect(component.card3Transform()).toContain('translate3d(0, -16.0px, 0)');
-    expect(component.card4Transform()).toContain('translate3d(0, 24.0px, 0)');
-    expect(component.card4Transform()).not.toContain('translateX');
+    // Full cover positioning: Card 4 cleanly covers Card 3 at 0%
+    expect(component.card3Transform()).toContain('translate3d(0, 0.0%, 0)');
+    expect(component.card4Transform()).toContain('translate3d(0, 0.0%, 0)');
   });
 
   it('should smoothly interpolate values during mid-scroll progress and ensure all 4 text opacities sum to 1', () => {
@@ -303,6 +297,44 @@ describe('BusinessControl', () => {
     component.goToCard(1);
     expect(scrollToSpy).toHaveBeenCalled();
     scrollToSpy.mockRestore();
+  });
+
+  it('should set isSnapping and call goToCard when snapToCard is called', () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    expect(component.isSnapping()).toBe(false);
+    component.snapToCard(2);
+    expect(component.isSnapping()).toBe(true);
+    expect(goToSpy).toHaveBeenCalledWith(2);
+
+    // Calling again while snapping should be ignored
+    component.snapToCard(3);
+    expect(goToSpy).toHaveBeenCalledTimes(1);
+    goToSpy.mockRestore();
+  });
+
+  it('should handle wheel scroll down and up when pinned in showcase', () => {
+    const snapSpy = vi.spyOn(component, 'snapToCard').mockImplementation(() => {});
+    const mockTrack = document.createElement('div');
+    Object.defineProperty(mockTrack, 'getBoundingClientRect', {
+      value: () => ({ top: 70, bottom: 2500, height: 2430 }),
+    });
+    Object.defineProperty(component, 'trackRef', {
+      value: () => ({ nativeElement: mockTrack }),
+    });
+
+    const preventDefault = vi.fn();
+    // Scroll down at card 0 -> snaps to card 1
+    component.setScrollProgress(0);
+    component.onTrackWheel({ deltaY: 50, preventDefault } as unknown as WheelEvent);
+    expect(preventDefault).toHaveBeenCalled();
+    expect(snapSpy).toHaveBeenCalledWith(1);
+
+    // Scroll up at card 2 -> snaps to card 1
+    component.setScrollProgress(0.74);
+    component.onTrackWheel({ deltaY: -50, preventDefault } as unknown as WheelEvent);
+    expect(snapSpy).toHaveBeenCalledWith(1);
+
+    snapSpy.mockRestore();
   });
 
   describe('Anchor Navigation & Stacking Section Interactivity', () => {
