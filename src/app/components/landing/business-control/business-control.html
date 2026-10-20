@@ -1,10 +1,21 @@
 <section
   #trackRef
-  class="w-full relative h-[420vh] scroll-mt-20"
+  class="w-full relative h-[420vh] scroll-mt-20 snap-y snap-mandatory scroll-smooth"
   aria-label="Business Control Interactive Showcase"
 >
+  <!-- Vertical snap anchors (CSS Scroll Snap Y-axis mandatory) -->
+  <div class="snap-anchor absolute top-0 left-0 w-full h-[105vh] snap-center pointer-events-none" aria-hidden="true"></div>
+  <div class="snap-anchor absolute top-[105vh] left-0 w-full h-[105vh] snap-center pointer-events-none" aria-hidden="true"></div>
+  <div class="snap-anchor absolute top-[210vh] left-0 w-full h-[105vh] snap-center pointer-events-none" aria-hidden="true"></div>
+  <div class="snap-anchor absolute top-[315vh] left-0 w-full h-[105vh] snap-center pointer-events-none" aria-hidden="true"></div>
+
   <div
-    class="sticky top-16 sm:top-18 lg:top-20 h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
+    class="h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
+    [class.sticky]="!isNavigating()"
+    [class.relative]="isNavigating()"
+    [class.top-16]="!isNavigating()"
+    [class.sm:top-18]="!isNavigating()"
+    [class.lg:top-20]="!isNavigating()"
   >
     <div class="text-center mb-3 sm:mb-5">
       <h2
@@ -19,11 +30,11 @@
     >
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
         <div
-          class="lg:col-span-7 relative flex flex-col h-105 sm:h-110 lg:h-115 overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-900/5 border border-slate-100/90"
+          class="lg:col-span-7 relative flex flex-col h-115 sm:h-120 lg:h-125 pt-14 sm:pt-16 lg:pt-18 snap-y snap-mandatory"
         >
           <!-- PREVIEW CARD 1: Interactive Income and Expense Chart (Base layer) -->
           <div
-            class="preview-card-1 absolute inset-0 bg-white p-4 sm:p-5 lg:p-6 select-none will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-1 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-md shadow-blue-950/5 p-4 sm:p-5 lg:p-6 border border-slate-200/90 select-none will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card1Transform()"
@@ -335,7 +346,7 @@
 
           <!-- PREVIEW CARD 2: Connected Processes (Covers Card 1) -->
           <div
-            class="preview-card-2 absolute inset-0 bg-white shadow-[0_-8px_30px_rgba(15,23,42,0.12)] p-3 sm:p-4 lg:p-5 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out"
+            class="preview-card-2 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card2Transform()"
@@ -597,7 +608,7 @@
 
           <!-- PREVIEW CARD 3: Workflow & Approval (Covers Card 2) -->
           <div
-            class="preview-card-3 absolute inset-0 bg-white shadow-[0_-8px_30px_rgba(15,23,42,0.12)] p-3 sm:p-4 lg:p-5 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-3 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card3Transform()"
@@ -960,7 +971,7 @@
 
           <!-- PREVIEW CARD 4: Project Revenue & Cost Control (Covers Card 3) -->
           <div
-            class="preview-card-4 absolute inset-0 bg-white shadow-[0_-8px_30px_rgba(15,23,42,0.12)] p-3 sm:p-4 lg:p-5 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-4 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card4Transform()"
@@ -1132,119 +1143,133 @@
           </div>
         </div>
 
-        <!-- RIGHT COLUMN: Text content with clean cross-fade (no stacking) -->
+        <!-- RIGHT COLUMN: Symmetrical layout across all cards, perfectly aligned -->
         <div
-          class="lg:col-span-5 relative flex flex-col justify-center min-h-65 sm:min-h-70 lg:min-h-80 lg:pl-4"
+          class="lg:col-span-5 relative flex flex-col justify-start lg:pl-4"
         >
-          <!-- Text 1: Real-Time Monitoring -->
-          <div
-            class="w-full flex flex-col justify-center space-y-5 transition-opacity duration-300 ease-out"
-            [class.!transition-none]="isNavigating()"
-            [style.transition]="isNavigating() ? 'none' : null"
-            [style.opacity]="text1Opacity()"
-            [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
-          >
-            <h3
-              class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+          <div class="grid grid-cols-1 grid-rows-1 w-full min-h-[24.5rem] sm:min-h-[25rem] lg:min-h-[25.5rem] snap-y snap-mandatory">
+            <!-- Text 1: Real-Time Monitoring -->
+            <div
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center"
+              [style.display]="activeCard() === 0 ? 'flex' : 'none'"
+              [style.opacity]="activeCard() === 0 ? 1 : 0"
+              [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
             >
-              {{ 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE' | translate }}
-            </h3>
+              <div class="flex flex-col">
+                <h3
+                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                >
+                  {{ 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE' | translate }}
+                </h3>
 
-            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-              {{ 'BUSINESS_CONTROL.CARDS.REALTIME.DESC' | translate }}
-            </p>
+                <p
+                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                >
+                  {{ 'BUSINESS_CONTROL.CARDS.REALTIME.DESC' | translate }}
+                </p>
+              </div>
 
-            <div class="pt-2">
-              <button
-                type="button"
-                class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
-              </button>
+              <div class="pt-5 sm:pt-6">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+                </button>
+              </div>
             </div>
-          </div>
 
-          <!-- Text 2: Connected Business Processes -->
-          <div
-            class="w-full absolute inset-0 flex flex-col justify-center space-y-5 transition-opacity duration-300 ease-out"
-            [class.!transition-none]="isNavigating()"
-            [style.transition]="isNavigating() ? 'none' : null"
-            [style.opacity]="text2Opacity()"
-            [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
-          >
-            <h3
-              class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+            <!-- Text 2: Connected Business Processes -->
+            <div
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center"
+              [style.display]="activeCard() === 1 ? 'flex' : 'none'"
+              [style.opacity]="activeCard() === 1 ? 1 : 0"
+              [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
             >
-              {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE' | translate }}
-            </h3>
+              <div class="flex flex-col">
+                <h3
+                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                >
+                  {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE' | translate }}
+                </h3>
 
-            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-              {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.DESC' | translate }}
-            </p>
+                <p
+                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                >
+                  {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.DESC' | translate }}
+                </p>
+              </div>
 
-            <div class="pt-2">
-              <button
-                type="button"
-                class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
-              </button>
+              <div class="pt-5 sm:pt-6">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+                </button>
+              </div>
             </div>
-          </div>
 
-          <!-- Text 3: Structured Workflow & Approval -->
-          <div
-            class="w-full absolute inset-0 flex flex-col justify-center space-y-5 transition-opacity duration-300 ease-out"
-            [class.!transition-none]="isNavigating()"
-            [style.transition]="isNavigating() ? 'none' : null"
-            [style.opacity]="text3Opacity()"
-            [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
-          >
-            <h3
-              class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+            <!-- Text 3: Structured Workflow & Approval -->
+            <div
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center"
+              [style.display]="activeCard() === 2 ? 'flex' : 'none'"
+              [style.opacity]="activeCard() === 2 ? 1 : 0"
+              [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
             >
-              {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE' | translate }}
-            </h3>
+              <div class="flex flex-col">
+                <h3
+                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                >
+                  {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE' | translate }}
+                </h3>
 
-            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-              {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.DESC' | translate }}
-            </p>
+                <p
+                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                >
+                  {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.DESC' | translate }}
+                </p>
+              </div>
 
-            <div class="pt-2">
-              <button
-                type="button"
-                class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
-              </button>
+              <div class="pt-5 sm:pt-6">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+                </button>
+              </div>
             </div>
-          </div>
 
-          <!-- Text 4: Financial & Cost Insight -->
-          <div
-            class="w-full absolute inset-0 flex flex-col justify-center space-y-5 transition-opacity duration-300 ease-out"
-            [class.!transition-none]="isNavigating()"
-            [style.transition]="isNavigating() ? 'none' : null"
-            [style.opacity]="text4Opacity()"
-            [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
-          >
-            <h3
-              class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight"
+            <!-- Text 4: Financial & Cost Insight -->
+            <div
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center"
+              [style.display]="activeCard() === 3 ? 'flex' : 'none'"
+              [style.opacity]="activeCard() === 3 ? 1 : 0"
+              [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
             >
-              {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE' | translate }}
-            </h3>
+              <div class="flex flex-col">
+                <h3
+                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                >
+                  {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE' | translate }}
+                </h3>
 
-            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-              {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.DESC' | translate }}
-            </p>
+                <p
+                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                >
+                  {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.DESC' | translate }}
+                </p>
+              </div>
 
-            <div class="pt-2">
-              <button
-                type="button"
-                class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
-              </button>
+              <div class="pt-5 sm:pt-6">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
+                </button>
+              </div>
             </div>
           </div>
         </div>
