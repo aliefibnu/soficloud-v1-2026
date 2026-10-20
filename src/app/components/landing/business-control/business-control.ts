@@ -97,6 +97,9 @@
     private wheelIdleTimeoutId: ReturnType<typeof setTimeout> | null = null;
     private scrollSnapDebounceId: ReturnType<typeof setTimeout> | null = null;
     private lastWheelDirection: -1 | 0 | 1 = 0;
+    private isProgrammaticCardScroll = false;
+    private snappingFromCard: 0 | 1 | 2 | 3 = 0;
+    private snappingToCard: 0 | 1 | 2 | 3 = 0;
     private hasSnappedThisWheelGesture = false;
     private accumulatedWheelDelta = 0;
     private hasSnappedThisTouch = false;
@@ -877,16 +880,15 @@
     }
 
     onWindowScroll(): void {
-      if (!this.isBrowser) return;
-
-      if (this.isNavigating()) {
-        return;
-      }
+      if (!this.isBrowser || this.isNavigating() || this.isProgrammaticCardScroll) return;
 
       if (this.rafId === null) {
         this.rafId = requestAnimationFrame(() => {
           this.rafId = null;
-          this.updateScrollProgress();
+          // A programmatic snap owns progress updates while its RAF is running.
+          if (!this.isNavigating() && !this.isProgrammaticCardScroll) {
+            this.updateScrollProgress();
+          }
         });
       }
     }
@@ -959,26 +961,35 @@
 
     animateScrollTo(targetY: number, durationMs = 420): void {
       if (!this.isBrowser) return;
+
       this.clearSnapAnimation();
+      if (this.rafId !== null && typeof cancelAnimationFrame !== 'undefined') {
+        cancelAnimationFrame(this.rafId);
+        this.rafId = null;
+      }
 
-      const startY = typeof window !== 'undefined' ? window.scrollY : 0;
+      const startY = window.scrollY;
       const distance = targetY - startY;
-
-      // Immediately trigger window.scrollTo for synchronous listeners / unit test assertions
+      this.isProgrammaticCardScroll = true;
       window.scrollTo({ top: startY, behavior: 'instant' as ScrollBehavior });
 
       if (Math.abs(distance) < 2) {
         window.scrollTo({ top: targetY, behavior: 'instant' as ScrollBehavior });
         this.updateScrollProgress();
+        this.isProgrammaticCardScroll = false;
+        this.isSnapping.set(false);
         return;
       }
 
       const startTime = performance.now();
-
       const animate = (currentTime: number) => {
+        if (!this.isProgrammaticCardScroll) {
+          this.snapAnimRafId = null;
+          return;
+        }
+
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / durationMs, 1);
-        // Buttery smooth cubic-bezier(0.22, 0.8, 0.25, 1) transition
         const ease = this.butteryEase(progress);
         const nextY = startY + distance * ease;
         window.scrollTo({ top: nextY, behavior: 'instant' as ScrollBehavior });
@@ -986,16 +997,18 @@
 
         if (progress < 1) {
           this.snapAnimRafId = requestAnimationFrame(animate);
-        } else {
-          this.snapAnimRafId = null;
-          window.scrollTo({ top: targetY, behavior: 'instant' as ScrollBehavior });
-          this.updateScrollProgress();
-          this.isSnapping.set(false);
-          this.hasSnappedThisWheelGesture = false;
-          if (this.snapCooldownId !== null) {
-            clearTimeout(this.snapCooldownId);
-            this.snapCooldownId = null;
-          }
+          return;
+        }
+
+        this.snapAnimRafId = null;
+        window.scrollTo({ top: targetY, behavior: 'instant' as ScrollBehavior });
+        this.updateScrollProgress();
+        this.isProgrammaticCardScroll = false;
+        this.isSnapping.set(false);
+        this.hasSnappedThisWheelGesture = false;
+        if (this.snapCooldownId !== null) {
+          clearTimeout(this.snapCooldownId);
+          this.snapCooldownId = null;
         }
       };
 
@@ -1005,26 +1018,30 @@
     clearSnapAnimation(): void {
       if (this.snapAnimRafId !== null && typeof cancelAnimationFrame !== 'undefined') {
         cancelAnimationFrame(this.snapAnimRafId);
-        this.snapAnimRafId = null;
       }
+      this.snapAnimRafId = null;
+      this.isProgrammaticCardScroll = false;
     }
 
     snapToCard(index: number): void {
       const clampedIndex = Math.max(0, Math.min(index, 3)) as 0 | 1 | 2 | 3;
       if (this.isSnapping()) return;
+
+      this.snappingFromCard = this.activeCard();
+      this.snappingToCard = clampedIndex;
       this.isSnapping.set(true);
       this.accumulatedWheelDelta = 0;
-
       this.goToCard(clampedIndex);
 
       if (this.snapCooldownId !== null) {
         clearTimeout(this.snapCooldownId);
       }
       this.snapCooldownId = setTimeout(() => {
-        this.isSnapping.set(false);
+        // animateScrollTo normally clears this first; timeout is only a safety net.
+        if (this.snapAnimRafId === null) this.isSnapping.set(false);
         this.hasSnappedThisWheelGesture = false;
         this.snapCooldownId = null;
-      }, 420);
+      }, 460);
     }
 
     getNearestCard(): 0 | 1 | 2 | 3 {
@@ -1089,88 +1106,68 @@
       const stickyOffset = this.getStickyOffset();
       const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
       const isPinned = rect.top <= stickyOffset + 5 && rect.bottom >= windowHeight + 5;
-
       if (!isPinned) return;
 
-      const currentCard = this.activeCard();
-      const deltaY = event.deltaMode === 1 ? event.deltaY * 20 : event.deltaY;
-
-      // Filter out sub-pixel noise drift (< 1px)
+      const deltaY = event.deltaMode === 1
+        ? event.deltaY * 16
+        : event.deltaMode === 2
+          ? event.deltaY * windowHeight
+          : event.deltaY;
       if (Math.abs(deltaY) < 1) return;
 
-      // Boundary release:
-      // If at card 0 and scrolling up, allow native scroll to exit upwards to Hero
-      if (deltaY < 0 && currentCard === 0) {
-        this.clearSnapAnimation();
-        if (this.snapCooldownId !== null) {
-          clearTimeout(this.snapCooldownId);
-          this.snapCooldownId = null;
-        }
-        this.isSnapping.set(false);
-        this.resetWheelGesture();
-        return;
-      }
-
-      // If at card 3 and scrolling down, allow native scroll to exit downwards to next section
-      if (deltaY > 0 && currentCard === 3) {
-        this.clearSnapAnimation();
-        if (this.snapCooldownId !== null) {
-          clearTimeout(this.snapCooldownId);
-          this.snapCooldownId = null;
-        }
-        this.isSnapping.set(false);
-        this.resetWheelGesture();
-        return;
-      }
-
-      // Intercept inside pinned showcase
-      event.preventDefault();
-
       const incomingDirection: -1 | 1 = deltaY > 0 ? 1 : -1;
+      const isAnimationRunning = this.isSnapping() || this.snapAnimRafId !== null;
 
-      // Direction reversal detection:
-      // If user reverses swipe direction, immediately cancel ongoing animation & reset delta
-      if (this.lastWheelDirection !== 0 && incomingDirection !== this.lastWheelDirection) {
-        this.clearSnapAnimation();
-        if (this.snapCooldownId !== null) {
-          clearTimeout(this.snapCooldownId);
-          this.snapCooldownId = null;
+      // Absorb same-direction momentum, but honor an explicit wheel reversal immediately.
+      if (isAnimationRunning) {
+        event.preventDefault();
+        const snapDirection: -1 | 0 | 1 = this.snappingToCard > this.snappingFromCard
+          ? 1
+          : this.snappingToCard < this.snappingFromCard
+            ? -1
+            : 0;
+        const expectedDirection = this.lastWheelDirection || snapDirection;
+
+        if (expectedDirection !== 0 && incomingDirection !== expectedDirection) {
+          const returnTo = this.snappingFromCard;
+          this.clearSnapAnimation();
+          if (this.snapCooldownId !== null) {
+            clearTimeout(this.snapCooldownId);
+            this.snapCooldownId = null;
+          }
+          this.isSnapping.set(false);
+          this.accumulatedWheelDelta = 0;
+          this.lastWheelDirection = incomingDirection;
+          this.snapToCard(returnTo);
         }
-        this.isSnapping.set(false);
-        this.accumulatedWheelDelta = 0;
-        this.lastWheelDirection = incomingDirection;
-      } else if (this.lastWheelDirection === 0) {
-        this.lastWheelDirection = incomingDirection;
+        return;
       }
 
-      // Debounce idle timer: when user pauses or lifts fingers
+      const currentCard = this.activeCard();
+      if ((deltaY < 0 && currentCard === 0) || (deltaY > 0 && currentCard === 3)) {
+        this.resetWheelGesture();
+        return;
+      }
+
+      event.preventDefault();
+      if (this.lastWheelDirection !== 0 && incomingDirection !== this.lastWheelDirection) {
+        this.accumulatedWheelDelta = 0;
+      }
+      this.lastWheelDirection = incomingDirection;
+
       if (this.wheelIdleTimeoutId !== null) {
         clearTimeout(this.wheelIdleTimeoutId);
       }
-      this.wheelIdleTimeoutId = setTimeout(() => {
-        this.onWheelIdle();
-      }, 120);
+      this.wheelIdleTimeoutId = setTimeout(() => this.onWheelIdle(), 140);
 
-      // If currently animating in the active direction, absorb momentum events so we don't jump multiple cards
-      if (this.isSnapping()) {
-        return;
-      }
-
-      // Accumulate wheel delta
       this.accumulatedWheelDelta += deltaY;
-
-      // Highly responsive 10px threshold for touchpad gestures
       const threshold = 10;
-      if (this.accumulatedWheelDelta >= threshold) {
-        if (currentCard < 3) {
-          this.accumulatedWheelDelta = 0;
-          this.snapToCard(currentCard + 1);
-        }
-      } else if (this.accumulatedWheelDelta <= -threshold) {
-        if (currentCard > 0) {
-          this.accumulatedWheelDelta = 0;
-          this.snapToCard(currentCard - 1);
-        }
+      if (this.accumulatedWheelDelta >= threshold && currentCard < 3) {
+        this.accumulatedWheelDelta = 0;
+        this.snapToCard((currentCard + 1) as 0 | 1 | 2 | 3);
+      } else if (this.accumulatedWheelDelta <= -threshold && currentCard > 0) {
+        this.accumulatedWheelDelta = 0;
+        this.snapToCard((currentCard - 1) as 0 | 1 | 2 | 3);
       }
     };
 

@@ -178,7 +178,7 @@ describe('BusinessControl', () => {
   });
 
   it('should keep card 1 settled and not start stacking while progress is below 0.14 in center screen', () => {
-    component.setScrollProgress(0.10);
+    component.setScrollProgress(0.1);
     expect(component.progress12()).toBe(0);
     expect(component.progress23()).toBe(0);
     expect(component.progress34()).toBe(0);
@@ -218,7 +218,7 @@ describe('BusinessControl', () => {
     expect(component.text2Opacity()).toBe(0);
     expect(component.text3Opacity()).toBe(1);
     expect(component.text4Opacity()).toBe(0);
-    expect(component.card1Opacity()).toBeCloseTo(0.70, 2);
+    expect(component.card1Opacity()).toBeCloseTo(0.7, 2);
     expect(component.card2Opacity()).toBeCloseTo(0.85, 2);
     expect(component.card3Opacity()).toBe(1);
     expect(component.card4Opacity()).toBe(0);
@@ -240,7 +240,7 @@ describe('BusinessControl', () => {
     expect(component.text3Opacity()).toBe(0);
     expect(component.text4Opacity()).toBe(1);
     expect(component.card1Opacity()).toBeCloseTo(0.55, 2);
-    expect(component.card2Opacity()).toBeCloseTo(0.70, 2);
+    expect(component.card2Opacity()).toBeCloseTo(0.7, 2);
     expect(component.card3Opacity()).toBeCloseTo(0.85, 2);
     expect(component.card4Opacity()).toBe(1);
 
@@ -256,19 +256,34 @@ describe('BusinessControl', () => {
     component.setScrollProgress(0.26);
     expect(component.progress12()).toBeGreaterThan(0);
     expect(component.progress12()).toBeLessThan(1);
-    expect(component.text1Opacity() + component.text2Opacity() + component.text3Opacity() + component.text4Opacity()).toBeCloseTo(1, 4);
+    expect(
+      component.text1Opacity() +
+        component.text2Opacity() +
+        component.text3Opacity() +
+        component.text4Opacity(),
+    ).toBeCloseTo(1, 4);
 
     // Transition 2 midpoint
     component.setScrollProgress(0.58);
     expect(component.progress23()).toBeGreaterThan(0);
     expect(component.progress23()).toBeLessThan(1);
-    expect(component.text1Opacity() + component.text2Opacity() + component.text3Opacity() + component.text4Opacity()).toBeCloseTo(1, 4);
+    expect(
+      component.text1Opacity() +
+        component.text2Opacity() +
+        component.text3Opacity() +
+        component.text4Opacity(),
+    ).toBeCloseTo(1, 4);
 
     // Transition 3 midpoint
     component.setScrollProgress(0.88);
     expect(component.progress34()).toBeGreaterThan(0);
     expect(component.progress34()).toBeLessThan(1);
-    expect(component.text1Opacity() + component.text2Opacity() + component.text3Opacity() + component.text4Opacity()).toBeCloseTo(1, 4);
+    expect(
+      component.text1Opacity() +
+        component.text2Opacity() +
+        component.text3Opacity() +
+        component.text4Opacity(),
+    ).toBeCloseTo(1, 4);
   });
 
   it('should contain all required project cost items and KPI metrics', () => {
@@ -410,7 +425,11 @@ describe('BusinessControl', () => {
 
       // Default window scrollY and innerHeight
       Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true });
-      Object.defineProperty(window, 'innerHeight', { value: 800, writable: true, configurable: true });
+      Object.defineProperty(window, 'innerHeight', {
+        value: 800,
+        writable: true,
+        configurable: true,
+      });
     });
 
     it('should immediately set scrollProgress to 1 and isNavigating to true when anchor is below stacking section', () => {
@@ -510,5 +529,37 @@ describe('BusinessControl', () => {
       clearSpy.mockRestore();
     });
   });
-});
 
+  it('should reverse an in-flight snap instead of swallowing the opposite mouse-wheel direction', () => {
+    const snapSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    const mockTrack = document.createElement('div');
+
+    Object.defineProperty(mockTrack, 'getBoundingClientRect', {
+      value: () => ({ top: 70, bottom: 2500, height: 2430 }),
+    });
+
+    Object.defineProperty(component, 'trackRef', {
+      value: () => ({ nativeElement: mockTrack }),
+      configurable: true,
+    });
+
+    component.setScrollProgress(0);
+    component.snapToCard(1);
+
+    expect(snapSpy).toHaveBeenLastCalledWith(1);
+    expect(component.isSnapping()).toBe(true);
+
+    const preventDefault = vi.fn();
+
+    component.onTrackWheel({
+      deltaY: -80,
+      deltaMode: 0,
+      preventDefault,
+    } as unknown as WheelEvent);
+
+    expect(preventDefault).toHaveBeenCalled();
+    expect(snapSpy).toHaveBeenLastCalledWith(0);
+
+    snapSpy.mockRestore();
+  });
+});

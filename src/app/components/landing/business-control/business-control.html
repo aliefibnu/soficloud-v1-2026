@@ -1,13 +1,8 @@
 <section
   #trackRef
-  class="w-full relative h-[420vh] scroll-mt-20 snap-y snap-mandatory scroll-smooth"
+  class="w-full relative h-[420vh] scroll-mt-20"
   aria-label="Business Control Interactive Showcase"
 >
-  <!-- Vertical snap anchors (CSS Scroll Snap Y-axis mandatory) -->
-  <div class="snap-anchor absolute top-0 left-0 w-full h-[105vh] snap-center pointer-events-none" aria-hidden="true"></div>
-  <div class="snap-anchor absolute top-[105vh] left-0 w-full h-[105vh] snap-center pointer-events-none" aria-hidden="true"></div>
-  <div class="snap-anchor absolute top-[210vh] left-0 w-full h-[105vh] snap-center pointer-events-none" aria-hidden="true"></div>
-  <div class="snap-anchor absolute top-[315vh] left-0 w-full h-[105vh] snap-center pointer-events-none" aria-hidden="true"></div>
 
   <div
     class="h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
@@ -30,11 +25,11 @@
     >
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
         <div
-          class="lg:col-span-7 relative flex flex-col h-115 sm:h-120 lg:h-125 pt-14 sm:pt-16 lg:pt-18 snap-y snap-mandatory"
+          class="lg:col-span-7 relative flex flex-col h-115 sm:h-120 lg:h-125 pt-14 sm:pt-16 lg:pt-18"
         >
           <!-- PREVIEW CARD 1: Interactive Income and Expense Chart (Base layer) -->
           <div
-            class="preview-card-1 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-md shadow-blue-950/5 p-4 sm:p-5 lg:p-6 border border-slate-200/90 select-none will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
+            class="preview-card-1 absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-md shadow-blue-950/5 p-4 sm:p-5 lg:p-6 border border-slate-200/90 select-none will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card1Transform()"
@@ -346,7 +341,7 @@
 
           <!-- PREVIEW CARD 2: Connected Processes (Covers Card 1) -->
           <div
-            class="preview-card-2 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden"
+            class="preview-card-2 absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card2Transform()"
@@ -608,7 +603,7 @@
 
           <!-- PREVIEW CARD 3: Workflow & Approval (Covers Card 2) -->
           <div
-            class="preview-card-3 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
+            class="preview-card-3 absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card3Transform()"
@@ -971,7 +966,7 @@
 
           <!-- PREVIEW CARD 4: Project Revenue & Cost Control (Covers Card 3) -->
           <div
-            class="preview-card-4 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
+            class="preview-card-4 absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card4Transform()"
@@ -1147,10 +1142,10 @@
         <div
           class="lg:col-span-5 relative flex flex-col justify-start lg:pl-4"
         >
-          <div class="grid grid-cols-1 grid-rows-1 w-full min-h-[24.5rem] sm:min-h-[25rem] lg:min-h-[25.5rem] snap-y snap-mandatory">
+          <div class="grid grid-cols-1 grid-rows-1 w-full min-h-[24.5rem] sm:min-h-[25rem] lg:min-h-[25.5rem]">
             <!-- Text 1: Real-Time Monitoring -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 0 ? 1 : 0"
@@ -1182,7 +1177,7 @@
 
             <!-- Text 2: Connected Business Processes -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 1 ? 1 : 0"
@@ -1214,7 +1209,7 @@
 
             <!-- Text 3: Structured Workflow & Approval -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 2 ? 1 : 0"
@@ -1246,7 +1241,7 @@
 
             <!-- Text 4: Financial & Cost Insight -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 3 ? 1 : 0"
