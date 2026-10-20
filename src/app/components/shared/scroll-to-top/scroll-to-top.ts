@@ -25,10 +25,16 @@ export class ScrollToTop {
   scrollToHero(): void {
     if (isPlatformBrowser(this.platformId)) {
       const heroEl = document.getElementById('hero');
-      if (heroEl) {
-        heroEl.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      // If business-control handles smooth 900ms cubic easeInOut navigation via document click,
+      // avoid firing native scrollIntoView which causes conflicting browser scroll animations.
+      const hasBusinessControl =
+        typeof document !== 'undefined' && !!document.querySelector('app-business-control');
+      if (!hasBusinessControl) {
+        if (heroEl) {
+          heroEl.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
     }
   }
