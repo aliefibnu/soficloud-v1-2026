@@ -639,6 +639,16 @@
     private handlePotentialAnchorClick(event: MouseEvent): void {
       if (!this.isBrowser) return;
       const target = event.target as HTMLElement | null;
+
+      const scrollToTopBtn = target?.closest('app-scroll-to-top button, [data-scroll-to-top]');
+      if (scrollToTopBtn) {
+        const handled = this.checkAndHandleAnchor('hero');
+        if (handled) {
+          event.preventDefault();
+          return;
+        }
+      }
+
       const anchor = target?.closest('a');
       if (!anchor) return;
 
@@ -738,7 +748,8 @@
           return true;
         }
       } else if (isAbove) {
-        const isPastStart = currentScroll > 0 || this.scrollProgress() > 0;
+        const currentY = typeof window !== 'undefined' ? window.scrollY : 0;
+        const isPastStart = currentScroll > 0 || this.scrollProgress() > 0 || currentY > 10;
         if (isPastStart) {
           this.startAnchorNavigation(0, targetScrollY !== null ? targetScrollY : undefined);
           return true;
