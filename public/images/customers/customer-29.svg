@@ -1,5 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 334" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient id="b" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#e6e7e8"/><stop offset="30%" stop-color="#fff"/><stop offset="65%" stop-color="#939598"/><stop offset="100%" stop-color="#d1d3d4"/></linearGradient><linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#8ed8f8"/><stop offset="50%" stop-color="#29abe2"/><stop offset="100%" stop-color="#0071bc"/></linearGradient><linearGradient id="h" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#56c5f0"/><stop offset="100%" stop-color="#0083ca"/></linearGradient><linearGradient id="i" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#0072bc"/><stop offset="100%" stop-color="#004a80"/></linearGradient><linearGradient id="j" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#00548e"/><stop offset="100%" stop-color="#003459"/></linearGradient><linearGradient id="f" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#ed1c24"/><stop offset="100%" stop-color="#a61018"/></linearGradient><linearGradient id="e" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#9e0b0f"/><stop offset="100%" stop-color="#5e0508"/></linearGradient><linearGradient id="d" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#939598"/><stop offset="100%" stop-color="#58595b"/></linearGradient><linearGradient id="c" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#6d6e71"/><stop offset="100%" stop-color="#414042"/></linearGradient><filter id="a" width="130%" height="130%" x="-10%" y="-10%"><feDropShadow dx="2" dy="3" flood-color="#000" flood-opacity="0.6" stdDeviation="3"/></filter></defs><path fill="#050505" d="M0 0h1024v334h-1024z"/><g filter="url(#a)"><path fill="url(#b)" stroke="#6d6e71" stroke-linejoin="round" d="M92 306v-68l62-64 22 30c3 4 2 8-2 12z"/><path fill="url(#c)" d="M101 277v-31l52-54 12 16z"/><path fill="url(#d)" d="m101 277 11-29 41-44 12 4z"/></g><g filter="url(#a)"><path fill="url(#b)" stroke="#6d6e71" stroke-linejoin="round" d="M62 304v-78l82-82 27 32c3 4 2 8-2 12z"/><path fill="url(#e)" d="M71 276v-42l72-74 16 20z"/><path fill="url(#f)" d="m71 276 14-38 60-64 14 6z"/></g><g filter="url(#a)"><path fill="url(#b)" stroke="#808285" stroke-linejoin="round" d="M35 23c2-6 8-6 13-1l116 126c4 4 4 9 0 13l-140 149 6-118 32-32-32-32z"/><path fill="url(#g)" d="m43 39 109 115h-38l-65-68z"/><path fill="url(#h)" d="m43 39 6 47 65 68-42 6-33-34z"/><path fill="url(#i)" d="m39 194 33-34 42-6-68 72-12 58z"/><path fill="url(#j)" d="M114 154h38l-118 130 12-58z"/></g><g fill="#fff" font-family="'Montserrat', 'Helvetica Neue', 'Arial', sans-serif"><text x="275" y="120" font-size="68" font-weight="500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="100%" height="100%">
+  <defs>
+    <!-- Main Blue Chevron Gradient -->
+    <linearGradient id="blueGrad" x1="15%" y1="5%" x2="65%" y2="85%">
+      <stop offset="0%" stop-color="#b8def8" />
+      <stop offset="22%" stop-color="#68abd8" />
+      <stop offset="55%" stop-color="#236896" />
+      <stop offset="100%" stop-color="#063859" />
+    </linearGradient>
+
+    <!-- Red Bar Gradient -->
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#961419" />
+      <stop offset="100%" stop-color="#69080c" />
+    </linearGradient>
+
+    <!-- Grey Bar Gradient -->
+    <linearGradient id="greyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#999691" />
+      <stop offset="100%" stop-color="#7f7c77" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="320" fill="#000000" />
+
+  <!-- Left Logo Mark -->
+  <g>
+    <!-- Unified White Outer Contour -->
+    <g fill="#ffffff" stroke="#ffffff" stroke-width="18" stroke-linejoin="round" stroke-linecap="round">
+      <!-- Blue & Bevel Footprint -->
+      <polygon points="41,28 157,148 35,275 39,174 70,143 37,112" />
+      <!-- Red Bar Footprint -->
+      <polygon points="69,240 144,162 159,177 69,273" />
+      <!-- Grey Bar Footprint -->
+      <polygon points="100,246 153,192 166,205 100,275" />
+    </g>
+
+    <!-- Inner White Spacer for Grey Bar -->
+    <polygon points="100,246 153,192 166,205 100,275" fill="#ffffff" stroke="#ffffff" stroke-width="10" stroke-linejoin="round" />
+
+    <!-- Dark Blue Inner Bevel -->
+    <polygon points="38,94 80,136 70,143 37,112" fill="#23435b" />
+
+    <!-- Red Layered Bar -->
+    <polygon points="69,240 144,162 159,177 69,273" fill="url(#redGrad)" />
+
+    <!-- Main Blue Chevron -->
+    <polygon points="41,28 157,148 35,275 39,174 79,136 38,94" fill="url(#blueGrad)" />
+
+    <!-- Grey Layered Bar -->
+    <polygon points="100,246 153,192 166,205 100,275" fill="url(#greyGrad)" />
+  </g>
+
+  <!-- Company Name Typography -->
+  <g fill="#ffffff" font-family="&#39;Segoe UI&#39;, Calibri, &#39;Helvetica Neue&#39;, Arial, sans-serif">
+    <!-- Top Line: PT. PERKASA INOVASI -->
+    <text x="268" y="114" font-size="76" font-weight="400" letter-spacing="2.5">
       PT. PERKASA INOVASI
-    </text><text x="268" y="268" font-size="168" font-weight="700">
-      LOGISTIK
-    </text></g></svg>
+    </text>
+
+    <!-- Bottom Line: LOGISTIK (with bold "TIK") -->
+    <text x="260" y="262" font-size="182" letter-spacing="1">
+      <tspan font-weight="400">LOGIS</tspan><tspan font-weight="700">TIK</tspan>
+    </text>
+  </g>
+</svg>
