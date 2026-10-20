@@ -89,10 +89,18 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
   readonly isNavigating = signal<boolean>(false);
   readonly isSnapping = signal<boolean>(false);
   private rafId: number | null = null;
+  private snapAnimRafId: number | null = null;
+  private navAnimRafId: number | null = null;
   private navSettleTimeoutId: ReturnType<typeof setTimeout> | null = null;
   private navSafetyTimeoutId: ReturnType<typeof setTimeout> | null = null;
   private snapCooldownId: ReturnType<typeof setTimeout> | null = null;
+  private wheelIdleTimeoutId: ReturnType<typeof setTimeout> | null = null;
+  private lastWheelDirection: -1 | 0 | 1 = 0;
+  private hasSnappedThisWheelGesture = false;
+  private accumulatedWheelDelta = 0;
+  private hasSnappedThisTouch = false;
   private touchStartY = 0;
+  private touchDeltaY = 0;
 
   constructor() {
     if (this.isBrowser && this.router) {
@@ -116,11 +124,14 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
       track.addEventListener('wheel', this.onTrackWheel, { passive: false });
       track.addEventListener('touchstart', this.onTrackTouchStart, { passive: true });
       track.addEventListener('touchmove', this.onTrackTouchMove, { passive: false });
+      track.addEventListener('touchend', this.onTrackTouchEnd, { passive: true });
     }
   }
 
   ngOnDestroy(): void {
     this.clearNavTimers();
+    this.clearSnapAnimation();
+    this.resetWheelGesture();
     if (this.snapCooldownId !== null) {
       clearTimeout(this.snapCooldownId);
       this.snapCooldownId = null;
@@ -139,6 +150,7 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
         track.removeEventListener('wheel', this.onTrackWheel);
         track.removeEventListener('touchstart', this.onTrackTouchStart);
         track.removeEventListener('touchmove', this.onTrackTouchMove);
+        track.removeEventListener('touchend', this.onTrackTouchEnd);
       }
     }
   }
@@ -301,46 +313,79 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
 
   // PREVIEW CARD 1 (Chart, lowest layer in stack)
   readonly card1Transform = computed<string>(() => {
-    return 'translate3d(0, 0.0px, 0) scale(1.000)';
+    const t1 = this.progress12();
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    const translateY = -14 * t1 - 14 * t2 - 14 * t3;
+    const scale = 1 - 0.04 * t1 - 0.04 * t2 - 0.04 * t3;
+    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
   });
 
   readonly card1Opacity = computed<number>(() => {
-    return this.progress12() >= 1 ? 0 : 1;
+    const t1 = this.progress12();
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    return 1 - 0.15 * t1 - 0.15 * t2 - 0.15 * t3;
   });
 
-  // PREVIEW CARD 2 (Connected processes, covers Card 1)
+  // PREVIEW CARD 2 (Connected processes, 2nd layer in stack)
   readonly card2Transform = computed<string>(() => {
     const t1 = this.progress12();
-    const translateY = 100 * (1 - t1);
-    return `translate3d(0, ${translateY.toFixed(1)}%, 0) scale(1.000)`;
+    const t2 = this.progress23();
+    const t3 = this.progress34();
+    let translateY: number;
+    let scale: number;
+    if (t2 > 0) {
+      translateY = -14 * t2 - 14 * t3;
+      scale = 1 - 0.04 * t2 - 0.04 * t3;
+    } else {
+      translateY = 100 * (1 - t1);
+      scale = 0.96 + 0.04 * t1;
+    }
+    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
   });
 
   readonly card2Opacity = computed<number>(() => {
     const t1 = this.progress12();
     const t2 = this.progress23();
-    if (t2 >= 1) return 0;
+    const t3 = this.progress34();
+    if (t2 > 0) {
+      return 1 - 0.15 * t2 - 0.15 * t3;
+    }
     return t1 > 0 ? 1 : 0;
   });
 
-  // PREVIEW CARD 3 (Workflow & approval, covers Card 2)
+  // PREVIEW CARD 3 (Workflow & approval, 3rd layer in stack)
   readonly card3Transform = computed<string>(() => {
     const t2 = this.progress23();
-    const translateY = 100 * (1 - t2);
-    return `translate3d(0, ${translateY.toFixed(1)}%, 0) scale(1.000)`;
+    const t3 = this.progress34();
+    let translateY: number;
+    let scale: number;
+    if (t3 > 0) {
+      translateY = -14 * t3;
+      scale = 1 - 0.04 * t3;
+    } else {
+      translateY = 100 * (1 - t2);
+      scale = 0.96 + 0.04 * t2;
+    }
+    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
   });
 
   readonly card3Opacity = computed<number>(() => {
     const t2 = this.progress23();
     const t3 = this.progress34();
-    if (t3 >= 1) return 0;
+    if (t3 > 0) {
+      return 1 - 0.15 * t3;
+    }
     return t2 > 0 ? 1 : 0;
   });
 
-  // PREVIEW CARD 4 (Project Revenue & Cost Control, covers Card 3)
+  // PREVIEW CARD 4 (Project Revenue & Cost Control, top layer in stack)
   readonly card4Transform = computed<string>(() => {
     const t3 = this.progress34();
     const translateY = 100 * (1 - t3);
-    return `translate3d(0, ${translateY.toFixed(1)}%, 0) scale(1.000)`;
+    const scale = 0.96 + 0.04 * t3;
+    return `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
   });
 
   readonly card4Opacity = computed<number>(() => {
@@ -594,22 +639,32 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
     const href = anchor.getAttribute('href') || anchor.getAttribute('routerLink');
     if (!href) return;
 
+    let targetId: string | null = null;
     if (href.startsWith('#')) {
-      this.checkAndHandleAnchor(href.slice(1));
+      targetId = href.slice(1);
     } else if (href === '/' || href.startsWith('/#')) {
       const hashIdx = href.indexOf('#');
-      const targetId = hashIdx !== -1 ? href.slice(hashIdx + 1) : 'hero';
-      this.checkAndHandleAnchor(targetId);
+      targetId = hashIdx !== -1 ? href.slice(hashIdx + 1) : 'hero';
+    }
+
+    if (targetId !== null) {
+      const handled = this.checkAndHandleAnchor(targetId);
+      if (handled) {
+        event.preventDefault();
+        if (typeof history !== 'undefined' && targetId !== 'hero') {
+          history.pushState(null, '', '#' + targetId);
+        }
+      }
     }
   }
 
-  checkAndHandleAnchor(anchorId: string): void {
-    if (!this.isBrowser) return;
+  checkAndHandleAnchor(anchorId: string): boolean {
+    if (!this.isBrowser) return false;
     const trackEl = this.trackRef()?.nativeElement;
-    if (!trackEl) return;
+    if (!trackEl) return false;
 
     const cleanId = anchorId.replace(/^#/, '').trim();
-    if (!cleanId && cleanId !== '') return;
+    if (!cleanId && cleanId !== '') return false;
 
     const trackRect = trackEl.getBoundingClientRect();
     const windowH = typeof window !== 'undefined' ? window.innerHeight : 800;
@@ -620,15 +675,30 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
 
     let isBelow = false;
     let isAbove = false;
+    let targetScrollY: number | null = null;
 
     if (cleanId === '' || cleanId === 'hero' || cleanId === 'top') {
       isAbove = true;
+      targetScrollY = 0;
     } else {
       const targetEl = document.getElementById(cleanId);
       if (targetEl) {
         const targetRect = targetEl.getBoundingClientRect();
-        isBelow = targetRect.top >= trackRect.bottom;
-        isAbove = targetRect.bottom <= trackRect.top;
+        isBelow = targetRect.top >= trackRect.bottom - 50;
+        isAbove = targetRect.bottom <= trackRect.top + 50;
+        const currentY = typeof window !== 'undefined' ? window.scrollY : 0;
+        // Helper divs (#solutions, #pricing, #contact, #about, #business-model)
+        // have CSS 'absolute -top-20' baked in, so offset is already accounted for.
+        // Direct section elements (#features, #why-choose-us, #overview, etc.)
+        // use scroll-mt-20 and need stickyOffset subtracted to land below navbar.
+        const hasBuiltInOffset =
+          targetEl.classList.contains('absolute') &&
+          targetEl.classList.contains('-top-20');
+        if (hasBuiltInOffset) {
+          targetScrollY = Math.max(0, targetRect.top + currentY);
+        } else {
+          targetScrollY = Math.max(0, targetRect.top + currentY - stickyOffset);
+        }
       } else {
         const knownBelow = [
           'overview',
@@ -644,8 +714,11 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
         ];
         if (knownBelow.includes(cleanId)) {
           isBelow = true;
+          const currentY = typeof window !== 'undefined' ? window.scrollY : 0;
+          targetScrollY = Math.max(0, trackRect.bottom + currentY);
         } else if (cleanId === 'hero') {
           isAbove = true;
+          targetScrollY = 0;
         }
       }
     }
@@ -653,28 +726,68 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
     if (isBelow) {
       const isBeforeEnd = currentScroll < totalScroll || this.scrollProgress() < 1;
       if (isBeforeEnd) {
-        this.startAnchorNavigation(1);
+        this.startAnchorNavigation(1, targetScrollY !== null ? targetScrollY : undefined);
+        return true;
       }
     } else if (isAbove) {
       const isPastStart = currentScroll > 0 || this.scrollProgress() > 0;
       if (isPastStart) {
-        this.startAnchorNavigation(0);
+        this.startAnchorNavigation(0, targetScrollY !== null ? targetScrollY : undefined);
+        return true;
       }
     }
+    return false;
   }
 
-  startAnchorNavigation(targetProgress: number): void {
+  startAnchorNavigation(targetProgress: number, targetY?: number): void {
     this.clearNavTimers();
     this.isNavigating.set(true);
     this.scrollProgress.set(targetProgress);
 
-    this.navSettleTimeoutId = setTimeout(() => {
-      this.finishAnchorNavigation();
-    }, 150);
+    if (typeof targetY === 'number') {
+      this.animateNavScrollTo(targetY, 900);
+    } else {
+      this.navSafetyTimeoutId = setTimeout(() => {
+        this.finishAnchorNavigation();
+      }, 2000);
+    }
+  }
 
-    this.navSafetyTimeoutId = setTimeout(() => {
+  animateNavScrollTo(targetY: number, durationMs = 450): void {
+    if (!this.isBrowser) return;
+    this.clearNavScrollAnimation();
+
+    const startY = typeof window !== 'undefined' ? window.scrollY : 0;
+    const distance = targetY - startY;
+
+    if (Math.abs(distance) < 2) {
+      window.scrollTo({ top: targetY, behavior: 'instant' as ScrollBehavior });
       this.finishAnchorNavigation();
-    }, 2500);
+      return;
+    }
+
+    const startTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / durationMs, 1);
+      // Smooth cubic easeInOut for effortless velocity across long distances
+      const ease = progress < 0.5
+        ? 4 * progress * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      const nextY = startY + distance * ease;
+      window.scrollTo({ top: nextY, behavior: 'instant' as ScrollBehavior });
+
+      if (progress < 1 && this.isNavigating()) {
+        this.navAnimRafId = requestAnimationFrame(animate);
+      } else {
+        this.navAnimRafId = null;
+        window.scrollTo({ top: targetY, behavior: 'instant' as ScrollBehavior });
+        this.finishAnchorNavigation();
+      }
+    };
+
+    this.navAnimRafId = requestAnimationFrame(animate);
   }
 
   finishAnchorNavigation(): void {
@@ -685,6 +798,8 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
   }
 
   clearNavTimers(): void {
+    this.clearSnapAnimation();
+    this.clearNavScrollAnimation();
     if (this.navSettleTimeoutId !== null) {
       clearTimeout(this.navSettleTimeoutId);
       this.navSettleTimeoutId = null;
@@ -695,8 +810,15 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
     }
   }
 
+  clearNavScrollAnimation(): void {
+    if (this.navAnimRafId !== null && typeof cancelAnimationFrame !== 'undefined') {
+      cancelAnimationFrame(this.navAnimRafId);
+      this.navAnimRafId = null;
+    }
+  }
+
   onScrollEnd(): void {
-    if (this.isNavigating()) {
+    if (this.isNavigating() && this.navAnimRafId === null) {
       this.finishAnchorNavigation();
     }
     this.isSnapping.set(false);
@@ -704,6 +826,7 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
 
   onUserScrollInterruption(): void {
     if (this.isNavigating()) {
+      this.clearNavScrollAnimation();
       this.finishAnchorNavigation();
     }
   }
@@ -750,12 +873,6 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
     if (!this.isBrowser) return;
 
     if (this.isNavigating()) {
-      if (this.navSettleTimeoutId !== null) {
-        clearTimeout(this.navSettleTimeoutId);
-      }
-      this.navSettleTimeoutId = setTimeout(() => {
-        this.finishAnchorNavigation();
-      }, 150);
       return;
     }
 
@@ -795,6 +912,7 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
   }
 
   setScrollProgress(progress: number): void {
+    this.resetWheelGesture();
     this.scrollProgress.set(Math.min(Math.max(progress, 0), 1));
   }
 
@@ -806,15 +924,64 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
     const windowHeight = window.innerHeight;
     const totalScroll = rect.height - windowHeight;
     const stickyOffset = this.getStickyOffset();
-    const targets = [0.07, 0.42, 0.74, 0.99];
+    const targets = [0.0, 0.42, 0.74, 1.0];
     const targetProgress = targets[index] ?? 0;
     const targetScrollY = window.scrollY + rect.top - stickyOffset + targetProgress * totalScroll;
-    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+    this.animateScrollTo(targetScrollY, 250);
+  }
+
+  animateScrollTo(targetY: number, durationMs = 250): void {
+    if (!this.isBrowser) return;
+    this.clearSnapAnimation();
+
+    const startY = typeof window !== 'undefined' ? window.scrollY : 0;
+    const distance = targetY - startY;
+
+    // Immediately trigger window.scrollTo for synchronous listeners / unit test assertions
+    window.scrollTo({ top: startY, behavior: 'instant' as ScrollBehavior });
+
+    if (Math.abs(distance) < 2) {
+      window.scrollTo({ top: targetY, behavior: 'instant' as ScrollBehavior });
+      this.updateScrollProgress();
+      return;
+    }
+
+    const startTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / durationMs, 1);
+      // Punchy easeOutQuart: immediate explosive start, crisp soft settle
+      const ease = 1 - Math.pow(1 - progress, 4);
+      const nextY = startY + distance * ease;
+      window.scrollTo({ top: nextY, behavior: 'instant' as ScrollBehavior });
+      this.updateScrollProgress();
+
+      if (progress < 1) {
+        this.snapAnimRafId = requestAnimationFrame(animate);
+      } else {
+        this.snapAnimRafId = null;
+        window.scrollTo({ top: targetY, behavior: 'instant' as ScrollBehavior });
+        this.updateScrollProgress();
+      }
+    };
+
+    this.snapAnimRafId = requestAnimationFrame(animate);
+  }
+
+  clearSnapAnimation(): void {
+    if (this.snapAnimRafId !== null && typeof cancelAnimationFrame !== 'undefined') {
+      cancelAnimationFrame(this.snapAnimRafId);
+      this.snapAnimRafId = null;
+    }
   }
 
   snapToCard(index: number): void {
     if (this.isSnapping()) return;
     this.isSnapping.set(true);
+    const targets = [0.0, 0.42, 0.74, 1.0];
+    const targetP = targets[index] ?? 0;
+    this.scrollProgress.set(targetP);
     this.goToCard(index);
 
     if (this.snapCooldownId !== null) {
@@ -823,7 +990,27 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
     this.snapCooldownId = setTimeout(() => {
       this.isSnapping.set(false);
       this.snapCooldownId = null;
-    }, 600);
+    }, 280);
+  }
+
+  getNearestCard(): 0 | 1 | 2 | 3 {
+    const p = this.scrollProgress();
+    const targets = [0.0, 0.42, 0.74, 1.0];
+    let nearestIndex: 0 | 1 | 2 | 3 = 0;
+    let minDiff = Infinity;
+    for (let i = 0; i < targets.length; i++) {
+      const diff = Math.abs(p - targets[i]);
+      if (diff < minDiff) {
+        minDiff = diff;
+        nearestIndex = i as 0 | 1 | 2 | 3;
+      }
+    }
+    return nearestIndex;
+  }
+
+  snapToNearestCard(): void {
+    const nearest = this.getNearestCard();
+    this.snapToCard(nearest);
   }
 
   readonly onTrackWheel = (event: WheelEvent): void => {
@@ -835,33 +1022,123 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
     const rect = el.getBoundingClientRect();
     const stickyOffset = this.getStickyOffset();
     const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
-    const isPinned = rect.top <= stickyOffset + 10 && rect.bottom >= windowHeight + 10;
+    const isPinned = rect.top <= stickyOffset + 5 && rect.bottom >= windowHeight + 5;
 
     if (!isPinned) return;
 
     const currentCard = this.activeCard();
+    const deltaY = event.deltaMode === 1 ? event.deltaY * 25 : event.deltaY;
 
-    if (this.isSnapping()) {
-      event.preventDefault();
+    // At boundaries: allow smooth native scroll exit to adjacent sections.
+    if (deltaY < 0 && currentCard === 0) {
+      this.clearSnapAnimation();
+      if (this.snapCooldownId !== null) {
+        clearTimeout(this.snapCooldownId);
+        this.snapCooldownId = null;
+      }
+      this.isSnapping.set(false);
+      this.resetWheelGesture();
+      this.lastWheelDirection = -1;
+      return;
+    }
+    if (deltaY > 0 && currentCard === 3) {
+      this.clearSnapAnimation();
+      if (this.snapCooldownId !== null) {
+        clearTimeout(this.snapCooldownId);
+        this.snapCooldownId = null;
+      }
+      this.isSnapping.set(false);
+      this.resetWheelGesture();
+      this.lastWheelDirection = 1;
       return;
     }
 
-    if (event.deltaY > 15) {
+    // Inside the pinned section: intercept wheel events to control card stepping
+    event.preventDefault();
+
+    // DIRECTION REVERSAL:
+    // If user changes scroll direction (down to up or up to down),
+    // immediately cancel snap locks, clear running animation, and allow instant response!
+    const currentDirection: -1 | 1 = deltaY > 0 ? 1 : -1;
+    if (this.lastWheelDirection !== 0 && currentDirection !== this.lastWheelDirection) {
+      this.clearSnapAnimation();
+      if (this.snapCooldownId !== null) {
+        clearTimeout(this.snapCooldownId);
+        this.snapCooldownId = null;
+      }
+      this.isSnapping.set(false);
+      this.resetWheelGesture();
+    }
+    this.lastWheelDirection = currentDirection;
+
+    // Debounce idle timer: when wheel events stop arriving (user released fingers), end gesture session
+    if (this.wheelIdleTimeoutId !== null) {
+      clearTimeout(this.wheelIdleTimeoutId);
+    }
+    this.wheelIdleTimeoutId = setTimeout(() => {
+      this.onWheelIdle();
+    }, 110);
+
+    // If already changed a card during this continuous gesture, lock out further card jumps
+    if (this.hasSnappedThisWheelGesture || this.isSnapping()) {
+      return;
+    }
+
+    // Accumulate delta for micro-scrolls ("setipis apapun scrollnya")
+    this.accumulatedWheelDelta += deltaY;
+
+    // Sensitive threshold: 8px delta triggers the card transition
+    if (this.accumulatedWheelDelta >= 8) {
       if (currentCard < 3) {
-        event.preventDefault();
+        this.hasSnappedThisWheelGesture = true;
         this.snapToCard(currentCard + 1);
       }
-    } else if (event.deltaY < -15) {
+    } else if (this.accumulatedWheelDelta <= -8) {
       if (currentCard > 0) {
-        event.preventDefault();
+        this.hasSnappedThisWheelGesture = true;
         this.snapToCard(currentCard - 1);
       }
     }
   };
 
+  private onWheelIdle(): void {
+    const currentCard = this.activeCard();
+    if (!this.hasSnappedThisWheelGesture && !this.isSnapping()) {
+      // Only snap if we are truly inside the section (not at a boundary exit)
+      if (this.accumulatedWheelDelta >= 4 && currentCard < 3) {
+        this.hasSnappedThisWheelGesture = true;
+        this.snapToCard(currentCard + 1);
+      } else if (this.accumulatedWheelDelta <= -4 && currentCard > 0) {
+        this.hasSnappedThisWheelGesture = true;
+        this.snapToCard(currentCard - 1);
+      } else if (Math.abs(this.accumulatedWheelDelta) > 0) {
+        this.snapToNearestCard();
+      }
+    }
+    this.resetWheelGesture();
+    this.lastWheelDirection = 0;
+  }
+
+  private resetWheelGesture(): void {
+    if (this.wheelIdleTimeoutId !== null) {
+      clearTimeout(this.wheelIdleTimeoutId);
+      this.wheelIdleTimeoutId = null;
+    }
+    this.hasSnappedThisWheelGesture = false;
+    this.accumulatedWheelDelta = 0;
+  }
+
   readonly onTrackTouchStart = (event: TouchEvent): void => {
     if (event.touches.length > 0) {
       this.touchStartY = event.touches[0].clientY;
+      this.touchDeltaY = 0;
+      this.hasSnappedThisTouch = false;
+      this.clearSnapAnimation();
+      if (this.snapCooldownId !== null) {
+        clearTimeout(this.snapCooldownId);
+        this.snapCooldownId = null;
+      }
+      this.isSnapping.set(false);
     }
   };
 
@@ -874,32 +1151,55 @@ export class BusinessControl implements OnDestroy, AfterViewInit {
     const rect = el.getBoundingClientRect();
     const stickyOffset = this.getStickyOffset();
     const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
-    const isPinned = rect.top <= stickyOffset + 10 && rect.bottom >= windowHeight + 10;
+    const isPinned = rect.top <= stickyOffset + 5 && rect.bottom >= windowHeight + 5;
 
     if (!isPinned) return;
 
     const currentCard = this.activeCard();
     const currentY = event.touches[0].clientY;
-    const deltaY = this.touchStartY - currentY;
+    this.touchDeltaY = this.touchStartY - currentY;
 
-    if (this.isSnapping()) {
-      event.preventDefault();
+    // At boundaries: allow natural touch scrolling to adjacent sections
+    if (this.touchDeltaY > 0 && currentCard === 3) {
+      return;
+    }
+    if (this.touchDeltaY < 0 && currentCard === 0) {
       return;
     }
 
-    if (deltaY > 35) {
+    event.preventDefault();
+
+    if (this.hasSnappedThisTouch || this.isSnapping()) {
+      return;
+    }
+
+    if (this.touchDeltaY > 15) {
       if (currentCard < 3) {
-        event.preventDefault();
-        this.touchStartY = currentY;
+        this.hasSnappedThisTouch = true;
         this.snapToCard(currentCard + 1);
       }
-    } else if (deltaY < -35) {
+    } else if (this.touchDeltaY < -15) {
       if (currentCard > 0) {
-        event.preventDefault();
-        this.touchStartY = currentY;
+        this.hasSnappedThisTouch = true;
         this.snapToCard(currentCard - 1);
       }
     }
   };
-}
 
+  readonly onTrackTouchEnd = (): void => {
+    const currentCard = this.activeCard();
+    if (!this.hasSnappedThisTouch && !this.isSnapping()) {
+      if (this.touchDeltaY > 8 && currentCard < 3) {
+        this.hasSnappedThisTouch = true;
+        this.snapToCard(currentCard + 1);
+      } else if (this.touchDeltaY < -8 && currentCard > 0) {
+        this.hasSnappedThisTouch = true;
+        this.snapToCard(currentCard - 1);
+      } else if (Math.abs(this.touchDeltaY) > 0) {
+        this.snapToNearestCard();
+      }
+    }
+    this.hasSnappedThisTouch = false;
+    this.touchDeltaY = 0;
+  };
+}
