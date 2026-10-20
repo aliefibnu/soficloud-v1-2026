@@ -34,7 +34,7 @@
         >
           <!-- PREVIEW CARD 1: Interactive Income and Expense Chart (Base layer) -->
           <div
-            class="preview-card-1 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-md shadow-blue-950/5 p-4 sm:p-5 lg:p-6 border border-slate-200/90 select-none will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-1 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-md shadow-blue-950/5 p-4 sm:p-5 lg:p-6 border border-slate-200/90 select-none will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card1Transform()"
@@ -346,7 +346,7 @@
 
           <!-- PREVIEW CARD 2: Connected Processes (Covers Card 1) -->
           <div
-            class="preview-card-2 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out"
+            class="preview-card-2 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card2Transform()"
@@ -608,7 +608,7 @@
 
           <!-- PREVIEW CARD 3: Workflow & Approval (Covers Card 2) -->
           <div
-            class="preview-card-3 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-3 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card3Transform()"
@@ -971,7 +971,7 @@
 
           <!-- PREVIEW CARD 4: Project Revenue & Cost Control (Covers Card 3) -->
           <div
-            class="preview-card-4 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transition-all duration-300 ease-out flex flex-col justify-between"
+            class="preview-card-4 snap-center absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
             [class.!transition-none]="isNavigating()"
             [style.transition]="isNavigating() ? 'none' : null"
             [style.transform]="card4Transform()"
@@ -1150,8 +1150,9 @@
           <div class="grid grid-cols-1 grid-rows-1 w-full min-h-[24.5rem] sm:min-h-[25rem] lg:min-h-[25.5rem] snap-y snap-mandatory">
             <!-- Text 1: Real-Time Monitoring -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center"
-              [style.display]="activeCard() === 0 ? 'flex' : 'none'"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              [class.!transition-none]="isNavigating()"
+              [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 0 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
             >
@@ -1181,8 +1182,9 @@
 
             <!-- Text 2: Connected Business Processes -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center"
-              [style.display]="activeCard() === 1 ? 'flex' : 'none'"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              [class.!transition-none]="isNavigating()"
+              [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 1 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
             >
@@ -1212,8 +1214,9 @@
 
             <!-- Text 3: Structured Workflow & Approval -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center"
-              [style.display]="activeCard() === 2 ? 'flex' : 'none'"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              [class.!transition-none]="isNavigating()"
+              [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 2 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
             >
@@ -1243,8 +1246,9 @@
 
             <!-- Text 4: Financial & Cost Insight -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center"
-              [style.display]="activeCard() === 3 ? 'flex' : 'none'"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start snap-center transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              [class.!transition-none]="isNavigating()"
+              [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 3 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
             >

@@ -337,6 +337,23 @@ describe('BusinessControl', () => {
     component.onTrackWheel({ deltaY: -50, preventDefault } as unknown as WheelEvent);
     expect(snapSpy).toHaveBeenCalledWith(1);
 
+    // Touchpad multi-packet test: micro-deltas (3, 4, 3) accumulate and snap to card 2
+    snapSpy.mockClear();
+    component.setScrollProgress(0.42); // at card 1
+    component.onTrackWheel({ deltaY: 3, preventDefault } as unknown as WheelEvent);
+    component.onTrackWheel({ deltaY: 4, preventDefault } as unknown as WheelEvent);
+    expect(snapSpy).not.toHaveBeenCalled();
+    component.onTrackWheel({ deltaY: 3, preventDefault } as unknown as WheelEvent);
+    expect(snapSpy).toHaveBeenCalledWith(2);
+
+    // Touchpad direction reversal test: immediately scrolling up after scrolling down cancels lock and snaps up
+    snapSpy.mockClear();
+    component.setScrollProgress(0.74); // at card 2
+    component.onTrackWheel({ deltaY: -3, preventDefault } as unknown as WheelEvent);
+    component.onTrackWheel({ deltaY: -4, preventDefault } as unknown as WheelEvent);
+    component.onTrackWheel({ deltaY: -3, preventDefault } as unknown as WheelEvent);
+    expect(snapSpy).toHaveBeenCalledWith(1);
+
     snapSpy.mockRestore();
   });
 
