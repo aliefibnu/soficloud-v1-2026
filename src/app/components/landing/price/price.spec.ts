@@ -120,5 +120,20 @@ describe('Price', () => {
     expect(p1Img?.className).toContain('lg:right-[410px]');
     expect(p2Img?.className).toContain('lg:right-[200px]');
     expect(p3Img?.className).toContain('right-0');
+
+    const bottomCoinsImg = images.find((img) =>
+      img.getAttribute('src')?.endsWith('bottom-coins.svg'),
+    );
+    const coinsImg = images.find((img) => img.getAttribute('src')?.endsWith('/coins.svg'));
+    const coinImg = images.find((img) => img.getAttribute('src')?.endsWith('/coin.svg'));
+
+    expect(bottomCoinsImg?.className).toContain('bottom-0');
+    expect(bottomCoinsImg?.className).not.toContain('-bottom-');
+    expect(bottomCoinsImg?.className).toContain('z-10');
+
+    expect(coinsImg?.className).toContain('bottom-0');
+    expect(coinsImg?.className).toContain('z-20');
+
+    expect(coinImg?.className).toContain('z-30');
   });
 });
