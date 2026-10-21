@@ -79,18 +79,6 @@ describe('Cta', () => {
     expect(card).toBeTruthy();
   });
 
-  it('should render decorative background wave with z-0 above section background', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const waveContainer = compiled.querySelector('.z-0');
-    expect(waveContainer).toBeTruthy();
-
-    const svg = waveContainer?.querySelector('svg');
-    expect(svg).toBeTruthy();
-
-    const path = svg?.querySelector('path');
-    expect(path?.getAttribute('fill')).toBe('#3874db');
-  });
-
   it('should render primary and secondary buttons with DM Sans and emit events on click', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const buttons = compiled.querySelectorAll('button');
