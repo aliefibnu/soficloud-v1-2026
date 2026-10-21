@@ -3,7 +3,7 @@
   [class.rounded-b-4xl]="!isMobileMenuOpen()"
   [class.rounded-b-none]="isMobileMenuOpen()"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative flex items-center justify-between gap-4 lg:gap-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative flex items-center justify-between gap-4 lg:gap-8">
     <a href="/" class="flex items-center shrink-0">
       <img
         ngSrc="/soficloud-logo.svg"
@@ -16,13 +16,20 @@
     </a>
 
     <nav
-      class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-5 xl:gap-8"
+      class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-1 xl:gap-2.5"
       [attr.aria-label]="'HEADER.ARIA.MAIN_NAV' | translate"
     >
       @for (link of navLinks; track link.key) {
         <a
           [href]="link.href"
-          class="text-[15px] xl:text-[16px] font-bold text-[#182849] tracking-[-0.01em] whitespace-nowrap transition-all hover:text-[#1d64ec] hover:opacity-85"
+          (click)="onNavClick(link.key)"
+          [attr.aria-current]="activeLinkKey() === link.key ? 'page' : null"
+          class="px-3 py-1.5 xl:px-3.5 xl:py-1.5 rounded-lg xl:rounded-xl text-[14.5px] xl:text-[15.5px] font-bold tracking-[-0.01em] whitespace-nowrap transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb]"
+          [class.bg-[#EAF2FD]]="activeLinkKey() === link.key"
+          [class.text-[#182849]]="activeLinkKey() === link.key"
+          [class.text-[#182849]/90]="activeLinkKey() !== link.key"
+          [class.hover:text-[#1d64ec]]="activeLinkKey() !== link.key"
+          [class.hover:bg-[#EAF2FD]/50]="activeLinkKey() !== link.key"
         >
           {{ link.key | translate }}
         </a>
@@ -107,7 +114,7 @@
 
       <button
         type="button"
-        class="group relative overflow-hidden w-full md:w-auto rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] px-6 py-2.5 text-[15px] font-semibold text-white shadow-xs transition-all duration-300 hover:shadow-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
+        class="group relative overflow-hidden w-full md:w-auto rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] px-4.5 py-2 xl:px-6 xl:py-2.5 text-[14px] xl:text-[15px] font-semibold text-white shadow-xs transition-all duration-300 hover:shadow-sm active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
         (click)="onScheduleDemo()"
       >
         <span class="relative z-10">{{ 'HEADER.ACTIONS.SCHEDULE_DEMO' | translate }}</span>
@@ -158,12 +165,17 @@
     class="absolute top-full left-0 right-0 z-40 bg-white border-b border-x border-gray-200/70 rounded-b-4xl shadow-[0_16px_36px_-4px_rgba(24,40,73,0.14)] lg:hidden origin-top animate-dropdown motion-reduce:animate-none"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-3 pb-5">
-      <nav class="flex flex-col" [attr.aria-label]="'HEADER.ARIA.MOBILE_NAV' | translate">
+      <nav class="flex flex-col gap-1" [attr.aria-label]="'HEADER.ARIA.MOBILE_NAV' | translate">
         @for (link of navLinks; track link.key) {
           <a
             [href]="link.href"
-            class="py-2.5 text-[15px] font-bold text-[#182849] transition-opacity hover:opacity-75"
-            (click)="closeMobileMenu()"
+            class="px-4 py-2.5 rounded-xl text-[15px] font-bold transition-all duration-200"
+            [class.bg-[#EAF2FD]]="activeLinkKey() === link.key"
+            [class.text-[#182849]]="activeLinkKey() === link.key"
+            [class.text-[#182849]/80]="activeLinkKey() !== link.key"
+            [class.hover:bg-gray-100/70]="activeLinkKey() !== link.key"
+            [attr.aria-current]="activeLinkKey() === link.key ? 'page' : null"
+            (click)="onMobileNavClick(link.key)"
           >
             {{ link.key | translate }}
           </a>
