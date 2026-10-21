@@ -35,7 +35,7 @@ export const TOP_CUSTOMERS: CustomerCompany[] = [
   { id: 2, name: 'PT. VMC Fishing Tackle Indonesia', logo: 'images/customers/customer-10.svg' },
   { id: 3, name: 'PT. Sanipak Indonesia', logo: 'images/customers/customer-4.svg' },
   { id: 4, name: 'PT Rajawali Sakti Utama', logo: 'images/customers/customer-2.svg' },
-  { id: 5, name: 'PT. Salam Jaya Lestari', logo: 'images/customers/customer-21.svg' },
+  { id: 5, name: 'PT. Agro Sarimas Indonesia', logo: 'images/customers/customer-21.svg' },
   { id: 6, name: 'PT. Fanindo Cipta Propertindo', logo: 'images/customers/customer-5.svg' },
   { id: 7, name: 'PT. Suntech Plastics Industries Batam', logo: 'images/customers/customer-16.webp' },
   { id: 8, name: 'PT. Unknown', logo: 'images/customers/customer43.webp' },
