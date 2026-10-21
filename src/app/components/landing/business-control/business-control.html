@@ -1,5 +1,4 @@
 <section
-  id="business-control"
   #trackRef
   class="w-full relative h-[420vh] scroll-mt-20"
   aria-label="Business Control Interactive Showcase"
@@ -28,9 +27,9 @@
       </p>
     </div>
 
-    <!-- Main Container Card with Linear Gradient (#D7E4FA, #EBF2FD, #A9C4F166 40%) -->
+    <!-- Main Container Card with Linear Gradient (#D7E4FA, #EBF2FD, #A9C4F166 40%) - Exact rx 24px -->
     <div
-      class="rounded-3xl sm:rounded-[36px] md:rounded-[40px] px-5 py-3.5 sm:px-7 sm:py-4.5 lg:px-9 lg:py-5 xl:px-10 xl:py-5.5 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-center max-h-[calc(100dvh-11.5rem)]"
+      class="rounded-[24px] px-5 py-3.5 sm:px-7 sm:py-4.5 lg:px-9 lg:py-5 xl:px-10 xl:py-5.5 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-center max-h-[calc(100dvh-11.5rem)]"
       style="background: linear-gradient(180deg, #D7E4FA 0%, #EBF2FD 50%, rgba(169, 196, 241, 0.4) 100%);"
     >
       <!-- Left Vertical Indicator Dots (100% matched to Group 10479.svg: 16px circles, 40px pitch) -->
@@ -45,12 +44,12 @@
             [attr.aria-label]="'Go to card ' + (card + 1)"
             class="w-4 h-4 rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
             [class.bg-[#649CEA]]="activeCard() === card"
-            [class.shadow-[0_0_8px_rgba(48,129,235,0.75)]]="activeCard() === card"
+            [class.shadow-[0_0_10px_rgba(100,156,234,0.85)]]="activeCard() === card"
+            [class.border-0]="activeCard() === card"
             [class.scale-105]="activeCard() === card"
             [class.bg-[#FDFDFD]]="activeCard() !== card"
-            [class.border]="activeCard() !== card"
-            [class.border-[#8EA9DB]/50]="activeCard() !== card"
-            [class.shadow-xs]="activeCard() !== card"
+            [class.border-0]="activeCard() !== card"
+            [class.shadow-none]="activeCard() !== card"
             [class.hover:scale-110]="activeCard() !== card"
             [class.hover:bg-white]="activeCard() !== card"
           ></button>
@@ -60,22 +59,22 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-center sm:pl-7 lg:pl-9">
         <!-- LEFT COLUMN: Category Header & Preview Cards Stack -->
         <div class="lg:col-span-7 flex flex-col justify-center">
-          <!-- Category Header (DM Sans 700 Bold & DM Sans 400 Regular #23244E) -->
-          <div class="relative h-11 sm:h-12 mb-2 sm:mb-2.5">
+          <!-- Category Header: Horizontally aligned with the white card (pl-4 sm:pl-5) -->
+          <div class="relative h-10 sm:h-11 mb-1 sm:mb-1.5 pl-4 sm:pl-5">
             @for (header of categoryHeaders; track header.title; let i = $index) {
               <div
-                class="absolute inset-0 flex flex-col justify-center transition-opacity duration-300 ease-out"
+                class="absolute inset-0 pl-4 sm:pl-5 flex flex-col justify-center transition-opacity duration-300 ease-out"
                 [style.opacity]="activeCard() === i ? 1 : 0"
                 [style.pointerEvents]="activeCard() === i ? 'auto' : 'none'"
               >
                 <span
-                  class="text-sm sm:text-base lg:text-[17px] xl:text-[19px] font-bold tracking-wider text-[#23244E] uppercase"
+                  class="text-sm sm:text-base lg:text-[17px] xl:text-[18px] font-bold tracking-wider text-[#23244E] uppercase"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
                 >
                   {{ header.title }}
                 </span>
                 <span
-                  class="text-[11px] sm:text-xs lg:text-[13px] font-normal tracking-widest text-[#23244E]/80 uppercase mt-0.5"
+                  class="text-[11px] sm:text-xs lg:text-[12px] font-normal tracking-widest text-[#23244E]/80 uppercase mt-0.5"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ header.subtitle }}
@@ -165,12 +164,12 @@
           </div>
         </div>
 
-        <!-- RIGHT COLUMN: Symmetrical Typography & CTA -->
-        <div class="lg:col-span-5 relative flex flex-col justify-center lg:pl-3 xl:pl-5">
-          <div class="grid grid-cols-1 grid-rows-1 w-full min-h-[19rem] sm:min-h-[21rem] lg:min-h-[22rem]">
+        <!-- RIGHT COLUMN: Vertically Centered with the Left Card -->
+        <div class="lg:col-span-5 relative flex flex-col justify-center items-start self-center lg:pl-3 xl:pl-5">
+          <div class="grid grid-cols-1 grid-rows-1 w-full self-center">
             <!-- Text 1: Real-Time Monitoring -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-between py-2 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 0 ? 1 : 0"
@@ -178,13 +177,13 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-semibold text-[#202144] leading-[1.22] tracking-tight"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE' | translate }}
                 </h3>
                 <p
-                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-4 max-w-lg"
+                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.DESC' | translate }}
@@ -202,7 +201,7 @@
 
             <!-- Text 2: Connected Business Processes -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-between py-2 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 1 ? 1 : 0"
@@ -210,13 +209,13 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-semibold text-[#202144] leading-[1.22] tracking-tight"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE' | translate }}
                 </h3>
                 <p
-                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-4 max-w-lg"
+                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.DESC' | translate }}
@@ -234,7 +233,7 @@
 
             <!-- Text 3: Structured Workflow & Approval -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-between py-2 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 2 ? 1 : 0"
@@ -242,13 +241,13 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-semibold text-[#202144] leading-[1.22] tracking-tight"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE' | translate }}
                 </h3>
                 <p
-                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-4 max-w-lg"
+                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.DESC' | translate }}
@@ -266,7 +265,7 @@
 
             <!-- Text 4: Financial & Cost Insight -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-between py-2 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 3 ? 1 : 0"
@@ -274,13 +273,13 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-semibold text-[#202144] leading-[1.22] tracking-tight"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE' | translate }}
                 </h3>
                 <p
-                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-4 max-w-lg"
+                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.DESC' | translate }}
