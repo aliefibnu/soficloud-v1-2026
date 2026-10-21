@@ -35,7 +35,12 @@
     readonly translationKey: string;
   }
 
-  export interface ProcessCard {
+  export interface CardCategoryHeader {
+  readonly title: string;
+  readonly subtitle: string;
+}
+
+export interface ProcessCard {
     readonly id: string;
     readonly step: string;
     readonly title: string;
@@ -163,7 +168,14 @@
       }
     }
 
-    readonly processCards: readonly ProcessCard[] = [
+    readonly categoryHeaders: readonly CardCategoryHeader[] = [
+    { title: 'REAL-TIME BUSINESS CONTROL', subtitle: 'REAL-TIME' },
+    { title: 'END-TO-END BUSINESS INTEGRATION', subtitle: 'INTEGRATE' },
+    { title: 'SMART WORKFLOW & APPROVAL', subtitle: 'AUTOMATE' },
+    { title: 'FINANCIAL & COST INTELLIGENCE', subtitle: 'ANALYZE' },
+  ];
+
+  readonly processCards: readonly ProcessCard[] = [
       {
         id: 'sales',
         step: '01',
