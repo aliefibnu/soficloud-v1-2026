@@ -1142,10 +1142,10 @@
         <div
           class="lg:col-span-5 relative flex flex-col justify-start lg:pl-4"
         >
-          <div class="grid grid-cols-1 grid-rows-1 w-full min-h-[24.5rem] sm:min-h-[25rem] lg:min-h-[25.5rem]">
+          <div class="grid grid-cols-1 grid-rows-1 w-full min-h-98 sm:min-h-100 lg:min-h-102">
             <!-- Text 1: Real-Time Monitoring -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 0 ? 1 : 0"
@@ -1153,13 +1153,13 @@
             >
               <div class="flex flex-col">
                 <h3
-                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-38 sm:min-h-45 lg:min-h-52"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE' | translate }}
                 </h3>
 
                 <p
-                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-22 sm:min-h-23 lg:min-h-23"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.DESC' | translate }}
                 </p>
@@ -1177,7 +1177,7 @@
 
             <!-- Text 2: Connected Business Processes -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 1 ? 1 : 0"
@@ -1185,13 +1185,13 @@
             >
               <div class="flex flex-col">
                 <h3
-                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-38 sm:min-h-45 lg:min-h-52"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE' | translate }}
                 </h3>
 
                 <p
-                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-22 sm:min-h-23 lg:min-h-23"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.DESC' | translate }}
                 </p>
@@ -1209,7 +1209,7 @@
 
             <!-- Text 3: Structured Workflow & Approval -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 2 ? 1 : 0"
@@ -1217,13 +1217,13 @@
             >
               <div class="flex flex-col">
                 <h3
-                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-38 sm:min-h-45 lg:min-h-52"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE' | translate }}
                 </h3>
 
                 <p
-                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-22 sm:min-h-23 lg:min-h-23"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.DESC' | translate }}
                 </p>
@@ -1241,7 +1241,7 @@
 
             <!-- Text 4: Financial & Cost Insight -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 3 ? 1 : 0"
@@ -1249,13 +1249,13 @@
             >
               <div class="flex flex-col">
                 <h3
-                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-38 sm:min-h-45 lg:min-h-52"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE' | translate }}
                 </h3>
 
                 <p
-                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-22 sm:min-h-23 lg:min-h-23"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.DESC' | translate }}
                 </p>
