@@ -1,36 +1,40 @@
 <section
   id="resources"
-  class="relative w-full py-section bg-white overflow-hidden scroll-mt-20"
+  class="relative w-full bg-[#9CBBF0] pb-8 sm:pb-10 lg:pb-[42px] overflow-hidden scroll-mt-20"
   aria-labelledby="business-model-heading"
 >
   <div id="business-model" class="absolute -top-20" aria-hidden="true"></div>
   <div id="solutions" class="absolute -top-20" aria-hidden="true"></div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 xl:gap-7 items-start">
-      <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
-        <div class="flex flex-col justify-end pt-1 lg:pt-1.5 pb-1 lg:pb-1.5">
-          <h2
-            id="business-model-heading"
-            class="font-inter font-bold text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[38px] text-[#182849] tracking-[-0.02em] leading-tight sm:leading-[1.18] whitespace-pre-line"
-          >
-            {{ 'BUSINESS_MODEL.HEADING' | translate }}
-          </h2>
-          <p
-            class="mt-2.5 sm:mt-3 md:mt-3.5 font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-[14.5px] text-slate-600 leading-relaxed max-w-lg xl:max-w-xl"
-          >
-            {{ 'BUSINESS_MODEL.SUBTITLE' | translate }}
-          </p>
+  <div
+    class="w-full bg-white rounded-b-[40px] sm:rounded-b-[60px] md:rounded-b-[80px] lg:rounded-b-[100px] py-section overflow-hidden"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 xl:gap-7 items-start">
+        <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
+          <div class="flex flex-col justify-end pt-1 lg:pt-1.5 pb-1 lg:pb-1.5">
+            <h2
+              id="business-model-heading"
+              class="font-inter font-bold text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[38px] text-[#182849] tracking-[-0.02em] leading-tight sm:leading-[1.18] whitespace-pre-line"
+            >
+              {{ 'BUSINESS_MODEL.HEADING' | translate }}
+            </h2>
+            <p
+              class="mt-2.5 sm:mt-3 md:mt-3.5 font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-[14.5px] text-slate-600 leading-relaxed max-w-lg xl:max-w-xl"
+            >
+              {{ 'BUSINESS_MODEL.SUBTITLE' | translate }}
+            </p>
+          </div>
+
+          @for (card of leftCards; track card.id) {
+            <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
+          }
         </div>
 
-        @for (card of leftCards; track card.id) {
-          <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
-        }
-      </div>
-
-      <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
-        @for (card of rightCards; track card.id) {
-          <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
-        }
+        <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
+          @for (card of rightCards; track card.id) {
+            <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
+          }
+        </div>
       </div>
     </div>
   </div>
