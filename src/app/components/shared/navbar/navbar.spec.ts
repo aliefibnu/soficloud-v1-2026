@@ -32,10 +32,11 @@ describe('Navbar', () => {
     expect(component.navLinks.map((l) => l.key)).toEqual([
       'HEADER.NAV.FEATURES',
       'HEADER.NAV.SOLUTIONS',
-      'HEADER.NAV.ABOUT',
+      'HEADER.NAV.TESTIMONIALS',
       'HEADER.NAV.PRICING',
       'HEADER.NAV.CONTACT',
     ]);
+    expect(component.navLinks.find((l) => l.key === 'HEADER.NAV.TESTIMONIALS')?.href).toBe('#customers');
     expect(component.languages.length).toBe(5);
     expect(component.selectedLang.code).toBe('id');
   });

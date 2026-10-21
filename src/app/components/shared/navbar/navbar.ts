@@ -27,7 +27,7 @@ export class Navbar {
   readonly navLinks: readonly NavLink[] = [
     { key: 'HEADER.NAV.FEATURES', href: '#features' },
     { key: 'HEADER.NAV.SOLUTIONS', href: '#solutions' },
-    { key: 'HEADER.NAV.ABOUT', href: '#why-choose-us' },
+    { key: 'HEADER.NAV.TESTIMONIALS', href: '#customers' },
     { key: 'HEADER.NAV.PRICING', href: '#pricing' },
     { key: 'HEADER.NAV.CONTACT', href: '#contact' },
   ];
