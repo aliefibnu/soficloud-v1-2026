@@ -450,5 +450,11 @@
       "EMAIL": "hello@inforsys.co.id 메일 보내기",
       "LOGO": "SOFICloud 로고"
     }
+  },
+  "PRICE": {
+    "HEADING": "여기서 시작하여\n비즈니스 요구를 실현하세요",
+    "STARTING_FROM": "시작 가격",
+    "AMOUNT": "Rp2.500.000",
+    "BUTTON": "가격 상세 보기"
   }
 }

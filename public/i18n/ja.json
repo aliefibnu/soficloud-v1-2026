@@ -450,5 +450,11 @@
       "EMAIL": "hello@inforsys.co.id へメール送信",
       "LOGO": "SOFICloudロゴ"
     }
+  },
+  "PRICE": {
+    "HEADING": "ここから始める\nあなたのニーズを実現",
+    "STARTING_FROM": "料金プラン",
+    "AMOUNT": "Rp2.500.000〜",
+    "BUTTON": "料金詳細を見る"
   }
 }

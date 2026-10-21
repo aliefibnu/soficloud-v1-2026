@@ -450,5 +450,11 @@
       "EMAIL": "Kirim email ke hello@inforsys.co.id",
       "LOGO": "Logo SOFICloud"
     }
+  },
+  "PRICE": {
+    "HEADING": "Mulai Dari Sini\nWujudkan Kebutuhanmu",
+    "STARTING_FROM": "Harga Mulai Dari",
+    "AMOUNT": "Rp2.500.000",
+    "BUTTON": "Lihat Detail Harga"
   }
 }

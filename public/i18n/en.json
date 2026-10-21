@@ -450,5 +450,11 @@
       "EMAIL": "Send email to hello@inforsys.co.id",
       "LOGO": "SOFICloud Logo"
     }
+  },
+  "PRICE": {
+    "HEADING": "Start From Here\nRealize Your Needs",
+    "STARTING_FROM": "Price Starting From",
+    "AMOUNT": "Rp2,500,000",
+    "BUTTON": "View Price Details"
   }
 }

@@ -6,6 +6,7 @@ import { Hero } from '../../components/landing/hero/hero';
 import { WhyChooseUs } from '../../components/landing/why-choose-us/why-choose-us';
 import { Customers } from '../../components/landing/customers/customers';
 import { BusinessModel } from '../../components/landing/business-model/business-model';
+import { Price } from '../../components/landing/price/price';
 
 @Component({
   imports: [
@@ -16,6 +17,7 @@ import { BusinessModel } from '../../components/landing/business-model/business-
     WhyChooseUs,
     Customers,
     BusinessModel,
+    Price,
   ],
   selector: 'app-landing',
   templateUrl: './landing.html',
