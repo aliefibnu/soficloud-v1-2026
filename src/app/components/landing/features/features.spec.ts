@@ -27,7 +27,7 @@ describe('Features', () => {
         CTA_LEARN_MORE: 'Pelajari Selengkapnya',
         CARDS: {
           FINANCIAL: {
-            TITLE: 'Financial Management & Accounting',
+            TITLE: 'Financial Management &\nAccounting',
             DESC: 'Kelola proses keuangan dan accounting dari transaksi operasional hingga laporan keuangan, cash control, cost analysis dan management insight.',
           },
         },
@@ -66,7 +66,7 @@ describe('Features', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const firstTitle = compiled.querySelector('article h3');
-    expect(firstTitle?.textContent?.trim()).toBe('Financial Management & Accounting');
+    expect(firstTitle?.textContent?.trim()).toBe('Financial Management &\nAccounting');
 
     const firstBtn = compiled.querySelector('article a');
     expect(firstBtn?.textContent?.trim()).toBe('Pelajari Selengkapnya');

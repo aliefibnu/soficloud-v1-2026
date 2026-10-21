@@ -1,10 +1,8 @@
 <section
-  id="business-control"
   #trackRef
   class="w-full relative h-[420vh] scroll-mt-20"
   aria-label="Business Control Interactive Showcase"
 >
-
   <div
     class="h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
     [class.sticky]="!isNavigating()"
@@ -13,1163 +11,188 @@
     [class.sm:top-18]="!isNavigating()"
     [class.lg:top-20]="!isNavigating()"
   >
-    <div class="text-center mb-3 sm:mb-5">
+    <!-- Section Header (Inter 600 Semi Bold & DM Sans 400 Regular #23244E) -->
+    <div class="text-center mb-2.5 sm:mb-3 lg:mb-3.5 max-w-4xl mx-auto shrink-0 px-2">
       <h2
-        class="text-2xl sm:text-3xl lg:text-[38px] font-extrabold text-[#111e38] tracking-tight leading-tight"
+        class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#23244E] tracking-tight leading-tight"
+        style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
       >
         {{ 'BUSINESS_CONTROL.HEADER_TITLE' | translate }}
       </h2>
+      <p
+        class="text-[#23244E] text-xs sm:text-sm lg:text-[15px] xl:text-[16px] mt-1 sm:mt-1.5 w-full max-w-none whitespace-normal sm:whitespace-nowrap text-center leading-relaxed"
+        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+      >
+        {{ 'BUSINESS_CONTROL.HEADER_SUBTITLE' | translate }}
+      </p>
     </div>
 
+    <!-- Main Container Card with Linear Gradient (#D7E4FA, #EBF2FD, #A9C4F166 40%) - Exact rx 24px -->
     <div
-      class="rounded-3xl sm:rounded-[36px] md:rounded-[40px] bg-linear-to-b from-[#ebf3fe] via-[#e2edfd] to-[#d6e6fa] p-4 sm:p-6 lg:p-9 relative shadow-sm border border-blue-100/80 w-full"
+      class="rounded-[24px] px-5 py-3.5 sm:px-7 sm:py-4.5 lg:px-9 lg:py-5 xl:px-10 xl:py-5.5 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-center max-h-[calc(100dvh-11.5rem)]"
+      style="background: linear-gradient(180deg, #D7E4FA 0%, #EBF2FD 50%, rgba(169, 196, 241, 0.4) 100%);"
     >
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
-        <div
-          class="lg:col-span-7 relative flex flex-col h-115 sm:h-120 lg:h-125 pt-14 sm:pt-16 lg:pt-18"
-        >
-          <!-- PREVIEW CARD 1: Interactive Income and Expense Chart (Base layer) -->
-          <div
-            class="preview-card-1 absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-md shadow-blue-950/5 p-4 sm:p-5 lg:p-6 border border-slate-200/90 select-none will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
-            [class.!transition-none]="isNavigating()"
-            [style.transition]="isNavigating() ? 'none' : null"
-            [style.transform]="card1Transform()"
-            [style.opacity]="card1Opacity()"
-            [style.zIndex]="10"
-            [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
-          >
-            <div class="flex items-center justify-between gap-4 mb-4">
-              <h4 class="text-xs sm:text-sm font-bold text-slate-700 tracking-wide uppercase">
-                {{ 'BUSINESS_CONTROL.CHART_TITLE' | translate }}
-              </h4>
+      <!-- Left Vertical Indicator Dots (100% matched to Group 10479.svg: 16px circles, 40px pitch) -->
+      <div
+        class="hidden sm:flex flex-col items-center justify-center gap-6 absolute left-3.5 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30"
+        aria-label="Card navigation indicators"
+      >
+        @for (card of [0, 1, 2, 3]; track card) {
+          <button
+            type="button"
+            (click)="goToCard(card)"
+            [attr.aria-label]="'Go to card ' + (card + 1)"
+            class="w-4 h-4 rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
+            [class.bg-[#649CEA]]="activeCard() === card"
+            [class.shadow-[0_0_10px_rgba(100,156,234,0.85)]]="activeCard() === card"
+            [class.border-0]="activeCard() === card"
+            [class.scale-105]="activeCard() === card"
+            [class.bg-[#FDFDFD]]="activeCard() !== card"
+            [class.border-0]="activeCard() !== card"
+            [class.shadow-none]="activeCard() !== card"
+            [class.hover:scale-110]="activeCard() !== card"
+            [class.hover:bg-white]="activeCard() !== card"
+          ></button>
+        }
+      </div>
 
-              <div class="relative chart-menu-container">
-                <button
-                  type="button"
-                  (click)="toggleMenu($event)"
-                  [attr.aria-label]="'BUSINESS_CONTROL.OPTIONS_MENU' | translate"
-                  class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-100/80 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-700 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
-                >
-                  <svg
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
-                    />
-                  </svg>
-                </button>
-
-                @if (isMenuOpen()) {
-                  <div
-                    class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-2xl border border-slate-100 py-1.5 z-20 animate-in fade-in zoom-in-95 duration-150"
-                  >
-                    <button
-                      type="button"
-                      (click)="resetView()"
-                      class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer"
-                    >
-                      <svg
-                        class="w-3.5 h-3.5 text-slate-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                        />
-                      </svg>
-                      {{ 'BUSINESS_CONTROL.RESET_VIEW' | translate }}
-                    </button>
-                    <button
-                      type="button"
-                      (click)="exportData()"
-                      class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer"
-                    >
-                      <svg
-                        class="w-3.5 h-3.5 text-slate-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                        />
-                      </svg>
-                      {{ 'BUSINESS_CONTROL.EXPORT_DATA' | translate }}
-                    </button>
-                  </div>
-                }
-              </div>
-            </div>
-
-            <div class="relative w-full">
-              @if (activePoint(); as pt) {
-                <div
-                  class="absolute z-10 pointer-events-none transition-all duration-150 ease-out -top-2 transform -translate-x-1/2 -translate-y-full bg-slate-900/90 backdrop-blur-md text-white text-[11px] rounded-xl px-3 py-2 shadow-xl border border-slate-700/50"
-                  [style.left.%]="((pt.x - chartLeft) / (chartRight - chartLeft)) * 86 + 8"
-                >
-                  <div class="font-semibold text-slate-300 pb-1 border-b border-slate-700/60 mb-1">
-                    {{ pt.monthKey | translate }}
-                  </div>
-                  @if (isIncomeVisible()) {
-                    <div class="flex items-center justify-between gap-3 text-[#60a5fa]">
-                      <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}:</span>
-                      <span class="font-bold font-mono">{{ formatCurrency(pt.income) }}</span>
-                    </div>
-                  }
-                  @if (isExpenseVisible()) {
-                    <div class="flex items-center justify-between gap-3 text-[#f87171]">
-                      <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}:</span>
-                      <span class="font-bold font-mono">{{ formatCurrency(pt.expense) }}</span>
-                    </div>
-                  }
-                  <div
-                    class="absolute left-1/2 -bottom-1 -translate-x-1/2 w-2 h-2 bg-slate-900/90 rotate-45 border-r border-b border-slate-700/50"
-                  ></div>
-                </div>
-              }
-
-              <svg
-                [attr.viewBox]="'0 0 ' + svgWidth + ' ' + svgHeight"
-                class="w-full h-auto overflow-visible select-none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Real-time Income and Expense Chart"
-              >
-                @for (grid of yGridLines; track grid.value) {
-                  <line
-                    [attr.x1]="chartLeft"
-                    [attr.y1]="grid.y"
-                    [attr.x2]="chartRight"
-                    [attr.y2]="grid.y"
-                    stroke="#f1f5f9"
-                    stroke-width="1.2"
-                  />
-                  <text
-                    [attr.x]="chartLeft - 8"
-                    [attr.y]="grid.y"
-                    dominant-baseline="central"
-                    text-anchor="end"
-                    class="text-[10px] fill-slate-400 font-medium tracking-tight"
-                  >
-                    {{ grid.label }}
-                  </text>
-                }
-
-                @for (month of monthAxes; track month.x) {
-                  <line
-                    [attr.x1]="month.x"
-                    [attr.y1]="chartTop"
-                    [attr.x2]="month.x"
-                    [attr.y2]="chartBottom"
-                    stroke="#f1f5f9"
-                    stroke-width="1.2"
-                  />
-                }
-
-                @if (activePoint(); as pt) {
-                  <line
-                    [attr.x1]="pt.x"
-                    [attr.y1]="chartTop"
-                    [attr.x2]="pt.x"
-                    [attr.y2]="chartBottom"
-                    stroke="#cbd5e1"
-                    stroke-width="1.5"
-                    stroke-dasharray="3,3"
-                    class="transition-opacity duration-200"
-                  />
-                }
-
-                @if (isExpenseVisible()) {
-                  <path
-                    [attr.d]="expensePath()"
-                    fill="none"
-                    stroke="#f87171"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="transition-opacity duration-300"
-                  />
-                }
-
-                @if (isIncomeVisible()) {
-                  <path
-                    [attr.d]="incomePath()"
-                    fill="none"
-                    stroke="#3b82f6"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="transition-opacity duration-300"
-                  />
-                }
-
-                @if (isExpenseVisible()) {
-                  @for (pt of dataPoints; track pt.id) {
-                    <g class="cursor-pointer">
-                      <circle
-                        [attr.cx]="pt.x"
-                        [attr.cy]="getYForValue(pt.expense)"
-                        [attr.r]="activePointIndex() === pt.id ? 5.5 : 3.5"
-                        fill="#f87171"
-                        stroke="#ffffff"
-                        stroke-width="1.5"
-                        class="transition-all duration-200"
-                      />
-                      @if (activePointIndex() === pt.id) {
-                        <circle
-                          [attr.cx]="pt.x"
-                          [attr.cy]="getYForValue(pt.expense)"
-                          r="9"
-                          fill="none"
-                          stroke="#f87171"
-                          stroke-width="1.5"
-                          stroke-opacity="0.4"
-                          class="animate-pulse"
-                        />
-                      }
-                    </g>
-                  }
-                }
-
-                @if (isIncomeVisible()) {
-                  @for (pt of dataPoints; track pt.id) {
-                    <g class="cursor-pointer">
-                      <circle
-                        [attr.cx]="pt.x"
-                        [attr.cy]="getYForValue(pt.income)"
-                        [attr.r]="activePointIndex() === pt.id ? 5.5 : 3.5"
-                        fill="#3b82f6"
-                        stroke="#ffffff"
-                        stroke-width="1.5"
-                        class="transition-all duration-200"
-                      />
-                      @if (activePointIndex() === pt.id) {
-                        <circle
-                          [attr.cx]="pt.x"
-                          [attr.cy]="getYForValue(pt.income)"
-                          r="9"
-                          fill="none"
-                          stroke="#3b82f6"
-                          stroke-width="1.5"
-                          stroke-opacity="0.4"
-                          class="animate-pulse"
-                        />
-                      }
-                    </g>
-                  }
-                }
-
-                @for (pt of dataPoints; track pt.id) {
-                  <rect
-                    [attr.x]="pt.x - 22"
-                    [attr.y]="chartTop"
-                    width="44"
-                    [attr.height]="chartBottom - chartTop"
-                    fill="transparent"
-                    class="cursor-pointer"
-                    (mouseenter)="setHoveredIndex(pt.id)"
-                    (mouseleave)="setHoveredIndex(null)"
-                    (click)="selectPoint(pt.id)"
-                  />
-                }
-
-                @for (month of monthAxes; track month.x) {
-                  <g
-                    [attr.transform]="
-                      'translate(' + month.x + ', ' + (chartBottom + 16) + ') rotate(-25)'
-                    "
-                  >
-                    <text
-                      x="0"
-                      y="0"
-                      text-anchor="end"
-                      class="text-[10px] sm:text-[11px] fill-slate-400 font-medium tracking-tight"
-                    >
-                      {{ month.translationKey | translate }}
-                    </text>
-                  </g>
-                }
-              </svg>
-            </div>
-
-            <div class="flex items-center justify-center gap-6 mt-3">
-              <button
-                type="button"
-                (click)="toggleExpense()"
-                [class.opacity-40]="!isExpenseVisible()"
-                class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1.5 px-3 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
-                [attr.aria-pressed]="isExpenseVisible()"
-                title="Toggle Expense series"
-              >
-                <span
-                  class="w-5 h-2.5 rounded-sm bg-[#fee2e2] border border-[#f87171] inline-block shadow-2xs"
-                ></span>
-                <span>{{ 'BUSINESS_CONTROL.EXPENSE' | translate }}</span>
-              </button>
-
-              <button
-                type="button"
-                (click)="toggleIncome()"
-                [class.opacity-40]="!isIncomeVisible()"
-                class="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-all cursor-pointer select-none py-1.5 px-3 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
-                [attr.aria-pressed]="isIncomeVisible()"
-                title="Toggle Income series"
-              >
-                <span
-                  class="w-5 h-2.5 rounded-sm bg-[#dbeafe] border border-[#3b82f6] inline-block shadow-2xs"
-                ></span>
-                <span>{{ 'BUSINESS_CONTROL.INCOME' | translate }}</span>
-              </button>
-            </div>
-
-            @if (copyFeedback()) {
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-center sm:pl-7 lg:pl-9">
+        <!-- LEFT COLUMN: Category Header & Preview Cards Stack -->
+        <div class="lg:col-span-7 flex flex-col justify-center">
+          <!-- Category Header: Horizontally aligned with the white card (pl-4 sm:pl-5) -->
+          <div class="relative h-10 sm:h-11 mb-1 sm:mb-1.5 pl-4 sm:pl-5">
+            @for (header of categoryHeaders; track header.title; let i = $index) {
               <div
-                class="absolute bottom-3 right-3 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg shadow-lg animate-in fade-in duration-150"
+                class="absolute inset-0 pl-4 sm:pl-5 flex flex-col justify-center transition-opacity duration-300 ease-out"
+                [style.opacity]="activeCard() === i ? 1 : 0"
+                [style.pointerEvents]="activeCard() === i ? 'auto' : 'none'"
               >
-                ✓ Data copied to clipboard
+                <span
+                  class="text-sm sm:text-base lg:text-[17px] xl:text-[18px] font-bold tracking-wider text-[#23244E] uppercase"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                >
+                  {{ header.title }}
+                </span>
+                <span
+                  class="text-[11px] sm:text-xs lg:text-[12px] font-normal tracking-widest text-[#23244E]/80 uppercase mt-0.5"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+                >
+                  {{ header.subtitle }}
+                </span>
               </div>
             }
           </div>
 
-          <!-- PREVIEW CARD 2: Connected Processes (Covers Card 1) -->
-          <div
-            class="preview-card-2 absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden"
-            [class.!transition-none]="isNavigating()"
-            [style.transition]="isNavigating() ? 'none' : null"
-            [style.transform]="card2Transform()"
-            [style.opacity]="card2Opacity()"
-            [style.zIndex]="20"
-            [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
-          >
-            <div class="relative w-full h-full overflow-hidden">
-              <!-- Top Center: 02 Procurement -->
-              <div class="absolute top-1 sm:top-2 left-1/2 -translate-x-1/2 z-20">
-                <div
-                  class="bg-white/95 rounded-2xl p-2 sm:p-2.5 lg:p-3 border border-slate-100/90 shadow-md shadow-blue-950/5 flex flex-col items-center text-center w-23 sm:w-26 lg:w-28.5 backdrop-blur-xs select-none"
-                >
-                  <div
-                    class="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl bg-linear-to-b from-[#eaf2fd] to-[#dceafc] flex items-center justify-center"
-                  >
-                    <img
-                      [ngSrc]="procurementCard.icon"
-                      [width]="procurementCard.iconWidth"
-                      [height]="procurementCard.iconHeight"
-                      [alt]="procurementCard.title"
-                      class="max-w-[70%] max-h-[70%] object-contain select-none"
-                    />
-                    <span
-                      class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-1.5 py-px border border-blue-200/90 shadow-2xs text-[9px] font-bold text-[#1d5fdc] tracking-tight leading-none"
-                    >
-                      {{ procurementCard.step }}
-                    </span>
-                  </div>
-                  <span
-                    class="mt-2 text-[11px] sm:text-xs font-bold text-[#111e38] tracking-tight leading-tight"
-                  >
-                    {{ procurementCard.title }}
-                  </span>
-                  <span
-                    class="text-[9px] sm:text-[10px] text-slate-400 font-normal mt-0.5 leading-tight"
-                  >
-                    {{ procurementCard.subtitle }}
-                  </span>
-                </div>
-              </div>
-
-              <!-- Left Column: 03 Inventory, 04 Production, 06 Project -->
-              <div
-                class="absolute left-1 sm:left-2 lg:left-3 top-1 sm:top-2 bottom-1 sm:bottom-2 flex flex-col justify-between z-20"
-              >
-                <!-- 03 Inventory -->
-                <div
-                  class="bg-white/95 rounded-2xl p-2 sm:p-2.5 lg:p-3 border border-slate-100/90 shadow-md shadow-blue-950/5 flex flex-col items-center text-center w-23 sm:w-26 lg:w-28.5 backdrop-blur-xs select-none"
-                >
-                  <div
-                    class="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl bg-linear-to-b from-[#eaf2fd] to-[#dceafc] flex items-center justify-center"
-                  >
-                    <img
-                      [ngSrc]="inventoryCard.icon"
-                      [width]="inventoryCard.iconWidth"
-                      [height]="inventoryCard.iconHeight"
-                      [alt]="inventoryCard.title"
-                      class="max-w-[70%] max-h-[70%] object-contain select-none"
-                    />
-                    <span
-                      class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-1.5 py-px border border-blue-200/90 shadow-2xs text-[9px] font-bold text-[#1d5fdc] tracking-tight leading-none"
-                    >
-                      {{ inventoryCard.step }}
-                    </span>
-                  </div>
-                  <span
-                    class="mt-2 text-[11px] sm:text-xs font-bold text-[#111e38] tracking-tight leading-tight"
-                  >
-                    {{ inventoryCard.title }}
-                  </span>
-                  <span
-                    class="text-[9px] sm:text-[10px] text-slate-400 font-normal mt-0.5 leading-tight"
-                  >
-                    {{ inventoryCard.subtitle }}
-                  </span>
-                </div>
-
-                <!-- 04 Production -->
-                <div
-                  class="bg-white/95 rounded-2xl p-2 sm:p-2.5 lg:p-3 border border-slate-100/90 shadow-md shadow-blue-950/5 flex flex-col items-center text-center w-23 sm:w-26 lg:w-28.5 backdrop-blur-xs select-none"
-                >
-                  <div
-                    class="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl bg-linear-to-b from-[#eaf2fd] to-[#dceafc] flex items-center justify-center"
-                  >
-                    <img
-                      [ngSrc]="productionCard.icon"
-                      [width]="productionCard.iconWidth"
-                      [height]="productionCard.iconHeight"
-                      [alt]="productionCard.title"
-                      class="max-w-[70%] max-h-[70%] object-contain select-none"
-                    />
-                    <span
-                      class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-1.5 py-px border border-blue-200/90 shadow-2xs text-[9px] font-bold text-[#1d5fdc] tracking-tight leading-none"
-                    >
-                      {{ productionCard.step }}
-                    </span>
-                  </div>
-                  <span
-                    class="mt-2 text-[11px] sm:text-xs font-bold text-[#111e38] tracking-tight leading-tight"
-                  >
-                    {{ productionCard.title }}
-                  </span>
-                  <span
-                    class="text-[9px] sm:text-[10px] text-slate-400 font-normal mt-0.5 leading-tight"
-                  >
-                    {{ productionCard.subtitle }}
-                  </span>
-                </div>
-
-                <!-- 06 Project -->
-                <div
-                  class="bg-white/95 rounded-2xl p-2 sm:p-2.5 lg:p-3 border border-slate-100/90 shadow-md shadow-blue-950/5 flex flex-col items-center text-center w-23 sm:w-26 lg:w-28.5 backdrop-blur-xs select-none"
-                >
-                  <div
-                    class="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl bg-linear-to-b from-[#eaf2fd] to-[#dceafc] flex items-center justify-center"
-                  >
-                    <img
-                      [ngSrc]="projectCard.icon"
-                      [width]="projectCard.iconWidth"
-                      [height]="projectCard.iconHeight"
-                      [alt]="projectCard.title"
-                      class="max-w-[70%] max-h-[70%] object-contain select-none"
-                    />
-                    <span
-                      class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-1.5 py-px border border-blue-200/90 shadow-2xs text-[9px] font-bold text-[#1d5fdc] tracking-tight leading-none"
-                    >
-                      {{ projectCard.step }}
-                    </span>
-                  </div>
-                  <span
-                    class="mt-2 text-[11px] sm:text-xs font-bold text-[#111e38] tracking-tight leading-tight"
-                  >
-                    {{ projectCard.title }}
-                  </span>
-                  <span
-                    class="text-[9px] sm:text-[10px] text-slate-400 font-normal mt-0.5 leading-tight"
-                  >
-                    {{ projectCard.subtitle }}
-                  </span>
-                </div>
-              </div>
-
-              <!-- Center: Mockup Stand Monitor on Pedestal -->
-              <div
-                class="absolute bottom-0 left-1/2 -translate-x-1/2 w-55 sm:w-62.5 lg:w-68.75 z-10 flex items-end justify-center pointer-events-none"
-              >
-                <img
-                  ngSrc="/images/business-control/mockup stand.svg"
-                  width="255"
-                  height="266"
-                  alt="Connected ERP Dashboard Mockup on Pedestal"
-                  class="w-full h-auto object-contain object-bottom select-none"
-                />
-              </div>
-
-              <!-- Right Column: 01 Sales, 05 General Ledger, 07 Dashboard -->
-              <div
-                class="absolute right-1 sm:right-2 lg:right-3 top-1 sm:top-2 bottom-1 sm:bottom-2 flex flex-col justify-between z-20"
-              >
-                <!-- 01 Sales -->
-                <div
-                  class="bg-white/95 rounded-2xl p-2 sm:p-2.5 lg:p-3 border border-slate-100/90 shadow-md shadow-blue-950/5 flex flex-col items-center text-center w-23 sm:w-26 lg:w-28.5 backdrop-blur-xs select-none"
-                >
-                  <div
-                    class="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl bg-linear-to-b from-[#eaf2fd] to-[#dceafc] flex items-center justify-center"
-                  >
-                    <img
-                      [ngSrc]="salesCard.icon"
-                      [width]="salesCard.iconWidth"
-                      [height]="salesCard.iconHeight"
-                      [alt]="salesCard.title"
-                      class="max-w-[70%] max-h-[70%] object-contain select-none"
-                    />
-                    <span
-                      class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-1.5 py-px border border-blue-200/90 shadow-2xs text-[9px] font-bold text-[#1d5fdc] tracking-tight leading-none"
-                    >
-                      {{ salesCard.step }}
-                    </span>
-                  </div>
-                  <span
-                    class="mt-2 text-[11px] sm:text-xs font-bold text-[#111e38] tracking-tight leading-tight"
-                  >
-                    {{ salesCard.title }}
-                  </span>
-                  <span
-                    class="text-[9px] sm:text-[10px] text-slate-400 font-normal mt-0.5 leading-tight"
-                  >
-                    {{ salesCard.subtitle }}
-                  </span>
-                </div>
-
-                <!-- 05 General Ledger -->
-                <div
-                  class="bg-white/95 rounded-2xl p-2 sm:p-2.5 lg:p-3 border border-slate-100/90 shadow-md shadow-blue-950/5 flex flex-col items-center text-center w-23 sm:w-26 lg:w-28.5 backdrop-blur-xs select-none"
-                >
-                  <div
-                    class="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl bg-linear-to-b from-[#eaf2fd] to-[#dceafc] flex items-center justify-center"
-                  >
-                    <img
-                      [ngSrc]="generalLedgerCard.icon"
-                      [width]="generalLedgerCard.iconWidth"
-                      [height]="generalLedgerCard.iconHeight"
-                      [alt]="generalLedgerCard.title"
-                      class="max-w-[70%] max-h-[70%] object-contain select-none"
-                    />
-                    <span
-                      class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-1.5 py-px border border-blue-200/90 shadow-2xs text-[9px] font-bold text-[#1d5fdc] tracking-tight leading-none"
-                    >
-                      {{ generalLedgerCard.step }}
-                    </span>
-                  </div>
-                  <span
-                    class="mt-2 text-[11px] sm:text-xs font-bold text-[#111e38] tracking-tight leading-tight"
-                  >
-                    {{ generalLedgerCard.title }}
-                  </span>
-                  <span
-                    class="text-[9px] sm:text-[10px] text-slate-400 font-normal mt-0.5 leading-tight"
-                  >
-                    {{ generalLedgerCard.subtitle }}
-                  </span>
-                </div>
-
-                <!-- 07 Dashboard -->
-                <div
-                  class="bg-white/95 rounded-2xl p-2 sm:p-2.5 lg:p-3 border border-slate-100/90 shadow-md shadow-blue-950/5 flex flex-col items-center text-center w-23 sm:w-26 lg:w-28.5 backdrop-blur-xs select-none"
-                >
-                  <div
-                    class="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl bg-linear-to-b from-[#eaf2fd] to-[#dceafc] flex items-center justify-center"
-                  >
-                    <img
-                      [ngSrc]="dashboardCard.icon"
-                      [width]="dashboardCard.iconWidth"
-                      [height]="dashboardCard.iconHeight"
-                      [alt]="dashboardCard.title"
-                      class="max-w-[70%] max-h-[70%] object-contain select-none"
-                    />
-                    <span
-                      class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-1.5 py-px border border-blue-200/90 shadow-2xs text-[9px] font-bold text-[#1d5fdc] tracking-tight leading-none"
-                    >
-                      {{ dashboardCard.step }}
-                    </span>
-                  </div>
-                  <span
-                    class="mt-2 text-[11px] sm:text-xs font-bold text-[#111e38] tracking-tight leading-tight"
-                  >
-                    {{ dashboardCard.title }}
-                  </span>
-                  <span
-                    class="text-[9px] sm:text-[10px] text-slate-400 font-normal mt-0.5 leading-tight"
-                  >
-                    {{ dashboardCard.subtitle }}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- PREVIEW CARD 3: Workflow & Approval (Covers Card 2) -->
-          <div
-            class="preview-card-3 absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-xl shadow-blue-950/10 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
-            [class.!transition-none]="isNavigating()"
-            [style.transition]="isNavigating() ? 'none' : null"
-            [style.transform]="card3Transform()"
-            [style.opacity]="card3Opacity()"
-            [style.zIndex]="30"
-            [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
-          >
-            <!-- TOP BAR: Header & Stepper -->
-            <div class="border-b border-slate-100 pb-2 sm:pb-2.5 shrink-0">
-              <h4
-                class="text-[10px] sm:text-xs font-extrabold text-[#111e38] tracking-wider uppercase mb-2"
-              >
-                STATUS APPROVAL
-              </h4>
-
-              <div class="flex items-center justify-between gap-1 sm:gap-2">
-                <!-- Step 1: MARKETING MANAGER -->
-                <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
-                  <div
-                    class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-full border-[1.8px] border-[#2563eb] flex items-center justify-center text-[#2563eb] shrink-0 bg-white shadow-2xs"
-                  >
-                    <svg
-                      class="w-3 h-3 sm:w-3.5 sm:h-3.5 stroke-[2.5]"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div class="flex flex-col min-w-0 leading-tight">
-                    <span
-                      class="text-[8.5px] sm:text-[9.5px] lg:text-[10.5px] font-bold text-[#111e38] truncate"
-                    >
-                      MARKETING MANAGER
-                    </span>
-                    <span class="text-[7.5px] sm:text-[8.5px] text-slate-400 font-medium truncate">
-                      ATQIYA WARDA SYAKIRA
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Connector 1 (Blue) -->
-                <div
-                  class="flex-1 max-w-6 sm:max-w-10 lg:max-w-13 h-0.5 bg-[#2563eb] shrink-0"
-                ></div>
-
-                <!-- Step 2: ACCOUNTING & FINANCE -->
-                <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
-                  <div
-                    class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-[9.5px] sm:text-[10.5px] font-bold shrink-0 shadow-2xs"
-                  >
-                    2
-                  </div>
-                  <div class="flex flex-col min-w-0 leading-tight">
-                    <span
-                      class="text-[8.5px] sm:text-[9.5px] lg:text-[10.5px] font-bold text-[#111e38] truncate"
-                    >
-                      ACCOUNTING & FINANCE
-                    </span>
-                    <span class="text-[7px] sm:text-[8px] text-slate-400 font-medium truncate">
-                      waiting approval,
-                    </span>
-                    <span class="text-[7px] sm:text-[8px] text-slate-400 font-medium truncate">
-                      HANIFAH
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Connector 2 (Gray) -->
-                <div
-                  class="flex-1 max-w-6 sm:max-w-10 lg:max-w-13 h-0.5 bg-slate-200 shrink-0"
-                ></div>
-
-                <!-- Step 3: DIRECTOR -->
-                <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
-                  <div
-                    class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-[9.5px] sm:text-[10.5px] font-bold shrink-0 shadow-2xs"
-                  >
-                    3
-                  </div>
-                  <div class="flex flex-col min-w-0 leading-tight">
-                    <span
-                      class="text-[8.5px] sm:text-[9.5px] lg:text-[10.5px] font-bold text-[#111e38] truncate"
-                    >
-                      DIRECTOR
-                    </span>
-                    <span class="text-[7px] sm:text-[8px] text-slate-400 font-medium truncate">
-                      waiting approval,
-                    </span>
-                    <span class="text-[7px] sm:text-[8px] text-slate-400 font-medium truncate">
-                      NABILLA SALSABILA
-                    </span>
-                  </div>
-                </div>
-              </div>
+          <!-- Preview Cards Stacking Container (Aspect ratio 656/470, mathematically identical sizes) -->
+          <div class="relative w-full aspect-[656/470] max-h-[340px] sm:max-h-[390px] lg:max-h-[430px] xl:max-h-[460px]">
+            <!-- Card 1: Real-Time Income and Expense Chart -->
+            <div
+              class="preview-card-1 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
+              [class.!transition-none]="isNavigating()"
+              [style.transition]="isNavigating() ? 'none' : null"
+              [style.transform]="card1Transform()"
+              [style.opacity]="card1Opacity()"
+              [style.zIndex]="10"
+              [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
+            >
+              <img
+                ngSrc="/images/business-control/card-1-preview.svg"
+                width="656"
+                height="470"
+                priority
+                alt="Real-Time Income and Expense Chart"
+                class="w-full h-full object-contain select-none pointer-events-none drop-shadow-xs"
+              />
             </div>
 
-            <!-- MIDDLE: Rail + 2 Form Panels -->
-            <div class="flex gap-2 sm:gap-2.5 items-stretch my-auto py-1">
-              <!-- Left Toolbar Rail: 5 blue outline buttons with blue filled inner square -->
-              <div
-                class="flex flex-col justify-between py-0.5 pr-1.5 sm:pr-2.5 border-r border-slate-100 shrink-0 space-y-1 sm:space-y-1.5"
-              >
-                @for (item of [1, 2, 3, 4, 5]; track item) {
-                  <div
-                    class="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 rounded-[5px] sm:rounded-md border-[1.5px] border-[#2563eb] bg-white flex items-center justify-center shadow-2xs"
-                  >
-                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-xs bg-[#2563eb]"></span>
-                  </div>
-                }
-              </div>
-
-              <!-- Right: Form Fields (2 cards) -->
-              <div class="grid grid-cols-2 gap-2 sm:gap-2.5 flex-1 min-w-0">
-                <!-- Form Card 1 (Left) -->
-                <div
-                  class="rounded-xl border border-slate-200/80 bg-white p-2 sm:p-2.5 flex flex-col justify-between space-y-1 shadow-2xs min-w-0"
-                >
-                  <div class="flex flex-col min-w-0">
-                    <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                      >Request No.</span
-                    >
-                    <div
-                      class="bg-[#f8fafc] border border-slate-200/80 rounded px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold text-[#111e38] truncate"
-                    >
-                      28-07-0009
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-1.5">
-                    <div class="flex flex-col min-w-0">
-                      <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                        >Date</span
-                      >
-                      <div
-                        class="bg-[#f8fafc] border border-slate-200/80 rounded px-1.5 py-0.5 text-[8px] sm:text-[9px] font-semibold text-[#111e38] truncate"
-                      >
-                        06 June 2025
-                      </div>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                      <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                        >Require Date</span
-                      >
-                      <div
-                        class="bg-[#f8fafc] border border-slate-200/80 rounded px-1.5 py-0.5 text-[8px] sm:text-[9px] font-semibold text-[#111e38] truncate"
-                      >
-                        06 June 2025
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col min-w-0">
-                    <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                      >Create By</span
-                    >
-                    <div
-                      class="bg-[#f8fafc] border border-slate-200/80 rounded px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold text-[#111e38] truncate"
-                    >
-                      Nabilla Warda
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col min-w-0">
-                    <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                      >Requestor</span
-                    >
-                    <div
-                      class="bg-[#f8fafc] border border-slate-200/80 rounded px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold text-[#111e38] truncate"
-                    >
-                      Atqiya Salsabila
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Form Card 2 (Right) -->
-                <div
-                  class="rounded-xl border border-slate-200/80 bg-white p-2 sm:p-2.5 flex flex-col justify-between space-y-1 shadow-2xs min-w-0"
-                >
-                  <div class="flex flex-col min-w-0">
-                    <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                      >Purpose</span
-                    >
-                    <div
-                      class="bg-[#f8fafc] border border-slate-200/80 rounded px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold text-[#111e38] flex items-center justify-between"
-                    >
-                      <span class="truncate">Business Trip</span>
-                      <svg
-                        class="w-2.5 h-2.5 text-slate-400 shrink-0 ml-1 stroke-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col min-w-0">
-                    <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                      >Description</span
-                    >
-                    <div
-                      class="bg-[#f8fafc] border border-slate-200/80 rounded px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold text-[#111e38] truncate"
-                    >
-                      Business Trip To Jakarta
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col min-w-0">
-                    <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                      >Project</span
-                    >
-                    <div
-                      class="bg-[#f8fafc] border border-slate-200/80 rounded px-2 py-0.5 h-5.25 sm:h-5.75 text-[9px] flex items-center justify-end"
-                    >
-                      <svg
-                        class="w-2.5 h-2.5 text-slate-400 shrink-0 stroke-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-1.5">
-                    <div class="flex flex-col min-w-0">
-                      <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                        >Division</span
-                      >
-                      <div
-                        class="bg-[#f8fafc] border border-slate-200/80 rounded px-1.5 py-0.5 text-[8px] sm:text-[9px] font-semibold text-[#111e38] flex items-center justify-between"
-                      >
-                        <span class="truncate">GEN - GENERAL</span>
-                        <svg
-                          class="w-2 h-2 text-slate-400 shrink-0 ml-0.5 stroke-2"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                      <span class="text-[8px] sm:text-[8.5px] font-medium text-slate-500 mb-0.5"
-                        >Require Date</span
-                      >
-                      <div
-                        class="bg-[#f8fafc] border border-slate-200/80 rounded px-1.5 py-0.5 text-[8px] sm:text-[9px] font-semibold text-[#111e38] flex items-center justify-between"
-                      >
-                        <span class="truncate">GEN - GENERAL</span>
-                        <svg
-                          class="w-2 h-2 text-slate-400 shrink-0 ml-0.5 stroke-2"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <!-- Card 2: Connected Processes -->
+            <div
+              class="preview-card-2 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
+              [class.!transition-none]="isNavigating()"
+              [style.transition]="isNavigating() ? 'none' : null"
+              [style.transform]="card2Transform()"
+              [style.opacity]="card2Opacity()"
+              [style.zIndex]="20"
+              [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
+            >
+              <img
+                ngSrc="/images/business-control/card-2-preview.svg"
+                width="656"
+                height="470"
+                alt="End-to-End Connected Business Processes"
+                class="w-full h-full object-contain select-none pointer-events-none drop-shadow-xs"
+              />
             </div>
 
-            <!-- BOTTOM: Table + Total Row -->
-            <div class="shrink-0 flex flex-col pt-0.5">
-              <!-- Table Header -->
-              <div
-                class="bg-[#1d64ec] rounded-t-xl px-2.5 sm:px-3 py-1.5 grid grid-cols-12 gap-1 text-[8px] sm:text-[9px] font-semibold text-white tracking-wide uppercase items-center"
-              >
-                <span class="col-span-3 truncate">Request No.</span>
-                <span class="col-span-3 truncate">COA</span>
-                <span class="col-span-1 text-center truncate">UoM</span>
-                <span class="col-span-1 text-center truncate">Qty</span>
-                <span class="col-span-2 text-right truncate">Price</span>
-                <span class="col-span-2 text-right truncate">Amount</span>
-              </div>
-
-              <!-- Table Rows -->
-              <div
-                class="border border-t-0 border-slate-200/80 rounded-b-xl bg-white divide-y divide-slate-100 shadow-2xs"
-              >
-                <!-- Row 1 -->
-                <div
-                  class="px-2.5 sm:px-3 py-1.5 grid grid-cols-12 gap-1 text-[8px] sm:text-[9px] items-center"
-                >
-                  <span class="col-span-3 text-[#111e38] font-medium truncate">
-                    Hotel Ticket – AWS
-                  </span>
-                  <span class="col-span-3 text-[#1d64ec] font-semibold truncate">
-                    600.013 – Travel Expenses
-                  </span>
-                  <span class="col-span-1 text-slate-600 text-center font-medium truncate">
-                    PIECES
-                  </span>
-                  <span class="col-span-1 text-slate-700 text-center font-medium"> 2 </span>
-                  <span class="col-span-2 text-slate-700 text-right font-medium truncate">
-                    Rp 1,800,000.00
-                  </span>
-                  <span class="col-span-2 text-slate-800 text-right font-bold truncate">
-                    Rp 3,600,000.00
-                  </span>
-                </div>
-
-                <!-- Row 2 -->
-                <div
-                  class="px-2.5 sm:px-3 py-1.5 grid grid-cols-12 gap-1 text-[8px] sm:text-[9px] items-center"
-                >
-                  <span class="col-span-3 text-[#111e38] font-medium truncate">
-                    Flight Ticket – NS
-                  </span>
-                  <span class="col-span-3 text-[#1d64ec] font-semibold truncate">
-                    600.013 – Travel Expenses
-                  </span>
-                  <span class="col-span-1 text-slate-600 text-center font-medium truncate">
-                    PIECES
-                  </span>
-                  <span class="col-span-1 text-slate-700 text-center font-medium"> 2 </span>
-                  <span class="col-span-2 text-slate-700 text-right font-medium truncate">
-                    Rp 2,100,000.00
-                  </span>
-                  <span class="col-span-2 text-slate-800 text-right font-bold truncate">
-                    Rp 4,200,000.00
-                  </span>
-                </div>
-              </div>
-
-              <!-- Total row -->
-              <div
-                class="flex justify-end items-center gap-1.5 sm:gap-2 mt-1.5 text-[9px] sm:text-[10px]"
-              >
-                <span class="font-semibold text-slate-600">Total :</span>
-                <div
-                  class="bg-[#f8fafc] border border-slate-200/80 rounded px-1.5 sm:px-2 py-0.5 font-bold text-[#111e38] flex items-center gap-1"
-                >
-                  <span>IDR</span>
-                  <svg
-                    class="w-2.5 h-2.5 text-slate-400 stroke-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-                <div
-                  class="bg-[#f8fafc] border border-slate-200/80 rounded px-2 sm:px-2.5 py-0.5 font-extrabold text-[#111e38] min-w-22.5 sm:min-w-27.5 text-right"
-                >
-                  7,800,000.00
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- PREVIEW CARD 4: Project Revenue & Cost Control (Covers Card 3) -->
-          <div
-            class="preview-card-4 absolute inset-x-0 bottom-0 h-105 sm:h-110 lg:h-115 bg-white rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-950/15 p-3 sm:p-4 lg:p-5 border border-slate-200/90 select-none overflow-hidden will-change-transform transform-gpu backface-hidden flex flex-col justify-between"
-            [class.!transition-none]="isNavigating()"
-            [style.transition]="isNavigating() ? 'none' : null"
-            [style.transform]="card4Transform()"
-            [style.opacity]="card4Opacity()"
-            [style.zIndex]="40"
-            [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
-          >
-            <!-- TOP: Header & Subtitle -->
-            <div class="border-b border-slate-100 pb-2 sm:pb-2.5 shrink-0">
-              <h4 class="text-xs sm:text-sm font-bold text-[#111e38] tracking-tight">
-                Project Revenue &amp; Cost Control
-              </h4>
-              <p class="text-[9px] sm:text-[10px] text-slate-400 font-normal mt-0.5">
-                Project Portfolio overview
-              </p>
+            <!-- Card 3: Workflow & Approval -->
+            <div
+              class="preview-card-3 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
+              [class.!transition-none]="isNavigating()"
+              [style.transition]="isNavigating() ? 'none' : null"
+              [style.transform]="card3Transform()"
+              [style.opacity]="card3Opacity()"
+              [style.zIndex]="30"
+              [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
+            >
+              <img
+                ngSrc="/images/business-control/card-3-preview.svg"
+                width="656"
+                height="470"
+                alt="Smart Workflow and Multi-tier Approval"
+                class="w-full h-full object-contain select-none pointer-events-none drop-shadow-xs"
+              />
             </div>
 
-            <!-- KPI METRICS ROW: 4 Cards -->
-            <div class="grid grid-cols-4 gap-1.5 sm:gap-2.5 mt-2 shrink-0">
-              @for (metric of projectKpiMetrics; track metric.label) {
-                <div
-                  class="bg-white rounded-xl sm:rounded-2xl border border-slate-100/90 shadow-sm shadow-blue-900/5 p-2 sm:p-2.5 flex flex-col justify-center"
-                >
-                  <span class="text-[7.5px] sm:text-[8.5px] text-slate-500 font-medium truncate">
-                    {{ metric.label }}
-                  </span>
-                  <span
-                    class="text-[11px] sm:text-xs lg:text-[13px] font-extrabold text-[#111e38] tracking-tight mt-0.5 truncate"
-                  >
-                    {{ metric.value }}
-                  </span>
-                </div>
-              }
-            </div>
-
-            <!-- BOTTOM PANELS: Left (Budget vs Actual Cost) + Right (Cost Ultilization) -->
-            <div class="grid grid-cols-12 gap-2 sm:gap-2.5 mt-2 flex-1 min-h-0 items-stretch">
-              <!-- LEFT PANEL: Budget vs Actual Cost (col-span-7) -->
-              <div
-                class="col-span-7 bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-2 sm:p-2.5 lg:p-3 shadow-2xs flex flex-col justify-between min-w-0"
-              >
-                <div class="mb-1 shrink-0">
-                  <span
-                    class="text-[7.5px] sm:text-[8px] text-slate-400 font-medium block leading-none"
-                  >
-                    Project Control
-                  </span>
-                  <h5
-                    class="text-[9.5px] sm:text-[11px] font-bold text-[#111e38] tracking-tight mt-0.5 leading-none"
-                  >
-                    Budget vs Actual Cost
-                  </h5>
-                </div>
-
-                <!-- 5 Project List Items -->
-                <div class="flex flex-col justify-between flex-1 space-y-1">
-                  @for (item of projectCostItems; track item.id) {
-                    <div
-                      class="rounded-lg border border-[#7ba7ec]/90 bg-white px-2 py-0.5 sm:py-1 flex items-center justify-between min-w-0"
-                    >
-                      <!-- Left Info -->
-                      <div class="flex flex-col min-w-0 pr-1 leading-tight">
-                        <span class="text-[8px] sm:text-[9px] font-bold text-[#111e38] truncate">
-                          {{ item.name }}
-                        </span>
-                        <span
-                          class="text-[6.5px] sm:text-[7.5px] text-slate-400 font-medium truncate"
-                        >
-                          {{ item.status }}
-                        </span>
-                      </div>
-
-                      <!-- Right Progress Bar + Value -->
-                      <div class="flex items-center gap-1.5 shrink-0">
-                        <div
-                          class="w-14 sm:w-18 lg:w-22 h-1.5 sm:h-2 bg-slate-200 rounded-full overflow-hidden"
-                        >
-                          <div
-                            class="h-full bg-[#1d64ec] rounded-full transition-all duration-300"
-                            [style.width.%]="item.percent"
-                          ></div>
-                        </div>
-                        <span
-                          class="text-[7px] sm:text-[7.5px] text-slate-400 font-medium w-6 sm:w-7 text-right"
-                        >
-                          {{ item.percentLabel }}
-                        </span>
-                      </div>
-                    </div>
-                  }
-                </div>
-              </div>
-
-              <!-- RIGHT PANEL: Cost Ultilization & Portfolio Pulse (col-span-5) -->
-              <div
-                class="col-span-5 bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 p-2 sm:p-2.5 lg:p-3 shadow-2xs flex flex-col justify-between min-w-0"
-              >
-                <div class="shrink-0">
-                  <span
-                    class="text-[7.5px] sm:text-[8px] text-slate-400 font-medium block leading-none"
-                  >
-                    Portfolio Pulse
-                  </span>
-                  <h5
-                    class="text-[9.5px] sm:text-[11px] font-bold text-[#111e38] tracking-tight mt-0.5 leading-none"
-                  >
-                    Cost Ultilization
-                  </h5>
-                </div>
-
-                <!-- Large Percentage & Big Bar -->
-                <div class="my-auto py-1">
-                  <div
-                    class="text-xl sm:text-2xl lg:text-[25px] font-extrabold text-[#111e38] tracking-tight leading-none"
-                  >
-                    51,99%
-                  </div>
-                  <span class="text-[7px] sm:text-[8px] text-slate-400 font-normal block mt-1">
-                    Of Budget Used
-                  </span>
-                  <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden mt-2">
-                    <div class="h-full bg-[#1d64ec] rounded-full w-[52%]"></div>
-                  </div>
-                </div>
-
-                <!-- Footer 3 Counters -->
-                <div class="border-t border-slate-200/80 pt-1.5 shrink-0">
-                  <div class="flex items-center justify-between text-center">
-                    <div>
-                      <span
-                        class="text-[9.5px] sm:text-[10.5px] font-bold text-[#111e38] block leading-none"
-                      >
-                        08
-                      </span>
-                      <span
-                        class="text-[6px] sm:text-[7px] text-slate-400 font-medium block mt-0.5 leading-none"
-                      >
-                        In progres
-                      </span>
-                    </div>
-                    <div>
-                      <span
-                        class="text-[9.5px] sm:text-[10.5px] font-bold text-[#111e38] block leading-none"
-                      >
-                        04
-                      </span>
-                      <span
-                        class="text-[6px] sm:text-[7px] text-slate-400 font-medium block mt-0.5 leading-none"
-                      >
-                        Completed
-                      </span>
-                    </div>
-                    <div>
-                      <span
-                        class="text-[9.5px] sm:text-[10.5px] font-bold text-[#111e38] block leading-none"
-                      >
-                        02
-                      </span>
-                      <span
-                        class="text-[6px] sm:text-[7px] text-slate-400 font-medium block mt-0.5 leading-none"
-                      >
-                        Not Started
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <!-- Card 4: Financial & Cost Insight -->
+            <div
+              class="preview-card-4 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
+              [class.!transition-none]="isNavigating()"
+              [style.transition]="isNavigating() ? 'none' : null"
+              [style.transform]="card4Transform()"
+              [style.opacity]="card4Opacity()"
+              [style.zIndex]="40"
+              [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
+            >
+              <img
+                ngSrc="/images/business-control/card-4-preview.svg"
+                width="656"
+                height="470"
+                alt="Financial and Cost Intelligence Dashboard"
+                class="w-full h-full object-contain select-none pointer-events-none drop-shadow-xs"
+              />
             </div>
           </div>
         </div>
 
-        <!-- RIGHT COLUMN: Symmetrical layout across all cards, perfectly aligned -->
-        <div
-          class="lg:col-span-5 relative flex flex-col justify-start lg:pl-4"
-        >
-          <div class="grid grid-cols-1 grid-rows-1 w-full min-h-[24.5rem] sm:min-h-[25rem] lg:min-h-[25.5rem]">
+        <!-- RIGHT COLUMN: Vertically Centered with the Left Card -->
+        <div class="lg:col-span-5 relative flex flex-col justify-center items-start self-center lg:pl-3 xl:pl-5">
+          <div class="grid grid-cols-1 grid-rows-1 w-full self-center">
             <!-- Text 1: Real-Time Monitoring -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 0 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
             >
-              <div class="flex flex-col">
+              <div>
                 <h3
-                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
+                  style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE' | translate }}
                 </h3>
-
                 <p
-                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.DESC' | translate }}
                 </p>
               </div>
-
               <div class="pt-5 sm:pt-6">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
                 </button>
@@ -1178,30 +201,30 @@
 
             <!-- Text 2: Connected Business Processes -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 1 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
             >
-              <div class="flex flex-col">
+              <div>
                 <h3
-                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
+                  style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE' | translate }}
                 </h3>
-
                 <p
-                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.DESC' | translate }}
                 </p>
               </div>
-
               <div class="pt-5 sm:pt-6">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
                 </button>
@@ -1210,30 +233,30 @@
 
             <!-- Text 3: Structured Workflow & Approval -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 2 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
             >
-              <div class="flex flex-col">
+              <div>
                 <h3
-                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
+                  style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE' | translate }}
                 </h3>
-
                 <p
-                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.DESC' | translate }}
                 </p>
               </div>
-
               <div class="pt-5 sm:pt-6">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
                 </button>
@@ -1242,30 +265,30 @@
 
             <!-- Text 4: Financial & Cost Insight -->
             <div
-              class="col-start-1 row-start-1 w-full flex flex-col justify-start transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 3 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
             >
-              <div class="flex flex-col">
+              <div>
                 <h3
-                  class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#111e38] leading-[1.18] tracking-tight min-h-[9.5rem] sm:min-h-[11.25rem] lg:min-h-[13rem]"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
+                  style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE' | translate }}
                 </h3>
-
                 <p
-                  class="text-slate-600 text-sm sm:text-base leading-relaxed mt-3 sm:mt-4 min-h-[5.5rem] sm:min-h-[5.75rem] lg:min-h-[5.75rem]"
+                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.DESC' | translate }}
                 </p>
               </div>
-
               <div class="pt-5 sm:pt-6">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-linear-to-r from-[#2563eb] to-[#3b82f6] hover:from-[#1d4ed8] hover:to-[#2563eb] text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
                 </button>

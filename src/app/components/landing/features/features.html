@@ -18,7 +18,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 xl:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
       @for (card of cards; track card.id) {
         <article
           class="group relative bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.06)] border border-slate-100/80 transition-all duration-300 ease-out hover:shadow-[0px_12px_32px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 flex flex-col overflow-hidden"
@@ -63,9 +63,9 @@
             }
           </div>
 
-          <div class="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
+          <div class="px-5 py-6 sm:px-6 sm:py-7 xl:px-6 flex flex-col flex-1 justify-between bg-white">
             <h3
-              class="font-dm-sans font-bold text-xl sm:text-[22px] text-[#182849] leading-snug tracking-[-0.01em] min-h-[44px] sm:min-h-[50px] flex items-start"
+              class="font-dm-sans font-bold text-xl sm:text-[22px] lg:text-[22px] xl:text-[25px] 2xl:text-[28px] text-[#182849] leading-[1.25] tracking-tight whitespace-pre-line min-h-[58px] sm:min-h-[64px] xl:min-h-[72px] flex items-start"
             >
               {{ card.titleKey | translate }}
             </h3>

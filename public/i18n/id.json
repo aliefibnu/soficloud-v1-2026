@@ -39,7 +39,7 @@
   },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "Kendalikan Bisnis Dari Satu Tempat",
-    "HEADER_SUBTITLE": "Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan selalu dapat ditelusuri.",
+    "HEADER_SUBTITLE": "Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan dapat ditelusuri kapan saja",
     "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
     "EXPENSE": "Expense",
     "INCOME": "Income",
@@ -52,22 +52,22 @@
     "CARDS": {
       "REALTIME": {
         "TAB": "Monitoring Real-Time",
-        "TITLE": "Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat.",
+        "TITLE": "Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat",
         "DESC": "Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view."
       },
       "CONNECTED": {
         "TAB": "Proses Terhubung",
-        "TITLE": "Seluruh Proses Bisnis Terhubung Dalam Satu Sistem.",
+        "TITLE": "Seluruh Proses Bisnis Terhubung Dalam Satu Sistem",
         "DESC": "Data mengalir dari Sales ke Procurement, Inventory, Manufacturing, Project, hingga Finance & Accounting tanpa input berulang."
       },
       "WORKFLOW": {
         "TAB": "Workflow & Approval",
-        "TITLE": "Workflow & Approval Terstruktur Sesuai Kebijakan Perusahaan.",
+        "TITLE": "Workflow & Approval Terstruktur Sesuai Kebijakan Perusahaan",
         "DESC": "Dokumen bergerak melalui tahapan Diajukan, Ditinjau, Disetujui, Diproses, dan Selesai, lengkap dengan approval chain serta audit trail."
       },
       "INSIGHT": {
         "TAB": "Insight Keuangan",
-        "TITLE": "Insight Keuangan Dan Biaya Untuk Keputusan Yang Lebih Cerdas.",
+        "TITLE": "Insight Keuangan Dan Biaya Untuk Keputusan Yang Lebih Cerdas",
         "DESC": "Revenue, gross margin, cash flow, AR/AP, inventory value, budget versus actual, cost, dan profitability dapat dianalisa dalam satu financial surface."
       }
     },
@@ -261,39 +261,39 @@
     "CTA_LEARN_MORE": "Pelajari Selengkapnya",
     "CARDS": {
       "FINANCIAL": {
-        "TITLE": "Financial Management & Accounting",
+        "TITLE": "Financial Management &\nAccounting",
         "DESC": "Kelola proses keuangan dan accounting dari transaksi operasional hingga laporan keuangan, cash control, cost analysis dan management insight."
       },
       "SALES": {
-        "TITLE": "Sales & Order Management",
+        "TITLE": "Sales & Order\nManagement",
         "DESC": "Kelola proses penjualan dari quotation, Sales Order dan pemenuhan pesanan hingga delivery, invoice dan monitoring revenue."
       },
       "PROCUREMENT": {
-        "TITLE": "Procurement & Vendor Management",
+        "TITLE": "Procurement &\nVendor Management",
         "DESC": "Kelola kebutuhan pembelian dari Purchase Requisition, approval, vendor, Purchase Order hingga penerimaan barang dan supplier invoice."
       },
       "INVENTORY": {
-        "TITLE": "Inventory & Warehouse Management",
+        "TITLE": "Inventory & Warehouse\nManagement",
         "DESC": "Pantau stock dan pergerakan barang secara real-time di berbagai gudang, lengkap dengan location, allocation, transfer, opname dan stock control."
       },
       "MANUFACTURING": {
-        "TITLE": "Manufacturing & Production Control",
+        "TITLE": "Manufacturing &\nProduction Control",
         "DESC": "Kelola perencanaan dan pelaksanaan produksi dari BOM, Routing dan MRP hingga Production Order, WIP serta analisa biaya produksi."
       },
       "PROJECT": {
-        "TITLE": "Project & Cost Management",
+        "TITLE": "Project & Cost\nManagement",
         "DESC": "Kelola project budget, progress dan realisasi biaya untuk memantau cost, budget vs actual serta profitability setiap proyek."
       },
       "WORKFLOW": {
-        "TITLE": "Workflow, Approval & Internal Control",
+        "TITLE": "Workflow, Approval &\nInternal Control",
         "DESC": "Atur workflow, multi-level approval dan otorisasi sesuai struktur perusahaan, lengkap dengan status proses dan audit trail."
       },
       "ANALYTICS": {
-        "TITLE": "Business Analytics & Reporting",
+        "TITLE": "Business Analytics &\nReporting",
         "DESC": "Ubah transaksi harian menjadi dashboard, laporan dan analisa yang membantu management membaca kinerja dan mengambil keputusan."
       },
       "SECURITY": {
-        "TITLE": "Security, Cloud & Auditability",
+        "TITLE": "Security, Cloud &\nAuditability",
         "DESC": "Lindungi akses, data dan histori transaksi melalui role-based authorization, audit trail, cloud access, backup dan monitoring."
       }
     }
