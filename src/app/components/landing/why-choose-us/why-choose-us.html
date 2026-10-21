@@ -86,8 +86,9 @@
 
           <div class="flex flex-col items-center justify-center flex-1 mt-1 sm:mt-1.5 w-full">
             <h3
-              class="font-dm-sans font-bold text-sm sm:text-base md:text-[18px] text-[#182849] leading-snug tracking-[-0.01em] whitespace-pre-line text-center transition-colors duration-300"
-              [class.text-slate-700]="!isCenter"
+              class="font-dm-sans font-bold text-sm sm:text-base md:text-[18px] leading-snug tracking-[-0.01em] whitespace-pre-line text-center transition-colors duration-300"
+              [class.text-[#182849]]="isCenter"
+              [class.text-slate-400]="!isCenter"
             >
               {{ 'WHY_CHOOSE_US.CARDS.' + card.id + '.TITLE' | translate }}
             </h3>

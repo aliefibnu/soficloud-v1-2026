@@ -126,6 +126,22 @@ describe('WhyChooseUs', () => {
     expect(firstImg?.className).toContain('md:max-h-21');
   });
 
+  it('should apply text-[#182849] to center card title and text-slate-400 to unselected card titles', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const cards = compiled.querySelectorAll<HTMLElement>('.carousel-card');
+
+    // Card 0 is center initially
+    const centerTitle = cards[0].querySelector('h3');
+    expect(centerTitle?.classList.contains('text-[#182849]')).toBe(true);
+    expect(centerTitle?.classList.contains('text-slate-400')).toBe(false);
+
+    // Card 1 is unselected initially
+    const unselectedTitle = cards[1].querySelector('h3');
+    expect(unselectedTitle?.classList.contains('text-slate-400')).toBe(true);
+    expect(unselectedTitle?.classList.contains('text-[#182849]')).toBe(false);
+  });
+
   it('should automatically advance to next card after 5 seconds', () => {
     vi.useFakeTimers();
     component.startAutoPlay();
