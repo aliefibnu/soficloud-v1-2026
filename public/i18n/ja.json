@@ -88,11 +88,13 @@
     "SUBTITLE": "業務から財務まで、相互に連携した単一のシステムですべてのビジネスプロセスを管理します。",
     "ACTIONS": {
       "CONTACT_US": "お問い合わせ",
-      "WATCH_VIDEO": "動画を見る"
+      "WATCH_VIDEO": "動画を見る",
+      "ABOUT_SOFICLOUD": "Soficloudについて"
     },
     "ARIA": {
       "CONTACT_US": "Soficloudチームにお問い合わせ",
-      "WATCH_VIDEO": "Soficloudデモ動画を視聴"
+      "WATCH_VIDEO": "Soficloudデモ動画を視聴",
+      "ABOUT_SOFICLOUD": "Soficloudについて詳しく知る"
     },
     "UI_MOCKUP": {
       "HEADER": {

@@ -29,10 +29,12 @@ describe('Hero', () => {
         ACTIONS: {
           CONTACT_US: 'Kontak Kami',
           WATCH_VIDEO: 'Lihat Video',
+          ABOUT_SOFICLOUD: 'Kenali Soficloud',
         },
         ARIA: {
           CONTACT_US: 'Hubungi tim Soficloud',
           WATCH_VIDEO: 'Tonton video demonstrasi Soficloud',
+          ABOUT_SOFICLOUD: 'Kenali lebih lanjut tentang Soficloud',
         },
       },
     });
@@ -83,28 +85,14 @@ describe('Hero', () => {
     const buttons = ctaContainer?.querySelectorAll('button') ?? [];
     expect(buttons.length).toBe(2);
 
-    const contactButton = buttons[0];
-    const videoButton = buttons[1];
-
-    expect(contactButton.textContent).toContain('Kontak Kami');
-    expect(contactButton.getAttribute('aria-label')).toBe('Hubungi tim Soficloud');
+    const videoButton = buttons[0];
+    const aboutButton = buttons[1];
 
     expect(videoButton.textContent).toContain('Lihat Video');
     expect(videoButton.getAttribute('aria-label')).toBe('Tonton video demonstrasi Soficloud');
-  });
 
-  it('should emit contactClick output when "Kontak Kami" button is clicked', () => {
-    let emitted = false;
-    component.contactClick.subscribe(() => {
-      emitted = true;
-    });
-
-    const compiled = fixture.nativeElement as HTMLElement;
-    const ctaContainer = compiled.querySelector('.mt-6');
-    const contactButton = ctaContainer?.querySelectorAll('button')[0];
-    contactButton?.click();
-
-    expect(emitted).toBe(true);
+    expect(aboutButton.textContent).toContain('Kenali Soficloud');
+    expect(aboutButton.getAttribute('aria-label')).toBe('Kenali lebih lanjut tentang Soficloud');
   });
 
   it('should emit videoClick output when "Lihat Video" button is clicked', () => {
@@ -115,10 +103,29 @@ describe('Hero', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     const ctaContainer = compiled.querySelector('.mt-6');
-    const videoButton = ctaContainer?.querySelectorAll('button')[1];
+    const videoButton = ctaContainer?.querySelectorAll('button')[0];
     videoButton?.click();
 
     expect(emitted).toBe(true);
+  });
+
+  it('should emit aboutClick and contactClick output when "Kenali Soficloud" button is clicked', () => {
+    let aboutEmitted = false;
+    let contactEmitted = false;
+    component.aboutClick.subscribe(() => {
+      aboutEmitted = true;
+    });
+    component.contactClick.subscribe(() => {
+      contactEmitted = true;
+    });
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const ctaContainer = compiled.querySelector('.mt-6');
+    const aboutButton = ctaContainer?.querySelectorAll('button')[1];
+    aboutButton?.click();
+
+    expect(aboutEmitted).toBe(true);
+    expect(contactEmitted).toBe(true);
   });
 
   it('should render the ambient background gradient layer with accessibility and overlay attributes', () => {
@@ -140,7 +147,7 @@ describe('Hero', () => {
     const h1 = compiled.querySelector('h1');
     expect(h1?.classList.contains('text-balance')).toBe(true);
 
-    const videoButton = compiled.querySelectorAll('.mt-6 button')[1];
+    const videoButton = compiled.querySelectorAll('.mt-6 button')[0];
     const playIcon = videoButton?.querySelector('img');
     expect(playIcon).toBeTruthy();
     expect(playIcon?.getAttribute('aria-hidden')).toBe('true');
