@@ -1,5 +1,14 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import {
+  afterNextRender,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  PLATFORM_ID,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
 
@@ -16,9 +25,13 @@ export interface NavLink {
     class: 'block sticky top-0 z-50',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'closeMenus()',
+    '(window:scroll)': 'onWindowScroll()',
   },
 })
 export class Navbar {
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly isBrowser = isPlatformBrowser(this.platformId);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef);
   private readonly languageService = inject(LanguageService);
 
@@ -27,14 +40,32 @@ export class Navbar {
   readonly navLinks: readonly NavLink[] = [
     { key: 'HEADER.NAV.FEATURES', href: '#features' },
     { key: 'HEADER.NAV.SOLUTIONS', href: '#solutions' },
-    { key: 'HEADER.NAV.ABOUT', href: '#why-choose-us' },
+    { key: 'HEADER.NAV.TESTIMONIALS', href: '#customers' },
     { key: 'HEADER.NAV.PRICING', href: '#pricing' },
     { key: 'HEADER.NAV.CONTACT', href: '#contact' },
   ];
 
+  readonly activeLinkKey = signal<string | null>(null);
   readonly isLangMenuOpen = signal(false);
   readonly isMobileMenuOpen = signal(false);
   readonly isMobileLangSheetOpen = signal(false);
+
+  private scrollRafId: number | null = null;
+
+  constructor() {
+    if (this.isBrowser) {
+      afterNextRender(() => {
+        this.updateActiveSection();
+      });
+
+      this.destroyRef.onDestroy(() => {
+        if (this.scrollRafId !== null && typeof cancelAnimationFrame !== 'undefined') {
+          cancelAnimationFrame(this.scrollRafId);
+          this.scrollRafId = null;
+        }
+      });
+    }
+  }
 
   get languages(): readonly LanguageOption[] {
     return this.languageService.languages;
@@ -121,10 +152,91 @@ export class Navbar {
     this.isMobileLangSheetOpen.set(false);
   }
 
+  onNavClick(linkKey: string): void {
+    this.activeLinkKey.set(linkKey);
+  }
+
+  onMobileNavClick(linkKey: string): void {
+    this.activeLinkKey.set(linkKey);
+    this.closeMobileMenu();
+  }
+
   onScheduleDemo(): void {
+    this.activeLinkKey.set('HEADER.NAV.CONTACT');
     if (typeof document !== 'undefined') {
       const el = document.getElementById('support') || document.getElementById('contact');
       el?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  onWindowScroll(): void {
+    if (!this.isBrowser) return;
+    if (this.scrollRafId !== null) return;
+    this.scrollRafId = window.requestAnimationFrame(() => {
+      this.scrollRafId = null;
+      this.updateActiveSection();
+    });
+  }
+
+  updateActiveSection(): void {
+    if (!this.isBrowser) return;
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    const windowH = window.innerHeight;
+    const docH = document.documentElement.scrollHeight;
+
+    // Scrolled near the bottom of a scrollable page -> activate Kontak
+    if (docH > windowH && scrollY + windowH >= docH - 60) {
+      this.activeLinkKey.set('HEADER.NAV.CONTACT');
+      return;
+    }
+
+    const threshold = 140; // Reference reading line just beneath the navbar
+    const featuresEl = document.getElementById('features');
+    const businessModelEl =
+      document.getElementById('business-model') || document.getElementById('resources');
+    const customersEl = document.getElementById('customers');
+    const ctaEl = document.getElementById('support') || document.getElementById('contact');
+
+    if (!featuresEl) return;
+
+    const featuresTop = featuresEl.getBoundingClientRect().top;
+    // Above features (Hero or Business Control interactive canvas)
+    if (featuresTop > threshold) {
+      this.activeLinkKey.set(null);
+      return;
+    }
+
+    const businessModelTop = businessModelEl?.getBoundingClientRect().top ?? Infinity;
+    if (businessModelTop > threshold) {
+      // Inside features or why-choose-us
+      this.activeLinkKey.set('HEADER.NAV.FEATURES');
+      return;
+    }
+
+    const customersTop = customersEl?.getBoundingClientRect().top ?? Infinity;
+    if (customersTop > threshold) {
+      // Inside business-model / solutions
+      this.activeLinkKey.set('HEADER.NAV.SOLUTIONS');
+      return;
+    }
+
+    const ctaTop = ctaEl?.getBoundingClientRect().top ?? Infinity;
+    if (ctaTop > threshold) {
+      // Inside customers / testimonials
+      this.activeLinkKey.set('HEADER.NAV.TESTIMONIALS');
+      return;
+    }
+
+    // Inside CTA (Pricing / Contact)
+    if (ctaEl) {
+      const ctaMid = ctaEl.getBoundingClientRect().top + ctaEl.offsetHeight * 0.45;
+      if (ctaMid <= threshold) {
+        this.activeLinkKey.set('HEADER.NAV.CONTACT');
+      } else {
+        this.activeLinkKey.set('HEADER.NAV.PRICING');
+      }
+    } else {
+      this.activeLinkKey.set('HEADER.NAV.CONTACT');
     }
   }
 }

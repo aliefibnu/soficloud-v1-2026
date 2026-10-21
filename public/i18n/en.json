@@ -12,7 +12,8 @@
     "NAV": {
       "FEATURES": "Features",
       "SOLUTIONS": "Solutions",
-      "ABOUT": "About SOFICloud",
+      "ABOUT": "Testimonials",
+      "TESTIMONIALS": "Testimonials",
       "PRICING": "Pricing",
       "CONTACT": "Contact",
       "RESOURCES": "Resources",
@@ -87,11 +88,13 @@
     "SUBTITLE": "Manage your entire business processes in one connected system, from operations to finance.",
     "ACTIONS": {
       "CONTACT_US": "Contact Us",
-      "WATCH_VIDEO": "Watch Video"
+      "WATCH_VIDEO": "Watch Video",
+      "ABOUT_SOFICLOUD": "About Soficloud"
     },
     "ARIA": {
       "CONTACT_US": "Contact Soficloud team",
-      "WATCH_VIDEO": "Watch Soficloud product demonstration video"
+      "WATCH_VIDEO": "Watch Soficloud product demonstration video",
+      "ABOUT_SOFICLOUD": "Learn more about Soficloud"
     },
     "UI_MOCKUP": {
       "HEADER": {

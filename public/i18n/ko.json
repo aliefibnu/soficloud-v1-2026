@@ -12,7 +12,8 @@
     "NAV": {
       "FEATURES": "기능",
       "SOLUTIONS": "솔루션",
-      "ABOUT": "SOFICloud 소개",
+      "ABOUT": "고객 후기",
+      "TESTIMONIALS": "고객 후기",
       "PRICING": "가격",
       "CONTACT": "문의하기",
       "RESOURCES": "리소스",
@@ -87,11 +88,13 @@
     "SUBTITLE": "운영에서 재무까지 연결된 하나의 시스템에서 모든 비즈니스 프로세스를 관리하세요.",
     "ACTIONS": {
       "CONTACT_US": "문의하기",
-      "WATCH_VIDEO": "동영상 보기"
+      "WATCH_VIDEO": "동영상 보기",
+      "ABOUT_SOFICLOUD": "Soficloud 소개"
     },
     "ARIA": {
       "CONTACT_US": "Soficloud 팀에 문의하기",
-      "WATCH_VIDEO": "Soficloud 데모 영상 시청"
+      "WATCH_VIDEO": "Soficloud 데모 영상 시청",
+      "ABOUT_SOFICLOUD": "Soficloud에 대해 자세히 알아보기"
     },
     "UI_MOCKUP": {
       "HEADER": {

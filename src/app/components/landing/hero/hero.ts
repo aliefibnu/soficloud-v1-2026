@@ -14,6 +14,7 @@ import { UiMockup } from './ui-mockup/ui-mockup';
 export class Hero {
   readonly contactClick = output<void>();
   readonly videoClick = output<void>();
+  readonly aboutClick = output<void>();
 
   onContact(): void {
     this.contactClick.emit();
@@ -21,5 +22,14 @@ export class Hero {
 
   onWatchVideo(): void {
     this.videoClick.emit();
+  }
+
+  onAbout(): void {
+    this.aboutClick.emit();
+    this.contactClick.emit();
+    if (typeof document !== 'undefined') {
+      const target = document.getElementById('features') || document.getElementById('why-choose-us');
+      target?.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

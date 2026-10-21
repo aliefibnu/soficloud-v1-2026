@@ -32,10 +32,11 @@ describe('Navbar', () => {
     expect(component.navLinks.map((l) => l.key)).toEqual([
       'HEADER.NAV.FEATURES',
       'HEADER.NAV.SOLUTIONS',
-      'HEADER.NAV.ABOUT',
+      'HEADER.NAV.TESTIMONIALS',
       'HEADER.NAV.PRICING',
       'HEADER.NAV.CONTACT',
     ]);
+    expect(component.navLinks.find((l) => l.key === 'HEADER.NAV.TESTIMONIALS')?.href).toBe('#customers');
     expect(component.languages.length).toBe(5);
     expect(component.selectedLang.code).toBe('id');
   });
@@ -96,5 +97,94 @@ describe('Navbar', () => {
     component.onDocumentClick(mouseEvent);
 
     expect(component.isLangMenuOpen()).toBe(false);
+  });
+
+  it('should initialize activeLinkKey as null at the top of the page', () => {
+    expect(component.activeLinkKey()).toBeNull();
+  });
+
+  it('should update activeLinkKey when onNavClick is called', () => {
+    component.onNavClick('HEADER.NAV.FEATURES');
+    expect(component.activeLinkKey()).toBe('HEADER.NAV.FEATURES');
+
+    component.onNavClick('HEADER.NAV.SOLUTIONS');
+    expect(component.activeLinkKey()).toBe('HEADER.NAV.SOLUTIONS');
+  });
+
+  it('should update activeLinkKey and close mobile menu when onMobileNavClick is called', () => {
+    component.isMobileMenuOpen.set(true);
+    component.onMobileNavClick('HEADER.NAV.TESTIMONIALS');
+
+    expect(component.activeLinkKey()).toBe('HEADER.NAV.TESTIMONIALS');
+    expect(component.isMobileMenuOpen()).toBe(false);
+  });
+
+  it('should set activeLinkKey to CONTACT when onScheduleDemo is called', () => {
+    component.onScheduleDemo();
+    expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
+  });
+
+  it('should correctly detect active section on updateActiveSection based on element rects', () => {
+    const features = document.createElement('div');
+    features.id = 'features';
+    const businessModel = document.createElement('div');
+    businessModel.id = 'business-model';
+    const customers = document.createElement('div');
+    customers.id = 'customers';
+    const cta = document.createElement('div');
+    cta.id = 'support';
+
+    document.body.appendChild(features);
+    document.body.appendChild(businessModel);
+    document.body.appendChild(customers);
+    document.body.appendChild(cta);
+
+    try {
+      // 1. Above features: features top is > 140
+      vi.spyOn(features, 'getBoundingClientRect').mockReturnValue({ top: 300 } as DOMRect);
+      component.updateActiveSection();
+      expect(component.activeLinkKey()).toBeNull();
+
+      // 2. In features / why-choose-us: features top <= 140, businessModel top > 140
+      vi.spyOn(features, 'getBoundingClientRect').mockReturnValue({ top: 100 } as DOMRect);
+      vi.spyOn(businessModel, 'getBoundingClientRect').mockReturnValue({ top: 500 } as DOMRect);
+      component.updateActiveSection();
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.FEATURES');
+
+      // 3. In business-model / solutions: businessModel top <= 140, customers top > 140
+      vi.spyOn(businessModel, 'getBoundingClientRect').mockReturnValue({ top: 50 } as DOMRect);
+      vi.spyOn(customers, 'getBoundingClientRect').mockReturnValue({ top: 600 } as DOMRect);
+      component.updateActiveSection();
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.SOLUTIONS');
+
+      // 4. In customers: customers top <= 140, cta top > 140
+      vi.spyOn(customers, 'getBoundingClientRect').mockReturnValue({ top: 80 } as DOMRect);
+      vi.spyOn(cta, 'getBoundingClientRect').mockReturnValue({ top: 700 } as DOMRect);
+      component.updateActiveSection();
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.TESTIMONIALS');
+
+      // 5. In upper CTA (pricing): cta top <= 140, ctaMid > 140
+      Object.defineProperty(cta, 'offsetHeight', { value: 600, configurable: true });
+      vi.spyOn(cta, 'getBoundingClientRect').mockReturnValue({ top: 50 } as DOMRect); // 50 + 270 = 320 > 140
+      component.updateActiveSection();
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.PRICING');
+
+      // 6. In lower CTA / contact: ctaMid <= 140
+      vi.spyOn(cta, 'getBoundingClientRect').mockReturnValue({ top: -200 } as DOMRect); // -200 + 270 = 70 <= 140
+      component.updateActiveSection();
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
+
+      // 7. Scrolled to bottom of page
+      Object.defineProperty(document.documentElement, 'scrollHeight', { value: 3000, configurable: true });
+      Object.defineProperty(window, 'innerHeight', { value: 800, configurable: true });
+      Object.defineProperty(window, 'scrollY', { value: 2200, configurable: true }); // 2200 + 800 = 3000 >= 3000 - 60
+      component.updateActiveSection();
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
+    } finally {
+      document.body.removeChild(features);
+      document.body.removeChild(businessModel);
+      document.body.removeChild(customers);
+      document.body.removeChild(cta);
+    }
   });
 });
