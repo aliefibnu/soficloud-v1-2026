@@ -108,5 +108,17 @@ describe('Price', () => {
     const arrowImg = images.find((img) => img.getAttribute('src')?.includes('arrow-graph.svg'));
     expect(arrowImg?.className).toContain('-top-20');
     expect(arrowImg?.className).toContain('lg:-top-[148px]');
+
+    const p1Img = images.find((img) => img.getAttribute('src')?.includes('pillar-1.svg'));
+    const p2Img = images.find((img) => img.getAttribute('src')?.includes('pillar-2.svg'));
+    const p3Img = images.find((img) => img.getAttribute('src')?.includes('pillar-3.svg'));
+
+    expect(p1Img?.className).toContain('opacity-40');
+    expect(p2Img?.className).toContain('opacity-40');
+    expect(p3Img?.className).toContain('opacity-40');
+
+    expect(p1Img?.className).toContain('lg:right-[410px]');
+    expect(p2Img?.className).toContain('lg:right-[200px]');
+    expect(p3Img?.className).toContain('right-0');
   });
 });

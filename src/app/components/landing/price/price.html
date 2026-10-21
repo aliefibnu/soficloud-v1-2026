@@ -74,30 +74,33 @@
           class="pointer-events-none absolute -top-20 sm:-top-28 lg:-top-[148px] -right-4 sm:-right-8 lg:-right-[40px] w-[500px] sm:w-[580px] lg:w-[636px] max-w-none opacity-40 object-contain object-right-top"
         />
 
-        <!-- 3 Pillars (Stepped Bar Chart at Bottom-Right) -->
-        <div class="absolute bottom-0 right-0 flex items-end pointer-events-none">
-          <img
-            ngSrc="/images/price/pillar-1.svg"
-            width="131"
-            height="106"
-            alt=""
-            class="w-[110px] lg:w-[131px] h-auto shrink-0"
-          />
-          <img
-            ngSrc="/images/price/pillar-2.svg"
-            width="131"
-            height="202"
-            alt=""
-            class="w-[110px] lg:w-[131px] h-auto shrink-0"
-          />
-          <img
-            ngSrc="/images/price/pillar-3.svg"
-            width="131"
-            height="298"
-            alt=""
-            class="w-[110px] lg:w-[131px] h-auto shrink-0"
-          />
-        </div>
+        <!-- 3 Pillars (Stepped Bar Chart with Gaps & Reduced Opacity) -->
+        <!-- Pillar 1 (Left): height 106px -->
+        <img
+          ngSrc="/images/price/pillar-1.svg"
+          width="131"
+          height="106"
+          alt=""
+          class="pointer-events-none absolute bottom-0 right-[320px] sm:right-[360px] lg:right-[410px] w-[95px] sm:w-[110px] lg:w-[131px] h-auto opacity-40"
+        />
+
+        <!-- Pillar 2 (Middle, behind coins): height 202px -->
+        <img
+          ngSrc="/images/price/pillar-2.svg"
+          width="131"
+          height="202"
+          alt=""
+          class="pointer-events-none absolute bottom-0 right-[150px] sm:right-[175px] lg:right-[200px] w-[95px] sm:w-[110px] lg:w-[131px] h-auto opacity-40"
+        />
+
+        <!-- Pillar 3 (Right): height 298px -->
+        <img
+          ngSrc="/images/price/pillar-3.svg"
+          width="131"
+          height="298"
+          alt=""
+          class="pointer-events-none absolute bottom-0 right-0 w-[95px] sm:w-[110px] lg:w-[131px] h-auto opacity-40"
+        />
 
         <!-- Coins Stack (Main Column) -->
         <img
