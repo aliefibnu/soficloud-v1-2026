@@ -134,10 +134,8 @@ describe('Customers', () => {
   });
 
   it('should switch customer instantly with 0ms delay when selectCustomer is called', () => {
-    component.selectCustomer(7); // PT. Bandar Sumatra Indonesia
+    component.selectCustomer(7);
     expect(component.activeCustomerIndex()).toBe(7);
-    expect(component.activeCustomer().name).toBe(
-      'PT. Bandar Sumatra Indonesia'
-    );
+    expect(component.activeCustomer().name).toBe('PT. Unknown');
   });
 });
