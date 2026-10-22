@@ -1,24 +1,31 @@
 <section id="hero" class="relative w-full pt-29.25 sm:pt-16 md:pt-20 lg:pt-24 pb-section overflow-x-clip">
-  <!-- blue shade/gradients -->
+  <!-- Ambient background shadow/gradients matching Figma (100% Pure Tailwind CSS) -->
   <div
     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none"
     aria-hidden="true"
   >
-    <div
-      class="absolute inset-0 bg-[radial-gradient(ellipse_80%_90%_at_-10%_35%,rgba(219,234,254,0.75)_0%,rgba(235,244,255,0.45)_45%,rgba(255,255,255,0)_80%)]"
-    ></div>
+    <!-- Centered 1440px canvas wrapper aligning with Hero content -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1440px] h-[1024px] pointer-events-none">
+      <!-- Ellipse 83: Top-Left Blue Glow (W: 1333, H: 1314, T: -401px, L: -550px, Blur: 235px) -->
+      <div
+        class="absolute -top-[401px] -left-[550px] w-[1333px] h-[1314px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(168,195,240,0.45)_0%,rgba(168,195,240,0.45)_45%,#FAFCFE_100%)] blur-[235px]"
+      ></div>
 
-    <div
-      class="absolute -top-16 -left-28 sm:-top-24 sm:-left-36 h-96 w-96 sm:h-135 sm:w-135 lg:h-180 lg:w-180 rounded-full bg-linear-to-br from-[#c7e0ff]/70 via-[#dbeafe]/50 to-transparent blur-3xl opacity-80"
-    ></div>
+      <!-- Ellipse 85: Bottom-Left Supporting Blue Glow (W: 681, H: 671, T: 344px, L: 93px, Blur: 235px) -->
+      <div
+        class="absolute top-[344px] left-[93px] w-[681px] h-[671px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(168,195,240,0.45)_0%,rgba(168,195,240,0.45)_45%,#FAFCFE_100%)] blur-[235px]"
+      ></div>
 
-    <div
-      class="absolute top-1/4 -left-20 sm:top-1/4 sm:-left-24 h-72 w-72 sm:h-105 sm:w-105 lg:h-140 lg:w-140 rounded-full bg-linear-to-tr from-[#dbeafe]/60 via-[#eff6ff]/40 to-transparent blur-3xl opacity-75"
-    ></div>
+      <!-- Ellipse 84: Top-Right Warm Peach/Blush Glow (W: 827, H: 818, T: -224px, L: 456px, Blur: 176px) -->
+      <div
+        class="absolute -top-[224px] left-[456px] w-[827px] h-[818px] rounded-full bg-[radial-gradient(ellipse_at_center,#FFEFED_0%,#FAFCFE_100%)] blur-[176px]"
+      ></div>
 
-    <div
-      class="absolute -top-24 -right-24 sm:-top-32 sm:-right-32 h-64 w-64 sm:h-96 sm:w-96 rounded-full bg-linear-to-bl from-[#e0ecfe]/40 to-transparent blur-3xl opacity-50"
-    ></div>
+      <!-- Vector 44: Right-Edge Organic Mint/Cyan Flow (W: 928, H: 1083, T: -32px, L: 632px, Rotation: 15.85deg, Blur: 50px) -->
+      <div
+        class="absolute -top-[32px] left-[632px] w-[928px] h-[1083px] rotate-[15.85deg] rounded-[48%_52%_62%_38%/42%_55%_45%_58%] bg-[radial-gradient(ellipse_at_center,rgba(221,243,243,0.5)_0%,rgba(221,243,243,0.5)_50%,#F8FEFE_100%)] blur-[50px]"
+      ></div>
+    </div>
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
