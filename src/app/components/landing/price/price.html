@@ -52,7 +52,7 @@
         <div class="mt-6 sm:mt-8">
           <button
             type="button"
-            class="group w-full sm:w-[440px] h-12 rounded-[10px] bg-gradient-to-r from-[#1E37E1] via-[#1C7DD8] to-[#6694EB] hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center font-dm-sans font-semibold text-base sm:text-[17px] text-white leading-[130%] shadow-sm hover:shadow-md cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E37E1]"
+            class="group w-full sm:w-110 h-12 rounded-[10px] bg-linear-to-r from-[#1E37E1] via-[#1C7DD8] to-[#6694EB] hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center font-dm-sans font-semibold text-base sm:text-[17px] text-white leading-[130%] shadow-sm hover:shadow-md cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E37E1]"
             [attr.aria-label]="'PRICE.BUTTON' | translate"
           >
             <span>{{ 'PRICE.BUTTON' | translate }}</span>
@@ -62,7 +62,7 @@
 
       <!-- Right Column: Illustration (Arrow, Pillars, Coins) -->
       <div
-        class="relative w-full lg:w-[48%] xl:w-[50%] min-h-[260px] sm:min-h-[300px] lg:min-h-[354px] overflow-hidden select-none pointer-events-none"
+        class="relative w-full lg:w-[48%] xl:w-[50%] min-h-65 sm:min-h-75 lg:min-h-88.5 overflow-hidden select-none pointer-events-none"
         aria-hidden="true"
       >
         <!-- Arrow Graph (Background, pushed upwards so top peak/arrowhead cross the card border) -->
@@ -71,7 +71,7 @@
           width="636"
           height="361"
           alt=""
-          class="pointer-events-none absolute -top-20 sm:-top-28 lg:-top-[148px] -right-4 sm:-right-8 lg:-right-[40px] w-[500px] sm:w-[580px] lg:w-[636px] max-w-none opacity-40 object-contain object-right-top"
+          class="pointer-events-none absolute -top-20 sm:-top-28 lg:-top-37 -right-4 sm:-right-8 lg:-right-10 w-125 sm:w-145 lg:w-159 max-w-none opacity-40 object-contain object-top-right"
         />
 
         <!-- 3 Pillars (Stepped Bar Chart with Gaps & Reduced Opacity) -->
@@ -81,7 +81,7 @@
           width="131"
           height="106"
           alt=""
-          class="pointer-events-none absolute bottom-0 right-[320px] sm:right-[360px] lg:right-[410px] w-[95px] sm:w-[110px] lg:w-[131px] h-auto opacity-40"
+          class="pointer-events-none absolute bottom-0 right-80 sm:right-90 lg:right-102.5 w-23.75 sm:w-27.5 lg:w-32.75 h-auto opacity-40"
         />
 
         <!-- Pillar 2 (Middle, behind coins): height 202px -->
@@ -90,7 +90,7 @@
           width="131"
           height="202"
           alt=""
-          class="pointer-events-none absolute bottom-0 right-[150px] sm:right-[175px] lg:right-[200px] w-[95px] sm:w-[110px] lg:w-[131px] h-auto opacity-40"
+          class="pointer-events-none absolute bottom-0 right-37.5 sm:right-43.75 lg:right-50 w-23.75 sm:w-27.5 lg:w-32.75 h-auto opacity-40"
         />
 
         <!-- Pillar 3 (Right): height 298px -->
@@ -99,7 +99,7 @@
           width="131"
           height="298"
           alt=""
-          class="pointer-events-none absolute bottom-0 -right-px right-0 w-[95px] sm:w-[110px] lg:w-[131px] h-auto opacity-40"
+          class="pointer-events-none absolute bottom-0 right-0 w-23.75 sm:w-27.5 lg:w-32.75 h-auto opacity-40"
         />
 
         <!-- Bottom Angled Coin (On par with Pillar 1 at bottom-0, layered behind Coins Stack) -->
@@ -108,7 +108,7 @@
           width="198"
           height="113"
           alt=""
-          class="pointer-events-none absolute bottom-0 right-[190px] sm:right-[215px] lg:right-[240px] z-10 h-auto w-[165px] lg:w-[198px]"
+          class="pointer-events-none absolute bottom-0 right-47.5 sm:right-53.75 lg:right-60 z-10 h-auto w-41.25 lg:w-49.5"
         />
 
         <!-- Coins Stack (Main Column, layered in front of Bottom Coins) -->
@@ -117,7 +117,7 @@
           width="216"
           height="210"
           alt=""
-          class="pointer-events-none absolute bottom-0 right-[70px] lg:right-[85px] z-20 h-auto w-[180px] lg:w-[216px]"
+          class="pointer-events-none absolute bottom-0 right-17.5 lg:right-21.25 z-20 h-auto w-45 lg:w-54"
         />
 
         <!-- Top Coin (Large Emblem Coin, on top of Coins Stack) -->
@@ -126,7 +126,7 @@
           width="182"
           height="182"
           alt=""
-          class="pointer-events-none absolute top-4 lg:top-7 right-[85px] lg:right-[102px] z-30 h-auto w-[150px] lg:w-[182px]"
+          class="pointer-events-none absolute top-4 lg:top-7 right-21.25 lg:right-25.5 z-30 h-auto w-37.5 lg:w-45.5"
         />
       </div>
     </div>

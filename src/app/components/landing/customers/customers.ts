@@ -46,7 +46,6 @@ export const TOP_CUSTOMERS: CustomerCompany[] = [
   { id: 10, name: 'PT. Adhya Tirta Lampung', logo: 'images/customers/customer36.webp', aspect: 'standard' },
 ];
 
-// Row 1 starts with Kubota, ISK, ATL, BSI to match the screenshot exactly
 export const BOTTOM_ROW_1: CustomerCompany[] = [
   { id: 11, name: 'PT. Kubota Indonesia', logo: 'images/customers/customer50.webp', aspect: 'wide' },
   { id: 12, name: 'PT. Inhil Sarimas Kelapa', logo: 'images/customers/customer46.webp', aspect: 'square' },
@@ -72,7 +71,6 @@ export const BOTTOM_ROW_1: CustomerCompany[] = [
   { id: 32, name: 'PT. EX Batam Indonesia', logo: 'images/customers/customer-26.svg', aspect: 'standard' },
 ];
 
-// Row 2 starts with Eagle (KSP), Suntech, Fanindo, Lytech to match the screenshot exactly
 export const BOTTOM_ROW_2: CustomerCompany[] = [
   { id: 33, name: 'PT. Batam Teknologi Gas', logo: 'images/customers/customer-9.svg', aspect: 'square' },
   { id: 34, name: 'PT. Suntech Plastics Indonesia', logo: 'images/customers/customer-16.webp', aspect: 'standard' },
@@ -402,7 +400,6 @@ export class Customers implements OnInit {
   readonly bottomRow1 = BOTTOM_ROW_1;
   readonly bottomRow2 = BOTTOM_ROW_2;
 
-  // Cloned array for backward compatibility
   readonly infiniteTopCustomers: ClonedCustomerCompany[] = Array.from(
     { length: 50 },
     (_, i) => ({
