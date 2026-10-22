@@ -48,7 +48,7 @@ describe('BusinessControl', () => {
           },
           CONNECTED: {
             TAB: 'Proses Terhubung',
-            TITLE: 'Seluruh Proses Bisnis Terhubung Dalam Satu Sistem.',
+            TITLE: 'Seluruh Proses\nBisnis Terhubung\nDalam Satu\nSistem.',
             DESC: 'Data mengalir dari Sales ke Procurement, Inventory, Manufacturing, Project, hingga Finance & Accounting tanpa input berulang.',
           },
           WORKFLOW: {
