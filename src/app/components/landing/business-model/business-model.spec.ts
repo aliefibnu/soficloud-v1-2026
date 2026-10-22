@@ -212,4 +212,55 @@ describe('BusinessModel', () => {
       ).toBe(true);
     });
   });
+
+  it('should match Figma typography specifications across heading, subtitle, numbers, titles, descriptions, and CTA buttons', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // 1. Section heading & subtitle (DM Sans alignment)
+    const heading = compiled.querySelector('#business-model-heading');
+    expect(heading?.classList.contains('font-dm-sans')).toBe(true);
+    expect(heading?.classList.contains('font-bold')).toBe(true);
+
+    const subtitle = heading?.parentElement?.querySelector('p');
+    expect(subtitle?.classList.contains('font-dm-sans')).toBe(true);
+    expect(subtitle?.classList.contains('lg:text-[16px]')).toBe(true);
+
+    const articles = compiled.querySelectorAll('article');
+    expect(articles.length).toBe(4);
+
+    articles.forEach((article) => {
+      // 2. Card Number ("01" - DM Sans, 700, Bold, 28px, Line Height 100%, Letter Spacing 0%)
+      const numberEl = article.querySelector('span');
+      expect(numberEl?.classList.contains('font-dm-sans')).toBe(true);
+      expect(numberEl?.classList.contains('font-bold')).toBe(true);
+      expect(numberEl?.classList.contains('lg:text-[28px]')).toBe(true);
+      expect(numberEl?.classList.contains('leading-none')).toBe(true);
+      expect(numberEl?.classList.contains('tracking-normal')).toBe(true);
+
+      // 3. Card Title ("Manufacturing" - DM Sans, 700, Bold, 28px, Line Height 100%, Letter Spacing 0%)
+      const titleEl = article.querySelector('h3');
+      expect(titleEl?.classList.contains('font-dm-sans')).toBe(true);
+      expect(titleEl?.classList.contains('font-bold')).toBe(true);
+      expect(titleEl?.classList.contains('lg:text-[28px]')).toBe(true);
+      expect(titleEl?.classList.contains('leading-none')).toBe(true);
+      expect(titleEl?.classList.contains('tracking-normal')).toBe(true);
+
+      // 4. Card Description ("Material planning..." - DM Sans, 400, Regular, 16px, Line Height 130%, Letter Spacing 0%)
+      const descEl = titleEl?.parentElement?.querySelector('p');
+      expect(descEl?.classList.contains('font-dm-sans')).toBe(true);
+      expect(descEl?.classList.contains('font-normal')).toBe(true);
+      expect(descEl?.classList.contains('lg:text-[16px]')).toBe(true);
+      expect(descEl?.classList.contains('leading-[130%]')).toBe(true);
+      expect(descEl?.classList.contains('tracking-normal')).toBe(true);
+
+      // 5. CTA Button ("Pelajari Selengkapnya" - DM Sans, 600, SemiBold, 18px, Line Height 130%, Letter Spacing 0%)
+      const btnEl = article.querySelector('a');
+      expect(btnEl?.classList.contains('font-dm-sans')).toBe(true);
+      expect(btnEl?.classList.contains('font-semibold')).toBe(true);
+      expect(btnEl?.classList.contains('lg:text-[18px]')).toBe(true);
+      expect(btnEl?.classList.contains('leading-[130%]')).toBe(true);
+      expect(btnEl?.classList.contains('tracking-normal')).toBe(true);
+    });
+  });
 });

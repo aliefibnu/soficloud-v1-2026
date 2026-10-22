@@ -13,10 +13,13 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
+export type LogoAspect = 'ultra-wide' | 'wide' | 'standard' | 'square';
+
 export interface CustomerCompany {
   id: number;
   name: string;
   logo: string;
+  aspect?: LogoAspect;
 }
 
 export interface ClonedCustomerCompany extends CustomerCompany {
@@ -31,68 +34,65 @@ export interface VisibleTopCard {
 }
 
 export const TOP_CUSTOMERS: CustomerCompany[] = [
-  { id: 1, name: 'PT. Madeira Threads Indonesia', logo: 'images/customers/customer-3.svg' },
-  { id: 2, name: 'PT. VMC Fishing Tackle Indonesia', logo: 'images/customers/customer-10.svg' },
-  { id: 3, name: 'PT. Sanipak Indonesia', logo: 'images/customers/customer-4.svg' },
-  { id: 4, name: 'PT Rajawali Sakti Utama', logo: 'images/customers/customer-2.svg' },
-  { id: 5, name: 'PT. Agro Sarimas Indonesia', logo: 'images/customers/customer-21.svg' },
-  { id: 6, name: 'PT. Fanindo Cipta Propertindo', logo: 'images/customers/customer-5.svg' },
-  { id: 7, name: 'PT. Suntech Plastics Industries Batam', logo: 'images/customers/customer-16.webp' },
-  { id: 8, name: 'PT. Unknown', logo: 'images/customers/customer43.webp' },
-  { id: 9, name: 'PT. Inhil Sarimas Kelapa', logo: 'images/customers/customer46.webp' },
-  { id: 10, name: 'PT. Adhya Tirta Lampung', logo: 'images/customers/customer36.webp' },
+  { id: 1, name: 'PT. Madeira Threads Indonesia', logo: 'images/customers/customer-3.svg', aspect: 'wide' },
+  { id: 2, name: 'PT. VMC Fishing Tackle Indonesia', logo: 'images/customers/customer-10.svg', aspect: 'square' },
+  { id: 3, name: 'PT. Sanipak Indonesia', logo: 'images/customers/customer-4.svg', aspect: 'wide' },
+  { id: 4, name: 'PT Rajawali Sakti Utama', logo: 'images/customers/customer-2.svg', aspect: 'standard' },
+  { id: 5, name: 'PT. Agro Sarimas Indonesia', logo: 'images/customers/customer-21.svg', aspect: 'square' },
+  { id: 6, name: 'PT. Fanindo Cipta Propertindo', logo: 'images/customers/customer-5.svg', aspect: 'standard' },
+  { id: 7, name: 'PT. Suntech Plastics Industries Batam', logo: 'images/customers/customer-16.webp', aspect: 'standard' },
+  { id: 8, name: 'PT. Bumi Sarimas Indonesia', logo: 'images/customers/customer43.webp', aspect: 'square' },
+  { id: 9, name: 'PT. Inhil Sarimas Kelapa', logo: 'images/customers/customer46.webp', aspect: 'square' },
+  { id: 10, name: 'PT. Adhya Tirta Lampung', logo: 'images/customers/customer36.webp', aspect: 'standard' },
 ];
 
-// Row 1 starts with Kubota, ISK, ATL, BSI to match the screenshot exactly
 export const BOTTOM_ROW_1: CustomerCompany[] = [
-  { id: 11, name: 'PT. Kubota Indonesia', logo: 'images/customers/customer50.webp' },
-  { id: 12, name: 'PT. Inhil Sarimas Kelapa', logo: 'images/customers/customer46.webp' },
-  { id: 13, name: 'PT. Adhya Tirta Lampung', logo: 'images/customers/customer36.webp' },
-  { id: 14, name: 'PT. Unknown', logo: 'images/customers/customer43.webp' },
-  { id: 15, name: 'PT. Katsuyama Finetech Indonesia', logo: 'images/customers/customer-1.svg' },
-  { id: 16, name: 'PT. ASL Shipyard Indonesia', logo: 'images/customers/customer-6.svg' },
-  { id: 17, name: 'PT. Cemara Intan Shipyard', logo: 'images/customers/customer-7.svg' },
-  { id: 18, name: 'PT. Bukti Alam Persada', logo: 'images/customers/customer-8.svg' },
-  { id: 19, name: 'PT. Sindomas Precast', logo: 'images/customers/customer-11.svg' },
-  { id: 20, name: 'PT. Yoshikawa Electronics Bintan', logo: 'images/customers/customer-12.svg' },
-  { id: 21, name: 'PT. Samudera Indonesia Tbk', logo: 'images/customers/customer-13.svg' },
-  { id: 22, name: 'Sekolah Mondial', logo: 'images/customers/customer-14.svg' },
-  { id: 23, name: 'PT. Kopegtel Batam', logo: 'images/customers/customer-15.svg' },
-  { id: 24, name: 'PT. Amber Karya', logo: 'images/customers/customer-17.svg' },
-  { id: 25, name: 'PT. Agro Sarimas Indonesia', logo: 'images/customers/customer-21.svg' },
-  { id: 26, name: 'PT. Vinnex Coatindo', logo: 'images/customers/customer-19.svg' },
-  { id: 27, name: 'PT. Venturindo Jaya Batam', logo: 'images/customers/customer20.webp' },
-  { id: 28, name: 'PT. Nittoh Batam', logo: 'images/customers/customer-22.svg' },
-  { id: 29, name: 'PT. Takamori Indonesia', logo: 'images/customers/customer-23.svg' },
-  { id: 30, name: 'PT. World Wide Equipment South East Asia', logo: 'images/customers/customer-24.svg' },
-  { id: 31, name: 'PT. Bahtera Bahari Shipyard', logo: 'images/customers/customer-25.svg' },
-  { id: 32, name: 'PT. EX Batam Indonesia', logo: 'images/customers/customer-26.svg' },
+  { id: 11, name: 'PT. Kubota Indonesia', logo: 'images/customers/customer50.webp', aspect: 'wide' },
+  { id: 12, name: 'PT. Inhil Sarimas Kelapa', logo: 'images/customers/customer46.webp', aspect: 'square' },
+  { id: 13, name: 'PT. Adhya Tirta Lampung', logo: 'images/customers/customer36.webp', aspect: 'standard' },
+  { id: 14, name: 'PT. Bumi Sarimas Indonesia', logo: 'images/customers/customer43.webp', aspect: 'square' },
+  { id: 15, name: 'PT. Katsuyama Finetech Indonesia', logo: 'images/customers/customer-1.svg', aspect: 'standard' },
+  { id: 16, name: 'PT. ASL Shipyard Indonesia', logo: 'images/customers/customer-6.svg', aspect: 'standard' },
+  { id: 17, name: 'PT. Cemara Intan Shipyard', logo: 'images/customers/customer-7.svg', aspect: 'standard' },
+  { id: 18, name: 'PT. Bukti Alam Persada', logo: 'images/customers/customer-8.svg', aspect: 'ultra-wide' },
+  { id: 19, name: 'PT. Sindomas Precast', logo: 'images/customers/customer-11.svg', aspect: 'ultra-wide' },
+  { id: 20, name: 'PT. Yoshikawa Electronics Bintan', logo: 'images/customers/customer-12.svg', aspect: 'wide' },
+  { id: 21, name: 'PT. Samudera Indonesia Tbk', logo: 'images/customers/customer-13.svg', aspect: 'standard' },
+  { id: 22, name: 'Sekolah Mondial', logo: 'images/customers/customer-14.svg', aspect: 'square' },
+  { id: 23, name: 'PT. Kopegtel Batam', logo: 'images/customers/customer-15.svg', aspect: 'ultra-wide' },
+  { id: 24, name: 'PT. Amber Karya', logo: 'images/customers/customer-17.svg', aspect: 'square' },
+  { id: 25, name: 'PT. Agro Sarimas Indonesia', logo: 'images/customers/customer-21.svg', aspect: 'square' },
+  { id: 26, name: 'PT. Vinnex Coatindo', logo: 'images/customers/customer-19.svg', aspect: 'standard' },
+  { id: 27, name: 'PT. Venturindo Jaya Batam', logo: 'images/customers/customer20.webp', aspect: 'ultra-wide' },
+  { id: 28, name: 'PT. Nittoh Batam', logo: 'images/customers/customer-22.svg', aspect: 'standard' },
+  { id: 29, name: 'PT. Takamori Indonesia', logo: 'images/customers/customer-23.svg', aspect: 'square' },
+  { id: 30, name: 'PT. World Wide Equipment South East Asia', logo: 'images/customers/customer-24.svg', aspect: 'square' },
+  { id: 31, name: 'PT. Bahtera Bahari Shipyard', logo: 'images/customers/customer-25.svg', aspect: 'square' },
+  { id: 32, name: 'PT. EX Batam Indonesia', logo: 'images/customers/customer-26.svg', aspect: 'standard' },
 ];
 
-// Row 2 starts with Eagle (KSP), Suntech, Fanindo, Lytech to match the screenshot exactly
 export const BOTTOM_ROW_2: CustomerCompany[] = [
-  { id: 33, name: 'PT. Batam Teknologi Gas', logo: 'images/customers/customer-9.svg' },
-  { id: 34, name: 'PT. Suntech Plastics Indonesia', logo: 'images/customers/customer-16.webp' },
-  { id: 35, name: 'PT. Fanindo Cipta Propertindo', logo: 'images/customers/customer-5.svg' },
-  { id: 36, name: 'PT. Lytech Batam', logo: 'images/customers/customer49.webp' },
-  { id: 37, name: 'PT. Takamori Indonesia', logo: 'images/customers/customer-23.svg' },
-  { id: 38, name: 'PT. Kebakkramat Elang Perkasa', logo: 'images/customers/customer28.webp' },
-  { id: 39, name: 'PT. Perkasa Inovasi Logistik', logo: 'images/customers/customer-29.svg' },
-  { id: 40, name: 'PT. Wahana Idea Cipta', logo: 'images/customers/customer30.webp' },
-  { id: 41, name: 'PT. Primo Microphones Indonesia', logo: 'images/customers/customer-31.svg' },
-  { id: 42, name: 'PT. Inti Duta Logistik', logo: 'images/customers/customer-33.svg' },
-  { id: 43, name: 'PT. Sumitomo Wiring Systems Batam', logo: 'images/customers/customer-34.svg' },
-  { id: 44, name: 'PT. Lubrikan Jasa Tama', logo: 'images/customers/customer-35.svg' },
-  { id: 45, name: 'PT. Adhya Tirta Lampung', logo: 'images/customers/customer36.webp' },
-  { id: 46, name: 'Rumah Kita Batam', logo: 'images/customers/customer-37.svg' },
-  { id: 47, name: 'PT. Unknown', logo: 'images/customers/customer-38.svg' },
-  { id: 48, name: 'PT. Unknown', logo: 'images/customers/customer-39.svg' },
-  { id: 49, name: 'PT. LKD Multi Industri', logo: 'images/customers/customer40.webp' },
-  { id: 50, name: 'PT. Awak Samudera Transportasi', logo: 'images/customers/customer-41.svg' },
-  { id: 51, name: 'PT. Soonle Metalindo Perkasa', logo: 'images/customers/customer42.webp' },
-  { id: 52, name: 'PT. Castroindo Perkasa', logo: 'images/customers/customer44.webp' },
-  { id: 53, name: 'PT. Unknown', logo: 'images/customers/customer45.webp' },
-  { id: 54, name: 'PT. Primetech Indonesia', logo: 'images/customers/customer47.webp' },
+  { id: 33, name: 'PT. Batam Teknologi Gas', logo: 'images/customers/customer-9.svg', aspect: 'square' },
+  { id: 34, name: 'PT. Suntech Plastics Indonesia', logo: 'images/customers/customer-16.webp', aspect: 'standard' },
+  { id: 35, name: 'PT. Fanindo Cipta Propertindo', logo: 'images/customers/customer-5.svg', aspect: 'standard' },
+  { id: 36, name: 'PT. Lytech Batam', logo: 'images/customers/customer49.webp', aspect: 'standard' },
+  { id: 37, name: 'PT. Takamori Indonesia', logo: 'images/customers/customer-23.svg', aspect: 'square' },
+  { id: 38, name: 'PT. Kebakkramat Elang Perkasa', logo: 'images/customers/customer28.webp', aspect: 'standard' },
+  { id: 39, name: 'PT. Perkasa Inovasi Logistik', logo: 'images/customers/customer-29.svg', aspect: 'wide' },
+  { id: 40, name: 'PT. Wahana Idea Cipta', logo: 'images/customers/customer30.webp', aspect: 'standard' },
+  { id: 41, name: 'PT. Primo Microphones Indonesia', logo: 'images/customers/customer-31.svg', aspect: 'wide' },
+  { id: 42, name: 'PT. Inti Duta Logistik', logo: 'images/customers/customer-33.svg', aspect: 'square' },
+  { id: 43, name: 'PT. Sumitomo Wiring Systems Batam', logo: 'images/customers/customer-34.svg', aspect: 'ultra-wide' },
+  { id: 44, name: 'PT. Lubrikan Jasa Tama', logo: 'images/customers/customer-35.svg', aspect: 'standard' },
+  { id: 45, name: 'PT. Adhya Tirta Lampung', logo: 'images/customers/customer36.webp', aspect: 'standard' },
+  { id: 46, name: 'Rumah Kita Batam', logo: 'images/customers/customer-37.svg', aspect: 'square' },
+  { id: 47, name: 'PT. Koperasi Karyawan BMW', logo: 'images/customers/customer-38.svg', aspect: 'square' },
+  { id: 48, name: 'PT. Batam Niaga Perkasa', logo: 'images/customers/customer-39.svg', aspect: 'square' },
+  { id: 49, name: 'PT. LKD Multi Industri', logo: 'images/customers/customer40.webp', aspect: 'ultra-wide' },
+  { id: 50, name: 'PT. Awak Samudera Transportasi', logo: 'images/customers/customer-41.svg', aspect: 'standard' },
+  { id: 51, name: 'PT. Soonle Metalindo Perkasa', logo: 'images/customers/customer42.webp', aspect: 'wide' },
+  { id: 52, name: 'PT. Castroindo Perkasa', logo: 'images/customers/customer44.webp', aspect: 'ultra-wide' },
+  { id: 53, name: 'PT. Primetech Indonesia', logo: 'images/customers/customer47.webp', aspect: 'wide' },
 ];
 
 @Component({
@@ -346,6 +346,26 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       );
     }
 
+    .cta-experience-btn {
+      width: 200.01px;
+      height: 40.82px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      padding: 10.91px;
+      gap: 7.27px;
+      background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(90deg, #1E37E1 0%, #1C7DD8 50%, #6694EB 100%) border-box;
+      transition: all 0.25s ease-out;
+    }
+
+    .cta-experience-btn:hover {
+      background:
+        linear-gradient(#F0F5FE, #F0F5FE) padding-box,
+        linear-gradient(90deg, #1E37E1 0%, #1C7DD8 50%, #6694EB 100%) border-box;
+      box-shadow: 0 4px 14px rgba(28, 115, 232, 0.12);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .pulse-top-horizontal,
       .pulse-upper-right,
@@ -380,7 +400,6 @@ export class Customers implements OnInit {
   readonly bottomRow1 = BOTTOM_ROW_1;
   readonly bottomRow2 = BOTTOM_ROW_2;
 
-  // Cloned array for backward compatibility
   readonly infiniteTopCustomers: ClonedCustomerCompany[] = Array.from(
     { length: 50 },
     (_, i) => ({

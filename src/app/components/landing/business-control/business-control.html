@@ -44,12 +44,13 @@
             [attr.aria-label]="'Go to card ' + (card + 1)"
             class="w-4 h-4 rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
             [class.bg-[#649CEA]]="activeCard() === card"
-            [class.shadow-[0_0_10px_rgba(100,156,234,0.85)]]="activeCard() === card"
+            [class.shadow-[0_2px_10px_#649cead9]]="activeCard() === card"
             [class.border-0]="activeCard() === card"
             [class.scale-105]="activeCard() === card"
             [class.bg-[#FDFDFD]]="activeCard() !== card"
             [class.border-0]="activeCard() !== card"
-            [class.shadow-none]="activeCard() !== card"
+            [class.shadow-[0_2px_6px_#23244e30]]="activeCard() !== card"
+            [class.hover:shadow-[0_3px_8px_#23244e40]]="activeCard() !== card"
             [class.hover:scale-110]="activeCard() !== card"
             [class.hover:bg-white]="activeCard() !== card"
           ></button>
@@ -177,7 +178,7 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight whitespace-pre-line"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE' | translate }}
@@ -209,7 +210,7 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight whitespace-pre-line"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE' | translate }}
@@ -241,7 +242,7 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight whitespace-pre-line"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE' | translate }}
@@ -273,7 +274,7 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight"
+                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight whitespace-pre-line"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE' | translate }}

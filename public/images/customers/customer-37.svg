@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" version="1.1">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="32 141 961 743" version="1.1">
   <title>Rumah Kita Batam</title>
   <desc>Vector-traced house logo and wordmark with orange-to-yellow gradients.</desc>
   <defs>
@@ -18,7 +18,6 @@
       <stop offset="100%" stop-color="#ff6a00"/>
     </linearGradient>
   </defs>
-  <rect width="1024" height="1024" fill="#000000"/>
   <g id="house-mark" fill="url(#houseGradient)" fill-rule="evenodd" stroke="none">
     <path d="M 369 618 L 369 683 L 407 683 L 408 619 L 383 617 Z"/>
     <path d="M 324 618 L 324 683 L 363 683 L 363 618 Z"/>

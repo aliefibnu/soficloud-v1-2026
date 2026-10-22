@@ -14,12 +14,12 @@
           <div class="flex flex-col justify-end pt-1 lg:pt-1.5 pb-1 lg:pb-1.5">
             <h2
               id="business-model-heading"
-              class="font-inter font-bold text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[38px] text-[#182849] tracking-[-0.02em] leading-tight sm:leading-[1.18] whitespace-pre-line"
+              class="font-dm-sans font-bold text-[24px] sm:text-[28px] md:text-[34px] lg:text-[38px] xl:text-[40px] text-[#182849] tracking-[-0.02em] leading-tight sm:leading-[1.15] whitespace-pre-line"
             >
               {{ 'BUSINESS_MODEL.HEADING' | translate }}
             </h2>
             <p
-              class="mt-2.5 sm:mt-3 md:mt-3.5 font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-[14.5px] text-slate-600 leading-relaxed max-w-lg xl:max-w-xl"
+              class="mt-2.5 sm:mt-3 md:mt-3.5 font-dm-sans font-normal text-sm sm:text-[15px] lg:text-[16px] text-slate-600 leading-relaxed max-w-lg xl:max-w-xl"
             >
               {{ 'BUSINESS_MODEL.SUBTITLE' | translate }}
             </p>
@@ -42,13 +42,13 @@
 
 <ng-template #cardTemplate let-card>
   <article
-    class="group relative bg-white rounded-xl sm:rounded-2xl border border-slate-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-blue-950/6 hover:-translate-y-1 transition-all duration-300 p-4 sm:p-5 lg:px-5.5 xl:px-7 lg:py-5 xl:py-6 min-h-fit sm:min-h-59.5 lg:min-h-62 flex flex-col justify-center overflow-hidden"
+    class="group relative bg-white rounded-xl sm:rounded-2xl border border-slate-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-blue-950/6 hover:-translate-y-1 transition-all duration-300 p-5 sm:p-6 lg:px-6 xl:px-7 lg:py-6 xl:py-7 min-h-fit sm:min-h-[280px] lg:min-h-[300px] flex flex-col justify-center overflow-hidden"
     [attr.aria-label]="
       'BUSINESS_MODEL.ARIA.CARD' | translate: { title: (card.titleKey | translate) }
     "
   >
     <span
-      class="absolute top-3.5 right-4 sm:top-4.5 sm:right-5 lg:top-5 lg:right-6 font-inter font-bold text-base sm:text-lg lg:text-xl text-[#182849] select-none pointer-events-none z-10"
+      class="absolute top-4 right-5 sm:top-5 sm:right-6 lg:top-6 lg:right-7 font-dm-sans font-bold text-xl sm:text-2xl lg:text-[28px] leading-none tracking-normal text-[#182849] select-none pointer-events-none z-10"
       aria-hidden="true"
     >
       {{ card.number }}
@@ -62,12 +62,12 @@
       >
         <div>
           <h3
-            class="font-inter font-bold text-base sm:text-lg md:text-xl lg:text-lg xl:text-[21.5px] text-[#182849] tracking-tight leading-snug"
+            class="font-dm-sans font-bold text-xl sm:text-2xl lg:text-[28px] leading-none tracking-normal text-[#182849]"
           >
             {{ card.titleKey | translate }}
           </h3>
           <p
-            class="mt-1.5 sm:mt-2.5 md:mt-3 font-dm-sans font-normal text-[11px] sm:text-[12px] md:text-[12px] lg:text-[11.5px] xl:text-[12.5px] text-slate-600 leading-relaxed max-w-none sm:max-w-xs lg:max-w-sm xl:max-w-md"
+            class="mt-2.5 sm:mt-3 font-dm-sans font-normal text-sm sm:text-[15px] lg:text-[16px] leading-[130%] tracking-normal text-slate-600 max-w-none sm:max-w-xs lg:max-w-sm xl:max-w-md"
           >
             {{ card.descKey | translate }}
           </p>
@@ -76,7 +76,7 @@
         <div class="mt-3.5 sm:mt-4 lg:mt-4.5 pt-0.5">
           <a
             href="#contact"
-            class="w-fit inline-flex items-center justify-center px-4.5 sm:px-5 py-2 min-h-10 sm:min-h-10.5 rounded-xl font-dm-sans font-semibold text-xs sm:text-[13px] md:text-[13.5px] text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            class="w-fit inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 min-h-11 sm:min-h-[46px] rounded-xl font-dm-sans font-semibold text-sm sm:text-base lg:text-[18px] leading-[130%] tracking-normal text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             [attr.aria-label]="
               'BUSINESS_MODEL.ARIA.LEARN_MORE' | translate: { title: (card.titleKey | translate) }
             "

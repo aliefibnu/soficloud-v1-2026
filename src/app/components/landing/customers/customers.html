@@ -4,20 +4,17 @@
   aria-labelledby="customers-heading"
 >
   <div
-    class="w-full bg-white rounded-2xl sm:rounded-[20px] lg:rounded-[24px] py-section overflow-hidden"
+    class="w-full bg-white rounded-2xl sm:rounded-[20px] lg:rounded-3xl py-section overflow-hidden"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-center">
-      <!-- Left Column: Stat, Headings, and 3 Staggered Benefit Cards (5 cols on lg) -->
       <div class="lg:col-span-5 flex flex-col justify-center">
-        <!-- Hero Stat 50+ (Inter Extra Bold, #23244E) -->
         <span
           class="font-inter font-extrabold text-5xl sm:text-6xl lg:text-[72px] text-[#23244E] tracking-tight leading-none select-none"
         >
           {{ 'CUSTOMERS.STAT' | translate }}
         </span>
 
-        <!-- Heading (DM Sans Bold, #23244E) -->
         <h2
           id="customers-heading"
           class="mt-2.5 sm:mt-3 font-dm-sans font-bold text-2xl sm:text-[28px] lg:text-[32px] text-[#23244E] leading-tight"
@@ -25,16 +22,13 @@
           {{ 'CUSTOMERS.HEADING' | translate }}
         </h2>
 
-        <!-- Subtitle (DM Sans Regular, #23244E) -->
         <p
           class="mt-2 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] leading-relaxed max-w-md"
         >
           {{ 'CUSTOMERS.SUBTITLE' | translate }}
         </p>
 
-        <!-- 3 Staggered Benefit Cards -->
         <div class="mt-6 sm:mt-8 flex flex-col gap-3 sm:gap-3.5 w-full max-w-lg">
-          <!-- Card 1: Berbagai Industri -->
           <article
             class="group w-full max-w-85 rounded-[20px] border-2 border-[#2F65F6] bg-white hover:bg-[#F0F5FE] p-4 sm:p-5 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default"
           >
@@ -50,7 +44,6 @@
             </p>
           </article>
 
-          <!-- Card 2: Tim Implementasi Berpengalaman (Indented rightwards to match screenshot) -->
           <article
             class="group w-full max-w-87.5 ml-5 sm:ml-9 lg:ml-12 rounded-[20px] border-2 border-[#2F65F6] bg-white hover:bg-[#F0F5FE] p-4 sm:p-5 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default"
           >
@@ -66,7 +59,6 @@
             </p>
           </article>
 
-          <!-- Card 3: After-Sales Support -->
           <article
             class="group w-full max-w-85 rounded-[20px] border-2 border-[#2F65F6] bg-white hover:bg-[#F0F5FE] p-4 sm:p-5 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default"
           >
@@ -84,9 +76,7 @@
         </div>
       </div>
 
-      <!-- Right Column: Top Spotlight Row, Animated Circuit Stage, Center Showcase Card, Bottom Dual Marquee (7 cols on lg) -->
       <div class="lg:col-span-7 relative flex flex-col items-center overflow-hidden">
-        <!-- 1. Top Row: Infinite Marquee of Logos with Dynamic Active PT Glow Border (Matches Cuplikan layar 2026-10-14 214301.png) -->
         <div
           #topContainer
           class="relative z-20 w-full overflow-hidden py-1 mb-2 marquee-mask"
@@ -99,7 +89,7 @@
           >
             @for (customer of topCustomers; track 'top-a-' + customer.id; let idx = $index) {
               <div
-                class="top-customer-card relative shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-300 ease-out cursor-default select-none pointer-events-none"
+                class="top-customer-card relative shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 ease-out cursor-default select-none pointer-events-none"
                 [attr.data-index]="idx"
                 [class.border-[#1C73E8]]="customer.id === activeCustomer().id"
                 [class.bg-[#EFF6FF]]="customer.id === activeCustomer().id"
@@ -118,16 +108,31 @@
                 <img
                   [src]="customer.logo"
                   [alt]="customer.name"
-                  class="max-h-7 sm:max-h-8 max-w-[82%] object-contain pointer-events-none transition-transform duration-300 ease-out"
+                  class="object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
+                  [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                  [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                  [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                  [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                  [class.max-h-5.5]="customer.aspect === 'wide'"
+                  [class.sm:max-h-6]="customer.aspect === 'wide'"
+                  [class.max-w-[78%]]="customer.aspect === 'wide'"
+                  [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                  [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.max-h-7]="customer.aspect === 'square'"
+                  [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                  [class.max-w-[60%]]="customer.aspect === 'square'"
+                  [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                   [class.scale-105]="customer.id === activeCustomer().id"
                   loading="lazy"
                 />
               </div>
             }
-            <!-- Duplicate for seamless infinite marquee loop -->
             @for (customer of topCustomers; track 'top-b-' + customer.id; let idx = $index) {
               <div
-                class="top-customer-card relative shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-300 ease-out cursor-default select-none pointer-events-none"
+                class="top-customer-card relative shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 ease-out cursor-default select-none pointer-events-none"
                 [attr.data-index]="idx"
                 [class.border-[#1C73E8]]="customer.id === activeCustomer().id"
                 [class.bg-[#EFF6FF]]="customer.id === activeCustomer().id"
@@ -146,7 +151,23 @@
                 <img
                   [src]="customer.logo"
                   [alt]="customer.name"
-                  class="max-h-7 sm:max-h-8 max-w-[82%] object-contain pointer-events-none transition-transform duration-300 ease-out"
+                  class="object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
+                  [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                  [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                  [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                  [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                  [class.max-h-5.5]="customer.aspect === 'wide'"
+                  [class.sm:max-h-6]="customer.aspect === 'wide'"
+                  [class.max-w-[78%]]="customer.aspect === 'wide'"
+                  [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                  [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.max-h-7]="customer.aspect === 'square'"
+                  [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                  [class.max-w-[60%]]="customer.aspect === 'square'"
+                  [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                   [class.scale-105]="customer.id === activeCustomer().id"
                   loading="lazy"
                 />
@@ -155,9 +176,7 @@
           </div>
         </div>
 
-        <!-- 2. Circuit Stage: SVG Canvas + Center Showcase Card (Fixed 370px height stage) -->
         <div class="relative w-full h-92.5 flex items-center justify-center">
-          <!-- SVG Circuit Canvas (Exact pixel geometry matching reference screenshot 104754.png) -->
           <svg
             class="absolute inset-0 w-full h-full pointer-events-none z-0"
             viewBox="0 0 750 370"
@@ -180,7 +199,6 @@
               </filter>
             </defs>
 
-            <!-- A. Top Horizontal Baseline (y = 20) -->
             <line
               x1="20"
               y1="20"
@@ -190,8 +208,6 @@
               stroke-width="1.5"
             />
 
-            <!-- B. Base Circuit Lines (Neutral gray #E2E8F0, exact geometry from reference) -->
-            <!-- 1. Upper Right: drops down from top baseline, curves left into card right edge -->
             <path
               d="M 515 100 L 530 100 Q 545 100 545 85 L 545 20"
               fill="none"
@@ -199,7 +215,6 @@
               stroke-width="1.5"
             />
 
-            <!-- 2. Lower Right: from center card, vertical 1 down, horizontal 1 right, vertical 2 straight down to bottom baseline -->
             <path
               d="M 515 175 L 545 175 Q 560 175 560 190 L 560 235 Q 560 250 575 250 L 615 250 Q 630 250 630 265 L 630 350"
               fill="none"
@@ -207,7 +222,6 @@
               stroke-width="1.5"
             />
 
-            <!-- 3. Left Path: from center card, vertical 1 down, horizontal 1 left, vertical 2 straight down to bottom baseline -->
             <path
               d="M 235 175 L 205 175 Q 190 175 190 190 L 190 235 Q 190 250 175 250 L 105 250 Q 90 250 90 265 L 90 350"
               fill="none"
@@ -215,7 +229,6 @@
               stroke-width="1.5"
             />
 
-            <!-- C. Bottom Horizontal Baseline (y = 350, strictly ABOVE bottom logo cards) -->
             <line
               x1="20"
               y1="350"
@@ -225,8 +238,6 @@
               stroke-width="1.5"
             />
 
-            <!-- D. Blue Pulses (Independent flowing animations, decoupled from PT timer) -->
-            <!-- Pulse Top: Flows right to left along top baseline (y = 20) -->
             <line
               x1="730"
               y1="20"
@@ -239,7 +250,6 @@
               filter="url(#circuit-glow)"
             />
 
-            <!-- Pulse 1: Upper Right (from card up vertical to top baseline) -->
             <path
               d="M 515 100 L 530 100 Q 545 100 545 85 L 545 20"
               fill="none"
@@ -250,7 +260,6 @@
               filter="url(#circuit-glow)"
             />
 
-            <!-- Pulse 2: Lower Right (flows through horizontal 1, vertical 1, horizontal 2, to vertical 2) -->
             <path
               d="M 515 175 L 545 175 Q 560 175 560 190 L 560 235 Q 560 250 575 250 L 615 250 Q 630 250 630 265 L 630 350"
               fill="none"
@@ -261,7 +270,6 @@
               filter="url(#circuit-glow)"
             />
 
-            <!-- Pulse 3: Left (flows through horizontal 1, vertical 1, horizontal 2, to vertical 2) -->
             <path
               d="M 235 175 L 205 175 Q 190 175 190 190 L 190 235 Q 190 250 175 250 L 105 250 Q 90 250 90 265 L 90 350"
               fill="none"
@@ -272,7 +280,6 @@
               filter="url(#circuit-glow)"
             />
 
-            <!-- Pulse 4: Bottom Horizontal (flows along bottom baseline) -->
             <line
               x1="20"
               y1="350"
@@ -286,7 +293,6 @@
             />
           </svg>
 
-          <!-- Center Showcase Card (Sitting in center of this stage, above the SVG lines) -->
           <article
             class="group/showcase relative z-10 w-72.5 sm:w-76.25 min-h-62.5 sm:min-h-64 rounded-[26px] bg-white hover:bg-[#F0F5FE] border border-slate-100 hover:border-blue-200 shadow-[0_16px_36px_rgba(35,36,78,0.08)] hover:shadow-[0_20px_42px_rgba(35,36,78,0.12)] py-5 px-6 sm:py-5.5 sm:px-7 flex flex-col items-center justify-between transition-all duration-300"
             [class.card-switch-pulse]="isLogoTransitioning()"
@@ -297,7 +303,6 @@
                 | translate: { name: activeCustomer().name }
             "
           >
-            <!-- Inner Container with Interactive Transition Logo (No background, seamless) -->
             <div
               class="w-full flex-1 flex flex-col items-center justify-center min-h-34 py-1 overflow-hidden transition-all duration-300"
             >
@@ -306,7 +311,23 @@
                   [src]="activeCustomer().logo"
                   [alt]="activeCustomer().name"
                   [class.logo-switch-active]="isLogoTransitioning()"
-                  class="max-h-13 max-w-[85%] object-contain select-none"
+                  class="object-contain select-none transition-all duration-300"
+                  [class.max-h-9]="activeCustomer().aspect === 'ultra-wide'"
+                  [class.sm:max-h-10]="activeCustomer().aspect === 'ultra-wide'"
+                  [class.max-w-[86%]]="activeCustomer().aspect === 'ultra-wide'"
+                  [class.sm:max-w-[88%]]="activeCustomer().aspect === 'ultra-wide'"
+                  [class.max-h-10]="activeCustomer().aspect === 'wide'"
+                  [class.sm:max-h-11]="activeCustomer().aspect === 'wide'"
+                  [class.max-w-[82%]]="activeCustomer().aspect === 'wide'"
+                  [class.sm:max-w-[85%]]="activeCustomer().aspect === 'wide'"
+                  [class.max-h-11]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
+                  [class.sm:max-h-12]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
+                  [class.max-w-[78%]]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
+                  [class.sm:max-w-[80%]]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
+                  [class.max-h-12]="activeCustomer().aspect === 'square'"
+                  [class.sm:max-h-13]="activeCustomer().aspect === 'square'"
+                  [class.max-w-[62%]]="activeCustomer().aspect === 'square'"
+                  [class.sm:max-w-[65%]]="activeCustomer().aspect === 'square'"
                 />
               </div>
               <p
@@ -317,60 +338,74 @@
               </p>
             </div>
 
-            <!-- CTA Link: Lihat Pengalaman Bisnis (DM Sans Bold, #1C73E8) -->
             <a
               href="javascript:void(0)"
-              class="mt-3 inline-flex items-center gap-2 font-dm-sans font-bold text-sm text-[#1C73E8] hover:text-blue-700 transition-colors group/cta focus:outline-none focus:ring-2 focus:ring-[#1C73E8] focus:ring-offset-2 rounded"
+              class="cta-experience-btn mt-3 inline-flex items-center justify-center font-dm-sans font-bold text-[12.73px] text-[#1C73E8] leading-none tracking-normal select-none focus:outline-none focus:ring-2 focus:ring-[#1C73E8] focus:ring-offset-2"
             >
               <span>{{ 'CUSTOMERS.CTA_EXPERIENCE' | translate }}</span>
-              <svg
-                class="w-4 h-4 transform group-hover/cta:translate-x-1.5 transition-transform duration-200"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
             </a>
           </article>
         </div>
 
-        <!-- 3. Bottom Rows: Dual Infinite Marquee (Strictly positioned BELOW the circuit stage) -->
         <div class="relative z-20 w-full flex flex-col gap-2.5 sm:gap-3 mt-4 marquee-mask overflow-hidden">
-          <!-- Row 1: Marquee (Starts with Kubota, ISK, ATL, BSI) -->
           <div class="relative w-full overflow-hidden py-1">
             <div
               class="marquee-track-right hover:[animation-play-state:paused] flex items-center gap-3"
             >
               @for (customer of bottomRow1; track 'r1a-' + customer.id) {
                 <div
-                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 cursor-default"
                   [attr.aria-label]="customer.name"
                 >
                   <img
                     [src]="customer.logo"
                     [alt]="customer.name"
-                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-5.5]="customer.aspect === 'wide'"
+                    [class.sm:max-h-6]="customer.aspect === 'wide'"
+                    [class.max-w-[78%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                    [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-7]="customer.aspect === 'square'"
+                    [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                    [class.max-w-[60%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
                   />
                 </div>
               }
-              <!-- Duplicate for seamless infinite loop -->
               @for (customer of bottomRow1; track 'r1b-' + customer.id) {
                 <div
-                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 cursor-default"
                   [attr.aria-label]="customer.name"
                 >
                   <img
                     [src]="customer.logo"
                     [alt]="customer.name"
-                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-5.5]="customer.aspect === 'wide'"
+                    [class.sm:max-h-6]="customer.aspect === 'wide'"
+                    [class.max-w-[78%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                    [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-7]="customer.aspect === 'square'"
+                    [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                    [class.max-w-[60%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
                   />
                 </div>
@@ -378,34 +413,64 @@
             </div>
           </div>
 
-          <!-- Row 2: Marquee (Starts with Eagle KSP, Suntech, Fanindo, Lytech) -->
           <div class="relative w-full overflow-hidden py-1">
             <div
               class="marquee-track-left hover:[animation-play-state:paused] flex items-center gap-3"
             >
               @for (customer of bottomRow2; track 'r2a-' + customer.id) {
                 <div
-                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 cursor-default"
                   [attr.aria-label]="customer.name"
                 >
                   <img
                     [src]="customer.logo"
                     [alt]="customer.name"
-                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-5.5]="customer.aspect === 'wide'"
+                    [class.sm:max-h-6]="customer.aspect === 'wide'"
+                    [class.max-w-[78%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                    [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-7]="customer.aspect === 'square'"
+                    [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                    [class.max-w-[60%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
                   />
                 </div>
               }
-              <!-- Duplicate for seamless infinite loop -->
               @for (customer of bottomRow2; track 'r2b-' + customer.id) {
                 <div
-                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 cursor-default"
                   [attr.aria-label]="customer.name"
                 >
                   <img
                     [src]="customer.logo"
                     [alt]="customer.name"
-                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-5.5]="customer.aspect === 'wide'"
+                    [class.sm:max-h-6]="customer.aspect === 'wide'"
+                    [class.max-w-[78%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                    [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-7]="customer.aspect === 'square'"
+                    [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                    [class.max-w-[60%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
                   />
                 </div>
