@@ -41,7 +41,7 @@ export const TOP_CUSTOMERS: CustomerCompany[] = [
   { id: 5, name: 'PT. Agro Sarimas Indonesia', logo: 'images/customers/customer-21.svg', aspect: 'square' },
   { id: 6, name: 'PT. Fanindo Cipta Propertindo', logo: 'images/customers/customer-5.svg', aspect: 'standard' },
   { id: 7, name: 'PT. Suntech Plastics Industries Batam', logo: 'images/customers/customer-16.webp', aspect: 'standard' },
-  { id: 8, name: 'PT. Unknown', logo: 'images/customers/customer43.webp', aspect: 'square' },
+  { id: 8, name: 'PT. Bumi Sarimas Indonesia', logo: 'images/customers/customer43.webp', aspect: 'square' },
   { id: 9, name: 'PT. Inhil Sarimas Kelapa', logo: 'images/customers/customer46.webp', aspect: 'square' },
   { id: 10, name: 'PT. Adhya Tirta Lampung', logo: 'images/customers/customer36.webp', aspect: 'standard' },
 ];
@@ -346,6 +346,26 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
         black 96%,
         transparent
       );
+    }
+
+    .cta-experience-btn {
+      width: 200.01px;
+      height: 40.82px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      padding: 10.91px;
+      gap: 7.27px;
+      background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(90deg, #1E37E1 0%, #1C7DD8 50%, #6694EB 100%) border-box;
+      transition: all 0.25s ease-out;
+    }
+
+    .cta-experience-btn:hover {
+      background:
+        linear-gradient(#F0F5FE, #F0F5FE) padding-box,
+        linear-gradient(90deg, #1E37E1 0%, #1C7DD8 50%, #6694EB 100%) border-box;
+      box-shadow: 0 4px 14px rgba(28, 115, 232, 0.12);
     }
 
     @media (prefers-reduced-motion: reduce) {
