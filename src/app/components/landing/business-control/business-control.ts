@@ -107,9 +107,8 @@ export interface ProcessCard {
     private snappingToCard: 0 | 1 | 2 | 3 = 0;
     private hasSnappedThisWheelGesture = false;
     private accumulatedWheelDelta = 0;
-    private hasSnappedThisTouch = false;
+    private touchStartX = 0;
     private touchStartY = 0;
-    private touchDeltaY = 0;
 
     constructor() {
       if (this.isBrowser && this.router) {
@@ -132,7 +131,6 @@ export interface ProcessCard {
       if (track) {
         track.addEventListener('wheel', this.onTrackWheel, { passive: false });
         track.addEventListener('touchstart', this.onTrackTouchStart, { passive: true });
-        track.addEventListener('touchmove', this.onTrackTouchMove, { passive: false });
         track.addEventListener('touchend', this.onTrackTouchEnd, { passive: true });
       }
     }
@@ -162,7 +160,6 @@ export interface ProcessCard {
         if (track) {
           track.removeEventListener('wheel', this.onTrackWheel);
           track.removeEventListener('touchstart', this.onTrackTouchStart);
-          track.removeEventListener('touchmove', this.onTrackTouchMove);
           track.removeEventListener('touchend', this.onTrackTouchEnd);
         }
       }
@@ -1224,76 +1221,29 @@ export interface ProcessCard {
 
     readonly onTrackTouchStart = (event: TouchEvent): void => {
       if (event.touches.length > 0) {
+        this.touchStartX = event.touches[0].clientX;
         this.touchStartY = event.touches[0].clientY;
-        this.touchDeltaY = 0;
-        this.hasSnappedThisTouch = false;
-        this.clearSnapAnimation();
-        if (this.snapCooldownId !== null) {
-          clearTimeout(this.snapCooldownId);
-          this.snapCooldownId = null;
-        }
-        this.isSnapping.set(false);
       }
     };
 
-    readonly onTrackTouchMove = (event: TouchEvent): void => {
-      if (!this.isBrowser || this.isNavigating() || event.touches.length === 0) return;
+    readonly onTrackTouchEnd = (event: TouchEvent): void => {
+      if (event.changedTouches.length === 0) return;
+      const touchEndX = event.changedTouches[0].clientX;
+      const touchEndY = event.changedTouches[0].clientY;
+      const diffX = touchEndX - this.touchStartX;
+      const diffY = touchEndY - this.touchStartY;
 
-      const el = this.trackRef()?.nativeElement;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const stickyOffset = this.getStickyOffset();
-      const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
-      const isPinned = rect.top <= stickyOffset + 5 && rect.bottom >= windowHeight + 5;
-
-      if (!isPinned) return;
-
-      const currentCard = this.activeCard();
-      const currentY = event.touches[0].clientY;
-      this.touchDeltaY = this.touchStartY - currentY;
-
-      // At boundaries: allow natural touch scrolling to adjacent sections
-      if (this.touchDeltaY > 0 && currentCard === 3) {
-        return;
-      }
-      if (this.touchDeltaY < 0 && currentCard === 0) {
-        return;
-      }
-
-      event.preventDefault();
-
-      if (this.hasSnappedThisTouch || this.isSnapping()) {
-        return;
-      }
-
-      if (this.touchDeltaY > 15) {
-        if (currentCard < 3) {
-          this.hasSnappedThisTouch = true;
-          this.snapToCard(currentCard + 1);
-        }
-      } else if (this.touchDeltaY < -15) {
-        if (currentCard > 0) {
-          this.hasSnappedThisTouch = true;
-          this.snapToCard(currentCard - 1);
+      // Handle horizontal swipe gesture (swipe left / right to navigate cards)
+      const isHorizontalSwipe = Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40;
+      if (isHorizontalSwipe) {
+        const currentCard = this.activeCard();
+        if (diffX < 0 && currentCard < 3) {
+          // Swiped left -> next card
+          this.goToCard(currentCard + 1);
+        } else if (diffX > 0 && currentCard > 0) {
+          // Swiped right -> prev card
+          this.goToCard(currentCard - 1);
         }
       }
-    };
-
-    readonly onTrackTouchEnd = (): void => {
-      const currentCard = this.activeCard();
-      if (!this.hasSnappedThisTouch && !this.isSnapping()) {
-        if (this.touchDeltaY > 8 && currentCard < 3) {
-          this.hasSnappedThisTouch = true;
-          this.snapToCard(currentCard + 1);
-        } else if (this.touchDeltaY < -8 && currentCard > 0) {
-          this.hasSnappedThisTouch = true;
-          this.snapToCard(currentCard - 1);
-        } else if (Math.abs(this.touchDeltaY) > 0) {
-          this.snapToNearestCard();
-        }
-      }
-      this.hasSnappedThisTouch = false;
-      this.touchDeltaY = 0;
     };
   }

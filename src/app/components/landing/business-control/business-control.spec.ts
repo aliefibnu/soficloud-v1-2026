@@ -578,4 +578,72 @@ describe('BusinessControl', () => {
     expect(indicatorButtons[2].className).toContain('shadow-[0_2px_6px_#23244e30]');
     expect(indicatorButtons[3].className).toContain('shadow-[0_2px_6px_#23244e30]');
   });
+
+  it('should navigate to next card on horizontal swipe left', () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    component.setScrollProgress(0); // at card 0
+
+    // Touch start at (150, 200)
+    component.onTrackTouchStart({
+      touches: [{ clientX: 150, clientY: 200 }],
+    } as unknown as TouchEvent);
+
+    // Touch end at (80, 205) -> diffX = -70, diffY = 5 (horizontal swipe left)
+    component.onTrackTouchEnd({
+      changedTouches: [{ clientX: 80, clientY: 205 }],
+    } as unknown as TouchEvent);
+
+    expect(goToSpy).toHaveBeenCalledWith(1);
+    goToSpy.mockRestore();
+  });
+
+  it('should navigate to previous card on horizontal swipe right', () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    component.setScrollProgress(0.74); // at card 2
+
+    // Touch start at (100, 200)
+    component.onTrackTouchStart({
+      touches: [{ clientX: 100, clientY: 200 }],
+    } as unknown as TouchEvent);
+
+    // Touch end at (170, 195) -> diffX = 70, diffY = -5 (horizontal swipe right)
+    component.onTrackTouchEnd({
+      changedTouches: [{ clientX: 170, clientY: 195 }],
+    } as unknown as TouchEvent);
+
+    expect(goToSpy).toHaveBeenCalledWith(1);
+    goToSpy.mockRestore();
+  });
+
+  it('should ignore vertical touch gestures in swipe handler to preserve native vertical scroll', () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    component.setScrollProgress(0.42); // at card 1
+
+    // Vertical drag: diffX = 10, diffY = 80
+    component.onTrackTouchStart({
+      touches: [{ clientX: 100, clientY: 200 }],
+    } as unknown as TouchEvent);
+
+    component.onTrackTouchEnd({
+      changedTouches: [{ clientX: 110, clientY: 120 }],
+    } as unknown as TouchEvent);
+
+    expect(goToSpy).not.toHaveBeenCalled();
+    goToSpy.mockRestore();
+  });
+
+  it('should render 4 mobile indicator pills and trigger goToCard on tap', async () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    component.setScrollProgress(0);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const mobilePillButtons = fixture.nativeElement.querySelectorAll('button[aria-label^="Select card"]');
+    expect(mobilePillButtons.length).toBe(4);
+
+    mobilePillButtons[2].click();
+    expect(goToSpy).toHaveBeenCalledWith(2);
+
+    goToSpy.mockRestore();
+  });
 });

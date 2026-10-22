@@ -1,10 +1,10 @@
 <section
   #trackRef
-  class="w-full relative h-[420vh] scroll-mt-20"
+  class="w-full relative h-[300vh] sm:h-[360vh] lg:h-[420vh] scroll-mt-20 touch-pan-y"
   aria-label="Business Control Interactive Showcase"
 >
   <div
-    class="h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
+    class="h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-3.5 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
     [class.sticky]="!isNavigating()"
     [class.relative]="isNavigating()"
     [class.top-16]="!isNavigating()"
@@ -12,15 +12,15 @@
     [class.lg:top-20]="!isNavigating()"
   >
     <!-- Section Header (Inter 600 Semi Bold & DM Sans 400 Regular #23244E) -->
-    <div class="text-center mb-2.5 sm:mb-3 lg:mb-3.5 max-w-4xl mx-auto shrink-0 px-2">
+    <div class="text-center mb-2 sm:mb-3 lg:mb-3.5 max-w-4xl mx-auto shrink-0 px-2">
       <h2
-        class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#23244E] tracking-tight leading-tight"
+        class="text-xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#23244E] tracking-tight leading-tight"
         style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
       >
         {{ 'BUSINESS_CONTROL.HEADER_TITLE' | translate }}
       </h2>
       <p
-        class="text-[#23244E] text-xs sm:text-sm lg:text-[15px] xl:text-[16px] mt-1 sm:mt-1.5 w-full max-w-none whitespace-normal sm:whitespace-nowrap text-center leading-relaxed"
+        class="text-[#23244E] text-xs sm:text-sm lg:text-[15px] xl:text-[16px] mt-0.5 sm:mt-1.5 w-full max-w-none whitespace-normal sm:whitespace-nowrap text-center leading-relaxed"
         style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
       >
         {{ 'BUSINESS_CONTROL.HEADER_SUBTITLE' | translate }}
@@ -29,7 +29,7 @@
 
     <!-- Main Container Card with Linear Gradient (#D7E4FA, #EBF2FD, #A9C4F166 40%) - Exact rx 24px -->
     <div
-      class="rounded-[24px] px-5 py-3.5 sm:px-7 sm:py-4.5 lg:px-9 lg:py-5 xl:px-10 xl:py-5.5 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-center max-h-[calc(100dvh-11.5rem)]"
+      class="rounded-[20px] sm:rounded-[24px] px-4 py-3 sm:px-7 sm:py-4.5 lg:px-9 lg:py-5 xl:px-10 xl:py-5.5 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-center max-h-[calc(100dvh-9.5rem)] sm:max-h-[calc(100dvh-11.5rem)]"
       style="background: linear-gradient(180deg, #D7E4FA 0%, #EBF2FD 50%, rgba(169, 196, 241, 0.4) 100%);"
     >
       <!-- Left Vertical Indicator Dots (100% matched to Group 10479.svg: 16px circles, 40px pitch) -->
@@ -57,35 +57,53 @@
         }
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-center sm:pl-7 lg:pl-9">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-12 items-center sm:pl-7 lg:pl-9">
         <!-- LEFT COLUMN: Category Header & Preview Cards Stack -->
         <div class="lg:col-span-7 flex flex-col justify-center">
-          <!-- Category Header: Horizontally aligned with the white card (pl-4 sm:pl-5) -->
-          <div class="relative h-10 sm:h-11 mb-1 sm:mb-1.5 pl-4 sm:pl-5">
-            @for (header of categoryHeaders; track header.title; let i = $index) {
-              <div
-                class="absolute inset-0 pl-4 sm:pl-5 flex flex-col justify-center transition-opacity duration-300 ease-out"
-                [style.opacity]="activeCard() === i ? 1 : 0"
-                [style.pointerEvents]="activeCard() === i ? 'auto' : 'none'"
-              >
-                <span
-                  class="text-sm sm:text-base lg:text-[17px] xl:text-[18px] font-bold tracking-wider text-[#23244E] uppercase"
-                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+          <!-- Category Header: Horizontally aligned with the card -->
+          <div class="relative h-9 sm:h-11 mb-1 sm:mb-1.5 flex items-center justify-between">
+            <div class="relative flex-1 h-full min-w-0">
+              @for (header of categoryHeaders; track header.title; let i = $index) {
+                <div
+                  class="absolute inset-0 flex flex-col justify-center transition-opacity duration-300 ease-out"
+                  [style.opacity]="activeCard() === i ? 1 : 0"
+                  [style.pointerEvents]="activeCard() === i ? 'auto' : 'none'"
                 >
-                  {{ header.title }}
-                </span>
-                <span
-                  class="text-[11px] sm:text-xs lg:text-[12px] font-normal tracking-widest text-[#23244E]/80 uppercase mt-0.5"
-                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
-                >
-                  {{ header.subtitle }}
-                </span>
-              </div>
-            }
+                  <span
+                    class="text-xs sm:text-base lg:text-[17px] xl:text-[18px] font-bold tracking-wider text-[#23244E] uppercase truncate"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                  >
+                    {{ header.title }}
+                  </span>
+                  <span
+                    class="text-[10px] sm:text-xs lg:text-[12px] font-normal tracking-widest text-[#23244E]/80 uppercase mt-0.5"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+                  >
+                    {{ header.subtitle }}
+                  </span>
+                </div>
+              }
+            </div>
+
+            <!-- Mobile Navigation Indicator Pills -->
+            <div class="flex sm:hidden items-center gap-1.5 z-20 shrink-0 pl-2" aria-label="Mobile card navigation">
+              @for (card of [0, 1, 2, 3]; track card) {
+                <button
+                  type="button"
+                  (click)="goToCard(card)"
+                  [attr.aria-label]="'Select card ' + (card + 1)"
+                  class="h-1.5 rounded-full transition-all duration-300 cursor-pointer focus:outline-none"
+                  [class.w-4]="activeCard() === card"
+                  [class.w-1.5]="activeCard() !== card"
+                  [class.bg-[#649CEA]]="activeCard() === card"
+                  [class.bg-[#23244E]/25]="activeCard() !== card"
+                ></button>
+              }
+            </div>
           </div>
 
           <!-- Preview Cards Stacking Container (Aspect ratio 656/470, mathematically identical sizes) -->
-          <div class="relative w-full aspect-[656/470] max-h-[340px] sm:max-h-[390px] lg:max-h-[430px] xl:max-h-[460px]">
+          <div class="relative w-full aspect-[656/470] max-h-[170px] xs:max-h-[210px] sm:max-h-[340px] lg:max-h-[430px] xl:max-h-[460px] overflow-hidden rounded-xl sm:rounded-2xl">
             <!-- Card 1: Real-Time Income and Expense Chart -->
             <div
               class="preview-card-1 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
@@ -170,7 +188,7 @@
           <div class="grid grid-cols-1 grid-rows-1 w-full self-center">
             <!-- Text 1: Real-Time Monitoring -->
             <div
-              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 0 ? 1 : 0"
@@ -178,22 +196,22 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight whitespace-pre-line"
+                  class="text-base sm:text-2xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-snug sm:leading-[1.16] tracking-tight whitespace-normal sm:whitespace-pre-line"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.TITLE' | translate }}
                 </h3>
                 <p
-                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
+                  class="text-[#202144]/85 text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-1 sm:mt-3.5 max-w-lg line-clamp-3 sm:line-clamp-none"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.REALTIME.DESC' | translate }}
                 </p>
               </div>
-              <div class="pt-5 sm:pt-6">
+              <div class="pt-2 sm:pt-5 lg:pt-6">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center px-5 py-2 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
                 </button>
@@ -202,7 +220,7 @@
 
             <!-- Text 2: Connected Business Processes -->
             <div
-              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 1 ? 1 : 0"
@@ -210,22 +228,22 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight whitespace-pre-line"
+                  class="text-base sm:text-2xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-snug sm:leading-[1.16] tracking-tight whitespace-normal sm:whitespace-pre-line"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.TITLE' | translate }}
                 </h3>
                 <p
-                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
+                  class="text-[#202144]/85 text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-1 sm:mt-3.5 max-w-lg line-clamp-3 sm:line-clamp-none"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.CONNECTED.DESC' | translate }}
                 </p>
               </div>
-              <div class="pt-5 sm:pt-6">
+              <div class="pt-2 sm:pt-5 lg:pt-6">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center px-5 py-2 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
                 </button>
@@ -234,7 +252,7 @@
 
             <!-- Text 3: Structured Workflow & Approval -->
             <div
-              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 2 ? 1 : 0"
@@ -242,22 +260,22 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight whitespace-pre-line"
+                  class="text-base sm:text-2xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-snug sm:leading-[1.16] tracking-tight whitespace-normal sm:whitespace-pre-line"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.TITLE' | translate }}
                 </h3>
                 <p
-                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
+                  class="text-[#202144]/85 text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-1 sm:mt-3.5 max-w-lg line-clamp-3 sm:line-clamp-none"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.WORKFLOW.DESC' | translate }}
                 </p>
               </div>
-              <div class="pt-5 sm:pt-6">
+              <div class="pt-2 sm:pt-5 lg:pt-6">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center px-5 py-2 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
                 </button>
@@ -266,7 +284,7 @@
 
             <!-- Text 4: Financial & Cost Insight -->
             <div
-              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [class.!transition-none]="isNavigating()"
               [style.transition]="isNavigating() ? 'none' : null"
               [style.opacity]="activeCard() === 3 ? 1 : 0"
@@ -274,22 +292,22 @@
             >
               <div>
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-[1.16] tracking-tight whitespace-pre-line"
+                  class="text-base sm:text-2xl lg:text-[38px] xl:text-[42px] font-semibold text-[#202144] leading-snug sm:leading-[1.16] tracking-tight whitespace-normal sm:whitespace-pre-line"
                   style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 600;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.TITLE' | translate }}
                 </h3>
                 <p
-                  class="text-[#202144] text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-3 sm:mt-3.5 max-w-lg"
+                  class="text-[#202144]/85 text-xs sm:text-sm lg:text-[15px] leading-relaxed mt-1 sm:mt-3.5 max-w-lg line-clamp-3 sm:line-clamp-none"
                   style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
                 >
                   {{ 'BUSINESS_CONTROL.CARDS.INSIGHT.DESC' | translate }}
                 </p>
               </div>
-              <div class="pt-5 sm:pt-6">
+              <div class="pt-2 sm:pt-5 lg:pt-6">
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="inline-flex items-center justify-center px-5 py-2 sm:px-7 sm:py-3.5 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
                 </button>
