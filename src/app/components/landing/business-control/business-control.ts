@@ -90,6 +90,8 @@ export interface ProcessCard {
 
     readonly trackRef = viewChild<ElementRef<HTMLElement>>('trackRef');
 
+    readonly isMobile = signal<boolean>(false);
+    readonly mobileCardIndex = signal<0 | 1 | 2 | 3>(0);
     readonly scrollProgress = signal<number>(0);
     readonly isNavigating = signal<boolean>(false);
     readonly isSnapping = signal<boolean>(false);
@@ -111,6 +113,9 @@ export interface ProcessCard {
     private touchStartY = 0;
 
     constructor() {
+      if (this.isBrowser) {
+        this.checkMobileBreakpoint();
+      }
       if (this.isBrowser && this.router) {
         this.routerSub = this.router.events.subscribe((event) => {
           if (event instanceof NavigationStart) {
@@ -122,6 +127,12 @@ export interface ProcessCard {
             }
           }
         });
+      }
+    }
+
+    checkMobileBreakpoint(): void {
+      if (typeof window !== 'undefined') {
+        this.isMobile.set(window.innerWidth < 1024);
       }
     }
 
@@ -322,6 +333,9 @@ export interface ProcessCard {
     readonly transitionProgress = computed<number>(() => this.progress12());
 
     readonly activeCard = computed<0 | 1 | 2 | 3>(() => {
+      if (this.isMobile()) {
+        return this.mobileCardIndex();
+      }
       if (this.progress34() >= 0.5) return 3;
       if (this.progress23() >= 0.5) return 2;
       if (this.progress12() >= 0.5) return 1;
@@ -900,7 +914,7 @@ export interface ProcessCard {
     }
 
     onWindowScroll(): void {
-      if (!this.isBrowser || this.isNavigating() || this.isProgrammaticCardScroll) return;
+      if (!this.isBrowser || this.isMobile() || this.isNavigating() || this.isProgrammaticCardScroll) return;
 
       if (this.rafId === null) {
         this.rafId = requestAnimationFrame(() => {
@@ -915,7 +929,10 @@ export interface ProcessCard {
 
     onWindowResize(): void {
       if (!this.isBrowser) return;
-      this.updateScrollProgress();
+      this.checkMobileBreakpoint();
+      if (!this.isMobile()) {
+        this.updateScrollProgress();
+      }
     }
 
     private getStickyOffset(): number {
@@ -947,6 +964,11 @@ export interface ProcessCard {
     }
 
     goToCard(index: number): void {
+      const clampedIndex = Math.max(0, Math.min(index, 3)) as 0 | 1 | 2 | 3;
+      if (this.isMobile()) {
+        this.mobileCardIndex.set(clampedIndex);
+        return;
+      }
       if (!this.isBrowser) return;
       const el = this.trackRef()?.nativeElement;
       if (!el) return;
@@ -955,9 +977,28 @@ export interface ProcessCard {
       const totalScroll = rect.height - windowHeight;
       const stickyOffset = this.getStickyOffset();
       const targets = [0.0, 0.42, 0.74, 1.0];
-      const targetProgress = targets[index] ?? 0;
+      const targetProgress = targets[clampedIndex] ?? 0;
       const targetScrollY = window.scrollY + rect.top - stickyOffset + targetProgress * totalScroll;
       this.animateScrollTo(targetScrollY, 420);
+    }
+
+    nextCard(): void {
+      const current = this.activeCard();
+      if (current < 3) {
+        this.goToCard(current + 1);
+      }
+    }
+
+    prevCard(): void {
+      const current = this.activeCard();
+      if (current > 0) {
+        this.goToCard(current - 1);
+      }
+    }
+
+    getMobileCardTransform(cardIndex: number): string {
+      const offset = cardIndex - this.activeCard();
+      return `translate3d(${offset * 100}%, 0, 0)`;
     }
 
     private butteryEase(x: number): number {
@@ -1117,7 +1158,7 @@ export interface ProcessCard {
     }
 
     readonly onTrackWheel = (event: WheelEvent): void => {
-      if (!this.isBrowser || this.isNavigating()) return;
+      if (!this.isBrowser || this.isMobile() || this.isNavigating()) return;
 
       const el = this.trackRef()?.nativeElement;
       if (!el) return;
@@ -1236,13 +1277,12 @@ export interface ProcessCard {
       // Handle horizontal swipe gesture (swipe left / right to navigate cards)
       const isHorizontalSwipe = Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40;
       if (isHorizontalSwipe) {
-        const currentCard = this.activeCard();
-        if (diffX < 0 && currentCard < 3) {
+        if (diffX < 0) {
           // Swiped left -> next card
-          this.goToCard(currentCard + 1);
-        } else if (diffX > 0 && currentCard > 0) {
+          this.nextCard();
+        } else if (diffX > 0) {
           // Swiped right -> prev card
-          this.goToCard(currentCard - 1);
+          this.prevCard();
         }
       }
     };

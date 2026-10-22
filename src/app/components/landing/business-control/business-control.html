@@ -1,15 +1,10 @@
 <section
   #trackRef
-  class="w-full relative h-[300vh] sm:h-[360vh] lg:h-[420vh] scroll-mt-20 touch-pan-y"
+  class="w-full relative h-auto py-8 sm:py-12 lg:py-0 lg:h-[420vh] scroll-mt-20 touch-pan-y"
   aria-label="Business Control Interactive Showcase"
 >
   <div
-    class="h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-3.5 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
-    [class.sticky]="!isNavigating()"
-    [class.relative]="isNavigating()"
-    [class.top-16]="!isNavigating()"
-    [class.sm:top-18]="!isNavigating()"
-    [class.lg:top-20]="!isNavigating()"
+    class="relative lg:sticky lg:top-20 lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-3.5 sm:px-6 lg:px-8 max-w-7xl mx-auto"
   >
     <!-- Section Header (Inter 600 Semi Bold & DM Sans 400 Regular #23244E) -->
     <div class="text-center mb-2 sm:mb-3 lg:mb-3.5 max-w-4xl mx-auto shrink-0 px-2">
@@ -29,12 +24,12 @@
 
     <!-- Main Container Card with Linear Gradient (#D7E4FA, #EBF2FD, #A9C4F166 40%) - Exact rx 24px -->
     <div
-      class="rounded-[20px] sm:rounded-[24px] px-4 py-3 sm:px-7 sm:py-4.5 lg:px-9 lg:py-5 xl:px-10 xl:py-5.5 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-center max-h-[calc(100dvh-9.5rem)] sm:max-h-[calc(100dvh-11.5rem)]"
+      class="rounded-[20px] sm:rounded-[24px] px-4 py-4 sm:px-7 sm:py-5 lg:px-9 lg:py-5 xl:px-10 xl:py-5.5 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-center max-h-none lg:max-h-[calc(100dvh-11.5rem)]"
       style="background: linear-gradient(180deg, #D7E4FA 0%, #EBF2FD 50%, rgba(169, 196, 241, 0.4) 100%);"
     >
-      <!-- Left Vertical Indicator Dots (100% matched to Group 10479.svg: 16px circles, 40px pitch) -->
+      <!-- Left Vertical Indicator Dots (Desktop only) -->
       <div
-        class="hidden sm:flex flex-col items-center justify-center gap-6 absolute left-3.5 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30"
+        class="hidden lg:flex flex-col items-center justify-center gap-6 absolute left-3.5 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30"
         aria-label="Card navigation indicators"
       >
         @for (card of [0, 1, 2, 3]; track card) {
@@ -61,57 +56,39 @@
         <!-- LEFT COLUMN: Category Header & Preview Cards Stack -->
         <div class="lg:col-span-7 flex flex-col justify-center">
           <!-- Category Header: Horizontally aligned with the card -->
-          <div class="relative h-9 sm:h-11 mb-1 sm:mb-1.5 flex items-center justify-between">
-            <div class="relative flex-1 h-full min-w-0">
-              @for (header of categoryHeaders; track header.title; let i = $index) {
-                <div
-                  class="absolute inset-0 flex flex-col justify-center transition-opacity duration-300 ease-out"
-                  [style.opacity]="activeCard() === i ? 1 : 0"
-                  [style.pointerEvents]="activeCard() === i ? 'auto' : 'none'"
+          <div class="relative h-8 sm:h-10 mb-1 sm:mb-1.5 flex items-center">
+            @for (header of categoryHeaders; track header.title; let i = $index) {
+              <div
+                class="absolute inset-0 flex flex-col justify-center transition-opacity duration-300 ease-out"
+                [style.opacity]="activeCard() === i ? 1 : 0"
+                [style.pointerEvents]="activeCard() === i ? 'auto' : 'none'"
+              >
+                <span
+                  class="text-xs sm:text-base lg:text-[17px] xl:text-[18px] font-bold tracking-wider text-[#23244E] uppercase truncate"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
                 >
-                  <span
-                    class="text-xs sm:text-base lg:text-[17px] xl:text-[18px] font-bold tracking-wider text-[#23244E] uppercase truncate"
-                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
-                  >
-                    {{ header.title }}
-                  </span>
-                  <span
-                    class="text-[10px] sm:text-xs lg:text-[12px] font-normal tracking-widest text-[#23244E]/80 uppercase mt-0.5"
-                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
-                  >
-                    {{ header.subtitle }}
-                  </span>
-                </div>
-              }
-            </div>
-
-            <!-- Mobile Navigation Indicator Pills -->
-            <div class="flex sm:hidden items-center gap-1.5 z-20 shrink-0 pl-2" aria-label="Mobile card navigation">
-              @for (card of [0, 1, 2, 3]; track card) {
-                <button
-                  type="button"
-                  (click)="goToCard(card)"
-                  [attr.aria-label]="'Select card ' + (card + 1)"
-                  class="h-1.5 rounded-full transition-all duration-300 cursor-pointer focus:outline-none"
-                  [class.w-4]="activeCard() === card"
-                  [class.w-1.5]="activeCard() !== card"
-                  [class.bg-[#649CEA]]="activeCard() === card"
-                  [class.bg-[#23244E]/25]="activeCard() !== card"
-                ></button>
-              }
-            </div>
+                  {{ header.title }}
+                </span>
+                <span
+                  class="text-[10px] sm:text-xs lg:text-[12px] font-normal tracking-widest text-[#23244E]/80 uppercase mt-0.5"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+                >
+                  {{ header.subtitle }}
+                </span>
+              </div>
+            }
           </div>
 
           <!-- Preview Cards Stacking Container (Aspect ratio 656/470, mathematically identical sizes) -->
           <div class="relative w-full aspect-[656/470] max-h-[170px] xs:max-h-[210px] sm:max-h-[340px] lg:max-h-[430px] xl:max-h-[460px] overflow-hidden rounded-xl sm:rounded-2xl">
             <!-- Card 1: Real-Time Income and Expense Chart -->
             <div
-              class="preview-card-1 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
-              [class.!transition-none]="isNavigating()"
-              [style.transition]="isNavigating() ? 'none' : null"
-              [style.transform]="card1Transform()"
-              [style.opacity]="card1Opacity()"
-              [style.zIndex]="10"
+              class="preview-card-1 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-transform duration-300 ease-out"
+              [class.!transition-none]="!isMobile() && isNavigating()"
+              [style.transition]="!isMobile() && isNavigating() ? 'none' : null"
+              [style.transform]="isMobile() ? getMobileCardTransform(0) : card1Transform()"
+              [style.opacity]="isMobile() ? (activeCard() === 0 ? 1 : 0) : card1Opacity()"
+              [style.zIndex]="isMobile() ? (activeCard() === 0 ? 20 : 10) : 10"
               [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
             >
               <img
@@ -126,12 +103,12 @@
 
             <!-- Card 2: Connected Processes -->
             <div
-              class="preview-card-2 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
-              [class.!transition-none]="isNavigating()"
-              [style.transition]="isNavigating() ? 'none' : null"
-              [style.transform]="card2Transform()"
-              [style.opacity]="card2Opacity()"
-              [style.zIndex]="20"
+              class="preview-card-2 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-transform duration-300 ease-out"
+              [class.!transition-none]="!isMobile() && isNavigating()"
+              [style.transition]="!isMobile() && isNavigating() ? 'none' : null"
+              [style.transform]="isMobile() ? getMobileCardTransform(1) : card2Transform()"
+              [style.opacity]="isMobile() ? (activeCard() === 1 ? 1 : 0) : card2Opacity()"
+              [style.zIndex]="isMobile() ? (activeCard() === 1 ? 20 : 10) : 20"
               [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
             >
               <img
@@ -145,12 +122,12 @@
 
             <!-- Card 3: Workflow & Approval -->
             <div
-              class="preview-card-3 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
-              [class.!transition-none]="isNavigating()"
-              [style.transition]="isNavigating() ? 'none' : null"
-              [style.transform]="card3Transform()"
-              [style.opacity]="card3Opacity()"
-              [style.zIndex]="30"
+              class="preview-card-3 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-transform duration-300 ease-out"
+              [class.!transition-none]="!isMobile() && isNavigating()"
+              [style.transition]="!isMobile() && isNavigating() ? 'none' : null"
+              [style.transform]="isMobile() ? getMobileCardTransform(2) : card3Transform()"
+              [style.opacity]="isMobile() ? (activeCard() === 2 ? 1 : 0) : card3Opacity()"
+              [style.zIndex]="isMobile() ? (activeCard() === 2 ? 20 : 10) : 30"
               [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
             >
               <img
@@ -164,12 +141,12 @@
 
             <!-- Card 4: Financial & Cost Insight -->
             <div
-              class="preview-card-4 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center"
-              [class.!transition-none]="isNavigating()"
-              [style.transition]="isNavigating() ? 'none' : null"
-              [style.transform]="card4Transform()"
-              [style.opacity]="card4Opacity()"
-              [style.zIndex]="40"
+              class="preview-card-4 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-transform duration-300 ease-out"
+              [class.!transition-none]="!isMobile() && isNavigating()"
+              [style.transition]="!isMobile() && isNavigating() ? 'none' : null"
+              [style.transform]="isMobile() ? getMobileCardTransform(3) : card4Transform()"
+              [style.opacity]="isMobile() ? (activeCard() === 3 ? 1 : 0) : card4Opacity()"
+              [style.zIndex]="isMobile() ? (activeCard() === 3 ? 20 : 10) : 40"
               [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
             >
               <img
@@ -315,6 +292,48 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Mobile Carousel Controls (Visible on < lg) -->
+      <div class="flex lg:hidden items-center justify-between w-full pt-3.5 mt-2 border-t border-blue-200/50">
+        <button
+          type="button"
+          (click)="prevCard()"
+          [disabled]="activeCard() === 0"
+          [attr.aria-label]="'Previous card'"
+          class="w-8 h-8 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-[#23244E] transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer active:scale-95"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="flex items-center gap-2" aria-label="Carousel pagination">
+          @for (card of [0, 1, 2, 3]; track card) {
+            <button
+              type="button"
+              (click)="goToCard(card)"
+              [attr.aria-label]="'Select card ' + (card + 1)"
+              class="h-2 rounded-full transition-all duration-300 cursor-pointer focus:outline-none"
+              [class.w-6]="activeCard() === card"
+              [class.w-2]="activeCard() !== card"
+              [class.bg-[#649CEA]]="activeCard() === card"
+              [class.bg-[#23244E]/25]="activeCard() !== card"
+            ></button>
+          }
+        </div>
+
+        <button
+          type="button"
+          (click)="nextCard()"
+          [disabled]="activeCard() === 3"
+          [attr.aria-label]="'Next card'"
+          class="w-8 h-8 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-[#23244E] transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer active:scale-95"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
