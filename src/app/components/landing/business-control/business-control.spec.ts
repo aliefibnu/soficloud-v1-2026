@@ -562,4 +562,20 @@ describe('BusinessControl', () => {
 
     snapSpy.mockRestore();
   });
+
+  it('should render indicator buttons with appropriate shadows for active and inactive cards', async () => {
+    component.setScrollProgress(0);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const indicatorButtons = fixture.nativeElement.querySelectorAll('button[aria-label^="Go to card"]');
+    expect(indicatorButtons.length).toBe(4);
+
+    // Card 0 is active
+    expect(indicatorButtons[0].className).toContain('shadow-[0_2px_10px_#649cead9]');
+    // Cards 1, 2, 3 are inactive
+    expect(indicatorButtons[1].className).toContain('shadow-[0_2px_6px_#23244e30]');
+    expect(indicatorButtons[2].className).toContain('shadow-[0_2px_6px_#23244e30]');
+    expect(indicatorButtons[3].className).toContain('shadow-[0_2px_6px_#23244e30]');
+  });
 });
