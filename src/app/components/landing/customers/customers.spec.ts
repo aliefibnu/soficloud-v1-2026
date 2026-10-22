@@ -136,6 +136,6 @@ describe('Customers', () => {
   it('should switch customer instantly with 0ms delay when selectCustomer is called', () => {
     component.selectCustomer(7);
     expect(component.activeCustomerIndex()).toBe(7);
-    expect(component.activeCustomer().name).toBe('PT. Unknown');
+    expect(component.activeCustomer().name).toBe('PT. Bumi Sarimas Indonesia');
   });
 });
