@@ -99,7 +99,7 @@
           >
             @for (customer of topCustomers; track 'top-a-' + customer.id; let idx = $index) {
               <div
-                class="top-customer-card relative shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-300 ease-out cursor-default select-none pointer-events-none"
+                class="top-customer-card relative shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 ease-out cursor-default select-none pointer-events-none"
                 [attr.data-index]="idx"
                 [class.border-[#1C73E8]]="customer.id === activeCustomer().id"
                 [class.bg-[#EFF6FF]]="customer.id === activeCustomer().id"
@@ -118,7 +118,23 @@
                 <img
                   [src]="customer.logo"
                   [alt]="customer.name"
-                  class="max-h-7 sm:max-h-8 max-w-[82%] object-contain pointer-events-none transition-transform duration-300 ease-out"
+                  class="object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
+                  [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                  [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                  [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                  [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                  [class.max-h-5.5]="customer.aspect === 'wide'"
+                  [class.sm:max-h-6]="customer.aspect === 'wide'"
+                  [class.max-w-[78%]]="customer.aspect === 'wide'"
+                  [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                  [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.max-h-7]="customer.aspect === 'square'"
+                  [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                  [class.max-w-[60%]]="customer.aspect === 'square'"
+                  [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                   [class.scale-105]="customer.id === activeCustomer().id"
                   loading="lazy"
                 />
@@ -127,7 +143,7 @@
             <!-- Duplicate for seamless infinite marquee loop -->
             @for (customer of topCustomers; track 'top-b-' + customer.id; let idx = $index) {
               <div
-                class="top-customer-card relative shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center transition-all duration-300 ease-out cursor-default select-none pointer-events-none"
+                class="top-customer-card relative shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl border-2 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 ease-out cursor-default select-none pointer-events-none"
                 [attr.data-index]="idx"
                 [class.border-[#1C73E8]]="customer.id === activeCustomer().id"
                 [class.bg-[#EFF6FF]]="customer.id === activeCustomer().id"
@@ -146,7 +162,23 @@
                 <img
                   [src]="customer.logo"
                   [alt]="customer.name"
-                  class="max-h-7 sm:max-h-8 max-w-[82%] object-contain pointer-events-none transition-transform duration-300 ease-out"
+                  class="object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
+                  [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                  [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                  [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                  [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                  [class.max-h-5.5]="customer.aspect === 'wide'"
+                  [class.sm:max-h-6]="customer.aspect === 'wide'"
+                  [class.max-w-[78%]]="customer.aspect === 'wide'"
+                  [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                  [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                  [class.max-h-7]="customer.aspect === 'square'"
+                  [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                  [class.max-w-[60%]]="customer.aspect === 'square'"
+                  [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                   [class.scale-105]="customer.id === activeCustomer().id"
                   loading="lazy"
                 />
@@ -306,7 +338,23 @@
                   [src]="activeCustomer().logo"
                   [alt]="activeCustomer().name"
                   [class.logo-switch-active]="isLogoTransitioning()"
-                  class="max-h-13 max-w-[85%] object-contain select-none"
+                  class="object-contain select-none transition-all duration-300"
+                  [class.max-h-9]="activeCustomer().aspect === 'ultra-wide'"
+                  [class.sm:max-h-10]="activeCustomer().aspect === 'ultra-wide'"
+                  [class.max-w-[86%]]="activeCustomer().aspect === 'ultra-wide'"
+                  [class.sm:max-w-[88%]]="activeCustomer().aspect === 'ultra-wide'"
+                  [class.max-h-10]="activeCustomer().aspect === 'wide'"
+                  [class.sm:max-h-11]="activeCustomer().aspect === 'wide'"
+                  [class.max-w-[82%]]="activeCustomer().aspect === 'wide'"
+                  [class.sm:max-w-[85%]]="activeCustomer().aspect === 'wide'"
+                  [class.max-h-11]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
+                  [class.sm:max-h-12]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
+                  [class.max-w-[78%]]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
+                  [class.sm:max-w-[80%]]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
+                  [class.max-h-12]="activeCustomer().aspect === 'square'"
+                  [class.sm:max-h-13]="activeCustomer().aspect === 'square'"
+                  [class.max-w-[62%]]="activeCustomer().aspect === 'square'"
+                  [class.sm:max-w-[65%]]="activeCustomer().aspect === 'square'"
                 />
               </div>
               <p
@@ -350,13 +398,29 @@
             >
               @for (customer of bottomRow1; track 'r1a-' + customer.id) {
                 <div
-                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 cursor-default"
                   [attr.aria-label]="customer.name"
                 >
                   <img
                     [src]="customer.logo"
                     [alt]="customer.name"
-                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-5.5]="customer.aspect === 'wide'"
+                    [class.sm:max-h-6]="customer.aspect === 'wide'"
+                    [class.max-w-[78%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                    [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-7]="customer.aspect === 'square'"
+                    [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                    [class.max-w-[60%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
                   />
                 </div>
@@ -364,13 +428,29 @@
               <!-- Duplicate for seamless infinite loop -->
               @for (customer of bottomRow1; track 'r1b-' + customer.id) {
                 <div
-                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 cursor-default"
                   [attr.aria-label]="customer.name"
                 >
                   <img
                     [src]="customer.logo"
                     [alt]="customer.name"
-                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-5.5]="customer.aspect === 'wide'"
+                    [class.sm:max-h-6]="customer.aspect === 'wide'"
+                    [class.max-w-[78%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                    [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-7]="customer.aspect === 'square'"
+                    [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                    [class.max-w-[60%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
                   />
                 </div>
@@ -385,13 +465,29 @@
             >
               @for (customer of bottomRow2; track 'r2a-' + customer.id) {
                 <div
-                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 cursor-default"
                   [attr.aria-label]="customer.name"
                 >
                   <img
                     [src]="customer.logo"
                     [alt]="customer.name"
-                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-5.5]="customer.aspect === 'wide'"
+                    [class.sm:max-h-6]="customer.aspect === 'wide'"
+                    [class.max-w-[78%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                    [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-7]="customer.aspect === 'square'"
+                    [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                    [class.max-w-[60%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
                   />
                 </div>
@@ -399,13 +495,29 @@
               <!-- Duplicate for seamless infinite loop -->
               @for (customer of bottomRow2; track 'r2b-' + customer.id) {
                 <div
-                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center transition-all duration-300 cursor-default"
+                  class="group/item shrink-0 w-28 sm:w-32 h-13 sm:h-14 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-slate-100 hover:border-[#1C73E8]/60 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-blue-500/15 hover:scale-105 p-2.5 flex items-center justify-center overflow-hidden transition-all duration-300 cursor-default"
                   [attr.aria-label]="customer.name"
                 >
                   <img
                     [src]="customer.logo"
                     [alt]="customer.name"
-                    class="max-h-7 sm:max-h-8 max-w-[82%] object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[82%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-5.5]="customer.aspect === 'wide'"
+                    [class.sm:max-h-6]="customer.aspect === 'wide'"
+                    [class.max-w-[78%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[80%]]="customer.aspect === 'wide'"
+                    [class.max-h-6.5]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-7]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[75%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-7]="customer.aspect === 'square'"
+                    [class.sm:max-h-7.5]="customer.aspect === 'square'"
+                    [class.max-w-[60%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
                   />
                 </div>
