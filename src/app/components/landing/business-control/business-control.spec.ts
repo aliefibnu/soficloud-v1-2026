@@ -578,4 +578,184 @@ describe('BusinessControl', () => {
     expect(indicatorButtons[2].className).toContain('shadow-[0_2px_6px_#23244e30]');
     expect(indicatorButtons[3].className).toContain('shadow-[0_2px_6px_#23244e30]');
   });
+
+  it('should navigate to next card on horizontal swipe left', () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    component.setScrollProgress(0); // at card 0
+
+    // Touch start at (150, 200)
+    component.onTrackTouchStart({
+      touches: [{ clientX: 150, clientY: 200 }],
+    } as unknown as TouchEvent);
+
+    // Touch end at (80, 205) -> diffX = -70, diffY = 5 (horizontal swipe left)
+    component.onTrackTouchEnd({
+      changedTouches: [{ clientX: 80, clientY: 205 }],
+    } as unknown as TouchEvent);
+
+    expect(goToSpy).toHaveBeenCalledWith(1);
+    goToSpy.mockRestore();
+  });
+
+  it('should navigate to previous card on horizontal swipe right', () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    component.setScrollProgress(0.74); // at card 2
+
+    // Touch start at (100, 200)
+    component.onTrackTouchStart({
+      touches: [{ clientX: 100, clientY: 200 }],
+    } as unknown as TouchEvent);
+
+    // Touch end at (170, 195) -> diffX = 70, diffY = -5 (horizontal swipe right)
+    component.onTrackTouchEnd({
+      changedTouches: [{ clientX: 170, clientY: 195 }],
+    } as unknown as TouchEvent);
+
+    expect(goToSpy).toHaveBeenCalledWith(1);
+    goToSpy.mockRestore();
+  });
+
+  it('should ignore vertical touch gestures in swipe handler to preserve native vertical scroll', () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    component.setScrollProgress(0.42); // at card 1
+
+    // Vertical drag: diffX = 10, diffY = 80
+    component.onTrackTouchStart({
+      touches: [{ clientX: 100, clientY: 200 }],
+    } as unknown as TouchEvent);
+
+    component.onTrackTouchEnd({
+      changedTouches: [{ clientX: 110, clientY: 120 }],
+    } as unknown as TouchEvent);
+
+    expect(goToSpy).not.toHaveBeenCalled();
+    goToSpy.mockRestore();
+  });
+
+  it('should render 4 mobile indicator pills and trigger goToCard on tap', async () => {
+    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
+    component.setScrollProgress(0);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const mobilePillButtons = fixture.nativeElement.querySelectorAll('button[aria-label^="Select card"]');
+    expect(mobilePillButtons.length).toBe(4);
+
+    mobilePillButtons[2].click();
+    expect(goToSpy).toHaveBeenCalledWith(2);
+
+    goToSpy.mockRestore();
+  });
+
+  describe('Mobile Swipeable Carousel Mode', () => {
+    it('should detect mobile breakpoint when window width is less than 1024', () => {
+      Object.defineProperty(window, 'innerWidth', { value: 375, writable: true, configurable: true });
+      component.checkMobileBreakpoint();
+      expect(component.isMobile()).toBe(true);
+
+      Object.defineProperty(window, 'innerWidth', { value: 1200, writable: true, configurable: true });
+      component.checkMobileBreakpoint();
+      expect(component.isMobile()).toBe(false);
+    });
+
+    it('should update mobileCardIndex directly on goToCard without scrolling window in mobile mode', () => {
+      component.isMobile.set(true);
+      const scrollToSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+
+      component.goToCard(2);
+      expect(component.mobileCardIndex()).toBe(2);
+      expect(component.activeCard()).toBe(2);
+      expect(scrollToSpy).not.toHaveBeenCalled();
+
+      // Clamp boundary tests
+      component.goToCard(5);
+      expect(component.activeCard()).toBe(3);
+
+      component.goToCard(-1);
+      expect(component.activeCard()).toBe(0);
+
+      scrollToSpy.mockRestore();
+    });
+
+    it('should navigate sequentially with nextCard and prevCard within boundaries', () => {
+      component.isMobile.set(true);
+      component.mobileCardIndex.set(0);
+
+      component.nextCard();
+      expect(component.activeCard()).toBe(1);
+
+      component.nextCard();
+      expect(component.activeCard()).toBe(2);
+
+      component.nextCard();
+      expect(component.activeCard()).toBe(3);
+
+      // Cannot advance past 3
+      component.nextCard();
+      expect(component.activeCard()).toBe(3);
+
+      component.prevCard();
+      expect(component.activeCard()).toBe(2);
+
+      component.prevCard();
+      expect(component.activeCard()).toBe(1);
+
+      component.prevCard();
+      expect(component.activeCard()).toBe(0);
+
+      // Cannot decrease below 0
+      component.prevCard();
+      expect(component.activeCard()).toBe(0);
+    });
+
+    it('should compute valid horizontal slide transforms via getMobileCardTransform', () => {
+      component.isMobile.set(true);
+      component.mobileCardIndex.set(1); // active is 1
+
+      expect(component.getMobileCardTransform(0)).toBe('translate3d(-100%, 0, 0)');
+      expect(component.getMobileCardTransform(1)).toBe('translate3d(0%, 0, 0)');
+      expect(component.getMobileCardTransform(2)).toBe('translate3d(100%, 0, 0)');
+      expect(component.getMobileCardTransform(3)).toBe('translate3d(200%, 0, 0)');
+    });
+
+    it('should disable prev button at card 0 and next button at card 3 in mobile carousel', async () => {
+      component.isMobile.set(true);
+      component.mobileCardIndex.set(0);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const prevBtn = fixture.nativeElement.querySelector('button[aria-label="Previous card"]') as HTMLButtonElement;
+      const nextBtn = fixture.nativeElement.querySelector('button[aria-label="Next card"]') as HTMLButtonElement;
+
+      expect(prevBtn).toBeTruthy();
+      expect(nextBtn).toBeTruthy();
+
+      expect(prevBtn.disabled).toBe(true);
+      expect(nextBtn.disabled).toBe(false);
+
+      // Advance to card 3
+      component.mobileCardIndex.set(3);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(prevBtn.disabled).toBe(false);
+      expect(nextBtn.disabled).toBe(true);
+    });
+
+    it('should ignore mouse-wheel events when in mobile mode', () => {
+      component.isMobile.set(true);
+      const snapSpy = vi.spyOn(component, 'snapToCard').mockImplementation(() => {});
+      const preventDefault = vi.fn();
+
+      component.onTrackWheel({
+        deltaY: 50,
+        deltaMode: 0,
+        preventDefault,
+      } as unknown as WheelEvent);
+
+      expect(preventDefault).not.toHaveBeenCalled();
+      expect(snapSpy).not.toHaveBeenCalled();
+      snapSpy.mockRestore();
+    });
+  });
 });

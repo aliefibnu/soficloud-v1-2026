@@ -131,12 +131,15 @@ describe('Navbar', () => {
     businessModel.id = 'business-model';
     const customers = document.createElement('div');
     customers.id = 'customers';
+    const pricing = document.createElement('div');
+    pricing.id = 'pricing';
     const cta = document.createElement('div');
     cta.id = 'support';
 
     document.body.appendChild(features);
     document.body.appendChild(businessModel);
     document.body.appendChild(customers);
+    document.body.appendChild(pricing);
     document.body.appendChild(cta);
 
     try {
@@ -157,33 +160,34 @@ describe('Navbar', () => {
       component.updateActiveSection();
       expect(component.activeLinkKey()).toBe('HEADER.NAV.SOLUTIONS');
 
-      // 4. In customers: customers top <= 140, cta top > 140
+      // 4. In customers / testimonials: customers top <= 140, pricing top > 140
       vi.spyOn(customers, 'getBoundingClientRect').mockReturnValue({ top: 80 } as DOMRect);
-      vi.spyOn(cta, 'getBoundingClientRect').mockReturnValue({ top: 700 } as DOMRect);
+      vi.spyOn(pricing, 'getBoundingClientRect').mockReturnValue({ top: 700 } as DOMRect);
       component.updateActiveSection();
       expect(component.activeLinkKey()).toBe('HEADER.NAV.TESTIMONIALS');
 
-      // 5. In upper CTA (pricing): cta top <= 140, ctaMid > 140
-      Object.defineProperty(cta, 'offsetHeight', { value: 600, configurable: true });
-      vi.spyOn(cta, 'getBoundingClientRect').mockReturnValue({ top: 50 } as DOMRect); // 50 + 270 = 320 > 140
+      // 5. In pricing: pricing top <= 140, cta top > 140
+      vi.spyOn(pricing, 'getBoundingClientRect').mockReturnValue({ top: 80 } as DOMRect);
+      vi.spyOn(cta, 'getBoundingClientRect').mockReturnValue({ top: 800 } as DOMRect);
       component.updateActiveSection();
       expect(component.activeLinkKey()).toBe('HEADER.NAV.PRICING');
 
-      // 6. In lower CTA / contact: ctaMid <= 140
-      vi.spyOn(cta, 'getBoundingClientRect').mockReturnValue({ top: -200 } as DOMRect); // -200 + 270 = 70 <= 140
+      // 6. In CTA / contact: cta top <= 140
+      vi.spyOn(cta, 'getBoundingClientRect').mockReturnValue({ top: 100 } as DOMRect);
       component.updateActiveSection();
       expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
 
       // 7. Scrolled to bottom of page
       Object.defineProperty(document.documentElement, 'scrollHeight', { value: 3000, configurable: true });
       Object.defineProperty(window, 'innerHeight', { value: 800, configurable: true });
-      Object.defineProperty(window, 'scrollY', { value: 2200, configurable: true }); // 2200 + 800 = 3000 >= 3000 - 60
+      Object.defineProperty(window, 'scrollY', { value: 2200 } as PropertyDescriptor); // 2200 + 800 = 3000 >= 3000 - 60
       component.updateActiveSection();
       expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
     } finally {
       document.body.removeChild(features);
       document.body.removeChild(businessModel);
       document.body.removeChild(customers);
+      document.body.removeChild(pricing);
       document.body.removeChild(cta);
     }
   });

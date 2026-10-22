@@ -90,6 +90,8 @@ export interface ProcessCard {
 
     readonly trackRef = viewChild<ElementRef<HTMLElement>>('trackRef');
 
+    readonly isMobile = signal<boolean>(false);
+    readonly mobileCardIndex = signal<0 | 1 | 2 | 3>(0);
     readonly scrollProgress = signal<number>(0);
     readonly isNavigating = signal<boolean>(false);
     readonly isSnapping = signal<boolean>(false);
@@ -107,11 +109,13 @@ export interface ProcessCard {
     private snappingToCard: 0 | 1 | 2 | 3 = 0;
     private hasSnappedThisWheelGesture = false;
     private accumulatedWheelDelta = 0;
-    private hasSnappedThisTouch = false;
+    private touchStartX = 0;
     private touchStartY = 0;
-    private touchDeltaY = 0;
 
     constructor() {
+      if (this.isBrowser) {
+        this.checkMobileBreakpoint();
+      }
       if (this.isBrowser && this.router) {
         this.routerSub = this.router.events.subscribe((event) => {
           if (event instanceof NavigationStart) {
@@ -126,13 +130,18 @@ export interface ProcessCard {
       }
     }
 
+    checkMobileBreakpoint(): void {
+      if (typeof window !== 'undefined') {
+        this.isMobile.set(window.innerWidth < 1024);
+      }
+    }
+
     ngAfterViewInit(): void {
       if (!this.isBrowser) return;
       const track = this.trackRef()?.nativeElement;
       if (track) {
         track.addEventListener('wheel', this.onTrackWheel, { passive: false });
         track.addEventListener('touchstart', this.onTrackTouchStart, { passive: true });
-        track.addEventListener('touchmove', this.onTrackTouchMove, { passive: false });
         track.addEventListener('touchend', this.onTrackTouchEnd, { passive: true });
       }
     }
@@ -162,7 +171,6 @@ export interface ProcessCard {
         if (track) {
           track.removeEventListener('wheel', this.onTrackWheel);
           track.removeEventListener('touchstart', this.onTrackTouchStart);
-          track.removeEventListener('touchmove', this.onTrackTouchMove);
           track.removeEventListener('touchend', this.onTrackTouchEnd);
         }
       }
@@ -325,6 +333,9 @@ export interface ProcessCard {
     readonly transitionProgress = computed<number>(() => this.progress12());
 
     readonly activeCard = computed<0 | 1 | 2 | 3>(() => {
+      if (this.isMobile()) {
+        return this.mobileCardIndex();
+      }
       if (this.progress34() >= 0.5) return 3;
       if (this.progress23() >= 0.5) return 2;
       if (this.progress12() >= 0.5) return 1;
@@ -903,7 +914,7 @@ export interface ProcessCard {
     }
 
     onWindowScroll(): void {
-      if (!this.isBrowser || this.isNavigating() || this.isProgrammaticCardScroll) return;
+      if (!this.isBrowser || this.isMobile() || this.isNavigating() || this.isProgrammaticCardScroll) return;
 
       if (this.rafId === null) {
         this.rafId = requestAnimationFrame(() => {
@@ -918,7 +929,10 @@ export interface ProcessCard {
 
     onWindowResize(): void {
       if (!this.isBrowser) return;
-      this.updateScrollProgress();
+      this.checkMobileBreakpoint();
+      if (!this.isMobile()) {
+        this.updateScrollProgress();
+      }
     }
 
     private getStickyOffset(): number {
@@ -950,6 +964,11 @@ export interface ProcessCard {
     }
 
     goToCard(index: number): void {
+      const clampedIndex = Math.max(0, Math.min(index, 3)) as 0 | 1 | 2 | 3;
+      if (this.isMobile()) {
+        this.mobileCardIndex.set(clampedIndex);
+        return;
+      }
       if (!this.isBrowser) return;
       const el = this.trackRef()?.nativeElement;
       if (!el) return;
@@ -958,9 +977,28 @@ export interface ProcessCard {
       const totalScroll = rect.height - windowHeight;
       const stickyOffset = this.getStickyOffset();
       const targets = [0.0, 0.42, 0.74, 1.0];
-      const targetProgress = targets[index] ?? 0;
+      const targetProgress = targets[clampedIndex] ?? 0;
       const targetScrollY = window.scrollY + rect.top - stickyOffset + targetProgress * totalScroll;
       this.animateScrollTo(targetScrollY, 420);
+    }
+
+    nextCard(): void {
+      const current = this.activeCard();
+      if (current < 3) {
+        this.goToCard(current + 1);
+      }
+    }
+
+    prevCard(): void {
+      const current = this.activeCard();
+      if (current > 0) {
+        this.goToCard(current - 1);
+      }
+    }
+
+    getMobileCardTransform(cardIndex: number): string {
+      const offset = cardIndex - this.activeCard();
+      return `translate3d(${offset * 100}%, 0, 0)`;
     }
 
     private butteryEase(x: number): number {
@@ -1120,7 +1158,7 @@ export interface ProcessCard {
     }
 
     readonly onTrackWheel = (event: WheelEvent): void => {
-      if (!this.isBrowser || this.isNavigating()) return;
+      if (!this.isBrowser || this.isMobile() || this.isNavigating()) return;
 
       const el = this.trackRef()?.nativeElement;
       if (!el) return;
@@ -1224,76 +1262,28 @@ export interface ProcessCard {
 
     readonly onTrackTouchStart = (event: TouchEvent): void => {
       if (event.touches.length > 0) {
+        this.touchStartX = event.touches[0].clientX;
         this.touchStartY = event.touches[0].clientY;
-        this.touchDeltaY = 0;
-        this.hasSnappedThisTouch = false;
-        this.clearSnapAnimation();
-        if (this.snapCooldownId !== null) {
-          clearTimeout(this.snapCooldownId);
-          this.snapCooldownId = null;
-        }
-        this.isSnapping.set(false);
       }
     };
 
-    readonly onTrackTouchMove = (event: TouchEvent): void => {
-      if (!this.isBrowser || this.isNavigating() || event.touches.length === 0) return;
+    readonly onTrackTouchEnd = (event: TouchEvent): void => {
+      if (event.changedTouches.length === 0) return;
+      const touchEndX = event.changedTouches[0].clientX;
+      const touchEndY = event.changedTouches[0].clientY;
+      const diffX = touchEndX - this.touchStartX;
+      const diffY = touchEndY - this.touchStartY;
 
-      const el = this.trackRef()?.nativeElement;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const stickyOffset = this.getStickyOffset();
-      const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
-      const isPinned = rect.top <= stickyOffset + 5 && rect.bottom >= windowHeight + 5;
-
-      if (!isPinned) return;
-
-      const currentCard = this.activeCard();
-      const currentY = event.touches[0].clientY;
-      this.touchDeltaY = this.touchStartY - currentY;
-
-      // At boundaries: allow natural touch scrolling to adjacent sections
-      if (this.touchDeltaY > 0 && currentCard === 3) {
-        return;
-      }
-      if (this.touchDeltaY < 0 && currentCard === 0) {
-        return;
-      }
-
-      event.preventDefault();
-
-      if (this.hasSnappedThisTouch || this.isSnapping()) {
-        return;
-      }
-
-      if (this.touchDeltaY > 15) {
-        if (currentCard < 3) {
-          this.hasSnappedThisTouch = true;
-          this.snapToCard(currentCard + 1);
-        }
-      } else if (this.touchDeltaY < -15) {
-        if (currentCard > 0) {
-          this.hasSnappedThisTouch = true;
-          this.snapToCard(currentCard - 1);
+      // Handle horizontal swipe gesture (swipe left / right to navigate cards)
+      const isHorizontalSwipe = Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40;
+      if (isHorizontalSwipe) {
+        if (diffX < 0) {
+          // Swiped left -> next card
+          this.nextCard();
+        } else if (diffX > 0) {
+          // Swiped right -> prev card
+          this.prevCard();
         }
       }
-    };
-
-    readonly onTrackTouchEnd = (): void => {
-      const currentCard = this.activeCard();
-      if (!this.hasSnappedThisTouch && !this.isSnapping()) {
-        if (this.touchDeltaY > 8 && currentCard < 3) {
-          this.hasSnappedThisTouch = true;
-          this.snapToCard(currentCard + 1);
-        } else if (this.touchDeltaY < -8 && currentCard > 0) {
-          this.hasSnappedThisTouch = true;
-          this.snapToCard(currentCard - 1);
-        } else if (Math.abs(this.touchDeltaY) > 0) {
-          this.snapToNearestCard();
-        }
-      }
-      this.hasSnappedThisTouch = false;
-      this.touchDeltaY = 0;
     };
   }

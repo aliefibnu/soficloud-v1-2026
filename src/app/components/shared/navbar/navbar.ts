@@ -195,6 +195,7 @@ export class Navbar {
     const businessModelEl =
       document.getElementById('business-model') || document.getElementById('resources');
     const customersEl = document.getElementById('customers');
+    const pricingEl = document.getElementById('pricing');
     const ctaEl = document.getElementById('support') || document.getElementById('contact');
 
     if (!featuresEl) return;
@@ -220,23 +221,21 @@ export class Navbar {
       return;
     }
 
-    const ctaTop = ctaEl?.getBoundingClientRect().top ?? Infinity;
-    if (ctaTop > threshold) {
+    const pricingTop = pricingEl?.getBoundingClientRect().top;
+    if (pricingTop !== undefined && pricingTop > threshold) {
       // Inside customers / testimonials
       this.activeLinkKey.set('HEADER.NAV.TESTIMONIALS');
       return;
     }
 
-    // Inside CTA (Pricing / Contact)
-    if (ctaEl) {
-      const ctaMid = ctaEl.getBoundingClientRect().top + ctaEl.offsetHeight * 0.45;
-      if (ctaMid <= threshold) {
-        this.activeLinkKey.set('HEADER.NAV.CONTACT');
-      } else {
-        this.activeLinkKey.set('HEADER.NAV.PRICING');
-      }
-    } else {
-      this.activeLinkKey.set('HEADER.NAV.CONTACT');
+    const ctaTop = ctaEl?.getBoundingClientRect().top ?? Infinity;
+    if (ctaTop > threshold) {
+      // Inside pricing
+      this.activeLinkKey.set(pricingEl ? 'HEADER.NAV.PRICING' : 'HEADER.NAV.TESTIMONIALS');
+      return;
     }
+
+    // Inside CTA / Contact
+    this.activeLinkKey.set('HEADER.NAV.CONTACT');
   }
 }
