@@ -465,6 +465,24 @@
       "TITLE_LINE_5": "より的確に",
       "DESCRIPTION": "販売、調達、資材所要量、注文の進捗状況、財務状況をSOFICloudダッシュボードから確認できます。あらゆる画面がチームの現状把握と迅速な行動決定をサポートします。",
       "TABLET_ALT": "タブレット上のSOFICloudダッシュボード"
+    },
+    "VISIBILITY_FUNCTION": {
+      "TITLE": "部門横断の可視化",
+      "SUBTITLE": "顧客の注文から財務状況に至るまで、マネジメント層は各プロセスに関連する重要指標を把握できます。以下の画面により、チームはビジネス機会、ボトルネック、未処理の業務を的確に把握できます。",
+      "TABS": {
+        "SALES_PERFORMANCE": "SALES PERFORMANCE",
+        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
+        "MATERIAL_READINESS": "MATERIAL READINESS",
+        "ORDER_PIPELINE": "ORDER PIPELINE",
+        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+      },
+      "ALTS": {
+        "SALES_PERFORMANCE": "販売実績ダッシュボードプレビュー",
+        "PROCUREMENT_CONTROL": "調達管理ダッシュボードプレビュー",
+        "MATERIAL_READINESS": "資材準備状況ダッシュボードプレビュー",
+        "ORDER_PIPELINE": "注文パイプラインダッシュボードプレビュー",
+        "FINANCIAL_VISIBILITY": "財務状況ダッシュボードプレビュー"
+      }
     }
   }
 }

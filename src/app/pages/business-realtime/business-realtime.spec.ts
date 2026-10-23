@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService } from '@ngx-translate/core';
+import { By } from '@angular/platform-browser';
 import { BusinessRealtime } from './business-realtime';
 
 describe('BusinessRealtime', () => {
@@ -24,5 +25,14 @@ describe('BusinessRealtime', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render both hero and visibility-function components', () => {
+    fixture.detectChanges();
+    const heroEl = fixture.debugElement.query(By.css('app-hero'));
+    expect(heroEl).toBeTruthy();
+
+    const visibilityEl = fixture.debugElement.query(By.css('app-visibility-function'));
+    expect(visibilityEl).toBeTruthy();
   });
 });

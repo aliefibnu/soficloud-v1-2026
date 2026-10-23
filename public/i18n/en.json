@@ -465,6 +465,24 @@
       "TITLE_LINE_5": "And Smarter",
       "DESCRIPTION": "Sales, procurement, material needs, order progress, and finance can be viewed directly from the SOFICloud dashboard. Every view empowers the team to see current conditions and act swiftly.",
       "TABLET_ALT": "SOFICloud dashboard on tablet"
+    },
+    "VISIBILITY_FUNCTION": {
+      "TITLE": "CROSS-FUNCTIONAL VISIBILITY",
+      "SUBTITLE": "From customer orders to financial positions, management monitors indicators relevant to each process. The following views illustrate how teams spot opportunities, bottlenecks, and open tasks.",
+      "TABS": {
+        "SALES_PERFORMANCE": "SALES PERFORMANCE",
+        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
+        "MATERIAL_READINESS": "MATERIAL READINESS",
+        "ORDER_PIPELINE": "ORDER PIPELINE",
+        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+      },
+      "ALTS": {
+        "SALES_PERFORMANCE": "Sales Performance Dashboard Preview",
+        "PROCUREMENT_CONTROL": "Procurement Control Dashboard Preview",
+        "MATERIAL_READINESS": "Material Readiness Dashboard Preview",
+        "ORDER_PIPELINE": "Order Pipeline Dashboard Preview",
+        "FINANCIAL_VISIBILITY": "Financial Visibility Dashboard Preview"
+      }
     }
   }
 }

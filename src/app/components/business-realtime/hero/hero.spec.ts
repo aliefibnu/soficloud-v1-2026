@@ -57,12 +57,13 @@ describe('BusinessRealtime Hero', () => {
     expect(headingText).toContain('Lebih Cepat');
   });
 
-  it('should render the description paragraph with the expected text', () => {
+  it('should render the description paragraph with the expected text and 15px size', () => {
     const paragraph = fixture.debugElement.query(By.css('p'));
     expect(paragraph).toBeTruthy();
     expect(paragraph.nativeElement.textContent).toContain(
       'Penjualan, pengadaan, kebutuhan material, progres pesanan, dan keuangan',
     );
+    expect(paragraph.nativeElement.classList.contains('text-[15px]')).toBe(true);
   });
 
   it('should render the tablet and pillar images with proper ngSrc and alt attributes', () => {

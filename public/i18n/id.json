@@ -465,6 +465,24 @@
       "TITLE_LINE_5": "Lebih Cepat",
       "DESCRIPTION": "Penjualan, pengadaan, kebutuhan material, progres pesanan, dan keuangan dapat dilihat dari dashboard SOFICloud. Setiap tampilan membantu tim melihat kondisi terkini dan menentukan hal yang perlu ditindaklanjuti.",
       "TABLET_ALT": "Dashboard SOFICloud pada tablet"
+    },
+    "VISIBILITY_FUNCTION": {
+      "TITLE": "VISIBILITAS LINTAS FUNGSI",
+      "SUBTITLE": "Mulai dari pesanan pelanggan sampai posisi keuangan, manajemen melihat indikator yang relevan pada tiap proses. Enam tampilan berikut menunjukkan bagaimana tim membaca peluang, hambatan, dan pekerjaan yang masih terbuka.",
+      "TABS": {
+        "SALES_PERFORMANCE": "SALES PERFORMANCE",
+        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
+        "MATERIAL_READINESS": "MATERIAL READINESS",
+        "ORDER_PIPELINE": "ORDER PIPELINE",
+        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+      },
+      "ALTS": {
+        "SALES_PERFORMANCE": "Pratinjau Dashboard Sales Performance",
+        "PROCUREMENT_CONTROL": "Pratinjau Dashboard Procurement Control",
+        "MATERIAL_READINESS": "Pratinjau Dashboard Material Readiness",
+        "ORDER_PIPELINE": "Pratinjau Dashboard Order Pipeline",
+        "FINANCIAL_VISIBILITY": "Pratinjau Dashboard Financial Visibility"
+      }
     }
   }
 }

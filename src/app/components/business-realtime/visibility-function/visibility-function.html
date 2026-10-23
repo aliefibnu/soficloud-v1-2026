@@ -1,0 +1,151 @@
+<section
+  id="visibility-function"
+  class="relative w-full pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8"
+  aria-labelledby="visibility-function-heading"
+>
+  <div class="max-w-7xl mx-auto">
+    <!-- Header: Title and Subtitle -->
+    <div class="text-center max-w-4xl mx-auto mb-8 sm:mb-10 lg:mb-12 px-2">
+      <h2
+        id="visibility-function-heading"
+        class="font-inter font-bold text-[#23244E] text-2xl sm:text-3xl md:text-4xl lg:text-[46px] leading-[1] tracking-normal text-center"
+        style="
+          font-family: var(--font-inter, 'Inter Variable', sans-serif);
+          font-weight: 700;
+        "
+      >
+        {{ 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TITLE' | translate }}
+      </h2>
+
+      <p
+        class="font-dm-sans font-normal text-[#23244E] text-[17px] leading-relaxed text-center max-w-[840px] mx-auto mt-4 sm:mt-5"
+        style="
+          font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+          font-weight: 400;
+        "
+      >
+        {{ 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.SUBTITLE' | translate }}
+      </p>
+    </div>
+
+    <!-- Tabs Navigation Bar & Sliding Line -->
+    <div
+      class="w-full max-w-7xl lg:max-w-[1240px] mx-auto overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden xl:overflow-visible pb-2"
+    >
+      <div class="min-w-[1080px] xl:min-w-0 w-full relative">
+        <!-- Tab buttons -->
+        <div
+          #tabsListRef
+          role="tablist"
+          aria-label="Cross-functional visibility options"
+          class="relative flex items-center justify-between w-full px-6 sm:px-10 lg:px-[70px]"
+        >
+          @for (tab of tabs; track tab.id; let i = $index) {
+            <button
+              type="button"
+              role="tab"
+              [id]="'tab-' + tab.id"
+              [attr.data-tab-id]="tab.id"
+              [attr.aria-selected]="activeTabId() === tab.id"
+              [attr.aria-controls]="'tabpanel-' + tab.id"
+              [attr.tabindex]="activeTabId() === tab.id ? 0 : -1"
+              (click)="selectTab(tab.id)"
+              (keydown)="onTabKeydown($event, i)"
+              class="font-dm-sans font-bold text-xs sm:text-sm md:text-base lg:text-[18px] leading-none tracking-normal py-2.5 px-2 text-center transition-colors duration-200 cursor-pointer select-none whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#365AD2] focus-visible:ring-offset-2 rounded-sm"
+              [class.text-[#23244E]]="activeTabId() === tab.id"
+              [class.text-[#B1B1B1DD]]="activeTabId() !== tab.id"
+              [style.font-family]="'var(--font-dm-sans, \'DM Sans Variable\', sans-serif)'"
+              [style.font-weight]="700"
+              [style.color]="activeTabId() === tab.id ? '#23244E' : '#B1B1B1DD'"
+            >
+              {{ tab.titleKey | translate }}
+            </button>
+          }
+        </div>
+
+        <!-- Continuous Line & Active Highlight Segment (overflow-hidden to guarantee no slider bar) -->
+        <div class="relative w-full h-[3px] bg-[#D9D9D9] mt-3 sm:mt-4 overflow-hidden rounded-full">
+          <span
+            class="absolute top-0 h-[3px] bg-[#365AD2] rounded-full transition-all duration-300 ease-out"
+            [style.left.px]="indicatorLeft()"
+            [style.width.px]="indicatorWidth()"
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Slide Showcase Panel -->
+    <div class="mt-8 sm:mt-12 lg:mt-14 w-full flex justify-center items-center">
+      @if (activeTab().imageSrc) {
+        <div
+          role="tabpanel"
+          [id]="'tabpanel-' + activeTab().id"
+          [attr.aria-labelledby]="'tab-' + activeTab().id"
+          class="w-full flex justify-center items-center animate-fade-in"
+        >
+          <div
+            class="relative w-full max-w-[1040px] rounded-3xl p-2 sm:p-4 lg:p-6 flex justify-center items-center"
+          >
+            <img
+              [ngSrc]="activeTab().imageSrc!"
+              width="947"
+              height="595"
+              priority
+              [alt]="activeTab().altKey | translate"
+              class="w-full max-w-[947px] h-auto object-contain select-none drop-shadow-[0_8px_30px_rgba(35,36,78,0.06)]"
+            />
+          </div>
+        </div>
+      } @else {
+        <!-- Fallback view when asset is pending -->
+        <div
+          role="tabpanel"
+          [id]="'tabpanel-' + activeTab().id"
+          [attr.aria-labelledby]="'tab-' + activeTab().id"
+          class="w-full flex justify-center items-center animate-fade-in"
+        >
+          <div
+            class="relative w-full max-w-[947px] min-h-[360px] sm:min-h-[460px] lg:min-h-[540px] rounded-2xl border border-gray-200/80 bg-[#FDFDFD] shadow-[0_8px_30px_rgba(35,36,78,0.06)] flex flex-col items-center justify-center p-8 text-center"
+          >
+            <div
+              class="w-16 h-16 rounded-2xl bg-blue-50 text-[#365AD2] flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-8 h-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3
+              class="font-inter font-bold text-xl sm:text-2xl text-[#23244E] mb-2"
+              style="
+                font-family: var(--font-inter, 'Inter Variable', sans-serif);
+                font-weight: 700;
+              "
+            >
+              {{ activeTab().titleKey | translate }}
+            </h3>
+            <p
+              class="font-dm-sans text-sm text-[#23244E]/70 max-w-md"
+              style="
+                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                font-weight: 400;
+              "
+            >
+              {{ activeTab().altKey | translate }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
