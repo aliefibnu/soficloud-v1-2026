@@ -455,5 +455,16 @@
     "STARTING_FROM": "Price Starting From",
     "AMOUNT": "Rp2,500,000",
     "BUTTON": "View Price Details"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "Monitor Business",
+      "TITLE_LINE_2": "In Real-time",
+      "TITLE_LINE_3": "Make Decisions",
+      "TITLE_LINE_4": "Faster",
+      "TITLE_LINE_5": "And Smarter",
+      "DESCRIPTION": "Sales, procurement, material needs, order progress, and finance can be viewed directly from the SOFICloud dashboard. Every view empowers the team to see current conditions and act swiftly.",
+      "TABLET_ALT": "SOFICloud dashboard on tablet"
+    }
   }
 }

@@ -455,5 +455,16 @@
     "STARTING_FROM": "시작 가격",
     "AMOUNT": "Rp2.500.000",
     "BUTTON": "가격 상세 보기"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "실시간으로",
+      "TITLE_LINE_2": "비즈니스 모니터링",
+      "TITLE_LINE_3": "더 빠른",
+      "TITLE_LINE_4": "의사 결정",
+      "TITLE_LINE_5": "더 큰 성과",
+      "DESCRIPTION": "판매, 조달, 자재 소요, 주문 진행 상황 및 재무 상태를 SOFICloud 대시보드에서 직접 확인할 수 있습니다. 모든 화면이 팀의 신속한 현황 파악과 정확한 후속 조치를 지원합니다.",
+      "TABLET_ALT": "태블릿의 SOFICloud 대시보드"
+    }
   }
 }

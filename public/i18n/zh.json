@@ -455,5 +455,16 @@
     "STARTING_FROM": "起步价",
     "AMOUNT": "Rp2.500.000",
     "BUTTON": "查看价格详情"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "实时掌握业务",
+      "TITLE_LINE_2": "全面洞察全局",
+      "TITLE_LINE_3": "决策更迅速",
+      "TITLE_LINE_4": "行动更精准",
+      "TITLE_LINE_5": "效益更显著",
+      "DESCRIPTION": "销售、采购、物料需求、订单进度以及财务数据均可在 SOFICloud 仪表盘中实时查看。每个视图都帮助团队把握当下现状，迅速确定需要跟进的事项。",
+      "TABLET_ALT": "平板电脑上的 SOFICloud 仪表盘"
+    }
   }
 }

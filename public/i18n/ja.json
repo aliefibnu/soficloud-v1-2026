@@ -455,5 +455,16 @@
     "STARTING_FROM": "料金プラン",
     "AMOUNT": "Rp2.500.000〜",
     "BUTTON": "料金詳細を見る"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "ビジネスを監視",
+      "TITLE_LINE_2": "リアルタイムで",
+      "TITLE_LINE_3": "意思決定を",
+      "TITLE_LINE_4": "より迅速に",
+      "TITLE_LINE_5": "より的確に",
+      "DESCRIPTION": "販売、調達、資材所要量、注文の進捗状況、財務状況をSOFICloudダッシュボードから確認できます。あらゆる画面がチームの現状把握と迅速な行動決定をサポートします。",
+      "TABLET_ALT": "タブレット上のSOFICloudダッシュボード"
+    }
   }
 }

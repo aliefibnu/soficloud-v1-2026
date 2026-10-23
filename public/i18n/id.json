@@ -455,5 +455,16 @@
     "STARTING_FROM": "Harga Mulai Dari",
     "AMOUNT": "Rp2.500.000",
     "BUTTON": "Lihat Detail Harga"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "Pantau Bisnis",
+      "TITLE_LINE_2": "Secara Real-time",
+      "TITLE_LINE_3": "Putuskan",
+      "TITLE_LINE_4": "Langkah",
+      "TITLE_LINE_5": "Lebih Cepat",
+      "DESCRIPTION": "Penjualan, pengadaan, kebutuhan material, progres pesanan, dan keuangan dapat dilihat dari dashboard SOFICloud. Setiap tampilan membantu tim melihat kondisi terkini dan menentukan hal yang perlu ditindaklanjuti.",
+      "TABLET_ALT": "Dashboard SOFICloud pada tablet"
+    }
   }
 }
