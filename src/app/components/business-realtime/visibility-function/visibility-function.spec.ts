@@ -76,17 +76,22 @@ describe('BusinessRealtime VisibilityFunction', () => {
     expect(subtitle.nativeElement.classList.contains('text-[17px]')).toBe(true);
   });
 
-  it('should render 5 tab buttons with tablist ARIA role', () => {
+  it('should render 5 tab buttons with tablist ARIA role and matching aria-controls', () => {
     const tablist = fixture.debugElement.query(By.css('[role="tablist"]'));
     expect(tablist).toBeTruthy();
 
     const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
     expect(tabs.length).toBe(5);
     expect(tabs[0].nativeElement.textContent.trim()).toBe('SALES PERFORMANCE');
+    expect(tabs[0].nativeElement.getAttribute('aria-controls')).toBe('sales-performance');
     expect(tabs[1].nativeElement.textContent.trim()).toBe('PROCUREMENT CONTROL');
+    expect(tabs[1].nativeElement.getAttribute('aria-controls')).toBe('procurement-control');
     expect(tabs[2].nativeElement.textContent.trim()).toBe('MATERIAL READINESS');
+    expect(tabs[2].nativeElement.getAttribute('aria-controls')).toBe('material-readiness');
     expect(tabs[3].nativeElement.textContent.trim()).toBe('ORDER PIPELINE');
+    expect(tabs[3].nativeElement.getAttribute('aria-controls')).toBe('order-pipeline');
     expect(tabs[4].nativeElement.textContent.trim()).toBe('FINANCIAL VISIBILITY');
+    expect(tabs[4].nativeElement.getAttribute('aria-controls')).toBe('financial-visibility');
   });
 
   it('should have sales-performance active by default with correct styles', () => {
@@ -156,26 +161,5 @@ describe('BusinessRealtime VisibilityFunction', () => {
 
     const indicator = fixture.debugElement.query(By.css('.bg-\\[\\#365AD2\\]'));
     expect(indicator).toBeTruthy();
-  });
-
-  it('should render sales-performance SVG image when first tab is active', () => {
-    const img = fixture.debugElement.query(By.css('img'));
-    expect(img).toBeTruthy();
-    expect(img.nativeElement.getAttribute('src')).toContain('sales-performance.svg');
-    expect(img.nativeElement.getAttribute('alt')).toBe(
-      'Pratinjau Dashboard Sales Performance',
-    );
-  });
-
-  it('should render fallback panel for tabs without images', () => {
-    component.selectTab('procurement-control');
-    fixture.detectChanges();
-
-    const img = fixture.debugElement.query(By.css('img'));
-    expect(img).toBeNull();
-
-    const fallbackHeading = fixture.debugElement.query(By.css('h3'));
-    expect(fallbackHeading).toBeTruthy();
-    expect(fallbackHeading.nativeElement.textContent.trim()).toBe('PROCUREMENT CONTROL');
   });
 });

@@ -483,6 +483,20 @@
         "ORDER_PIPELINE": "订单管道仪表盘预览",
         "FINANCIAL_VISIBILITY": "财务可见性仪表盘预览"
       }
+    },
+    "VISIBILITY_SECTIONS": {
+      "COMMON": {
+        "DECISION_LABEL": "用于决策：",
+        "DASHBOARD": "仪表板",
+        "ADMIN": "管理员",
+        "SIDEBAR": {
+          "PROCUREMENT": "采购",
+          "SALES": "销售",
+          "MRP": "MRP",
+          "FINANCE": "财务",
+          "ORDER_PIPELINE": "订单流程"
+        }
+      }
     }
   }
 }

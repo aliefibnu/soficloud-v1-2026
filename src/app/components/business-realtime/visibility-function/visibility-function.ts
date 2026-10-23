@@ -8,21 +8,20 @@ import {
   PLATFORM_ID,
   AfterViewInit,
 } from '@angular/core';
-import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
 export interface VisibilityTab {
   readonly id: string;
   readonly titleKey: string;
   readonly defaultTitle: string;
-  readonly imageSrc?: string;
   readonly altKey: string;
   readonly defaultAlt: string;
 }
 
 @Component({
   selector: 'app-visibility-function',
-  imports: [NgOptimizedImage, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './visibility-function.html',
   host: {
     class: 'block w-full',
@@ -40,7 +39,6 @@ export class VisibilityFunction implements AfterViewInit {
       id: 'sales-performance',
       titleKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TABS.SALES_PERFORMANCE',
       defaultTitle: 'SALES PERFORMANCE',
-      imageSrc: '/images/business-realtime/sales-performance.svg',
       altKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.ALTS.SALES_PERFORMANCE',
       defaultAlt: 'Sales Performance Dashboard',
     },

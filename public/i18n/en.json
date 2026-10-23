@@ -483,6 +483,20 @@
         "ORDER_PIPELINE": "Order Pipeline Dashboard Preview",
         "FINANCIAL_VISIBILITY": "Financial Visibility Dashboard Preview"
       }
+    },
+    "VISIBILITY_SECTIONS": {
+      "COMMON": {
+        "DECISION_LABEL": "For decisions:",
+        "DASHBOARD": "Dashboard",
+        "ADMIN": "Admin",
+        "SIDEBAR": {
+          "PROCUREMENT": "Procurement",
+          "SALES": "Sales",
+          "MRP": "MRP",
+          "FINANCE": "Finance",
+          "ORDER_PIPELINE": "Order Pipeline"
+        }
+      }
     }
   }
 }

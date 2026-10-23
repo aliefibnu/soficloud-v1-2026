@@ -483,6 +483,20 @@
         "ORDER_PIPELINE": "注文パイプラインダッシュボードプレビュー",
         "FINANCIAL_VISIBILITY": "財務状況ダッシュボードプレビュー"
       }
+    },
+    "VISIBILITY_SECTIONS": {
+      "COMMON": {
+        "DECISION_LABEL": "意思決定のために：",
+        "DASHBOARD": "ダッシュボード",
+        "ADMIN": "管理者",
+        "SIDEBAR": {
+          "PROCUREMENT": "調達",
+          "SALES": "営業",
+          "MRP": "MRP",
+          "FINANCE": "財務",
+          "ORDER_PIPELINE": "受注パイプライン"
+        }
+      }
     }
   }
 }

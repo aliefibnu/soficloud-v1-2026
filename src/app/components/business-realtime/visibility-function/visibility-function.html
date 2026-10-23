@@ -1,6 +1,6 @@
 <section
   id="visibility-function"
-  class="relative w-full pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8"
+  class="relative w-full pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 lg:px-8"
   aria-labelledby="visibility-function-heading"
 >
   <div class="max-w-7xl mx-auto">
@@ -44,7 +44,7 @@
               [id]="'tab-' + tab.id"
               [attr.data-tab-id]="tab.id"
               [attr.aria-selected]="activeTabId() === tab.id"
-              [attr.aria-controls]="'tabpanel-' + tab.id"
+              [attr.aria-controls]="tab.id"
               [attr.tabindex]="activeTabId() === tab.id ? 0 : -1"
               (click)="selectTab(tab.id)"
               (keydown)="onTabKeydown($event, i)"
@@ -68,78 +68,6 @@
           ></span>
         </div>
       </div>
-    </div>
-
-    <div class="mt-8 sm:mt-12 lg:mt-14 w-full flex justify-center items-center">
-      @if (activeTab().imageSrc) {
-        <div
-          role="tabpanel"
-          [id]="'tabpanel-' + activeTab().id"
-          [attr.aria-labelledby]="'tab-' + activeTab().id"
-          class="w-full flex justify-center items-center animate-fade-in"
-        >
-          <div
-            class="relative w-full max-w-260 rounded-3xl p-2 sm:p-4 lg:p-6 flex justify-center items-center"
-          >
-            <img
-              [ngSrc]="activeTab().imageSrc!"
-              width="947"
-              height="595"
-              priority
-              [alt]="activeTab().altKey | translate"
-              class="w-full max-w-236.75 h-auto object-contain select-none drop-shadow-[0_8px_30px_rgba(35,36,78,0.06)]"
-            />
-          </div>
-        </div>
-      } @else {
-        <div
-          role="tabpanel"
-          [id]="'tabpanel-' + activeTab().id"
-          [attr.aria-labelledby]="'tab-' + activeTab().id"
-          class="w-full flex justify-center items-center animate-fade-in"
-        >
-          <div
-            class="relative w-full max-w-236.75 min-h-90 sm:min-h-115 lg:min-h-135 rounded-2xl border border-gray-200/80 bg-[#FDFDFD] shadow-[0_8px_30px_rgba(35,36,78,0.06)] flex flex-col items-center justify-center p-8 text-center"
-          >
-            <div
-              class="w-16 h-16 rounded-2xl bg-blue-50 text-[#365AD2] flex items-center justify-center mb-4"
-            >
-              <svg
-                class="w-8 h-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
-              </svg>
-            </div>
-            <h3
-              class="font-inter font-bold text-xl sm:text-2xl text-[#23244E] mb-2"
-              style="
-                font-family: var(--font-inter, 'Inter Variable', sans-serif);
-                font-weight: 700;
-              "
-            >
-              {{ activeTab().titleKey | translate }}
-            </h3>
-            <p
-              class="font-dm-sans text-sm text-[#23244E]/70 max-w-md"
-              style="
-                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-                font-weight: 400;
-              "
-            >
-              {{ activeTab().altKey | translate }}
-            </p>
-          </div>
-        </div>
-      }
     </div>
   </div>
 </section>

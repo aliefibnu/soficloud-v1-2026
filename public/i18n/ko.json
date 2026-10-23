@@ -483,6 +483,20 @@
         "ORDER_PIPELINE": "주문 파이프라인 대시보드 미리보기",
         "FINANCIAL_VISIBILITY": "재무 가시성 대시보드 미리보기"
       }
+    },
+    "VISIBILITY_SECTIONS": {
+      "COMMON": {
+        "DECISION_LABEL": "의사결정을 위해:",
+        "DASHBOARD": "대시보드",
+        "ADMIN": "관리자",
+        "SIDEBAR": {
+          "PROCUREMENT": "조달",
+          "SALES": "영업",
+          "MRP": "MRP",
+          "FINANCE": "재무",
+          "ORDER_PIPELINE": "주문 파이프라인"
+        }
+      }
     }
   }
 }

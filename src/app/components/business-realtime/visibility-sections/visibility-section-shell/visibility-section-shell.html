@@ -1,0 +1,94 @@
+<section
+  [id]="sectionId()"
+  [attr.aria-labelledby]="sectionId() + '-heading'"
+  class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10"
+>
+  <div
+    class="w-full rounded-3xl bg-white shadow-[0_8px_30px_rgba(35,36,78,0.08)] overflow-hidden border border-gray-100/70"
+  >
+    <!-- Top White Header Block -->
+    <div class="px-6 py-8 sm:px-10 sm:py-10 lg:px-16 lg:py-12 text-center max-w-4xl mx-auto">
+      <h3
+        [id]="sectionId() + '-heading'"
+        class="font-inter font-bold text-2xl sm:text-3xl lg:text-[34px] xl:text-[36px] text-[#23244E] leading-snug tracking-normal"
+        style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 700;"
+      >
+        {{ titleKey() | translate }}
+      </h3>
+
+      <div
+        class="w-16 sm:w-20 h-0.75 bg-[#365AD2] rounded-full mx-auto my-4 sm:my-5"
+        aria-hidden="true"
+      ></div>
+
+      <p
+        class="font-dm-sans font-normal text-[#23244E] text-sm sm:text-base lg:text-[17px] leading-relaxed max-w-3xl mx-auto"
+        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+      >
+        {{ descriptionKey() | translate }}
+      </p>
+    </div>
+
+    <!-- Bottom Colored Stage -->
+    <div [class]="'w-full p-4 sm:p-6 lg:p-8 xl:p-10 ' + stageBgClass()">
+      <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+        <!-- Left / Main Column: Domain Mockup Slot -->
+        <div class="w-full flex-1 min-w-0">
+          <ng-content />
+        </div>
+
+        <!-- Right Column: 'Untuk keputusan:' Card -->
+        <div
+          class="w-full lg:w-72 xl:w-80 shrink-0 bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-black/5 flex flex-col gap-4"
+        >
+          @if (decisionIconSrc()) {
+            <div
+              class="w-11 h-11 rounded-xl bg-blue-50/80 flex items-center justify-center overflow-hidden"
+            >
+              <img
+                [src]="decisionIconSrc()!"
+                alt=""
+                class="w-6 h-6 object-contain"
+                aria-hidden="true"
+              />
+            </div>
+          } @else {
+            <div
+              class="w-11 h-11 rounded-xl bg-blue-50 text-[#365AD2] flex items-center justify-center"
+              aria-hidden="true"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+          }
+
+          <div class="flex flex-col gap-2">
+            <span
+              class="font-inter font-bold text-xs sm:text-sm text-[#23244E] tracking-tight uppercase"
+              style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 700;"
+            >
+              {{ decisionLabelKey() | translate }}
+            </span>
+            <p
+              class="font-dm-sans font-normal text-[#23244E] text-xs sm:text-sm leading-relaxed"
+              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+            >
+              {{ decisionTextKey() | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
