@@ -39,7 +39,6 @@
   },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "한 곳에서 비즈니스를 관리하세요",
-    "HEADER_SUBTITLE": "보고 싶은 영역을 선택하세요. 모든 프로세스가 동일한 데이터에 연결되어 항상 추적 가능합니다.",
     "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
     "EXPENSE": "지출",
     "INCOME": "수입",

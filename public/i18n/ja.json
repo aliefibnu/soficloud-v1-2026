@@ -39,7 +39,6 @@
   },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "ビジネスをひとつの場所から管理",
-    "HEADER_SUBTITLE": "表示したいエリアを選択。すべてのプロセスが同じデータに連携し、常に追跡可能です。",
     "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
     "EXPENSE": "支出",
     "INCOME": "収入",
