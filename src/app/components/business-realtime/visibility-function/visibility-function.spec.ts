@@ -141,7 +141,10 @@ describe('BusinessRealtime VisibilityFunction', () => {
   it('should render the tablist with padding to provide leftover space on both sides of the line', () => {
     const tablist = fixture.debugElement.query(By.css('[role="tablist"]'));
     expect(tablist).toBeTruthy();
-    expect(tablist.nativeElement.classList.contains('lg:px-[70px]')).toBe(true);
+    expect(
+      tablist.nativeElement.classList.contains('lg:px-17.5') ||
+        tablist.nativeElement.classList.contains('lg:px-[70px]'),
+    ).toBe(true);
     expect(tablist.nativeElement.classList.contains('sm:px-10')).toBe(true);
     expect(tablist.nativeElement.classList.contains('px-6')).toBe(true);
   });
