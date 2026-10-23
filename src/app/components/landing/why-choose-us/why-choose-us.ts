@@ -101,63 +101,63 @@ export class WhyChooseUs {
   readonly cards: readonly WhyChooseUsCard[] = [
     {
       id: 1,
-      icon: '/images/why-choose-us/calendar.svg',
+      icon: '/images/landing/why-choose-us/calendar.svg',
       defaultTitle: 'Dikembangkan\nSejak 1998',
       defaultDesc:
         'Pengalaman lebih dari dua dekade membentuk SOFICloud menjadi ERP yang matang, stabil, dan terus berkembang mengikuti kebutuhan bisnis.',
     },
     {
       id: 2,
-      icon: '/images/why-choose-us/house.svg',
+      icon: '/images/landing/why-choose-us/house.svg',
       defaultTitle: 'Teruji dalam Berbagai\nImplementasi',
       defaultDesc:
         'Digunakan oleh berbagai perusahaan dengan karakter bisnis dan proses operasional yang beragam di berbagai industri.',
     },
     {
       id: 3,
-      icon: '/images/why-choose-us/screen.svg',
+      icon: '/images/landing/why-choose-us/screen.svg',
       defaultTitle: 'Modern, Responsif, dan Nyaman\nDigunakan',
       defaultDesc:
         'Antarmuka bersih, cepat, dan mudah dipahami untuk mendukung aktivitas kerja sehari-hari.',
     },
     {
       id: 4,
-      icon: '/images/why-choose-us/gear.svg',
+      icon: '/images/landing/why-choose-us/gear.svg',
       defaultTitle: 'Fleksibel Mengikuti\nProses Bisnis',
       defaultDesc:
         'Alur kerja dan parameter sistem dapat disesuaikan dengan kebutuhan operasional perusahaan.',
     },
     {
       id: 5,
-      icon: '/images/why-choose-us/lightbulb.svg',
+      icon: '/images/landing/why-choose-us/lightbulb.svg',
       defaultTitle: 'Lebih Mudah Dipahami\nPengguna',
       defaultDesc:
         'Struktur menu dan proses kerja membantu pengguna beradaptasi lebih cepat dalam aktivitas operasional.',
     },
     {
       id: 6,
-      icon: '/images/why-choose-us/puzzle.svg',
+      icon: '/images/landing/why-choose-us/puzzle.svg',
       defaultTitle: 'Modul Lengkap Dalam\nSatu Sistem',
       defaultDesc:
         'Finance, Sales, Procurement, Inventory, Manufacturing, Project, Workflow, dan Analytics saling terhubung.',
     },
     {
       id: 7,
-      icon: '/images/why-choose-us/headset.svg',
+      icon: '/images/landing/why-choose-us/headset.svg',
       defaultTitle: 'Dukungan Purna Jual\nBerkelanjutan',
       defaultDesc:
         'Tim implementasi memahami sistem, proses bisnis, dan kebutuhan pelanggan setelah sistem mulai digunakan.',
     },
     {
       id: 8,
-      icon: '/images/why-choose-us/shield.svg',
+      icon: '/images/landing/why-choose-us/shield.svg',
       defaultTitle: 'Andal, Aman, dan Dapat\nDiandalkan',
       defaultDesc:
         'Infrastruktur cloud yang aman, backup terjadwal, dan standar keamanan data menjaga kelancaran operasional.',
     },
     {
       id: 9,
-      icon: '/images/why-choose-us/chart.svg',
+      icon: '/images/landing/why-choose-us/chart.svg',
       defaultTitle: 'Mendukung Keputusan\nBerbasis Data',
       defaultDesc:
         'Laporan real-time, dashboard interaktif, dan analitik membantu management mengambil keputusan lebih tepat.',

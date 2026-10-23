@@ -7,11 +7,11 @@ export interface ResponsiveVariant {
 }
 
 export const RESPONSIVE_IMAGE_VARIANTS: Record<string, readonly ResponsiveVariant[]> = {
-  '/images/overview-feature/computer.webp': [
-    { maxWidth: 320, file: '/images/overview-feature/computer-309w.webp' },
+  '/images/landing/overview-feature/computer.webp': [
+    { maxWidth: 320, file: '/images/landing/overview-feature/computer-309w.webp' },
   ],
-  '/images/overview-feature/glow.webp': [
-    { maxWidth: 450, file: '/images/overview-feature/glow-418w.webp' },
+  '/images/landing/overview-feature/glow.webp': [
+    { maxWidth: 450, file: '/images/landing/overview-feature/glow-418w.webp' },
   ],
 };
 

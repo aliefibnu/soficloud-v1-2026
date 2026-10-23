@@ -5,41 +5,41 @@ import { customImageLoader, provideCustomImageLoader } from './image-loader';
 describe('customImageLoader', () => {
   it('should return responsive mobile image for computer.webp when width is 309', () => {
     const result = customImageLoader({
-      src: '/images/overview-feature/computer.webp',
+      src: '/images/landing/overview-feature/computer.webp',
       width: 309,
     });
-    expect(result).toBe('/images/overview-feature/computer-309w.webp');
+    expect(result).toBe('/images/landing/overview-feature/computer-309w.webp');
   });
 
   it('should return original computer.webp when width is desktop size 417', () => {
     const result = customImageLoader({
-      src: '/images/overview-feature/computer.webp',
+      src: '/images/landing/overview-feature/computer.webp',
       width: 417,
     });
-    expect(result).toBe('/images/overview-feature/computer.webp');
+    expect(result).toBe('/images/landing/overview-feature/computer.webp');
   });
 
   it('should return original computer.webp when width is undefined', () => {
     const result = customImageLoader({
-      src: '/images/overview-feature/computer.webp',
+      src: '/images/landing/overview-feature/computer.webp',
     });
-    expect(result).toBe('/images/overview-feature/computer.webp');
+    expect(result).toBe('/images/landing/overview-feature/computer.webp');
   });
 
   it('should return responsive mobile image for glow.webp when width is 418', () => {
     const result = customImageLoader({
-      src: '/images/overview-feature/glow.webp',
+      src: '/images/landing/overview-feature/glow.webp',
       width: 418,
     });
-    expect(result).toBe('/images/overview-feature/glow-418w.webp');
+    expect(result).toBe('/images/landing/overview-feature/glow-418w.webp');
   });
 
   it('should return original glow.webp when width is desktop size 521', () => {
     const result = customImageLoader({
-      src: '/images/overview-feature/glow.webp',
+      src: '/images/landing/overview-feature/glow.webp',
       width: 521,
     });
-    expect(result).toBe('/images/overview-feature/glow.webp');
+    expect(result).toBe('/images/landing/overview-feature/glow.webp');
   });
 
   it('should return untouched src for unconfigured images', () => {
