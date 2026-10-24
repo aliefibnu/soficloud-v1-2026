@@ -2,6 +2,7 @@ import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import {
   afterNextRender,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   inject,
@@ -9,6 +10,9 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
 
@@ -34,6 +38,7 @@ export class Navbar {
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef);
   private readonly languageService = inject(LanguageService);
+  private readonly router = inject(Router);
 
   readonly mobileSheetRef = viewChild<ElementRef<HTMLElement>>('mobileSheet');
 
@@ -45,7 +50,14 @@ export class Navbar {
     { key: 'HEADER.NAV.CONTACT', href: '#contact' },
   ];
 
-  readonly activeLinkKey = signal<string | null>(null);
+  private isLandingUrl(url: string): boolean {
+    const path = url.split(/[?#]/)[0];
+    return path === '' || path === '/';
+  }
+
+  readonly isLandingPage = signal(this.isLandingUrl(this.router.url));
+  private readonly rawActiveLinkKey = signal<string | null>(null);
+  readonly activeLinkKey = computed(() => (this.isLandingPage() ? this.rawActiveLinkKey() : null));
   readonly isLangMenuOpen = signal(false);
   readonly isMobileMenuOpen = signal(false);
   readonly isMobileLangSheetOpen = signal(false);
@@ -53,6 +65,23 @@ export class Navbar {
   private scrollRafId: number | null = null;
 
   constructor() {
+    this.router.events
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((e) => {
+        const isLanding = this.isLandingUrl(e.urlAfterRedirects);
+        this.isLandingPage.set(isLanding);
+        if (isLanding) {
+          if (this.isBrowser) {
+            setTimeout(() => this.updateActiveSection(), 0);
+          }
+        } else {
+          this.rawActiveLinkKey.set(null);
+        }
+      });
+
     if (this.isBrowser) {
       afterNextRender(() => {
         this.updateActiveSection();
@@ -153,16 +182,22 @@ export class Navbar {
   }
 
   onNavClick(linkKey: string): void {
-    this.activeLinkKey.set(linkKey);
+    if (this.isLandingPage()) {
+      this.rawActiveLinkKey.set(linkKey);
+    }
   }
 
   onMobileNavClick(linkKey: string): void {
-    this.activeLinkKey.set(linkKey);
+    if (this.isLandingPage()) {
+      this.rawActiveLinkKey.set(linkKey);
+    }
     this.closeMobileMenu();
   }
 
   onScheduleDemo(): void {
-    this.activeLinkKey.set('HEADER.NAV.CONTACT');
+    if (this.isLandingPage()) {
+      this.rawActiveLinkKey.set('HEADER.NAV.CONTACT');
+    }
     if (typeof document !== 'undefined') {
       const el = document.getElementById('support') || document.getElementById('contact');
       el?.scrollIntoView({ behavior: 'smooth' });
@@ -170,7 +205,7 @@ export class Navbar {
   }
 
   onWindowScroll(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || !this.isLandingPage()) return;
     if (this.scrollRafId !== null) return;
     this.scrollRafId = window.requestAnimationFrame(() => {
       this.scrollRafId = null;
@@ -179,14 +214,19 @@ export class Navbar {
   }
 
   updateActiveSection(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || !this.isLandingPage()) {
+      if (this.rawActiveLinkKey() !== null) {
+        this.rawActiveLinkKey.set(null);
+      }
+      return;
+    }
     const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
     const windowH = window.innerHeight;
     const docH = document.documentElement.scrollHeight;
 
     // Scrolled near the bottom of a scrollable page -> activate Kontak
     if (docH > windowH && scrollY + windowH >= docH - 60) {
-      this.activeLinkKey.set('HEADER.NAV.CONTACT');
+      this.rawActiveLinkKey.set('HEADER.NAV.CONTACT');
       return;
     }
 
@@ -198,44 +238,47 @@ export class Navbar {
     const pricingEl = document.getElementById('pricing');
     const ctaEl = document.getElementById('support') || document.getElementById('contact');
 
-    if (!featuresEl) return;
+    if (!featuresEl) {
+      this.rawActiveLinkKey.set(null);
+      return;
+    }
 
     const featuresTop = featuresEl.getBoundingClientRect().top;
     // Above features (Hero or Business Control interactive canvas)
     if (featuresTop > threshold) {
-      this.activeLinkKey.set(null);
+      this.rawActiveLinkKey.set(null);
       return;
     }
 
     const businessModelTop = businessModelEl?.getBoundingClientRect().top ?? Infinity;
     if (businessModelTop > threshold) {
       // Inside features or why-choose-us
-      this.activeLinkKey.set('HEADER.NAV.FEATURES');
+      this.rawActiveLinkKey.set('HEADER.NAV.FEATURES');
       return;
     }
 
     const customersTop = customersEl?.getBoundingClientRect().top ?? Infinity;
     if (customersTop > threshold) {
       // Inside business-model / solutions
-      this.activeLinkKey.set('HEADER.NAV.SOLUTIONS');
+      this.rawActiveLinkKey.set('HEADER.NAV.SOLUTIONS');
       return;
     }
 
     const pricingTop = pricingEl?.getBoundingClientRect().top;
     if (pricingTop !== undefined && pricingTop > threshold) {
       // Inside customers / testimonials
-      this.activeLinkKey.set('HEADER.NAV.TESTIMONIALS');
+      this.rawActiveLinkKey.set('HEADER.NAV.TESTIMONIALS');
       return;
     }
 
     const ctaTop = ctaEl?.getBoundingClientRect().top ?? Infinity;
     if (ctaTop > threshold) {
       // Inside pricing
-      this.activeLinkKey.set(pricingEl ? 'HEADER.NAV.PRICING' : 'HEADER.NAV.TESTIMONIALS');
+      this.rawActiveLinkKey.set(pricingEl ? 'HEADER.NAV.PRICING' : 'HEADER.NAV.TESTIMONIALS');
       return;
     }
 
     // Inside CTA / Contact
-    this.activeLinkKey.set('HEADER.NAV.CONTACT');
+    this.rawActiveLinkKey.set('HEADER.NAV.CONTACT');
   }
 }

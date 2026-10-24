@@ -21,7 +21,7 @@
     >
       @for (link of navLinks; track link.key) {
         <a
-          [href]="link.href"
+          [href]="isLandingPage() ? link.href : '/' + link.href"
           (click)="onNavClick(link.key)"
           [attr.aria-current]="activeLinkKey() === link.key ? 'page' : null"
           class="px-3 py-1.5 xl:px-3.5 xl:py-1.5 rounded-lg xl:rounded-xl text-[14.5px] xl:text-[15.5px] font-bold tracking-[-0.01em] whitespace-nowrap transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb]"
@@ -168,7 +168,7 @@
       <nav class="flex flex-col gap-1" [attr.aria-label]="'HEADER.ARIA.MOBILE_NAV' | translate">
         @for (link of navLinks; track link.key) {
           <a
-            [href]="link.href"
+            [href]="isLandingPage() ? link.href : '/' + link.href"
             class="px-4 py-2.5 rounded-xl text-[15px] font-bold transition-all duration-200"
             [class.bg-[#EAF2FD]]="activeLinkKey() === link.key"
             [class.text-[#182849]]="activeLinkKey() === link.key"
