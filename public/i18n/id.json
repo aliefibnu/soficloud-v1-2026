@@ -496,6 +496,19 @@
           "FINANCE": "Finance",
           "ORDER_PIPELINE": "Order Pipeline"
         }
+      },
+      "SALES_PERFORMANCE": {
+        "TITLE": "Lihat Arah Penjualan Sejak Awal",
+        "DESCRIPTION": "Nilai open sales order memperlihatkan pesanan yang masih berjalan. Jumlah pelanggan aktif memberi konteks terhadap basis penjualan, sementara grafik bulanan membantu membandingkan tren tahun berjalan dengan periode sebelumnya.",
+        "DECISION_TEXT": "Pantau perubahan pipeline dan selidiki bulan ketika kinerja mulai melemah",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Sales (PT INFORSYS INDONESIA )",
+          "OPEN_SO_VALUE_TITLE": "OPEN SO VALUE (IDR)",
+          "ACTIVE_CUSTOMERS_TITLE": "NUMBER OF ACTIVE CUSTOMER (IDR)",
+          "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
+          "SELECT_VIEW_CHART": "SELECT VIEW CHART",
+          "LINE_CHART": "LINE CHART"
+        }
       }
     }
   }

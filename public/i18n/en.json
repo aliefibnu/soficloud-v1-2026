@@ -496,6 +496,19 @@
           "FINANCE": "Finance",
           "ORDER_PIPELINE": "Order Pipeline"
         }
+      },
+      "SALES_PERFORMANCE": {
+        "TITLE": "See Sales Direction from the Start",
+        "DESCRIPTION": "Open sales order value shows ongoing orders. The number of active customers provides context to the sales base, while monthly charts help compare current year trends with previous periods.",
+        "DECISION_TEXT": "Monitor pipeline shifts and investigate months where performance begins to decline",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Sales (PT INFORSYS INDONESIA )",
+          "OPEN_SO_VALUE_TITLE": "OPEN SO VALUE (IDR)",
+          "ACTIVE_CUSTOMERS_TITLE": "NUMBER OF ACTIVE CUSTOMER (IDR)",
+          "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
+          "SELECT_VIEW_CHART": "SELECT VIEW CHART",
+          "LINE_CHART": "LINE CHART"
+        }
       }
     }
   }

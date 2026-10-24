@@ -27,12 +27,17 @@ describe('BusinessRealtime', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render both hero and visibility-function components', () => {
+  it('should render hero, visibility-function, and sales-performance components', () => {
     fixture.detectChanges();
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     expect(heroEl).toBeTruthy();
 
     const visibilityEl = fixture.debugElement.query(By.css('app-visibility-function'));
     expect(visibilityEl).toBeTruthy();
+
+    const salesPerformanceEl = fixture.debugElement.query(
+      By.css('app-sales-performance'),
+    );
+    expect(salesPerformanceEl).toBeTruthy();
   });
 });

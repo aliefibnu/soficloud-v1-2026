@@ -496,6 +496,19 @@
           "FINANCE": "财务",
           "ORDER_PIPELINE": "订单流程"
         }
+      },
+      "SALES_PERFORMANCE": {
+        "TITLE": "从一开始掌握销售走向",
+        "DESCRIPTION": "未完成销售订单价值直观反映当前进行中的业务。活跃客户数量为销售基础提供全面参照，而月度图表则协助对比当年度趋势与往期业绩表现。",
+        "DECISION_TEXT": "严密追踪销售管道变化，深入剖析业绩开始下滑的关键月份",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Sales (PT INFORSYS INDONESIA )",
+          "OPEN_SO_VALUE_TITLE": "OPEN SO VALUE (IDR)",
+          "ACTIVE_CUSTOMERS_TITLE": "NUMBER OF ACTIVE CUSTOMER (IDR)",
+          "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
+          "SELECT_VIEW_CHART": "SELECT VIEW CHART",
+          "LINE_CHART": "LINE CHART"
+        }
       }
     }
   }

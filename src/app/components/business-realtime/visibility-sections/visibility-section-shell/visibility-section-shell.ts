@@ -14,6 +14,5 @@ export class VisibilitySectionShell {
   readonly decisionLabelKey = input<string>(
     'BUSINESS_REALTIME.VISIBILITY_SECTIONS.COMMON.DECISION_LABEL',
   );
-  readonly decisionIconSrc = input<string | undefined>(undefined);
   readonly stageBgClass = input<string>('bg-[#F9CEC8]');
 }

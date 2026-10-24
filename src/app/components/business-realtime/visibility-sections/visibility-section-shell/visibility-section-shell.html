@@ -7,23 +7,29 @@
     class="w-full rounded-3xl bg-white shadow-[0_8px_30px_rgba(35,36,78,0.08)] overflow-hidden border border-gray-100/70"
   >
     <!-- Top White Header Block -->
-    <div class="px-6 py-8 sm:px-10 sm:py-10 lg:px-16 lg:py-12 text-center max-w-4xl mx-auto">
+    <div class="px-6 py-8 sm:px-10 sm:py-10 lg:px-10 lg:py-12 text-center max-w-5xl mx-auto">
       <h3
         [id]="sectionId() + '-heading'"
-        class="font-inter font-bold text-2xl sm:text-3xl lg:text-[34px] xl:text-[36px] text-[#23244E] leading-snug tracking-normal"
-        style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 700;"
+        class="font-inter font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[46px] text-[#23244E] leading-tight lg:leading-[1.18] tracking-normal text-center max-w-lg lg:max-w-[560px] mx-auto"
+        style="
+          font-family: var(--font-inter, 'Inter Variable', sans-serif);
+          font-weight: 600;
+        "
       >
         {{ titleKey() | translate }}
       </h3>
 
       <div
-        class="w-16 sm:w-20 h-0.75 bg-[#365AD2] rounded-full mx-auto my-4 sm:my-5"
+        class="w-full max-w-[856px] h-0.5 bg-[#365AD2] mx-auto my-5 sm:my-6"
         aria-hidden="true"
       ></div>
 
       <p
-        class="font-dm-sans font-normal text-[#23244E] text-sm sm:text-base lg:text-[17px] leading-relaxed max-w-3xl mx-auto"
-        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+        class="font-dm-sans font-normal text-[#23244E] text-[14px] leading-relaxed sm:leading-[1.65] text-center text-balance max-w-[856px] mx-auto mt-5 sm:mt-6 tracking-normal"
+        style="
+          font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+          font-weight: 400;
+        "
       >
         {{ descriptionKey() | translate }}
       </p>
@@ -31,7 +37,7 @@
 
     <!-- Bottom Colored Stage -->
     <div [class]="'w-full p-4 sm:p-6 lg:p-8 xl:p-10 ' + stageBgClass()">
-      <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+      <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-center">
         <!-- Left / Main Column: Domain Mockup Slot -->
         <div class="w-full flex-1 min-w-0">
           <ng-content />
@@ -39,50 +45,30 @@
 
         <!-- Right Column: 'Untuk keputusan:' Card -->
         <div
-          class="w-full lg:w-72 xl:w-80 shrink-0 bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-black/5 flex flex-col gap-4"
+          class="w-full sm:w-[195px] lg:w-[195px] xl:w-[200px] shrink-0 bg-white rounded-2xl p-4 sm:p-4.5 shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/5 flex flex-col gap-4 self-center"
         >
-          @if (decisionIconSrc()) {
-            <div
-              class="w-11 h-11 rounded-xl bg-blue-50/80 flex items-center justify-center overflow-hidden"
-            >
-              <img
-                [src]="decisionIconSrc()!"
-                alt=""
-                class="w-6 h-6 object-contain"
-                aria-hidden="true"
-              />
-            </div>
-          } @else {
-            <div
-              class="w-11 h-11 rounded-xl bg-blue-50 text-[#365AD2] flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-            </div>
-          }
+          <!-- Solid #D9D9D9 Rectangle with 8px radius -->
+          <div
+            class="w-full h-32 rounded-[8px] bg-[#D9D9D9] shrink-0"
+            aria-hidden="true"
+          ></div>
 
           <div class="flex flex-col gap-2">
             <span
-              class="font-inter font-bold text-xs sm:text-sm text-[#23244E] tracking-tight uppercase"
-              style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 700;"
+              class="font-dm-sans font-bold text-[17px] text-[#23244E] leading-snug tracking-tight max-w-[155px]"
+              style="
+                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                font-weight: 700;
+              "
             >
               {{ decisionLabelKey() | translate }}
             </span>
             <p
-              class="font-dm-sans font-normal text-[#23244E] text-xs sm:text-sm leading-relaxed"
-              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+              class="font-dm-sans font-semibold text-[13px] text-[#23244E] leading-[1.65] max-w-[155px]"
+              style="
+                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                font-weight: 600;
+              "
             >
               {{ decisionTextKey() | translate }}
             </p>

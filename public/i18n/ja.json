@@ -496,6 +496,19 @@
           "FINANCE": "財務",
           "ORDER_PIPELINE": "受注パイプライン"
         }
+      },
+      "SALES_PERFORMANCE": {
+        "TITLE": "初期段階から販売傾向を把握",
+        "DESCRIPTION": "未処理受注額は現在進行中の注文状況を可視化します。アクティブ顧客数は販売基盤の背景を提示し、月次グラフは当年の推移と前年実績との比較をサポートします。",
+        "DECISION_TEXT": "パイプラインの変動を監視し、パフォーマンスが低下し始める月を詳細に調査",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Sales (PT INFORSYS INDONESIA )",
+          "OPEN_SO_VALUE_TITLE": "OPEN SO VALUE (IDR)",
+          "ACTIVE_CUSTOMERS_TITLE": "NUMBER OF ACTIVE CUSTOMER (IDR)",
+          "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
+          "SELECT_VIEW_CHART": "SELECT VIEW CHART",
+          "LINE_CHART": "LINE CHART"
+        }
       }
     }
   }
