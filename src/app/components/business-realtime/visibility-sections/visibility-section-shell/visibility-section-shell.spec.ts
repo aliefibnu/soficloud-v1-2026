@@ -150,7 +150,7 @@ describe('VisibilitySectionShell', () => {
       el.nativeElement.textContent.includes('Pantau perubahan pipeline'),
     );
     expect(bodyText).toBeTruthy();
-    expect(bodyText!.nativeElement.classList.contains('font-semibold')).toBe(true);
+    expect(bodyText!.nativeElement.classList.contains('font-regular')).toBe(true);
     expect(bodyText!.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
   });
 
