@@ -11,7 +11,6 @@
     [moduleTitle]="'BUSINESS_REALTIME.VISIBILITY_SECTIONS.MATERIAL_READINESS.MOCKUP.WINDOW_TITLE' | translate"
     [showStatusPills]="false"
   >
-    <!-- Card 1: MRP Filters Box -->
     <article
       class="bg-white rounded-[10px] p-2.5 sm:p-3 shadow-2xs border-[#DDDDDD]/80 border-[0.67px] flex flex-col gap-2"
     >
@@ -30,9 +29,7 @@
         </span>
       </div>
 
-      <!-- Filters Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-2.5 gap-y-1.5 text-[10px]">
-        <!-- Row 1: Part (4), Part Category 1 (2), Part Category 2 (2), Project Budgeted (4) -->
         <div class="flex flex-col gap-0.5 lg:col-span-4">
           <label class="text-[9px] font-medium text-[#23244E] leading-tight">
             {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.MATERIAL_READINESS.MOCKUP.FILTERS.PART' | translate }}
@@ -98,7 +95,6 @@
           </div>
         </div>
 
-        <!-- Row 2: Supplier (4), Part Category 3 (4), Finished Goods & BoM (4) -->
         <div class="flex flex-col gap-0.5 lg:col-span-4">
           <label class="text-[9px] font-medium text-[#23244E] leading-tight">
             {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.MATERIAL_READINESS.MOCKUP.FILTERS.SUPPLIER' | translate }}
@@ -144,7 +140,6 @@
           </div>
         </div>
 
-        <!-- Row 3: Part Group (4), Part Type (4), Classification (4) -->
         <div class="flex flex-col gap-0.5 lg:col-span-4">
           <label class="text-[9px] font-medium text-[#23244E] leading-tight">
             {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.MATERIAL_READINESS.MOCKUP.FILTERS.PART_GROUP' | translate }}
@@ -188,7 +183,6 @@
         </div>
       </div>
 
-      <!-- Controls: Priority checkbox + Show Stock button -->
       <div class="flex items-center justify-end gap-2.5 pt-0.5">
         <label class="inline-flex items-center gap-1 cursor-default select-none">
           <span class="w-3 h-3 rounded-[3px] border border-[#CBD5E1] bg-white inline-block"></span>
@@ -207,7 +201,6 @@
       </div>
     </article>
 
-    <!-- Search Bar & Action Buttons -->
     <div class="flex flex-col gap-1.5 w-full">
       <div class="w-full">
         <input
@@ -246,7 +239,6 @@
       </div>
     </div>
 
-    <!-- Data Table -->
     <div class="w-full overflow-x-auto scrollbar-none rounded-lg border border-[#E2E8F0] bg-white shadow-2xs">
       <table class="w-full text-left text-[8.5px] xl:text-[9px] whitespace-nowrap border-collapse">
         <thead>
