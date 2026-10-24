@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, signal } from '@angular/core';
-import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
 import { VisibilitySectionShell } from './visibility-section-shell';
 
@@ -9,10 +8,10 @@ import { VisibilitySectionShell } from './visibility-section-shell';
   template: `
     <app-visibility-section-shell
       [sectionId]="sectionId()"
-      [titleKey]="titleKey()"
-      [descriptionKey]="descriptionKey()"
-      [decisionTextKey]="decisionTextKey()"
-      [decisionLabelKey]="decisionLabelKey()"
+      [title]="title()"
+      [description]="description()"
+      [decisionText]="decisionText()"
+      [decisionLabel]="decisionLabel()"
       [stageBgClass]="stageBgClass()"
     >
       <div id="test-projected-mockup">Projected Domain Mockup</div>
@@ -21,46 +20,23 @@ import { VisibilitySectionShell } from './visibility-section-shell';
 })
 class TestHostComponent {
   readonly sectionId = signal('sales-performance');
-  readonly titleKey = signal('TEST.TITLE');
-  readonly descriptionKey = signal('TEST.DESCRIPTION');
-  readonly decisionTextKey = signal('TEST.DECISION_TEXT');
-  readonly decisionLabelKey = signal('TEST.DECISION_LABEL');
+  readonly title = signal('Lihat Arah Penjualan Sejak Awal');
+  readonly description = signal(
+    'Nilai open sales order memperlihatkan pesanan yang masih berjalan.',
+  );
+  readonly decisionText = signal('Pantau perubahan pipeline secara cepat.');
+  readonly decisionLabel = signal('Untuk keputusan:');
   readonly stageBgClass = signal('bg-[#F9CEC8]');
 }
 
 describe('VisibilitySectionShell', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let hostComponent: TestHostComponent;
-  let translateService: TranslateService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent, VisibilitySectionShell],
-      providers: [
-        provideTranslateService({
-          fallbackLang: 'en',
-          lang: 'id',
-        }),
-      ],
     }).compileComponents();
-
-    translateService = TestBed.inject(TranslateService);
-    translateService.setTranslation('id', {
-      TEST: {
-        TITLE: 'Lihat Arah Penjualan Sejak Awal',
-        DESCRIPTION: 'Nilai open sales order memperlihatkan pesanan yang masih berjalan.',
-        DECISION_TEXT: 'Pantau perubahan pipeline secara cepat.',
-        DECISION_LABEL: 'Untuk keputusan:',
-      },
-      BUSINESS_REALTIME: {
-        VISIBILITY_SECTIONS: {
-          COMMON: {
-            DECISION_LABEL: 'Untuk keputusan:',
-          },
-        },
-      },
-    });
-    translateService.use('id');
 
     fixture = TestBed.createComponent(TestHostComponent);
     hostComponent = fixture.componentInstance;
@@ -100,7 +76,7 @@ describe('VisibilitySectionShell', () => {
     expect(dividerEl).toBeTruthy();
     expect(dividerEl.nativeElement.getAttribute('aria-hidden')).toBe('true');
     expect(dividerEl.nativeElement.classList.contains('w-full')).toBe(true);
-    expect(dividerEl.nativeElement.classList.contains('max-w-[856px]')).toBe(true);
+    expect(dividerEl.nativeElement.classList.contains('max-w-214')).toBe(true);
     expect(dividerEl.nativeElement.classList.contains('h-0.5')).toBe(true);
   });
 
@@ -111,7 +87,7 @@ describe('VisibilitySectionShell', () => {
       'Nilai open sales order memperlihatkan pesanan yang masih berjalan.',
     );
     expect(descEl.nativeElement.classList.contains('text-balance')).toBe(true);
-    expect(descEl.nativeElement.classList.contains('max-w-[856px]')).toBe(true);
+    expect(descEl.nativeElement.classList.contains('max-w-214')).toBe(true);
   });
 
   it('should project child content into the left main column via ng-content', () => {
@@ -157,7 +133,7 @@ describe('VisibilitySectionShell', () => {
   it('should render the #D9D9D9 placeholder rectangle with 8px radius in the decision card', () => {
     const rectEl = fixture.debugElement.query(By.css('.bg-\\[\\#D9D9D9\\]'));
     expect(rectEl).toBeTruthy();
-    expect(rectEl.nativeElement.classList.contains('rounded-[8px]')).toBe(true);
+    expect(rectEl.nativeElement.classList.contains('rounded-lg')).toBe(true);
     expect(rectEl.nativeElement.classList.contains('h-32')).toBe(true);
 
     // No images or SVGs should exist in the decision card

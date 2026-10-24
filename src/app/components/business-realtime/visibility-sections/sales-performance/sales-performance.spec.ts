@@ -104,7 +104,7 @@ describe('SalesPerformance', () => {
     expect(card3).toBeTruthy();
     expect(card3.nativeElement.textContent).toContain('2026');
     expect(card3.nativeElement.textContent).toContain('2025');
-    expect(card3.nativeElement.classList.contains('max-w-[540px]')).toBe(true);
+    expect(card3.nativeElement.classList.contains('max-w-135')).toBe(true);
     expect(card3.nativeElement.classList.contains('mx-auto')).toBe(true);
   });
 

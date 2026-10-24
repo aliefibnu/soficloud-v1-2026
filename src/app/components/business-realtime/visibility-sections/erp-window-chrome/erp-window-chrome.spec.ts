@@ -9,7 +9,7 @@ import { ErpWindowChrome, ErpModuleType } from './erp-window-chrome';
   template: `
     <app-erp-window-chrome
       [activeModule]="activeModule()"
-      [moduleTitleKey]="moduleTitleKey()"
+      [moduleTitle]="moduleTitle()"
     >
       <div id="test-projected-card">Test Card Inside ERP</div>
     </app-erp-window-chrome>
@@ -17,9 +17,7 @@ import { ErpWindowChrome, ErpModuleType } from './erp-window-chrome';
 })
 class TestHostComponent {
   readonly activeModule = signal<ErpModuleType>('sales');
-  readonly moduleTitleKey = signal<string>(
-    'BUSINESS_REALTIME.VISIBILITY_SECTIONS.SALES_PERFORMANCE.MOCKUP.WINDOW_TITLE',
-  );
+  readonly moduleTitle = signal<string>('Sales (PT INFORSYS INDONESIA )');
 }
 
 describe('ErpWindowChrome', () => {

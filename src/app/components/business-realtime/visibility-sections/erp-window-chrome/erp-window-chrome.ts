@@ -21,7 +21,7 @@ export interface ErpSidebarItem {
 })
 export class ErpWindowChrome {
   readonly activeModule = input<ErpModuleType>('sales');
-  readonly moduleTitleKey = input.required<string>();
+  readonly moduleTitle = input.required<string>();
 
   readonly sidebarItems: readonly ErpSidebarItem[] = [
     {
