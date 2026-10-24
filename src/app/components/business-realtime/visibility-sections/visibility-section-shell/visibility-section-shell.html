@@ -6,11 +6,10 @@
   <div
     class="w-full rounded-3xl bg-white shadow-[0_8px_30px_rgba(35,36,78,0.08)] overflow-hidden border border-gray-100/70"
   >
-    <!-- Top White Header Block -->
     <div class="px-6 py-8 sm:px-10 sm:py-10 lg:px-10 lg:py-12 text-center max-w-5xl mx-auto">
       <h3
         [id]="sectionId() + '-heading'"
-        class="font-inter font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[46px] text-[#23244E] leading-tight lg:leading-[1.18] tracking-normal text-center max-w-lg lg:max-w-[560px] mx-auto"
+        class="font-inter font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[46px] text-[#23244E] leading-tight lg:leading-[1.18] tracking-normal text-center max-w-lg lg:max-w-140 mx-auto"
         style="
           font-family: var(--font-inter, 'Inter Variable', sans-serif);
           font-weight: 600;
@@ -20,12 +19,12 @@
       </h3>
 
       <div
-        class="w-full max-w-[856px] h-0.5 bg-[#365AD2] mx-auto my-5 sm:my-6"
+        class="w-full max-w-214 h-0.5 bg-[#365AD2] mx-auto my-5 sm:my-6"
         aria-hidden="true"
       ></div>
 
       <p
-        class="font-dm-sans font-normal text-[#23244E] text-[14px] leading-relaxed sm:leading-[1.65] text-center text-balance max-w-[856px] mx-auto mt-5 sm:mt-6 tracking-normal"
+        class="font-dm-sans font-normal text-[#23244E] text-[14px] leading-relaxed sm:leading-[1.65] text-center text-balance max-w-214 mx-auto mt-5 sm:mt-6 tracking-normal"
         style="
           font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
           font-weight: 400;
@@ -45,17 +44,17 @@
 
         <!-- Right Column: 'Untuk keputusan:' Card -->
         <div
-          class="w-full sm:w-[195px] lg:w-[195px] xl:w-[200px] shrink-0 bg-white rounded-2xl p-4 sm:p-4.5 shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/5 flex flex-col gap-4 self-center"
+          class="w-full sm:w-48.75 lg:w-48.75 xl:w-50 shrink-0 bg-white rounded-2xl p-4 sm:p-4.5 shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/5 flex flex-col gap-4 self-center"
         >
           <!-- Solid #D9D9D9 Rectangle with 8px radius -->
           <div
-            class="w-full h-32 rounded-[8px] bg-[#D9D9D9] shrink-0"
+            class="w-full h-32 rounded-lg bg-[#D9D9D9] shrink-0"
             aria-hidden="true"
           ></div>
 
           <div class="flex flex-col gap-2">
             <span
-              class="font-dm-sans font-bold text-[17px] text-[#23244E] leading-snug tracking-tight max-w-[155px]"
+              class="font-dm-sans font-bold text-[17px] text-[#23244E] leading-snug tracking-tight max-w-38.75"
               style="
                 font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
                 font-weight: 700;
@@ -64,7 +63,7 @@
               {{ decisionLabelKey() | translate }}
             </span>
             <p
-              class="font-dm-sans font-regular text-[15px] text-[#23244E] leading-[1.65] max-w-[155px]"
+              class="font-dm-sans font-regular text-[15px] text-[#23244E] leading-[1.65] max-w-38.75"
               style="
                 font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
                 font-weight: 400;
