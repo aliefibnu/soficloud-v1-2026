@@ -6,6 +6,7 @@ import { ProcurementControl } from '../../components/business-realtime/visibilit
 import { MaterialReadiness } from '../../components/business-realtime/visibility-sections/material-readiness/material-readiness';
 import { OrderPipeline } from '../../components/business-realtime/visibility-sections/order-pipeline/order-pipeline';
 import { FinancialVisibility } from '../../components/business-realtime/visibility-sections/financial-visibility/financial-visibility';
+import { Subfooter } from '../../components/business-realtime/subfooter/subfooter';
 
 @Component({
   imports: [
@@ -16,6 +17,7 @@ import { FinancialVisibility } from '../../components/business-realtime/visibili
     MaterialReadiness,
     OrderPipeline,
     FinancialVisibility,
+    Subfooter,
   ],
   selector: 'app-business-realtime',
   templateUrl: './business-realtime.html',

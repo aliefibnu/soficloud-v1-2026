@@ -27,7 +27,7 @@ describe('BusinessRealtime', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render hero, visibility-function, sales-performance, procurement-control, material-readiness, order-pipeline, and financial-visibility components', () => {
+  it('should render hero, visibility-function, visibility sections, and subfooter components without cta', () => {
     fixture.detectChanges();
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     expect(heroEl).toBeTruthy();
@@ -59,5 +59,13 @@ describe('BusinessRealtime', () => {
       By.css('app-financial-visibility'),
     );
     expect(financialVisibilityEl).toBeTruthy();
+
+    const subfooterEl = fixture.debugElement.query(
+      By.css('app-subfooter'),
+    );
+    expect(subfooterEl).toBeTruthy();
+
+    const ctaEl = fixture.debugElement.query(By.css('app-cta'));
+    expect(ctaEl).toBeNull();
   });
 });

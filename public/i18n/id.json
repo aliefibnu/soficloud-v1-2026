@@ -667,6 +667,10 @@
           }
         }
       }
+    },
+    "SUBFOOTER": {
+      "TITLE": "Informasi Yang Jelas\nTindakan Yang Tepat",
+      "DESCRIPTION": "Diskusikan indikator dan dashboard yang dibutuhkan sesuai alur kerja perusahaan Anda"
     }
   }
 }

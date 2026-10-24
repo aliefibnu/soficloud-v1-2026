@@ -667,6 +667,10 @@
           }
         }
       }
+    },
+    "SUBFOOTER": {
+      "TITLE": "Clear Information\nDecisive Action",
+      "DESCRIPTION": "Discuss the indicators and dashboards your company needs based on your workflows"
     }
   }
 }

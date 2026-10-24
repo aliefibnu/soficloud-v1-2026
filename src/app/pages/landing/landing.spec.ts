@@ -21,4 +21,10 @@ describe('Landing', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render the cta component', () => {
+    fixture.detectChanges();
+    const ctaEl = fixture.nativeElement.querySelector('app-cta');
+    expect(ctaEl).toBeTruthy();
+  });
 });
