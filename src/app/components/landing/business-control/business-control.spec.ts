@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { BusinessControl } from './business-control';
 import { LanguageService } from '../../../systems/lib/language.service';
@@ -14,6 +15,7 @@ describe('BusinessControl', () => {
     await TestBed.configureTestingModule({
       imports: [BusinessControl],
       providers: [
+        provideRouter([]),
         provideTranslateService({
           fallbackLang: 'en',
           lang: 'id',
@@ -763,6 +765,14 @@ describe('BusinessControl', () => {
       expect(preventDefault).not.toHaveBeenCalled();
       expect(snapSpy).not.toHaveBeenCalled();
       snapSpy.mockRestore();
+    });
+
+    it('should link the real-time card CTA button to /business-realtime', () => {
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement as HTMLElement;
+      const ctaLink = compiled.querySelector('a[routerlink="/business-realtime"], a[href="/business-realtime"]');
+      expect(ctaLink).toBeTruthy();
+      expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe('/business-realtime');
     });
   });
 });

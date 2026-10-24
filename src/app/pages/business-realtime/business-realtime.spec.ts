@@ -6,8 +6,11 @@ import { BusinessRealtime } from './business-realtime';
 describe('BusinessRealtime', () => {
   let component: BusinessRealtime;
   let fixture: ComponentFixture<BusinessRealtime>;
+  let scrollToSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(async () => {
+    scrollToSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+
     await TestBed.configureTestingModule({
       imports: [BusinessRealtime],
       providers: [
@@ -21,6 +24,10 @@ describe('BusinessRealtime', () => {
     fixture = TestBed.createComponent(BusinessRealtime);
     component = fixture.componentInstance;
     await fixture.whenStable();
+  });
+
+  afterEach(() => {
+    scrollToSpy.mockRestore();
   });
 
   it('should create', () => {
@@ -67,5 +74,11 @@ describe('BusinessRealtime', () => {
 
     const ctaEl = fixture.debugElement.query(By.css('app-cta'));
     expect(ctaEl).toBeNull();
+  });
+
+  it('should scroll to top (0, 0) on initialization when in browser environment without hash', () => {
+    scrollToSpy.mockClear();
+    component.ngOnInit();
+    expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
   });
 });

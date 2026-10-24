@@ -10,7 +10,7 @@
     AfterViewInit,
   } from '@angular/core';
   import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
-  import { Router, NavigationStart } from '@angular/router';
+  import { Router, NavigationStart, RouterLink } from '@angular/router';
   import { Subscription } from 'rxjs';
   import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   import { LanguageService } from '../../../systems/lib/language.service';
@@ -65,7 +65,7 @@ export interface ProcessCard {
 
   @Component({
     selector: 'app-business-control',
-    imports: [TranslatePipe, NgOptimizedImage],
+    imports: [TranslatePipe, NgOptimizedImage, RouterLink],
     templateUrl: './business-control.html',
     host: {
       class: 'block w-full',

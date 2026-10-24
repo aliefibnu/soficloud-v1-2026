@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Hero } from '../../components/business-realtime/hero/hero';
 import { VisibilityFunction } from '../../components/business-realtime/visibility-function/visibility-function';
 import { SalesPerformance } from '../../components/business-realtime/visibility-sections/sales-performance/sales-performance';
@@ -22,4 +23,12 @@ import { Subfooter } from '../../components/business-realtime/subfooter/subfoote
   selector: 'app-business-realtime',
   templateUrl: './business-realtime.html',
 })
-export class BusinessRealtime {}
+export class BusinessRealtime implements OnInit {
+  private readonly platformId = inject(PLATFORM_ID);
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId) && !window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }
+}
