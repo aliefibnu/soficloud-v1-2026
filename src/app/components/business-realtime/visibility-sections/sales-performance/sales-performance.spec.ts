@@ -37,7 +37,7 @@ describe('SalesPerformance', () => {
             },
           },
           SALES_PERFORMANCE: {
-            TITLE: 'Lihat Arah Penjualan Sejak Awal',
+            TITLE: 'Lihat Arah Penjualan\nSejak Awal',
             DESCRIPTION:
               'Nilai open sales order memperlihatkan pesanan yang masih berjalan.',
             DECISION_TEXT:
@@ -72,7 +72,9 @@ describe('SalesPerformance', () => {
 
     const heading = fixture.debugElement.query(By.css('h3#sales-performance-heading'));
     expect(heading).toBeTruthy();
-    expect(heading.nativeElement.textContent.trim()).toBe('Lihat Arah Penjualan Sejak Awal');
+    expect(heading.nativeElement.textContent.replace(/\s+/g, ' ').trim()).toBe(
+      'Lihat Arah Penjualan Sejak Awal',
+    );
   });
 
   it('should render the ERP window chrome with module title and active sales pill', () => {
