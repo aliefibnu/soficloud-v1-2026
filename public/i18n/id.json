@@ -498,7 +498,7 @@
         }
       },
       "SALES_PERFORMANCE": {
-        "TITLE": "Lihat Arah Penjualan Sejak Awal",
+        "TITLE": "Lihat Arah Penjualan\nSejak Awal",
         "DESCRIPTION": "Nilai open sales order memperlihatkan pesanan yang masih berjalan. Jumlah pelanggan aktif memberi konteks terhadap basis penjualan, sementara grafik bulanan membantu membandingkan tren tahun berjalan dengan periode sebelumnya.",
         "DECISION_TEXT": "Pantau perubahan pipeline dan selidiki bulan ketika kinerja mulai melemah",
         "MOCKUP": {
@@ -508,6 +508,28 @@
           "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
           "SELECT_VIEW_CHART": "SELECT VIEW CHART",
           "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "Temukan Transaksi Pembelian\nYang Tertahan",
+        "DESCRIPTION": "Ringkasan ini menunjukkan dokumen MPR dan PO yang belum melangkah ke tahap berikutnya: PO, GRN, hingga\nsupplier invoice. Grafik jumlah MPR dan PO memberi gambaran aktivitas pembelian dari bulan ke bulan.",
+        "DECISION_TEXT": "Prioritaskan PO dan penerimaan barang yang belum selesai",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
         }
       }
     }

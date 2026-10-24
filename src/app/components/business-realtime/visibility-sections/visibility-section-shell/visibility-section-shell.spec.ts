@@ -68,7 +68,8 @@ describe('VisibilitySectionShell', () => {
     expect(headingEl.nativeElement.classList.contains('font-inter')).toBe(true);
     expect(headingEl.nativeElement.classList.contains('font-semibold')).toBe(true);
     expect(headingEl.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
-    expect(headingEl.nativeElement.classList.contains('max-w-lg')).toBe(true);
+    expect(headingEl.nativeElement.classList.contains('max-w-3xl')).toBe(true);
+    expect(headingEl.nativeElement.classList.contains('whitespace-pre-line')).toBe(true);
   });
 
   it('should render the blue accent divider line with wide horizontal span', () => {
@@ -86,7 +87,7 @@ describe('VisibilitySectionShell', () => {
     expect(descEl.nativeElement.textContent.trim()).toBe(
       'Nilai open sales order memperlihatkan pesanan yang masih berjalan.',
     );
-    expect(descEl.nativeElement.classList.contains('text-balance')).toBe(true);
+    expect(descEl.nativeElement.classList.contains('whitespace-pre-line')).toBe(true);
     expect(descEl.nativeElement.classList.contains('max-w-214')).toBe(true);
   });
 

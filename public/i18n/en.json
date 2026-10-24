@@ -498,7 +498,7 @@
         }
       },
       "SALES_PERFORMANCE": {
-        "TITLE": "See Sales Direction from the Start",
+        "TITLE": "See Sales Direction\nfrom the Start",
         "DESCRIPTION": "Open sales order value shows ongoing orders. The number of active customers provides context to the sales base, while monthly charts help compare current year trends with previous periods.",
         "DECISION_TEXT": "Monitor pipeline shifts and investigate months where performance begins to decline",
         "MOCKUP": {
@@ -508,6 +508,28 @@
           "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
           "SELECT_VIEW_CHART": "SELECT VIEW CHART",
           "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "Discover Stalled\nPurchasing Transactions",
+        "DESCRIPTION": "This summary shows MPR and PO documents that have not progressed to the next stage: PO, GRN, through\nsupplier invoice. The chart of MPR and PO volume provides an overview of purchasing activities month over month.",
+        "DECISION_TEXT": "Prioritize unfinished POs and goods receipts",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
         }
       }
     }

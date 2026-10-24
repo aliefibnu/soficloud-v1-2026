@@ -27,7 +27,7 @@ describe('BusinessRealtime', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render hero, visibility-function, and sales-performance components', () => {
+  it('should render hero, visibility-function, sales-performance, and procurement-control components', () => {
     fixture.detectChanges();
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     expect(heroEl).toBeTruthy();
@@ -39,5 +39,10 @@ describe('BusinessRealtime', () => {
       By.css('app-sales-performance'),
     );
     expect(salesPerformanceEl).toBeTruthy();
+
+    const procurementControlEl = fixture.debugElement.query(
+      By.css('app-procurement-control'),
+    );
+    expect(procurementControlEl).toBeTruthy();
   });
 });

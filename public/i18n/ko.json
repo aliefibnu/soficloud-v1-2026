@@ -498,7 +498,7 @@
         }
       },
       "SALES_PERFORMANCE": {
-        "TITLE": "영업 방향을 초기부터 파악",
+        "TITLE": "영업 방향을\n초기부터 파악",
         "DESCRIPTION": "미결 주문 금액은 진행 중인 주문 현황을 명확히 보여줍니다. 활성 고객 수는 매출 기반의 맥락을 제공하며, 월별 차트는 당해 연도 추이와 이전 기간의 실적을 손쉽게 비교할 수 있도록 돕습니다.",
         "DECISION_TEXT": "파이프라인 변동을 모니터링하고 실적이 저하되기 시작하는 시점을 집중 분석",
         "MOCKUP": {
@@ -508,6 +508,28 @@
           "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
           "SELECT_VIEW_CHART": "SELECT VIEW CHART",
           "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "지연된 구매 거래를\n빠르게 파악",
+        "DESCRIPTION": "이 요약은 PO, GRN 및 공급업체 인보이스 등 다음 단계로 진행되지 않은 MPR 및 PO 문서를 표시합니다.\nMPR 및 PO 수량 차트를 통해 월별 구매 활동 현황을 한눈에 파악할 수 있습니다.",
+        "DECISION_TEXT": "미완료된 발주서(PO) 및 입고 처리를 우선 순위화",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
         }
       }
     }

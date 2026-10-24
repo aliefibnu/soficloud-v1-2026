@@ -498,7 +498,7 @@
         }
       },
       "SALES_PERFORMANCE": {
-        "TITLE": "从一开始掌握销售走向",
+        "TITLE": "从一开始掌握\n销售走向",
         "DESCRIPTION": "未完成销售订单价值直观反映当前进行中的业务。活跃客户数量为销售基础提供全面参照，而月度图表则协助对比当年度趋势与往期业绩表现。",
         "DECISION_TEXT": "严密追踪销售管道变化，深入剖析业绩开始下滑的关键月份",
         "MOCKUP": {
@@ -508,6 +508,28 @@
           "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
           "SELECT_VIEW_CHART": "SELECT VIEW CHART",
           "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "及时发现滞留的\n采购交易",
+        "DESCRIPTION": "此概览展示尚未进入下一阶段（采购订单、收货单乃至供应商发票）的MPR和PO文档。\nMPR与PO数量图表清晰呈现逐月采购动态。",
+        "DECISION_TEXT": "优先处理未完成的采购订单与收货单",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
         }
       }
     }

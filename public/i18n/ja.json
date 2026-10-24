@@ -498,7 +498,7 @@
         }
       },
       "SALES_PERFORMANCE": {
-        "TITLE": "初期段階から販売傾向を把握",
+        "TITLE": "初期段階から\n販売傾向を把握",
         "DESCRIPTION": "未処理受注額は現在進行中の注文状況を可視化します。アクティブ顧客数は販売基盤の背景を提示し、月次グラフは当年の推移と前年実績との比較をサポートします。",
         "DECISION_TEXT": "パイプラインの変動を監視し、パフォーマンスが低下し始める月を詳細に調査",
         "MOCKUP": {
@@ -508,6 +508,28 @@
           "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
           "SELECT_VIEW_CHART": "SELECT VIEW CHART",
           "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "滞留している\n購買取引を迅速に特定",
+        "DESCRIPTION": "このサマリーは、PO、GRN、サプライヤー請求書といった次工程に進んでいないMPRおよびPO伝票を表示します。\nMPRおよびPO件数のグラフにより、月ごとの購買動向を俯瞰できます。",
+        "DECISION_TEXT": "未完了のPOおよび物品受領を優先して処理",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
         }
       }
     }
