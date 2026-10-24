@@ -10,6 +10,7 @@ import { ErpWindowChrome, ErpModuleType } from './erp-window-chrome';
     <app-erp-window-chrome
       [activeModule]="activeModule()"
       [moduleTitle]="moduleTitle()"
+      [showStatusPills]="showStatusPills()"
     >
       <div id="test-projected-card">Test Card Inside ERP</div>
     </app-erp-window-chrome>
@@ -18,6 +19,7 @@ import { ErpWindowChrome, ErpModuleType } from './erp-window-chrome';
 class TestHostComponent {
   readonly activeModule = signal<ErpModuleType>('sales');
   readonly moduleTitle = signal<string>('Sales (PT INFORSYS INDONESIA )');
+  readonly showStatusPills = signal<boolean>(true);
 }
 
 describe('ErpWindowChrome', () => {
@@ -141,5 +143,15 @@ describe('ErpWindowChrome', () => {
     const projected = fixture.debugElement.query(By.css('#test-projected-card'));
     expect(projected).toBeTruthy();
     expect(projected.nativeElement.textContent.trim()).toBe('Test Card Inside ERP');
+  });
+
+  it('should conditionally hide status pills when showStatusPills is false', () => {
+    hostComponent.showStatusPills.set(false);
+    fixture.detectChanges();
+
+    const pillsContainer = fixture.debugElement.query(
+      By.css('[aria-label="System status and timestamp"]'),
+    );
+    expect(pillsContainer).toBeNull();
   });
 });

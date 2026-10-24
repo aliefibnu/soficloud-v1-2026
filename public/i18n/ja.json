@@ -531,6 +531,51 @@
             "NUMBER_OF_PO": "NUMBER OF PO (-)"
           }
         }
+      },
+      "MATERIAL_READINESS": {
+        "TITLE": "生産前に\n原材料の充足状況を確認",
+        "DESCRIPTION": "MRP画面では実在庫、引当済在庫、利用可能在庫、発注残、部品ごとの予想在庫を詳細に表示します。部品とBOMの絞り込みにより、PPICは製造予定製品の所要量を的確に把握できます。",
+        "DECISION_TEXT": "資材不足を特定し、発注申請または生産計画のリスケジュールを実施",
+        "MOCKUP": {
+          "WINDOW_TITLE": "MRP (PT INFORSYS INDONESIA )",
+          "CARD_TITLE": "Material Requirement Planning (MRP)",
+          "AS_OF": "As of Jul 28, 2026",
+          "FILTERS": {
+            "PART": "Part",
+            "PART_CATEGORY_1": "Part Category 1",
+            "PART_CATEGORY_2": "Part Category 2",
+            "PROJECT_BUDGETED": "Project Budgeted",
+            "SUPPLIER": "Supplier",
+            "PART_CATEGORY_3": "Part Category 3",
+            "FINISHED_GOODS_BOM": "Finished Goods & BoM",
+            "PART_GROUP": "Part Group",
+            "PART_TYPE": "Part Type",
+            "CLASSIFICATION": "Classification",
+            "SELECT_ALL": "Select All",
+            "TRADING_PART": "Trading Part",
+            "SAMPLE_BOM": "Classic jati-craft Table - FG-c001",
+            "PRIORITY": "Priority",
+            "SHOW_STOCK": "Show stock"
+          },
+          "SEARCH_PLACEHOLDER": "Search Part Detail",
+          "ACTIONS": {
+            "CREATE_MPR": "Create MPR",
+            "CREATE_STOCK_ISSUE": "Create Stock Issue",
+            "CREATE_PACKING_LIST": "Create Packing List",
+            "CREATE_TRANSFER": "Create Transfer"
+          },
+          "TABLE": {
+            "PART_CODE": "Part Code",
+            "PART_NAME": "Part Name",
+            "GROUP": "Group",
+            "UNIT": "Unit",
+            "STOCK_ON_HAND": "Stock On Hand",
+            "BOOKING_STOCK": "Booking Stock",
+            "AVAILABILITY_STOCK": "Availability stock",
+            "ORDER_STOCK": "Order Stock",
+            "EXPECTED_STOCK": "Expected Stock"
+          }
+        }
       }
     }
   }
