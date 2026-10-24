@@ -9,11 +9,9 @@
     activeModule="sales"
     moduleTitleKey="BUSINESS_REALTIME.VISIBILITY_SECTIONS.SALES_PERFORMANCE.MOCKUP.WINDOW_TITLE"
   >
-    <!-- Top Row: Card 1 (OPEN SO VALUE) & Card 2 (NUMBER OF ACTIVE CUSTOMER) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 w-full">
-      <!-- Card 1: OPEN SO VALUE (IDR) -->
       <article
-        class="bg-white rounded-[10px] p-3.5 sm:p-4.5 shadow-2xs border border-[#DDDDDD]/80 border-[0.67px] flex flex-col justify-between"
+        class="bg-white rounded-[10px] p-3.5 sm:p-4.5 shadow-2xs border-[#DDDDDD]/80 border-[0.67px] flex flex-col justify-between"
       >
         <div class="flex items-center justify-between mb-2">
           <h4
@@ -37,7 +35,6 @@
           </svg>
         </div>
 
-        <!-- Static Bar Chart SVG -->
         <div class="w-full flex items-center justify-center">
           <svg
             class="w-full h-auto max-w-full"
@@ -45,7 +42,7 @@
             fill="none"
             aria-hidden="true"
           >
-            <!-- Y-Axis Gridlines & Labels -->
+            <!-- Y-Axis gridlines & labels -->
             <text x="32" y="38" font-size="8.5" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="end">600 M</text>
             <line x1="38" y1="35" x2="305" y2="35" stroke="#E2E8F0" stroke-width="1" />
 
@@ -58,24 +55,18 @@
             <text x="32" y="158" font-size="8.5" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="end">0</text>
             <line x1="38" y1="155" x2="305" y2="155" stroke="#CBD5E1" stroke-width="1" />
 
-            <!-- Bars -->
-            <!-- Apr 2026: ~200M (y=115..155) -->
+            <!-- monthly bars from apr to sep -->
             <rect x="58" y="115" width="26" height="40" rx="2" fill="#FDD8D3" stroke="#F9CEC8" stroke-width="1" />
-            <!-- May 2026: ~400M (y=75..155) -->
             <rect x="100" y="75" width="26" height="80" rx="2" fill="#F9BCB3" stroke="#F5A99E" stroke-width="1" />
-            <!-- Jun 2026: ~480M (y=59..155) -->
             <rect x="142" y="59" width="26" height="96" rx="2" fill="#F39C8F" stroke="#EA8778" stroke-width="1" />
-            <!-- Peak badge above Jun 2026 -->
+            <!-- peak badge above june 2026 -->
             <rect x="144" y="44" width="22" height="10" rx="3" fill="#FDECE9" stroke="#F9CEC8" stroke-width="1" />
 
-            <!-- Jul 2026: ~560M (y=43..155) -->
             <rect x="184" y="43" width="26" height="112" rx="2" fill="#8BAFF4" stroke="#729DF0" stroke-width="1" />
-            <!-- Aug 2026: ~440M (y=67..155) -->
             <rect x="226" y="67" width="26" height="88" rx="2" fill="#B9D1FB" stroke="#A4C4F9" stroke-width="1" />
-            <!-- Sep 2026: ~380M (y=79..155) -->
             <rect x="268" y="79" width="26" height="76" rx="2" fill="#D8E6FD" stroke="#C6DCFC" stroke-width="1" />
 
-            <!-- X-Axis Labels -->
+            <!-- X-Axis labels -->
             <g font-size="8" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="middle">
               <text x="71" y="170" transform="rotate(-20 71 170)">Apr 2026</text>
               <text x="113" y="170" transform="rotate(-20 113 170)">May 2026</text>
@@ -88,9 +79,8 @@
         </div>
       </article>
 
-      <!-- Card 2: NUMBER OF ACTIVE CUSTOMER (IDR) -->
       <article
-        class="bg-white rounded-[10px] p-3.5 sm:p-4.5 shadow-2xs border border-[#DDDDDD]/80 border-[0.67px] flex flex-col justify-between"
+        class="bg-white rounded-[10px] p-3.5 sm:p-4.5 shadow-2xs border-[#DDDDDD]/80 border-[0.67px] flex flex-col justify-between"
       >
         <div class="flex items-center justify-between mb-2">
           <h4
@@ -114,7 +104,6 @@
           </svg>
         </div>
 
-        <!-- Static Bar Chart SVG -->
         <div class="w-full flex items-center justify-center">
           <svg
             class="w-full h-auto max-w-full"
@@ -122,7 +111,7 @@
             fill="none"
             aria-hidden="true"
           >
-            <!-- Y-Axis Gridlines & Labels (0 to 60) -->
+            <!-- Y-Axis gridlines & labels (0 to 60) -->
             <text x="28" y="38" font-size="8.5" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="end">60</text>
             <line x1="34" y1="35" x2="305" y2="35" stroke="#E2E8F0" stroke-width="1" />
 
@@ -144,24 +133,18 @@
             <text x="28" y="158" font-size="8.5" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="end">0</text>
             <line x1="34" y1="155" x2="305" y2="155" stroke="#CBD5E1" stroke-width="1" />
 
-            <!-- Bars -->
-            <!-- Apr 2026: ~44 (y=67..155) -->
+            <!-- montly bars from apr to sep -->
             <rect x="58" y="67" width="26" height="88" rx="2" fill="#FDD8D3" stroke="#F9CEC8" stroke-width="1" />
-            <!-- May 2026: ~54 (y=47..155) -->
             <rect x="100" y="47" width="26" height="108" rx="2" fill="#F9BCB3" stroke="#F5A99E" stroke-width="1" />
-            <!-- Jun 2026: ~54 (y=47..155) -->
             <rect x="142" y="47" width="26" height="108" rx="2" fill="#F39C8F" stroke="#EA8778" stroke-width="1" />
-            <!-- Peak badge above Jun 2026 -->
+            <!-- peak badge above june 2026 -->
             <rect x="144" y="32" width="22" height="10" rx="3" fill="#FDECE9" stroke="#F9CEC8" stroke-width="1" />
 
-            <!-- Jul 2026: ~51 (y=53..155) -->
             <rect x="184" y="53" width="26" height="102" rx="2" fill="#8BAFF4" stroke="#729DF0" stroke-width="1" />
-            <!-- Aug 2026: ~46 (y=63..155) -->
             <rect x="226" y="63" width="26" height="92" rx="2" fill="#B9D1FB" stroke="#A4C4F9" stroke-width="1" />
-            <!-- Sep 2026: ~40 (y=75..155) -->
             <rect x="268" y="75" width="26" height="80" rx="2" fill="#D8E6FD" stroke="#C6DCFC" stroke-width="1" />
 
-            <!-- X-Axis Labels -->
+            <!-- X-Axis labels -->
             <g font-size="8" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="middle">
               <text x="71" y="168">Apr2026</text>
               <text x="113" y="168">May2026</text>
@@ -175,11 +158,9 @@
       </article>
     </div>
 
-    <!-- Bottom Row: Card 3 (SALES ANALYSIS) -->
     <article
-      class="bg-white rounded-[10px] p-3.5 sm:p-5 shadow-2xs border border-[#DDDDDD]/80 border-[0.67px] flex flex-col w-full max-w-[540px] mx-auto"
+      class="bg-white rounded-[10px] p-3.5 sm:p-5 shadow-2xs border-[#DDDDDD]/80 border-[0.67px] flex flex-col w-full max-w-135 mx-auto"
     >
-      <!-- Card Header: Title + Controls + Legend -->
       <div class="flex flex-col gap-2 mb-3">
         <div class="flex items-center justify-between">
           <h4
@@ -204,7 +185,6 @@
         </div>
 
         <div class="flex items-center justify-between flex-wrap gap-2">
-          <!-- View selector -->
           <div class="flex items-center gap-2">
             <span
               class="font-dm-sans font-normal text-[10px] text-[#23244E] uppercase tracking-wider"
@@ -216,7 +196,7 @@
               }}
             </span>
             <span
-              class="font-dm-sans font-medium border border-[#DDDDDD] border-[0.67px] bg-[#FDFDFD] text-[10px] text-[#23244E] px-2 py-0.5 rounded-[6.72px] flex items-center gap-1 shadow-2xs select-none"
+              class="font-dm-sans font-medium border-[#DDDDDD] border-[0.67px] bg-[#FDFDFD] text-[10px] text-[#23244E] px-2 py-0.5 rounded-[6.72px] flex items-center gap-1 shadow-2xs select-none"
               style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 500;"
             >
               {{
@@ -229,7 +209,6 @@
             </span>
           </div>
 
-          <!-- Legend -->
           <div class="flex items-center gap-3 select-none">
             <div class="flex items-center gap-1.5">
               <span class="w-6 h-2.5 rounded-full bg-[#2D62EC]"></span>
@@ -253,7 +232,6 @@
         </div>
       </div>
 
-      <!-- Static Dual Line Chart SVG -->
       <div class="w-full flex items-center justify-center">
         <svg
           class="w-full h-auto max-w-full"
@@ -261,7 +239,7 @@
           fill="none"
           aria-hidden="true"
         >
-          <!-- Y-Axis Gridlines & Labels -->
+          <!-- Y-Axis gridlines & labels -->
           <text x="32" y="33" font-size="8.5" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="end">600 M</text>
           <line x1="38" y1="30" x2="520" y2="30" stroke="#E2E8F0" stroke-width="1" />
 
@@ -283,7 +261,6 @@
           <text x="32" y="183" font-size="8.5" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="end">0</text>
           <line x1="38" y1="180" x2="520" y2="180" stroke="#CBD5E1" stroke-width="1" />
 
-          <!-- Vertical Gridlines for 12 months -->
           <line x1="48" y1="30" x2="48" y2="180" stroke="#F1F5F9" stroke-width="1" />
           <line x1="91" y1="30" x2="91" y2="180" stroke="#F1F5F9" stroke-width="1" />
           <line x1="134" y1="30" x2="134" y2="180" stroke="#F1F5F9" stroke-width="1" />
@@ -297,7 +274,7 @@
           <line x1="476" y1="30" x2="476" y2="180" stroke="#F1F5F9" stroke-width="1" />
           <line x1="518" y1="30" x2="518" y2="180" stroke="#F1F5F9" stroke-width="1" />
 
-          <!-- Smooth Coral Curve (2025) -->
+          <!-- smooth coral curve (2025) -->
           <path
             d="M 48 107
                C 70 120, 75 120, 91 120
@@ -315,7 +292,7 @@
             stroke-width="1.8"
             fill="none"
           />
-          <!-- 2025 Data Point Markers -->
+          <!-- 2025 data point markers -->
           <circle cx="48" cy="107" r="3" fill="#FA7966" />
           <circle cx="91" cy="120" r="3" fill="#FA7966" />
           <circle cx="134" cy="80" r="3" fill="#FA7966" />
@@ -329,7 +306,7 @@
           <circle cx="476" cy="86" r="3" fill="#FA7966" />
           <circle cx="518" cy="82" r="3" fill="#FA7966" />
 
-          <!-- Smooth Blue Curve (2026) -->
+          <!-- smooth blue curve (2026) -->
           <path
             d="M 48 105
                C 70 95, 75 91, 91 91
@@ -347,7 +324,7 @@
             stroke-width="1.8"
             fill="none"
           />
-          <!-- 2026 Data Point Markers -->
+          <!-- 2026 data point markers -->
           <circle cx="48" cy="105" r="3" fill="#2D62EC" />
           <circle cx="91" cy="91" r="3" fill="#2D62EC" />
           <circle cx="134" cy="111" r="3" fill="#2D62EC" />
