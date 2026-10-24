@@ -2,14 +2,14 @@
   class="w-full rounded-2xl sm:rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-slate-100 bg-white overflow-hidden"
 >
   <div class="overflow-x-auto scrollbar-none w-full">
-    <div class="min-w-190 lg:min-w-0 w-full flex flex-col">
+    <div class="min-w-170 lg:min-w-0 w-full flex flex-col">
       <header
-        class="h-12 sm:h-13 px-4 sm:px-6 bg-white border-b border-slate-100 flex items-center justify-between select-none shrink-0"
+        class="h-9 sm:h-10 px-3 sm:px-4 bg-white border-b border-slate-100 flex items-center justify-between select-none shrink-0"
       >
         <div class="flex items-center">
-          <div class="w-40 sm:w-44 lg:w-48 shrink-0 flex items-center gap-2">
+          <div class="w-32 sm:w-36 lg:w-38 shrink-0 flex items-center gap-1.5">
             <svg
-              class="w-4 h-4 text-[#23244E]"
+              class="w-3.5 h-3.5 text-[#23244E]"
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
@@ -18,9 +18,9 @@
                 d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
               />
             </svg>
-            <span class="text-slate-300 font-light text-sm">|</span>
+            <span class="text-slate-300 font-light text-xs">|</span>
             <span
-              class="font-dm-sans font-semibold text-xs sm:text-sm text-[#23244E] tracking-tight inline-flex items-center"
+              class="font-dm-sans font-semibold text-[11px] sm:text-xs text-[#23244E] tracking-tight inline-flex items-center"
               style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600;"
             >
               {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.COMMON.DASHBOARD' | translate }}
@@ -28,22 +28,22 @@
           </div>
 
           <span
-            class="font-dm-sans font-semibold text-xs sm:text-sm text-[#23244E] tracking-tight inline-flex items-center"
+            class="font-dm-sans font-semibold text-[11px] sm:text-xs text-[#23244E] tracking-tight inline-flex items-center"
             style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600;"
           >
             {{ moduleTitle() }}
           </span>
         </div>
 
-        <div class="flex items-center gap-1.5 cursor-default">
+        <div class="flex items-center gap-1 cursor-default">
           <div
-            class="w-7 h-7 rounded-full bg-[#365AD2] text-white font-bold text-xs flex items-center justify-center shadow-xs select-none"
+            class="w-6 h-6 rounded-full bg-[#365AD2] text-white font-bold text-[10px] flex items-center justify-center shadow-xs select-none"
             aria-label="User Avatar"
           >
             A
           </div>
           <svg
-            class="w-3.5 h-3.5 text-[#365AD2] stroke-[2.5]"
+            class="w-3 h-3 text-[#365AD2] stroke-[2.5]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -58,14 +58,14 @@
         </div>
       </header>
 
-      <div class="flex w-full min-h-110">
+      <div class="flex w-full min-h-92">
         <aside
-          class="w-44 sm:w-48 lg:w-52 shrink-0 bg-white border-r border-slate-100 p-3 sm:p-4 flex flex-col gap-1 select-none"
+          class="w-32 sm:w-36 lg:w-38 shrink-0 bg-white border-r border-slate-100 p-2 sm:p-2.5 lg:p-3 flex flex-col gap-0.5 select-none"
           aria-label="Module Navigation"
         >
           @for (item of sidebarItems; track item.id) {
             <div
-              class="font-dm-sans font-medium px-3.5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm tracking-tight transition-colors duration-150 text-[#23244E]"
+              class="font-dm-sans font-medium px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs tracking-tight transition-colors duration-150 text-[#23244E]"
               [class.bg-[#EAF1FD]]="activeModule() === item.id"
               [class.shadow-2xs]="activeModule() === item.id"
               style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 500;"
@@ -75,26 +75,26 @@
           }
         </aside>
 
-        <main class="flex-1 min-w-0 bg-[#FDFDFD] p-3 sm:p-5 lg:p-6 flex flex-col">
+        <main class="flex-1 min-w-0 bg-[#FDFDFD] p-2.5 sm:p-3.5 lg:p-4 flex flex-col">
           @if (showStatusPills()) {
             <div
-              class="flex items-center justify-end gap-2 sm:gap-2.5 mb-4 sm:mb-5 select-none"
+              class="flex items-center justify-end gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 select-none"
               aria-label="System status and timestamp"
             >
               <span
-                class="font-dm-sans font-semibold text-[11px] text-[#23244E] px-3.5 py-1 rounded-[6.72px] bg-[#FDFDFD] border-[#DDDDDD] border-[0.67px] shadow-2xs inline-flex items-center justify-center"
+                class="font-dm-sans font-semibold text-[10px] text-[#23244E] px-2.5 py-0.5 rounded-[6.72px] bg-[#FDFDFD] border-[#DDDDDD] border-[0.67px] shadow-2xs inline-flex items-center justify-center"
                 style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600;"
               >
                 {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.COMMON.ADMIN' | translate }}
               </span>
               <span
-                class="font-dm-sans font-semibold text-[11px] text-[#23244E] px-3.5 py-1 rounded-[6.72px] bg-[#FDFDFD] border-[#DDDDDD] border-[0.67px] shadow-2xs inline-flex items-center justify-center"
+                class="font-dm-sans font-semibold text-[10px] text-[#23244E] px-2.5 py-0.5 rounded-[6.72px] bg-[#FDFDFD] border-[#DDDDDD] border-[0.67px] shadow-2xs inline-flex items-center justify-center"
                 style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600;"
               >
                 Thursday, 28 Jul 2026
               </span>
               <span
-                class="font-dm-sans font-semibold text-[11px] text-[#23244E] px-3.5 py-1 rounded-[6.72px] bg-[#FDFDFD] border-[#DDDDDD] border-[0.67px] shadow-2xs inline-flex items-center justify-center"
+                class="font-dm-sans font-semibold text-[10px] text-[#23244E] px-2.5 py-0.5 rounded-[6.72px] bg-[#FDFDFD] border-[#DDDDDD] border-[0.67px] shadow-2xs inline-flex items-center justify-center"
                 style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600;"
               >
                 09:54:25 AM
@@ -102,7 +102,7 @@
             </div>
           }
 
-          <div class="w-full flex-1 flex flex-col gap-4 sm:gap-5">
+          <div class="w-full flex-1 flex flex-col gap-2.5 sm:gap-3">
             <ng-content />
           </div>
         </main>
