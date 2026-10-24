@@ -611,6 +611,61 @@
             "RECEIPT_AMOUNT": "Receipt Amount"
           }
         }
+      },
+      "FINANCIAL_VISIBILITY": {
+        "TITLE": "財務ポジションと\nその推移を同時に把握",
+        "DESCRIPTION": "財務ダッシュボードは2つの視点を提供します：特定期間の貸借対照表の構成と、時系列での収支比較です。",
+        "DECISION_TEXT": "財務状況と収支トレンドを評価し、予算の優先順位を決定して財務の安定性を維持",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Finance ( PT INFORSYS INDONESIA )",
+          "ASSETS": {
+            "TITLE": "ASSETS",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 2,162,866,910.38",
+            "ITEMS": {
+              "CASH": "CASH",
+              "BANK": "BANK",
+              "ACCOUNT_RECEIVABLE": "ACCOUNT RECEIVABLE",
+              "OTHERS_RECEIVABLE": "OTHERS RECEIVABLE",
+              "PREPAID": "PREPAID",
+              "INVENTORY": "INVENTORY",
+              "FIXED_ASSET": "FIXED ASSET",
+              "INTANGIBLE_ASSETS": "INTANGIBLE ASSETS"
+            }
+          },
+          "LIABILITIES": {
+            "TITLE": "LIABILITIES",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 796,274,157.84",
+            "ITEMS": {
+              "ACCOUNT_PAYABLE": "ACCOUNT PAYABLE",
+              "EMPLOYEE_PAYABLE": "EMPLOYEE PAYABLE",
+              "EXPENSES_PAYABLE": "EXPENSES PAYABLE",
+              "TAX_PAYABLE": "TAX PAYABLE",
+              "LONG_TERM_PAYABLE": "LONG TERM PAYABLE"
+            }
+          },
+          "EQUITY": {
+            "TITLE": "EQUITY",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 1,427,742,140.54",
+            "ITEMS": {
+              "CAPITAL": "CAPITAL",
+              "RETAINED_EARNING": "RETAINED EARNING",
+              "CURRENT_EARNING": "CURRENT EARNING"
+            }
+          },
+          "TABLE": {
+            "NAME": "NAME",
+            "PERIOD": "August 2026"
+          },
+          "CHARTS": {
+            "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+            "INCOME_EXPENSE_TITLE": "INCOME & EXPENSE ( IDR )",
+            "EXPENSE": "Expense",
+            "INCOME": "Income"
+          }
+        }
       }
     }
   }
