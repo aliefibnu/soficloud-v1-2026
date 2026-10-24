@@ -11,7 +11,6 @@
     [moduleTitle]="'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.WINDOW_TITLE' | translate"
     [showStatusPills]="false"
   >
-    <!-- Top Action: Back To List -->
     <div class="flex items-center justify-start select-none mb-2 sm:mb-2.5">
       <button
         type="button"
@@ -22,12 +21,9 @@
       </button>
     </div>
 
-    <!-- Pipeline Canvas Container (Fit and clean scale matching Sales Performance) -->
     <div class="w-full overflow-x-auto scrollbar-none pb-2 select-none">
       <div class="min-w-175 lg:min-w-0 w-full flex flex-col gap-6 relative">
-        <!-- Row 1: 4 Cards (Customer Order -> Product -> Raw Material -> PL Incoming) -->
         <div class="grid grid-cols-4 gap-4 sm:gap-5 lg:gap-6 relative items-stretch">
-          <!-- Card 1: Customer Order -->
           <article
             class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 flex flex-col min-h-56 sm:min-h-60"
           >
@@ -63,14 +59,12 @@
               </div>
             </div>
 
-            <!-- Right Connector Line: Blue -->
             <div
               class="absolute -right-4 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#0B63EE] z-10 pointer-events-none"
               aria-hidden="true"
             ></div>
           </article>
 
-          <!-- Card 2: Product -->
           <article
             class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 flex flex-col min-h-56 sm:min-h-60"
           >
@@ -104,14 +98,12 @@
               </div>
             </div>
 
-            <!-- Right Connector Line: Coral -->
             <div
               class="absolute -right-4 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#EE7981] z-10 pointer-events-none"
               aria-hidden="true"
             ></div>
           </article>
 
-          <!-- Card 3: Raw Material Available -->
           <article
             class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 flex flex-col min-h-56 sm:min-h-60"
           >
@@ -125,7 +117,6 @@
 
               <div class="p-3 sm:p-3.5 flex flex-col justify-start flex-1 font-dm-sans text-[#23244E] text-[10px] sm:text-[10.5px]">
                 <div class="flex flex-col gap-2.5">
-                  <!-- Part 1 -->
                   <div class="flex flex-col">
                     <h4
                       class="font-bold text-[11px] sm:text-xs text-[#23244E] leading-snug mb-1"
@@ -149,7 +140,6 @@
                     </div>
                   </div>
 
-                  <!-- Part 2 -->
                   <div class="flex flex-col pt-1.5 border-t border-slate-100">
                     <h4
                       class="font-bold text-[11px] sm:text-xs text-[#23244E] leading-snug mb-1"
@@ -176,14 +166,12 @@
               </div>
             </div>
 
-            <!-- Right Connector Line: Blue -->
             <div
               class="absolute -right-4 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#0B63EE] z-10 pointer-events-none"
               aria-hidden="true"
             ></div>
           </article>
 
-          <!-- Card 4: PL Incoming & Stock Receipt -->
           <article
             class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 flex flex-col min-h-56 sm:min-h-60"
           >
@@ -202,7 +190,6 @@
               </div>
             </div>
 
-            <!-- Vertical Connector Line down to Card 8: Coral -->
             <div
               class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-0.75 h-6 bg-[#EE7981] z-10 pointer-events-none"
               aria-hidden="true"
@@ -210,9 +197,7 @@
           </article>
         </div>
 
-        <!-- Row 2: 4 Cards (Invoice & Receipt <- Delivery <- Manufacturing <- PO & GRN) -->
         <div class="grid grid-cols-4 gap-4 sm:gap-5 lg:gap-6 relative items-stretch">
-          <!-- Card 5: Invoice & Receipt (Col 1) -->
           <article
             class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 flex flex-col min-h-40 sm:min-h-44"
           >
@@ -252,7 +237,6 @@
             </div>
           </article>
 
-          <!-- Card 6: Delivery (Col 2) -->
           <article
             class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 flex flex-col min-h-40 sm:min-h-44"
           >
@@ -286,14 +270,12 @@
               </div>
             </div>
 
-            <!-- Left Connector Line towards Card 5: Blue -->
             <div
               class="absolute -left-4 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#0B63EE] z-10 pointer-events-none"
               aria-hidden="true"
             ></div>
           </article>
 
-          <!-- Card 7: Manufacturing (Col 3) -->
           <article
             class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 flex flex-col min-h-40 sm:min-h-44"
           >
@@ -332,14 +314,12 @@
               </div>
             </div>
 
-            <!-- Left Connector Line towards Card 6: Coral -->
             <div
               class="absolute -left-4 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#EE7981] z-10 pointer-events-none"
               aria-hidden="true"
             ></div>
           </article>
 
-          <!-- Card 8: PO & GRN Available Order (Col 4) -->
           <article
             class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 flex flex-col min-h-40 sm:min-h-44"
           >
@@ -358,7 +338,6 @@
               </div>
             </div>
 
-            <!-- Left Connector Line towards Card 7: Blue -->
             <div
               class="absolute -left-4 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#0B63EE] z-10 pointer-events-none"
               aria-hidden="true"
