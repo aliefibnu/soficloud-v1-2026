@@ -1,0 +1,372 @@
+<app-visibility-section-shell
+  sectionId="order-pipeline"
+  [title]="'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.TITLE' | translate"
+  [description]="'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.DESCRIPTION' | translate"
+  [decisionText]="'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.DECISION_TEXT' | translate"
+  [decisionLabel]="'BUSINESS_REALTIME.VISIBILITY_SECTIONS.COMMON.DECISION_LABEL' | translate"
+  stageBgClass="bg-[#F9CEC8]"
+>
+  <app-erp-window-chrome
+    activeModule="order-pipeline"
+    [moduleTitle]="'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.WINDOW_TITLE' | translate"
+    [showStatusPills]="false"
+  >
+    <!-- Top Action: Back To List -->
+    <div class="flex items-center justify-start select-none mb-1">
+      <button
+        type="button"
+        class="font-dm-sans font-semibold text-[10.5px] sm:text-xs text-[#23244E] px-3.5 sm:px-4 py-0.5 sm:py-1 rounded-full bg-white border border-[#DDDDDD] shadow-2xs cursor-default hover:bg-slate-50 transition-colors"
+        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600;"
+      >
+        {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.BACK_TO_LIST' | translate }}
+      </button>
+    </div>
+
+    <!-- Pipeline Canvas Container -->
+    <div class="w-full overflow-x-auto scrollbar-none pb-2 select-none">
+      <div class="min-w-165 sm:min-w-175 lg:min-w-0 w-full flex flex-col gap-5 sm:gap-6 relative">
+        <!-- Row 1: Stages 1 to 4 (Customer Order -> Product -> Raw Material -> PL Incoming) -->
+        <div class="grid grid-cols-4 gap-4 sm:gap-5 lg:gap-6 relative items-stretch">
+          <!-- Card 1: Customer Order -->
+          <article
+            class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 overflow-visible flex flex-col min-h-50 sm:min-h-53"
+          >
+            <!-- Card content wrapper with overflow-hidden for rounded header -->
+            <div class="w-full h-full rounded-xl overflow-hidden flex flex-col">
+              <header
+                class="bg-[#0B63EE] text-white py-1.5 px-2 text-center font-dm-sans font-bold text-[9px] sm:text-[9.5px] uppercase tracking-wider"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+              >
+                {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.STAGES.CUSTOMER_ORDER' | translate }}
+              </header>
+
+              <div class="p-2 sm:p-2.5 flex flex-col justify-start flex-1 font-dm-sans text-[#23244E]">
+                <h4
+                  class="font-bold text-[9.5px] sm:text-[10px] text-[#23244E] leading-tight mb-2 sm:mb-2.5"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                >
+                  PT Trendy Home Design
+                </h4>
+                <div class="flex flex-col text-[8px] sm:text-[8.5px] leading-tight mb-2 sm:mb-2.5">
+                  <span class="text-[#64748B] font-medium">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.SO_NO' | translate }}
+                  </span>
+                  <span class="font-bold text-[#23244E]">SO-2601-002</span>
+                  <span class="text-[#8F9CAE]">(02 Jan 2026)</span>
+                </div>
+                <div class="flex flex-col text-[8px] sm:text-[8.5px] leading-tight">
+                  <span class="text-[#64748B] font-medium">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.PO_NO' | translate }}
+                  </span>
+                  <span class="font-bold text-[#23244E]">PO/002/JT</span>
+                  <span class="text-[#8F9CAE]">(02 Jan 2026)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Connector Line: Blue -->
+            <div
+              class="absolute -right-4 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#0B63EE] z-10 pointer-events-none"
+              aria-hidden="true"
+            ></div>
+          </article>
+
+          <!-- Card 2: Product -->
+          <article
+            class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 overflow-visible flex flex-col min-h-50 sm:min-h-53"
+          >
+            <div class="w-full h-full rounded-xl overflow-hidden flex flex-col">
+              <header
+                class="bg-[#EE7981] text-white py-1.5 px-2 text-center font-dm-sans font-bold text-[9px] sm:text-[9.5px] uppercase tracking-wider"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+              >
+                {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.STAGES.PRODUCT' | translate }}
+              </header>
+
+              <div class="p-2 sm:p-2.5 flex flex-col justify-start flex-1 font-dm-sans text-[#23244E]">
+                <h4
+                  class="font-bold text-[9.5px] sm:text-[10px] text-[#23244E] leading-tight mb-2 sm:mb-2.5"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                >
+                  Classic Jati-craft Table - FG-c001
+                </h4>
+                <div class="flex items-center gap-1 text-[8.5px] sm:text-[9px] leading-tight mb-1 sm:mb-1.5">
+                  <span class="text-[#64748B] font-medium">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.ORDER' | translate }}
+                  </span>
+                  <span class="font-bold text-[#23244E]">40 UNIT</span>
+                </div>
+                <div class="flex flex-col text-[8px] sm:text-[8.5px] leading-tight">
+                  <span class="text-[#64748B] font-medium">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.REQ_DATE' | translate }}
+                  </span>
+                  <span class="font-bold text-[#23244E]">28 Jul 2026</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Connector Line: Coral -->
+            <div
+              class="absolute -right-4 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#EE7981] z-10 pointer-events-none"
+              aria-hidden="true"
+            ></div>
+          </article>
+
+          <!-- Card 3: Raw Material Available -->
+          <article
+            class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 overflow-visible flex flex-col min-h-50 sm:min-h-53"
+          >
+            <div class="w-full h-full rounded-xl overflow-hidden flex flex-col">
+              <header
+                class="bg-[#0B63EE] text-white py-1.5 px-1.5 text-center font-dm-sans font-bold text-[8.5px] sm:text-[9px] uppercase tracking-wider"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+              >
+                {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.STAGES.RAW_MATERIAL_AVAILABLE' | translate }}
+              </header>
+
+              <div class="p-2 sm:p-2.5 flex flex-col justify-start flex-1 font-dm-sans text-[#23244E] text-[8px] sm:text-[8.5px]">
+                <div class="flex flex-col gap-1.5">
+                  <!-- Part 1 -->
+                  <div class="flex flex-col">
+                    <h4
+                      class="font-bold text-[9px] sm:text-[9.5px] text-[#23244E] leading-tight mb-0.5"
+                      style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                    >
+                      RM-T001 - Teak Wood Boards
+                    </h4>
+                    <div class="flex flex-col gap-0.25 leading-tight text-[#64748B]">
+                      <div>
+                        {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.STOCK_ON_HAND' | translate }}
+                        <span class="font-bold text-[#23244E]">14 UNIT</span>
+                      </div>
+                      <div>
+                        {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.BOOKING_STOCK' | translate }}
+                        <span class="font-bold text-[#23244E]">0 UNIT</span>
+                      </div>
+                      <div>
+                        {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.AVAILABILITY_STOCK' | translate }}
+                        <span class="font-bold text-[#23244E]">14 UNIT</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Part 2 -->
+                  <div class="flex flex-col pt-0.5 border-t border-slate-100">
+                    <h4
+                      class="font-bold text-[9px] sm:text-[9.5px] text-[#23244E] leading-tight mb-0.5"
+                      style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                    >
+                      RM-T001 - Solid Wood Legs
+                    </h4>
+                    <div class="flex flex-col gap-0.25 leading-tight text-[#64748B]">
+                      <div>
+                        {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.STOCK_ON_HAND' | translate }}
+                        <span class="font-bold text-[#23244E]">18 UNIT</span>
+                      </div>
+                      <div>
+                        {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.BOOKING_STOCK' | translate }}
+                        <span class="font-bold text-[#23244E]">0 UNIT</span>
+                      </div>
+                      <div>
+                        {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.AVAILABILITY_STOCK' | translate }}
+                        <span class="font-bold text-[#23244E]">14 UNIT</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Connector Line: Blue -->
+            <div
+              class="absolute -right-4 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#0B63EE] z-10 pointer-events-none"
+              aria-hidden="true"
+            ></div>
+          </article>
+
+          <!-- Card 4: PL Incoming & Stock Receipt -->
+          <article
+            class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 overflow-visible flex flex-col min-h-50 sm:min-h-53"
+          >
+            <div class="w-full h-full rounded-xl overflow-hidden flex flex-col">
+              <header
+                class="bg-[#EE7981] text-white py-1.5 px-1.5 text-center font-dm-sans font-bold text-[8.5px] sm:text-[9px] tracking-tight leading-tight"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+              >
+                {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.STAGES.PL_INCOMING_STOCK_RECEIPT' | translate }}
+              </header>
+
+              <div class="p-2 sm:p-2.5 flex items-center justify-center flex-1 font-dm-sans">
+                <span class="text-[9.5px] sm:text-[10px] text-[#94A3B8] font-medium">
+                  {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.NO_DATA' | translate }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Vertical Connector Line down to Card 8: Coral -->
+            <div
+              class="absolute -bottom-5 sm:-bottom-6 left-1/2 -translate-x-1/2 w-0.75 h-5 sm:h-6 bg-[#EE7981] z-10 pointer-events-none"
+              aria-hidden="true"
+            ></div>
+          </article>
+        </div>
+
+        <!-- Row 2: Stages 5 to 8 (Invoice & Receipt <- Delivery <- Manufacturing <- PO & GRN) -->
+        <div class="grid grid-cols-4 gap-4 sm:gap-5 lg:gap-6 relative items-stretch">
+          <!-- Card 5: Invoice & Receipt (Col 1) -->
+          <article
+            class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 overflow-visible flex flex-col min-h-36 sm:min-h-40"
+          >
+            <div class="w-full h-full rounded-xl overflow-hidden flex flex-col">
+              <header
+                class="bg-[#EE7981] text-white py-1.5 px-2 text-center font-dm-sans font-bold text-[9px] sm:text-[9.5px] uppercase tracking-wider"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+              >
+                {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.STAGES.INVOICE_RECEIPT' | translate }}
+              </header>
+
+              <div class="p-2 sm:p-2.5 flex flex-col justify-center flex-1 font-dm-sans text-[#23244E]">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[8.5px] sm:text-[9px] text-[#64748B] font-medium leading-tight">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.INVOICE_AMOUNT' | translate }}
+                  </span>
+                  <span
+                    class="font-bold text-[10px] sm:text-[11px] text-[#23244E] leading-tight"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                  >
+                    96,000,000.00
+                  </span>
+                </div>
+                <div class="h-px bg-slate-200/80 my-2 sm:my-2.5" aria-hidden="true"></div>
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[8.5px] sm:text-[9px] text-[#64748B] font-medium leading-tight">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.RECEIPT_AMOUNT' | translate }}
+                  </span>
+                  <span
+                    class="font-bold text-[10px] sm:text-[11px] text-[#23244E] leading-tight"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                  >
+                    0.00
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6: Delivery (Col 2) -->
+          <article
+            class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 overflow-visible flex flex-col min-h-36 sm:min-h-40"
+          >
+            <div class="w-full h-full rounded-xl overflow-hidden flex flex-col">
+              <header
+                class="bg-[#0B63EE] text-white py-1.5 px-2 text-center font-dm-sans font-bold text-[9px] sm:text-[9.5px] uppercase tracking-wider"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+              >
+                {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.STAGES.DELIVERY' | translate }}
+              </header>
+
+              <div class="p-2 sm:p-2.5 flex flex-col justify-start flex-1 font-dm-sans text-[#23244E]">
+                <h4
+                  class="font-bold text-[9.5px] sm:text-[10px] text-[#23244E] leading-tight mb-2 sm:mb-2.5"
+                  style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                >
+                  Classic Jati-craft Table - FG-c001
+                </h4>
+                <div class="flex items-center gap-1 text-[8.5px] sm:text-[9px] leading-tight mb-1">
+                  <span class="text-[#64748B] font-medium">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.DELIVERY_LABEL' | translate }}
+                  </span>
+                  <span class="font-bold text-[#23244E]">40 UNIT</span>
+                </div>
+                <div class="flex items-center gap-1 text-[8.5px] sm:text-[9px] leading-tight">
+                  <span class="text-[#64748B] font-medium">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.OUTSTANDING_QTY' | translate }}
+                  </span>
+                  <span class="font-bold text-[#23244E]">0 UNIT</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Left Connector Line towards Card 5: Blue -->
+            <div
+              class="absolute -left-4 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#0B63EE] z-10 pointer-events-none"
+              aria-hidden="true"
+            ></div>
+          </article>
+
+          <!-- Card 7: Manufacturing (Col 3) -->
+          <article
+            class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 overflow-visible flex flex-col min-h-36 sm:min-h-40"
+          >
+            <div class="w-full h-full rounded-xl overflow-hidden flex flex-col">
+              <header
+                class="bg-[#EE7981] text-white py-1.5 px-2 text-center font-dm-sans font-bold text-[9px] sm:text-[9.5px] uppercase tracking-wider"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+              >
+                {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.STAGES.MANUFACTURING' | translate }}
+              </header>
+
+              <div class="p-2 sm:p-2.5 flex flex-col justify-center flex-1 font-dm-sans text-[#23244E]">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[8.5px] sm:text-[9px] text-[#64748B] font-medium leading-tight">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.MANUFACTURING_ORDER_QTY' | translate }}
+                  </span>
+                  <span
+                    class="font-bold text-[10px] sm:text-[11px] text-[#23244E] leading-tight"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                  >
+                    25
+                  </span>
+                </div>
+                <div class="h-px bg-slate-200/80 my-2 sm:my-2.5" aria-hidden="true"></div>
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[8.5px] sm:text-[9px] text-[#64748B] font-medium leading-tight">
+                    {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.ASSEMBLY_QTY_RESULT' | translate }}
+                  </span>
+                  <span
+                    class="font-bold text-[10px] sm:text-[11px] text-[#23244E] leading-tight"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+                  >
+                    25
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Left Connector Line towards Card 6: Coral -->
+            <div
+              class="absolute -left-4 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#EE7981] z-10 pointer-events-none"
+              aria-hidden="true"
+            ></div>
+          </article>
+
+          <!-- Card 8: PO & GRN Available Order (Col 4) -->
+          <article
+            class="relative bg-white rounded-xl shadow-2xs border border-[#DDDDDD]/80 overflow-visible flex flex-col min-h-36 sm:min-h-40"
+          >
+            <div class="w-full h-full rounded-xl overflow-hidden flex flex-col">
+              <header
+                class="bg-[#0B63EE] text-white py-1.5 px-1.5 text-center font-dm-sans font-bold text-[8.5px] sm:text-[9px] uppercase tracking-wider leading-tight"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+              >
+                {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.STAGES.PO_GRN_AVAILABLE_ORDER' | translate }}
+              </header>
+
+              <div class="p-2 sm:p-2.5 flex items-center justify-center flex-1 font-dm-sans">
+                <span class="text-[9.5px] sm:text-[10px] text-[#94A3B8] font-medium">
+                  {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.ORDER_PIPELINE.MOCKUP.FIELDS.NO_DATA' | translate }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Left Connector Line towards Card 7: Blue -->
+            <div
+              class="absolute -left-4 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 w-4 sm:w-5 lg:w-6 h-0.75 bg-[#0B63EE] z-10 pointer-events-none"
+              aria-hidden="true"
+            ></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </app-erp-window-chrome>
+</app-visibility-section-shell>

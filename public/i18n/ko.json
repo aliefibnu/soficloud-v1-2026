@@ -576,6 +576,41 @@
             "EXPECTED_STOCK": "Expected Stock"
           }
         }
+      },
+      "ORDER_PIPELINE": {
+        "TITLE": "주문부터 수령까지\n단일 주문 추적",
+        "DESCRIPTION": "Order Pipeline은 고객 주문, 제품, 원자재 가용성, 구매 및 입고, 제조, 배송, 송장 및 수령 간의 연결을 보여줍니다. 팀은 진행된 단계와 주의가 필요한 지점을 한눈에 파악할 수 있습니다.",
+        "DECISION_TEXT": "단순한 최종 주문 상태가 아닌 공정 단계별로 주문 병목 현상을 파악",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Order Pipeline ( Demo Manufacture )",
+          "BACK_TO_LIST": "목록으로 돌아가기",
+          "STAGES": {
+            "CUSTOMER_ORDER": "CUSTOMER ORDER",
+            "PRODUCT": "PRODUCT",
+            "RAW_MATERIAL_AVAILABLE": "RAW MATERIAL AVAILABLE",
+            "PL_INCOMING_STOCK_RECEIPT": "PL Incoming & Stock Receipt",
+            "PO_GRN_AVAILABLE_ORDER": "PO & GRN AVAILABLE ORDER",
+            "MANUFACTURING": "MANUFACTURING",
+            "DELIVERY": "DELIVERY",
+            "INVOICE_RECEIPT": "INVOICE & RECEIPT"
+          },
+          "FIELDS": {
+            "NO_DATA": "데이터 없음",
+            "SO_NO": "SO No:",
+            "PO_NO": "Po No:",
+            "ORDER": "Order:",
+            "REQ_DATE": "Req. Date:",
+            "STOCK_ON_HAND": "Stock On Hand:",
+            "BOOKING_STOCK": "Booking Stock:",
+            "AVAILABILITY_STOCK": "Availability Stock:",
+            "MANUFACTURING_ORDER_QTY": "Manufacturing Order Qty:",
+            "ASSEMBLY_QTY_RESULT": "Assembly Qty Result:",
+            "DELIVERY_LABEL": "Delivery:",
+            "OUTSTANDING_QTY": "Outstanding Qty:",
+            "INVOICE_AMOUNT": "Invoice Amount",
+            "RECEIPT_AMOUNT": "Receipt Amount"
+          }
+        }
       }
     }
   }

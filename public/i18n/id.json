@@ -576,6 +576,41 @@
             "EXPECTED_STOCK": "Expected Stock"
           }
         }
+      },
+      "ORDER_PIPELINE": {
+        "TITLE": "Telusuri Satu Pesanan Dari\nOrder Hingga Penerimaan",
+        "DESCRIPTION": "Order Pipeline memperlihatkan hubungan antara customer order, produk, ketersediaan raw material, pembelian dan penerimaan, manufacturing, delivery, sampai invoice dan receipt. Tim dapat melihat tahap yang sudah bergerak dan titik yang masih memerlukan perhatian.",
+        "DECISION_TEXT": "Cek hambatan order berdasarkan posisi proses, bukan sekadar status akhir pesanan",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Order Pipeline ( Demo Manufacture )",
+          "BACK_TO_LIST": "Back To List",
+          "STAGES": {
+            "CUSTOMER_ORDER": "CUSTOMER ORDER",
+            "PRODUCT": "PRODUCT",
+            "RAW_MATERIAL_AVAILABLE": "RAW MATERIAL AVAILABLE",
+            "PL_INCOMING_STOCK_RECEIPT": "PL Incoming & Stock Receipt",
+            "PO_GRN_AVAILABLE_ORDER": "PO & GRN AVAILABLE ORDER",
+            "MANUFACTURING": "MANUFACTURING",
+            "DELIVERY": "DELIVERY",
+            "INVOICE_RECEIPT": "INVOICE & RECEIPT"
+          },
+          "FIELDS": {
+            "NO_DATA": "No Data",
+            "SO_NO": "SO No:",
+            "PO_NO": "Po No:",
+            "ORDER": "Order:",
+            "REQ_DATE": "Req. Date:",
+            "STOCK_ON_HAND": "Stock On Hand:",
+            "BOOKING_STOCK": "Booking Stock:",
+            "AVAILABILITY_STOCK": "Availability Stock:",
+            "MANUFACTURING_ORDER_QTY": "Manufacturing Order Qty:",
+            "ASSEMBLY_QTY_RESULT": "Assembly Qty Result:",
+            "DELIVERY_LABEL": "Delivery:",
+            "OUTSTANDING_QTY": "Outstanding Qty:",
+            "INVOICE_AMOUNT": "Invoice Amount",
+            "RECEIPT_AMOUNT": "Receipt Amount"
+          }
+        }
       }
     }
   }
