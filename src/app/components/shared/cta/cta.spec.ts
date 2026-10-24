@@ -131,7 +131,9 @@ describe('Cta', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const img = compiled.querySelector('img');
     expect(img).toBeTruthy();
-    expect(img?.getAttribute('ngsrc')).toContain('cta_image.webp');
+    expect(img?.getAttribute('ngsrc')).toBe(
+      '/images/landing/cta/cta_image.webp',
+    );
     expect(img?.getAttribute('width')).toBe('528');
     expect(img?.getAttribute('height')).toBe('704');
     expect(img?.getAttribute('alt')).toBeTruthy();
