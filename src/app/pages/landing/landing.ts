@@ -7,6 +7,7 @@ import { WhyChooseUs } from '../../components/landing/why-choose-us/why-choose-u
 import { Customers } from '../../components/landing/customers/customers';
 import { BusinessModel } from '../../components/landing/business-model/business-model';
 import { Price } from '../../components/landing/price/price';
+import { Cta } from '../../components/shared/cta/cta';
 
 @Component({
   imports: [
@@ -18,6 +19,7 @@ import { Price } from '../../components/landing/price/price';
     Customers,
     BusinessModel,
     Price,
+    Cta,
   ],
   selector: 'app-landing',
   templateUrl: './landing.html',

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
 import { Navbar } from './navbar';
@@ -7,16 +8,25 @@ describe('Navbar', () => {
   let component: Navbar;
   let fixture: ComponentFixture<Navbar>;
   let languageService: LanguageService;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Navbar],
-      providers: [provideTranslateService(), LanguageService],
+      providers: [
+        provideTranslateService(),
+        LanguageService,
+        provideRouter([
+          { path: '', component: Navbar },
+          { path: 'business-realtime', component: Navbar },
+        ]),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Navbar);
     component = fixture.componentInstance;
     languageService = TestBed.inject(LanguageService);
+    router = TestBed.inject(Router);
     await fixture.whenStable();
   });
 
@@ -190,5 +200,66 @@ describe('Navbar', () => {
       document.body.removeChild(pricing);
       document.body.removeChild(cta);
     }
+  });
+
+  describe('Route-scoped highlight state', () => {
+    it('should identify landing page correctly and render anchor-only hrefs', () => {
+      expect(component.isLandingPage()).toBe(true);
+
+      const navAnchor = fixture.nativeElement.querySelector('nav a') as HTMLAnchorElement;
+      expect(navAnchor.getAttribute('href')).toBe('#features');
+    });
+
+    it('should disable highlight state completely when navigated to /business-realtime', async () => {
+      await router.navigateByUrl('/business-realtime');
+      fixture.detectChanges();
+
+      expect(component.isLandingPage()).toBe(false);
+      expect(component.activeLinkKey()).toBeNull();
+
+      // Desktop links should now prefix with /
+      const navAnchor = fixture.nativeElement.querySelector('nav a') as HTMLAnchorElement;
+      expect(navAnchor.getAttribute('href')).toBe('/#features');
+
+      // Calling onNavClick or onScheduleDemo on non-landing page should not set activeLinkKey
+      component.onNavClick('HEADER.NAV.FEATURES');
+      expect(component.activeLinkKey()).toBeNull();
+
+      component.onScheduleDemo();
+      expect(component.activeLinkKey()).toBeNull();
+
+      component.onMobileNavClick('HEADER.NAV.TESTIMONIALS');
+      expect(component.activeLinkKey()).toBeNull();
+
+      // Even when scrolled to the bottom of the page with support/contact present
+      const cta = document.createElement('div');
+      cta.id = 'support';
+      document.body.appendChild(cta);
+
+      try {
+        Object.defineProperty(document.documentElement, 'scrollHeight', { value: 3000, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 800, configurable: true });
+        Object.defineProperty(window, 'scrollY', { value: 2500 } as PropertyDescriptor);
+
+        component.updateActiveSection();
+        expect(component.activeLinkKey()).toBeNull();
+
+        component.onWindowScroll();
+        expect(component.activeLinkKey()).toBeNull();
+      } finally {
+        document.body.removeChild(cta);
+      }
+    });
+
+    it('should re-enable highlight state when navigating back to landing page', async () => {
+      await router.navigateByUrl('/business-realtime');
+      expect(component.isLandingPage()).toBe(false);
+
+      await router.navigateByUrl('/');
+      expect(component.isLandingPage()).toBe(true);
+
+      component.onNavClick('HEADER.NAV.PRICING');
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.PRICING');
+    });
   });
 });

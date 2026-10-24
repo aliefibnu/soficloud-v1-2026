@@ -1,0 +1,73 @@
+<section
+  id="visibility-function"
+  class="relative w-full pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 lg:px-8"
+  aria-labelledby="visibility-function-heading"
+>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center max-w-4xl mx-auto mb-8 sm:mb-10 lg:mb-12 px-2">
+      <h2
+        id="visibility-function-heading"
+        class="font-inter font-bold text-[#23244E] text-2xl sm:text-3xl md:text-4xl lg:text-[46px] leading-none tracking-normal text-center"
+        style="
+          font-family: var(--font-inter, 'Inter Variable', sans-serif);
+          font-weight: 700;
+        "
+      >
+        {{ 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TITLE' | translate }}
+      </h2>
+
+      <p
+        class="font-dm-sans font-normal text-[#23244E] text-[17px] leading-relaxed text-center max-w-210 mx-auto mt-4 sm:mt-5"
+        style="
+          font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+          font-weight: 400;
+        "
+      >
+        {{ 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.SUBTITLE' | translate }}
+      </p>
+    </div>
+
+    <div
+      class="w-full max-w-7xl lg:max-w-310 mx-auto overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden xl:overflow-visible pb-2"
+    >
+      <div class="min-w-270 xl:min-w-0 w-full relative">
+        <div
+          #tabsListRef
+          role="tablist"
+          aria-label="Cross-functional visibility options"
+          class="relative flex items-center justify-between w-full px-6 sm:px-10 lg:px-17.5"
+        >
+          @for (tab of tabs; track tab.id; let i = $index) {
+            <button
+              type="button"
+              role="tab"
+              [id]="'tab-' + tab.id"
+              [attr.data-tab-id]="tab.id"
+              [attr.aria-selected]="activeTabId() === tab.id"
+              [attr.aria-controls]="tab.id"
+              [attr.tabindex]="activeTabId() === tab.id ? 0 : -1"
+              (click)="selectTab(tab.id)"
+              (keydown)="onTabKeydown($event, i)"
+              class="font-dm-sans font-bold text-xs sm:text-sm md:text-base lg:text-[18px] leading-none tracking-normal py-2.5 px-2 text-center transition-colors duration-200 cursor-pointer select-none whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#365AD2] focus-visible:ring-offset-2 rounded-sm"
+              [class.text-[#23244E]]="activeTabId() === tab.id"
+              [class.text-[#B1B1B1DD]]="activeTabId() !== tab.id"
+              [style.font-family]="'var(--font-dm-sans, \'DM Sans Variable\', sans-serif)'"
+              [style.font-weight]="700"
+              [style.color]="activeTabId() === tab.id ? '#23244E' : '#B1B1B1DD'"
+            >
+              {{ tab.titleKey | translate }}
+            </button>
+          }
+        </div>
+
+        <div class="relative w-full h-0.75 bg-[#D9D9D9] mt-3 sm:mt-4 overflow-hidden rounded-full">
+          <span
+            class="absolute top-0 h-0.75 bg-[#365AD2] rounded-full transition-all duration-300 ease-out"
+            [style.left.px]="indicatorLeft()"
+            [style.width.px]="indicatorWidth()"
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -39,7 +39,6 @@
   },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "从一处掌控您的业务",
-    "HEADER_SUBTITLE": "选择您想要查看的区域。每个流程都连接到相同的数据，并且始终可追溯。",
     "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
     "EXPENSE": "支出",
     "INCOME": "收入",
@@ -456,5 +455,222 @@
     "STARTING_FROM": "起步价",
     "AMOUNT": "Rp2.500.000",
     "BUTTON": "查看价格详情"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "实时掌握业务",
+      "TITLE_LINE_2": "全面洞察全局",
+      "TITLE_LINE_3": "决策更迅速",
+      "TITLE_LINE_4": "行动更精准",
+      "TITLE_LINE_5": "效益更显著",
+      "DESCRIPTION": "销售、采购、物料需求、订单进度以及财务数据均可在 SOFICloud 仪表盘中实时查看。每个视图都帮助团队把握当下现状，迅速确定需要跟进的事项。",
+      "TABLET_ALT": "平板电脑上的 SOFICloud 仪表盘"
+    },
+    "VISIBILITY_FUNCTION": {
+      "TITLE": "跨职能全局洞察",
+      "SUBTITLE": "从客户订单到财务状况，管理层可纵览各业务环节的关键指标。以下展示展示了团队如何发现机遇、规避瓶颈并跟进进行中的各项任务。",
+      "TABS": {
+        "SALES_PERFORMANCE": "SALES PERFORMANCE",
+        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
+        "MATERIAL_READINESS": "MATERIAL READINESS",
+        "ORDER_PIPELINE": "ORDER PIPELINE",
+        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+      },
+      "ALTS": {
+        "SALES_PERFORMANCE": "销售业绩仪表盘预览",
+        "PROCUREMENT_CONTROL": "采购控制仪表盘预览",
+        "MATERIAL_READINESS": "物料齐套仪表盘预览",
+        "ORDER_PIPELINE": "订单管道仪表盘预览",
+        "FINANCIAL_VISIBILITY": "财务可见性仪表盘预览"
+      }
+    },
+    "VISIBILITY_SECTIONS": {
+      "COMMON": {
+        "DECISION_LABEL": "用于决策：",
+        "DASHBOARD": "仪表板",
+        "ADMIN": "管理员",
+        "SIDEBAR": {
+          "PROCUREMENT": "采购",
+          "SALES": "销售",
+          "MRP": "MRP",
+          "FINANCE": "财务",
+          "ORDER_PIPELINE": "订单流程"
+        }
+      },
+      "SALES_PERFORMANCE": {
+        "TITLE": "从一开始掌握\n销售走向",
+        "DESCRIPTION": "未完成销售订单价值直观反映当前进行中的业务。活跃客户数量为销售基础提供全面参照，而月度图表则协助对比当年度趋势与往期业绩表现。",
+        "DECISION_TEXT": "严密追踪销售管道变化，深入剖析业绩开始下滑的关键月份",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Sales (PT INFORSYS INDONESIA )",
+          "OPEN_SO_VALUE_TITLE": "OPEN SO VALUE (IDR)",
+          "ACTIVE_CUSTOMERS_TITLE": "NUMBER OF ACTIVE CUSTOMER (IDR)",
+          "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
+          "SELECT_VIEW_CHART": "SELECT VIEW CHART",
+          "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "及时发现滞留的\n采购交易",
+        "DESCRIPTION": "此概览展示尚未进入下一阶段（采购订单、收货单乃至供应商发票）的MPR和PO文档。\nMPR与PO数量图表清晰呈现逐月采购动态。",
+        "DECISION_TEXT": "优先处理未完成的采购订单与收货单",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
+        }
+      },
+      "MATERIAL_READINESS": {
+        "TITLE": "投产前核查\n物料齐套情况",
+        "DESCRIPTION": "MRP视图详细列出各物料的物理库存、已锁定库存、可用库存、采购在途订单及预计库存。物料与BOM筛选协助PPIC准确核算拟生产产品的物料需求。",
+        "DECISION_TEXT": "精准识别缺料情况，及时发起采购申请或调整排产计划",
+        "MOCKUP": {
+          "WINDOW_TITLE": "MRP (PT INFORSYS INDONESIA )",
+          "CARD_TITLE": "Material Requirement Planning (MRP)",
+          "AS_OF": "As of Jul 28, 2026",
+          "FILTERS": {
+            "PART": "Part",
+            "PART_CATEGORY_1": "Part Category 1",
+            "PART_CATEGORY_2": "Part Category 2",
+            "PROJECT_BUDGETED": "Project Budgeted",
+            "SUPPLIER": "Supplier",
+            "PART_CATEGORY_3": "Part Category 3",
+            "FINISHED_GOODS_BOM": "Finished Goods & BoM",
+            "PART_GROUP": "Part Group",
+            "PART_TYPE": "Part Type",
+            "CLASSIFICATION": "Classification",
+            "SELECT_ALL": "Select All",
+            "TRADING_PART": "Trading Part",
+            "SAMPLE_BOM": "Classic jati-craft Table - FG-c001",
+            "PRIORITY": "Priority",
+            "SHOW_STOCK": "Show stock"
+          },
+          "SEARCH_PLACEHOLDER": "Search Part Detail",
+          "ACTIONS": {
+            "CREATE_MPR": "Create MPR",
+            "CREATE_STOCK_ISSUE": "Create Stock Issue",
+            "CREATE_PACKING_LIST": "Create Packing List",
+            "CREATE_TRANSFER": "Create Transfer"
+          },
+          "TABLE": {
+            "PART_CODE": "Part Code",
+            "PART_NAME": "Part Name",
+            "GROUP": "Group",
+            "UNIT": "Unit",
+            "STOCK_ON_HAND": "Stock On Hand",
+            "BOOKING_STOCK": "Booking Stock",
+            "AVAILABILITY_STOCK": "Availability stock",
+            "ORDER_STOCK": "Order Stock",
+            "EXPECTED_STOCK": "Expected Stock"
+          }
+        }
+      },
+      "ORDER_PIPELINE": {
+        "TITLE": "从下单到验收\n全程跟踪单笔订单",
+        "DESCRIPTION": "Order Pipeline展示客户订单、产品、原材料可用性、采购与验收、生产制造、交付发货直到发票和收款之间的关联。团队可以清晰查看各环节进展及需关注的瓶颈点。",
+        "DECISION_TEXT": "按流程阶段定位订单瓶颈，而非仅关注最终订单状态",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Order Pipeline ( Demo Manufacture )",
+          "BACK_TO_LIST": "返回列表",
+          "STAGES": {
+            "CUSTOMER_ORDER": "CUSTOMER ORDER",
+            "PRODUCT": "PRODUCT",
+            "RAW_MATERIAL_AVAILABLE": "RAW MATERIAL AVAILABLE",
+            "PL_INCOMING_STOCK_RECEIPT": "PL Incoming & Stock Receipt",
+            "PO_GRN_AVAILABLE_ORDER": "PO & GRN AVAILABLE ORDER",
+            "MANUFACTURING": "MANUFACTURING",
+            "DELIVERY": "DELIVERY",
+            "INVOICE_RECEIPT": "INVOICE & RECEIPT"
+          },
+          "FIELDS": {
+            "NO_DATA": "无数据",
+            "SO_NO": "SO No:",
+            "PO_NO": "Po No:",
+            "ORDER": "Order:",
+            "REQ_DATE": "Req. Date:",
+            "STOCK_ON_HAND": "Stock On Hand:",
+            "BOOKING_STOCK": "Booking Stock:",
+            "AVAILABILITY_STOCK": "Availability Stock:",
+            "MANUFACTURING_ORDER_QTY": "Manufacturing Order Qty:",
+            "ASSEMBLY_QTY_RESULT": "Assembly Qty Result:",
+            "DELIVERY_LABEL": "Delivery:",
+            "OUTSTANDING_QTY": "Outstanding Qty:",
+            "INVOICE_AMOUNT": "Invoice Amount",
+            "RECEIPT_AMOUNT": "Receipt Amount"
+          }
+        }
+      },
+      "FINANCIAL_VISIBILITY": {
+        "TITLE": "全面洞悉财务状况\n与变动趋势",
+        "DESCRIPTION": "财务仪表板提供两个维度的视角：特定时期的资产负债表构成，以及随时间推移的收支对比。",
+        "DECISION_TEXT": "评估财务状况及收支趋势，明确预算优先级并保持财务稳健",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Finance ( PT INFORSYS INDONESIA )",
+          "ASSETS": {
+            "TITLE": "ASSETS",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 2,162,866,910.38",
+            "ITEMS": {
+              "CASH": "CASH",
+              "BANK": "BANK",
+              "ACCOUNT_RECEIVABLE": "ACCOUNT RECEIVABLE",
+              "OTHERS_RECEIVABLE": "OTHERS RECEIVABLE",
+              "PREPAID": "PREPAID",
+              "INVENTORY": "INVENTORY",
+              "FIXED_ASSET": "FIXED ASSET",
+              "INTANGIBLE_ASSETS": "INTANGIBLE ASSETS"
+            }
+          },
+          "LIABILITIES": {
+            "TITLE": "LIABILITIES",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 796,274,157.84",
+            "ITEMS": {
+              "ACCOUNT_PAYABLE": "ACCOUNT PAYABLE",
+              "EMPLOYEE_PAYABLE": "EMPLOYEE PAYABLE",
+              "EXPENSES_PAYABLE": "EXPENSES PAYABLE",
+              "TAX_PAYABLE": "TAX PAYABLE",
+              "LONG_TERM_PAYABLE": "LONG TERM PAYABLE"
+            }
+          },
+          "EQUITY": {
+            "TITLE": "EQUITY",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 1,427,742,140.54",
+            "ITEMS": {
+              "CAPITAL": "CAPITAL",
+              "RETAINED_EARNING": "RETAINED EARNING",
+              "CURRENT_EARNING": "CURRENT EARNING"
+            }
+          },
+          "TABLE": {
+            "NAME": "NAME",
+            "PERIOD": "August 2026"
+          },
+          "CHARTS": {
+            "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+            "INCOME_EXPENSE_TITLE": "INCOME & EXPENSE ( IDR )",
+            "EXPENSE": "Expense",
+            "INCOME": "Income"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "清晰的信息\n精准的行动",
+      "DESCRIPTION": "根据贵公司的业务流程，探讨所需的指标与仪表板"
+    }
   }
 }

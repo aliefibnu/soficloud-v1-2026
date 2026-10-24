@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { BusinessControl } from './business-control';
 import { LanguageService } from '../../../systems/lib/language.service';
@@ -14,6 +15,7 @@ describe('BusinessControl', () => {
     await TestBed.configureTestingModule({
       imports: [BusinessControl],
       providers: [
+        provideRouter([]),
         provideTranslateService({
           fallbackLang: 'en',
           lang: 'id',
@@ -29,8 +31,6 @@ describe('BusinessControl', () => {
     translateService.setTranslation('id', {
       BUSINESS_CONTROL: {
         HEADER_TITLE: 'Kendalikan Bisnis Dari Satu Tempat',
-        HEADER_SUBTITLE:
-          'Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan selalu dapat ditelusuri.',
         CARD_TITLE: 'Real-Time Business Control',
         CARD_BADGE: 'REAL-TIME',
         CHART_TITLE: 'INCOME AND EXPENSIVE (IDR)',
@@ -73,6 +73,15 @@ describe('BusinessControl', () => {
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render the header title without a subtitle', () => {
+    const heading = fixture.debugElement.nativeElement.querySelector('h2');
+    expect(heading).toBeTruthy();
+    expect(heading.textContent).toContain('Kendalikan Bisnis Dari Satu Tempat');
+
+    const headerContainer = heading.parentElement;
+    expect(headerContainer.querySelector('p')).toBeNull();
   });
 
   it('should toggle expense visibility correctly', () => {
@@ -756,6 +765,14 @@ describe('BusinessControl', () => {
       expect(preventDefault).not.toHaveBeenCalled();
       expect(snapSpy).not.toHaveBeenCalled();
       snapSpy.mockRestore();
+    });
+
+    it('should link the real-time card CTA button to /business-realtime', () => {
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement as HTMLElement;
+      const ctaLink = compiled.querySelector('a[routerlink="/business-realtime"], a[href="/business-realtime"]');
+      expect(ctaLink).toBeTruthy();
+      expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe('/business-realtime');
     });
   });
 });

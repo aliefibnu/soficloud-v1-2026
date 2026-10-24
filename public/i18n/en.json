@@ -39,7 +39,6 @@
   },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "Control Business From One Place",
-    "HEADER_SUBTITLE": "Choose the area you want to view. Every process connects to the same data and can be traced at any time.",
     "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
     "EXPENSE": "Expense",
     "INCOME": "Income",
@@ -456,5 +455,222 @@
     "STARTING_FROM": "Price Starting From",
     "AMOUNT": "Rp2,500,000",
     "BUTTON": "View Price Details"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "Monitor Business",
+      "TITLE_LINE_2": "In Real-time",
+      "TITLE_LINE_3": "Make Decisions",
+      "TITLE_LINE_4": "Faster",
+      "TITLE_LINE_5": "And Smarter",
+      "DESCRIPTION": "Sales, procurement, material needs, order progress, and finance can be viewed directly from the SOFICloud dashboard. Every view empowers the team to see current conditions and act swiftly.",
+      "TABLET_ALT": "SOFICloud dashboard on tablet"
+    },
+    "VISIBILITY_FUNCTION": {
+      "TITLE": "CROSS-FUNCTIONAL VISIBILITY",
+      "SUBTITLE": "From customer orders to financial positions, management monitors indicators relevant to each process. The following views illustrate how teams spot opportunities, bottlenecks, and open tasks.",
+      "TABS": {
+        "SALES_PERFORMANCE": "SALES PERFORMANCE",
+        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
+        "MATERIAL_READINESS": "MATERIAL READINESS",
+        "ORDER_PIPELINE": "ORDER PIPELINE",
+        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+      },
+      "ALTS": {
+        "SALES_PERFORMANCE": "Sales Performance Dashboard Preview",
+        "PROCUREMENT_CONTROL": "Procurement Control Dashboard Preview",
+        "MATERIAL_READINESS": "Material Readiness Dashboard Preview",
+        "ORDER_PIPELINE": "Order Pipeline Dashboard Preview",
+        "FINANCIAL_VISIBILITY": "Financial Visibility Dashboard Preview"
+      }
+    },
+    "VISIBILITY_SECTIONS": {
+      "COMMON": {
+        "DECISION_LABEL": "For decisions:",
+        "DASHBOARD": "Dashboard",
+        "ADMIN": "Admin",
+        "SIDEBAR": {
+          "PROCUREMENT": "Procurement",
+          "SALES": "Sales",
+          "MRP": "MRP",
+          "FINANCE": "Finance",
+          "ORDER_PIPELINE": "Order Pipeline"
+        }
+      },
+      "SALES_PERFORMANCE": {
+        "TITLE": "See Sales Direction\nfrom the Start",
+        "DESCRIPTION": "Open sales order value shows ongoing orders. The number of active customers provides context to the sales base, while monthly charts help compare current year trends with previous periods.",
+        "DECISION_TEXT": "Monitor pipeline shifts and investigate months where performance begins to decline",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Sales (PT INFORSYS INDONESIA )",
+          "OPEN_SO_VALUE_TITLE": "OPEN SO VALUE (IDR)",
+          "ACTIVE_CUSTOMERS_TITLE": "NUMBER OF ACTIVE CUSTOMER (IDR)",
+          "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
+          "SELECT_VIEW_CHART": "SELECT VIEW CHART",
+          "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "Discover Stalled\nPurchasing Transactions",
+        "DESCRIPTION": "This summary shows MPR and PO documents that have not progressed to the next stage: PO, GRN, through\nsupplier invoice. The chart of MPR and PO volume provides an overview of purchasing activities month over month.",
+        "DECISION_TEXT": "Prioritize unfinished POs and goods receipts",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
+        }
+      },
+      "MATERIAL_READINESS": {
+        "TITLE": "Check Material Readiness\nBefore Production",
+        "DESCRIPTION": "The MRP view details physical stock, booked stock, available stock, supplier orders, and projected stock per part. Part and BOM filters help PPIC review the requirements for products to be manufactured.",
+        "DECISION_TEXT": "Identify material shortages, then submit purchasing requests or reschedule",
+        "MOCKUP": {
+          "WINDOW_TITLE": "MRP (PT INFORSYS INDONESIA )",
+          "CARD_TITLE": "Material Requirement Planning (MRP)",
+          "AS_OF": "As of Jul 28, 2026",
+          "FILTERS": {
+            "PART": "Part",
+            "PART_CATEGORY_1": "Part Category 1",
+            "PART_CATEGORY_2": "Part Category 2",
+            "PROJECT_BUDGETED": "Project Budgeted",
+            "SUPPLIER": "Supplier",
+            "PART_CATEGORY_3": "Part Category 3",
+            "FINISHED_GOODS_BOM": "Finished Goods & BoM",
+            "PART_GROUP": "Part Group",
+            "PART_TYPE": "Part Type",
+            "CLASSIFICATION": "Classification",
+            "SELECT_ALL": "Select All",
+            "TRADING_PART": "Trading Part",
+            "SAMPLE_BOM": "Classic jati-craft Table - FG-c001",
+            "PRIORITY": "Priority",
+            "SHOW_STOCK": "Show stock"
+          },
+          "SEARCH_PLACEHOLDER": "Search Part Detail",
+          "ACTIONS": {
+            "CREATE_MPR": "Create MPR",
+            "CREATE_STOCK_ISSUE": "Create Stock Issue",
+            "CREATE_PACKING_LIST": "Create Packing List",
+            "CREATE_TRANSFER": "Create Transfer"
+          },
+          "TABLE": {
+            "PART_CODE": "Part Code",
+            "PART_NAME": "Part Name",
+            "GROUP": "Group",
+            "UNIT": "Unit",
+            "STOCK_ON_HAND": "Stock On Hand",
+            "BOOKING_STOCK": "Booking Stock",
+            "AVAILABILITY_STOCK": "Availability stock",
+            "ORDER_STOCK": "Order Stock",
+            "EXPECTED_STOCK": "Expected Stock"
+          }
+        }
+      },
+      "ORDER_PIPELINE": {
+        "TITLE": "Track a Single Order\nFrom Placement to Receipt",
+        "DESCRIPTION": "The Order Pipeline reveals the connections between customer orders, products, raw material availability, procurement and receipt, manufacturing, delivery, through to invoice and receipt. Teams can see completed stages and pinpoint areas needing attention.",
+        "DECISION_TEXT": "Spot order bottlenecks by process stage, rather than just final order status",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Order Pipeline ( Demo Manufacture )",
+          "BACK_TO_LIST": "Back To List",
+          "STAGES": {
+            "CUSTOMER_ORDER": "CUSTOMER ORDER",
+            "PRODUCT": "PRODUCT",
+            "RAW_MATERIAL_AVAILABLE": "RAW MATERIAL AVAILABLE",
+            "PL_INCOMING_STOCK_RECEIPT": "PL Incoming & Stock Receipt",
+            "PO_GRN_AVAILABLE_ORDER": "PO & GRN AVAILABLE ORDER",
+            "MANUFACTURING": "MANUFACTURING",
+            "DELIVERY": "DELIVERY",
+            "INVOICE_RECEIPT": "INVOICE & RECEIPT"
+          },
+          "FIELDS": {
+            "NO_DATA": "No Data",
+            "SO_NO": "SO No:",
+            "PO_NO": "Po No:",
+            "ORDER": "Order:",
+            "REQ_DATE": "Req. Date:",
+            "STOCK_ON_HAND": "Stock On Hand:",
+            "BOOKING_STOCK": "Booking Stock:",
+            "AVAILABILITY_STOCK": "Availability Stock:",
+            "MANUFACTURING_ORDER_QTY": "Manufacturing Order Qty:",
+            "ASSEMBLY_QTY_RESULT": "Assembly Qty Result:",
+            "DELIVERY_LABEL": "Delivery:",
+            "OUTSTANDING_QTY": "Outstanding Qty:",
+            "INVOICE_AMOUNT": "Invoice Amount",
+            "RECEIPT_AMOUNT": "Receipt Amount"
+          }
+        }
+      },
+      "FINANCIAL_VISIBILITY": {
+        "TITLE": "Read Financial Position And\nIts Movements Together.",
+        "DESCRIPTION": "The Finance dashboard presents two perspectives: the balance sheet composition for a single period, and a comparison of income and expenses over time.",
+        "DECISION_TEXT": "Evaluate financial condition and income-expense trends to determine budget priorities and maintain financial stability",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Finance ( PT INFORSYS INDONESIA )",
+          "ASSETS": {
+            "TITLE": "ASSETS",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 2,162,866,910.38",
+            "ITEMS": {
+              "CASH": "CASH",
+              "BANK": "BANK",
+              "ACCOUNT_RECEIVABLE": "ACCOUNT RECEIVABLE",
+              "OTHERS_RECEIVABLE": "OTHERS RECEIVABLE",
+              "PREPAID": "PREPAID",
+              "INVENTORY": "INVENTORY",
+              "FIXED_ASSET": "FIXED ASSET",
+              "INTANGIBLE_ASSETS": "INTANGIBLE ASSETS"
+            }
+          },
+          "LIABILITIES": {
+            "TITLE": "LIABILITIES",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 796,274,157.84",
+            "ITEMS": {
+              "ACCOUNT_PAYABLE": "ACCOUNT PAYABLE",
+              "EMPLOYEE_PAYABLE": "EMPLOYEE PAYABLE",
+              "EXPENSES_PAYABLE": "EXPENSES PAYABLE",
+              "TAX_PAYABLE": "TAX PAYABLE",
+              "LONG_TERM_PAYABLE": "LONG TERM PAYABLE"
+            }
+          },
+          "EQUITY": {
+            "TITLE": "EQUITY",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 1,427,742,140.54",
+            "ITEMS": {
+              "CAPITAL": "CAPITAL",
+              "RETAINED_EARNING": "RETAINED EARNING",
+              "CURRENT_EARNING": "CURRENT EARNING"
+            }
+          },
+          "TABLE": {
+            "NAME": "NAME",
+            "PERIOD": "August 2026"
+          },
+          "CHARTS": {
+            "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+            "INCOME_EXPENSE_TITLE": "INCOME & EXPENSE ( IDR )",
+            "EXPENSE": "Expense",
+            "INCOME": "Income"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "Clear Information\nDecisive Action",
+      "DESCRIPTION": "Discuss the indicators and dashboards your company needs based on your workflows"
+    }
   }
 }

@@ -39,7 +39,6 @@
   },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "ビジネスをひとつの場所から管理",
-    "HEADER_SUBTITLE": "表示したいエリアを選択。すべてのプロセスが同じデータに連携し、常に追跡可能です。",
     "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
     "EXPENSE": "支出",
     "INCOME": "収入",
@@ -456,5 +455,222 @@
     "STARTING_FROM": "料金プラン",
     "AMOUNT": "Rp2.500.000〜",
     "BUTTON": "料金詳細を見る"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "ビジネスを監視",
+      "TITLE_LINE_2": "リアルタイムで",
+      "TITLE_LINE_3": "意思決定を",
+      "TITLE_LINE_4": "より迅速に",
+      "TITLE_LINE_5": "より的確に",
+      "DESCRIPTION": "販売、調達、資材所要量、注文の進捗状況、財務状況をSOFICloudダッシュボードから確認できます。あらゆる画面がチームの現状把握と迅速な行動決定をサポートします。",
+      "TABLET_ALT": "タブレット上のSOFICloudダッシュボード"
+    },
+    "VISIBILITY_FUNCTION": {
+      "TITLE": "部門横断の可視化",
+      "SUBTITLE": "顧客の注文から財務状況に至るまで、マネジメント層は各プロセスに関連する重要指標を把握できます。以下の画面により、チームはビジネス機会、ボトルネック、未処理の業務を的確に把握できます。",
+      "TABS": {
+        "SALES_PERFORMANCE": "SALES PERFORMANCE",
+        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
+        "MATERIAL_READINESS": "MATERIAL READINESS",
+        "ORDER_PIPELINE": "ORDER PIPELINE",
+        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+      },
+      "ALTS": {
+        "SALES_PERFORMANCE": "販売実績ダッシュボードプレビュー",
+        "PROCUREMENT_CONTROL": "調達管理ダッシュボードプレビュー",
+        "MATERIAL_READINESS": "資材準備状況ダッシュボードプレビュー",
+        "ORDER_PIPELINE": "注文パイプラインダッシュボードプレビュー",
+        "FINANCIAL_VISIBILITY": "財務状況ダッシュボードプレビュー"
+      }
+    },
+    "VISIBILITY_SECTIONS": {
+      "COMMON": {
+        "DECISION_LABEL": "意思決定のために：",
+        "DASHBOARD": "ダッシュボード",
+        "ADMIN": "管理者",
+        "SIDEBAR": {
+          "PROCUREMENT": "調達",
+          "SALES": "営業",
+          "MRP": "MRP",
+          "FINANCE": "財務",
+          "ORDER_PIPELINE": "受注パイプライン"
+        }
+      },
+      "SALES_PERFORMANCE": {
+        "TITLE": "初期段階から\n販売傾向を把握",
+        "DESCRIPTION": "未処理受注額は現在進行中の注文状況を可視化します。アクティブ顧客数は販売基盤の背景を提示し、月次グラフは当年の推移と前年実績との比較をサポートします。",
+        "DECISION_TEXT": "パイプラインの変動を監視し、パフォーマンスが低下し始める月を詳細に調査",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Sales (PT INFORSYS INDONESIA )",
+          "OPEN_SO_VALUE_TITLE": "OPEN SO VALUE (IDR)",
+          "ACTIVE_CUSTOMERS_TITLE": "NUMBER OF ACTIVE CUSTOMER (IDR)",
+          "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
+          "SELECT_VIEW_CHART": "SELECT VIEW CHART",
+          "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "滞留している\n購買取引を迅速に特定",
+        "DESCRIPTION": "このサマリーは、PO、GRN、サプライヤー請求書といった次工程に進んでいないMPRおよびPO伝票を表示します。\nMPRおよびPO件数のグラフにより、月ごとの購買動向を俯瞰できます。",
+        "DECISION_TEXT": "未完了のPOおよび物品受領を優先して処理",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
+        }
+      },
+      "MATERIAL_READINESS": {
+        "TITLE": "生産前に\n原材料の充足状況を確認",
+        "DESCRIPTION": "MRP画面では実在庫、引当済在庫、利用可能在庫、発注残、部品ごとの予想在庫を詳細に表示します。部品とBOMの絞り込みにより、PPICは製造予定製品の所要量を的確に把握できます。",
+        "DECISION_TEXT": "資材不足を特定し、発注申請または生産計画のリスケジュールを実施",
+        "MOCKUP": {
+          "WINDOW_TITLE": "MRP (PT INFORSYS INDONESIA )",
+          "CARD_TITLE": "Material Requirement Planning (MRP)",
+          "AS_OF": "As of Jul 28, 2026",
+          "FILTERS": {
+            "PART": "Part",
+            "PART_CATEGORY_1": "Part Category 1",
+            "PART_CATEGORY_2": "Part Category 2",
+            "PROJECT_BUDGETED": "Project Budgeted",
+            "SUPPLIER": "Supplier",
+            "PART_CATEGORY_3": "Part Category 3",
+            "FINISHED_GOODS_BOM": "Finished Goods & BoM",
+            "PART_GROUP": "Part Group",
+            "PART_TYPE": "Part Type",
+            "CLASSIFICATION": "Classification",
+            "SELECT_ALL": "Select All",
+            "TRADING_PART": "Trading Part",
+            "SAMPLE_BOM": "Classic jati-craft Table - FG-c001",
+            "PRIORITY": "Priority",
+            "SHOW_STOCK": "Show stock"
+          },
+          "SEARCH_PLACEHOLDER": "Search Part Detail",
+          "ACTIONS": {
+            "CREATE_MPR": "Create MPR",
+            "CREATE_STOCK_ISSUE": "Create Stock Issue",
+            "CREATE_PACKING_LIST": "Create Packing List",
+            "CREATE_TRANSFER": "Create Transfer"
+          },
+          "TABLE": {
+            "PART_CODE": "Part Code",
+            "PART_NAME": "Part Name",
+            "GROUP": "Group",
+            "UNIT": "Unit",
+            "STOCK_ON_HAND": "Stock On Hand",
+            "BOOKING_STOCK": "Booking Stock",
+            "AVAILABILITY_STOCK": "Availability stock",
+            "ORDER_STOCK": "Order Stock",
+            "EXPECTED_STOCK": "Expected Stock"
+          }
+        }
+      },
+      "ORDER_PIPELINE": {
+        "TITLE": "受注から検収まで\n1つの注文を追跡",
+        "DESCRIPTION": "Order Pipelineは顧客注文、製品、原材料の在庫状況、購買と受入、製造、納品、請求書および入金までのつながりを可視化します。チームは進行した工程と注意が必要な箇所を一目で把握できます。",
+        "DECISION_TEXT": "最終的な注文ステータスだけでなく、工程の位置からボトルネックを特定",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Order Pipeline ( Demo Manufacture )",
+          "BACK_TO_LIST": "一覧に戻る",
+          "STAGES": {
+            "CUSTOMER_ORDER": "CUSTOMER ORDER",
+            "PRODUCT": "PRODUCT",
+            "RAW_MATERIAL_AVAILABLE": "RAW MATERIAL AVAILABLE",
+            "PL_INCOMING_STOCK_RECEIPT": "PL Incoming & Stock Receipt",
+            "PO_GRN_AVAILABLE_ORDER": "PO & GRN AVAILABLE ORDER",
+            "MANUFACTURING": "MANUFACTURING",
+            "DELIVERY": "DELIVERY",
+            "INVOICE_RECEIPT": "INVOICE & RECEIPT"
+          },
+          "FIELDS": {
+            "NO_DATA": "データなし",
+            "SO_NO": "SO No:",
+            "PO_NO": "Po No:",
+            "ORDER": "Order:",
+            "REQ_DATE": "Req. Date:",
+            "STOCK_ON_HAND": "Stock On Hand:",
+            "BOOKING_STOCK": "Booking Stock:",
+            "AVAILABILITY_STOCK": "Availability Stock:",
+            "MANUFACTURING_ORDER_QTY": "Manufacturing Order Qty:",
+            "ASSEMBLY_QTY_RESULT": "Assembly Qty Result:",
+            "DELIVERY_LABEL": "Delivery:",
+            "OUTSTANDING_QTY": "Outstanding Qty:",
+            "INVOICE_AMOUNT": "Invoice Amount",
+            "RECEIPT_AMOUNT": "Receipt Amount"
+          }
+        }
+      },
+      "FINANCIAL_VISIBILITY": {
+        "TITLE": "財務ポジションと\nその推移を同時に把握",
+        "DESCRIPTION": "財務ダッシュボードは2つの視点を提供します：特定期間の貸借対照表の構成と、時系列での収支比較です。",
+        "DECISION_TEXT": "財務状況と収支トレンドを評価し、予算の優先順位を決定して財務の安定性を維持",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Finance ( PT INFORSYS INDONESIA )",
+          "ASSETS": {
+            "TITLE": "ASSETS",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 2,162,866,910.38",
+            "ITEMS": {
+              "CASH": "CASH",
+              "BANK": "BANK",
+              "ACCOUNT_RECEIVABLE": "ACCOUNT RECEIVABLE",
+              "OTHERS_RECEIVABLE": "OTHERS RECEIVABLE",
+              "PREPAID": "PREPAID",
+              "INVENTORY": "INVENTORY",
+              "FIXED_ASSET": "FIXED ASSET",
+              "INTANGIBLE_ASSETS": "INTANGIBLE ASSETS"
+            }
+          },
+          "LIABILITIES": {
+            "TITLE": "LIABILITIES",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 796,274,157.84",
+            "ITEMS": {
+              "ACCOUNT_PAYABLE": "ACCOUNT PAYABLE",
+              "EMPLOYEE_PAYABLE": "EMPLOYEE PAYABLE",
+              "EXPENSES_PAYABLE": "EXPENSES PAYABLE",
+              "TAX_PAYABLE": "TAX PAYABLE",
+              "LONG_TERM_PAYABLE": "LONG TERM PAYABLE"
+            }
+          },
+          "EQUITY": {
+            "TITLE": "EQUITY",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 1,427,742,140.54",
+            "ITEMS": {
+              "CAPITAL": "CAPITAL",
+              "RETAINED_EARNING": "RETAINED EARNING",
+              "CURRENT_EARNING": "CURRENT EARNING"
+            }
+          },
+          "TABLE": {
+            "NAME": "NAME",
+            "PERIOD": "August 2026"
+          },
+          "CHARTS": {
+            "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+            "INCOME_EXPENSE_TITLE": "INCOME & EXPENSE ( IDR )",
+            "EXPENSE": "Expense",
+            "INCOME": "Income"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "明確な情報\n的確な行動",
+      "DESCRIPTION": "貴社の業務フローに合わせて必要な指標とダッシュボードをご相談ください"
+    }
   }
 }

@@ -55,7 +55,7 @@
         layers: [
           {
             name: 'Group 10284.svg',
-            src: '/images/features/1/Group 10284.svg',
+            src: '/images/landing/features/1/Group 10284.svg',
             w: 383,
             h: 521,
             z: 10,
@@ -68,7 +68,7 @@
           },
           {
             name: 'Group 9410.svg',
-            src: '/images/features/1/Group 9410.svg',
+            src: '/images/landing/features/1/Group 9410.svg',
             w: 312,
             h: 332,
             z: 20,
@@ -81,7 +81,7 @@
           },
           {
             name: 'Group 9409.svg',
-            src: '/images/features/1/Group 9409.svg',
+            src: '/images/landing/features/1/Group 9409.svg',
             w: 174,
             h: 191,
             z: 25,
@@ -103,7 +103,7 @@
         layers: [
           {
             name: 'Group 10279.svg',
-            src: '/images/features/2/Group 10279.svg',
+            src: '/images/landing/features/2/Group 10279.svg',
             w: 352,
             h: 527,
             z: 10,
@@ -116,7 +116,7 @@
           },
           {
             name: 'Group 10277.svg',
-            src: '/images/features/2/Group 10277.svg',
+            src: '/images/landing/features/2/Group 10277.svg',
             w: 157,
             h: 158,
             z: 20,
@@ -129,7 +129,7 @@
           },
           {
             name: 'Group 10276.svg',
-            src: '/images/features/2/Group 10276.svg',
+            src: '/images/landing/features/2/Group 10276.svg',
             w: 102,
             h: 102,
             z: 25,
@@ -142,7 +142,7 @@
           },
           {
             name: 'Group 10275.svg',
-            src: '/images/features/2/Group 10275.svg',
+            src: '/images/landing/features/2/Group 10275.svg',
             w: 308,
             h: 173,
             z: 20,
@@ -164,7 +164,7 @@
         layers: [
           {
             name: 'Group 10263.svg',
-            src: '/images/features/3/Group 10263.svg',
+            src: '/images/landing/features/3/Group 10263.svg',
             w: 640,
             h: 455,
             z: 10,
@@ -177,7 +177,7 @@
           },
           {
             name: 'Group 9639.svg',
-            src: '/images/features/3/Group 9639.svg',
+            src: '/images/landing/features/3/Group 9639.svg',
             w: 284,
             h: 190,
             z: 20,
@@ -190,7 +190,7 @@
           },
           {
             name: 'Group 9641.svg',
-            src: '/images/features/3/Group 9641.svg',
+            src: '/images/landing/features/3/Group 9641.svg',
             w: 183,
             h: 123,
             z: 20,
@@ -212,7 +212,7 @@
         layers: [
           {
             name: 'Group 10269.svg',
-            src: '/images/features/4/Group 10269.svg',
+            src: '/images/landing/features/4/Group 10269.svg',
             w: 220,
             h: 355,
             z: 10,
@@ -225,7 +225,7 @@
           },
           {
             name: 'Group 9416.svg',
-            src: '/images/features/4/Group 9416.svg',
+            src: '/images/landing/features/4/Group 9416.svg',
             w: 461,
             h: 630,
             z: 15,
@@ -238,7 +238,7 @@
           },
           {
             name: 'Group 9417.svg',
-            src: '/images/features/4/Group 9417.svg',
+            src: '/images/landing/features/4/Group 9417.svg',
             w: 260,
             h: 209,
             z: 25,
@@ -260,7 +260,7 @@
         layers: [
           {
             name: 'Group 9643.svg',
-            src: '/images/features/5/Group 9643.svg',
+            src: '/images/landing/features/5/Group 9643.svg',
             w: 581,
             h: 461,
             z: 10,
@@ -273,7 +273,7 @@
           },
           {
             name: 'Group 9644.svg',
-            src: '/images/features/5/Group 9644.svg',
+            src: '/images/landing/features/5/Group 9644.svg',
             w: 311,
             h: 134,
             z: 20,
@@ -286,7 +286,7 @@
           },
           {
             name: 'Group 9645.svg',
-            src: '/images/features/5/Group 9645.svg',
+            src: '/images/landing/features/5/Group 9645.svg',
             w: 209,
             h: 209,
             z: 25,
@@ -299,7 +299,7 @@
           },
           {
             name: 'Group 9646.svg',
-            src: '/images/features/5/Group 9646.svg',
+            src: '/images/landing/features/5/Group 9646.svg',
             w: 116,
             h: 116,
             z: 20,
@@ -321,7 +321,7 @@
         layers: [
           {
             name: 'Group 9649.svg',
-            src: '/images/features/6/Group 9649.svg',
+            src: '/images/landing/features/6/Group 9649.svg',
             w: 347,
             h: 471,
             z: 10,
@@ -334,7 +334,7 @@
           },
           {
             name: 'Group 10248.svg',
-            src: '/images/features/6/Group 10248.svg',
+            src: '/images/landing/features/6/Group 10248.svg',
             w: 537,
             h: 504,
             z: 15,
@@ -347,7 +347,7 @@
           },
           {
             name: 'Group 9430.svg',
-            src: '/images/features/6/Group 9430.svg',
+            src: '/images/landing/features/6/Group 9430.svg',
             w: 228,
             h: 228,
             z: 20,
@@ -369,7 +369,7 @@
         layers: [
           {
             name: 'Group 10258.svg',
-            src: '/images/features/7/Group 10258.svg',
+            src: '/images/landing/features/7/Group 10258.svg',
             w: 608,
             h: 464,
             z: 10,
@@ -382,7 +382,7 @@
           },
           {
             name: 'Group 9419.svg',
-            src: '/images/features/7/Group 9419.svg',
+            src: '/images/landing/features/7/Group 9419.svg',
             w: 320,
             h: 270,
             z: 25,
@@ -395,7 +395,7 @@
           },
           {
             name: 'Group 9458.svg',
-            src: '/images/features/7/Group 9458.svg',
+            src: '/images/landing/features/7/Group 9458.svg',
             w: 152,
             h: 152,
             z: 20,
@@ -408,7 +408,7 @@
           },
           {
             name: 'Group 9420.svg',
-            src: '/images/features/7/Group 9420.svg',
+            src: '/images/landing/features/7/Group 9420.svg',
             w: 165,
             h: 153,
             z: 20,
@@ -430,7 +430,7 @@
         layers: [
           {
             name: 'Group 10254.svg',
-            src: '/images/features/8/Group 10254.svg',
+            src: '/images/landing/features/8/Group 10254.svg',
             w: 631,
             h: 466,
             z: 10,
@@ -443,7 +443,7 @@
           },
           {
             name: 'Group 10253.svg',
-            src: '/images/features/8/Group 10253.svg',
+            src: '/images/landing/features/8/Group 10253.svg',
             w: 118,
             h: 118,
             z: 25,
@@ -456,7 +456,7 @@
           },
           {
             name: 'Group 9434.svg',
-            src: '/images/features/8/Group 9434.svg',
+            src: '/images/landing/features/8/Group 9434.svg',
             w: 366,
             h: 384,
             z: 20,
@@ -469,7 +469,7 @@
           },
           {
             name: 'Group 9651.svg',
-            src: '/images/features/8/Group 9651.svg',
+            src: '/images/landing/features/8/Group 9651.svg',
             w: 248,
             h: 166,
             z: 20,
@@ -491,7 +491,7 @@
         layers: [
           {
             name: 'Group 10247.svg',
-            src: '/images/features/9/Group 10247.svg',
+            src: '/images/landing/features/9/Group 10247.svg',
             w: 587,
             h: 453,
             z: 10,
@@ -504,7 +504,7 @@
           },
           {
             name: 'Group 10244.svg',
-            src: '/images/features/9/Group 10244.svg',
+            src: '/images/landing/features/9/Group 10244.svg',
             w: 249,
             h: 270,
             z: 25,
@@ -517,7 +517,7 @@
           },
           {
             name: 'Group 10246.svg',
-            src: '/images/features/9/Group 10246.svg',
+            src: '/images/landing/features/9/Group 10246.svg',
             w: 250,
             h: 77,
             z: 20,

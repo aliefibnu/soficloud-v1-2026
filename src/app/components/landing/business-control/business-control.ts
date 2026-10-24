@@ -10,7 +10,7 @@
     AfterViewInit,
   } from '@angular/core';
   import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
-  import { Router, NavigationStart } from '@angular/router';
+  import { Router, NavigationStart, RouterLink } from '@angular/router';
   import { Subscription } from 'rxjs';
   import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   import { LanguageService } from '../../../systems/lib/language.service';
@@ -65,7 +65,7 @@ export interface ProcessCard {
 
   @Component({
     selector: 'app-business-control',
-    imports: [TranslatePipe, NgOptimizedImage],
+    imports: [TranslatePipe, NgOptimizedImage, RouterLink],
     templateUrl: './business-control.html',
     host: {
       class: 'block w-full',
@@ -189,7 +189,7 @@ export interface ProcessCard {
         step: '01',
         title: 'Sales',
         subtitle: 'SO Confirmed',
-        icon: '/images/business-control/1sales.svg',
+        icon: '/images/landing/business-control/1sales.svg',
         iconWidth: 47,
         iconHeight: 46,
       },
@@ -198,7 +198,7 @@ export interface ProcessCard {
         step: '02',
         title: 'Procurement',
         subtitle: 'MRP Demand',
-        icon: '/images/business-control/2procurement.svg',
+        icon: '/images/landing/business-control/2procurement.svg',
         iconWidth: 58,
         iconHeight: 36,
       },
@@ -207,7 +207,7 @@ export interface ProcessCard {
         step: '03',
         title: 'Inventory',
         subtitle: 'Stock Allocated',
-        icon: '/images/business-control/3inventory.svg',
+        icon: '/images/landing/business-control/3inventory.svg',
         iconWidth: 42,
         iconHeight: 40,
       },
@@ -216,7 +216,7 @@ export interface ProcessCard {
         step: '04',
         title: 'Production',
         subtitle: 'MO Released',
-        icon: '/images/business-control/4production.svg',
+        icon: '/images/landing/business-control/4production.svg',
         iconWidth: 47,
         iconHeight: 36,
       },
@@ -225,7 +225,7 @@ export interface ProcessCard {
         step: '05',
         title: 'General Ledger',
         subtitle: 'Posted to GL',
-        icon: '/images/business-control/5general ledger.svg',
+        icon: '/images/landing/business-control/5general ledger.svg',
         iconWidth: 47,
         iconHeight: 35,
       },
@@ -234,7 +234,7 @@ export interface ProcessCard {
         step: '06',
         title: 'Project',
         subtitle: 'Project Initiated',
-        icon: '/images/business-control/6project.svg',
+        icon: '/images/landing/business-control/6project.svg',
         iconWidth: 45,
         iconHeight: 35,
       },
@@ -243,7 +243,7 @@ export interface ProcessCard {
         step: '07',
         title: 'Dashboard',
         subtitle: 'Data Refreshed',
-        icon: '/images/business-control/7dashboard.svg',
+        icon: '/images/landing/business-control/7dashboard.svg',
         iconWidth: 46,
         iconHeight: 35,
       },

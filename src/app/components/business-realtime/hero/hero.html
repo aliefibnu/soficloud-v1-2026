@@ -1,0 +1,71 @@
+<section id="hero" class="relative w-full py-3 sm:py-4 lg:py-5 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div
+      class="relative w-full rounded-3xl sm:rounded-4xl lg:rounded-[36px] overflow-hidden shadow-[0_16px_48px_-12px_rgba(24,40,73,0.06),0_2px_12px_-2px_rgba(24,40,73,0.04)] border border-white/80"
+      style="
+        background: #fdfdfd;
+        background: conic-gradient(
+          from 180deg at 50% 50%,
+          #fdfdfd 0%,
+          rgba(235, 242, 253, 0.9) 90%,
+          #fdfdfd 100%
+        );
+      "
+    >
+      <div
+        class="grid grid-cols-1 lg:grid-cols-12 min-h-115 sm:min-h-122.5 lg:min-h-125 xl:min-h-130 lg:max-h-[min(540px,calc(100dvh-7.5rem))] items-center relative"
+      >
+        <div
+          class="lg:col-span-6 xl:col-span-6 flex flex-col justify-center px-6 py-6 sm:px-10 sm:py-8 lg:py-10 lg:pl-10 xl:pl-14 lg:pr-2 z-10"
+        >
+          <h1
+            class="font-inter font-extrabold text-[#23244E] text-2xl sm:text-3xl md:text-4xl lg:text-[44px] xl:text-[48px] leading-[1.16] tracking-normal max-w-xl"
+            style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 800"
+          >
+            <span class="block">{{ 'BUSINESS_REALTIME.HERO.TITLE_LINE_1' | translate }}</span>
+            <span class="block">{{ 'BUSINESS_REALTIME.HERO.TITLE_LINE_2' | translate }}</span>
+            <span class="block">{{ 'BUSINESS_REALTIME.HERO.TITLE_LINE_3' | translate }}</span>
+            <span class="block">{{ 'BUSINESS_REALTIME.HERO.TITLE_LINE_4' | translate }}</span>
+            <span class="block">{{ 'BUSINESS_REALTIME.HERO.TITLE_LINE_5' | translate }}</span>
+          </h1>
+
+          <p
+            class="font-dm-sans font-normal text-[#23244E] text-[15px] leading-[1.6] text-left tracking-normal max-w-137.5 mt-2 sm:mt-2.5"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ 'BUSINESS_REALTIME.HERO.DESCRIPTION' | translate }}
+          </p>
+        </div>
+
+        <div
+          class="lg:col-span-6 xl:col-span-6 relative w-full h-full min-h-85 sm:min-h-100 lg:min-h-125 xl:min-h-130 flex items-end justify-end pt-4 lg:pt-0"
+        >
+          <div
+            class="relative aspect-753/657 w-[92%] sm:w-120 md:w-130 lg:w-142.5 xl:w-155 max-w-none shrink-0 -right-2 sm:-right-2.5 xl:-right-3 -bottom-2 sm:-bottom-2.5 xl:-bottom-3"
+          >
+            <img
+              ngSrc="/images/business-realtime/tablet-pillar.svg"
+              width="753"
+              height="305"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute bottom-0 right-0 w-full h-auto max-w-none select-none z-0"
+            />
+
+            <img
+              ngSrc="/images/business-realtime/tablet.webp"
+              width="686"
+              height="487"
+              priority
+              [alt]="'BUSINESS_REALTIME.HERO.TABLET_ALT' | translate"
+              class="absolute top-0 right-0 z-10 w-[91.1%] h-auto max-w-none object-contain select-none"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

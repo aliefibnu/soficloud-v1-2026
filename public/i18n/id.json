@@ -39,7 +39,6 @@
   },
   "BUSINESS_CONTROL": {
     "HEADER_TITLE": "Kendalikan Bisnis Dari Satu Tempat",
-    "HEADER_SUBTITLE": "Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan dapat ditelusuri kapan saja",
     "CHART_TITLE": "INCOME AND EXPENSIVE (IDR)",
     "EXPENSE": "Expense",
     "INCOME": "Income",
@@ -456,5 +455,222 @@
     "STARTING_FROM": "Harga Mulai Dari",
     "AMOUNT": "Rp2.500.000",
     "BUTTON": "Lihat Detail Harga"
+  },
+  "BUSINESS_REALTIME": {
+    "HERO": {
+      "TITLE_LINE_1": "Pantau Bisnis",
+      "TITLE_LINE_2": "Secara Real-time",
+      "TITLE_LINE_3": "Putuskan",
+      "TITLE_LINE_4": "Langkah",
+      "TITLE_LINE_5": "Lebih Cepat",
+      "DESCRIPTION": "Penjualan, pengadaan, kebutuhan material, progres pesanan, dan keuangan dapat dilihat dari dashboard SOFICloud. Setiap tampilan membantu tim melihat kondisi terkini dan menentukan hal yang perlu ditindaklanjuti.",
+      "TABLET_ALT": "Dashboard SOFICloud pada tablet"
+    },
+    "VISIBILITY_FUNCTION": {
+      "TITLE": "VISIBILITAS LINTAS FUNGSI",
+      "SUBTITLE": "Mulai dari pesanan pelanggan sampai posisi keuangan, manajemen melihat indikator yang relevan pada tiap proses. Enam tampilan berikut menunjukkan bagaimana tim membaca peluang, hambatan, dan pekerjaan yang masih terbuka.",
+      "TABS": {
+        "SALES_PERFORMANCE": "SALES PERFORMANCE",
+        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
+        "MATERIAL_READINESS": "MATERIAL READINESS",
+        "ORDER_PIPELINE": "ORDER PIPELINE",
+        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+      },
+      "ALTS": {
+        "SALES_PERFORMANCE": "Pratinjau Dashboard Sales Performance",
+        "PROCUREMENT_CONTROL": "Pratinjau Dashboard Procurement Control",
+        "MATERIAL_READINESS": "Pratinjau Dashboard Material Readiness",
+        "ORDER_PIPELINE": "Pratinjau Dashboard Order Pipeline",
+        "FINANCIAL_VISIBILITY": "Pratinjau Dashboard Financial Visibility"
+      }
+    },
+    "VISIBILITY_SECTIONS": {
+      "COMMON": {
+        "DECISION_LABEL": "Untuk keputusan:",
+        "DASHBOARD": "Dashboard",
+        "ADMIN": "Admin",
+        "SIDEBAR": {
+          "PROCUREMENT": "Procurement",
+          "SALES": "Sales",
+          "MRP": "MRP",
+          "FINANCE": "Finance",
+          "ORDER_PIPELINE": "Order Pipeline"
+        }
+      },
+      "SALES_PERFORMANCE": {
+        "TITLE": "Lihat Arah Penjualan\nSejak Awal",
+        "DESCRIPTION": "Nilai open sales order memperlihatkan pesanan yang masih berjalan. Jumlah pelanggan aktif memberi konteks terhadap basis penjualan, sementara grafik bulanan membantu membandingkan tren tahun berjalan dengan periode sebelumnya.",
+        "DECISION_TEXT": "Pantau perubahan pipeline dan selidiki bulan ketika kinerja mulai melemah",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Sales (PT INFORSYS INDONESIA )",
+          "OPEN_SO_VALUE_TITLE": "OPEN SO VALUE (IDR)",
+          "ACTIVE_CUSTOMERS_TITLE": "NUMBER OF ACTIVE CUSTOMER (IDR)",
+          "SALES_ANALYSIS_TITLE": "SALES ANALYSIS (IDR)",
+          "SELECT_VIEW_CHART": "SELECT VIEW CHART",
+          "LINE_CHART": "LINE CHART"
+        }
+      },
+      "PROCUREMENT_CONTROL": {
+        "TITLE": "Temukan Transaksi Pembelian\nYang Tertahan",
+        "DESCRIPTION": "Ringkasan ini menunjukkan dokumen MPR dan PO yang belum melangkah ke tahap berikutnya: PO, GRN, hingga\nsupplier invoice. Grafik jumlah MPR dan PO memberi gambaran aktivitas pembelian dari bulan ke bulan.",
+        "DECISION_TEXT": "Prioritaskan PO dan penerimaan barang yang belum selesai",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Procurement ( Demo Construction )",
+          "CARDS": {
+            "MPR_NEED_RUNNING": "MPR NEED TO RUNNING (GM)",
+            "OUTSTANDING_MPR_PO": "OUTSTANDING MPR AGAINST PO",
+            "OUTSTANDING_MPR_GRN": "OUTSTANDING MPR AGAINST GRN",
+            "PO_NEED_RUNNING": "PO NEED RUNNING",
+            "OUTSTANDING_PO_GRN": "OUTSTANDING PO AGAINST GRN",
+            "OUTSTANDING_PO_SI": "OUTSTANDING PO AGAINST SI",
+            "SI_NEED_CONFIRM": "SI NEED TO CONFIRM",
+            "SI_NEED_RUNNING": "SI NEED TO RUNNING"
+          },
+          "CHARTS": {
+            "NUMBER_OF_MPR": "NUMBER OF MPR (-)",
+            "NUMBER_OF_PO": "NUMBER OF PO (-)"
+          }
+        }
+      },
+      "MATERIAL_READINESS": {
+        "TITLE": "Cek Ketersediaan Bahan\nSebelum Produksi",
+        "DESCRIPTION": "Tampilan MRP merinci stok fisik, stok yang sudah dipesan, stok tersedia, pesanan pemasok, dan perkiraan stok per part. Filter part dan BOM membantu PPIC meninjau kebutuhan produk yang akan dibuat.",
+        "DECISION_TEXT": "Identifikasi kekurangan material, lalu ajukan pembelian atau jadwal ulang",
+        "MOCKUP": {
+          "WINDOW_TITLE": "MRP (PT INFORSYS INDONESIA )",
+          "CARD_TITLE": "Material Requirement Planning (MRP)",
+          "AS_OF": "As of Jul 28, 2026",
+          "FILTERS": {
+            "PART": "Part",
+            "PART_CATEGORY_1": "Part Category 1",
+            "PART_CATEGORY_2": "Part Category 2",
+            "PROJECT_BUDGETED": "Project Budgeted",
+            "SUPPLIER": "Supplier",
+            "PART_CATEGORY_3": "Part Category 3",
+            "FINISHED_GOODS_BOM": "Finished Goods & BoM",
+            "PART_GROUP": "Part Group",
+            "PART_TYPE": "Part Type",
+            "CLASSIFICATION": "Classification",
+            "SELECT_ALL": "Select All",
+            "TRADING_PART": "Trading Part",
+            "SAMPLE_BOM": "Classic jati-craft Table - FG-c001",
+            "PRIORITY": "Priority",
+            "SHOW_STOCK": "Show stock"
+          },
+          "SEARCH_PLACEHOLDER": "Search Part Detail",
+          "ACTIONS": {
+            "CREATE_MPR": "Create MPR",
+            "CREATE_STOCK_ISSUE": "Create Stock Issue",
+            "CREATE_PACKING_LIST": "Create Packing List",
+            "CREATE_TRANSFER": "Create Transfer"
+          },
+          "TABLE": {
+            "PART_CODE": "Part Code",
+            "PART_NAME": "Part Name",
+            "GROUP": "Group",
+            "UNIT": "Unit",
+            "STOCK_ON_HAND": "Stock On Hand",
+            "BOOKING_STOCK": "Booking Stock",
+            "AVAILABILITY_STOCK": "Availability stock",
+            "ORDER_STOCK": "Order Stock",
+            "EXPECTED_STOCK": "Expected Stock"
+          }
+        }
+      },
+      "ORDER_PIPELINE": {
+        "TITLE": "Telusuri Satu Pesanan Dari\nOrder Hingga Penerimaan",
+        "DESCRIPTION": "Order Pipeline memperlihatkan hubungan antara customer order, produk, ketersediaan raw material, pembelian dan penerimaan, manufacturing, delivery, sampai invoice dan receipt. Tim dapat melihat tahap yang sudah bergerak dan titik yang masih memerlukan perhatian.",
+        "DECISION_TEXT": "Cek hambatan order berdasarkan posisi proses, bukan sekadar status akhir pesanan",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Order Pipeline ( Demo Manufacture )",
+          "BACK_TO_LIST": "Back To List",
+          "STAGES": {
+            "CUSTOMER_ORDER": "CUSTOMER ORDER",
+            "PRODUCT": "PRODUCT",
+            "RAW_MATERIAL_AVAILABLE": "RAW MATERIAL AVAILABLE",
+            "PL_INCOMING_STOCK_RECEIPT": "PL Incoming & Stock Receipt",
+            "PO_GRN_AVAILABLE_ORDER": "PO & GRN AVAILABLE ORDER",
+            "MANUFACTURING": "MANUFACTURING",
+            "DELIVERY": "DELIVERY",
+            "INVOICE_RECEIPT": "INVOICE & RECEIPT"
+          },
+          "FIELDS": {
+            "NO_DATA": "No Data",
+            "SO_NO": "SO No:",
+            "PO_NO": "Po No:",
+            "ORDER": "Order:",
+            "REQ_DATE": "Req. Date:",
+            "STOCK_ON_HAND": "Stock On Hand:",
+            "BOOKING_STOCK": "Booking Stock:",
+            "AVAILABILITY_STOCK": "Availability Stock:",
+            "MANUFACTURING_ORDER_QTY": "Manufacturing Order Qty:",
+            "ASSEMBLY_QTY_RESULT": "Assembly Qty Result:",
+            "DELIVERY_LABEL": "Delivery:",
+            "OUTSTANDING_QTY": "Outstanding Qty:",
+            "INVOICE_AMOUNT": "Invoice Amount",
+            "RECEIPT_AMOUNT": "Receipt Amount"
+          }
+        }
+      },
+      "FINANCIAL_VISIBILITY": {
+        "TITLE": "Baca Posisi Keuangan Dan\nPergerakannya Bersama.",
+        "DESCRIPTION": "Dashboard Finance menyajikan dua sudut pandang: komposisi neraca pada satu periode, serta perbandingan income dan expense dari waktu ke waktu.",
+        "DECISION_TEXT": "Evaluasi kondisi keuangan dan tren pemasukan serta pengeluaran untuk menentukan prioritas anggaran dan menjaga kestabilan keuangan",
+        "MOCKUP": {
+          "WINDOW_TITLE": "Finance ( PT INFORSYS INDONESIA )",
+          "ASSETS": {
+            "TITLE": "ASSETS",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 2,162,866,910.38",
+            "ITEMS": {
+              "CASH": "CASH",
+              "BANK": "BANK",
+              "ACCOUNT_RECEIVABLE": "ACCOUNT RECEIVABLE",
+              "OTHERS_RECEIVABLE": "OTHERS RECEIVABLE",
+              "PREPAID": "PREPAID",
+              "INVENTORY": "INVENTORY",
+              "FIXED_ASSET": "FIXED ASSET",
+              "INTANGIBLE_ASSETS": "INTANGIBLE ASSETS"
+            }
+          },
+          "LIABILITIES": {
+            "TITLE": "LIABILITIES",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 796,274,157.84",
+            "ITEMS": {
+              "ACCOUNT_PAYABLE": "ACCOUNT PAYABLE",
+              "EMPLOYEE_PAYABLE": "EMPLOYEE PAYABLE",
+              "EXPENSES_PAYABLE": "EXPENSES PAYABLE",
+              "TAX_PAYABLE": "TAX PAYABLE",
+              "LONG_TERM_PAYABLE": "LONG TERM PAYABLE"
+            }
+          },
+          "EQUITY": {
+            "TITLE": "EQUITY",
+            "PERIOD": "August 2026",
+            "TOTAL": "Rp 1,427,742,140.54",
+            "ITEMS": {
+              "CAPITAL": "CAPITAL",
+              "RETAINED_EARNING": "RETAINED EARNING",
+              "CURRENT_EARNING": "CURRENT EARNING"
+            }
+          },
+          "TABLE": {
+            "NAME": "NAME",
+            "PERIOD": "August 2026"
+          },
+          "CHARTS": {
+            "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+            "INCOME_EXPENSE_TITLE": "INCOME & EXPENSE ( IDR )",
+            "EXPENSE": "Expense",
+            "INCOME": "Income"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "Informasi Yang Jelas\nTindakan Yang Tepat",
+      "DESCRIPTION": "Diskusikan indikator dan dashboard yang dibutuhkan sesuai alur kerja perusahaan Anda"
+    }
   }
 }

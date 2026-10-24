@@ -1,0 +1,75 @@
+<section
+  [id]="sectionId()"
+  [attr.aria-labelledby]="sectionId() + '-heading'"
+  class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 lg:py-8"
+>
+  <div
+    class="w-full rounded-3xl bg-white shadow-[0_8px_30px_rgba(35,36,78,0.08)] overflow-hidden border border-gray-100/70"
+  >
+    <div class="px-6 py-7 sm:px-10 sm:py-8 lg:px-10 lg:py-9 text-center max-w-5xl mx-auto">
+      <h3
+        [id]="sectionId() + '-heading'"
+        class="font-inter font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[46px] text-[#23244E] leading-tight lg:leading-[1.18] tracking-normal text-center max-w-3xl lg:max-w-214 mx-auto whitespace-pre-line"
+        style="
+          font-family: var(--font-inter, 'Inter Variable', sans-serif);
+          font-weight: 600;
+        "
+      >
+        {{ title() }}
+      </h3>
+
+      <div
+        class="w-full max-w-214 h-0.5 bg-[#365AD2] mx-auto my-4 sm:my-5"
+        aria-hidden="true"
+      ></div>
+
+      <p
+        class="font-dm-sans font-normal text-[#23244E] text-[14px] leading-relaxed sm:leading-[1.65] text-center max-w-214 mx-auto mt-4 sm:mt-5 tracking-normal whitespace-pre-line"
+        style="
+          font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+          font-weight: 400;
+        "
+      >
+        {{ description() }}
+      </p>
+    </div>
+
+    <div [class]="'w-full p-3.5 sm:p-5 lg:p-6 xl:p-7 ' + stageBgClass()">
+      <div class="flex flex-col lg:flex-row gap-4 lg:gap-5 xl:gap-6 items-center">
+        <div class="w-full flex-1 min-w-0">
+          <ng-content />
+        </div>
+
+        <div
+          class="w-full sm:w-44 lg:w-44 xl:w-46 shrink-0 bg-white rounded-2xl p-3.5 sm:p-4 shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/5 flex flex-col gap-3 self-center"
+        >
+          <div
+            class="w-full h-32 rounded-lg bg-[#D9D9D9] shrink-0"
+            aria-hidden="true"
+          ></div>
+
+          <div class="flex flex-col gap-1.5">
+            <span
+              class="font-dm-sans font-bold text-[16px] text-[#23244E] leading-snug tracking-tight max-w-38.75"
+              style="
+                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                font-weight: 700;
+              "
+            >
+              {{ decisionLabel() }}
+            </span>
+            <p
+              class="font-dm-sans font-regular text-[14px] text-[#23244E] leading-[1.6] max-w-38.75"
+              style="
+                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                font-weight: 400;
+              "
+            >
+              {{ decisionText() }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
