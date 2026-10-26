@@ -7,7 +7,7 @@ import { WhyChooseUs } from '../../components/landing/why-choose-us/why-choose-u
 import { Customers } from '../../components/landing/customers/customers';
 import { BusinessModel } from '../../components/landing/business-model/business-model';
 import { Price } from '../../components/landing/price/price';
-import { Cta } from '../../components/shared/cta/cta';
+import { Cta } from '../../components/landing/cta/cta';
 
 @Component({
   imports: [
