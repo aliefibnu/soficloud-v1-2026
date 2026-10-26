@@ -290,7 +290,13 @@ describe('TransactionFlow', () => {
     );
 
     const svgs = fixture.debugElement.queryAll(By.css('ol li svg'));
-    expect(svgs.length).toBe(5);
+    expect(svgs.length).toBe(0);
+
+    const images = fixture.debugElement.queryAll(By.css('ol li img'));
+    expect(images.length).toBe(5);
+    images.forEach((img) => {
+      expect(img.nativeElement.getAttribute('src')).toContain('calendar.svg');
+    });
   });
 
   it('should switch steps and callout dynamically when clicking Plan-to-Produce (P2PR)', () => {
@@ -318,9 +324,16 @@ describe('TransactionFlow', () => {
     const calloutTags = fixture.debugElement.query(
       By.css('span.font-dm-sans.font-medium.text-\\[\\#23244E\\]'),
     );
+    expect(calloutTags).toBeTruthy();
     expect(calloutTags.nativeElement.textContent.trim()).toBe(
       'Rencana produksi · Work in Process · Realisasi material · Harga pokok',
     );
+
+    const images = fixture.debugElement.queryAll(By.css('ol li img'));
+    expect(images.length).toBe(5);
+    images.forEach((img) => {
+      expect(img.nativeElement.getAttribute('src')).toContain('calendar.svg');
+    });
   });
 
   it('should support keyboard navigation across tabs (ArrowRight, ArrowLeft, Home, End)', () => {
