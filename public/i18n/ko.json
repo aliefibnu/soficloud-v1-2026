@@ -691,7 +691,10 @@
         "STATUS_AUDIT": "AUDIT & APPROVAL",
         "STATUS_TRAIL": "AUDIT TRAIL",
         "STATUS_ANALYTICS": "BUSINESS ANALYTICS"
-      }
+      },
+      "TITLE_LINE_3": "",
+      "TITLE_LINE_4": "",
+      "TABLET_ALT": "태블릿 화면의 SOFICloud 커넥티드 비즈니스 대시보드"
     },
     "PROCESS_TABS": {
       "SATU_DATA": "단일 데이터 소스",

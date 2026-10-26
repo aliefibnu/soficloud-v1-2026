@@ -675,8 +675,8 @@
   },
   "CONNECTED_PROCESS": {
     "HERO": {
-      "TITLE_LINE_1": "From Business Activities",
-      "TITLE_LINE_2": "To Financial Statements",
+      "TITLE_LINE_1": "From Business",
+      "TITLE_LINE_2": "Activities To",
       "DESCRIPTION": "Sales, procurement, material requirements, order progress, and finance can all be viewed from the SOFICloud dashboard. Each view helps teams see current conditions and determine necessary follow-ups.",
       "TABLET": {
         "TITLE": "CONNECTED BUSINESS",
@@ -691,7 +691,10 @@
         "STATUS_AUDIT": "AUDIT & APPROVAL",
         "STATUS_TRAIL": "AUDIT TRAIL",
         "STATUS_ANALYTICS": "BUSINESS ANALYTICS"
-      }
+      },
+      "TITLE_LINE_3": "Financial",
+      "TITLE_LINE_4": "Statements",
+      "TABLET_ALT": "SOFICloud Connected Business dashboard on tablet"
     },
     "PROCESS_TABS": {
       "SATU_DATA": "SINGLE DATA SOURCE",

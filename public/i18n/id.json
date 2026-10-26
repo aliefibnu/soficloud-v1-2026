@@ -675,8 +675,8 @@
   },
   "CONNECTED_PROCESS": {
     "HERO": {
-      "TITLE_LINE_1": "Dari Aktivitas Bisnis",
-      "TITLE_LINE_2": "Hingga Laporan Keuangan",
+      "TITLE_LINE_1": "Dari Aktivitas",
+      "TITLE_LINE_2": "Bisnis Hingga",
       "DESCRIPTION": "Penjualan, pengadaan, kebutuhan material, progres pesanan, dan keuangan dapat dilihat dari dashboard SOFICloud. Setiap tampilan membantu tim melihat kondisi terkini dan menentukan hal yang perlu ditindaklanjuti.",
       "TABLET": {
         "TITLE": "CONNECTED BUSINESS",
@@ -691,7 +691,10 @@
         "STATUS_AUDIT": "AUDIT & APPROVAL",
         "STATUS_TRAIL": "AUDIT TRAIL",
         "STATUS_ANALYTICS": "BUSINESS ANALYTICS"
-      }
+      },
+      "TITLE_LINE_3": "Laporan",
+      "TITLE_LINE_4": "Keuangan",
+      "TABLET_ALT": "Dashboard Connected Business SOFICloud pada tablet"
     },
     "PROCESS_TABS": {
       "SATU_DATA": "SATU DATA",

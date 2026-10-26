@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService } from '@ngx-translate/core';
+import { By } from '@angular/platform-browser';
 import { ConnectedProcess } from './connected-process';
 
 describe('ConnectedProcess', () => {
@@ -37,5 +38,14 @@ describe('ConnectedProcess', () => {
     scrollToSpy.mockClear();
     component.ngOnInit();
     expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
+  });
+
+  it('should render hero and subfooter components', () => {
+    fixture.detectChanges();
+    const heroEl = fixture.debugElement.query(By.css('app-hero'));
+    expect(heroEl).toBeTruthy();
+
+    const subfooterEl = fixture.debugElement.query(By.css('app-subfooter'));
+    expect(subfooterEl).toBeTruthy();
   });
 });
