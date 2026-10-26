@@ -250,4 +250,26 @@ describe('BusinessRealtime VisibilityFunction', () => {
     component.ngOnDestroy();
     expect(disconnectSpy).toHaveBeenCalled();
   });
+
+  it('should attempt smooth scroll to section and update URL hash when tab is selected', () => {
+    const dummySection = document.createElement('div');
+    dummySection.id = 'procurement-control';
+    const scrollSpy = vi.fn();
+    dummySection.scrollIntoView = scrollSpy;
+    document.body.appendChild(dummySection);
+
+    const replaceStateSpy = vi.spyOn(history, 'replaceState');
+
+    try {
+      component.selectTab('procurement-control');
+      expect(scrollSpy).toHaveBeenCalledWith({
+        behavior: 'smooth',
+        block: 'start',
+      });
+      expect(replaceStateSpy).toHaveBeenCalledWith(null, '', '#procurement-control');
+    } finally {
+      document.body.removeChild(dummySection);
+      replaceStateSpy.mockRestore();
+    }
+  });
 });

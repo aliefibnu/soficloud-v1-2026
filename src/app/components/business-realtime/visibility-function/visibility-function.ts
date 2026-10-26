@@ -114,6 +114,13 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (this.isBrowser) {
+      if (typeof window !== 'undefined' && window.location.hash) {
+        const hashId = window.location.hash.slice(1);
+        if (this.tabs.some((t) => t.id === hashId)) {
+          this.activeTabId.set(hashId);
+        }
+      }
+
       this.updateIndicator();
       requestAnimationFrame(() => this.updateIndicator());
       setTimeout(() => this.updateIndicator(), 50);
@@ -153,6 +160,25 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.updateIndicator();
       }, 0);
+
+      const listEl = this.tabsListRef()?.nativeElement;
+      const activeBtn = listEl?.querySelector(
+        `[data-tab-id="${id}"]`,
+      ) as HTMLElement | null;
+      activeBtn?.scrollIntoView?.({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+
+      const targetEl = document.getElementById(id);
+      if (targetEl) {
+        targetEl.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+      }
+
+      if (typeof history !== 'undefined' && history.replaceState) {
+        history.replaceState(null, '', `#${id}`);
+      }
     }
   }
 
