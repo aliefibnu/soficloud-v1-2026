@@ -332,18 +332,18 @@ flowchart TD
 ### Phase 2: Navigation Slider Bar (`ProcessTabs`)
 *Objective: Build the 5-tab sticky/anchored navigation bar with the animated blue indicator slider.*
 
-- [ ] **Step 2.1 — Scaffold `ProcessTabs` Component (`src/app/components/connected-process/process-tabs/`):**
+- [x] **Step 2.1 — Scaffold `ProcessTabs` Component (`src/app/components/connected-process/process-tabs/`):**
   - Create `process-tabs.ts`, `process-tabs.html`, `process-tabs.spec.ts`.
   - Declare the 5 tabs: `satu-data`, `alur-transaksi`, `dampak-akuntansi`, `laporan`, `peta-lengkap`.
-- [ ] **Step 2.2 — Implement Dynamic Indicator Math:**
+- [x] **Step 2.2 — Implement Dynamic Indicator Math:**
   - Calculate `indicatorLeft` and `indicatorWidth` signals from `getBoundingClientRect()`.
   - Handle window resize and initial load timing (`AfterViewInit`).
-- [ ] **Step 2.3 — Implement WAI-ARIA & Keyboard Controls:**
+- [x] **Step 2.3 — Implement WAI-ARIA & Keyboard Controls:**
   - Roving tabindex, arrow key listeners (`ArrowLeft`/`ArrowRight`/`Home`/`End`).
   - Anchor click smooth-scrolling to section target IDs.
-- [ ] **Step 2.4 — Mount into Page:**
+- [x] **Step 2.4 — Mount into Page:**
   - Place `<app-process-tabs />` immediately below `<app-hero />`.
-- [ ] **Verification Gate 2:** Indicator slides smoothly to clicked tabs; arrow keys navigate tabs properly; no console errors or hydration mismatches.
+- [x] **Verification Gate 2:** Indicator slides smoothly to clicked tabs; arrow keys navigate tabs properly; no console errors or hydration mismatches.
 
 ---
 

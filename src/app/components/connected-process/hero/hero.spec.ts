@@ -121,11 +121,13 @@ describe('ConnectedProcess Hero', () => {
     const pillarImg = visualWrapper.query(By.css('img[src*="pillar.svg"]'));
     expect(pillarImg).toBeTruthy();
     expect(
-      pillarImg.nativeElement.classList.contains('-bottom-[4.45%]'),
+      pillarImg.nativeElement.classList.contains('-bottom-[4.45%]') ||
+        pillarImg.nativeElement.classList.contains('bottom-[-4.45%]'),
     ).toBe(true);
-    expect(pillarImg.nativeElement.classList.contains('-left-[5.67%]')).toBe(
-      true,
-    );
+    expect(
+      pillarImg.nativeElement.classList.contains('-left-[5.67%]') ||
+        pillarImg.nativeElement.classList.contains('left-[-5.67%]'),
+    ).toBe(true);
     expect(pillarImg.nativeElement.classList.contains('w-[105.64%]')).toBe(
       true,
     );
@@ -133,9 +135,10 @@ describe('ConnectedProcess Hero', () => {
     const tabletImg = visualWrapper.query(By.css('img[src*="tablet.webp"]'));
     expect(tabletImg).toBeTruthy();
     expect(tabletImg.nativeElement.classList.contains('top-0')).toBe(true);
-    expect(tabletImg.nativeElement.classList.contains('-left-[2.25%]')).toBe(
-      true,
-    );
+    expect(
+      tabletImg.nativeElement.classList.contains('-left-[2.25%]') ||
+        tabletImg.nativeElement.classList.contains('left-[-2.25%]'),
+    ).toBe(true);
     expect(tabletImg.nativeElement.classList.contains('w-[92.19%]')).toBe(
       true,
     );
