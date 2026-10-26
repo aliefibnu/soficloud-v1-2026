@@ -106,7 +106,8 @@ describe('ConnectedProcess Hero', () => {
     const textCol = columns[1];
     expect(textCol.nativeElement.classList.contains('lg:order-2')).toBe(true);
     expect(textCol.query(By.css('h1'))).toBeTruthy();
-    expect(textCol.nativeElement.classList.contains('text-center')).toBe(true);
+    expect(textCol.nativeElement.classList.contains('text-right')).toBe(true);
+    expect(textCol.nativeElement.classList.contains('items-end')).toBe(true);
   });
 
   it('should position the tablet flush to the left of the canvas and fit properly on the pillar', () => {
