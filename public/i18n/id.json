@@ -812,7 +812,21 @@
       "CALLOUT": {
         "TITLE": "TERLIHAT DI LAPORAN",
         "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
-        "DISCLAIMER": "Dampak jurnal mengikuti transaksi yang diposting dan pengaturan akun perusahaan; Sales Quotation dan Sales Order belum otomatis menjadi pendapatan."
+        "DISCLAIMER": "Dampak jurnal mengikuti transaksi yang diposting dan pengaturan akun perusahaan; Sales Quotation dan Sales Order belum otomatis menjadi pendapatan.",
+        "CYCLES": {
+          "O2C": {
+            "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+            "DISCLAIMER": "Dampak jurnal mengikuti transaksi yang diposting dan pengaturan akun perusahaan; Sales Quotation dan Sales Order belum otomatis menjadi pendapatan."
+          },
+          "P2P": {
+            "TAGS": "Procurement pipeline · Penerimaan barang · A/P aging · Kas keluar",
+            "DISCLAIMER": "Penerimaan barang mencatat mutasi persediaan/utang belum difaktur; pembebanan akun dan pengakuan biaya final diposting saat tagihan pemasok."
+          },
+          "P2PR": {
+            "TAGS": "Rencana produksi · Work in Process · Realisasi material · Harga pokok",
+            "DISCLAIMER": "Perhitungan biaya persediaan dan varians dicatat setelah pelaporan order manufaktur; BOM dan perencanaan belum menghasilkan jurnal mutasi."
+          }
+        }
       }
     },
     "ACCOUNTING_IMPACT": {

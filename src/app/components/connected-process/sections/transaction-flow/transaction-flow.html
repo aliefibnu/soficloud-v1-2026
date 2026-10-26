@@ -1,0 +1,234 @@
+<app-process-section-shell
+  sectionId="alur-transaksi"
+  [title]="'CONNECTED_PROCESS.TRANSACTION_FLOW.TITLE' | translate"
+  [description]="'CONNECTED_PROCESS.TRANSACTION_FLOW.DESCRIPTION' | translate"
+  stageBgClass="bg-gradient-to-r from-[#C8DFDC] to-[#AECFD0]"
+>
+  <!-- Cycle Selector Tabs placed atop stage -->
+  <div shell-shelf class="px-4 sm:px-6 lg:px-8 xl:px-10 -mb-[1px] relative z-10">
+    <div
+      role="tablist"
+      aria-label="Transaction Cycles"
+      class="flex items-end gap-2 sm:gap-3 overflow-x-auto no-scrollbar"
+    >
+      @for (cycle of cycles; track cycle.id; let i = $index) {
+        <button
+          type="button"
+          role="tab"
+          [id]="'tab-cycle-' + cycle.id"
+          [attr.aria-selected]="selectedCycle() === cycle.id"
+          [attr.aria-controls]="'cycle-panel-' + cycle.id"
+          [tabindex]="selectedCycle() === cycle.id ? 0 : -1"
+          (click)="selectCycle(cycle.id)"
+          (keydown)="onTabKeydown($event, i)"
+          [class]="
+            'group flex flex-col items-start text-left px-5 py-3 sm:px-6 sm:py-3.5 rounded-t-2xl sm:rounded-t-3xl transition-all duration-200 cursor-pointer min-w-[200px] sm:min-w-[240px] select-none ' +
+            (selectedCycle() === cycle.id
+              ? 'bg-white shadow-[0_-4px_16px_rgba(35,36,78,0.04)] border-t border-x border-black/5 relative z-20'
+              : 'bg-white/50 hover:bg-white/80 border-t border-x border-transparent')
+          "
+        >
+          <span
+            class="font-inter font-bold text-base sm:text-lg tracking-tight leading-snug transition-colors"
+            [class.text-[#23244E]]="selectedCycle() === cycle.id"
+            [class.text-[#8C90A4]]="selectedCycle() !== cycle.id"
+            style="font-family: var(--font-inter, 'Inter Variable', sans-serif);"
+          >
+            {{ cycle.nameKey | translate }}
+          </span>
+          <span
+            class="font-dm-sans font-normal text-xs sm:text-sm mt-0.5 tracking-normal leading-normal transition-colors"
+            [class.text-[#23244E]/75]="selectedCycle() === cycle.id"
+            [class.text-[#A0A5BA]]="selectedCycle() !== cycle.id"
+            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+          >
+            {{ cycle.subtitleKey | translate }}
+          </span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Stage Interior: Pipeline Stepper & Bottom Callout -->
+  <div
+    [id]="'cycle-panel-' + selectedCycle()"
+    role="tabpanel"
+    [attr.aria-labelledby]="'tab-cycle-' + selectedCycle()"
+    class="w-full flex flex-col gap-6 sm:gap-8 lg:gap-10 py-3 sm:py-5 lg:py-6"
+  >
+    <!-- Stepper Container with connecting blue pipeline line -->
+    <div class="relative w-full">
+      <!-- Horizontal connecting blue line across desktop view -->
+      <div
+        class="hidden lg:block absolute left-8 right-8 top-[46%] -translate-y-1/2 h-3.5 sm:h-4 bg-[#2F65E8] rounded-full z-0 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+
+      <!-- List of 5 Step Cards (Horizontal scroll on mobile/tablet, 5-col grid on desktop) -->
+      <ol
+        class="relative z-10 flex lg:grid lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-4 xl:gap-5 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 snap-x snap-mandatory no-scrollbar"
+        aria-label="Workflow pipeline steps"
+      >
+        @for (step of currentSteps(); track step.id; let i = $index) {
+          <li
+            class="snap-center shrink-0 w-56 sm:w-60 lg:w-auto bg-white rounded-2xl p-4 sm:p-5 shadow-[0_4px_16px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col items-center text-center justify-between min-h-[170px] sm:min-h-[185px] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(35,36,78,0.12)] relative z-10"
+          >
+            <!-- Squircle Icon Badge with soft blue glass gradient -->
+            <div
+              class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-b from-[#E8F1FD] to-[#D0E2FC] border border-[#BFD7F9] flex items-center justify-center shrink-0 mb-3 shadow-[0_2px_8px_rgba(47,101,232,0.12)] text-[#2F65E8]"
+              aria-hidden="true"
+            >
+              @if (step.imageSrc) {
+                <img
+                  [ngSrc]="step.imageSrc"
+                  [width]="step.imageWidth ?? 36"
+                  [height]="step.imageHeight ?? 36"
+                  alt=""
+                  class="w-7 h-7 sm:w-8 sm:h-8 object-contain select-none pointer-events-none"
+                />
+              } @else {
+                @switch (step.icon) {
+                  @case ('requisition') {
+                    <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                      <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                      <path d="m9 14 2 2 4-4" />
+                      <path d="M9 10h6" />
+                    </svg>
+                  }
+                @case ('cart-order') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="8" cy="21" r="1" />
+                    <circle cx="19" cy="21" r="1" />
+                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                  </svg>
+                }
+                @case ('goods-receipt') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                    <path d="m3.3 7 8.7 5 8.7-5" />
+                    <path d="M12 22V12" />
+                  </svg>
+                }
+                @case ('supplier-invoice') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="8" y1="13" x2="16" y2="13" />
+                    <line x1="8" y1="17" x2="12" y2="17" />
+                  </svg>
+                }
+                @case ('payment') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="5" rx="2" />
+                    <line x1="2" x2="22" y1="10" y2="10" />
+                    <path d="m9 15 2 2 4-4" />
+                  </svg>
+                }
+                @case ('bom-routing') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="5" r="2" />
+                    <circle cx="6" cy="19" r="2" />
+                    <circle cx="18" cy="19" r="2" />
+                    <path d="M12 7v5m0 0H6v5m6-5h6v5" />
+                  </svg>
+                }
+                @case ('production-planning') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <line x1="16" x2="16" y1="2" y2="6" />
+                    <line x1="8" x2="8" y1="2" y2="6" />
+                    <line x1="3" x2="21" y1="10" y2="10" />
+                    <circle cx="12" cy="15" r="2" />
+                  </svg>
+                }
+                @case ('manufacturing-order') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <circle cx="12" cy="15" r="2" />
+                    <path d="M12 11v1m0 6v1m-3-4h1m6 0h1" />
+                  </svg>
+                }
+                @case ('manufacturing-process') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                  </svg>
+                }
+                @case ('standard-costing') {
+                  <svg class="w-6 h-6 text-[#2F65E8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                    <circle cx="18" cy="7" r="2" />
+                  </svg>
+                }
+              }
+              }
+            </div>
+
+            <!-- Title -->
+            <span
+              class="font-inter font-bold text-sm sm:text-[15px] lg:text-[15px] text-[#23244E] leading-snug tracking-tight mb-1"
+              style="font-family: var(--font-inter, 'Inter Variable', sans-serif);"
+            >
+              {{ step.titleKey | translate }}
+            </span>
+
+            <!-- Description -->
+            <span
+              class="font-dm-sans font-normal text-xs text-[#5A607F] leading-snug tracking-normal mt-auto"
+              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+            >
+              {{ step.descKey | translate }}
+            </span>
+          </li>
+        }
+      </ol>
+    </div>
+
+    <!-- Bottom Callout White Card -->
+    <div
+      class="w-full bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 lg:p-8 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/80 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8 lg:gap-12"
+    >
+      <!-- Left Side: Headline & Tags -->
+      <div class="w-full md:w-5/12 lg:w-4/12 flex flex-col items-center md:items-start text-center md:text-left shrink-0">
+        <span
+          class="font-inter font-extrabold text-xl sm:text-2xl lg:text-[28px] tracking-wide text-[#2F65E8] leading-tight select-none uppercase"
+          style="font-family: var(--font-inter, 'Inter Variable', sans-serif);"
+        >
+          {{ calloutTitleKey | translate }}
+        </span>
+        <span
+          class="font-dm-sans font-medium text-xs sm:text-sm text-[#23244E] mt-1.5 sm:mt-2 tracking-normal leading-relaxed"
+          style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+        >
+          {{ calloutTagsKey() | translate }}
+        </span>
+      </div>
+
+      <!-- Vertical Blue Divider on md+ -->
+      <div
+        class="hidden md:block w-0.5 self-stretch bg-[#2F65E8] rounded-full shrink-0"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Horizontal Blue Divider on mobile -->
+      <div
+        class="block md:hidden w-20 h-0.5 bg-[#2F65E8] rounded-full shrink-0"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Right Side: Explanatory Note -->
+      <div class="w-full md:w-7/12 lg:w-8/12 flex items-center text-center md:text-left">
+        <p
+          class="font-dm-sans font-normal text-xs sm:text-sm lg:text-[15px] text-[#23244E]/90 leading-relaxed tracking-normal"
+          style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+        >
+          {{ calloutDisclaimerKey() | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</app-process-section-shell>

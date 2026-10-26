@@ -812,7 +812,21 @@
       "CALLOUT": {
         "TITLE": "보고서 반영 현황",
         "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
-        "DISCLAIMER": "분개 반영은 전기된 거래 및 회사의 계정과목 설정에 따라 이루어지며, 견적서와 수주서 단계에서는 매출로 자동 인식되지 않습니다."
+        "DISCLAIMER": "분개 반영은 전기된 거래 및 회사의 계정과목 설정에 따라 이루어지며, 견적서와 수주서 단계에서는 매출로 자동 인식되지 않습니다.",
+        "CYCLES": {
+          "O2C": {
+            "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+            "DISCLAIMER": "분개 반영은 전기된 거래 및 회사의 계정과목 설정에 따라 이루어지며, 견적서와 수주서 단계에서는 매출로 자동 인식되지 않습니다."
+          },
+          "P2P": {
+            "TAGS": "Procurement pipeline · Goods receipt · A/P aging · Cash out",
+            "DISCLAIMER": "입고 처리는 재고 이동 및 미착계정을 기록하며, 최종 비용 및 세무 반영은 공급업체 송장 전기 시 확정됩니다."
+          },
+          "P2PR": {
+            "TAGS": "Production plan · Work in Process · Material issuance · Standard cost",
+            "DISCLAIMER": "재고 원가 계산 및 차이 분석은 제조 오더 실적 보고 이후 산출되며, BOM과 생산 계획 단계에서는 분개가 생성되지 않습니다."
+          }
+        }
       }
     },
     "ACCOUNTING_IMPACT": {

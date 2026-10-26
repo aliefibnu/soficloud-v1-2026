@@ -812,7 +812,21 @@
       "CALLOUT": {
         "TITLE": "レポートへの反映",
         "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
-        "DISCLAIMER": "仕訳の反映は伝票記帳と勘定科目設定に従います。見積書や受注伝票の時点では自動的に売上計上されません。"
+        "DISCLAIMER": "仕訳の反映は伝票記帳と勘定科目設定に従います。見積書や受注伝票の時点では自動的に売上計上されません。",
+        "CYCLES": {
+          "O2C": {
+            "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+            "DISCLAIMER": "仕訳の反映は伝票記帳と勘定科目設定に従います。見積書や受注伝票の時点では自動的に売上計上されません。"
+          },
+          "P2P": {
+            "TAGS": "Procurement pipeline · Goods receipt · A/P aging · Cash out",
+            "DISCLAIMER": "入庫伝票は在庫移動および未払計上を記録します。最終的な費用化および税務認識は仕入先請求書の計上時に行われます。"
+          },
+          "P2PR": {
+            "TAGS": "Production plan · Work in Process · Material issuance · Standard cost",
+            "DISCLAIMER": "在庫原価の計算および差異分析は製造指図の完了実績入力後に反映されます。BOMや計画段階では仕訳は発生しません。"
+          }
+        }
       }
     },
     "ACCOUNTING_IMPACT": {

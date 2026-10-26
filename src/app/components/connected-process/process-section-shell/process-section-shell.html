@@ -34,6 +34,8 @@
       </p>
     </div>
 
+    <ng-content select="[shell-shelf]" />
+
     <div [class]="'w-full p-4 sm:p-6 lg:p-8 xl:p-10 ' + stageBgClass()">
       <ng-content />
     </div>

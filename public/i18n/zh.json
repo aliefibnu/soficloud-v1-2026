@@ -812,7 +812,21 @@
       "CALLOUT": {
         "TITLE": "报表体现",
         "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
-        "DISCLAIMER": "凭证入账遵循过账单据与企业会计科目设定；销售报价与销售订单阶段尚不自动确认为营业收入。"
+        "DISCLAIMER": "凭证入账遵循过账单据与企业会计科目设定；销售报价与销售订单阶段尚不自动确认为营业收入。",
+        "CYCLES": {
+          "O2C": {
+            "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+            "DISCLAIMER": "凭证入账遵循过账单据与企业会计科目设定；销售报价与销售订单阶段尚不自动确认为营业收入。"
+          },
+          "P2P": {
+            "TAGS": "Procurement pipeline · Goods receipt · A/P aging · Cash out",
+            "DISCLAIMER": "货物入库记录库存变动与暂估应付；最终费用分摊与税务确认为供应商发票过账时处理。"
+          },
+          "P2PR": {
+            "TAGS": "Production plan · Work in Process · Material issuance · Standard cost",
+            "DISCLAIMER": "存货成本计算与差异分析在制造订单报工后核算；物料清单（BOM）与排程阶段不产生财务凭证。"
+          }
+        }
       }
     },
     "ACCOUNTING_IMPACT": {

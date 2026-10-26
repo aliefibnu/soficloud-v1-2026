@@ -12,6 +12,7 @@ import { ProcessSectionShell } from './process-section-shell';
       [description]="description()"
       [stageBgClass]="stageBgClass()"
     >
+      <div id="test-shelf" shell-shelf>Shelf Test Content</div>
       <div id="test-projected-content">Projected Test Content</div>
     </app-process-section-shell>
   `,
@@ -83,6 +84,12 @@ describe('ProcessSectionShell', () => {
       'Dokumen bisnis membawa referensi ke tahap berikutnya.',
     );
     expect(descEl.nativeElement.classList.contains('whitespace-pre-line')).toBe(true);
+  });
+
+  it('should project shelf content inside the shell-shelf slot', () => {
+    const shelfEl = fixture.debugElement.query(By.css('#test-shelf'));
+    expect(shelfEl).toBeTruthy();
+    expect(shelfEl.nativeElement.textContent.trim()).toBe('Shelf Test Content');
   });
 
   it('should project child content inside the stage container via ng-content', () => {

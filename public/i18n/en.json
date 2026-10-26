@@ -812,7 +812,21 @@
       "CALLOUT": {
         "TITLE": "VISIBLE IN REPORTS",
         "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
-        "DISCLAIMER": "Journal impacts reflect posted transactions and company chart of accounts configuration; Sales Quotations and Sales Orders do not automatically recognize revenue."
+        "DISCLAIMER": "Journal impacts reflect posted transactions and company chart of accounts configuration; Sales Quotations and Sales Orders do not automatically recognize revenue.",
+        "CYCLES": {
+          "O2C": {
+            "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+            "DISCLAIMER": "Journal impacts reflect posted transactions and company chart of accounts configuration; Sales Quotations and Sales Orders do not automatically recognize revenue."
+          },
+          "P2P": {
+            "TAGS": "Procurement pipeline · Goods receipt · A/P aging · Cash out",
+            "DISCLAIMER": "Goods receipt records inventory movements/uninvoiced accruals; expense allocation and final recognition post with supplier invoices."
+          },
+          "P2PR": {
+            "TAGS": "Production plan · Work in Process · Material issuance · Standard cost",
+            "DISCLAIMER": "Inventory cost calculations and variances are recorded following manufacturing order confirmations; BOM and scheduling do not create ledger entries."
+          }
+        }
       }
     },
     "ACCOUNTING_IMPACT": {
