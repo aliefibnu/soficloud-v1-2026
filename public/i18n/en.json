@@ -672,5 +672,234 @@
       "TITLE": "Clear Information\nDecisive Action",
       "DESCRIPTION": "Discuss the indicators and dashboards your company needs based on your workflows"
     }
+  },
+  "CONNECTED_PROCESS": {
+    "HERO": {
+      "TITLE_LINE_1": "From Business Activities",
+      "TITLE_LINE_2": "To Financial Statements",
+      "DESCRIPTION": "Sales, procurement, material requirements, order progress, and finance can all be viewed from the SOFICloud dashboard. Each view helps teams see current conditions and determine necessary follow-ups.",
+      "TABLET": {
+        "TITLE": "CONNECTED BUSINESS",
+        "USER": "A",
+        "DATE": "28-07",
+        "MODULE_PROCUREMENT": "02 Procurement (PR - PO - GRN)",
+        "MODULE_INVENTORY": "03 Inventory (Stock - Movement)",
+        "MODULE_MANUFACTURING": "04 Manufacturing (BOM - MO - Cost)",
+        "MODULE_PROJECT": "05 Project & Cost (Budget - Actual)",
+        "CONNECTED_TRANSACTIONS": "Connected Transactions",
+        "CONNECTED_FLOW": "PR - PO - GRN -> Journal -> General Ledger",
+        "STATUS_AUDIT": "AUDIT & APPROVAL",
+        "STATUS_TRAIL": "AUDIT TRAIL",
+        "STATUS_ANALYTICS": "BUSINESS ANALYTICS"
+      }
+    },
+    "PROCESS_TABS": {
+      "SATU_DATA": "SINGLE DATA SOURCE",
+      "ALUR_TRANSAKSI": "TRANSACTION FLOW",
+      "DAMPAK_AKUNTANSI": "ACCOUNTING IMPACT",
+      "LAPORAN": "REPORTS",
+      "PETA_LENGKAP": "FULL PROCESS MAP"
+    },
+    "SATU_DATA": {
+      "TITLE": "Every Department Moves with the Same Context.",
+      "DESCRIPTION": "Business documents carry references forward into subsequent stages. Teams can trace request origins, order statuses, goods receipts, production, billing, all the way to financial transactions.",
+      "CARDS": {
+        "CARD_1": {
+          "NUMBER": "01",
+          "TITLE": "Connected document references",
+          "DESCRIPTION": "Orders, POs, receipts, invoices, and payments can be traced along their complete workflow."
+        },
+        "CARD_2": {
+          "NUMBER": "02",
+          "TITLE": "Cross-departmental controls",
+          "DESCRIPTION": "Workflows and approvals provide verification checkpoints as documents transition across departments."
+        },
+        "CARD_3": {
+          "NUMBER": "03",
+          "TITLE": "Accountable numbers",
+          "DESCRIPTION": "Operational and accounting reports are backed by transparent source transactions."
+        }
+      }
+    },
+    "TRANSACTION_FLOW": {
+      "TITLE": "Three Workflows, One Connected System",
+      "DESCRIPTION": "Select a transaction sample to see how modules pass information seamlessly. Each stage serves distinct documents and operational purposes.",
+      "CYCLES": {
+        "O2C": {
+          "NAME": "Order-to-Cash",
+          "SUBTITLE": "From sales to cash receipt"
+        },
+        "P2P": {
+          "NAME": "Procure-to-Pay",
+          "SUBTITLE": "From requisition to payment"
+        },
+        "P2PR": {
+          "NAME": "Plan-to-Produce",
+          "SUBTITLE": "From materials to production costs"
+        }
+      },
+      "STEPS": {
+        "O2C": {
+          "STEP_1": {
+            "TITLE": "Sales Quotation",
+            "DESC": "Quotation to customer"
+          },
+          "STEP_2": {
+            "TITLE": "Sales Order",
+            "DESC": "Confirmed sales order"
+          },
+          "STEP_3": {
+            "TITLE": "Delivery Order",
+            "DESC": "Goods delivered"
+          },
+          "STEP_4": {
+            "TITLE": "Customer Invoice",
+            "DESC": "Receivable recognized"
+          },
+          "STEP_5": {
+            "TITLE": "Receipt",
+            "DESC": "Payment received"
+          }
+        },
+        "P2P": {
+          "STEP_1": {
+            "TITLE": "Purchase Requisition",
+            "DESC": "Material requisition"
+          },
+          "STEP_2": {
+            "TITLE": "Purchase Order",
+            "DESC": "Supplier purchase order"
+          },
+          "STEP_3": {
+            "TITLE": "Goods Receipt",
+            "DESC": "Goods received"
+          },
+          "STEP_4": {
+            "TITLE": "Supplier Invoice",
+            "DESC": "Vendor invoice received"
+          },
+          "STEP_5": {
+            "TITLE": "Payment",
+            "DESC": "Payment settlement"
+          }
+        },
+        "P2PR": {
+          "STEP_1": {
+            "TITLE": "BOM & Routing",
+            "DESC": "Component & routing standard"
+          },
+          "STEP_2": {
+            "TITLE": "Production Planning",
+            "DESC": "Schedule & allocation"
+          },
+          "STEP_3": {
+            "TITLE": "Manufacturing Order",
+            "DESC": "Work order authorization"
+          },
+          "STEP_4": {
+            "TITLE": "Manufacturing Process",
+            "DESC": "Actual floor recording"
+          },
+          "STEP_5": {
+            "TITLE": "Standard Costing & Variance",
+            "DESC": "Standard costing & variance calculation"
+          }
+        }
+      },
+      "CALLOUT": {
+        "TITLE": "VISIBLE IN REPORTS",
+        "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+        "DISCLAIMER": "Journal impacts reflect posted transactions and company chart of accounts configuration; Sales Quotations and Sales Orders do not automatically recognize revenue."
+      }
+    },
+    "ACCOUNTING_IMPACT": {
+      "TITLE": "Operations Run, Accounting Follows",
+      "DESCRIPTION": "Documents that reach accounting recognition stages generate ledger entries based on chart of accounts setup and corporate policies.",
+      "COLUMN_1": {
+        "TITLE": "Source Documents",
+        "SUBTITLE": "Including General Journals and manual adjustments when required",
+        "ITEMS": [
+          "Customer Invoice",
+          "Supplier Invoice",
+          "Inventory & Manufacturing",
+          "Receipt & Payment"
+        ]
+      },
+      "COLUMN_2": {
+        "TITLE": "COA Mapping & Posting",
+        "SUBTITLE": "Transactions remain fully auditable back to source documents. Adjustments follow formal correction protocols with change trails and authorization.",
+        "ITEMS": [
+          "Journal",
+          "Trial Balance",
+          "General Ledger"
+        ]
+      },
+      "COLUMN_3": {
+        "TITLE": "Financial Statements",
+        "SUBTITLE": "Positive financial performance through revenue growth and operational cost efficiency.",
+        "ITEMS": [
+          "Profit & Loss",
+          "Balance Sheet",
+          "Cash Flow",
+          "Subledger AP / AR"
+        ]
+      },
+      "DISCLAIMER_LABEL": "Important:",
+      "DISCLAIMER_TEXT": "This workflow illustrates process and data relationships. Journal types, posting triggers, revenue/expense recognition milestones, and report formats are configured according to company accounting policies and implementation requirements."
+    },
+    "ROLE_REPORTS": {
+      "TITLE": "Reports for Every Team Within One Data Flow",
+      "DESCRIPTION": "Management sees final financial results alongside the operational context that created them.",
+      "TIERS": {
+        "OPERATIONAL": {
+          "TITLE": "OPERATIONAL",
+          "SUBTITLE": "In Motion",
+          "DESCRIPTION": "Open orders, outstanding procurement, goods receipts, inventory positions, material readiness, production progress, and project statuses.",
+          "TAGS": [
+            "Sales",
+            "Procurement",
+            "Inventory",
+            "Production"
+          ]
+        },
+        "FINANCIAL": {
+          "TITLE": "FINANCIAL",
+          "SUBTITLE": "Recorded",
+          "DESCRIPTION": "Accounts receivable, payable, cash & bank, General Ledger, Trial Balance, Profit & Loss, Balance Sheet, and cash flow statements.",
+          "TAGS": [
+            "AR",
+            "AP",
+            "Cash & Bank",
+            "Accounting"
+          ]
+        },
+        "MANAGEMENT": {
+          "TITLE": "MANAGEMENT",
+          "SUBTITLE": "Actionable Decisions",
+          "DESCRIPTION": "Dashboards and analytics help interpret sales trends, manufacturing costs, budget vs. actual project performance, and transactions requiring management action.",
+          "TAGS": [
+            "Dashboard",
+            "Analytics",
+            "Project",
+            "Control"
+          ]
+        }
+      }
+    },
+    "FULL_PROCESS_MAP": {
+      "TITLE": "See the Complete Process Architecture",
+      "DESCRIPTION": "This architectural diagram summarizes purchasing, manufacturing, sales, general ledger postings, and financial statement outputs as an enterprise capability blueprint.",
+      "HINT_SCROLL": "Scroll horizontally to view the full diagram",
+      "STREAMS": {
+        "PURCHASING": "Purchasing & AP Stream",
+        "MANUFACTURING": "Manufacturing & Costing Stream",
+        "SALES": "Sales & AR Stream",
+        "GENERAL_LEDGER": "General Ledger & Financial Output"
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "Connect the Process, Understand the Results",
+      "DESCRIPTION": "Discuss transaction workflows, control checkpoints, and reporting requirements for your business with the SOFICloud team."
+    }
   }
 }

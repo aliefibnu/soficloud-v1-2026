@@ -672,5 +672,234 @@
       "TITLE": "Informasi Yang Jelas\nTindakan Yang Tepat",
       "DESCRIPTION": "Diskusikan indikator dan dashboard yang dibutuhkan sesuai alur kerja perusahaan Anda"
     }
+  },
+  "CONNECTED_PROCESS": {
+    "HERO": {
+      "TITLE_LINE_1": "Dari Aktivitas Bisnis",
+      "TITLE_LINE_2": "Hingga Laporan Keuangan",
+      "DESCRIPTION": "Penjualan, pengadaan, kebutuhan material, progres pesanan, dan keuangan dapat dilihat dari dashboard SOFICloud. Setiap tampilan membantu tim melihat kondisi terkini dan menentukan hal yang perlu ditindaklanjuti.",
+      "TABLET": {
+        "TITLE": "CONNECTED BUSINESS",
+        "USER": "A",
+        "DATE": "28-07",
+        "MODULE_PROCUREMENT": "02 Procurement (PR - PO - GRN)",
+        "MODULE_INVENTORY": "03 Inventory (Stock - Movement)",
+        "MODULE_MANUFACTURING": "04 Manufacturing (BOM - MO - Cost)",
+        "MODULE_PROJECT": "05 Project & Cost (Budget - Actual)",
+        "CONNECTED_TRANSACTIONS": "Connected Transactions",
+        "CONNECTED_FLOW": "PR - PO - GRN -> Journal -> General Ledger",
+        "STATUS_AUDIT": "AUDIT & APPROVAL",
+        "STATUS_TRAIL": "AUDIT TRAIL",
+        "STATUS_ANALYTICS": "BUSINESS ANALYTICS"
+      }
+    },
+    "PROCESS_TABS": {
+      "SATU_DATA": "SATU DATA",
+      "ALUR_TRANSAKSI": "ALUR TRANSAKSI",
+      "DAMPAK_AKUNTANSI": "DAMPAK AKUNTANSI",
+      "LAPORAN": "LAPORAN",
+      "PETA_LENGKAP": "PETA LENGKAP"
+    },
+    "SATU_DATA": {
+      "TITLE": "Setiap Bagian Bergerak Dengan Konteks Yang Sama.",
+      "DESCRIPTION": "Dokumen bisnis membawa referensi ke tahap berikutnya. Tim dapat mengikuti asal permintaan, status pesanan, penerimaan, produksi, penagihan, hingga transaksi keuangannya.",
+      "CARDS": {
+        "CARD_1": {
+          "NUMBER": "01",
+          "TITLE": "Referensi dokumen terhubung",
+          "DESCRIPTION": "Order, PO, penerimaan, invoice, dan pembayaran dapat ditelusuri sesuai alurnya."
+        },
+        "CARD_2": {
+          "NUMBER": "02",
+          "TITLE": "Kontrol lintas bagian",
+          "DESCRIPTION": "Workflow dan approval memberi titik pemeriksaan saat dokumen berpindah proses."
+        },
+        "CARD_3": {
+          "NUMBER": "03",
+          "TITLE": "Angka yang dapat dijelaskan",
+          "DESCRIPTION": "Laporan operasional dan akuntansi memiliki transaksi sumber yang jelas."
+        }
+      }
+    },
+    "TRANSACTION_FLOW": {
+      "TITLE": "Tiga Alur Satu Sistem Yang Terhubung",
+      "DESCRIPTION": "Pilih contoh transaksi untuk melihat bagaimana modul saling meneruskan informasi. Setiap tahap memiliki dokumen dan tujuan yang berbeda.",
+      "CYCLES": {
+        "O2C": {
+          "NAME": "Order-to-Cash",
+          "SUBTITLE": "Penjualan hingga penerimaan"
+        },
+        "P2P": {
+          "NAME": "Procure-to-Pay",
+          "SUBTITLE": "Kebutuhan hingga pembayaran"
+        },
+        "P2PR": {
+          "NAME": "Plan-to-Produce",
+          "SUBTITLE": "Material hingga biaya produksi"
+        }
+      },
+      "STEPS": {
+        "O2C": {
+          "STEP_1": {
+            "TITLE": "Sales Quotation",
+            "DESC": "Penawaran ke pelanggan"
+          },
+          "STEP_2": {
+            "TITLE": "Sales Order",
+            "DESC": "Pesanan terkonfirmasi"
+          },
+          "STEP_3": {
+            "TITLE": "Delivery Order",
+            "DESC": "Barang diserahkan"
+          },
+          "STEP_4": {
+            "TITLE": "Customer Invoice",
+            "DESC": "Piutang terbentuk"
+          },
+          "STEP_5": {
+            "TITLE": "Receipt",
+            "DESC": "Pembayaran diterima"
+          }
+        },
+        "P2P": {
+          "STEP_1": {
+            "TITLE": "Purchase Requisition",
+            "DESC": "Permintaan kebutuhan"
+          },
+          "STEP_2": {
+            "TITLE": "Purchase Order",
+            "DESC": "Pesanan pemasok"
+          },
+          "STEP_3": {
+            "TITLE": "Goods Receipt",
+            "DESC": "Penerimaan barang"
+          },
+          "STEP_4": {
+            "TITLE": "Supplier Invoice",
+            "DESC": "Tagihan masuk"
+          },
+          "STEP_5": {
+            "TITLE": "Payment",
+            "DESC": "Pelunasan pembayaran"
+          }
+        },
+        "P2PR": {
+          "STEP_1": {
+            "TITLE": "BOM & Routing",
+            "DESC": "Standar komponen & jalur"
+          },
+          "STEP_2": {
+            "TITLE": "Production Planning",
+            "DESC": "Jadwal & alokasi"
+          },
+          "STEP_3": {
+            "TITLE": "Manufacturing Order",
+            "DESC": "Surat perintah kerja"
+          },
+          "STEP_4": {
+            "TITLE": "Manufacturing Process",
+            "DESC": "Pencatatan aktual"
+          },
+          "STEP_5": {
+            "TITLE": "Standard Costing & Variance",
+            "DESC": "Kalkulasi harga pokok"
+          }
+        }
+      },
+      "CALLOUT": {
+        "TITLE": "TERLIHAT DI LAPORAN",
+        "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+        "DISCLAIMER": "Dampak jurnal mengikuti transaksi yang diposting dan pengaturan akun perusahaan; Sales Quotation dan Sales Order belum otomatis menjadi pendapatan."
+      }
+    },
+    "ACCOUNTING_IMPACT": {
+      "TITLE": "Operasional Berjalan Pembukuan Mengikuti",
+      "DESCRIPTION": "Dokumen yang sudah memenuhi tahap pencatatan menghasilkan dampak akuntansi berdasarkan konfigurasi akun dan kebijakan perusahaan.",
+      "COLUMN_1": {
+        "TITLE": "Dokumen Sumber",
+        "SUBTITLE": "Termasuk General Journal dan adjustment bila diperlukan",
+        "ITEMS": [
+          "Customer Invoice",
+          "Supplier Invoice",
+          "Inventory & Manufacturing",
+          "Receipt & Payment"
+        ]
+      },
+      "COLUMN_2": {
+        "TITLE": "Posting & Pemetaan COA",
+        "SUBTITLE": "Transaksi dapat ditelusuri kembali ke dokumen asal. Koreksi dilakukan melalui proses yang sesuai, dengan jejak perubahan dan otorisasi.",
+        "ITEMS": [
+          "Jurnal",
+          "Trial Balance",
+          "General Ledger"
+        ]
+      },
+      "COLUMN_3": {
+        "TITLE": "Hasil Keuangan",
+        "SUBTITLE": "Kinerja keuangan positif melalui pertumbuhan pendapatan dan efisiensi biaya.",
+        "ITEMS": [
+          "Laba Rugi",
+          "Neraca",
+          "Arus Kas",
+          "Subledger AP / AR"
+        ]
+      },
+      "DISCLAIMER_LABEL": "Penting:",
+      "DISCLAIMER_TEXT": "Alur ini menggambarkan hubungan proses dan data. Jenis jurnal, titik posting, pengakuan pendapatan/biaya, serta format laporan disesuaikan dengan implementasi dan kebijakan akuntansi perusahaan."
+    },
+    "ROLE_REPORTS": {
+      "TITLE": "Laporan Untuk Setiap Tim Dalam Satu Alur Data",
+      "DESCRIPTION": "Management melihat hasil akhir sekaligus konteks operasional yang membentuknya.",
+      "TIERS": {
+        "OPERATIONAL": {
+          "TITLE": "OPERASIONAL",
+          "SUBTITLE": "Sedang Bergerak",
+          "DESCRIPTION": "Open order, outstanding procurement, penerimaan barang, posisi stok, kebutuhan material, progress produksi, dan status project.",
+          "TAGS": [
+            "Sales",
+            "Procurement",
+            "Inventory",
+            "Production"
+          ]
+        },
+        "FINANCIAL": {
+          "TITLE": "KEUANGAN",
+          "SUBTITLE": "Sudah Tercatat",
+          "DESCRIPTION": "Piutang, utang, kas dan bank, General Ledger, Balance, Laba Rugi, Neraca, serta laporan arus kas.",
+          "TAGS": [
+            "AR",
+            "AP",
+            "Cash & Bank",
+            "Accounting"
+          ]
+        },
+        "MANAGEMENT": {
+          "TITLE": "MANAJEMEN",
+          "SUBTITLE": "Perlu Diputuskan",
+          "DESCRIPTION": "Dashboard dan analisis membantu membaca tren penjualan, biaya produksi, budget versus actual project, serta transaksi yang membutuhkan perhatian.",
+          "TAGS": [
+            "Dashboard",
+            "Analytics",
+            "Project",
+            "Control"
+          ]
+        }
+      }
+    },
+    "FULL_PROCESS_MAP": {
+      "TITLE": "Lihat Hubungan Proses Lebih Lengkap",
+      "DESCRIPTION": "Diagram ini merangkum alur pembelian, produksi, penjualan, General Ledger, dan keluaran laporan sebagai referensi kemampuan produk.",
+      "HINT_SCROLL": "Gulir horizontal untuk melihat peta lengkap",
+      "STREAMS": {
+        "PURCHASING": "Purchasing & AP Stream",
+        "MANUFACTURING": "Manufacturing & Costing Stream",
+        "SALES": "Sales & AR Stream",
+        "GENERAL_LEDGER": "General Ledger & Financial Output"
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "Sambungkan Proses Pahami Hasilnya",
+      "DESCRIPTION": "Diskusikan alur transaksi, titik kontrol, dan kebutuhan pelaporan perusahaan Anda bersama tim SOFICloud."
+    }
   }
 }
