@@ -1,0 +1,86 @@
+<app-process-section-shell
+  sectionId="laporan"
+  [title]="'CONNECTED_PROCESS.ROLE_REPORTS.TITLE' | translate"
+  [description]="'CONNECTED_PROCESS.ROLE_REPORTS.DESCRIPTION' | translate"
+  stageBgClass="bg-[#FBCBC5]"
+>
+  <div
+    class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 lg:gap-5 xl:gap-6 w-full max-w-7xl mx-auto py-4 sm:py-6 lg:py-8"
+  >
+    @for (tier of tiers; track tier.id) {
+      <article
+        class="bg-white rounded-[16px] p-4 sm:p-5 lg:p-5 xl:p-6 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/60 flex flex-row items-stretch gap-3 sm:gap-4 lg:gap-4.5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(35,36,78,0.1)] min-h-75 sm:min-h-80 lg:min-h-85"
+      >
+        <!-- Left Meta Column: Number and Category (weight 400) -->
+        <div
+          class="w-18 sm:w-20 lg:w-24 shrink-0 flex flex-col items-center justify-center text-center self-center py-2 sm:py-3"
+        >
+          <span
+            class="font-inter font-bold text-2xl sm:text-3xl lg:text-[36px] text-[#23244E] mb-1 sm:mb-1.5 tracking-tight select-none leading-none"
+            style="
+              font-family: var(--font-inter, 'Inter Variable', sans-serif);
+              font-weight: 700;
+            "
+          >
+            {{ tier.number }}
+          </span>
+          <span
+            class="font-inter font-normal text-[11px] sm:text-xs tracking-wider uppercase text-[#23244E] leading-tight"
+            style="
+              font-family: var(--font-inter, 'Inter Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ tier.titleKey | translate }}
+          </span>
+        </div>
+
+        <!-- Vertical Pill Divider with Gradient -->
+        <div
+          [class]="'w-3 sm:w-3.5 lg:w-4 rounded-full self-stretch my-2 sm:my-2.5 shrink-0 ' + tier.pillGradientClass"
+          aria-hidden="true"
+        ></div>
+
+        <!-- Right Content Column: Heading (700 bold), Description (400 regular, 3-5 lines), Tags -->
+        <div
+          class="flex-1 min-w-0 flex flex-col justify-between py-1.5 sm:py-2 pr-1"
+        >
+          <div>
+            <h3
+              class="font-inter font-bold text-xl sm:text-2xl lg:text-[26px] text-[#23244E] leading-[1.18] tracking-tight mb-2 sm:mb-3 whitespace-pre-line"
+              style="
+                font-family: var(--font-inter, 'Inter Variable', sans-serif);
+                font-weight: 700;
+              "
+            >
+              {{ tier.subtitleKey | translate }}
+            </h3>
+
+            <p
+              class="font-dm-sans font-normal text-xs sm:text-[13px] text-[#23244E]/90 leading-[1.55] sm:leading-[1.6] mb-4 sm:mb-5"
+              style="
+                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                font-weight: 400;
+              "
+            >
+              {{ tier.descriptionKey | translate }}
+            </p>
+          </div>
+
+          <!-- Bulleted Blue Tag List -->
+          <ul
+            class="space-y-0.5 sm:space-y-1 text-xs sm:text-[13px] font-dm-sans font-medium text-[#365AD2]"
+            aria-label="Department Tags"
+          >
+            @for (tag of asArray(tier.tagsKey | translate); track tag) {
+              <li class="flex items-center gap-1.5">
+                <span class="text-[#365AD2] select-none font-bold leading-none">·</span>
+                <span>{{ tag }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </article>
+    }
+  </div>
+</app-process-section-shell>

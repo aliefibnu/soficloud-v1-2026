@@ -40,13 +40,19 @@ describe('ConnectedProcess', () => {
     expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
   });
 
-  it('should render hero, process-tabs, and subfooter components', () => {
+  it('should render hero, process-tabs, satu-data, role-reports, and subfooter components', () => {
     fixture.detectChanges();
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     expect(heroEl).toBeTruthy();
 
     const processTabsEl = fixture.debugElement.query(By.css('app-process-tabs'));
     expect(processTabsEl).toBeTruthy();
+
+    const satuDataEl = fixture.debugElement.query(By.css('app-satu-data'));
+    expect(satuDataEl).toBeTruthy();
+
+    const roleReportsEl = fixture.debugElement.query(By.css('app-role-reports'));
+    expect(roleReportsEl).toBeTruthy();
 
     const subfooterEl = fixture.debugElement.query(By.css('app-subfooter'));
     expect(subfooterEl).toBeTruthy();

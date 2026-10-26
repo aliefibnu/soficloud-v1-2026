@@ -350,15 +350,15 @@ flowchart TD
 ### Phase 3: Static Showcase Sections (`SatuData` & `RoleReports`)
 *Objective: Build the two modular 3-card sections that present structured content without complex interactive logic.*
 
-- [ ] **Step 3.1 — Build `SatuDataSection` (`src/app/components/connected-process/sections/satu-data/`):**
-  - Wrap in `<app-process-section-shell sectionId="satu-data" stageBgClass="bg-[#E8F0FC]" ...>`.
+- [x] **Step 3.1 — Build `SatuDataSection` (`src/app/components/connected-process/sections/satu-data/`):**
+  - Wrap in `<app-process-section-shell sectionId="satu-data" stageBgClass="bg-[#C0D6F7]" ...>`.
   - Implement 3 feature cards (01 Referensi Dokumen, 02 Kontrol Lintas Bagian, 03 Angka Yang Dapat Dijelaskan).
-- [ ] **Step 3.2 — Build `RoleReportsSection` (`src/app/components/connected-process/sections/role-reports/`):**
+- [x] **Step 3.2 — Build `RoleReportsSection` (`src/app/components/connected-process/sections/role-reports/`):**
   - Wrap in `<app-process-section-shell sectionId="laporan" stageBgClass="bg-[#FDE8E4]" ...>`.
   - Implement 3 stakeholder tier cards (Operasional, Keuangan, Manajemen) with accent color stripes and department tags.
-- [ ] **Step 3.3 — Mount & Verify:**
+- [x] **Step 3.3 — Mount & Verify:**
   - Register `<app-satu-data />` and `<app-role-reports />` in `connected-process.html`.
-- [ ] **Verification Gate 3:** Both sections render pixel-perfect cards with accurate typography, padding, and responsive grid wrapping.
+- [x] **Verification Gate 3:** Both sections render pixel-perfect cards with accurate typography, padding, and responsive grid wrapping.
 
 ---
 
