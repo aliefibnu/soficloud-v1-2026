@@ -470,11 +470,11 @@
       "TITLE": "部門横断の可視化",
       "SUBTITLE": "顧客の注文から財務状況に至るまで、マネジメント層は各プロセスに関連する重要指標を把握できます。以下の画面により、チームはビジネス機会、ボトルネック、未処理の業務を的確に把握できます。",
       "TABS": {
-        "SALES_PERFORMANCE": "SALES PERFORMANCE",
-        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
-        "MATERIAL_READINESS": "MATERIAL READINESS",
-        "ORDER_PIPELINE": "ORDER PIPELINE",
-        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+        "SALES_PERFORMANCE": "販売実績",
+        "PROCUREMENT_CONTROL": "調達管理",
+        "MATERIAL_READINESS": "資材準備状況",
+        "ORDER_PIPELINE": "受注パイプライン",
+        "FINANCIAL_VISIBILITY": "財務状況"
       },
       "ALTS": {
         "SALES_PERFORMANCE": "販売実績ダッシュボードプレビュー",

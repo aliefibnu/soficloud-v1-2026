@@ -470,11 +470,11 @@
       "TITLE": "VISIBILITAS LINTAS FUNGSI",
       "SUBTITLE": "Mulai dari pesanan pelanggan sampai posisi keuangan, manajemen melihat indikator yang relevan pada tiap proses. Enam tampilan berikut menunjukkan bagaimana tim membaca peluang, hambatan, dan pekerjaan yang masih terbuka.",
       "TABS": {
-        "SALES_PERFORMANCE": "SALES PERFORMANCE",
-        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
-        "MATERIAL_READINESS": "MATERIAL READINESS",
-        "ORDER_PIPELINE": "ORDER PIPELINE",
-        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+        "SALES_PERFORMANCE": "KINERJA PENJUALAN",
+        "PROCUREMENT_CONTROL": "PENGENDALIAN PENGADAAN",
+        "MATERIAL_READINESS": "KESIAPAN MATERIAL",
+        "ORDER_PIPELINE": "PIPELINE PESANAN",
+        "FINANCIAL_VISIBILITY": "VISIBILITAS KEUANGAN"
       },
       "ALTS": {
         "SALES_PERFORMANCE": "Pratinjau Dashboard Sales Performance",

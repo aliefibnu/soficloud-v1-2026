@@ -27,11 +27,11 @@ describe('BusinessRealtime VisibilityFunction', () => {
           SUBTITLE:
             'Mulai dari pesanan pelanggan sampai posisi keuangan, manajemen melihat indikator yang relevan pada tiap proses. Enam tampilan berikut menunjukkan bagaimana tim membaca peluang, hambatan, dan pekerjaan yang masih terbuka.',
           TABS: {
-            SALES_PERFORMANCE: 'SALES PERFORMANCE',
-            PROCUREMENT_CONTROL: 'PROCUREMENT CONTROL',
-            MATERIAL_READINESS: 'MATERIAL READINESS',
-            ORDER_PIPELINE: 'ORDER PIPELINE',
-            FINANCIAL_VISIBILITY: 'FINANCIAL VISIBILITY',
+            SALES_PERFORMANCE: 'KINERJA PENJUALAN',
+            PROCUREMENT_CONTROL: 'PENGENDALIAN PENGADAAN',
+            MATERIAL_READINESS: 'KESIAPAN MATERIAL',
+            ORDER_PIPELINE: 'PIPELINE PESANAN',
+            FINANCIAL_VISIBILITY: 'VISIBILITAS KEUANGAN',
           },
           ALTS: {
             SALES_PERFORMANCE: 'Pratinjau Dashboard Sales Performance',
@@ -39,6 +39,30 @@ describe('BusinessRealtime VisibilityFunction', () => {
             MATERIAL_READINESS: 'Pratinjau Dashboard Material Readiness',
             ORDER_PIPELINE: 'Pratinjau Dashboard Order Pipeline',
             FINANCIAL_VISIBILITY: 'Pratinjau Dashboard Financial Visibility',
+          },
+        },
+      },
+    });
+
+    translateService.setTranslation('ja', {
+      BUSINESS_REALTIME: {
+        VISIBILITY_FUNCTION: {
+          TITLE: '部門横断の可視化',
+          SUBTITLE:
+            '顧客の注文から財務状況に至るまで、マネジメント層は各プロセスに関連する重要指標を把握できます。以下の画面により、チームはビジネス機会、ボトルネック、未処理の業務を的確に把握できます。',
+          TABS: {
+            SALES_PERFORMANCE: '販売実績',
+            PROCUREMENT_CONTROL: '調達管理',
+            MATERIAL_READINESS: '資材準備状況',
+            ORDER_PIPELINE: '受注パイプライン',
+            FINANCIAL_VISIBILITY: '財務状況',
+          },
+          ALTS: {
+            SALES_PERFORMANCE: '販売実績ダッシュボードプレビュー',
+            PROCUREMENT_CONTROL: '調達管理ダッシュボードプレビュー',
+            MATERIAL_READINESS: '資材準備状況ダッシュボードプレビュー',
+            ORDER_PIPELINE: '注文パイプラインダッシュボードプレビュー',
+            FINANCIAL_VISIBILITY: '財務状況ダッシュボードプレビュー',
           },
         },
       },
@@ -82,15 +106,15 @@ describe('BusinessRealtime VisibilityFunction', () => {
 
     const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
     expect(tabs.length).toBe(5);
-    expect(tabs[0].nativeElement.textContent.trim()).toBe('SALES PERFORMANCE');
+    expect(tabs[0].nativeElement.textContent.trim()).toBe('KINERJA PENJUALAN');
     expect(tabs[0].nativeElement.getAttribute('aria-controls')).toBe('sales-performance');
-    expect(tabs[1].nativeElement.textContent.trim()).toBe('PROCUREMENT CONTROL');
+    expect(tabs[1].nativeElement.textContent.trim()).toBe('PENGENDALIAN PENGADAAN');
     expect(tabs[1].nativeElement.getAttribute('aria-controls')).toBe('procurement-control');
-    expect(tabs[2].nativeElement.textContent.trim()).toBe('MATERIAL READINESS');
+    expect(tabs[2].nativeElement.textContent.trim()).toBe('KESIAPAN MATERIAL');
     expect(tabs[2].nativeElement.getAttribute('aria-controls')).toBe('material-readiness');
-    expect(tabs[3].nativeElement.textContent.trim()).toBe('ORDER PIPELINE');
+    expect(tabs[3].nativeElement.textContent.trim()).toBe('PIPELINE PESANAN');
     expect(tabs[3].nativeElement.getAttribute('aria-controls')).toBe('order-pipeline');
-    expect(tabs[4].nativeElement.textContent.trim()).toBe('FINANCIAL VISIBILITY');
+    expect(tabs[4].nativeElement.textContent.trim()).toBe('VISIBILITAS KEUANGAN');
     expect(tabs[4].nativeElement.getAttribute('aria-controls')).toBe('financial-visibility');
   });
 
@@ -161,5 +185,69 @@ describe('BusinessRealtime VisibilityFunction', () => {
 
     const indicator = fixture.debugElement.query(By.css('.bg-\\[\\#365AD2\\]'));
     expect(indicator).toBeTruthy();
+  });
+
+  it('should render Japanese tab titles when switching language to ja', async () => {
+    translateService.use('ja');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
+    expect(tabs[0].nativeElement.textContent.trim()).toBe('販売実績');
+    expect(tabs[1].nativeElement.textContent.trim()).toBe('調達管理');
+    expect(tabs[2].nativeElement.textContent.trim()).toBe('資材準備状況');
+    expect(tabs[3].nativeElement.textContent.trim()).toBe('受注パイプライン');
+    expect(tabs[4].nativeElement.textContent.trim()).toBe('財務状況');
+  });
+
+  it('should recalculate indicator dimensions when updateIndicator is called with mock bounding boxes', () => {
+    const listEl = component.tabsListRef()?.nativeElement;
+    expect(listEl).toBeTruthy();
+    if (!listEl) return;
+
+    // Mock bounding rects
+    vi.spyOn(listEl, 'getBoundingClientRect').mockReturnValue({
+      left: 100,
+      top: 200,
+      width: 1000,
+      height: 40,
+      right: 1100,
+      bottom: 240,
+      x: 100,
+      y: 200,
+      toJSON: () => {},
+    });
+
+    const activeBtn = listEl.querySelector(
+      `[data-tab-id="${component.activeTabId()}"]`,
+    ) as HTMLElement;
+    expect(activeBtn).toBeTruthy();
+
+    vi.spyOn(activeBtn, 'getBoundingClientRect').mockReturnValue({
+      left: 170,
+      top: 200,
+      width: 85,
+      height: 40,
+      right: 255,
+      bottom: 240,
+      x: 170,
+      y: 200,
+      toJSON: () => {},
+    });
+
+    component.updateIndicator();
+
+    expect(component.indicatorLeft()).toBe(70); // 170 - 100 = 70
+    expect(component.indicatorWidth()).toBe(85); // 85px to cover the word
+  });
+
+  it('should disconnect resizeObserver on destroy', () => {
+    const disconnectSpy = vi.fn();
+    (component as unknown as { resizeObserver?: { disconnect: () => void } }).resizeObserver = {
+      disconnect: disconnectSpy,
+    };
+
+    component.ngOnDestroy();
+    expect(disconnectSpy).toHaveBeenCalled();
   });
 });

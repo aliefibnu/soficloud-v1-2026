@@ -470,11 +470,11 @@
       "TITLE": "跨职能全局洞察",
       "SUBTITLE": "从客户订单到财务状况，管理层可纵览各业务环节的关键指标。以下展示展示了团队如何发现机遇、规避瓶颈并跟进进行中的各项任务。",
       "TABS": {
-        "SALES_PERFORMANCE": "SALES PERFORMANCE",
-        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
-        "MATERIAL_READINESS": "MATERIAL READINESS",
-        "ORDER_PIPELINE": "ORDER PIPELINE",
-        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+        "SALES_PERFORMANCE": "销售业绩",
+        "PROCUREMENT_CONTROL": "采购控制",
+        "MATERIAL_READINESS": "物料齐套",
+        "ORDER_PIPELINE": "订单管道",
+        "FINANCIAL_VISIBILITY": "财务可见性"
       },
       "ALTS": {
         "SALES_PERFORMANCE": "销售业绩仪表盘预览",
