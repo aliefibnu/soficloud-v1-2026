@@ -31,6 +31,30 @@ describe('ConnectedProcess ProcessTabs', () => {
         },
       },
     });
+
+    translateService.setTranslation('ja', {
+      CONNECTED_PROCESS: {
+        PROCESS_TABS: {
+          SATU_DATA: '統合データ',
+          ALUR_TRANSAKSI: '取引フロー',
+          DAMPAK_AKUNTANSI: '会計影響',
+          LAPORAN: 'レポート',
+          PETA_LENGKAP: '全体プロセスマップ',
+        },
+      },
+    });
+
+    translateService.setTranslation('en', {
+      CONNECTED_PROCESS: {
+        PROCESS_TABS: {
+          SATU_DATA: 'SINGLE DATA SOURCE',
+          ALUR_TRANSAKSI: 'TRANSACTION FLOW',
+          DAMPAK_AKUNTANSI: 'ACCOUNTING IMPACT',
+          LAPORAN: 'REPORTS',
+          PETA_LENGKAP: 'FULL PROCESS MAP',
+        },
+      },
+    });
     translateService.use('id');
 
     fixture = TestBed.createComponent(ProcessTabs);
@@ -160,5 +184,69 @@ describe('ConnectedProcess ProcessTabs', () => {
     const updateSpy = vi.spyOn(component, 'updateIndicator');
     window.dispatchEvent(new Event('resize'));
     expect(updateSpy).toHaveBeenCalled();
+  });
+
+  it('should render Japanese tab titles when switching language to ja', async () => {
+    translateService.use('ja');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
+    expect(tabs[0].nativeElement.textContent.trim()).toBe('統合データ');
+    expect(tabs[1].nativeElement.textContent.trim()).toBe('取引フロー');
+    expect(tabs[2].nativeElement.textContent.trim()).toBe('会計影響');
+    expect(tabs[3].nativeElement.textContent.trim()).toBe('レポート');
+    expect(tabs[4].nativeElement.textContent.trim()).toBe('全体プロセスマップ');
+  });
+
+  it('should recalculate indicator dimensions when updateIndicator is called with mock bounding boxes', () => {
+    const listEl = component.tabsListRef()?.nativeElement;
+    expect(listEl).toBeTruthy();
+    if (!listEl) return;
+
+    // Simulate mobile viewport where container left is 20 and tab button starts at 44 with width 86
+    vi.spyOn(listEl, 'getBoundingClientRect').mockReturnValue({
+      left: 20,
+      top: 100,
+      width: 375,
+      height: 40,
+      right: 395,
+      bottom: 140,
+      x: 20,
+      y: 100,
+      toJSON: () => {},
+    });
+
+    const activeBtn = listEl.querySelector(
+      `[data-tab-id="${component.activeTabId()}"]`,
+    ) as HTMLElement;
+    expect(activeBtn).toBeTruthy();
+
+    vi.spyOn(activeBtn, 'getBoundingClientRect').mockReturnValue({
+      left: 44,
+      top: 100,
+      width: 86,
+      height: 40,
+      right: 130,
+      bottom: 140,
+      x: 44,
+      y: 100,
+      toJSON: () => {},
+    });
+
+    component.updateIndicator();
+
+    expect(component.indicatorLeft()).toBe(24); // 44 - 20 = 24
+    expect(component.indicatorWidth()).toBe(86); // 86px width
+  });
+
+  it('should disconnect resizeObserver on destroy', () => {
+    const disconnectSpy = vi.fn();
+    (component as unknown as { resizeObserver?: { disconnect: () => void } }).resizeObserver = {
+      disconnect: disconnectSpy,
+    };
+
+    component.ngOnDestroy();
+    expect(disconnectSpy).toHaveBeenCalled();
   });
 });
