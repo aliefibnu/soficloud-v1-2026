@@ -187,6 +187,17 @@ describe('TransactionFlow', () => {
     expect(tab3.getAttribute('aria-selected')).toBe('false');
   });
 
+  it('should render visible background and borders on unselected tabs', () => {
+    const tabs = fixture.debugElement.queryAll(By.css('button[role="tab"]'));
+    const unselectedTab = tabs[1].nativeElement;
+    expect(unselectedTab.className).toContain('bg-white');
+    expect(unselectedTab.className).toContain('rounded-t-[24px]');
+    expect(unselectedTab.className).toContain('border-t');
+    expect(unselectedTab.className).toContain('border-x');
+    expect(unselectedTab.className).toContain('border-black/5');
+    expect(unselectedTab.className).not.toContain('border-transparent');
+  });
+
   it('should render default Order-to-Cash (O2C) 5 pipeline step cards', () => {
     const cards = fixture.debugElement.queryAll(By.css('ol li'));
     expect(cards.length).toBe(5);
