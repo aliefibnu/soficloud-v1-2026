@@ -125,4 +125,30 @@ describe('SatuData', () => {
       'Laporan operasional dan akuntansi memiliki transaksi sumber yang jelas.',
     );
   });
+
+  it('should apply rounded-[25.09px] border radius to all feature cards to match Figma spec', () => {
+    const cards = fixture.debugElement.queryAll(By.css('article'));
+    expect(cards.length).toBe(3);
+    for (const card of cards) {
+      expect(card.nativeElement.classList.contains('rounded-[25.09px]')).toBe(
+        true,
+      );
+    }
+  });
+
+  it('should ensure card titles have single-line styling without max-w-72 restriction', () => {
+    const titles = fixture.debugElement.queryAll(By.css('h3'));
+    expect(titles.length).toBe(3);
+    for (const title of titles) {
+      expect(
+        title.nativeElement.classList.contains('md:whitespace-nowrap'),
+      ).toBe(true);
+      expect(title.nativeElement.classList.contains('max-w-72')).toBe(false);
+    }
+  });
+
+  it('should render a wider responsive grid container with max-w-7xl', () => {
+    const gridEl = fixture.debugElement.query(By.css('.grid'));
+    expect(gridEl.nativeElement.classList.contains('max-w-7xl')).toBe(true);
+  });
 });

@@ -5,14 +5,14 @@
   stageBgClass="bg-[linear-gradient(322.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]"
 >
   <div
-    class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 lg:gap-8 xl:gap-10 max-w-6xl mx-auto py-6 sm:py-8 lg:py-12"
+    class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 lg:gap-5 xl:gap-6 w-full max-w-7xl mx-auto py-4 sm:py-6 lg:py-8"
   >
     @for (card of cards; track card.number) {
       <article
-        class="bg-white rounded-3xl sm:rounded-4xl lg:rounded-[32px] p-6 sm:p-8 lg:p-10 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/60 flex flex-col items-center text-center justify-start transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(35,36,78,0.1)]"
+        class="bg-white rounded-[25.09px] px-5 py-6 sm:px-6 sm:py-7 lg:px-6 lg:py-7.5 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/60 flex flex-col items-center text-center justify-start transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(35,36,78,0.1)]"
       >
         <span
-          class="font-dm-sans font-bold text-3xl sm:text-4xl lg:text-[40px] text-[#23244E] mb-3 sm:mb-4 tracking-tight select-none"
+          class="font-dm-sans font-bold text-3xl sm:text-4xl lg:text-[38px] text-[#23244E] mb-2 sm:mb-2.5 lg:mb-3 tracking-tight select-none leading-none"
           style="
             font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
             font-weight: 700;
@@ -21,7 +21,7 @@
           {{ card.number }}
         </span>
         <h3
-          class="font-dm-sans font-bold text-lg sm:text-xl lg:text-[22px] text-[#23244E] mb-3 sm:mb-4 leading-snug tracking-tight max-w-72"
+          class="font-dm-sans font-bold text-lg sm:text-xl lg:text-[20px] xl:text-[22px] text-[#23244E] mb-2.5 sm:mb-3 lg:mb-3.5 leading-snug tracking-tight w-full md:whitespace-nowrap"
           style="
             font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
             font-weight: 700;
@@ -30,7 +30,7 @@
           {{ card.titleKey | translate }}
         </h3>
         <p
-          class="font-dm-sans font-normal text-sm sm:text-[15px] lg:text-[16px] text-[#23244E] leading-relaxed tracking-normal max-w-72"
+          class="font-dm-sans font-normal text-sm sm:text-[15px] lg:text-[16px] text-[#23244E] leading-relaxed tracking-normal max-w-85 sm:max-w-90 lg:max-w-85 xl:max-w-90"
           style="
             font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
             font-weight: 400;
