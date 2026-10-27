@@ -135,14 +135,17 @@ describe('RoleReports', () => {
   it('should render vertical gradient divider capsule pills for each tier', () => {
     const cards = fixture.debugElement.queryAll(By.css('article'));
 
-    const pill1 = cards[0].query(By.css('.from-\\[\\#EAF1FB\\]'));
+    const pill1 = cards[0].query(By.css('.from-\\[\\#EDF3FB\\]'));
     expect(pill1).toBeTruthy();
+    expect(pill1.nativeElement.style.background).toContain('linear-gradient');
 
-    const pill2 = cards[1].query(By.css('.from-\\[\\#FEEBEA\\]'));
+    const pill2 = cards[1].query(By.css('.from-\\[\\#FFEFED\\]'));
     expect(pill2).toBeTruthy();
+    expect(pill2.nativeElement.style.background).toContain('linear-gradient');
 
-    const pill3 = cards[2].query(By.css('.from-\\[\\#B9E5E5\\]'));
+    const pill3 = cards[2].query(By.css('.from-\\[\\#10BFC1\\]'));
     expect(pill3).toBeTruthy();
+    expect(pill3.nativeElement.style.background).toContain('linear-gradient');
   });
 
   it('should render vertical bulleted department tags inside each card', () => {

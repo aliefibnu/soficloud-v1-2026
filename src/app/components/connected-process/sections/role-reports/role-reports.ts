@@ -6,6 +6,7 @@ export interface RoleReportTier {
   readonly id: 'operational' | 'financial' | 'management';
   readonly number: string;
   readonly pillGradientClass: string;
+  readonly pillGradient: string;
   readonly titleKey: string;
   readonly subtitleKey: string;
   readonly descriptionKey: string;
@@ -22,7 +23,8 @@ export class RoleReports {
     {
       id: 'operational',
       number: '01',
-      pillGradientClass: 'bg-gradient-to-b from-[#EAF1FB] to-[#C4D8F7]',
+      pillGradientClass: 'bg-[linear-gradient(180deg,#EDF3FB_0%,#C3D7F7_100%)] from-[#EDF3FB] to-[#C3D7F7]',
+      pillGradient: 'linear-gradient(180deg, #EDF3FB 0%, #C3D7F7 100%)',
       titleKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.OPERATIONAL.TITLE',
       subtitleKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.OPERATIONAL.SUBTITLE',
       descriptionKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.OPERATIONAL.DESCRIPTION',
@@ -31,7 +33,8 @@ export class RoleReports {
     {
       id: 'financial',
       number: '02',
-      pillGradientClass: 'bg-gradient-to-b from-[#FEEBEA] to-[#FCCFC9]',
+      pillGradientClass: 'bg-[linear-gradient(180deg,#FFEFED_0%,#FBCBC5_100%)] from-[#FFEFED] to-[#FBCBC5]',
+      pillGradient: 'linear-gradient(180deg, #FFEFED 0%, #FBCBC5 100%)',
       titleKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.FINANCIAL.TITLE',
       subtitleKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.FINANCIAL.SUBTITLE',
       descriptionKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.FINANCIAL.DESCRIPTION',
@@ -40,7 +43,8 @@ export class RoleReports {
     {
       id: 'management',
       number: '03',
-      pillGradientClass: 'bg-gradient-to-b from-[#B9E5E5] to-[#20C2C5]',
+      pillGradientClass: 'bg-[linear-gradient(0deg,#10BFC1_0%,#C0E7E7_98.58%)] from-[#10BFC1] to-[#C0E7E7]',
+      pillGradient: 'linear-gradient(0deg, #10BFC1 0%, #C0E7E7 98.58%)',
       titleKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.MANAGEMENT.TITLE',
       subtitleKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.MANAGEMENT.SUBTITLE',
       descriptionKey: 'CONNECTED_PROCESS.ROLE_REPORTS.TIERS.MANAGEMENT.DESCRIPTION',
