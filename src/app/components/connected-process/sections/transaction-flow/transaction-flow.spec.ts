@@ -273,28 +273,46 @@ describe('TransactionFlow', () => {
     );
   });
 
-  it('should render the bottom callout card with title, divider, tags, and disclaimer', () => {
-    const calloutTitle = fixture.debugElement.query(
-      By.css('span.font-extrabold.text-\\[\\#2F65E8\\]'),
-    );
+  it('should render the bottom callout card with title, divider, tags, and disclaimer matching Figma spec', () => {
+    const frame = fixture.debugElement.query(By.css('[data-testid="callout-frame"]'));
+    expect(frame).toBeTruthy();
+    expect(frame.nativeElement.className).toContain('bg-[#FDFDFD]');
+    expect(frame.nativeElement.className).toContain('rounded-[8px]');
+
+    const calloutTitle = fixture.debugElement.query(By.css('[data-testid="callout-title"]'));
     expect(calloutTitle).toBeTruthy();
     expect(calloutTitle.nativeElement.textContent.trim()).toBe('TERLIHAT DI LAPORAN');
+    expect(calloutTitle.nativeElement.className).toContain('font-dm-sans');
+    expect(calloutTitle.nativeElement.className).toContain('font-bold');
+    expect(calloutTitle.nativeElement.className).toContain('text-[#1C73E8]');
+    expect(calloutTitle.nativeElement.className).toContain('text-center');
+    expect(calloutTitle.nativeElement.className).toContain('lg:text-[34px]');
 
-    const calloutTags = fixture.debugElement.query(
-      By.css('span.font-dm-sans.font-medium.text-\\[\\#23244E\\]'),
-    );
+    const calloutTags = fixture.debugElement.query(By.css('[data-testid="callout-tags"]'));
     expect(calloutTags).toBeTruthy();
     expect(calloutTags.nativeElement.textContent.trim()).toBe(
       'Sales pipeline · Delivery · A/R aging · Cash receipt',
     );
+    expect(calloutTags.nativeElement.className).toContain('font-dm-sans');
+    expect(calloutTags.nativeElement.className).toContain('font-bold');
+    expect(calloutTags.nativeElement.className).toContain('text-[#23244E]');
+    expect(calloutTags.nativeElement.className).toContain('text-center');
+    expect(calloutTags.nativeElement.className).toContain('text-[11px]');
+    expect(calloutTags.nativeElement.className).toContain('mt-1.5');
 
-    const disclaimer = fixture.debugElement.query(
-      By.css('p.font-dm-sans.text-\\[\\#23244E\\]\\/90'),
-    );
+    const divider = fixture.debugElement.query(By.css('[data-testid="callout-divider"]'));
+    expect(divider).toBeTruthy();
+    expect(divider.nativeElement.className).toContain('bg-[#365AD2]');
+
+    const disclaimer = fixture.debugElement.query(By.css('[data-testid="callout-disclaimer"]'));
     expect(disclaimer).toBeTruthy();
     expect(disclaimer.nativeElement.textContent.trim()).toContain(
       'Dampak jurnal mengikuti transaksi yang diposting dan pengaturan akun perusahaan',
     );
+    expect(disclaimer.nativeElement.className).toContain('font-dm-sans');
+    expect(disclaimer.nativeElement.className).toContain('font-normal');
+    expect(disclaimer.nativeElement.className).toContain('text-[#23244E]');
+    expect(disclaimer.nativeElement.className).toContain('text-justify');
   });
 
   it('should switch steps and callout dynamically when clicking Procure-to-Pay (P2P)', () => {
@@ -320,7 +338,7 @@ describe('TransactionFlow', () => {
     ]);
 
     const calloutTags = fixture.debugElement.query(
-      By.css('span.font-dm-sans.font-medium.text-\\[\\#23244E\\]'),
+      By.css('[data-testid="callout-tags"]'),
     );
     expect(calloutTags.nativeElement.textContent.trim()).toBe(
       'Procurement pipeline · Penerimaan barang · A/P aging · Kas keluar',
@@ -359,7 +377,7 @@ describe('TransactionFlow', () => {
     ]);
 
     const calloutTags = fixture.debugElement.query(
-      By.css('span.font-dm-sans.font-medium.text-\\[\\#23244E\\]'),
+      By.css('[data-testid="callout-tags"]'),
     );
     expect(calloutTags).toBeTruthy();
     expect(calloutTags.nativeElement.textContent.trim()).toBe(

@@ -108,17 +108,20 @@
     </div>
 
     <div
-      class="w-full bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 lg:p-8 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/80 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8 lg:gap-12"
+      data-testid="callout-frame"
+      class="w-full bg-[#FDFDFD] rounded-[8px] p-5 sm:p-7 lg:py-8 lg:px-10 shadow-[0_4px_20px_rgba(35,36,78,0.04)] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12"
     >
-      <div class="w-full md:w-5/12 lg:w-4/12 flex flex-col items-center md:items-start text-center md:text-left shrink-0">
+      <div class="w-full md:w-5/12 lg:w-5/12 flex flex-col items-center justify-center text-center shrink-0">
         <span
-          class="font-inter font-extrabold text-xl sm:text-2xl lg:text-[28px] tracking-wide text-[#2F65E8] leading-tight select-none uppercase"
-          style="font-family: var(--font-inter, 'Inter Variable', sans-serif);"
+          data-testid="callout-title"
+          class="font-dm-sans font-bold text-2xl sm:text-3xl lg:text-[34px] xl:text-[36px] tracking-wide text-[#1C73E8] leading-tight sm:leading-none select-none uppercase text-center"
+          style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
         >
           {{ calloutTitleKey | translate }}
         </span>
         <span
-          class="font-dm-sans font-medium text-xs sm:text-sm text-[#23244E] mt-1.5 sm:mt-2 tracking-normal leading-relaxed"
+          data-testid="callout-tags"
+          class="font-dm-sans font-bold text-[11px] sm:text-xs lg:text-[12.5px] text-[#23244E] mt-1.5 sm:mt-2 tracking-normal leading-tight text-center"
           style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
         >
           {{ calloutTagsKey() | translate }}
@@ -126,18 +129,20 @@
       </div>
 
       <div
-        class="hidden md:block w-0.5 self-stretch bg-[#2F65E8] rounded-full shrink-0"
+        data-testid="callout-divider"
+        class="hidden md:block w-0.5 self-stretch bg-[#365AD2] rounded-full shrink-0 my-1 sm:my-2"
         aria-hidden="true"
       ></div>
 
       <div
-        class="block md:hidden w-20 h-0.5 bg-[#2F65E8] rounded-full shrink-0"
+        class="block md:hidden w-20 h-0.5 bg-[#365AD2] rounded-full shrink-0 my-1"
         aria-hidden="true"
       ></div>
 
-      <div class="w-full md:w-7/12 lg:w-8/12 flex items-center text-center md:text-left">
+      <div class="w-full md:w-7/12 lg:w-7/12 flex items-center justify-center">
         <p
-          class="font-dm-sans font-normal text-xs sm:text-sm lg:text-[15px] text-[#23244E]/90 leading-relaxed tracking-normal"
+          data-testid="callout-disclaimer"
+          class="max-w-[760px] font-dm-sans font-normal text-xs sm:text-sm lg:text-[15px] xl:text-[15.5px] text-[#23244E] text-justify leading-relaxed tracking-normal"
           style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
         >
           {{ calloutDisclaimerKey() | translate }}
