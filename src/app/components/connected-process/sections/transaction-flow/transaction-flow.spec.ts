@@ -214,10 +214,10 @@ describe('TransactionFlow', () => {
     expect(unselectedTab.className).toContain('border-x');
 
     const unselectedTitle = tabs[1].query(By.css('span.font-bold')).nativeElement;
-    expect(unselectedTitle.className).toContain('text-[#4F5674]');
+    expect(unselectedTitle.className).toContain('text-[#B1B1B1DD]');
 
     const unselectedSub = tabs[1].query(By.css('span.font-normal')).nativeElement;
-    expect(unselectedSub.className).toContain('text-[#6B7280]');
+    expect(unselectedSub.className).toContain('text-[#B1B1B1DD]');
   });
 
   it('should render default Order-to-Cash (O2C) 5 pipeline step cards', () => {
@@ -262,11 +262,15 @@ describe('TransactionFlow', () => {
     expect(sources[4]).toContain('receipt.svg');
   });
 
-  it('should render the connecting blue pipeline line for desktop view', () => {
+  it('should render the connecting gradient pipeline line for desktop view', () => {
     const connectingLine = fixture.debugElement.query(
-      By.css('.bg-\\[\\#2F65E8\\].rounded-full'),
+      By.css('[data-testid="transaction-flow-line"]'),
     );
     expect(connectingLine).toBeTruthy();
+    expect(connectingLine.nativeElement.className).toContain('rounded-full');
+    expect(connectingLine.nativeElement.className).toContain(
+      'bg-[linear-gradient(90deg,#1E37E1_0%,#1C7DD8_69.97%,#6694EB_100%)]',
+    );
   });
 
   it('should render the bottom callout card with title, divider, tags, and disclaimer', () => {
