@@ -156,4 +156,39 @@ describe('SatuData', () => {
     const gridEl = fixture.debugElement.query(By.css('.grid'));
     expect(gridEl.nativeElement.classList.contains('max-w-7xl')).toBe(true);
   });
+
+  it('should render English card titles cleanly with single-line styling', async () => {
+    translateService.setTranslation(
+      'en',
+      {
+        CONNECTED_PROCESS: {
+          SATU_DATA: {
+            CARDS: {
+              CARD_1: {
+                TITLE: 'Connected document references',
+              },
+              CARD_2: {
+                TITLE: 'Cross-departmental controls',
+              },
+              CARD_3: {
+                TITLE: 'Accountable numbers',
+              },
+            },
+          },
+        },
+      },
+      true,
+    );
+    translateService.use('en');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const titles = fixture.debugElement.queryAll(By.css('h3'));
+    expect(titles[0].nativeElement.textContent.trim()).toBe(
+      'Connected document references',
+    );
+    expect(
+      titles[0].nativeElement.classList.contains('md:whitespace-nowrap'),
+    ).toBe(true);
+  });
 });

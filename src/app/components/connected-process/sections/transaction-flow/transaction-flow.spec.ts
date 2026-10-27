@@ -209,7 +209,7 @@ describe('TransactionFlow', () => {
     expect(selectedTab.className).toContain('border-x');
 
     expect(unselectedTab.className).toContain('bg-[#F8FAFC]');
-    expect(unselectedTab.className).toContain('rounded-t-[24px]');
+    expect(unselectedTab.className).toMatch(/rounded-t-(?:\[24px\]|3xl)/);
     expect(unselectedTab.className).toContain('border-t');
     expect(unselectedTab.className).toContain('border-x');
 
