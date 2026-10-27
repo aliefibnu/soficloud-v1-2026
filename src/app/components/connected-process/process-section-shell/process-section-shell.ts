@@ -9,4 +9,5 @@ export class ProcessSectionShell {
   readonly title = input.required<string>();
   readonly description = input.required<string>();
   readonly stageBgClass = input<string>('bg-[#E8F0FC]');
+  readonly titleMaxWidthClass = input<string>('max-w-3xl lg:max-w-214');
 }

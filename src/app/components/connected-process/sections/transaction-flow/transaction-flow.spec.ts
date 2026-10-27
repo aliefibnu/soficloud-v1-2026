@@ -26,7 +26,7 @@ describe('TransactionFlow', () => {
     translateService.setTranslation('id', {
       CONNECTED_PROCESS: {
         TRANSACTION_FLOW: {
-          TITLE: 'Tiga Alur Satu Sistem Yang Terhubung',
+          TITLE: 'Tiga Alur Satu Sistem\nYang Terhubung',
           DESCRIPTION:
             'Pilih contoh transaksi untuk melihat bagaimana modul saling meneruskan informasi. Setiap tahap memiliki dokumen dan tujuan yang berbeda.',
           CYCLES: {
@@ -158,7 +158,14 @@ describe('TransactionFlow', () => {
     expect(shellComponent.stageBgClass()).toBe(
       'bg-gradient-to-r from-[#C8DFDC] to-[#AECFD0]',
     );
-    expect(shellComponent.title()).toBe('Tiga Alur Satu Sistem Yang Terhubung');
+    expect(shellComponent.title()).toBe(
+      'Tiga Alur Satu Sistem\nYang Terhubung',
+    );
+    const headingEl = fixture.debugElement.query(By.css('h2'));
+    expect(headingEl).toBeTruthy();
+    expect(headingEl.nativeElement.classList.contains('lg:max-w-[620px]')).toBe(
+      true,
+    );
     expect(shellComponent.description()).toContain(
       'Pilih contoh transaksi untuk melihat bagaimana modul saling meneruskan informasi.',
     );

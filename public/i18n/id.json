@@ -704,7 +704,7 @@
       "PETA_LENGKAP": "PETA LENGKAP"
     },
     "SATU_DATA": {
-      "TITLE": "Setiap Bagian Bergerak Dengan Konteks Yang Sama.",
+      "TITLE": "Setiap Bagian Bergerak Dengan\nKonteks Yang Sama.",
       "DESCRIPTION": "Dokumen bisnis membawa referensi ke tahap berikutnya. Tim dapat mengikuti asal permintaan, status pesanan, penerimaan, produksi, penagihan, hingga transaksi keuangannya.",
       "CARDS": {
         "CARD_1": {
@@ -725,7 +725,7 @@
       }
     },
     "TRANSACTION_FLOW": {
-      "TITLE": "Tiga Alur Satu Sistem Yang Terhubung",
+      "TITLE": "Tiga Alur Satu Sistem\nYang Terhubung",
       "DESCRIPTION": "Pilih contoh transaksi untuk melihat bagaimana modul saling meneruskan informasi. Setiap tahap memiliki dokumen dan tujuan yang berbeda.",
       "CYCLES": {
         "O2C": {

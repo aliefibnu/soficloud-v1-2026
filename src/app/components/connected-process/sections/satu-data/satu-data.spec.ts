@@ -24,7 +24,7 @@ describe('SatuData', () => {
     translateService.setTranslation('id', {
       CONNECTED_PROCESS: {
         SATU_DATA: {
-          TITLE: 'Setiap Bagian Bergerak Dengan Konteks Yang Sama.',
+          TITLE: 'Setiap Bagian Bergerak Dengan\nKonteks Yang Sama.',
           DESCRIPTION:
             'Dokumen bisnis membawa referensi ke tahap berikutnya. Tim dapat mengikuti asal permintaan, status pesanan, penerimaan, produksi, penagihan, hingga transaksi keuangannya.',
           CARDS: {
@@ -74,7 +74,12 @@ describe('SatuData', () => {
       'bg-[linear-gradient(322.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]',
     );
     expect(shellComponent.title()).toBe(
-      'Setiap Bagian Bergerak Dengan Konteks Yang Sama.',
+      'Setiap Bagian Bergerak Dengan\nKonteks Yang Sama.',
+    );
+    const headingEl = fixture.debugElement.query(By.css('h2'));
+    expect(headingEl).toBeTruthy();
+    expect(headingEl.nativeElement.classList.contains('lg:max-w-214')).toBe(
+      true,
     );
     expect(shellComponent.description()).toContain(
       'Dokumen bisnis membawa referensi ke tahap berikutnya.',

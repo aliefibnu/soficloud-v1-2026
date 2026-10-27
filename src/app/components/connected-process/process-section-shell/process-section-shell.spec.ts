@@ -11,6 +11,7 @@ import { ProcessSectionShell } from './process-section-shell';
       [title]="title()"
       [description]="description()"
       [stageBgClass]="stageBgClass()"
+      [titleMaxWidthClass]="titleMaxWidthClass()"
     >
       <div id="test-shelf" shell-shelf>Shelf Test Content</div>
       <div id="test-projected-content">Projected Test Content</div>
@@ -24,6 +25,7 @@ class TestHostComponent {
     'Dokumen bisnis membawa referensi ke tahap berikutnya.',
   );
   readonly stageBgClass = signal('bg-[#E8F0FC]');
+  readonly titleMaxWidthClass = signal('max-w-3xl lg:max-w-214');
 }
 
 describe('ProcessSectionShell', () => {
@@ -67,6 +69,21 @@ describe('ProcessSectionShell', () => {
     expect(headingEl.nativeElement.classList.contains('font-inter')).toBe(true);
     expect(headingEl.nativeElement.classList.contains('font-semibold')).toBe(true);
     expect(headingEl.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
+    expect(headingEl.nativeElement.classList.contains('lg:max-w-214')).toBe(
+      true,
+    );
+  });
+
+  it('should allow custom titleMaxWidthClass on heading', () => {
+    const headingEl = fixture.debugElement.query(By.css('h2'));
+    expect(headingEl.nativeElement.classList.contains('lg:max-w-214')).toBe(
+      true,
+    );
+
+    hostComponent.titleMaxWidthClass.set('max-w-md');
+    fixture.detectChanges();
+
+    expect(headingEl.nativeElement.classList.contains('max-w-md')).toBe(true);
   });
 
   it('should render the accent divider line with aria-hidden="true"', () => {

@@ -704,7 +704,7 @@
       "PETA_LENGKAP": "FULL PROCESS MAP"
     },
     "SATU_DATA": {
-      "TITLE": "Every Department Moves with the Same Context.",
+      "TITLE": "Every Department Moves with\nthe Same Context.",
       "DESCRIPTION": "Business documents carry references forward into subsequent stages. Teams can trace request origins, order statuses, goods receipts, production, billing, all the way to financial transactions.",
       "CARDS": {
         "CARD_1": {
@@ -725,7 +725,7 @@
       }
     },
     "TRANSACTION_FLOW": {
-      "TITLE": "Three Workflows, One Connected System",
+      "TITLE": "Three Workflows,\nOne Connected System",
       "DESCRIPTION": "Select a transaction sample to see how modules pass information seamlessly. Each stage serves distinct documents and operational purposes.",
       "CYCLES": {
         "O2C": {

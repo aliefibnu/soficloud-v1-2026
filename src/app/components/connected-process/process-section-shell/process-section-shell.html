@@ -9,7 +9,10 @@
     <div class="px-6 py-7 sm:px-10 sm:py-8 lg:px-10 lg:py-9 text-center max-w-5xl mx-auto">
       <h2
         [id]="sectionId() + '-heading'"
-        class="font-inter font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[46px] text-[#23244E] leading-tight lg:leading-[1.18] tracking-normal text-center max-w-3xl lg:max-w-214 mx-auto whitespace-pre-line"
+        [class]="
+          'font-inter font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[46px] text-[#23244E] leading-tight lg:leading-[1.18] tracking-normal text-center mx-auto whitespace-pre-line ' +
+          titleMaxWidthClass()
+        "
         style="
           font-family: var(--font-inter, 'Inter Variable', sans-serif);
           font-weight: 600;
