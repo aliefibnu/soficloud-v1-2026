@@ -62,7 +62,7 @@ describe('SatuData', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the ProcessSectionShell with sectionId satu-data and stageBgClass bg-[#C0D6F7]', () => {
+  it('should render the ProcessSectionShell with sectionId satu-data and Figma background gradient stageBgClass', () => {
     const shellEl = fixture.debugElement.query(
       By.directive(ProcessSectionShell),
     );
@@ -70,7 +70,9 @@ describe('SatuData', () => {
 
     const shellComponent = shellEl.componentInstance as ProcessSectionShell;
     expect(shellComponent.sectionId()).toBe('satu-data');
-    expect(shellComponent.stageBgClass()).toBe('bg-[#C0D6F7]');
+    expect(shellComponent.stageBgClass()).toBe(
+      'bg-[linear-gradient(232.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]',
+    );
     expect(shellComponent.title()).toBe(
       'Setiap Bagian Bergerak Dengan Konteks Yang Sama.',
     );
