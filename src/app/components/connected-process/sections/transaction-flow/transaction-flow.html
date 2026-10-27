@@ -6,7 +6,7 @@
   titleMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[620px]"
 >
   <!-- Cycle Selector Tabs placed atop stage -->
-  <div shell-shelf class="px-4 sm:px-6 lg:px-8 xl:px-10 -mb-[1px] relative z-10">
+  <div shell-shelf class="pl-0 pr-4 sm:pr-6 lg:pr-8 xl:pr-10 mb-0 relative z-10">
     <div
       role="tablist"
       aria-label="Transaction Cycles"
@@ -23,24 +23,26 @@
           (click)="selectCycle(cycle.id)"
           (keydown)="onTabKeydown($event, i)"
           [class]="
-            'group flex flex-col items-start text-left px-5 py-3 sm:px-6 sm:py-3.5 rounded-t-[24px] border-t border-x border-black/5 bg-white transition-all duration-200 cursor-pointer min-w-[200px] sm:min-w-[240px] select-none ' +
+            'group flex flex-col items-start text-left px-5 pt-3 pb-2 sm:px-6 sm:pt-3.5 sm:pb-2 rounded-t-[24px] border-t border-x transition-all duration-200 cursor-pointer min-w-[200px] sm:min-w-[240px] select-none ' +
             (selectedCycle() === cycle.id
-              ? 'shadow-[0_-4px_16px_rgba(35,36,78,0.06)] relative z-20'
-              : 'shadow-[0_-2px_8px_rgba(35,36,78,0.02)] hover:shadow-[0_-3px_12px_rgba(35,36,78,0.04)] relative z-10')
+              ? 'bg-white border-slate-200/90 shadow-[0_-4px_20px_rgba(35,36,78,0.08)] relative z-20'
+              : 'bg-[#F8FAFC] border-slate-200/70 hover:bg-white hover:border-slate-300/90 shadow-[0_-1px_4px_rgba(35,36,78,0.03)] relative z-10')
           "
         >
           <span
             class="font-dm-sans font-bold text-base sm:text-lg tracking-tight leading-snug transition-colors"
             [class.text-[#23244E]]="selectedCycle() === cycle.id"
-            [class.text-[#8C90A4]]="selectedCycle() !== cycle.id"
+            [class.text-[#4F5674]]="selectedCycle() !== cycle.id"
+            [class.group-hover:text-[#23244E]]="selectedCycle() !== cycle.id"
             style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
           >
             {{ cycle.nameKey | translate }}
           </span>
           <span
             class="font-dm-sans font-normal text-xs sm:text-sm mt-0.5 tracking-normal leading-normal transition-colors"
-            [class.text-[#23244E]/75]="selectedCycle() === cycle.id"
-            [class.text-[#A0A5BA]]="selectedCycle() !== cycle.id"
+            [class.text-[#23244E]/80]="selectedCycle() === cycle.id"
+            [class.text-[#6B7280]]="selectedCycle() !== cycle.id"
+            [class.group-hover:text-[#23244E]/70]="selectedCycle() !== cycle.id"
             style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
           >
             {{ cycle.subtitleKey | translate }}

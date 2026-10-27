@@ -194,15 +194,30 @@ describe('TransactionFlow', () => {
     expect(tab3.getAttribute('aria-selected')).toBe('false');
   });
 
-  it('should render visible background and borders on unselected tabs', () => {
+  it('should render distinct, accessible tabs with clear borders, background contrast, and flush left alignment', () => {
+    const shelf = fixture.debugElement.query(By.css('[shell-shelf]')).nativeElement;
+    expect(shelf.className).toContain('pl-0');
+    expect(shelf.className).toContain('mb-0');
+    expect(shelf.className).not.toContain('-mb-');
+
     const tabs = fixture.debugElement.queryAll(By.css('button[role="tab"]'));
+    const selectedTab = tabs[0].nativeElement;
     const unselectedTab = tabs[1].nativeElement;
-    expect(unselectedTab.className).toContain('bg-white');
+
+    expect(selectedTab.className).toContain('bg-white');
+    expect(selectedTab.className).toContain('border-t');
+    expect(selectedTab.className).toContain('border-x');
+
+    expect(unselectedTab.className).toContain('bg-[#F8FAFC]');
     expect(unselectedTab.className).toContain('rounded-t-[24px]');
     expect(unselectedTab.className).toContain('border-t');
     expect(unselectedTab.className).toContain('border-x');
-    expect(unselectedTab.className).toContain('border-black/5');
-    expect(unselectedTab.className).not.toContain('border-transparent');
+
+    const unselectedTitle = tabs[1].query(By.css('span.font-bold')).nativeElement;
+    expect(unselectedTitle.className).toContain('text-[#4F5674]');
+
+    const unselectedSub = tabs[1].query(By.css('span.font-normal')).nativeElement;
+    expect(unselectedSub.className).toContain('text-[#6B7280]');
   });
 
   it('should render default Order-to-Cash (O2C) 5 pipeline step cards', () => {
