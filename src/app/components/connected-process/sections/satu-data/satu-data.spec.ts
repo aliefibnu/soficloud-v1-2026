@@ -71,7 +71,7 @@ describe('SatuData', () => {
     const shellComponent = shellEl.componentInstance as ProcessSectionShell;
     expect(shellComponent.sectionId()).toBe('satu-data');
     expect(shellComponent.stageBgClass()).toBe(
-      'bg-[linear-gradient(232.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]',
+      'bg-[linear-gradient(322.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]',
     );
     expect(shellComponent.title()).toBe(
       'Setiap Bagian Bergerak Dengan Konteks Yang Sama.',
