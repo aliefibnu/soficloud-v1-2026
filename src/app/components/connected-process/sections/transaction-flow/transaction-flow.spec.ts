@@ -236,7 +236,7 @@ describe('TransactionFlow', () => {
     ]);
 
     const descriptions = cards.map((c) =>
-      c.query(By.css('span.mt-auto')).nativeElement.textContent.trim(),
+      c.query(By.css('span.font-normal')).nativeElement.textContent.trim(),
     );
     expect(descriptions).toEqual([
       'Penawaran ke pelanggan',

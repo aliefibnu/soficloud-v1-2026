@@ -5,7 +5,6 @@
   stageBgClass="bg-gradient-to-r from-[#C8DFDC] to-[#AECFD0]"
   titleMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[620px]"
 >
-  <!-- Cycle Selector Tabs placed atop stage -->
   <div shell-shelf class="pl-0 pr-4 sm:pr-6 lg:pr-8 xl:pr-10 mb-0 relative z-10">
     <div
       role="tablist"
@@ -23,7 +22,7 @@
           (click)="selectCycle(cycle.id)"
           (keydown)="onTabKeydown($event, i)"
           [class]="
-            'group flex flex-col items-start text-left px-5 pt-3 pb-2 sm:px-6 sm:pt-3.5 sm:pb-2 rounded-t-[24px] border-t border-x transition-all duration-200 cursor-pointer min-w-[200px] sm:min-w-[240px] select-none ' +
+            'group flex flex-col items-start text-left px-5 pt-3 pb-2 sm:px-6 sm:pt-3.5 sm:pb-2 rounded-t-3xl border-t border-x transition-all duration-200 cursor-pointer min-w-50 sm:min-w-60 select-none ' +
             (selectedCycle() === cycle.id
               ? 'bg-white border-slate-200/90 shadow-[0_-4px_20px_rgba(35,36,78,0.08)] relative z-20'
               : 'bg-[#F8FAFC] border-slate-200/70 hover:bg-white hover:border-slate-300/90 shadow-[0_-1px_4px_rgba(35,36,78,0.03)] relative z-10')
@@ -52,33 +51,29 @@
     </div>
   </div>
 
-  <!-- Stage Interior: Pipeline Stepper & Bottom Callout -->
   <div
     [id]="'cycle-panel-' + selectedCycle()"
     role="tabpanel"
     [attr.aria-labelledby]="'tab-cycle-' + selectedCycle()"
     class="w-full flex flex-col gap-6 sm:gap-8 lg:gap-10 py-3 sm:py-5 lg:py-6"
   >
-    <!-- Stepper Container with connecting blue pipeline line -->
     <div class="relative w-full">
-      <!-- Horizontal connecting blue line across desktop view -->
       <div
-        class="hidden lg:block absolute left-8 right-8 top-[46%] -translate-y-1/2 h-3.5 sm:h-4 bg-[#2F65E8] rounded-full z-0 pointer-events-none"
+        class="hidden lg:block absolute left-8 right-8 top-1/2 -translate-y-1/2 h-3.5 sm:h-4 bg-[#2F65E8] rounded-full z-0 pointer-events-none"
         aria-hidden="true"
       ></div>
 
-      <!-- List of 5 Step Cards (Horizontal scroll on mobile/tablet, 5-col grid on desktop) -->
       <ol
         class="relative z-10 flex lg:grid lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-4 xl:gap-5 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 snap-x snap-mandatory no-scrollbar"
         aria-label="Workflow pipeline steps"
       >
         @for (step of currentSteps(); track step.id; let i = $index) {
           <li
-            class="snap-center shrink-0 w-56 sm:w-60 lg:w-auto bg-white rounded-2xl p-4 sm:p-5 shadow-[0_4px_16px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col items-center text-center justify-between min-h-[170px] sm:min-h-[185px] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(35,36,78,0.12)] relative z-10"
+            class="snap-center shrink-0 w-56 sm:w-60 lg:w-auto bg-white rounded-md px-2 py-3.5 sm:px-2.5 sm:py-4 shadow-[0_4px_16px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col items-center text-center justify-center min-h-35 sm:min-h-38 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(35,36,78,0.12)] relative z-10"
           >
-            <!-- Squircle Icon Badge with soft blue glass gradient -->
             <div
-              class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-b from-[#E8F1FD] to-[#D0E2FC] border border-[#BFD7F9] flex items-center justify-center shrink-0 mb-3 shadow-[0_2px_8px_rgba(47,101,232,0.12)] text-[#2F65E8]"
+              class="w-12 h-12 sm:w-14 sm:h-14 rounded-md flex items-center justify-center shrink-0 mb-2 sm:mb-2.5 text-[#2F65E8]"
+              style="background: radial-gradient(64.37% 118.95% at 50.57% 50%, #C3D7F7 0%, #EBF2FD 65.38%);"
               aria-hidden="true"
             >
               @if (step.imageSrc) {
@@ -92,17 +87,15 @@
               }
             </div>
 
-            <!-- Title -->
             <span
-              class="font-inter font-bold text-sm sm:text-[15px] lg:text-[15px] text-[#23244E] leading-snug tracking-tight mb-1"
+              class="font-inter font-bold text-sm sm:text-[15px] lg:text-[15px] text-[#23244E] leading-snug tracking-tight"
               style="font-family: var(--font-inter, 'Inter Variable', sans-serif);"
             >
               {{ step.titleKey | translate }}
             </span>
 
-            <!-- Description -->
             <span
-              class="font-dm-sans font-normal text-xs text-[#5A607F] leading-snug tracking-normal mt-auto"
+              class="font-dm-sans font-normal text-xs text-[#23244E] leading-snug tracking-normal mt-1 sm:mt-1.5"
               style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
             >
               {{ step.descKey | translate }}
@@ -112,11 +105,9 @@
       </ol>
     </div>
 
-    <!-- Bottom Callout White Card -->
     <div
       class="w-full bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 lg:p-8 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/80 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8 lg:gap-12"
     >
-      <!-- Left Side: Headline & Tags -->
       <div class="w-full md:w-5/12 lg:w-4/12 flex flex-col items-center md:items-start text-center md:text-left shrink-0">
         <span
           class="font-inter font-extrabold text-xl sm:text-2xl lg:text-[28px] tracking-wide text-[#2F65E8] leading-tight select-none uppercase"
@@ -132,19 +123,16 @@
         </span>
       </div>
 
-      <!-- Vertical Blue Divider on md+ -->
       <div
         class="hidden md:block w-0.5 self-stretch bg-[#2F65E8] rounded-full shrink-0"
         aria-hidden="true"
       ></div>
 
-      <!-- Horizontal Blue Divider on mobile -->
       <div
         class="block md:hidden w-20 h-0.5 bg-[#2F65E8] rounded-full shrink-0"
         aria-hidden="true"
       ></div>
 
-      <!-- Right Side: Explanatory Note -->
       <div class="w-full md:w-7/12 lg:w-8/12 flex items-center text-center md:text-left">
         <p
           class="font-dm-sans font-normal text-xs sm:text-sm lg:text-[15px] text-[#23244E]/90 leading-relaxed tracking-normal"
