@@ -97,7 +97,7 @@ describe('RoleReports', () => {
   it('should render numbers 01, 02, and 03 in the left meta column of cards', () => {
     const cards = fixture.debugElement.queryAll(By.css('article'));
     const numbers = cards.map((c) =>
-      c.query(By.css('span.font-inter.leading-none')).nativeElement.textContent.trim(),
+      c.query(By.css('span.font-dm-sans.leading-none')).nativeElement.textContent.trim(),
     );
     expect(numbers).toEqual(['01', '02', '03']);
   });
