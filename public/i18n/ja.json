@@ -495,6 +495,13 @@
           "MRP": "MRP",
           "FINANCE": "財務",
           "ORDER_PIPELINE": "受注パイプライン"
+        },
+        "PROFILE": {
+          "ARIA": "ユーザープロフィールアバター",
+          "NAME": "アタビル・マロヴェ",
+          "ROLE": "事業運営副社長",
+          "STATUS": "オンライン",
+          "BADGE": "管理者"
         }
       },
       "SALES_PERFORMANCE": {

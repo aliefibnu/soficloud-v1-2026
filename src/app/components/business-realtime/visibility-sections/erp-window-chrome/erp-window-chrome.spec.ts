@@ -52,6 +52,13 @@ describe('ErpWindowChrome', () => {
               FINANCE: 'Finance',
               ORDER_PIPELINE: 'Order Pipeline',
             },
+            PROFILE: {
+              ARIA: 'Avatar profil pengguna',
+              NAME: 'Atabil Marove',
+              ROLE: 'VP of Operations',
+              STATUS: 'Online',
+              BADGE: 'Admin',
+            },
           },
           SALES_PERFORMANCE: {
             MOCKUP: {
@@ -153,5 +160,118 @@ describe('ErpWindowChrome', () => {
       By.css('[aria-label="System status and timestamp"]'),
     );
     expect(pillsContainer).toBeNull();
+  });
+
+  it('should toggle profile popover when avatar button is clicked', () => {
+    const chromeDebug = fixture.debugElement.query(By.directive(ErpWindowChrome));
+    const chrome = chromeDebug.componentInstance as ErpWindowChrome;
+
+    expect(chrome.isProfileOpen()).toBe(false);
+    expect(fixture.debugElement.query(By.css('[role="dialog"]'))).toBeNull();
+
+    const avatarBtn = fixture.debugElement.query(
+      By.css('button[aria-label="Avatar profil pengguna"]'),
+    );
+    expect(avatarBtn).toBeTruthy();
+    expect(avatarBtn.nativeElement.getAttribute('aria-expanded')).toBe('false');
+
+    avatarBtn.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(chrome.isProfileOpen()).toBe(true);
+    expect(avatarBtn.nativeElement.getAttribute('aria-expanded')).toBe('true');
+    expect(fixture.debugElement.query(By.css('[role="dialog"]'))).toBeTruthy();
+
+    avatarBtn.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(chrome.isProfileOpen()).toBe(false);
+    expect(avatarBtn.nativeElement.getAttribute('aria-expanded')).toBe('false');
+    expect(fixture.debugElement.query(By.css('[role="dialog"]'))).toBeNull();
+  });
+
+  it('should display user profile name, role, online status, and admin badge in popover', () => {
+    const chromeDebug = fixture.debugElement.query(By.directive(ErpWindowChrome));
+    const chrome = chromeDebug.componentInstance as ErpWindowChrome;
+
+    chrome.toggleProfile();
+    fixture.detectChanges();
+
+    const dialog = fixture.debugElement.query(By.css('[role="dialog"]'));
+    expect(dialog).toBeTruthy();
+    expect(dialog.nativeElement.textContent).toContain('Atabil Marove');
+    expect(dialog.nativeElement.textContent).toContain('VP of Operations');
+    expect(dialog.nativeElement.textContent).toContain('Online');
+    expect(dialog.nativeElement.textContent).toContain('Admin');
+  });
+
+  it('should close profile popover when document is clicked or escape is pressed', () => {
+    const chromeDebug = fixture.debugElement.query(By.directive(ErpWindowChrome));
+    const chrome = chromeDebug.componentInstance as ErpWindowChrome;
+
+    chrome.isProfileOpen.set(true);
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('[role="dialog"]'))).toBeTruthy();
+
+    chrome.onDocumentClick();
+    fixture.detectChanges();
+    expect(chrome.isProfileOpen()).toBe(false);
+    expect(fixture.debugElement.query(By.css('[role="dialog"]'))).toBeNull();
+
+    chrome.isProfileOpen.set(true);
+    fixture.detectChanges();
+    expect(chrome.isProfileOpen()).toBe(true);
+
+    chrome.closeAllDropdowns();
+    fixture.detectChanges();
+    expect(chrome.isProfileOpen()).toBe(false);
+  });
+
+  it('should stop click propagation inside popover card so it remains open', () => {
+    const chromeDebug = fixture.debugElement.query(By.directive(ErpWindowChrome));
+    const chrome = chromeDebug.componentInstance as ErpWindowChrome;
+
+    chrome.isProfileOpen.set(true);
+    fixture.detectChanges();
+
+    const dialog = fixture.debugElement.query(By.css('[role="dialog"]'));
+    const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+    const spy = vi.spyOn(clickEvent, 'stopPropagation');
+
+    dialog.nativeElement.dispatchEvent(clickEvent);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should rotate chevron icon when popover is open', () => {
+    const chromeDebug = fixture.debugElement.query(By.directive(ErpWindowChrome));
+    const chrome = chromeDebug.componentInstance as ErpWindowChrome;
+    const chevron = fixture.debugElement.query(By.css('button svg'));
+
+    expect(chevron.nativeElement.classList.contains('rotate-180')).toBe(false);
+
+    chrome.isProfileOpen.set(true);
+    fixture.detectChanges();
+
+    expect(chevron.nativeElement.classList.contains('rotate-180')).toBe(true);
+  });
+
+  it('should close other ERP window instances when one opens', () => {
+    const fixture2 = TestBed.createComponent(TestHostComponent);
+    fixture2.detectChanges();
+
+    const chrome1 = fixture.debugElement.query(By.directive(ErpWindowChrome))
+      .componentInstance as ErpWindowChrome;
+    const chrome2 = fixture2.debugElement.query(By.directive(ErpWindowChrome))
+      .componentInstance as ErpWindowChrome;
+
+    chrome1.toggleProfile();
+    expect(chrome1.isProfileOpen()).toBe(true);
+    expect(chrome2.isProfileOpen()).toBe(false);
+
+    chrome2.toggleProfile();
+    expect(chrome1.isProfileOpen()).toBe(false);
+    expect(chrome2.isProfileOpen()).toBe(true);
+
+    fixture2.destroy();
   });
 });
