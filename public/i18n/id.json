@@ -837,7 +837,7 @@
       }
     },
     "ACCOUNTING_IMPACT": {
-      "TITLE": "Operasional Berjalan Pembukuan Mengikuti",
+      "TITLE": "Operasional Berjalan\nPembukuan Mengikuti",
       "DESCRIPTION": "Dokumen yang sudah memenuhi tahap pencatatan menghasilkan dampak akuntansi berdasarkan konfigurasi akun dan kebijakan perusahaan.",
       "COLUMN_1": {
         "TITLE": "Dokumen Sumber",

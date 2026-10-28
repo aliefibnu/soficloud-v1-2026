@@ -40,7 +40,7 @@ describe('ConnectedProcess', () => {
     expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
   });
 
-  it('should render hero, process-tabs, satu-data, transaction-flow, role-reports, and subfooter components', () => {
+  it('should render hero, process-tabs, satu-data, transaction-flow, accounting-impact, role-reports, and subfooter components', () => {
     fixture.detectChanges();
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     expect(heroEl).toBeTruthy();
@@ -56,10 +56,30 @@ describe('ConnectedProcess', () => {
     );
     expect(transactionFlowEl).toBeTruthy();
 
+    const accountingImpactEl = fixture.debugElement.query(
+      By.css('app-accounting-impact'),
+    );
+    expect(accountingImpactEl).toBeTruthy();
+
     const roleReportsEl = fixture.debugElement.query(By.css('app-role-reports'));
     expect(roleReportsEl).toBeTruthy();
 
     const subfooterEl = fixture.debugElement.query(By.css('app-subfooter'));
     expect(subfooterEl).toBeTruthy();
+
+    // Verify correct DOM order inside <main>
+    const mainEl = fixture.debugElement.query(By.css('main'));
+    const children = Array.from((mainEl.nativeElement as HTMLElement).children).map(
+      (el) => el.tagName.toLowerCase(),
+    );
+    expect(children).toEqual([
+      'app-hero',
+      'app-process-tabs',
+      'app-satu-data',
+      'app-transaction-flow',
+      'app-accounting-impact',
+      'app-role-reports',
+      'app-subfooter',
+    ]);
   });
 });

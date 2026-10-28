@@ -1,0 +1,259 @@
+<app-process-section-shell
+  sectionId="dampak-akuntansi"
+  [title]="'CONNECTED_PROCESS.ACCOUNTING_IMPACT.TITLE' | translate"
+  [description]="'CONNECTED_PROCESS.ACCOUNTING_IMPACT.DESCRIPTION' | translate"
+  stageBgClass="bg-[linear-gradient(322.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]"
+  titleMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[640px]"
+  descriptionMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[760px]"
+>
+  <div
+    class="w-full max-w-290 mx-auto flex flex-col gap-4 sm:gap-5 py-2 sm:py-3 lg:py-4"
+  >
+    <div
+      data-testid="accounting-pipeline-grid"
+      class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] items-stretch gap-2.5 sm:gap-3 lg:gap-0"
+    >
+      <article
+        data-testid="accounting-col-source"
+        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
+      >
+        <div class="mb-3.5 sm:mb-4 lg:min-h-14.5 flex flex-col justify-start text-left">
+          <h3
+            id="accounting-col-1-heading"
+            class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-1.5"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 700;
+            "
+          >
+            {{ col1TitleKey | translate }}
+          </h3>
+          <p
+            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] lg:text-[10.5px] text-[#23244E]/90 leading-[1.38] tracking-normal max-w-53.75"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ col1SubtitleKey | translate }}
+          </p>
+        </div>
+
+        <ul aria-labelledby="accounting-col-1-heading" class="flex flex-col gap-2.25 w-full">
+          @for (item of sourceDocuments; track item.id) {
+            <li
+              class="bg-white rounded-lg border border-[#23244E] min-h-8.75 sm:min-h-9 flex items-stretch overflow-hidden"
+            >
+              <div
+                class="w-11 shrink-0 flex items-center justify-center bg-white border-[1.5px] border-[#5B94E8] rounded-l-[7px] select-none"
+                aria-hidden="true"
+              >
+                <img
+                  [ngSrc]="item.iconSrc"
+                  [width]="item.iconWidth"
+                  [height]="item.iconHeight"
+                  alt=""
+                  class="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain select-none pointer-events-none"
+                />
+              </div>
+              <span
+                class="px-3 sm:px-3.5 py-1.5 flex items-center font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-[14px] text-[#23244E] leading-snug tracking-normal text-left"
+                style="
+                  font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                  font-weight: 400;
+                "
+              >
+                {{ item.labelKey | translate }}
+              </span>
+            </li>
+          }
+        </ul>
+      </article>
+
+      <div
+        data-testid="pipeline-arrow"
+        class="flex items-center justify-center py-1 sm:py-1.5 lg:py-0 lg:px-5 xl:px-7 select-none"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 38 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-8 h-4 sm:w-9.5 sm:h-4.5 text-[#1C73E8] rotate-90 lg:rotate-0 shrink-0"
+        >
+          <path
+            d="M2 9H35M35 9L27.5 2M35 9L27.5 16"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <article
+        data-testid="accounting-col-coa"
+        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
+      >
+        <div class="mb-3.5 sm:mb-4 lg:min-h-14.5 flex flex-col justify-start text-left">
+          <h3
+            id="accounting-col-2-heading"
+            class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-1.5"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 700;
+            "
+          >
+            {{ col2TitleKey | translate }}
+          </h3>
+          <p
+            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] lg:text-[10.5px] text-[#23244E]/90 leading-[1.38] tracking-normal"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ col2SubtitleKey | translate }}
+          </p>
+        </div>
+
+        <ol
+          aria-labelledby="accounting-col-2-heading"
+          class="flex flex-col items-center justify-start w-full"
+        >
+          @for (step of postingSteps; track step.id; let last = $last) {
+            <li class="w-full flex flex-col items-center">
+              <div
+                class="w-full max-w-50 sm:max-w-52.5 min-h-10.5 px-4 py-2 bg-white rounded-lg border border-[#23244E] flex items-center justify-center text-center"
+              >
+                <span
+                  class="font-dm-sans font-bold text-base sm:text-[17px] lg:text-[18px] text-[#23244E] leading-tight tracking-tight"
+                  style="
+                    font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                    font-weight: 700;
+                  "
+                >
+                  {{ step.labelKey | translate }}
+                </span>
+              </div>
+              @if (!last) {
+                <div
+                  data-testid="coa-vertical-arrow"
+                  class="h-6.5 flex items-center justify-center text-[#1C5BDD] select-none"
+                  aria-hidden="true"
+                >
+                  <svg
+                    viewBox="0 0 18 26"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4.5 h-6.5"
+                  >
+                    <path
+                      d="M9 0V24.5M9 24.5L3.5 19M9 24.5L14.5 19"
+                      stroke="currentColor"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              }
+            </li>
+          }
+        </ol>
+      </article>
+
+      <div
+        data-testid="pipeline-arrow"
+        class="flex items-center justify-center py-1 sm:py-1.5 lg:py-0 lg:px-5 xl:px-7 select-none"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 38 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-8 h-4 sm:w-9.5 sm:h-4.5 text-[#1C73E8] rotate-90 lg:rotate-0 shrink-0"
+        >
+          <path
+            d="M2 9H35M35 9L27.5 2M35 9L27.5 16"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <article
+        data-testid="accounting-col-results"
+        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
+      >
+        <div class="mb-3.5 sm:mb-4 lg:min-h-14.5 flex flex-col justify-start text-left">
+          <h3
+            id="accounting-col-3-heading"
+            class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-1.5"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 700;
+            "
+          >
+            {{ col3TitleKey | translate }}
+          </h3>
+          <p
+            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] lg:text-[10.5px] text-[#23244E]/90 leading-[1.38] tracking-normal"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ col3SubtitleKey | translate }}
+          </p>
+        </div>
+
+        <ul aria-labelledby="accounting-col-3-heading" class="flex flex-col gap-2.25 w-full">
+          @for (item of financialResults; track item.id) {
+            <li
+              class="bg-white rounded-lg border border-[#23244E] min-h-8.75 sm:min-h-9 flex items-stretch overflow-hidden"
+            >
+              <div
+                class="w-11 shrink-0 flex items-center justify-center bg-white border-[1.5px] border-[#5B94E8] rounded-l-[7px] select-none"
+                aria-hidden="true"
+              >
+                <img
+                  [ngSrc]="item.iconSrc"
+                  [width]="item.iconWidth"
+                  [height]="item.iconHeight"
+                  alt=""
+                  class="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain select-none pointer-events-none"
+                />
+              </div>
+              <span
+                class="px-3 sm:px-3.5 py-1.5 flex items-center font-dm-sans font-normal text-xs sm:text-[13.5px] lg:text-[14px] text-[#23244E] leading-snug tracking-normal text-left"
+                style="
+                  font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                  font-weight: 400;
+                "
+              >
+                {{ item.labelKey | translate }}
+              </span>
+            </li>
+          }
+        </ul>
+      </article>
+    </div>
+
+    <div
+      data-testid="accounting-disclaimer"
+      class="w-full bg-[#FDFDFD] rounded-lg px-5 py-4 sm:px-6 sm:py-4.5 lg:px-7 lg:py-4.5 shadow-[0_4px_20px_rgba(35,36,78,0.04)] border border-white/70"
+    >
+      <p
+        data-testid="accounting-disclaimer-text"
+        class="font-dm-sans font-normal text-xs sm:text-sm lg:text-[14.5px] text-[#23244E] leading-relaxed tracking-normal text-left"
+        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+      >
+        <strong class="font-bold">{{ disclaimerLabelKey | translate }}</strong>
+        {{ ' ' + (disclaimerTextKey | translate) }}
+      </p>
+    </div>
+  </div>
+</app-process-section-shell>

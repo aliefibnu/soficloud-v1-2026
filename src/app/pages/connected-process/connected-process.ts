@@ -4,11 +4,20 @@ import { Hero } from '../../components/connected-process/hero/hero';
 import { ProcessTabs } from '../../components/connected-process/process-tabs/process-tabs';
 import { SatuData } from '../../components/connected-process/sections/satu-data/satu-data';
 import { TransactionFlow } from '../../components/connected-process/sections/transaction-flow/transaction-flow';
+import { AccountingImpact } from '../../components/connected-process/sections/accounting-impact/accounting-impact';
 import { RoleReports } from '../../components/connected-process/sections/role-reports/role-reports';
 import { Subfooter } from '../../components/connected-process/subfooter/subfooter';
 
 @Component({
-  imports: [Hero, ProcessTabs, SatuData, TransactionFlow, RoleReports, Subfooter],
+  imports: [
+    Hero,
+    ProcessTabs,
+    SatuData,
+    TransactionFlow,
+    AccountingImpact,
+    RoleReports,
+    Subfooter,
+  ],
   selector: 'app-connected-process',
   templateUrl: './connected-process.html',
 })

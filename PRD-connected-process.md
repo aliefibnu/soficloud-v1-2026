@@ -385,20 +385,20 @@ flowchart TD
 ### Phase 5: Accounting Impact Section (`AccountingImpact`)
 *Objective: Build the 3-column operational-to-ledger architecture pipeline.*
 
-- [ ] **Step 5.1 — Scaffold Component:**
+- [x] **Step 5.1 — Scaffold Component:**
   - Create `src/app/components/connected-process/sections/accounting-impact/`.
-  - Wrap in `<app-process-section-shell sectionId="dampak-akuntansi" stageBgClass="bg-[#EBF2FD]" ...>`.
-- [ ] **Step 5.2 — Implement 3-Column Architectural Flow:**
+  - Wrap in `<app-process-section-shell sectionId="dampak-akuntansi" stageBgClass="bg-[linear-gradient(322.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]" ...>`.
+- [x] **Step 5.2 — Implement 3-Column Architectural Flow:**
   - Column 1: Dokumen Sumber (4 source document cards).
   - Arrow 1: Prominent directional blue connector.
   - Column 2: Posting & Pemetaan COA (Vertical flow: Jurnal → Trial Balance → General Ledger).
   - Arrow 2: Prominent directional blue connector.
   - Column 3: Hasil Keuangan (4 financial statement cards with icons).
-- [ ] **Step 5.3 — Implement Policy Callout Box:**
+- [x] **Step 5.3 — Implement Policy Callout Box:**
   - Bottom disclaimer banner regarding accounting configuration and company policies.
-- [ ] **Step 5.4 — Mount into Page:**
+- [x] **Step 5.4 — Mount into Page:**
   - Add `<app-accounting-impact />` in `connected-process.html`.
-- [ ] **Verification Gate 5:** Pipeline layout aligns cleanly on desktop; stacks gracefully on mobile with clear directional sequence.
+- [x] **Verification Gate 5:** Pipeline layout aligns cleanly on desktop; stacks gracefully on mobile with clear directional sequence.
 
 ---
 

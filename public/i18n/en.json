@@ -837,7 +837,7 @@
       }
     },
     "ACCOUNTING_IMPACT": {
-      "TITLE": "Operations Run, Accounting Follows",
+      "TITLE": "Operations Run,\nAccounting Follows",
       "DESCRIPTION": "Documents that reach accounting recognition stages generate ledger entries based on chart of accounts setup and corporate policies.",
       "COLUMN_1": {
         "TITLE": "Source Documents",
