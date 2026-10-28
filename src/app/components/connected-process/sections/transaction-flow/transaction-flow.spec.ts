@@ -69,11 +69,11 @@ describe('TransactionFlow', () => {
             P2P: {
               STEP_1: {
                 TITLE: 'Purchase Requisition',
-                DESC: 'Permintaan kebutuhan',
+                DESC: 'Kebutuhan disetujui',
               },
               STEP_2: {
                 TITLE: 'Purchase Order',
-                DESC: 'Pesanan pemasok',
+                DESC: 'Pesanan ke supplier',
               },
               STEP_3: {
                 TITLE: 'Goods Receipt',
@@ -81,33 +81,33 @@ describe('TransactionFlow', () => {
               },
               STEP_4: {
                 TITLE: 'Supplier Invoice',
-                DESC: 'Tagihan masuk',
+                DESC: 'Tagihan & AP',
               },
               STEP_5: {
                 TITLE: 'Payment',
-                DESC: 'Pelunasan pembayaran',
+                DESC: 'Kewajiban dibayar',
               },
             },
             P2PR: {
               STEP_1: {
                 TITLE: 'BOM & Routing',
-                DESC: 'Standar komponen & jalur',
+                DESC: 'Struktur dan proses',
               },
               STEP_2: {
-                TITLE: 'Production Planning',
-                DESC: 'Jadwal & alokasi',
+                TITLE: 'Planning / MRP',
+                DESC: 'Cek kebutuhan material',
               },
               STEP_3: {
-                TITLE: 'Manufacturing Order',
-                DESC: 'Surat perintah kerja',
+                TITLE: 'Procurement',
+                DESC: 'Penuhi kekurangan',
               },
               STEP_4: {
-                TITLE: 'Manufacturing Process',
-                DESC: 'Pencatatan aktual',
+                TITLE: 'Manufacturing Order',
+                DESC: 'Eksekusi produksi',
               },
               STEP_5: {
-                TITLE: 'Standard Costing & Variance',
-                DESC: 'Kalkulasi harga pokok',
+                TITLE: 'Costing & Variance',
+                DESC: 'Analisis biaya',
               },
             },
           },
@@ -277,7 +277,7 @@ describe('TransactionFlow', () => {
     const frame = fixture.debugElement.query(By.css('[data-testid="callout-frame"]'));
     expect(frame).toBeTruthy();
     expect(frame.nativeElement.className).toContain('bg-[#FDFDFD]');
-    expect(frame.nativeElement.className).toContain('rounded-[8px]');
+    expect(frame.nativeElement.className).toContain('rounded-lg');
 
     const calloutTitle = fixture.debugElement.query(By.css('[data-testid="callout-title"]'));
     expect(calloutTitle).toBeTruthy();
@@ -370,10 +370,10 @@ describe('TransactionFlow', () => {
     );
     expect(titles).toEqual([
       'BOM & Routing',
-      'Production Planning',
+      'Planning / MRP',
+      'Procurement',
       'Manufacturing Order',
-      'Manufacturing Process',
-      'Standard Costing & Variance',
+      'Costing & Variance',
     ]);
 
     const calloutTags = fixture.debugElement.query(

@@ -774,11 +774,11 @@
         "P2P": {
           "STEP_1": {
             "TITLE": "Purchase Requisition",
-            "DESC": "Material requisition"
+            "DESC": "Requisition approved"
           },
           "STEP_2": {
             "TITLE": "Purchase Order",
-            "DESC": "Supplier purchase order"
+            "DESC": "Order to supplier"
           },
           "STEP_3": {
             "TITLE": "Goods Receipt",
@@ -786,33 +786,33 @@
           },
           "STEP_4": {
             "TITLE": "Supplier Invoice",
-            "DESC": "Vendor invoice received"
+            "DESC": "Invoice & AP"
           },
           "STEP_5": {
             "TITLE": "Payment",
-            "DESC": "Payment settlement"
+            "DESC": "Obligations paid"
           }
         },
         "P2PR": {
           "STEP_1": {
             "TITLE": "BOM & Routing",
-            "DESC": "Component & routing standard"
+            "DESC": "Structure and process"
           },
           "STEP_2": {
-            "TITLE": "Production Planning",
-            "DESC": "Schedule & allocation"
+            "TITLE": "Planning / MRP",
+            "DESC": "Check material requirements"
           },
           "STEP_3": {
-            "TITLE": "Manufacturing Order",
-            "DESC": "Work order authorization"
+            "TITLE": "Procurement",
+            "DESC": "Fulfill shortages"
           },
           "STEP_4": {
-            "TITLE": "Manufacturing Process",
-            "DESC": "Actual floor recording"
+            "TITLE": "Manufacturing Order",
+            "DESC": "Production execution"
           },
           "STEP_5": {
-            "TITLE": "Standard Costing & Variance",
-            "DESC": "Standard costing & variance calculation"
+            "TITLE": "Costing & Variance",
+            "DESC": "Cost analysis"
           }
         }
       },
