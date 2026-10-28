@@ -65,7 +65,7 @@ describe('RoleReports', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the ProcessSectionShell with sectionId laporan and stageBgClass bg-[#FBCBC5]', () => {
+  it('should render the ProcessSectionShell with sectionId laporan and gradient stageBgClass', () => {
     const shellEl = fixture.debugElement.query(
       By.directive(ProcessSectionShell),
     );
@@ -73,7 +73,9 @@ describe('RoleReports', () => {
 
     const shellComponent = shellEl.componentInstance as ProcessSectionShell;
     expect(shellComponent.sectionId()).toBe('laporan');
-    expect(shellComponent.stageBgClass()).toBe('bg-[#FBCBC5]');
+    expect(shellComponent.stageBgClass()).toBe(
+      'bg-[linear-gradient(310.74deg,#FFEFED_-9.86%,rgba(252,190,182,0.8)_43.43%,#FBCBC5_94.33%)]',
+    );
     expect(shellComponent.title()).toBe(
       'Laporan Untuk Setiap Tim Dalam Satu Alur Data',
     );
@@ -90,8 +92,8 @@ describe('RoleReports', () => {
     const cards = fixture.debugElement.queryAll(By.css('article'));
     expect(cards.length).toBe(3);
     for (const card of cards) {
-      expect(card.nativeElement.classList.contains('rounded-[16px]')).toBe(true);
-      expect(card.nativeElement.classList.contains('min-h-[314px]')).toBe(true);
+      expect(card.nativeElement.classList.contains('rounded-2xl')).toBe(true);
+      expect(card.nativeElement.classList.contains('min-h-78.5')).toBe(true);
     }
   });
 
@@ -140,19 +142,19 @@ describe('RoleReports', () => {
     const pill1 = cards[0].query(By.css('.from-\\[\\#EDF3FB\\]'));
     expect(pill1).toBeTruthy();
     expect(pill1.nativeElement.style.background).toContain('linear-gradient');
-    expect(pill1.nativeElement.classList.contains('rounded-[8px]')).toBe(true);
+    expect(pill1.nativeElement.classList.contains('rounded-lg')).toBe(true);
     expect(pill1.nativeElement.classList.contains('w-[20.83px]')).toBe(true);
 
     const pill2 = cards[1].query(By.css('.from-\\[\\#FFEFED\\]'));
     expect(pill2).toBeTruthy();
     expect(pill2.nativeElement.style.background).toContain('linear-gradient');
-    expect(pill2.nativeElement.classList.contains('rounded-[8px]')).toBe(true);
+    expect(pill2.nativeElement.classList.contains('rounded-lg')).toBe(true);
     expect(pill2.nativeElement.classList.contains('w-[20.83px]')).toBe(true);
 
     const pill3 = cards[2].query(By.css('.from-\\[\\#10BFC1\\]'));
     expect(pill3).toBeTruthy();
     expect(pill3.nativeElement.style.background).toContain('linear-gradient');
-    expect(pill3.nativeElement.classList.contains('rounded-[8px]')).toBe(true);
+    expect(pill3.nativeElement.classList.contains('rounded-lg')).toBe(true);
     expect(pill3.nativeElement.classList.contains('w-[20.83px]')).toBe(true);
   });
 
