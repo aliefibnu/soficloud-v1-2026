@@ -82,7 +82,7 @@ describe('RoleReports', () => {
     );
   });
 
-  it('should render exactly 3 tier cards in a responsive grid with 16px corner radius', () => {
+  it('should render exactly 3 tier cards in a responsive grid with 16px corner radius and 314px min-height', () => {
     const gridEl = fixture.debugElement.query(By.css('.grid'));
     expect(gridEl).toBeTruthy();
     expect(gridEl.nativeElement.classList.contains('md:grid-cols-3')).toBe(true);
@@ -91,6 +91,7 @@ describe('RoleReports', () => {
     expect(cards.length).toBe(3);
     for (const card of cards) {
       expect(card.nativeElement.classList.contains('rounded-[16px]')).toBe(true);
+      expect(card.nativeElement.classList.contains('min-h-[314px]')).toBe(true);
     }
   });
 
@@ -115,6 +116,7 @@ describe('RoleReports', () => {
     const subtitles = cards.map((c) => {
       const el = c.query(By.css('h3')).nativeElement;
       expect(el.classList.contains('font-bold')).toBe(true);
+      expect(el.classList.contains('leading-[1.2]')).toBe(true);
       return el.textContent.trim();
     });
     expect(subtitles).toEqual([
@@ -132,24 +134,34 @@ describe('RoleReports', () => {
     }
   });
 
-  it('should render vertical gradient divider capsule pills for each tier', () => {
+  it('should render vertical gradient divider capsule pills for each tier with 8px radius and 20.83px width', () => {
     const cards = fixture.debugElement.queryAll(By.css('article'));
 
     const pill1 = cards[0].query(By.css('.from-\\[\\#EDF3FB\\]'));
     expect(pill1).toBeTruthy();
     expect(pill1.nativeElement.style.background).toContain('linear-gradient');
+    expect(pill1.nativeElement.classList.contains('rounded-[8px]')).toBe(true);
+    expect(pill1.nativeElement.classList.contains('w-[20.83px]')).toBe(true);
 
     const pill2 = cards[1].query(By.css('.from-\\[\\#FFEFED\\]'));
     expect(pill2).toBeTruthy();
     expect(pill2.nativeElement.style.background).toContain('linear-gradient');
+    expect(pill2.nativeElement.classList.contains('rounded-[8px]')).toBe(true);
+    expect(pill2.nativeElement.classList.contains('w-[20.83px]')).toBe(true);
 
     const pill3 = cards[2].query(By.css('.from-\\[\\#10BFC1\\]'));
     expect(pill3).toBeTruthy();
     expect(pill3.nativeElement.style.background).toContain('linear-gradient');
+    expect(pill3.nativeElement.classList.contains('rounded-[8px]')).toBe(true);
+    expect(pill3.nativeElement.classList.contains('w-[20.83px]')).toBe(true);
   });
 
-  it('should render vertical bulleted department tags inside each card', () => {
+  it('should render vertical bulleted department tags inside each card in #1C73E8 with font-weight 400', () => {
     const cards = fixture.debugElement.queryAll(By.css('article'));
+    const tagList = cards[0].query(By.css('[aria-label="Department Tags"]'));
+    expect(tagList.nativeElement.classList.contains('text-[#1C73E8]')).toBe(true);
+    expect(tagList.nativeElement.classList.contains('font-normal')).toBe(true);
+    expect(cards[0].query(By.css('[aria-label="Department Tags"] li')).nativeElement.classList.contains('leading-none')).toBe(true);
 
     const tags1 = cards[0]
       .queryAll(By.css('[aria-label="Department Tags"] li span:last-child'))
