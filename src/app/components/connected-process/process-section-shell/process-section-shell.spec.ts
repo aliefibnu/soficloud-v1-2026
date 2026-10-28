@@ -12,6 +12,7 @@ import { ProcessSectionShell } from './process-section-shell';
       [description]="description()"
       [stageBgClass]="stageBgClass()"
       [titleMaxWidthClass]="titleMaxWidthClass()"
+      [descriptionMaxWidthClass]="descriptionMaxWidthClass()"
     >
       <div id="test-shelf" shell-shelf>Shelf Test Content</div>
       <div id="test-projected-content">Projected Test Content</div>
@@ -26,6 +27,7 @@ class TestHostComponent {
   );
   readonly stageBgClass = signal('bg-[#E8F0FC]');
   readonly titleMaxWidthClass = signal('max-w-3xl lg:max-w-214');
+  readonly descriptionMaxWidthClass = signal('max-w-214');
 }
 
 describe('ProcessSectionShell', () => {
@@ -101,6 +103,17 @@ describe('ProcessSectionShell', () => {
       'Dokumen bisnis membawa referensi ke tahap berikutnya.',
     );
     expect(descEl.nativeElement.classList.contains('whitespace-pre-line')).toBe(true);
+    expect(descEl.nativeElement.classList.contains('max-w-214')).toBe(true);
+  });
+
+  it('should allow custom descriptionMaxWidthClass on description paragraph', () => {
+    const descEl = fixture.debugElement.query(By.css('p.font-dm-sans'));
+    expect(descEl.nativeElement.classList.contains('max-w-214')).toBe(true);
+
+    hostComponent.descriptionMaxWidthClass.set('max-w-md');
+    fixture.detectChanges();
+
+    expect(descEl.nativeElement.classList.contains('max-w-md')).toBe(true);
   });
 
   it('should project shelf content inside the shell-shelf slot', () => {

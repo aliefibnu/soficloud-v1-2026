@@ -872,8 +872,8 @@
       "DISCLAIMER_TEXT": "Alur ini menggambarkan hubungan proses dan data. Jenis jurnal, titik posting, pengakuan pendapatan/biaya, serta format laporan disesuaikan dengan implementasi dan kebijakan akuntansi perusahaan."
     },
     "ROLE_REPORTS": {
-      "TITLE": "Laporan Untuk Setiap Tim Dalam Satu Alur Data",
-      "DESCRIPTION": "Management melihat hasil akhir sekaligus konteks operasional yang membentuknya.",
+      "TITLE": "Laporan Untuk Setiap Tim\nDalam Satu Alur Data",
+      "DESCRIPTION": "Management melihat hasil akhir sekaligus konteks\noperasional yang membentuknya.",
       "TIERS": {
         "OPERATIONAL": {
           "TITLE": "OPERASIONAL",

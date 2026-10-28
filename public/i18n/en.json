@@ -872,8 +872,8 @@
       "DISCLAIMER_TEXT": "This workflow illustrates process and data relationships. Journal types, posting triggers, revenue/expense recognition milestones, and report formats are configured according to company accounting policies and implementation requirements."
     },
     "ROLE_REPORTS": {
-      "TITLE": "Reports for Every Team Within One Data Flow",
-      "DESCRIPTION": "Management sees final financial results alongside the operational context that created them.",
+      "TITLE": "Reports for Every Team\nWithin One Data Flow",
+      "DESCRIPTION": "Management sees final financial results\nalongside the operational context that created them.",
       "TIERS": {
         "OPERATIONAL": {
           "TITLE": "OPERATIONAL",

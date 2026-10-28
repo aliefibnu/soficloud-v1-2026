@@ -24,9 +24,9 @@ describe('RoleReports', () => {
     translateService.setTranslation('id', {
       CONNECTED_PROCESS: {
         ROLE_REPORTS: {
-          TITLE: 'Laporan Untuk Setiap Tim Dalam Satu Alur Data',
+          TITLE: 'Laporan Untuk Setiap Tim\nDalam Satu Alur Data',
           DESCRIPTION:
-            'Management melihat hasil akhir sekaligus konteks operasional yang membentuknya.',
+            'Management melihat hasil akhir sekaligus konteks\noperasional yang membentuknya.',
           TIERS: {
             OPERATIONAL: {
               TITLE: 'OPERASIONAL',
@@ -77,10 +77,16 @@ describe('RoleReports', () => {
       'bg-[linear-gradient(310.74deg,#FFEFED_-9.86%,rgba(252,190,182,0.8)_43.43%,#FBCBC5_94.33%)]',
     );
     expect(shellComponent.title()).toBe(
-      'Laporan Untuk Setiap Tim Dalam Satu Alur Data',
+      'Laporan Untuk Setiap Tim\nDalam Satu Alur Data',
     );
     expect(shellComponent.description()).toContain(
-      'Management melihat hasil akhir sekaligus konteks operasional yang membentuknya.',
+      'Management melihat hasil akhir sekaligus konteks\noperasional yang membentuknya.',
+    );
+    expect(shellComponent.titleMaxWidthClass()).toBe(
+      'max-w-xl sm:max-w-2xl lg:max-w-[620px]',
+    );
+    expect(shellComponent.descriptionMaxWidthClass()).toBe(
+      'max-w-md sm:max-w-lg lg:max-w-[480px]',
     );
   });
 
