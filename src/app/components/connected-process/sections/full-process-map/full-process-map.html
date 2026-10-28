@@ -6,7 +6,6 @@
   descriptionMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[740px]"
   stageBgClass="bg-[linear-gradient(135deg,#C9DEDE_0%,#A3D0D0_48%,#DBE8E8_100%)]"
 >
-  <!-- Mobile / Tablet Scroll Hint Pill (< xl) -->
   <div
     data-testid="fpm-scroll-hint"
     class="xl:hidden flex items-center justify-center mb-3 select-none"
@@ -34,7 +33,6 @@
     </span>
   </div>
 
-  <!-- Focusable & Accessible Scroll Viewport -->
   <div
     #scrollViewport
     data-testid="fpm-scroll-viewport"
@@ -50,12 +48,10 @@
     (pointerup)="onPointerUp($event)"
     (pointercancel)="onPointerUp($event)"
   >
-    <!-- Inner Diagram Canvas Card (1120 × 728 px) -->
     <div
       data-testid="fpm-canvas"
       class="relative w-280 h-182 mx-auto shrink-0 rounded-2xl border border-white/80 shadow-[0_6px_28px_rgba(35,36,78,0.07)] overflow-hidden bg-[radial-gradient(56%_60%_at_50%_54%,#CFE0F9_0%,#DCE8FB_56%,#EAF2FD_100%)]"
     >
-      <!-- Unified SVG Connector Overlay (34 Paths) -->
       <svg
         data-testid="fpm-connectors-svg"
         viewBox="0 0 1120 728"
@@ -114,7 +110,6 @@
         }
       </svg>
 
-      <!-- 4 Semantic Stream Groups & 31 Nodes -->
       @for (stream of streamGroups; track stream.id) {
         <h3 [id]="'fpm-stream-' + stream.id" class="sr-only">
           {{ stream.titleKey | translate }}
@@ -131,21 +126,18 @@
               [style.left.px]="node.x"
               [style.top.px]="node.y"
             >
-              <!-- Layer 1: Offset Back Shadow Tile -->
               <div
-                class="absolute -left-1 top-1 w-12 h-11 rounded-tl-[7px] rounded-bl-[7px] rounded-br-[12px] rounded-tr-none z-0 select-none pointer-events-none"
+                class="absolute -left-1 top-1 w-12 h-11 rounded-tl-[7px] rounded-bl-[7px] rounded-br-xl rounded-tr-none z-0 select-none pointer-events-none"
                 [class]="themeTokens[node.theme].shadowBgClass"
                 aria-hidden="true"
               ></div>
 
-              <!-- Layer 2: Main White Label Card Frame -->
               <div
-                class="relative z-10 w-full h-full bg-white rounded-[6px] border flex items-stretch overflow-hidden"
+                class="relative z-10 w-full h-full bg-white rounded-md border flex items-stretch overflow-hidden"
                 [class]="themeTokens[node.theme].borderClass"
               >
-                <!-- Layer 3: Front Gradient Icon Badge -->
                 <div
-                  class="w-12 shrink-0 flex items-center justify-center select-none -my-px -ml-px rounded-tl-[7px] rounded-bl-[7px] rounded-br-[12px] rounded-tr-none"
+                  class="w-12 shrink-0 flex items-center justify-center select-none -my-px -ml-px rounded-tl-[7px] rounded-bl-[7px] rounded-br-xl rounded-tr-none"
                   [style.background]="themeTokens[node.theme].badgeGradient"
                   aria-hidden="true"
                 >
@@ -154,11 +146,10 @@
                     [width]="node.iconWidth"
                     [height]="node.iconHeight"
                     alt=""
-                    class="max-w-6.5 max-h-6.5 w-auto h-auto object-contain select-none pointer-events-none"
+                    class="w-full h-full p-1 object-contain select-none pointer-events-none"
                   />
                 </div>
 
-                <!-- Right Label Compartment -->
                 <span
                   class="flex-1 min-w-0 pl-2.5 pr-2 py-1 flex items-center font-dm-sans font-bold text-[11px] leading-[1.18] tracking-[-0.01em] text-[#23244E] text-left whitespace-pre-line"
                   style="

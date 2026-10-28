@@ -204,6 +204,12 @@ describe('FullProcessMap', () => {
       expect(img.nativeElement.getAttribute('src')).toMatch(
         /^\/images\/connected-process\/full-process-map\/.*\.svg$/,
       );
+      expect(img.nativeElement.className).toContain('w-full');
+      expect(img.nativeElement.className).toContain('h-full');
+      expect(img.nativeElement.className).toContain('p-1');
+      expect(img.nativeElement.className).toContain('object-contain');
+      expect(img.nativeElement.className).not.toContain('max-w-6.5');
+      expect(img.nativeElement.className).not.toContain('max-h-6.5');
     }
   });
 

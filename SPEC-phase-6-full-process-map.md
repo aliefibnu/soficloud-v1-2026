@@ -201,7 +201,7 @@ Every single one of the **31 process nodes** has identical outer card dimensions
    - Vertical linear gradient fill by stream theme (see Section 3.4).
    - `aria-hidden="true"`.
    - Icon `<img>` (via `NgOptimizedImage`):
-     - `class="max-w-6.5 max-h-6.5 w-auto h-auto object-contain select-none pointer-events-none"` (`max 26px × 26px`, preserving each SVG's intrinsic aspect ratio cleanly inside the `48px × 44px` badge).
+     - `class="w-full h-full p-1 object-contain select-none pointer-events-none"` (scales SVG icons to comfortably fill ~80%–85% of the `48px × 44px` badge with 4px padding inset per Figma, eliminating HiDPI srcset halving).
 4. **Right Label Compartment (`<span>`):**
    - Classes:
      ```text
