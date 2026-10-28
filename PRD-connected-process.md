@@ -365,20 +365,20 @@ flowchart TD
 ### Phase 4: Transaction Flow Section (`TransactionFlow`)
 *Objective: Deliver the interactive 3-cycle workflow pipeline (Order-to-Cash, Procure-to-Pay, Plan-to-Produce).*
 
-- [ ] **Step 4.1 — Scaffold Component & State:**
+- [x] **Step 4.1 — Scaffold Component & State:**
   - Create `src/app/components/connected-process/sections/transaction-flow/`.
   - Define `selectedCycle = signal<'O2C' | 'P2P' | 'P2PR'>('O2C')`.
   - Derive current steps and report metadata via `computed()`.
-- [ ] **Step 4.2 — Build Cycle Switcher Tabs:**
+- [x] **Step 4.2 — Build Cycle Switcher Tabs:**
   - Interactive pill selector with active elevation and subtle border.
-- [ ] **Step 4.3 — Build Document Pipeline Stepper Nodes:**
+- [x] **Step 4.3 — Build Document Pipeline Stepper Nodes:**
   - Visual nodes with custom icons, active blue connecting bar, and document captions.
   - Smooth animated transition when switching cycles.
-- [ ] **Step 4.4 — Build Bottom Report Summary Callout:**
+- [x] **Step 4.4 — Build Bottom Report Summary Callout:**
   - Two-column callout banner with `TERLIHAT DI LAPORAN` tags and accounting posting disclaimer.
-- [ ] **Step 4.5 — Mount into Page:**
+- [x] **Step 4.5 — Mount into Page:**
   - Add `<app-transaction-flow />` directly below `SatuData`.
-- [ ] **Verification Gate 4:** Switching between Order-to-Cash, Procure-to-Pay, and Plan-to-Produce instantaneously updates document nodes and report callout without layout jumps.
+- [x] **Verification Gate 4:** Switching between Order-to-Cash, Procure-to-Pay, and Plan-to-Produce instantaneously updates document nodes and report callout without layout jumps.
 
 ---
 
