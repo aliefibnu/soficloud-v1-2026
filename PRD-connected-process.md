@@ -405,20 +405,20 @@ flowchart TD
 ### Phase 6: Full Process Architecture Map (`FullProcessMap`)
 *Objective: Build the comprehensive 4-stream ERP process and data interaction map.*
 
-- [ ] **Step 6.1 — Scaffold Component:**
+- [x] **Step 6.1 — Scaffold Component:**
   - Create `src/app/components/connected-process/sections/full-process-map/`.
-  - Wrap in `<app-process-section-shell sectionId="peta-lengkap" stageBgClass="bg-[#DDEAE6]" ...>`.
-- [ ] **Step 6.2 — Implement 4-Stream Interconnected Diagram:**
+  - Wrap in `<app-process-section-shell sectionId="peta-lengkap" stageBgClass="bg-[linear-gradient(135deg,#C9DEDE_0%,#A3D0D0_48%,#DBE8E8_100%)]" ...>`.
+- [x] **Step 6.2 — Implement 4-Stream Interconnected Diagram:**
   - Purchasing Stream (Blue nodes + branches).
   - Manufacturing Stream (Teal/green nodes + manufacturing hub).
   - Sales Stream (Red/coral nodes + branches).
   - Central General Ledger Hub & Downstream Financial Statements (Center core).
-- [ ] **Step 6.3 — Responsive Viewport Strategy:**
+- [x] **Step 6.3 — Responsive Viewport Strategy:**
   - Desktop: Full wide layout with SVG connector paths.
   - Mobile/Tablet: Overflow-x container with smooth drag scrolling and visual scroll indicator.
-- [ ] **Step 6.4 — Mount into Page:**
+- [x] **Step 6.4 — Mount into Page:**
   - Add `<app-full-process-map />` as the final milestone section.
-- [ ] **Verification Gate 6:** All diagram labels are razor-sharp, connections reflect the architectural map, and horizontal scrolling works smoothly on touch devices.
+- [x] **Verification Gate 6:** All diagram labels are razor-sharp, connections reflect the architectural map, and horizontal scrolling works smoothly on touch devices.
 
 ---
 

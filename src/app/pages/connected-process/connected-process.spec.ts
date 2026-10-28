@@ -40,7 +40,7 @@ describe('ConnectedProcess', () => {
     expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
   });
 
-  it('should render hero, process-tabs, satu-data, transaction-flow, accounting-impact, role-reports, and subfooter components', () => {
+  it('should render hero, process-tabs, satu-data, transaction-flow, accounting-impact, role-reports, full-process-map, and subfooter components', () => {
     fixture.detectChanges();
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     expect(heroEl).toBeTruthy();
@@ -64,6 +64,11 @@ describe('ConnectedProcess', () => {
     const roleReportsEl = fixture.debugElement.query(By.css('app-role-reports'));
     expect(roleReportsEl).toBeTruthy();
 
+    const fullProcessMapEl = fixture.debugElement.query(
+      By.css('app-full-process-map'),
+    );
+    expect(fullProcessMapEl).toBeTruthy();
+
     const subfooterEl = fixture.debugElement.query(By.css('app-subfooter'));
     expect(subfooterEl).toBeTruthy();
 
@@ -79,6 +84,7 @@ describe('ConnectedProcess', () => {
       'app-transaction-flow',
       'app-accounting-impact',
       'app-role-reports',
+      'app-full-process-map',
       'app-subfooter',
     ]);
   });

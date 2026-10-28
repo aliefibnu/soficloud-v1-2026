@@ -6,6 +6,7 @@ import { SatuData } from '../../components/connected-process/sections/satu-data/
 import { TransactionFlow } from '../../components/connected-process/sections/transaction-flow/transaction-flow';
 import { AccountingImpact } from '../../components/connected-process/sections/accounting-impact/accounting-impact';
 import { RoleReports } from '../../components/connected-process/sections/role-reports/role-reports';
+import { FullProcessMap } from '../../components/connected-process/sections/full-process-map/full-process-map';
 import { Subfooter } from '../../components/connected-process/subfooter/subfooter';
 
 @Component({
@@ -16,6 +17,7 @@ import { Subfooter } from '../../components/connected-process/subfooter/subfoote
     TransactionFlow,
     AccountingImpact,
     RoleReports,
+    FullProcessMap,
     Subfooter,
   ],
   selector: 'app-connected-process',

@@ -1,0 +1,178 @@
+<app-process-section-shell
+  sectionId="peta-lengkap"
+  [title]="'CONNECTED_PROCESS.FULL_PROCESS_MAP.TITLE' | translate"
+  [description]="'CONNECTED_PROCESS.FULL_PROCESS_MAP.DESCRIPTION' | translate"
+  titleMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[660px]"
+  descriptionMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[740px]"
+  stageBgClass="bg-[linear-gradient(135deg,#C9DEDE_0%,#A3D0D0_48%,#DBE8E8_100%)]"
+>
+  <!-- Mobile / Tablet Scroll Hint Pill (< xl) -->
+  <div
+    data-testid="fpm-scroll-hint"
+    class="xl:hidden flex items-center justify-center mb-3 select-none"
+  >
+    <span
+      class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-xs border border-white/80 shadow-[0_2px_10px_rgba(35,36,78,0.06)] font-dm-sans font-medium text-xs text-[#23244E]"
+      style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+    >
+      <svg
+        viewBox="0 0 20 12"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-2.5 text-[#139496] shrink-0"
+        aria-hidden="true"
+      >
+        <path
+          d="M4.5 2L1 6L4.5 10M15.5 2L19 6L15.5 10M1 6H19"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      {{ scrollHintKey | translate }}
+    </span>
+  </div>
+
+  <!-- Focusable & Accessible Scroll Viewport -->
+  <div
+    #scrollViewport
+    data-testid="fpm-scroll-viewport"
+    role="region"
+    [attr.aria-label]="ariaRegionLabelKey | translate"
+    tabindex="0"
+    class="w-full overflow-x-auto overscroll-x-contain pb-2 xl:pb-0 xl:overflow-x-visible focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#365AD2] focus-visible:ring-offset-2 rounded-2xl xl:cursor-default"
+    [class.cursor-grab]="!isDragging()"
+    [class.cursor-grabbing]="isDragging()"
+    [class.select-none]="isDragging()"
+    (pointerdown)="onPointerDown($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerUp($event)"
+    (pointercancel)="onPointerUp($event)"
+  >
+    <!-- Inner Diagram Canvas Card (1120 × 728 px) -->
+    <div
+      data-testid="fpm-canvas"
+      class="relative w-280 h-182 mx-auto shrink-0 rounded-2xl border border-white/80 shadow-[0_6px_28px_rgba(35,36,78,0.07)] overflow-hidden bg-[radial-gradient(56%_60%_at_50%_54%,#CFE0F9_0%,#DCE8FB_56%,#EAF2FD_100%)]"
+    >
+      <!-- Unified SVG Connector Overlay (34 Paths) -->
+      <svg
+        data-testid="fpm-connectors-svg"
+        viewBox="0 0 1120 728"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full pointer-events-none z-0"
+      >
+        <defs>
+          <marker
+            id="fpm-arrow-blue"
+            viewBox="0 0 10 10"
+            refX="8.5"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 1 1.2 L 8.8 5 L 1 8.8 Z" fill="#1C73F0" />
+          </marker>
+          <marker
+            id="fpm-arrow-teal"
+            viewBox="0 0 10 10"
+            refX="8.5"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 1 1.2 L 8.8 5 L 1 8.8 Z" fill="#139496" />
+          </marker>
+          <marker
+            id="fpm-arrow-red"
+            viewBox="0 0 10 10"
+            refX="8.5"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 1 1.2 L 8.8 5 L 1 8.8 Z" fill="#E4212F" />
+          </marker>
+        </defs>
+
+        @for (c of connectors; track c.id) {
+          <path
+            [attr.id]="'fpm-conn-' + c.id"
+            [attr.d]="c.d"
+            [attr.stroke]="themeTokens[c.theme].strokeHex"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            [attr.marker-start]="c.markers === 'both' ? themeTokens[c.theme].markerUrl : null"
+            [attr.marker-end]="c.markers === 'end' || c.markers === 'both' ? themeTokens[c.theme].markerUrl : null"
+          />
+        }
+      </svg>
+
+      <!-- 4 Semantic Stream Groups & 31 Nodes -->
+      @for (stream of streamGroups; track stream.id) {
+        <h3 [id]="'fpm-stream-' + stream.id" class="sr-only">
+          {{ stream.titleKey | translate }}
+        </h3>
+        <ul
+          [attr.data-testid]="'fpm-stream-' + stream.id"
+          [attr.aria-labelledby]="'fpm-stream-' + stream.id"
+          class="m-0 p-0 list-none"
+        >
+          @for (node of stream.nodes; track node.id) {
+            <li
+              [attr.data-testid]="'fpm-node-' + node.id"
+              class="absolute w-46 h-11"
+              [style.left.px]="node.x"
+              [style.top.px]="node.y"
+            >
+              <!-- Layer 1: Offset Back Shadow Tile -->
+              <div
+                class="absolute -left-1 top-1 w-12 h-11 rounded-tl-[7px] rounded-bl-[7px] rounded-br-[12px] rounded-tr-none z-0 select-none pointer-events-none"
+                [class]="themeTokens[node.theme].shadowBgClass"
+                aria-hidden="true"
+              ></div>
+
+              <!-- Layer 2: Main White Label Card Frame -->
+              <div
+                class="relative z-10 w-full h-full bg-white rounded-[6px] border flex items-stretch overflow-hidden"
+                [class]="themeTokens[node.theme].borderClass"
+              >
+                <!-- Layer 3: Front Gradient Icon Badge -->
+                <div
+                  class="w-12 shrink-0 flex items-center justify-center select-none -my-px -ml-px rounded-tl-[7px] rounded-bl-[7px] rounded-br-[12px] rounded-tr-none"
+                  [style.background]="themeTokens[node.theme].badgeGradient"
+                  aria-hidden="true"
+                >
+                  <img
+                    [ngSrc]="node.iconSrc"
+                    [width]="node.iconWidth"
+                    [height]="node.iconHeight"
+                    alt=""
+                    class="max-w-6.5 max-h-6.5 w-auto h-auto object-contain select-none pointer-events-none"
+                  />
+                </div>
+
+                <!-- Right Label Compartment -->
+                <span
+                  class="flex-1 min-w-0 pl-2.5 pr-2 py-1 flex items-center font-dm-sans font-bold text-[11px] leading-[1.18] tracking-[-0.01em] text-[#23244E] text-left whitespace-pre-line"
+                  style="
+                    font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                    font-weight: 700;
+                  "
+                >
+                  {{ node.labelKey | translate }}
+                </span>
+              </div>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+</app-process-section-shell>
