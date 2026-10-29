@@ -14,7 +14,7 @@ describe('OrderPipeline', () => {
       imports: [OrderPipeline],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

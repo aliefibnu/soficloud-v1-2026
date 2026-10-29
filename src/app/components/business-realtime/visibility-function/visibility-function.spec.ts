@@ -13,7 +13,7 @@ describe('BusinessRealtime VisibilityFunction', () => {
       imports: [VisibilityFunction],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

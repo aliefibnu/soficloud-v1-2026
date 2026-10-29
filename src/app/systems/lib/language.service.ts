@@ -13,8 +13,8 @@ export interface LanguageOption {
 }
 
 export const LANGUAGE_OPTIONS: readonly LanguageOption[] = [
-  { code: 'en', label: 'English', flag: '🇬🇧' },
   { code: 'id', label: 'Bahasa Indonesia', flag: '🇮🇩' },
+  { code: 'en', label: 'English', flag: '🇬🇧' },
   { code: 'zh', label: '中文', flag: '🇨🇳' },
   { code: 'ja', label: '日本語', flag: '🇯🇵' },
   { code: 'ko', label: '한국어', flag: '🇰🇷' },
@@ -25,7 +25,7 @@ export class LanguageService {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly translate = inject(TranslateService);
   private readonly document = inject(DOCUMENT);
-  readonly supportedLanguages: readonly Language[] = ['en', 'id', 'zh', 'ja', 'ko'];
+  readonly supportedLanguages: readonly Language[] = ['id', 'en', 'zh', 'ja', 'ko'];
   readonly languages: readonly LanguageOption[] = LANGUAGE_OPTIONS;
   private readonly storageKey = 'app-lang';
 
@@ -47,23 +47,20 @@ export class LanguageService {
     this.translate.addLangs([...this.supportedLanguages]);
     this.translate.setFallbackLang('id');
 
-    let language = 'id';
+    let language: Language = 'id';
 
     if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
-      const savedLang = localStorage.getItem(this.storageKey);
-      const browserLang = this.translate.getBrowserLang();
-      language = savedLang ?? browserLang ?? 'id';
+      const savedLang = localStorage.getItem(this.storageKey) as Language | null;
+      if (savedLang && this.supportedLanguages.includes(savedLang)) {
+        language = savedLang;
+      }
     }
 
-    const selected = this.supportedLanguages.includes(language as Language)
-      ? (language as Language)
-      : 'id';
-
-    this.currentLanguage.set(selected);
+    this.currentLanguage.set(language);
     if (this.document?.documentElement) {
-      this.document.documentElement.lang = selected;
+      this.document.documentElement.lang = language;
     }
-    return this.translate.use(selected);
+    return this.translate.use(language);
   }
 
   setLanguage(language: Language): void {

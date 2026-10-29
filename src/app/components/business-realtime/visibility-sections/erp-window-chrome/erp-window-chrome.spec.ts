@@ -32,7 +32,7 @@ describe('ErpWindowChrome', () => {
       imports: [TestHostComponent, ErpWindowChrome],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

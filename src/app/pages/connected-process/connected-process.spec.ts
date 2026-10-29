@@ -15,7 +15,7 @@ describe('ConnectedProcess', () => {
       imports: [ConnectedProcess],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

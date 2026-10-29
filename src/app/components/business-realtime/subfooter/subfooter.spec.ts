@@ -13,7 +13,7 @@ describe('Subfooter', () => {
       imports: [Subfooter],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

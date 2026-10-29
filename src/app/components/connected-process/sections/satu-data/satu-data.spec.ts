@@ -14,7 +14,7 @@ describe('SatuData', () => {
       imports: [SatuData],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

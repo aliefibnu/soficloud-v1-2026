@@ -14,7 +14,7 @@ describe('ProcurementControl', () => {
       imports: [ProcurementControl],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

@@ -14,7 +14,7 @@ describe('BusinessModel', () => {
       imports: [BusinessModel],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
         LanguageService,

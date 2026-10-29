@@ -85,7 +85,7 @@ describe('AccountingImpact', () => {
       imports: [AccountingImpact],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
         provideCustomImageLoader(),

@@ -15,7 +15,7 @@ describe('TransactionFlow', () => {
       imports: [TransactionFlow],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
         provideCustomImageLoader(),

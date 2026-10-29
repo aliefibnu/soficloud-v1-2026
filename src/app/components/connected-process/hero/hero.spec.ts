@@ -13,7 +13,7 @@ describe('ConnectedProcess Hero', () => {
       imports: [Hero],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

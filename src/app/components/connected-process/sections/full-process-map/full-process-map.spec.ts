@@ -117,7 +117,7 @@ describe('FullProcessMap', () => {
       imports: [FullProcessMap],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
         provideCustomImageLoader(),

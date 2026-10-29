@@ -17,7 +17,7 @@ describe('BusinessControl', () => {
       providers: [
         provideRouter([]),
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
         LanguageService,

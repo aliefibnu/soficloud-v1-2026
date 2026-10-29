@@ -14,7 +14,7 @@ describe('RoleReports', () => {
       imports: [RoleReports],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

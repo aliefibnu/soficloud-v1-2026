@@ -14,7 +14,7 @@ describe('OverviewFeature', () => {
       imports: [OverviewFeature],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
         provideCustomImageLoader(),

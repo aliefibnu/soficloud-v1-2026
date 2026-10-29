@@ -37,17 +37,40 @@ describe('LanguageService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize with supported language and return observable', () => {
+  it('should initialize with default language "id" when no saved language is in localStorage', () => {
+    const init$ = service.init();
+    expect(init$).toBeTruthy();
+    expect(service.getLanguage()).toBe('id');
+    expect(service.currentLanguage()).toBe('id');
+    expect(service.selectedLanguageOption().code).toBe('id');
+  });
+
+  it('should initialize with saved language and return observable when present in localStorage', () => {
     mockStorage['app-lang'] = 'en';
     const init$ = service.init();
     expect(init$).toBeTruthy();
     expect(service.getLanguage()).toBe('en');
     expect(service.currentLanguage()).toBe('en');
+    expect(service.selectedLanguageOption().code).toBe('en');
   });
 
-  it('should update currentLanguage on setLanguage', () => {
+  it('should fallback to "id" when invalid language is stored in localStorage', () => {
+    mockStorage['app-lang'] = 'invalid-code';
+    const init$ = service.init();
+    expect(init$).toBeTruthy();
+    expect(service.getLanguage()).toBe('id');
+    expect(service.currentLanguage()).toBe('id');
+  });
+
+  it('should update currentLanguage on setLanguage and persist to localStorage', () => {
+    service.setLanguage('en');
+    expect(service.getLanguage()).toBe('en');
+    expect(service.currentLanguage()).toBe('en');
+    expect(mockStorage['app-lang']).toBe('en');
+
     service.setLanguage('id');
     expect(service.getLanguage()).toBe('id');
     expect(service.currentLanguage()).toBe('id');
+    expect(mockStorage['app-lang']).toBe('id');
   });
 });
