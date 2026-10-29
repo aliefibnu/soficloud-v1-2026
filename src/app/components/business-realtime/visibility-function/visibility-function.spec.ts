@@ -272,4 +272,44 @@ describe('BusinessRealtime VisibilityFunction', () => {
       replaceStateSpy.mockRestore();
     }
   });
+
+  it('should render heading with responsive line-height classes to prevent collision on wrap', () => {
+    const heading = fixture.debugElement.query(By.css('h2'));
+    expect(heading).toBeTruthy();
+    expect(heading.nativeElement.classList.contains('leading-tight')).toBe(true);
+    expect(heading.nativeElement.classList.contains('sm:leading-snug')).toBe(true);
+    expect(heading.nativeElement.classList.contains('lg:leading-none')).toBe(true);
+  });
+
+  it('should configure horizontal scroll container and tablist with responsive and touch-friendly classes', () => {
+    const scrollContainer = fixture.debugElement.query(By.css('.overflow-x-auto'));
+    expect(scrollContainer).toBeTruthy();
+    expect(scrollContainer.nativeElement.classList.contains('touch-pan-x')).toBe(true);
+    expect(scrollContainer.nativeElement.classList.contains('overscroll-x-contain')).toBe(true);
+    expect(scrollContainer.nativeElement.classList.contains('scroll-smooth')).toBe(true);
+
+    const tablist = fixture.debugElement.query(By.css('[role="tablist"]'));
+    expect(tablist).toBeTruthy();
+    expect(tablist.nativeElement.classList.contains('justify-start')).toBe(true);
+    expect(tablist.nativeElement.classList.contains('lg:justify-between')).toBe(true);
+    expect(tablist.nativeElement.classList.contains('gap-4')).toBe(true);
+    expect(tablist.nativeElement.classList.contains('sm:gap-6')).toBe(true);
+    expect(tablist.nativeElement.classList.contains('md:gap-8')).toBe(true);
+    expect(tablist.nativeElement.classList.contains('lg:gap-0')).toBe(true);
+  });
+
+  it('should render tab buttons with accessible min-h-[44px] touch target size', () => {
+    const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
+    expect(tabs.length).toBeGreaterThan(0);
+    tabs.forEach((tab) => {
+      expect(tab.nativeElement.classList.contains('min-h-[44px]')).toBe(true);
+      expect(tab.nativeElement.classList.contains('touch-manipulation')).toBe(true);
+    });
+  });
+
+  it('should trigger scrollActiveTabIntoView when selecting a tab', () => {
+    const scrollSpy = vi.spyOn(component, 'scrollActiveTabIntoView');
+    component.selectTab('order-pipeline');
+    expect(scrollSpy).toHaveBeenCalledWith('smooth');
+  });
 });

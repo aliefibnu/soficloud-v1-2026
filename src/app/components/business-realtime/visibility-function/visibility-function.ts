@@ -122,8 +122,15 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
       }
 
       this.updateIndicator();
-      requestAnimationFrame(() => this.updateIndicator());
-      setTimeout(() => this.updateIndicator(), 50);
+      this.scrollActiveTabIntoView('auto');
+      requestAnimationFrame(() => {
+        this.updateIndicator();
+        this.scrollActiveTabIntoView('auto');
+      });
+      setTimeout(() => {
+        this.updateIndicator();
+        this.scrollActiveTabIntoView('auto');
+      }, 50);
 
       const listEl = this.tabsListRef()?.nativeElement;
       if (typeof ResizeObserver !== 'undefined' && listEl) {
@@ -153,6 +160,19 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
     }
   }
 
+  scrollActiveTabIntoView(behavior: ScrollBehavior = 'smooth'): void {
+    if (!this.isBrowser) return;
+    const listEl = this.tabsListRef()?.nativeElement;
+    const activeBtn = listEl?.querySelector(
+      `[data-tab-id="${this.activeTabId()}"]`,
+    ) as HTMLElement | null;
+    activeBtn?.scrollIntoView?.({
+      behavior,
+      block: 'nearest',
+      inline: 'center',
+    });
+  }
+
   selectTab(id: string): void {
     this.activeTabId.set(id);
     if (this.isBrowser) {
@@ -161,15 +181,7 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
         this.updateIndicator();
       }, 0);
 
-      const listEl = this.tabsListRef()?.nativeElement;
-      const activeBtn = listEl?.querySelector(
-        `[data-tab-id="${id}"]`,
-      ) as HTMLElement | null;
-      activeBtn?.scrollIntoView?.({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
-      });
+      this.scrollActiveTabIntoView('smooth');
 
       const targetEl = document.getElementById(id);
       if (targetEl) {

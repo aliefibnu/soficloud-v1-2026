@@ -7,7 +7,7 @@
     <div class="text-center max-w-4xl mx-auto mb-8 sm:mb-10 lg:mb-12 px-2">
       <h2
         id="visibility-function-heading"
-        class="font-inter font-bold text-[#23244E] text-2xl sm:text-3xl md:text-4xl lg:text-[46px] leading-none tracking-normal text-center"
+        class="font-inter font-bold text-[#23244E] text-2xl sm:text-3xl md:text-4xl lg:text-[46px] leading-tight sm:leading-snug lg:leading-none tracking-normal text-center"
         style="
           font-family: var(--font-inter, 'Inter Variable', sans-serif);
           font-weight: 700;
@@ -28,14 +28,14 @@
     </div>
 
     <div
-      class="w-full max-w-7xl lg:max-w-310 mx-auto overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden xl:overflow-visible pb-2"
+      class="w-full max-w-7xl lg:max-w-310 mx-auto overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden xl:overflow-visible pb-2 touch-pan-x overscroll-x-contain scroll-smooth scroll-px-6 sm:scroll-px-10 lg:scroll-px-17.5"
     >
-      <div class="min-w-270 xl:min-w-0 w-full relative">
+      <div class="w-max lg:w-full min-w-full relative">
         <div
           #tabsListRef
           role="tablist"
           aria-label="Cross-functional visibility options"
-          class="relative flex items-center justify-between w-full px-6 sm:px-10 lg:px-17.5"
+          class="relative flex items-center justify-start lg:justify-between gap-4 sm:gap-6 md:gap-8 lg:gap-0 w-full px-6 sm:px-10 lg:px-17.5"
         >
           @for (tab of tabs; track tab.id; let i = $index) {
             <button
@@ -48,7 +48,7 @@
               [attr.tabindex]="activeTabId() === tab.id ? 0 : -1"
               (click)="selectTab(tab.id)"
               (keydown)="onTabKeydown($event, i)"
-              class="font-dm-sans font-bold text-xs sm:text-sm md:text-base lg:text-[18px] leading-none tracking-normal py-2.5 px-2 text-center transition-colors duration-200 cursor-pointer select-none whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#365AD2] focus-visible:ring-offset-2 rounded-sm"
+              class="font-dm-sans font-bold text-xs sm:text-sm md:text-base lg:text-[18px] leading-none tracking-normal min-h-[44px] py-2.5 px-2 inline-flex items-center justify-center text-center transition-colors duration-200 cursor-pointer select-none whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#365AD2] focus-visible:ring-offset-2 rounded-sm touch-manipulation"
               [class.text-[#23244E]]="activeTabId() === tab.id"
               [class.text-[#B1B1B1DD]]="activeTabId() !== tab.id"
               [style.font-family]="'var(--font-dm-sans, \'DM Sans Variable\', sans-serif)'"
