@@ -7,7 +7,7 @@
   descriptionMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[760px]"
 >
   <div
-    class="w-full max-w-290 mx-auto flex flex-col gap-4 sm:gap-5 py-2 sm:py-3 lg:py-4"
+    class="w-full max-w-290 mx-auto flex flex-col gap-4 sm:gap-5 short:gap-3 py-2 sm:py-3 lg:py-4 short:py-1.5"
   >
     <div
       data-testid="accounting-pipeline-grid"
@@ -15,9 +15,9 @@
     >
       <article
         data-testid="accounting-col-source"
-        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
+        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 short:px-4 short:py-3.5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
       >
-        <div class="mb-3.5 sm:mb-4 lg:min-h-14.5 flex flex-col justify-start text-left">
+        <div class="mb-3.5 sm:mb-4 short:mb-2.5 lg:min-h-14.5 lg:short:min-h-11 flex flex-col justify-start text-left">
           <h3
             id="accounting-col-1-heading"
             class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-1.5"
@@ -39,7 +39,7 @@
           </p>
         </div>
 
-        <ul aria-labelledby="accounting-col-1-heading" class="flex flex-col gap-2.25 w-full">
+        <ul aria-labelledby="accounting-col-1-heading" class="flex flex-col gap-2.25 short:gap-1.5 w-full">
           @for (item of sourceDocuments; track item.id) {
             <li
               class="bg-white rounded-lg border border-[#23244E] min-h-8.75 sm:min-h-9 flex items-stretch overflow-hidden"
@@ -93,9 +93,9 @@
 
       <article
         data-testid="accounting-col-coa"
-        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
+        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 short:px-4 short:py-3.5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
       >
-        <div class="mb-3.5 sm:mb-4 lg:min-h-14.5 flex flex-col justify-start text-left">
+        <div class="mb-3.5 sm:mb-4 short:mb-2.5 lg:min-h-14.5 lg:short:min-h-11 flex flex-col justify-start text-left">
           <h3
             id="accounting-col-2-heading"
             class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-1.5"
@@ -124,7 +124,7 @@
           @for (step of postingSteps; track step.id; let last = $last) {
             <li class="w-full flex flex-col items-center">
               <div
-                class="w-full max-w-50 sm:max-w-52.5 min-h-10.5 px-4 py-2 bg-white rounded-lg border border-[#23244E] flex items-center justify-center text-center"
+                class="w-full max-w-50 sm:max-w-52.5 min-h-10.5 short:min-h-9 px-4 py-2 short:py-1 bg-white rounded-lg border border-[#23244E] flex items-center justify-center text-center"
               >
                 <span
                   class="font-dm-sans font-bold text-base sm:text-[17px] lg:text-[18px] text-[#23244E] leading-tight tracking-tight"
@@ -139,7 +139,7 @@
               @if (!last) {
                 <div
                   data-testid="coa-vertical-arrow"
-                  class="h-6.5 flex items-center justify-center text-[#1C5BDD] select-none"
+                  class="h-6.5 short:h-4.5 flex items-center justify-center text-[#1C5BDD] select-none"
                   aria-hidden="true"
                 >
                   <svg
@@ -186,9 +186,9 @@
 
       <article
         data-testid="accounting-col-results"
-        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
+        class="bg-[#FDFDFD] rounded-lg p-4 sm:p-5 lg:px-5 lg:py-5 short:px-4 short:py-3.5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start"
       >
-        <div class="mb-3.5 sm:mb-4 lg:min-h-14.5 flex flex-col justify-start text-left">
+        <div class="mb-3.5 sm:mb-4 short:mb-2.5 lg:min-h-14.5 lg:short:min-h-11 flex flex-col justify-start text-left">
           <h3
             id="accounting-col-3-heading"
             class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-1.5"
@@ -210,7 +210,7 @@
           </p>
         </div>
 
-        <ul aria-labelledby="accounting-col-3-heading" class="flex flex-col gap-2.25 w-full">
+        <ul aria-labelledby="accounting-col-3-heading" class="flex flex-col gap-2.25 short:gap-1.5 w-full">
           @for (item of financialResults; track item.id) {
             <li
               class="bg-white rounded-lg border border-[#23244E] min-h-8.75 sm:min-h-9 flex items-stretch overflow-hidden"
@@ -244,7 +244,7 @@
 
     <div
       data-testid="accounting-disclaimer"
-      class="w-full bg-[#FDFDFD] rounded-lg px-5 py-4 sm:px-6 sm:py-4.5 lg:px-7 lg:py-4.5 shadow-[0_4px_20px_rgba(35,36,78,0.04)] border border-white/70"
+      class="w-full bg-[#FDFDFD] rounded-lg px-5 py-4 sm:px-6 sm:py-4.5 lg:px-7 lg:py-4.5 short:py-3 short:px-6 shadow-[0_4px_20px_rgba(35,36,78,0.04)] border border-white/70"
     >
       <p
         data-testid="accounting-disclaimer-text"

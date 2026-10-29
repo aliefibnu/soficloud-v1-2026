@@ -290,4 +290,16 @@ describe('AccountingImpact', () => {
     expect(ol).toBeTruthy();
     expect(ol.nativeElement.getAttribute('aria-labelledby')).toBe('accounting-col-2-heading');
   });
+
+  it('should apply height-responsive vertical rhythm classes for compact viewports', () => {
+    const stageContainer = fixture.debugElement.query(By.css('.short\\:py-1\\.5'));
+    expect(stageContainer).toBeTruthy();
+    expect(stageContainer.nativeElement.classList.contains('short:gap-3')).toBe(true);
+
+    const col1 = fixture.debugElement.query(By.css('[data-testid="accounting-col-source"]'));
+    expect(col1.nativeElement.classList.contains('short:py-3.5')).toBe(true);
+
+    const disclaimer = fixture.debugElement.query(By.css('[data-testid="accounting-disclaimer"]'));
+    expect(disclaimer.nativeElement.classList.contains('short:py-3')).toBe(true);
+  });
 });
