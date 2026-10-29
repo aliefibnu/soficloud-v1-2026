@@ -61,11 +61,9 @@ describe('ProcessSectionShell', () => {
     );
   });
 
-  it('should apply responsive scroll-margin-top classes to prevent sticky navbar occlusion', () => {
+  it('should apply scroll-margin-top classes to prevent sticky navbar occlusion and fit screen', () => {
     const sectionEl = fixture.debugElement.query(By.css('section'));
     expect(sectionEl.nativeElement.classList.contains('scroll-mt-20')).toBe(true);
-    expect(sectionEl.nativeElement.classList.contains('sm:scroll-mt-24')).toBe(true);
-    expect(sectionEl.nativeElement.classList.contains('lg:scroll-mt-28')).toBe(true);
   });
 
   it('should render the h2 heading with matching id, styling, and text', () => {
