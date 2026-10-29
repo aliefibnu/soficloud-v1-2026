@@ -161,7 +161,7 @@ describe('UiMockup', () => {
       imports: [UiMockup],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'en',
         }),
       ],

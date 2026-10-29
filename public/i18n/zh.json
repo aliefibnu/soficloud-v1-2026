@@ -470,11 +470,11 @@
       "TITLE": "跨职能全局洞察",
       "SUBTITLE": "从客户订单到财务状况，管理层可纵览各业务环节的关键指标。以下展示展示了团队如何发现机遇、规避瓶颈并跟进进行中的各项任务。",
       "TABS": {
-        "SALES_PERFORMANCE": "SALES PERFORMANCE",
-        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
-        "MATERIAL_READINESS": "MATERIAL READINESS",
-        "ORDER_PIPELINE": "ORDER PIPELINE",
-        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+        "SALES_PERFORMANCE": "销售业绩",
+        "PROCUREMENT_CONTROL": "采购控制",
+        "MATERIAL_READINESS": "物料齐套",
+        "ORDER_PIPELINE": "订单管道",
+        "FINANCIAL_VISIBILITY": "财务可见性"
       },
       "ALTS": {
         "SALES_PERFORMANCE": "销售业绩仪表盘预览",
@@ -495,6 +495,13 @@
           "MRP": "MRP",
           "FINANCE": "财务",
           "ORDER_PIPELINE": "订单流程"
+        },
+        "PROFILE": {
+          "ARIA": "用户个人头像",
+          "NAME": "阿塔比尔·马罗夫",
+          "ROLE": "运营副总裁",
+          "STATUS": "在线",
+          "BADGE": "管理员"
         }
       },
       "SALES_PERFORMANCE": {
@@ -671,6 +678,286 @@
     "SUBFOOTER": {
       "TITLE": "清晰的信息\n精准的行动",
       "DESCRIPTION": "根据贵公司的业务流程，探讨所需的指标与仪表板"
+    }
+  },
+  "CONNECTED_PROCESS": {
+    "HERO": {
+      "TITLE_LINE_1": "从业务活动",
+      "TITLE_LINE_2": "到财务报表",
+      "DESCRIPTION": "销售、采购、物料需求、订单进度和财务状况皆可在 SOFICloud 仪表板中一览无余。每个视图帮助团队掌握最新状况并决定跟进措施。",
+      "TABLET": {
+        "TITLE": "CONNECTED BUSINESS",
+        "USER": "A",
+        "DATE": "28-07",
+        "MODULE_PROCUREMENT": "02 采购 (PR - PO - GRN)",
+        "MODULE_INVENTORY": "03 库存 (Stock - Movement)",
+        "MODULE_MANUFACTURING": "04 制造 (BOM - MO - Cost)",
+        "MODULE_PROJECT": "05 项目与成本 (Budget - Actual)",
+        "CONNECTED_TRANSACTIONS": "Connected Transactions",
+        "CONNECTED_FLOW": "PR - PO - GRN -> Journal -> General Ledger",
+        "STATUS_AUDIT": "AUDIT & APPROVAL",
+        "STATUS_TRAIL": "AUDIT TRAIL",
+        "STATUS_ANALYTICS": "BUSINESS ANALYTICS"
+      },
+      "TITLE_LINE_3": "",
+      "TITLE_LINE_4": "",
+      "TABLET_ALT": "平板电脑上的 SOFICloud 互联业务仪表板"
+    },
+    "PROCESS_TABS": {
+      "SATU_DATA": "单一数据源",
+      "ALUR_TRANSAKSI": "交易流程",
+      "DAMPAK_AKUNTANSI": "财务影响",
+      "LAPORAN": "报表体系",
+      "PETA_LENGKAP": "完整流程图"
+    },
+    "SATU_DATA": {
+      "TITLE": "每个部门在相同上下文中协同运作",
+      "DESCRIPTION": "业务单据将关联引用传递至下一阶段。团队可全程追踪需求来源、订单状态、收货、生产、开票直至财务记账全流程。",
+      "CARDS": {
+        "CARD_1": {
+          "NUMBER": "01",
+          "TITLE": "单据引用环环相扣",
+          "DESCRIPTION": "订单、采购单、收货、发票与付款皆可沿完整业务流精准溯源。"
+        },
+        "CARD_2": {
+          "NUMBER": "02",
+          "TITLE": "跨部门严格管控",
+          "DESCRIPTION": "工作流与审批机制在单据跨环节流转时提供关键核验节点。"
+        },
+        "CARD_3": {
+          "NUMBER": "03",
+          "TITLE": "数据清晰有据可查",
+          "DESCRIPTION": "业务运营报表与财务报表均拥有清晰明确的源头交易单据支持。"
+        }
+      }
+    },
+    "TRANSACTION_FLOW": {
+      "TITLE": "一套系统贯通\n三大核心业务流程",
+      "DESCRIPTION": "选择交易场景，了解各模块间如何实现信息顺畅传递。每个阶段具备特定的单据与明确目标。",
+      "CYCLES": {
+        "O2C": {
+          "NAME": "Order-to-Cash",
+          "SUBTITLE": "从销售到收款"
+        },
+        "P2P": {
+          "NAME": "Procure-to-Pay",
+          "SUBTITLE": "从需求到付款"
+        },
+        "P2PR": {
+          "NAME": "Plan-to-Produce",
+          "SUBTITLE": "从物料到生产成本"
+        }
+      },
+      "STEPS": {
+        "O2C": {
+          "STEP_1": {
+            "TITLE": "销售报价单 (Sales Quotation)",
+            "DESC": "向客户提供报价"
+          },
+          "STEP_2": {
+            "TITLE": "销售订单 (Sales Order)",
+            "DESC": "确认客户订单"
+          },
+          "STEP_3": {
+            "TITLE": "发货送货单 (Delivery Order)",
+            "DESC": "交付产品与货物"
+          },
+          "STEP_4": {
+            "TITLE": "客户销售发票 (Customer Invoice)",
+            "DESC": "确认应收账款"
+          },
+          "STEP_5": {
+            "TITLE": "收款收据 (Receipt)",
+            "DESC": "收到结算款项"
+          }
+        },
+        "P2P": {
+          "STEP_1": {
+            "TITLE": "采购申请 (Purchase Requisition)",
+            "DESC": "物料需求申请"
+          },
+          "STEP_2": {
+            "TITLE": "采购订单 (Purchase Order)",
+            "DESC": "向供应商下达订单"
+          },
+          "STEP_3": {
+            "TITLE": "入库验收 (Goods Receipt)",
+            "DESC": "货物检验入库"
+          },
+          "STEP_4": {
+            "TITLE": "供应商发票 (Supplier Invoice)",
+            "DESC": "确认应付账款"
+          },
+          "STEP_5": {
+            "TITLE": "支付结算 (Payment)",
+            "DESC": "完成款项清偿"
+          }
+        },
+        "P2PR": {
+          "STEP_1": {
+            "TITLE": "物料清单与工艺路线 (BOM & Routing)",
+            "DESC": "零部件与工序标准"
+          },
+          "STEP_2": {
+            "TITLE": "生产计划 (Production Planning)",
+            "DESC": "排期与资源分配"
+          },
+          "STEP_3": {
+            "TITLE": "制造工单 (Manufacturing Order)",
+            "DESC": "下达生产工单"
+          },
+          "STEP_4": {
+            "TITLE": "制造工艺跟踪 (Process Tracking)",
+            "DESC": "现场工时与物料消耗"
+          },
+          "STEP_5": {
+            "TITLE": "标准成本与差异分析",
+            "DESC": "核算成本并分析差异"
+          }
+        }
+      },
+      "CALLOUT": {
+        "TITLE": "报表体现",
+        "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+        "DISCLAIMER": "凭证入账遵循过账单据与企业会计科目设定；销售报价与销售订单阶段尚不自动确认为营业收入。",
+        "CYCLES": {
+          "O2C": {
+            "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+            "DISCLAIMER": "凭证入账遵循过账单据与企业会计科目设定；销售报价与销售订单阶段尚不自动确认为营业收入。"
+          },
+          "P2P": {
+            "TAGS": "Procurement pipeline · Goods receipt · A/P aging · Cash out",
+            "DISCLAIMER": "货物入库记录库存变动与暂估应付；最终费用分摊与税务确认为供应商发票过账时处理。"
+          },
+          "P2PR": {
+            "TAGS": "Production plan · Work in Process · Material issuance · Standard cost",
+            "DISCLAIMER": "存货成本计算与差异分析在制造订单报工后核算；物料清单（BOM）与排程阶段不产生财务凭证。"
+          }
+        }
+      }
+    },
+    "ACCOUNTING_IMPACT": {
+      "TITLE": "业务平稳推进 财务同步跟进",
+      "DESCRIPTION": "满足入账条件的单据，将根据企业会计科目配置与财务制度自动生成凭证影响。",
+      "COLUMN_1": {
+        "TITLE": "源头单据",
+        "SUBTITLE": "包含必要时的通用日记账与调整凭证",
+        "ITEMS": [
+          "客户销售发票 (Customer Invoice)",
+          "供应商发票 (Supplier Invoice)",
+          "库存与生产单据",
+          "收款与付款凭证"
+        ]
+      },
+      "COLUMN_2": {
+        "TITLE": "凭证过账与科目映射",
+        "SUBTITLE": "所有交易皆可完整追溯至原始单据。冲销或调整均遵循合规流程，具备变更留痕与授权审批。",
+        "ITEMS": [
+          "日记账 (Journal)",
+          "科目余额表 (Trial Balance)",
+          "总分类账 (General Ledger)"
+        ]
+      },
+      "COLUMN_3": {
+        "TITLE": "财务成果",
+        "SUBTITLE": "通过收入增长与成本控制实现良性财务表现。",
+        "ITEMS": [
+          "损益表 (P&L)",
+          "资产负债表 (Balance Sheet)",
+          "现金流量表",
+          "辅助明细账 (AP / AR)"
+        ]
+      },
+      "DISCLAIMER_LABEL": "重要说明:",
+      "DISCLAIMER_TEXT": "该流程展示业务流程与数据链条的对应关系。凭证类型、过账节点、收入/成本确认条件及报表格式将根据企业的实施方案与会计准则灵活定制。"
+    },
+    "ROLE_REPORTS": {
+      "TITLE": "基于统一数据链\n为各部门提供专属报表",
+      "DESCRIPTION": "管理层既能掌握最终财务成果，\n又能清晰洞察塑造该结果的业务全貌。",
+      "TIERS": {
+        "OPERATIONAL": {
+          "TITLE": "运营部门",
+          "SUBTITLE": "进行中的业务",
+          "DESCRIPTION": "未结订单、未交采购、到货验收、实时库存、物料到位、生产进度及项目状态一览。",
+          "TAGS": [
+            "Sales",
+            "Procurement",
+            "Inventory",
+            "Production"
+          ]
+        },
+        "FINANCIAL": {
+          "TITLE": "财务部门",
+          "SUBTITLE": "已记账的核算",
+          "DESCRIPTION": "应收账款、应付账款、资金银行、总账、试算表、损益表、资产负债表及现金流汇总。",
+          "TAGS": [
+            "AR",
+            "AP",
+            "Cash & Bank",
+            "Accounting"
+          ]
+        },
+        "MANAGEMENT": {
+          "TITLE": "管理层",
+          "SUBTITLE": "需决策的事项",
+          "DESCRIPTION": "仪表板与深度分析助力洞察销售趋势、制造工本、项目预实对比及需重点关注的异动单据。",
+          "TAGS": [
+            "Dashboard",
+            "Analytics",
+            "Project",
+            "Control"
+          ]
+        }
+      }
+    },
+    "FULL_PROCESS_MAP": {
+      "TITLE": "查看完整\n业务流程架构图",
+      "DESCRIPTION": "本架构图全面呈现采购、生产、销售、总分类账与财务报表输出的流转逻辑，作为企业能力蓝图参考。",
+      "HINT_SCROLL": "可横向滑动查看完整流程图",
+      "ARIA_REGION_LABEL": "SOFICloud 完整业务流程关联架构图",
+      "STREAMS": {
+        "PURCHASING": "采购与应付流",
+        "MANUFACTURING": "生产与成本流",
+        "SALES": "销售与应收流",
+        "GENERAL_LEDGER": "总分类账与财务输出"
+      },
+      "NODES": {
+        "PURCHASE_REQUISITION": "请购单",
+        "PURCHASE_QUOTATION": "采购报价单",
+        "PURCHASE_ORDER": "采购订单",
+        "PURCHASE_RETURN": "采购退货",
+        "AP_DEBIT_NOTE": "应付借项通知单",
+        "AP_STATEMENT": "应付账款对账单",
+        "GOODS_RECEIPT": "收货入库单",
+        "SUPPLIER_INVOICE": "供应商发票",
+        "PAYMENT": "付款单",
+        "BILL_OF_MATERIAL": "物料清单 (BOM) &\n工艺路线",
+        "PLANNING": "生产计划",
+        "MANUFACTURING_ORDER": "生产工单",
+        "MANUFACTURING_PROCESS": "生产过程实绩",
+        "STANDARD_COSTING": "标准成本 &\n差异分析",
+        "MANUFACTURING": "制造管理",
+        "GENERAL_JOURNAL": "通用日记账",
+        "GENERAL_LEDGER": "总分类账",
+        "ADJUSTMENT": "调整凭证",
+        "TRIAL_BALANCE": "科目余额表",
+        "COGS": "主营业务成本",
+        "PROFIT_LOSS": "利润表",
+        "BALANCE_SHEET": "资产负债表",
+        "CASH_FLOW": "现金流量表",
+        "SALES_ORDER": "销售订单",
+        "PACKING_LIST": "装箱清单 &\n发货单",
+        "CUSTOMER_INVOICE": "客户销售发票",
+        "RECEIVE": "收款单",
+        "SALES_QUOTATION": "销售报价单",
+        "RETURN": "销售退货",
+        "AR_CREDIT_NOTE": "应收贷项通知单",
+        "AR_STATEMENT": "应收账款对账单"
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "贯通业务流程 洞悉经营成果",
+      "DESCRIPTION": "与 SOFICloud 专家团队深入探讨适合您企业的业务交易流、关键控制点与报表需求。"
     }
   }
 }

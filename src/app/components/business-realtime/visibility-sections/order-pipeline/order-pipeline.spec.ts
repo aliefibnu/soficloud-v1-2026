@@ -14,7 +14,7 @@ describe('OrderPipeline', () => {
       imports: [OrderPipeline],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],
@@ -122,7 +122,7 @@ describe('OrderPipeline', () => {
   });
 
   it('should render the Back To List button', () => {
-    const backBtn = fixture.debugElement.query(By.css('button'));
+    const backBtn = fixture.debugElement.query(By.css('main button'));
     expect(backBtn).toBeTruthy();
     expect(backBtn.nativeElement.textContent.trim()).toBe('Back To List');
   });

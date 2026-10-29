@@ -1,0 +1,78 @@
+<section id="hero" class="relative w-full py-3 sm:py-4 lg:py-5 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div
+      class="relative w-full rounded-3xl sm:rounded-4xl lg:rounded-[36px] overflow-hidden shadow-[0_16px_48px_-12px_rgba(24,40,73,0.06),0_2px_12px_-2px_rgba(24,40,73,0.04)] border border-white/80"
+      style="
+        background: #fdfdfd;
+        background: conic-gradient(
+          from 180deg at 50% 50%,
+          #fdfdfd 0%,
+          rgba(235, 242, 253, 0.9) 90%,
+          #fdfdfd 100%
+        );
+      "
+    >
+      <div
+        class="grid grid-cols-1 lg:grid-cols-12 min-h-115 sm:min-h-122.5 lg:min-h-125 xl:min-h-130 lg:max-h-[min(540px,calc(100dvh-7.5rem))] items-center relative"
+      >
+        <div
+          class="order-2 lg:order-1 lg:col-span-6 xl:col-span-6 relative w-full h-full min-h-85 sm:min-h-100 lg:min-h-125 xl:min-h-130 flex items-end justify-start pt-4 lg:pt-0"
+        >
+          <div
+            class="relative aspect-691/649 w-[92%] sm:w-115 md:w-125 lg:w-130 xl:w-136 max-w-none shrink-0 left-0 bottom-0"
+          >
+            <img
+              ngSrc="/images/connected-process/pillar.svg"
+              width="730"
+              height="316"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute bottom-[-4.45%] left-[-5.67%] w-[105.64%] h-auto max-w-none select-none z-0"
+            />
+
+            <img
+              ngSrc="/images/connected-process/tablet.webp"
+              width="637"
+              height="487"
+              priority
+              [alt]="'CONNECTED_PROCESS.HERO.TABLET_ALT' | translate"
+              class="absolute top-0 left-[-2.25%] z-10 w-[92.19%] h-auto max-w-none object-contain select-none"
+            />
+          </div>
+        </div>
+
+        <div
+          class="order-1 lg:order-2 lg:col-span-6 xl:col-span-6 flex flex-col justify-center items-end px-6 py-8 sm:px-10 sm:py-10 lg:py-10 lg:pr-10 xl:pr-14 lg:pl-4 z-10 text-right"
+        >
+          <h1
+            class="font-inter font-extrabold text-[#23244E] text-2xl sm:text-3xl md:text-4xl lg:text-[44px] xl:text-[48px] leading-[1.14] tracking-normal max-w-xl ml-auto text-right"
+            style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 800"
+          >
+            <span class="block">{{ 'CONNECTED_PROCESS.HERO.TITLE_LINE_1' | translate }}</span>
+            <span class="block">{{ 'CONNECTED_PROCESS.HERO.TITLE_LINE_2' | translate }}</span>
+            @if ('CONNECTED_PROCESS.HERO.TITLE_LINE_3' | translate; as l3) {
+              @if (l3.trim().length > 0 && l3 !== 'CONNECTED_PROCESS.HERO.TITLE_LINE_3') {
+                <span class="block">{{ l3 }}</span>
+              }
+            }
+            @if ('CONNECTED_PROCESS.HERO.TITLE_LINE_4' | translate; as l4) {
+              @if (l4.trim().length > 0 && l4 !== 'CONNECTED_PROCESS.HERO.TITLE_LINE_4') {
+                <span class="block">{{ l4 }}</span>
+              }
+            }
+          </h1>
+
+          <p
+            class="font-dm-sans font-normal text-[#23244E] text-[15px] leading-[1.6] text-right tracking-normal max-w-137.5 mt-3 sm:mt-4 ml-auto"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ 'CONNECTED_PROCESS.HERO.DESCRIPTION' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

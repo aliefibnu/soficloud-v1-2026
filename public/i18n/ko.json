@@ -470,11 +470,11 @@
       "TITLE": "부서 간 가시성 확보",
       "SUBTITLE": "고객 주문부터 재무 상태까지, 경영진은 각 프로세스에 관련된 핵심 지표를 한눈에 파악합니다. 다음 화면들을 통해 팀은 기회 요인, 병목 구간, 진행 중인 과제를 신속히 식별할 수 있습니다.",
       "TABS": {
-        "SALES_PERFORMANCE": "SALES PERFORMANCE",
-        "PROCUREMENT_CONTROL": "PROCUREMENT CONTROL",
-        "MATERIAL_READINESS": "MATERIAL READINESS",
-        "ORDER_PIPELINE": "ORDER PIPELINE",
-        "FINANCIAL_VISIBILITY": "FINANCIAL VISIBILITY"
+        "SALES_PERFORMANCE": "영업 실적",
+        "PROCUREMENT_CONTROL": "조달 관리",
+        "MATERIAL_READINESS": "자재 준비 상태",
+        "ORDER_PIPELINE": "주문 파이프라인",
+        "FINANCIAL_VISIBILITY": "재무 가시성"
       },
       "ALTS": {
         "SALES_PERFORMANCE": "영업 실적 대시보드 미리보기",
@@ -495,6 +495,13 @@
           "MRP": "MRP",
           "FINANCE": "재무",
           "ORDER_PIPELINE": "주문 파이프라인"
+        },
+        "PROFILE": {
+          "ARIA": "사용자 프로필 아바타",
+          "NAME": "아타빌 마로브",
+          "ROLE": "운영 부사장",
+          "STATUS": "온라인",
+          "BADGE": "관리자"
         }
       },
       "SALES_PERFORMANCE": {
@@ -671,6 +678,286 @@
     "SUBFOOTER": {
       "TITLE": "명확한 정보\n정확한 조치",
       "DESCRIPTION": "회사의 워크플로우에 맞춰 필요한 지표와 대시보드를 논의하세요"
+    }
+  },
+  "CONNECTED_PROCESS": {
+    "HERO": {
+      "TITLE_LINE_1": "비즈니스 활동부터",
+      "TITLE_LINE_2": "재무제표까지",
+      "DESCRIPTION": "영업, 조달, 자재 소요량, 주문 진행 상황 및 재무 현황을 SOFICloud 대시보드에서 한눈에 확인하세요. 각 화면은 최신 현황을 보여주고 필요한 후속 조치를 결정할 수 있도록 지원합니다.",
+      "TABLET": {
+        "TITLE": "CONNECTED BUSINESS",
+        "USER": "A",
+        "DATE": "28-07",
+        "MODULE_PROCUREMENT": "02 조달 (PR - PO - GRN)",
+        "MODULE_INVENTORY": "03 재고 (Stock - Movement)",
+        "MODULE_MANUFACTURING": "04 제조 (BOM - MO - Cost)",
+        "MODULE_PROJECT": "05 프로젝트 및 원가 (Budget - Actual)",
+        "CONNECTED_TRANSACTIONS": "Connected Transactions",
+        "CONNECTED_FLOW": "PR - PO - GRN -> Journal -> General Ledger",
+        "STATUS_AUDIT": "AUDIT & APPROVAL",
+        "STATUS_TRAIL": "AUDIT TRAIL",
+        "STATUS_ANALYTICS": "BUSINESS ANALYTICS"
+      },
+      "TITLE_LINE_3": "",
+      "TITLE_LINE_4": "",
+      "TABLET_ALT": "태블릿 화면의 SOFICloud 커넥티드 비즈니스 대시보드"
+    },
+    "PROCESS_TABS": {
+      "SATU_DATA": "단일 데이터 소스",
+      "ALUR_TRANSAKSI": "거래 흐름",
+      "DAMPAK_AKUNTANSI": "회계 영향",
+      "LAPORAN": "보고서",
+      "PETA_LENGKAP": "전체 프로세스 맵"
+    },
+    "SATU_DATA": {
+      "TITLE": "모든 부서가 동일한 맥락에서 유기적으로 연결",
+      "DESCRIPTION": "비즈니스 문서는 다음 단계로 참조 정보를 이어줍니다. 요청 발생부터 주문 상태, 입고, 생산, 청구, 재무 분개에 이르기까지 원활하게 추적할 수 있습니다.",
+      "CARDS": {
+        "CARD_1": {
+          "NUMBER": "01",
+          "TITLE": "연결된 전표 참조",
+          "DESCRIPTION": "주문, 발주, 입고, 청구서, 결제까지 전체 흐름에 따라 완벽히 추적됩니다."
+        },
+        "CARD_2": {
+          "NUMBER": "02",
+          "TITLE": "부서 간 통제 관리",
+          "DESCRIPTION": "문서가 프로세스를 이동할 때 워크플로우와 승인이 확실한 검증 체크포인트를 제공합니다."
+        },
+        "CARD_3": {
+          "NUMBER": "03",
+          "TITLE": "신뢰할 수 있는 데이터",
+          "DESCRIPTION": "운영 및 회계 보고서는 명확한 원천 거래 데이터를 기반으로 합니다."
+        }
+      }
+    },
+    "TRANSACTION_FLOW": {
+      "TITLE": "하나의 통합 시스템으로 이어지는\n3대 핵심 거래 흐름",
+      "DESCRIPTION": "거래 모델을 선택하여 모듈 간에 정보가 어떻게 전달되는지 확인해 보세요. 각 단계마다 고유한 문서와 명확한 목적이 존재합니다.",
+      "CYCLES": {
+        "O2C": {
+          "NAME": "Order-to-Cash",
+          "SUBTITLE": "영업부터 대금 수납까지"
+        },
+        "P2P": {
+          "NAME": "Procure-to-Pay",
+          "SUBTITLE": "구매 요청부터 대금 지급까지"
+        },
+        "P2PR": {
+          "NAME": "Plan-to-Produce",
+          "SUBTITLE": "원자재부터 생산 원가까지"
+        }
+      },
+      "STEPS": {
+        "O2C": {
+          "STEP_1": {
+            "TITLE": "견적서 (Sales Quotation)",
+            "DESC": "고객 견적서 제출"
+          },
+          "STEP_2": {
+            "TITLE": "수주서 (Sales Order)",
+            "DESC": "확정된 주문 등록"
+          },
+          "STEP_3": {
+            "TITLE": "출고 납품서 (Delivery Order)",
+            "DESC": "상품 및 제품 인도"
+          },
+          "STEP_4": {
+            "TITLE": "매출 청구서 (Customer Invoice)",
+            "DESC": "매출채권 인식"
+          },
+          "STEP_5": {
+            "TITLE": "입금 전표 (Receipt)",
+            "DESC": "결제 대금 수령"
+          }
+        },
+        "P2P": {
+          "STEP_1": {
+            "TITLE": "구매 요청서 (Purchase Requisition)",
+            "DESC": "소요 자재 구매 요청"
+          },
+          "STEP_2": {
+            "TITLE": "발주서 (Purchase Order)",
+            "DESC": "공급업체 발주서 발행"
+          },
+          "STEP_3": {
+            "TITLE": "입고 전표 (Goods Receipt)",
+            "DESC": "실물 자재 입고 및 검수"
+          },
+          "STEP_4": {
+            "TITLE": "매입 청구서 (Supplier Invoice)",
+            "DESC": "매입채무 확정 인식"
+          },
+          "STEP_5": {
+            "TITLE": "지급 결제 (Payment)",
+            "DESC": "대금 지급 완료"
+          }
+        },
+        "P2PR": {
+          "STEP_1": {
+            "TITLE": "BOM 및 라우팅",
+            "DESC": "부품 구성 및 공정 표준"
+          },
+          "STEP_2": {
+            "TITLE": "생산 계획 (Production Planning)",
+            "DESC": "일정 및 리소스 배분"
+          },
+          "STEP_3": {
+            "TITLE": "제조 지시서 (Manufacturing Order)",
+            "DESC": "작업 지시서 발행"
+          },
+          "STEP_4": {
+            "TITLE": "제조 공정 실적 (Process Tracking)",
+            "DESC": "실적 공수 및 투입 기록"
+          },
+          "STEP_5": {
+            "TITLE": "표준원가 및 차이 분석",
+            "DESC": "제조원가 계산 및 차이 분석"
+          }
+        }
+      },
+      "CALLOUT": {
+        "TITLE": "보고서 반영 현황",
+        "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+        "DISCLAIMER": "분개 반영은 전기된 거래 및 회사의 계정과목 설정에 따라 이루어지며, 견적서와 수주서 단계에서는 매출로 자동 인식되지 않습니다.",
+        "CYCLES": {
+          "O2C": {
+            "TAGS": "Sales pipeline · Delivery · A/R aging · Cash receipt",
+            "DISCLAIMER": "분개 반영은 전기된 거래 및 회사의 계정과목 설정에 따라 이루어지며, 견적서와 수주서 단계에서는 매출로 자동 인식되지 않습니다."
+          },
+          "P2P": {
+            "TAGS": "Procurement pipeline · Goods receipt · A/P aging · Cash out",
+            "DISCLAIMER": "입고 처리는 재고 이동 및 미착계정을 기록하며, 최종 비용 및 세무 반영은 공급업체 송장 전기 시 확정됩니다."
+          },
+          "P2PR": {
+            "TAGS": "Production plan · Work in Process · Material issuance · Standard cost",
+            "DISCLAIMER": "재고 원가 계산 및 차이 분석은 제조 오더 실적 보고 이후 산출되며, BOM과 생산 계획 단계에서는 분개가 생성되지 않습니다."
+          }
+        }
+      }
+    },
+    "ACCOUNTING_IMPACT": {
+      "TITLE": "업무 실행과 동시에 연동되는 회계 결산",
+      "DESCRIPTION": "전기 요건을 충족한 문서는 귀사의 계정과목 체계 및 회계 정책에 따라 자동으로 분개에 반영됩니다.",
+      "COLUMN_1": {
+        "TITLE": "원천 문서",
+        "SUBTITLE": "필요에 따른 일반 분개 및 조정 분개 포함",
+        "ITEMS": [
+          "매출 청구서 (Customer Invoice)",
+          "매입 청구서 (Supplier Invoice)",
+          "재고 및 제조 실적",
+          "입금 및 지급 전표"
+        ]
+      },
+      "COLUMN_2": {
+        "TITLE": "전기 및 계정과목 매핑",
+        "SUBTITLE": "모든 거래는 원천 문서로 완전히 역추적 가능하며, 수정은 변경 이력과 승인을 거치는 적법한 절차로 수행됩니다.",
+        "ITEMS": [
+          "분개장 (Journal)",
+          "합계잔액시산표 (Trial Balance)",
+          "총계정원장 (General Ledger)"
+        ]
+      },
+      "COLUMN_3": {
+        "TITLE": "재무 성과",
+        "SUBTITLE": "매출 성장과 비용 효율화를 통한 건전한 재무 성과.",
+        "ITEMS": [
+          "손익계산서 (P&L)",
+          "재무상태표 (B/S)",
+          "현금흐름표",
+          "보조원장 (AP / AR)"
+        ]
+      },
+      "DISCLAIMER_LABEL": "중요 안내:",
+      "DISCLAIMER_TEXT": "이 흐름은 비즈니스 프로세스와 데이터의 연계 구조를 나타냅니다. 분개 유형, 전기 시점, 수익/비용 인식 기준 및 보고서 양식은 기업의 회계 정책 및 도입 환경에 따라 맞춤 설정됩니다."
+    },
+    "ROLE_REPORTS": {
+      "TITLE": "단일 데이터 흐름 기반의\n부서별 맞춤 보고서",
+      "DESCRIPTION": "경영진은 최종 재무 결과뿐 아니라\n이를 형성한 운영 현장의 맥락까지 함께 통찰할 수 있습니다.",
+      "TIERS": {
+        "OPERATIONAL": {
+          "TITLE": "운영 부서",
+          "SUBTITLE": "진행 중인 업무",
+          "DESCRIPTION": "미결 주문, 미납 발주, 입고 현황, 재고 수량, 자재 준비율, 생산 진행률 및 프로젝트 상태를 신속히 파악.",
+          "TAGS": [
+            "Sales",
+            "Procurement",
+            "Inventory",
+            "Production"
+          ]
+        },
+        "FINANCIAL": {
+          "TITLE": "재무 및 회계 부서",
+          "SUBTITLE": "전기 완료된 내역",
+          "DESCRIPTION": "매출채권, 매입채무, 현금 및 예금, 총계정원장, 시산표, 손익계산서, 재무상태표 및 현금흐름표 집계.",
+          "TAGS": [
+            "AR",
+            "AP",
+            "Cash & Bank",
+            "Accounting"
+          ]
+        },
+        "MANAGEMENT": {
+          "TITLE": "경영진",
+          "SUBTITLE": "의사결정 필요 항목",
+          "DESCRIPTION": "대시보드와 정밀 분석으로 매출 추이, 제조 원가, 프로젝트 예산 대비 실적, 집중 관리가 필요한 거래를 파악.",
+          "TAGS": [
+            "Dashboard",
+            "Analytics",
+            "Project",
+            "Control"
+          ]
+        }
+      }
+    },
+    "FULL_PROCESS_MAP": {
+      "TITLE": "전체 프로세스 연계 구조\n상세 보기",
+      "DESCRIPTION": "구매, 생산, 영업, 총계정원장 및 재무 보고서 출력 간의 유기적 관계를 집약한 엔터프라이즈 아키텍처 맵입니다.",
+      "HINT_SCROLL": "가로로 스크롤하여 전체 맵을 확인하세요",
+      "ARIA_REGION_LABEL": "SOFICloud 전체 프로세스 연계 아키텍처 다이어그램",
+      "STREAMS": {
+        "PURCHASING": "구매 및 매입 스트림",
+        "MANUFACTURING": "제조 및 원가 스트림",
+        "SALES": "영업 및 매출 스트림",
+        "GENERAL_LEDGER": "총계정원장 및 재무 보고서"
+      },
+      "NODES": {
+        "PURCHASE_REQUISITION": "구매요청서",
+        "PURCHASE_QUOTATION": "구매견적서",
+        "PURCHASE_ORDER": "발주서",
+        "PURCHASE_RETURN": "구매반품",
+        "AP_DEBIT_NOTE": "매입 차변전표",
+        "AP_STATEMENT": "매입처 원장명세",
+        "GOODS_RECEIPT": "입고전표",
+        "SUPPLIER_INVOICE": "공급업체 청구서",
+        "PAYMENT": "지급결제",
+        "BILL_OF_MATERIAL": "BOM 및\n라우팅 공정",
+        "PLANNING": "생산계획",
+        "MANUFACTURING_ORDER": "제조작업지시서",
+        "MANUFACTURING_PROCESS": "제조공정실적",
+        "STANDARD_COSTING": "표준원가 및\n차이분석",
+        "MANUFACTURING": "제조관리",
+        "GENERAL_JOURNAL": "일반분개장",
+        "GENERAL_LEDGER": "총계정원장",
+        "ADJUSTMENT": "결산조정전표",
+        "TRIAL_BALANCE": "합계잔액시산표",
+        "COGS": "매출원가",
+        "PROFIT_LOSS": "손익계산서",
+        "BALANCE_SHEET": "재무상태표",
+        "CASH_FLOW": "현금흐름표",
+        "SALES_ORDER": "수주주문서",
+        "PACKING_LIST": "포장명세서 및\n출하지시서",
+        "CUSTOMER_INVOICE": "고객청구서",
+        "RECEIVE": "수금처리",
+        "SALES_QUOTATION": "영업견적서",
+        "RETURN": "판매반품",
+        "AR_CREDIT_NOTE": "매출 대변전표",
+        "AR_STATEMENT": "매출처 원장명세"
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "프로세스를 연결하고 결과를 파악하세요",
+      "DESCRIPTION": "귀사의 거래 워크플로우, 통제 포인트 및 보고서 요구사항을 SOFICloud 팀과 함께 상담하세요."
     }
   }
 }

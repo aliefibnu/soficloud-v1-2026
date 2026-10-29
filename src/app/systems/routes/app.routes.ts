@@ -12,4 +12,11 @@ export const routes: Routes = [
         (m) => m.BusinessRealtime,
       ),
   },
+  {
+    path: 'connected-process',
+    loadComponent: () =>
+      import('../../pages/connected-process/connected-process').then(
+        (m) => m.ConnectedProcess,
+      ),
+  },
 ];

@@ -14,7 +14,7 @@ describe('MaterialReadiness', () => {
       imports: [MaterialReadiness],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

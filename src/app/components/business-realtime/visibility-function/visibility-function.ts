@@ -7,9 +7,12 @@ import {
   inject,
   PLATFORM_ID,
   AfterViewInit,
+  OnDestroy,
+  DestroyRef,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 export interface VisibilityTab {
   readonly id: string;
@@ -28,11 +31,15 @@ export interface VisibilityTab {
     '(window:resize)': 'onWindowResize()',
   },
 })
-export class VisibilityFunction implements AfterViewInit {
+export class VisibilityFunction implements AfterViewInit, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
   readonly isBrowser = isPlatformBrowser(this.platformId);
 
   readonly tabsListRef = viewChild<ElementRef<HTMLElement>>('tabsListRef');
+
+  private resizeObserver?: ResizeObserver;
 
   readonly tabs: readonly VisibilityTab[] = [
     {
@@ -85,13 +92,59 @@ export class VisibilityFunction implements AfterViewInit {
     return this.tabs[this.activeTabIndex()] ?? this.tabs[0];
   });
 
+  constructor() {
+    this.translate.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        if (this.isBrowser) {
+          requestAnimationFrame(() => this.updateIndicator());
+          setTimeout(() => this.updateIndicator(), 50);
+        }
+      });
+
+    this.translate.onTranslationChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        if (this.isBrowser) {
+          requestAnimationFrame(() => this.updateIndicator());
+          setTimeout(() => this.updateIndicator(), 50);
+        }
+      });
+  }
+
   ngAfterViewInit(): void {
     if (this.isBrowser) {
-      // Defer slightly to ensure font metrics and layouts are established
-      setTimeout(() => {
-        this.updateIndicator();
-      }, 50);
+      if (typeof window !== 'undefined' && window.location.hash) {
+        const hashId = window.location.hash.slice(1);
+        if (this.tabs.some((t) => t.id === hashId)) {
+          this.activeTabId.set(hashId);
+        }
+      }
+
+      this.updateIndicator();
+      requestAnimationFrame(() => this.updateIndicator());
+      setTimeout(() => this.updateIndicator(), 50);
+
+      const listEl = this.tabsListRef()?.nativeElement;
+      if (typeof ResizeObserver !== 'undefined' && listEl) {
+        this.resizeObserver = new ResizeObserver(() => {
+          this.updateIndicator();
+        });
+        this.resizeObserver.observe(listEl);
+        const buttons = listEl.querySelectorAll('[role="tab"]');
+        buttons.forEach((btn) => this.resizeObserver?.observe(btn));
+      }
+
+      if (typeof document !== 'undefined' && document.fonts?.ready) {
+        document.fonts.ready.then(() => {
+          this.updateIndicator();
+        });
+      }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.resizeObserver?.disconnect();
   }
 
   onWindowResize(): void {
@@ -103,9 +156,29 @@ export class VisibilityFunction implements AfterViewInit {
   selectTab(id: string): void {
     this.activeTabId.set(id);
     if (this.isBrowser) {
+      this.updateIndicator();
       setTimeout(() => {
         this.updateIndicator();
       }, 0);
+
+      const listEl = this.tabsListRef()?.nativeElement;
+      const activeBtn = listEl?.querySelector(
+        `[data-tab-id="${id}"]`,
+      ) as HTMLElement | null;
+      activeBtn?.scrollIntoView?.({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+
+      const targetEl = document.getElementById(id);
+      if (targetEl) {
+        targetEl.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+      }
+
+      if (typeof history !== 'undefined' && history.replaceState) {
+        history.replaceState(null, '', `#${id}`);
+      }
     }
   }
 

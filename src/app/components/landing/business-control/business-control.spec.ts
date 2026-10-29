@@ -17,7 +17,7 @@ describe('BusinessControl', () => {
       providers: [
         provideRouter([]),
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
         LanguageService,
@@ -773,6 +773,14 @@ describe('BusinessControl', () => {
       const ctaLink = compiled.querySelector('a[routerlink="/business-realtime"], a[href="/business-realtime"]');
       expect(ctaLink).toBeTruthy();
       expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe('/business-realtime');
+    });
+
+    it('should link the connected-process card CTA button to /connected-process', () => {
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement as HTMLElement;
+      const ctaLink = compiled.querySelector('a[routerlink="/connected-process"], a[href="/connected-process"]');
+      expect(ctaLink).toBeTruthy();
+      expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe('/connected-process');
     });
   });
 });

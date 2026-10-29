@@ -14,7 +14,7 @@ describe('FinancialVisibility', () => {
       imports: [FinancialVisibility],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

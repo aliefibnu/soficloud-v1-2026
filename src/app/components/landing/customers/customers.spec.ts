@@ -15,7 +15,7 @@ describe('Customers', () => {
       imports: [Customers],
       providers: [
         provideTranslateService({
-          fallbackLang: 'en',
+          fallbackLang: 'id',
           lang: 'id',
         }),
       ],

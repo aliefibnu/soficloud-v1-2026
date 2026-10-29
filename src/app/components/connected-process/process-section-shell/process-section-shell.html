@@ -1,0 +1,49 @@
+<section
+  [id]="sectionId()"
+  [attr.aria-labelledby]="sectionId() + '-heading'"
+  class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 lg:py-8 short:py-3.5 scroll-mt-20"
+>
+  <div
+    class="w-full rounded-3xl bg-white shadow-[0_8px_30px_rgba(35,36,78,0.08)] overflow-hidden border border-gray-100/70"
+  >
+    <div class="px-6 pt-7 pb-6 sm:px-10 sm:pt-10 sm:pb-7 lg:px-10 lg:pt-14 lg:pb-8 short:pt-8.5 short:pb-4.5 lg:short:pt-9 text-center max-w-5xl mx-auto">
+      <h2
+        [id]="sectionId() + '-heading'"
+        [class]="
+          'font-inter font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[46px] text-[#23244E] leading-tight lg:leading-[1.18] tracking-normal text-center mx-auto whitespace-pre-line ' +
+          titleMaxWidthClass()
+        "
+        style="
+          font-family: var(--font-inter, 'Inter Variable', sans-serif);
+          font-weight: 600;
+        "
+      >
+        {{ title() }}
+      </h2>
+
+      <div
+        class="w-full max-w-214 h-0.5 bg-[#365AD2] mx-auto my-4 sm:my-5 short:my-2.5"
+        aria-hidden="true"
+      ></div>
+
+      <p
+        [class]="
+          'font-dm-sans font-normal text-[#23244E] text-[14px] leading-relaxed sm:leading-[1.65] text-center mx-auto mt-4 sm:mt-5 short:mt-2.5 tracking-normal whitespace-pre-line ' +
+          descriptionMaxWidthClass()
+        "
+        style="
+          font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+          font-weight: 400;
+        "
+      >
+        {{ description() }}
+      </p>
+    </div>
+
+    <ng-content select="[shell-shelf]" />
+
+    <div [class]="'w-full p-4 sm:p-6 lg:p-8 xl:p-10 short:p-5 ' + stageBgClass()">
+      <ng-content />
+    </div>
+  </div>
+</section>
