@@ -83,3 +83,7 @@ html {
 @utility pb-section {
   padding-bottom: var(--section-padding);
 }
+
+/* Short viewport height optimization (e.g., 125% - 150% display scaling on 1080p, or 1366x768 screens) */
+@custom-variant short (@media (min-width: 1024px) and (max-height: 860px));
+

@@ -151,4 +151,18 @@ describe('ProcessSectionShell', () => {
     );
     expect(updatedStageContainer).toBeTruthy();
   });
+
+  it('should apply height-responsive vertical rhythm classes for compact viewports', () => {
+    const sectionEl = fixture.debugElement.query(By.css('section'));
+    expect(sectionEl.nativeElement.classList.contains('short:py-3.5')).toBe(true);
+
+    const headerEl = fixture.debugElement.query(By.css('.short\\:pt-8\\.5'));
+    expect(headerEl).toBeTruthy();
+
+    const dividerEl = fixture.debugElement.query(By.css('.short\\:my-2\\.5'));
+    expect(dividerEl).toBeTruthy();
+
+    const stageEl = fixture.debugElement.query(By.css('.short\\:p-5'));
+    expect(stageEl).toBeTruthy();
+  });
 });
