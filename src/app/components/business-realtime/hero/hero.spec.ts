@@ -75,12 +75,16 @@ describe('BusinessRealtime Hero', () => {
     );
     expect(pillarImg).toBeTruthy();
     expect(pillarImg?.nativeElement.getAttribute('aria-hidden')).toBe('true');
+    expect(pillarImg?.nativeElement.getAttribute('draggable')).toBe('false');
+    expect(pillarImg?.nativeElement.classList.contains('pointer-events-none')).toBe(true);
 
     const tabletImg = images.find((img) =>
       img.nativeElement.getAttribute('src')?.includes('tablet.svg'),
     );
     expect(tabletImg).toBeTruthy();
     expect(tabletImg?.nativeElement.getAttribute('alt')).toBe('Dashboard SOFICloud pada tablet');
+    expect(tabletImg?.nativeElement.getAttribute('draggable')).toBe('false');
+    expect(tabletImg?.nativeElement.classList.contains('pointer-events-none')).toBe(true);
   });
 
   it('should contain the canvas container with gradient and shadow classes without border stroke', () => {
