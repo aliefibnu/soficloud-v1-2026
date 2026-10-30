@@ -453,6 +453,18 @@ describe('BusinessControl', () => {
       expect(component.activeCard()).toBe(3);
     });
 
+    it('should smoothly handle anchor navigation to sections below business-control when already scrolled past the section', () => {
+      window.scrollY = 6000; // Far past business control section (e.g. at pricing/solutions)
+      component.setScrollProgress(1);
+
+      // Trigger navigation to #features (known below)
+      const handled = component.checkAndHandleAnchor('features');
+
+      expect(handled).toBe(true);
+      expect(component.isNavigating()).toBe(true);
+      expect(component.scrollProgress()).toBe(1);
+    });
+
     it('should immediately set scrollProgress to 0 and isNavigating to true when anchor is above stacking section', () => {
       window.scrollY = 5000; // Past the section
       component.setScrollProgress(1);

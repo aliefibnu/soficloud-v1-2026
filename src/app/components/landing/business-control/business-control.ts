@@ -764,19 +764,10 @@ export interface ProcessCard {
         }
       }
 
-      if (isBelow) {
-        const isBeforeEnd = currentScroll < totalScroll || this.scrollProgress() < 1;
-        if (isBeforeEnd) {
-          this.startAnchorNavigation(1, targetScrollY !== null ? targetScrollY : undefined);
-          return true;
-        }
-      } else if (isAbove) {
-        const currentY = typeof window !== 'undefined' ? window.scrollY : 0;
-        const isPastStart = currentScroll > 0 || this.scrollProgress() > 0 || currentY > 10;
-        if (isPastStart) {
-          this.startAnchorNavigation(0, targetScrollY !== null ? targetScrollY : undefined);
-          return true;
-        }
+      if (targetScrollY !== null) {
+        const targetProgress = isAbove ? 0 : 1;
+        this.startAnchorNavigation(targetProgress, targetScrollY);
+        return true;
       }
       return false;
     }
@@ -787,7 +778,10 @@ export interface ProcessCard {
       this.scrollProgress.set(targetProgress);
 
       if (typeof targetY === 'number') {
-        this.animateNavScrollTo(targetY, 900);
+        const currentY = typeof window !== 'undefined' ? window.scrollY : 0;
+        const distance = Math.abs(targetY - currentY);
+        const duration = Math.min(800, Math.max(400, Math.round(distance * 0.1)));
+        this.animateNavScrollTo(targetY, duration);
       } else {
         this.navSafetyTimeoutId = setTimeout(() => {
           this.finishAnchorNavigation();
