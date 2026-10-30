@@ -83,11 +83,13 @@ describe('BusinessRealtime Hero', () => {
     expect(tabletImg?.nativeElement.getAttribute('alt')).toBe('Dashboard SOFICloud pada tablet');
   });
 
-  it('should contain the canvas container with gradient and shadow classes', () => {
+  it('should contain the canvas container with gradient and shadow classes without border stroke', () => {
     const canvas = fixture.debugElement.query(
       By.css('.rounded-3xl, .rounded-4xl, [class*="rounded-["]'),
     );
     expect(canvas).toBeTruthy();
     expect(canvas.nativeElement.style.background).toContain('conic-gradient');
+    expect(canvas.nativeElement.classList.contains('border')).toBe(false);
+    expect(canvas.nativeElement.classList.contains('border-white/80')).toBe(false);
   });
 });
