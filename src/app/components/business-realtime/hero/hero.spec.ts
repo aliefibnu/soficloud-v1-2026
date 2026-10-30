@@ -77,7 +77,7 @@ describe('BusinessRealtime Hero', () => {
     expect(pillarImg?.nativeElement.getAttribute('aria-hidden')).toBe('true');
 
     const tabletImg = images.find((img) =>
-      img.nativeElement.getAttribute('src')?.includes('tablet.webp'),
+      img.nativeElement.getAttribute('src')?.includes('tablet.svg'),
     );
     expect(tabletImg).toBeTruthy();
     expect(tabletImg?.nativeElement.getAttribute('alt')).toBe('Dashboard SOFICloud pada tablet');
