@@ -73,14 +73,18 @@ describe('ConnectedProcess Hero', () => {
     );
     expect(pillarImg).toBeTruthy();
     expect(pillarImg?.nativeElement.getAttribute('aria-hidden')).toBe('true');
+    expect(pillarImg?.nativeElement.getAttribute('draggable')).toBe('false');
+    expect(pillarImg?.nativeElement.classList.contains('pointer-events-none')).toBe(true);
 
     const tabletImg = images.find((img) =>
-      img.nativeElement.getAttribute('src')?.includes('tablet.webp'),
+      img.nativeElement.getAttribute('src')?.includes('tablet.svg'),
     );
     expect(tabletImg).toBeTruthy();
     expect(tabletImg?.nativeElement.getAttribute('alt')).toBe(
       'Dashboard Connected Business SOFICloud pada tablet',
     );
+    expect(tabletImg?.nativeElement.getAttribute('draggable')).toBe('false');
+    expect(tabletImg?.nativeElement.classList.contains('pointer-events-none')).toBe(true);
   });
 
   it('should contain the canvas container with conic gradient and shadow classes', () => {
@@ -100,7 +104,7 @@ describe('ConnectedProcess Hero', () => {
     // Left column contains visual assets
     const visualCol = columns[0];
     expect(visualCol.nativeElement.classList.contains('lg:order-1')).toBe(true);
-    expect(visualCol.query(By.css('img[src*="tablet.webp"]'))).toBeTruthy();
+    expect(visualCol.query(By.css('img[src*="tablet.svg"]'))).toBeTruthy();
 
     // Right column contains text content
     const textCol = columns[1];
@@ -132,7 +136,7 @@ describe('ConnectedProcess Hero', () => {
       true,
     );
 
-    const tabletImg = visualWrapper.query(By.css('img[src*="tablet.webp"]'));
+    const tabletImg = visualWrapper.query(By.css('img[src*="tablet.svg"]'));
     expect(tabletImg).toBeTruthy();
     expect(tabletImg.nativeElement.classList.contains('top-0')).toBe(true);
     expect(
