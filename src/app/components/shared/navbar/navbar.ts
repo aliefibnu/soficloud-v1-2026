@@ -181,15 +181,23 @@ export class Navbar {
     this.isMobileLangSheetOpen.set(false);
   }
 
-  onNavClick(linkKey: string): void {
+  onNavClick(linkKey: string, href?: string, event?: Event): void {
     if (this.isLandingPage()) {
       this.rawActiveLinkKey.set(linkKey);
+    } else if (href) {
+      event?.preventDefault();
+      const cleanId = href.replace(/^#/, '').trim();
+      this.router.navigate(['/'], { fragment: cleanId });
     }
   }
 
-  onMobileNavClick(linkKey: string): void {
+  onMobileNavClick(linkKey: string, href?: string, event?: Event): void {
     if (this.isLandingPage()) {
       this.rawActiveLinkKey.set(linkKey);
+    } else if (href) {
+      event?.preventDefault();
+      const cleanId = href.replace(/^#/, '').trim();
+      this.router.navigate(['/'], { fragment: cleanId });
     }
     this.closeMobileMenu();
   }
@@ -197,10 +205,12 @@ export class Navbar {
   onScheduleDemo(): void {
     if (this.isLandingPage()) {
       this.rawActiveLinkKey.set('HEADER.NAV.CONTACT');
-    }
-    if (typeof document !== 'undefined') {
-      const el = document.getElementById('support') || document.getElementById('contact');
-      el?.scrollIntoView({ behavior: 'smooth' });
+      if (typeof document !== 'undefined') {
+        const el = document.getElementById('support') || document.getElementById('contact');
+        el?.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      this.router.navigate(['/'], { fragment: 'contact' });
     }
   }
 

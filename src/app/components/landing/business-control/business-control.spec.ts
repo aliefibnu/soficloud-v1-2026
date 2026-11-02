@@ -794,5 +794,19 @@ describe('BusinessControl', () => {
       expect(ctaLink).toBeTruthy();
       expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe('/connected-process');
     });
+
+    it('should invoke checkAndHandleAnchor on ngAfterViewInit when initial hash is present', () => {
+      vi.useFakeTimers();
+      const anchorSpy = vi.spyOn(component, 'checkAndHandleAnchor').mockReturnValue(true);
+      window.location.hash = '#contact';
+
+      component.ngAfterViewInit();
+      vi.advanceTimersByTime(100);
+
+      expect(anchorSpy).toHaveBeenCalledWith('contact');
+      window.location.hash = '';
+      anchorSpy.mockRestore();
+      vi.useRealTimers();
+    });
   });
 });
