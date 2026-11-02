@@ -134,6 +134,27 @@ describe('Navbar', () => {
     expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
   });
 
+  it('should navigate to root with fragment when onNavClick or onMobileNavClick is called on non-landing page', () => {
+    component.isLandingPage.set(false);
+    const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+    const event = new MouseEvent('click');
+    const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
+
+    component.onNavClick('HEADER.NAV.CONTACT', '#contact', event);
+    expect(preventDefaultSpy).toHaveBeenCalled();
+    expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'contact' });
+
+    component.isMobileMenuOpen.set(true);
+    component.onMobileNavClick('HEADER.NAV.FEATURES', '#features', event);
+    expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'features' });
+    expect(component.isMobileMenuOpen()).toBe(false);
+
+    component.onScheduleDemo();
+    expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'contact' });
+
+    navSpy.mockRestore();
+  });
+
   it('should correctly detect active section on updateActiveSection based on element rects', () => {
     const features = document.createElement('div');
     features.id = 'features';

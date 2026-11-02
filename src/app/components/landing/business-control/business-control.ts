@@ -10,7 +10,7 @@
     AfterViewInit,
   } from '@angular/core';
   import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
-  import { Router, NavigationStart, RouterLink } from '@angular/router';
+  import { Router, NavigationStart, NavigationEnd, RouterLink } from '@angular/router';
   import { Subscription } from 'rxjs';
   import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   import { LanguageService } from '../../../systems/lib/language.service';
@@ -125,6 +125,14 @@ export interface ProcessCard {
             } else if (event.url === '/' || event.url === '') {
               this.checkAndHandleAnchor('hero');
             }
+          } else if (event instanceof NavigationEnd) {
+            const tree = this.router?.parseUrl(event.urlAfterRedirects);
+            if (tree?.fragment) {
+              const fragment = tree.fragment;
+              setTimeout(() => {
+                this.checkAndHandleAnchor(fragment);
+              }, 60);
+            }
           }
         });
       }
@@ -143,6 +151,15 @@ export interface ProcessCard {
         track.addEventListener('wheel', this.onTrackWheel, { passive: false });
         track.addEventListener('touchstart', this.onTrackTouchStart, { passive: true });
         track.addEventListener('touchend', this.onTrackTouchEnd, { passive: true });
+      }
+
+      const initialHash =
+        (typeof window !== 'undefined' && window.location.hash ? window.location.hash.slice(1) : '') ||
+        (this.router ? this.router.parseUrl(this.router.url).fragment : null);
+      if (initialHash) {
+        setTimeout(() => {
+          this.checkAndHandleAnchor(initialHash);
+        }, 60);
       }
     }
 
