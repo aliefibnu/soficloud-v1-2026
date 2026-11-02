@@ -453,7 +453,8 @@
   "PRICE": {
     "HEADING": "ここから始める\nあなたのニーズを実現",
     "STARTING_FROM": "料金プラン",
-    "AMOUNT": "Rp2.500.000〜",
+    "AMOUNT": "Rp2.500.000",
+    "PERIOD": "/月",
     "BUTTON": "料金詳細を見る"
   },
   "BUSINESS_REALTIME": {

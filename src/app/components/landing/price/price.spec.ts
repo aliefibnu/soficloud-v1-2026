@@ -24,6 +24,7 @@ describe('Price', () => {
         HEADING: 'Mulai Dari Sini\nWujudkan Kebutuhanmu',
         STARTING_FROM: 'Harga Mulai Dari',
         AMOUNT: 'Rp2.500.000',
+        PERIOD: '/bln',
         BUTTON: 'Lihat Detail Harga',
       },
     });
@@ -57,10 +58,12 @@ describe('Price', () => {
     const textContent = fixture.nativeElement.textContent;
     expect(textContent).toContain('Harga Mulai Dari');
     expect(textContent).toContain('Rp2.500.000');
+    expect(textContent).toContain('/bln');
 
     const amountEl = fixture.nativeElement.querySelector('.font-extrabold');
     expect(amountEl).toBeTruthy();
     expect(amountEl.textContent).toContain('Rp2.500.000');
+    expect(amountEl.textContent).toContain('/bln');
     expect(amountEl.classList.contains('font-inter')).toBe(true);
   });
 
