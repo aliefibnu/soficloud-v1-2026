@@ -8,14 +8,14 @@ export const routes: Routes = [
   {
     path: 'business-realtime',
     loadComponent: () =>
-      import('../../pages/business-realtime/business-realtime').then(
+      import('../../pages/business-control/business-realtime/business-realtime').then(
         (m) => m.BusinessRealtime,
       ),
   },
   {
     path: 'connected-process',
     loadComponent: () =>
-      import('../../pages/connected-process/connected-process').then(
+      import('../../pages/business-control/connected-process/connected-process').then(
         (m) => m.ConnectedProcess,
       ),
   },
