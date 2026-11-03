@@ -22,7 +22,7 @@
       @for (link of navLinks; track link.key) {
         <a
           [href]="isLandingPage() ? link.href : '/' + link.href"
-          (click)="onNavClick(link.key, link.href, $event)"
+          (click)="onNavClick(link.key)"
           [attr.aria-current]="activeLinkKey() === link.key ? 'page' : null"
           class="px-3 py-1.5 xl:px-3.5 xl:py-1.5 rounded-lg xl:rounded-xl text-[14.5px] xl:text-[15.5px] font-bold tracking-[-0.01em] whitespace-nowrap transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb]"
           [class.bg-[#EAF2FD]]="activeLinkKey() === link.key"
@@ -175,7 +175,7 @@
             [class.text-[#182849]/80]="activeLinkKey() !== link.key"
             [class.hover:bg-gray-100/70]="activeLinkKey() !== link.key"
             [attr.aria-current]="activeLinkKey() === link.key ? 'page' : null"
-            (click)="onMobileNavClick(link.key, link.href, $event)"
+            (click)="onMobileNavClick(link.key)"
           >
             {{ link.key | translate }}
           </a>

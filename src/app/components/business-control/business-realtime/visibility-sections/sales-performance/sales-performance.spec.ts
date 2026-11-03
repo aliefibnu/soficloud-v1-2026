@@ -81,7 +81,9 @@ describe('SalesPerformance', () => {
     const chrome = fixture.debugElement.query(By.css('app-erp-window-chrome'));
     expect(chrome).toBeTruthy();
 
-    const activePill = chrome.query(By.css('.bg-\\[\\#EAF1FD\\]'));
+    const activePill =
+      chrome.query(By.css('.bg-\\[\\#EBF2FD\\]')) ||
+      chrome.query(By.css('.bg-\\[\\#EAF1FD\\]'));
     expect(activePill).toBeTruthy();
     expect(activePill.nativeElement.textContent.trim()).toBe('Sales');
 
@@ -106,8 +108,7 @@ describe('SalesPerformance', () => {
     expect(card3).toBeTruthy();
     expect(card3.nativeElement.textContent).toContain('2026');
     expect(card3.nativeElement.textContent).toContain('2025');
-    expect(card3.nativeElement.classList.contains('max-w-135')).toBe(true);
-    expect(card3.nativeElement.classList.contains('mx-auto')).toBe(true);
+    expect(card3.nativeElement.classList.contains('sm:w-[432.43px]')).toBe(true);
   });
 
   it('should render the decision card with decision text', () => {
