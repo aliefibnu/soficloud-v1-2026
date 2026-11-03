@@ -162,7 +162,7 @@ describe('MaterialReadiness', () => {
     expect(searchInput).toBeTruthy();
 
     const buttons = fixture.debugElement.queryAll(
-      By.css('button.bg-\\[\\#0B63EE\\]'),
+      By.css('button.bg-\\[\\#0162EF\\]'),
     );
     expect(buttons.length).toBe(4);
     const buttonTexts = buttons.map((b) => b.nativeElement.textContent.trim());
