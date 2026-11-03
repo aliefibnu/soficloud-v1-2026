@@ -89,8 +89,8 @@ export class AccountingImpact {
       id: 'balance-sheet',
       labelKey: 'CONNECTED_PROCESS.ACCOUNTING_IMPACT.COLUMN_3.ITEMS.1',
       iconSrc: '/images/connected-process/accounting-impact/balance-sheet.svg',
-      iconWidth: 18,
-      iconHeight: 21,
+      iconWidth: 24,
+      iconHeight: 22,
     },
     {
       id: 'cash-flow',
