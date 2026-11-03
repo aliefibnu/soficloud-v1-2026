@@ -29,6 +29,7 @@ export class ErpWindowChrome implements OnDestroy {
   readonly activeModule = input<ErpModuleType>('sales');
   readonly moduleTitle = input.required<string>();
   readonly showStatusPills = input<boolean>(true);
+  readonly windowHeightClass = input<string>('lg:h-[553.723px]');
   readonly mainPaddingClass = input<string>('px-4 sm:px-8 lg:px-19');
   readonly contentContainerClass = input<string>(
     'w-full max-w-190 mx-auto flex-1 flex flex-col gap-4 sm:gap-6',
