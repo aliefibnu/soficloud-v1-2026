@@ -10,5 +10,6 @@ export class VisibilitySectionShell {
   readonly description = input.required<string>();
   readonly decisionText = input.required<string>();
   readonly decisionLabel = input<string>('For decisions:');
+  readonly decisionReversed = input(false);
   readonly stageBgClass = input<string>('bg-[#F9CEC8]');
 }
