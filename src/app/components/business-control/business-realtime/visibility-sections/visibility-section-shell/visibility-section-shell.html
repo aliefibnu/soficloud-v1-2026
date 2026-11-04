@@ -30,7 +30,7 @@
 
     <div [class]="'w-full ' + stageBgClass()">
       <div
-        [class]="'w-full max-w-[1161px] mx-auto p-3.5 sm:p-5 lg:pt-[50px] lg:pb-[50.28px] lg:pl-[52.06px] lg:pr-[26.07px] flex items-center justify-center gap-4 lg:gap-[17.5px] ' + (decisionReversed() ? 'flex-col-reverse lg:flex-row-reverse' : 'flex-col lg:flex-row')"
+        [class]="'w-full max-w-[1161px] mx-auto p-3.5 sm:p-5 lg:pt-[50px] lg:pb-[50.28px] flex items-center justify-center gap-4 ' + (decisionReversed() ? 'lg:pl-[39px] lg:pr-[39.5px] lg:gap-[17px] flex-col-reverse lg:flex-row-reverse' : 'lg:pl-[52.06px] lg:pr-[26.07px] lg:gap-[17.5px] flex-col lg:flex-row')"
       >
         <div class="w-full lg:w-auto shrink-0 flex justify-center">
           <ng-content />
