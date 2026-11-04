@@ -209,7 +209,7 @@ describe('OrderPipeline', () => {
 
   it('should render connector lines between pipeline stages', () => {
     const connectors = fixture.debugElement.queryAll(
-      By.css('[aria-hidden="true"].bg-\\[\\#0B63EE\\], [aria-hidden="true"].bg-\\[\\#EE7981\\]'),
+      By.css('[aria-hidden="true"].bg-\\[\\#0162EF\\], [aria-hidden="true"].bg-\\[\\#EF7A82\\]'),
     );
     // 3 horizontal in Row 1 + 1 vertical from Card 4 + 3 horizontal in Row 2 = 7 connectors
     expect(connectors.length).toBe(7);
