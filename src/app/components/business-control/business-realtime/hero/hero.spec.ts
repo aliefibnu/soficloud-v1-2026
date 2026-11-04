@@ -46,7 +46,7 @@ describe('BusinessRealtime Hero', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the heading with the correct text lines', () => {
+  it('should render the heading with the correct text lines and font weight', () => {
     const heading = fixture.debugElement.query(By.css('h1'));
     expect(heading).toBeTruthy();
     const headingText = heading.nativeElement.textContent;
@@ -55,45 +55,45 @@ describe('BusinessRealtime Hero', () => {
     expect(headingText).toContain('Putuskan');
     expect(headingText).toContain('Langkah');
     expect(headingText).toContain('Lebih Cepat');
+    expect(heading.nativeElement.classList.contains('font-inter')).toBe(true);
+    expect(heading.nativeElement.classList.contains('font-extrabold')).toBe(true);
   });
 
-  it('should render the description paragraph with the expected text and 15px size', () => {
+  it('should render the description paragraph with the expected text and text-justify class', () => {
     const paragraph = fixture.debugElement.query(By.css('p'));
     expect(paragraph).toBeTruthy();
     expect(paragraph.nativeElement.textContent).toContain(
       'Penjualan, pengadaan, kebutuhan material, progres pesanan, dan keuangan',
     );
-    expect(paragraph.nativeElement.classList.contains('text-[15px]')).toBe(true);
+    expect(paragraph.nativeElement.classList.contains('text-justify')).toBe(true);
   });
 
-  it('should render the tablet and pillar images with proper ngSrc and alt attributes', () => {
+  it('should render the unified tablet stage image with proper ngSrc and alt attributes', () => {
     const images = fixture.debugElement.queryAll(By.css('img'));
-    expect(images.length).toBeGreaterThanOrEqual(2);
+    expect(images.length).toBeGreaterThanOrEqual(1);
 
-    const pillarImg = images.find((img) =>
-      img.nativeElement.getAttribute('src')?.includes('tablet-pillar.svg'),
+    const stageImg = images.find((img) =>
+      img.nativeElement.getAttribute('src')?.includes('hero-tablet-stage.svg'),
     );
-    expect(pillarImg).toBeTruthy();
-    expect(pillarImg?.nativeElement.getAttribute('aria-hidden')).toBe('true');
-    expect(pillarImg?.nativeElement.getAttribute('draggable')).toBe('false');
-    expect(pillarImg?.nativeElement.classList.contains('pointer-events-none')).toBe(true);
-
-    const tabletImg = images.find((img) =>
-      img.nativeElement.getAttribute('src')?.includes('tablet.svg'),
-    );
-    expect(tabletImg).toBeTruthy();
-    expect(tabletImg?.nativeElement.getAttribute('alt')).toBe('Dashboard SOFICloud pada tablet');
-    expect(tabletImg?.nativeElement.getAttribute('draggable')).toBe('false');
-    expect(tabletImg?.nativeElement.classList.contains('pointer-events-none')).toBe(true);
+    expect(stageImg).toBeTruthy();
+    expect(stageImg?.nativeElement.getAttribute('alt')).toBe('Dashboard SOFICloud pada tablet');
+    expect(stageImg?.nativeElement.getAttribute('draggable')).toBe('false');
+    expect(stageImg?.nativeElement.classList.contains('object-contain')).toBe(true);
   });
 
-  it('should contain the canvas container with gradient and shadow classes without border stroke', () => {
-    const canvas = fixture.debugElement.query(
-      By.css('.rounded-3xl, .rounded-4xl, [class*="rounded-["]'),
+  it('should contain the card container with gradient, shadow, and rounded-32px classes', () => {
+    const card = fixture.debugElement.query(
+      By.css('.rounded-3xl, [class*="rounded-["]'),
     );
-    expect(canvas).toBeTruthy();
-    expect(canvas.nativeElement.style.background).toContain('conic-gradient');
-    expect(canvas.nativeElement.classList.contains('border')).toBe(false);
-    expect(canvas.nativeElement.classList.contains('border-white/80')).toBe(false);
+    expect(card).toBeTruthy();
+    expect(card.nativeElement.style.background).toContain('conic-gradient');
+    expect(card.nativeElement.classList.contains('shadow-[0px_3px_15px_0px_rgba(0,0,0,0.08)]')).toBe(true);
+  });
+
+  it('should allow text selection and copying on the typography column', () => {
+    const textCol = fixture.debugElement.query(By.css('.z-10'));
+    expect(textCol).toBeTruthy();
+    expect(textCol.nativeElement.classList.contains('select-text')).toBe(true);
+    expect(textCol.nativeElement.classList.contains('select-none')).toBe(false);
   });
 });
