@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { VisibilitySectionShell } from '../visibility-section-shell/visibility-section-shell';
 import { ErpWindowChrome } from '../erp-window-chrome/erp-window-chrome';
@@ -7,6 +7,8 @@ export interface BalanceSheetItem {
   readonly nameKey: string;
   readonly defaultName: string;
   readonly amount: string;
+  readonly nameLines?: readonly string[];
+  readonly amountLines?: readonly string[];
 }
 
 export interface BalanceSheetCategory {
@@ -46,12 +48,12 @@ export class FinancialVisibility {
         {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.ASSETS.ITEMS.CASH',
           defaultName: 'CASH',
-          amount: '32,285,731.90',
+          amount: '32,285,731.96',
         },
         {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.ASSETS.ITEMS.BANK',
           defaultName: 'BANK',
-          amount: '83,938,838.63',
+          amount: '83,998,838.63',
         },
         {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.ASSETS.ITEMS.ACCOUNT_RECEIVABLE',
@@ -72,6 +74,7 @@ export class FinancialVisibility {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.ASSETS.ITEMS.INVENTORY',
           defaultName: 'INVENTORY',
           amount: '0.00',
+          nameLines: ['INVENT', 'ORY'],
         },
         {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.ASSETS.ITEMS.FIXED_ASSET',
@@ -82,6 +85,7 @@ export class FinancialVisibility {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.ASSETS.ITEMS.INTANGIBLE_ASSETS',
           defaultName: 'INTANGIBLE ASSETS',
           amount: '791,666,666.52',
+          amountLines: ['791,666,666', '.52'],
         },
       ],
     },
@@ -107,7 +111,7 @@ export class FinancialVisibility {
         {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.LIABILITIES.ITEMS.EXPENSES_PAYABLE',
           defaultName: 'EXPENSES PAYABLE',
-          amount: '291,862,297.08',
+          amount: '291,862,297.06',
         },
         {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.LIABILITIES.ITEMS.TAX_PAYABLE',
@@ -117,7 +121,7 @@ export class FinancialVisibility {
         {
           nameKey: 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.LIABILITIES.ITEMS.LONG_TERM_PAYABLE',
           defaultName: 'LONG TERM PAYABLE',
-          amount: '453,975,224.76',
+          amount: '453,975,224.78',
         },
       ],
     },
@@ -150,34 +154,48 @@ export class FinancialVisibility {
   ];
 
   readonly incomePath =
-    'M 55.0 100.0 C 63.3 103.2, 88.1 123.5, 104.6 119.3 C 121.1 115.1, 137.7 76.1, 154.2 75.0 C 170.7 73.9, 187.3 107.7, 203.8 112.5 C 220.3 117.3, 236.8 103.6, 253.3 104.0 C 269.8 104.4, 286.4 122.0, 302.9 114.8 C 319.4 107.6, 336.0 62.7, 352.5 60.8 C 369.0 58.9, 385.6 90.9, 402.1 103.5 C 418.6 116.1, 435.2 140.3, 451.7 136.3 C 468.2 132.3, 484.8 83.8, 501.3 79.5 C 517.8 75.2, 534.3 112.7, 550.8 110.3 C 567.3 107.9, 583.9 75.5, 600.4 65.3 C 616.9 55.0, 641.7 51.5, 650.0 48.8';
+    'M 106.275 164.283 C 122.881 176.097, 122.881 184.63, 142.808 193.819 C 155.521 199.681, 170.841 125.01, 183.326 129.496 C 205.245 137.373, 207.902 174.128, 219.858 182.661 C 232.959 192.011, 245.08 170.19, 257.054 170.19 C 278.974 170.19, 277.871 183.245, 294.251 185.942 C 310.192 188.568, 324.141 176.753, 332.112 176.753 C 352.194 176.753, 365.345 165.482, 369.973 170.19 C 392.556 193.162, 394.655 216.134, 409.162 216.134 C 427.76 216.134, 435.067 136.06, 445.694 136.06 C 468.942 136.06, 476.913 183.645, 482.891 180.692 C 490.862 176.753, 516.767 115.713, 522.745 115.713 L 557.782 102.58';
 
   readonly expensePath =
-    'M 55.0 125.0 C 63.3 124.4, 88.1 121.8, 104.6 121.5 C 121.1 121.2, 137.7 122.7, 154.2 123.3 C 170.7 123.9, 187.3 128.6, 203.8 125.0 C 220.3 121.4, 236.8 104.2, 253.3 101.8 C 269.8 99.3, 286.4 109.8, 302.9 110.3 C 319.4 110.8, 336.0 112.5, 352.5 104.5 C 369.0 96.5, 385.6 61.0, 402.1 62.0 C 418.6 63.0, 435.2 103.0, 451.7 110.8 C 468.2 118.6, 484.8 110.0, 501.3 109.0 C 517.8 108.0, 534.3 104.3, 550.8 104.5 C 567.3 104.7, 583.9 108.1, 600.4 110.3 C 616.9 112.5, 641.7 116.3, 650.0 117.5';
+    'M 106.275 200.423 L 146.129 194.472 C 146.129 194.472, 162.025 197.387, 181.997 197.754 C 197.471 198.038, 204.581 197.754, 219.194 200.423 C 230.899 202.561, 245.763 169.255, 257.719 166.905 C 274.629 163.582, 279.002 180.032, 296.244 180.032 C 308.2 180.032, 320.622 174.052, 332.776 172.156 C 345.396 170.187, 360.037 104.24, 371.965 111.116 C 395.878 124.899, 404.312 180.067, 407.834 180.689 C 426.432 183.971, 430.417 185.283, 446.359 178.72 C 461.736 172.388, 467.704 167.935, 484.219 172.156 C 496.84 175.381, 522.08 180.032, 522.08 180.032 C 522.08 180.032, 543.374 185.804, 557.948 189.878';
 
   readonly monthlyData: readonly IncomeExpenseMonth[] = [
-    { label: 'August 2025', x: 55.0, incomeY: 100.0, expenseY: 125.0 },
-    { label: 'September 2025', x: 104.6, incomeY: 119.3, expenseY: 121.5 },
-    { label: 'October 2025', x: 154.2, incomeY: 75.0, expenseY: 123.3 },
-    { label: 'November 2025', x: 203.8, incomeY: 112.5, expenseY: 125.0 },
-    { label: 'December 2025', x: 253.3, incomeY: 104.0, expenseY: 101.8 },
-    { label: 'January 2026', x: 302.9, incomeY: 114.8, expenseY: 110.3 },
-    { label: 'February 2026', x: 352.5, incomeY: 60.8, expenseY: 104.5 },
-    { label: 'March 2026', x: 402.1, incomeY: 103.5, expenseY: 62.0 },
-    { label: 'April 2026', x: 451.7, incomeY: 136.3, expenseY: 110.8 },
-    { label: 'May 2026', x: 501.3, incomeY: 79.5, expenseY: 109.0 },
-    { label: 'June 2026', x: 550.8, incomeY: 110.3, expenseY: 104.5 },
-    { label: 'July 2026', x: 600.4, incomeY: 65.3, expenseY: 110.3 },
-    { label: 'August 2026', x: 650.0, incomeY: 48.8, expenseY: 117.5 },
+    { label: 'August 2025', x: 106.897, incomeY: 164.932, expenseY: 200.379 },
+    { label: 'September 2025', x: 144.567, incomeY: 193.811, expenseY: 195.129 },
+    { label: 'October 2025', x: 182.241, incomeY: 129.489, expenseY: 197.748 },
+    { label: 'November 2025', x: 219.915, incomeY: 182.659, expenseY: 200.379 },
+    { label: 'December 2025', x: 257.589, incomeY: 170.180, expenseY: 167.561 },
+    { label: 'January 2026', x: 295.268, incomeY: 185.936, expenseY: 179.379 },
+    { label: 'February 2026', x: 332.936, incomeY: 176.752, expenseY: 171.496 },
+    { label: 'March 2026', x: 370.610, incomeY: 170.180, expenseY: 111.116 },
+    { label: 'April 2026', x: 408.284, incomeY: 216.133, expenseY: 180.690 },
+    { label: 'May 2026', x: 445.960, incomeY: 136.051, expenseY: 178.063 },
+    { label: 'June 2026', x: 483.637, incomeY: 180.690, expenseY: 171.496 },
+    { label: 'July 2026', x: 521.307, incomeY: 116.362, expenseY: 179.379 },
+    { label: 'August 2026', x: 558.518, incomeY: 103.235, expenseY: 189.873 },
   ];
 
   readonly gridLevels = [
-    { label: '600 M', y: 25 },
-    { label: '500 M', y: 50 },
-    { label: '400 M', y: 75 },
-    { label: '300 M', y: 100 },
-    { label: '200 M', y: 125 },
-    { label: '100 M', y: 150 },
-    { label: '0', y: 175 },
+    { label: '600 M', y: 94.70 },
+    { label: '500 M', y: 129.93 },
+    { label: '400 M', y: 165.15 },
+    { label: '300 M', y: 200.38 },
+    { label: '200 M', y: 235.61 },
+    { label: '100 M', y: 270.82 },
+    { label: '0', y: 306.05 },
   ];
+
+  readonly scrollThumbTop = signal<number>(0);
+
+  onContentScroll(event: Event): void {
+    const target = event.target as HTMLElement;
+    const maxScroll = target.scrollHeight - target.clientHeight;
+    if (maxScroll > 0) {
+      const trackHeight = target.clientHeight - 50; // 50px is the blue indicator thumb height
+      const scrollRatio = target.scrollTop / maxScroll;
+      this.scrollThumbTop.set(Math.max(0, Math.min(trackHeight, scrollRatio * trackHeight)));
+    } else {
+      this.scrollThumbTop.set(0);
+    }
+  }
 }
