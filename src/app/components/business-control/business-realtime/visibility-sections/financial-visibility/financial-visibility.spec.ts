@@ -159,9 +159,9 @@ describe('FinancialVisibility', () => {
       'Rp 2,162,866,910.38',
     );
     expect(assetsCard.nativeElement.textContent).toContain('CASH');
-    expect(assetsCard.nativeElement.textContent).toContain('32,285,731.90');
+    expect(assetsCard.nativeElement.textContent).toContain('32,285,731.96');
     expect(assetsCard.nativeElement.textContent).toContain('BANK');
-    expect(assetsCard.nativeElement.textContent).toContain('83,938,838.63');
+    expect(assetsCard.nativeElement.textContent).toContain('83,998,838.63');
     expect(assetsCard.nativeElement.textContent).toContain('FIXED ASSET');
     expect(assetsCard.nativeElement.textContent).toContain('139,575,580.37');
 
@@ -177,7 +177,7 @@ describe('FinancialVisibility', () => {
       'EXPENSES PAYABLE',
     );
     expect(liabilitiesCard.nativeElement.textContent).toContain(
-      '291,862,297.08',
+      '291,862,297.06',
     );
 
     const equityCard = articles[2];
@@ -227,7 +227,7 @@ describe('FinancialVisibility', () => {
     expect(bottomCard.nativeElement.textContent).toContain('Expense');
     expect(bottomCard.nativeElement.textContent).toContain('Income');
 
-    const chartSvg = bottomCard.query(By.css('svg[viewBox="0 0 680 230"]'));
+    const chartSvg = bottomCard.query(By.css('svg[viewBox="19.9258 15.9414 580.533 342.615"]'));
     expect(chartSvg).toBeTruthy();
 
     const paths = chartSvg.queryAll(By.css('path'));

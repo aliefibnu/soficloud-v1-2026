@@ -9,7 +9,7 @@
   "
   [decisionLabel]="'BUSINESS_REALTIME.VISIBILITY_SECTIONS.COMMON.DECISION_LABEL' | translate"
   [decisionReversed]="true"
-  stageBgClass="bg-[#C0D6F7]"
+  stageBgClass="bg-[linear-gradient(232.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)] rounded-b-[32px] overflow-hidden"
 >
   <app-erp-window-chrome
     activeModule="finance"
@@ -17,193 +17,172 @@
       'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.WINDOW_TITLE' | translate
     "
     [showStatusPills]="true"
+    contentContainerClass="w-full flex-1 min-h-0 flex flex-col overflow-hidden"
+    mainPaddingClass="px-2 sm:px-4 lg:px-[18px]"
   >
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3.5 w-full">
-      @for (category of categories; track category.key) {
-        <article
-          class="bg-white rounded-[10px] p-2.5 sm:p-3 shadow-2xs border-[#DDDDDD]/80 border-[0.67px] flex flex-col justify-start gap-2.5"
-        >
-          <div class="flex items-start justify-between">
-            <div class="text-[#94A3B8] p-1" aria-hidden="true">
-              @switch (category.iconType) {
-                @case ('building') {
-                  <svg class="w-5 h-5 text-[#94A3B8]" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M3 2h9v20H3V2zm2 3h2v2H5V5zm3 0h2v2H8V5zm-3 4h2v2H5V9zm3 0h2v2H8V9zm-3 4h2v2H5v-2zm3 0h2v2H8v-2zm-3 4h2v2H5v-2zm3 0h2v2H8v-2zm6-8h8v13h-8V9zm2 3h2v2h-2v-2zm3 0h1.5v2H19v-2zm-3 4h2v2h-2v-2zm3 0h1.5v2H19v-2z"
-                    />
-                  </svg>
-                }
-                @case ('bank') {
-                  <svg class="w-5 h-5 text-[#94A3B8]" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M12 2L2 7v2h20V7L12 2zM4 11v7h2.5v-7H4zm5 0v7h2.5v-7H9zm5 0v7h2.5v-7H14zm5 0v7h2.5v-7H19zM2 20v2h20v-2H2z"
-                    />
-                  </svg>
-                }
-                @case ('equity') {
-                  <svg class="w-5 h-5 text-[#94A3B8]" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M19 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-1 18H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1z"
-                    />
-                    <path
-                      d="M7 6h10v3H7V6zm0 5h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"
-                    />
-                  </svg>
-                }
-              }
-            </div>
+    <!-- Viewport Container with Fixed Height & Isolated Internal Scroll -->
+    <div class="relative w-full h-[475px] flex overflow-hidden">
+      <!-- Scrollable Kanvas (Scrollbar Native Browser 100% Disembunyikan) -->
+      <div
+        (scroll)="onContentScroll($event)"
+        class="flex-1 h-full overflow-y-auto pr-3.5 space-y-4 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        <!-- Top Row: Assets, Liabilities, Equity (Tinggi Tetap 263.71px, Gap Presisi 32.17px) -->
+        <div class="flex justify-center gap-[32.17px] w-full">
+          @for (category of categories; track category.key) {
+            <article
+              class="w-[174.85px] h-[263.71px] rounded-[5.6px] border-[0.7px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4.2px_8.83px_0px_rgba(0,0,0,0.02)] relative p-[12.59px] flex flex-col justify-start gap-[14px] overflow-hidden shrink-0"
+            >
+              <!-- 3-Dots Menu Tab Top-Right -->
+              <div
+                class="absolute top-0 right-0 w-[15.39px] h-[18.14px] bg-[#DDDDDD] rounded-tr-[5.6px] flex flex-col items-center justify-center gap-[1.4px] pointer-events-none"
+                aria-hidden="true"
+              >
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+              </div>
 
-            <div class="flex flex-col items-end text-right">
-              <span
-                class="font-dm-sans font-bold text-xs sm:text-[13px] text-[#0B63EE] tracking-tight uppercase"
-                style="
-                  font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-                  font-weight: 700;
-                "
-              >
-                {{ category.titleKey | translate }}
-              </span>
-              <span
-                class="font-dm-sans text-[8.5px] sm:text-[9px] text-[#8F9CAE] leading-tight"
-                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif)"
-              >
-                {{ category.periodKey | translate }}
-              </span>
-              <span
-                class="font-dm-sans font-bold text-xs sm:text-[12.5px] text-[#23244E] tracking-tight mt-0.5"
-                style="
-                  font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-                  font-weight: 700;
-                "
-              >
-                {{ category.total }}
-              </span>
-            </div>
+              <!-- Card Header -->
+              <div class="flex items-start justify-between pr-3">
+                <div class="text-[#D9D9D9] pt-0.5" aria-hidden="true">
+                  @switch (category.iconType) {
+                    @case ('building') {
+                      <!-- Assets Icon Ekstrak Vektor Asli Group 9934.svg -->
+                      <svg class="w-[17px] h-[19px] shrink-0" viewBox="0 0 17 19" fill="none">
+                        <path
+                          d="M9.791 18.139H0V0H9.791V18.139ZM1.399 12.558H4.196V9.768H1.399V12.558ZM5.594 12.558H8.392V9.768H5.594V12.558ZM1.399 8.372H4.196V5.581H1.399V8.372ZM5.594 8.372H8.392V5.581H5.594V8.372ZM1.399 4.184H4.196V1.393H1.399V4.184ZM5.594 4.184H8.392V1.393H5.594V4.184Z"
+                          fill="#D9D9D9"
+                        />
+                        <path
+                          d="M16.787 18.134H11.192V8.368H16.787V18.134ZM12.59 13.948V18.133H15.388V13.948H12.59Z"
+                          fill="#D9D9D9"
+                        />
+                        <rect x="11.192" y="5.581" width="5.595" height="1.395" fill="#D9D9D9" />
+                      </svg>
+                    }
+                    @case ('bank') {
+                      <!-- Liabilities Icon Ekstrak Vektor Asli Group 9934.svg -->
+                      <svg class="w-[20px] h-[17px] shrink-0" viewBox="0 0 20 17" fill="none">
+                        <path d="M9.791 0L19.583 6.976H0L9.791 0Z" fill="#D9D9D9" />
+                        <rect x="2.797" y="6.981" width="1.399" height="6.976" fill="#D9D9D9" />
+                        <rect x="6.993" y="6.981" width="1.399" height="6.976" fill="#D9D9D9" />
+                        <rect x="11.19" y="6.981" width="1.399" height="6.976" fill="#D9D9D9" />
+                        <rect x="15.387" y="6.981" width="1.399" height="6.976" fill="#D9D9D9" />
+                        <rect x="1.398" y="13.955" width="16.785" height="1.395" fill="#D9D9D9" />
+                        <rect x="0" y="15.348" width="19.583" height="1.395" fill="#D9D9D9" />
+                      </svg>
+                    }
+                    @case ('equity') {
+                      <!-- Equity Icon Ekstrak Vektor Asli Group 9934.svg -->
+                      <svg class="w-[17px] h-[17px] shrink-0" viewBox="0 0 17 17" fill="none">
+                        <rect x="0" y="4.188" width="4.196" height="12.558" rx="1.401" fill="#D9D9D9" />
+                        <path
+                          d="M13.986 0C14.76 0 15.386 0.628 15.386 1.402V6.396C15.386 6.768 15.535 7.124 15.798 7.387L16.374 7.961C16.637 8.224 16.786 8.581 16.786 8.954V15.343C16.786 16.117 16.158 16.744 15.384 16.744H6.997C6.223 16.744 5.595 16.117 5.595 15.343V1.402C5.595 0.628 6.223 0 6.997 0H13.986ZM6.994 13.957H8.392V12.561H6.994V13.957ZM9.792 13.957H11.19V12.561H9.792V13.957ZM12.588 13.957H13.987V12.561H12.588V13.957ZM6.994 11.164H8.392V9.768H6.994V11.164ZM9.792 11.164H11.19V9.768H9.792V11.164ZM12.588 11.164H13.987V9.768H12.588V11.164ZM6.994 8.369H8.392V6.973H6.994V8.369ZM9.792 8.369H11.19V6.973H9.792V8.369ZM12.588 8.369H13.987V6.973H12.588V8.369ZM6.994 1.393V4.184H13.988V1.393H6.994Z"
+                          fill="#D9D9D9"
+                        />
+                      </svg>
+                    }
+                  }
+                </div>
 
-            <svg
-              class="w-3 h-3 text-[#94A3B8] ml-1 shrink-0"
-              fill="currentColor"
-              viewBox="0 0 20 20"
+                <div class="flex flex-col items-end text-right">
+                  <span
+                    class="font-dm-sans font-bold text-[14.01px] text-[#0162EF] tracking-tight uppercase leading-none"
+                    style="
+                      font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                      font-weight: 700;
+                    "
+                  >
+                    {{ category.titleKey | translate }}
+                  </span>
+                  <span
+                    class="font-dm-sans text-[8.41px] text-[#23244E] leading-none mt-1"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif)"
+                  >
+                    {{ category.periodKey | translate }}
+                  </span>
+                  <span
+                    class="font-dm-sans font-bold text-[10.51px] text-[#23244E] tracking-tight leading-none mt-1.5"
+                    style="
+                      font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                      font-weight: 700;
+                    "
+                  >
+                    {{ category.total }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Table Inside Card: Lebar 149.67px, Tinggi Baris Tepat 18.14px Sesuai Figma -->
+              <div class="w-[149.67px] mx-auto rounded-[3px] overflow-hidden border border-[#DDDDDD]/70">
+                <div
+                  class="bg-[#0162EF] text-[#FDFDFD] text-[7px] font-semibold h-[18.14px] px-2 flex items-center justify-between select-none leading-none"
+                >
+                  <span class="uppercase tracking-wider font-semibold">{{
+                    'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.TABLE.NAME'
+                      | translate
+                  }}</span>
+                  <span class="tracking-normal font-semibold">{{
+                    'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.TABLE.PERIOD'
+                      | translate
+                  }}</span>
+                </div>
+                <div class="font-dm-sans text-[7px] text-[#23244E] bg-[#FDFDFD]">
+                  @for (item of category.items; track item.nameKey; let idx = $index) {
+                    <div
+                      class="min-h-[18.14px] px-2 py-0.5 flex items-center justify-between leading-none"
+                      [class.bg-[#F3F8FE]]="idx % 2 === 1"
+                    >
+                      @if (item.nameLines) {
+                        <div class="flex flex-col justify-center leading-[7.5px] pr-1">
+                          @for (line of item.nameLines; track line) {
+                            <span class="font-medium">{{ line }}</span>
+                          }
+                        </div>
+                      } @else {
+                        <span class="font-medium truncate pr-1">{{ item.nameKey | translate }}</span>
+                      }
+
+                      @if (item.amountLines) {
+                        <div class="flex flex-col items-end justify-center leading-[7.5px] shrink-0 tabular-nums">
+                          @for (line of item.amountLines; track line) {
+                            <span class="font-medium">{{ line }}</span>
+                          }
+                        </div>
+                      } @else {
+                        <span class="font-medium tabular-nums shrink-0">{{ item.amount }}</span>
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+
+        <!-- Middle Row: 2 Cash & Bank Balance (Lebar 271.36px, Tinggi 193.94px, Gap Presisi 40.57px) -->
+        <div class="flex justify-center gap-[40.57px] w-full">
+          <!-- Card 4 (Left - cash-bank-balance1.svg) -->
+          <article
+            class="w-[271.36px] h-[193.94px] rounded-[5.6px] border-[0.7px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4.2px_8.83px_0px_rgba(0,0,0,0.02)] relative overflow-hidden shrink-0"
+          >
+            <!-- 3-Dots Menu Tab Top-Right (HTML) -->
+            <div
+              class="absolute top-0 right-0 w-[15.39px] h-[18.14px] bg-[#DDDDDD] rounded-tr-[5.6px] flex flex-col items-center justify-center gap-[1.4px] pointer-events-none z-10"
               aria-hidden="true"
             >
-              <circle cx="10" cy="4" r="2" />
-              <circle cx="10" cy="10" r="2" />
-              <circle cx="10" cy="16" r="2" />
-            </svg>
-          </div>
-
-          <div class="w-full rounded-xs overflow-hidden border border-[#DDDDDD]/60">
-            <div
-              class="bg-[#0B63EE] text-white text-[8px] sm:text-[8.5px] font-semibold px-2 py-1 flex items-center justify-between select-none"
-            >
-              <span class="uppercase tracking-wider">{{
-                'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.TABLE.NAME'
-                  | translate
-              }}</span>
-              <span class="tracking-normal font-medium">{{
-                'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.TABLE.PERIOD'
-                  | translate
-              }}</span>
+              <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+              <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+              <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
             </div>
-            <div
-              class="divide-y divide-slate-100/90 font-dm-sans text-[8px] sm:text-[8.5px] text-[#23244E] bg-white"
-            >
-              @for (item of category.items; track item.nameKey) {
-                <div
-                  class="px-2 py-1 flex items-center justify-between hover:bg-slate-50/70 transition-colors"
-                >
-                  <span class="font-medium truncate pr-1">{{ item.nameKey | translate }}</span>
-                  <span class="font-normal tabular-nums shrink-0">{{ item.amount }}</span>
-                </div>
-              }
-            </div>
-          </div>
-        </article>
-      }
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3.5 w-full">
-      <article
-        class="bg-white rounded-[10px] p-2.5 sm:p-3.5 shadow-2xs border-[#DDDDDD]/80 border-[0.67px] flex flex-col justify-between"
-      >
-        <div class="flex items-center justify-between mb-1.5">
-          <h4
-            class="font-dm-sans font-semibold text-[11px] sm:text-xs text-[#23244E] tracking-tight uppercase"
-            style="
-              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-              font-weight: 600;
-            "
-          >
-            {{
-              'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.CHARTS.CASH_BANK_BALANCE'
-                | translate
-            }}
-          </h4>
-          <svg
-            class="w-3 h-3 text-[#94A3B8]"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            aria-hidden="true"
-          >
-            <circle cx="10" cy="4" r="2" />
-            <circle cx="10" cy="10" r="2" />
-            <circle cx="10" cy="16" r="2" />
-          </svg>
-        </div>
-
-        <div class="w-full flex items-center justify-center pt-2">
-          <svg
-            class="w-full h-auto max-w-full"
-            viewBox="0 0 320 130"
-            fill="none"
-            aria-hidden="true"
-          >
-            <line x1="25" y1="105" x2="305" y2="105" stroke="#CBD5E1" stroke-width="1" />
-
-            <line x1="30" y1="15" x2="30" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="57" y1="15" x2="57" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="84" y1="15" x2="84" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="111" y1="15" x2="111" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="138" y1="15" x2="138" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="165" y1="15" x2="165" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="192" y1="15" x2="192" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="219" y1="15" x2="219" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="246" y1="15" x2="246" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="273" y1="15" x2="273" y2="105" stroke="#E2E8F0" stroke-width="1" />
-            <line x1="300" y1="15" x2="300" y2="105" stroke="#E2E8F0" stroke-width="1" />
-
-            <g
-              font-size="8"
-              fill="#8F9CAE"
-              font-family="'DM Sans Variable', 'DM Sans', sans-serif"
-              text-anchor="middle"
-            >
-              <text x="30" y="118">0</text>
-              <text x="57" y="118">0.1</text>
-              <text x="84" y="118">0.2</text>
-              <text x="111" y="118">0.3</text>
-              <text x="138" y="118">0.4</text>
-              <text x="165" y="118">0.5</text>
-              <text x="192" y="118">0.6</text>
-              <text x="219" y="118">0.7</text>
-              <text x="246" y="118">0.8</text>
-              <text x="273" y="118">0.9</text>
-              <text x="300" y="118">1</text>
-            </g>
-          </svg>
-        </div>
-      </article>
-
-      <article
-        class="bg-white rounded-[10px] p-2.5 sm:p-3.5 shadow-2xs border-[#DDDDDD]/80 border-[0.67px] flex flex-col justify-between"
-      >
-        <div class="flex items-center justify-between mb-1.5">
-          <div class="flex items-center gap-2">
+            <!-- Title (HTML Heading) -->
             <h4
-              class="font-dm-sans font-semibold text-[11px] sm:text-xs text-[#23244E] tracking-tight uppercase"
+              class="absolute left-[13.07px] top-[14.68px] z-10 font-dm-sans font-bold text-[10.51px] text-[#23244E] tracking-tight uppercase leading-none"
               style="
                 font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-                font-weight: 600;
+                font-weight: 700;
               "
             >
               {{
@@ -211,198 +190,228 @@
                   | translate
               }}
             </h4>
+
+            <!-- Coordinate Grid Overlay: Exact 271.36 x 193.94 Coordinates from cash-bank-balance1.svg -->
+            <svg
+              class="absolute inset-0 w-full h-full pointer-events-none"
+              viewBox="0 0 271.36 193.94"
+              fill="none"
+              aria-hidden="true"
+            >
+              <!-- Baseline Horizontal Line at y=166.04 -->
+              <line x1="23.78" y1="166.04" x2="247.58" y2="166.04" stroke="#DDDDDD" stroke-width="0.7" />
+
+              <!-- 11 Vertical Grid Lines with Tick Marks (y from 51.62 to 169.53) -->
+              <line x1="23.78" y1="51.62" x2="23.78" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="46.16" y1="51.62" x2="46.16" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="68.54" y1="51.62" x2="68.54" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="90.92" y1="51.62" x2="90.92" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="113.30" y1="51.62" x2="113.30" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="135.68" y1="51.62" x2="135.68" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="158.06" y1="51.62" x2="158.06" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="180.44" y1="51.62" x2="180.44" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="202.82" y1="51.62" x2="202.82" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="225.20" y1="51.62" x2="225.20" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="247.58" y1="51.62" x2="247.58" y2="169.53" stroke="#DDDDDD" stroke-width="0.7" />
+
+              <!-- 11 X-Axis Labels at y=180.08 -->
+              <g
+                font-size="8.4"
+                fill="#B1B1B1"
+                fill-opacity="0.87"
+                font-family="'DM Sans Variable', 'DM Sans', sans-serif"
+                text-anchor="middle"
+              >
+                <text x="23.78" y="180.08">0</text>
+                <text x="46.16" y="180.08">0.1</text>
+                <text x="68.54" y="180.08">0.2</text>
+                <text x="90.92" y="180.08">0.3</text>
+                <text x="113.30" y="180.08">0.4</text>
+                <text x="135.68" y="180.08">0.5</text>
+                <text x="158.06" y="180.08">0.6</text>
+                <text x="180.44" y="180.08">0.7</text>
+                <text x="202.82" y="180.08">0.8</text>
+                <text x="225.20" y="180.08">0.9</text>
+                <text x="247.58" y="180.08">1</text>
+              </g>
+            </svg>
+          </article>
+
+          <!-- Card 5 (Right - cash-bank-balance2.svg) -->
+          <article
+            class="w-[271.36px] h-[193.94px] rounded-[5.6px] border-[0.7px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4.2px_8.83px_0px_rgba(0,0,0,0.02)] relative overflow-hidden shrink-0"
+          >
+            <!-- 3-Dots Menu Tab Top-Right (HTML) -->
+            <div
+              class="absolute top-0 right-0 w-[15.39px] h-[18.14px] bg-[#DDDDDD] rounded-tr-[5.6px] flex flex-col items-center justify-center gap-[1.4px] pointer-events-none z-10"
+              aria-hidden="true"
+            >
+              <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+              <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+              <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+            </div>
+
+            <!-- Title (HTML Heading) -->
+            <h4
+              class="absolute left-[13.07px] top-[14.68px] z-10 font-dm-sans font-bold text-[10.51px] text-[#23244E] tracking-tight uppercase leading-none"
+              style="
+                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                font-weight: 700;
+              "
+            >
+              {{
+                'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.CHARTS.CASH_BANK_BALANCE'
+                  | translate
+              }}
+            </h4>
+
+            <!-- Red / Coral Pill (HTML Span) Exactly Positioned at x=134.28px, y=32.79px -->
             <span
-              class="w-6 h-2.5 rounded-[3px] bg-[#F9BCB3] inline-block"
+              class="absolute left-[134.28px] top-[32.79px] z-10 w-[22.37px] h-[8.37px] rounded-[2.1px] bg-[#F98F87]/[0.68] border-[1.4px] border-[#F7695F] inline-block pointer-events-none"
               aria-hidden="true"
             ></span>
-          </div>
-          <svg
-            class="w-3 h-3 text-[#94A3B8]"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            aria-hidden="true"
-          >
-            <circle cx="10" cy="4" r="2" />
-            <circle cx="10" cy="10" r="2" />
-            <circle cx="10" cy="16" r="2" />
-          </svg>
-        </div>
 
-        <div class="w-full flex items-center justify-center pt-2">
-          <svg
-            class="w-full h-auto max-w-full"
-            viewBox="0 0 320 130"
-            fill="none"
-            aria-hidden="true"
-          >
-            <g
-              font-size="7.5"
-              fill="#8F9CAE"
-              font-family="'DM Sans Variable', 'DM Sans', sans-serif"
-              text-anchor="end"
+            <!-- Coordinate Grid Overlay: Exact 271.36 x 193.94 Coordinates from cash-bank-balance2.svg -->
+            <svg
+              class="absolute inset-0 w-full h-full pointer-events-none"
+              viewBox="0 0 271.36 193.94"
+              fill="none"
+              aria-hidden="true"
             >
-              <text x="24" y="16">1</text>
-              <line x1="28" y1="14" x2="305" y2="14" stroke="#E2E8F0" stroke-width="1" />
+              <!-- Baseline Vertical Line at x=28.67 (from y=54.42 to 152.09) -->
+              <line x1="28.67" y1="54.42" x2="28.67" y2="152.09" stroke="#DDDDDD" stroke-width="0.7" />
 
-              <text x="24" y="25">0.9</text>
-              <line x1="28" y1="23" x2="305" y2="23" stroke="#E2E8F0" stroke-width="1" />
+              <!-- 11 Horizontal Grid Lines with Tick Marks (Interval 9.767px from y=54.42 to 152.08) -->
+              <line x1="25.18" y1="54.42" x2="257.37" y2="54.42" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="64.19" x2="257.37" y2="64.19" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="73.95" x2="257.37" y2="73.95" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="83.72" x2="257.37" y2="83.72" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="93.49" x2="257.37" y2="93.49" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="103.26" x2="257.37" y2="103.26" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="113.02" x2="257.37" y2="113.02" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="122.78" x2="257.37" y2="122.78" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="132.55" x2="257.37" y2="132.55" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="142.32" x2="257.37" y2="142.32" stroke="#DDDDDD" stroke-width="0.7" />
+              <line x1="25.18" y1="152.08" x2="257.37" y2="152.08" stroke="#DDDDDD" stroke-width="0.7" />
 
-              <text x="24" y="34">0.8</text>
-              <line x1="28" y1="32" x2="305" y2="32" stroke="#E2E8F0" stroke-width="1" />
-
-              <text x="24" y="43">0.7</text>
-              <line x1="28" y1="41" x2="305" y2="41" stroke="#E2E8F0" stroke-width="1" />
-
-              <text x="24" y="52">0.6</text>
-              <line x1="28" y1="50" x2="305" y2="50" stroke="#E2E8F0" stroke-width="1" />
-
-              <text x="24" y="61">0.5</text>
-              <line x1="28" y1="59" x2="305" y2="59" stroke="#E2E8F0" stroke-width="1" />
-
-              <text x="24" y="70">0.4</text>
-              <line x1="28" y1="68" x2="305" y2="68" stroke="#E2E8F0" stroke-width="1" />
-
-              <text x="24" y="79">0.3</text>
-              <line x1="28" y1="77" x2="305" y2="77" stroke="#E2E8F0" stroke-width="1" />
-
-              <text x="24" y="88">0.2</text>
-              <line x1="28" y1="86" x2="305" y2="86" stroke="#E2E8F0" stroke-width="1" />
-
-              <text x="24" y="97">0.1</text>
-              <line x1="28" y1="95" x2="305" y2="95" stroke="#E2E8F0" stroke-width="1" />
-
-              <text x="24" y="106">0</text>
-              <line x1="28" y1="104" x2="305" y2="104" stroke="#CBD5E1" stroke-width="1" />
-            </g>
-          </svg>
+              <!-- 11 Y-Axis Labels at x=22.5 (Left of Baseline) -->
+              <g
+                font-size="8"
+                fill="#B1B1B1"
+                fill-opacity="0.87"
+                font-family="'DM Sans Variable', 'DM Sans', sans-serif"
+                text-anchor="end"
+              >
+                <text x="22.5" y="57.0">1</text>
+                <text x="22.5" y="66.8">0.9</text>
+                <text x="22.5" y="76.5">0.8</text>
+                <text x="22.5" y="86.3">0.7</text>
+                <text x="22.5" y="96.1">0.6</text>
+                <text x="22.5" y="105.8">0.5</text>
+                <text x="22.5" y="115.6">0.4</text>
+                <text x="22.5" y="125.4">0.3</text>
+                <text x="22.5" y="135.1">0.2</text>
+                <text x="22.5" y="144.9">0.1</text>
+                <text x="22.5" y="154.7">0</text>
+              </g>
+            </svg>
+          </article>
         </div>
-      </article>
+
+        <!-- Bottom Row: Card 6 (INCOME & EXPENSE IDR - income-expenese.svg) Dilipat di Bawah -->
+        <div class="flex justify-center w-full pt-8 pb-4">
+          <article
+            class="w-[580.53px] h-[342.61px] rounded-[15.94px] border-[0.7px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_3.99px_19.93px_0px_rgba(0,0,0,0.08)] relative overflow-hidden shrink-0"
+          >
+            <!-- 3-Dots Minimalis Biru Pojok Kanan Atas (Sesuai Desain Acuan cx=560.6px, cy=42.2px) -->
+            <div
+              class="absolute right-[39.85px] top-[22.32px] flex flex-col items-center gap-[2.6px] pointer-events-none z-10"
+              aria-hidden="true"
+            >
+              <span class="w-[2.65px] h-[2.65px] rounded-full bg-[#316ED7]"></span>
+              <span class="w-[2.65px] h-[2.65px] rounded-full bg-[#316ED7]"></span>
+              <span class="w-[2.65px] h-[2.65px] rounded-full bg-[#316ED7]"></span>
+            </div>
+
+            <!-- Judul Card (HTML Heading) -->
+            <h4
+              class="absolute left-[36.62px] top-[23.56px] z-10 font-dm-sans font-bold text-[10.51px] text-[#23244E] tracking-tight uppercase leading-none"
+              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700;"
+            >
+              {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.CHARTS.INCOME_EXPENSE_TITLE' | translate }}
+            </h4>
+
+            <!-- Legend Terpusat (HTML) -->
+            <div class="absolute top-[59.74px] left-0 right-0 flex items-center justify-center gap-4 select-none z-10">
+              <div class="flex items-center gap-2">
+                <span class="w-[25.25px] h-[7.86px] rounded-[2.6px] bg-[#F98F87] border-[1.33px] border-[#F7695F] inline-block"></span>
+                <span class="font-dm-sans text-[8.5px] font-medium text-[#23244E]" style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 500;">
+                  {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.CHARTS.EXPENSE' | translate }}
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-[25.25px] h-[7.86px] rounded-[2.6px] bg-[#316ED7] border-[1.33px] border-[#2050A2] inline-block"></span>
+                <span class="font-dm-sans text-[8.5px] font-medium text-[#23244E]" style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 500;">
+                  {{ 'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.CHARTS.INCOME' | translate }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Kanvas Koordinat Vektor Presisi 1:1 -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="19.9258 15.9414 580.533 342.615" fill="none" aria-hidden="true">
+              <!-- 7 Garis Kisi Horizontal -->
+              @for (lvl of gridLevels; track lvl.label) {
+                <text
+                  x="96"
+                  [attr.y]="lvl.y + 3"
+                  font-size="8.5"
+                  fill="#23244E"
+                  font-weight="400"
+                  font-family="'DM Sans Variable', 'DM Sans', sans-serif"
+                  text-anchor="end"
+                >
+                  {{ lvl.label }}
+                </text>
+                <line x1="103.62" [attr.y1]="lvl.y" x2="558.52" [attr.y2]="lvl.y" stroke="#DDDDDD" stroke-width="0.66" />
+              }
+
+              <!-- 13 Garis Kisi Vertikal -->
+              @for (m of monthlyData; track m.label) {
+                <line [attr.x1]="m.x" y1="94.70" [attr.x2]="m.x" y2="306.05" stroke="#DDDDDD" stroke-width="0.66" />
+              }
+
+              <!-- Kurva & Titik Expense (Pink) -->
+              <path [attr.d]="expensePath" stroke="#F98F87" stroke-width="0.8" fill="none" />
+              @for (m of monthlyData; track m.label) {
+                <circle [attr.cx]="m.x" [attr.cy]="m.expenseY" r="2" fill="#F98F87" />
+              }
+
+              <!-- Kurva & Titik Income (Biru) -->
+              <path [attr.d]="incomePath" stroke="#316ED7" stroke-width="1.33" fill="none" />
+              @for (m of monthlyData; track m.label) {
+                <circle [attr.cx]="m.x" [attr.cy]="m.incomeY" r="2" fill="#316ED7" />
+              }
+
+              <!-- Label Bulan Sumbu X -->
+              <g font-size="7.5" fill="#23244E" font-weight="400" font-family="'DM Sans Variable', 'DM Sans', sans-serif" text-anchor="end">
+                @for (m of monthlyData; track m.label) {
+                  <text [attr.x]="m.x" y="318" [attr.transform]="'rotate(-38 ' + m.x + ' 318)'">
+                    {{ m.label }}
+                  </text>
+                }
+              </g>
+            </svg>
+          </article>
+        </div>
+      </div>
+
+      <!-- Custom Blue Scroll Indicator Track & Thumb (Figma Item 21) -->
+      <div class="absolute right-0 top-0 bottom-0 w-1 pointer-events-none" aria-hidden="true">
+        <div
+          class="w-1 h-[50px] rounded-full bg-[#0162EF] transition-transform duration-75 ease-out"
+          [style.transform]="'translateY(' + scrollThumbTop() + 'px)'"
+        ></div>
+      </div>
     </div>
-
-    <article
-      class="bg-white rounded-[10px] p-2.5 sm:p-3.5 shadow-2xs border-[#DDDDDD]/80 border-[0.67px] flex flex-col w-full"
-    >
-      <div class="flex flex-col gap-1.5 mb-2">
-        <div class="flex items-center justify-between">
-          <h4
-            class="font-dm-sans font-semibold text-[11px] sm:text-xs text-[#23244E] tracking-tight uppercase"
-            style="
-              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-              font-weight: 600;
-            "
-          >
-            {{
-              'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.CHARTS.INCOME_EXPENSE_TITLE'
-                | translate
-            }}
-          </h4>
-          <svg
-            class="w-3 h-3 text-[#94A3B8]"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            aria-hidden="true"
-          >
-            <circle cx="10" cy="4" r="2" />
-            <circle cx="10" cy="10" r="2" />
-            <circle cx="10" cy="16" r="2" />
-          </svg>
-        </div>
-
-        <div class="flex items-center justify-center gap-4 select-none">
-          <div class="flex items-center gap-1.5">
-            <span class="w-5 h-2 rounded-full bg-[#FA7966]"></span>
-            <span
-              class="font-dm-sans text-[10px] font-medium text-[#23244E]"
-              style="
-                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-                font-weight: 500;
-              "
-            >
-              {{
-                'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.CHARTS.EXPENSE'
-                  | translate
-              }}
-            </span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="w-5 h-2 rounded-full bg-[#2D62EC]"></span>
-            <span
-              class="font-dm-sans text-[10px] font-medium text-[#23244E]"
-              style="
-                font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-                font-weight: 500;
-              "
-            >
-              {{
-                'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.CHARTS.INCOME'
-                  | translate
-              }}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full flex items-center justify-center">
-        <svg class="w-full h-auto max-w-full" viewBox="0 0 680 230" fill="none" aria-hidden="true">
-          <!-- Y-Axis gridlines & labels -->
-          @for (lvl of gridLevels; track lvl.label) {
-            <text
-              x="42"
-              [attr.y]="lvl.y + 3"
-              font-size="8.5"
-              fill="#23244E"
-              font-weight="400"
-              font-family="'DM Sans Variable', 'DM Sans', sans-serif"
-              text-anchor="end"
-            >
-              {{ lvl.label }}
-            </text>
-            <line
-              x1="48"
-              [attr.y1]="lvl.y"
-              x2="660"
-              [attr.y2]="lvl.y"
-              [attr.stroke]="lvl.y === 175 ? '#CBD5E1' : '#E2E8F0'"
-              stroke-width="1"
-            />
-          }
-
-          @for (m of monthlyData; track m.label) {
-            <line
-              [attr.x1]="m.x"
-              y1="25"
-              [attr.x2]="m.x"
-              y2="175"
-              stroke="#F1F5F9"
-              stroke-width="1"
-            />
-          }
-
-          <path [attr.d]="expensePath" stroke="#FA7966" stroke-width="1.8" fill="none" />
-          @for (m of monthlyData; track m.label) {
-            <circle [attr.cx]="m.x" [attr.cy]="m.expenseY" r="2.5" fill="#FA7966" />
-          }
-
-          <path [attr.d]="incomePath" stroke="#2D62EC" stroke-width="1.8" fill="none" />
-          @for (m of monthlyData; track m.label) {
-            <circle [attr.cx]="m.x" [attr.cy]="m.incomeY" r="2.5" fill="#2D62EC" />
-          }
-
-          <g
-            font-size="7.5"
-            fill="#23244E"
-            font-weight="400"
-            font-family="'DM Sans Variable', 'DM Sans', sans-serif"
-            text-anchor="end"
-          >
-            @for (m of monthlyData; track m.label) {
-              <text [attr.x]="m.x" y="186" [attr.transform]="'rotate(-40 ' + m.x + ' 186)'">
-                {{ m.label }}
-              </text>
-            }
-          </g>
-        </svg>
-      </div>
-    </article>
   </app-erp-window-chrome>
 </app-visibility-section-shell>
