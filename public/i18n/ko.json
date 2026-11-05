@@ -488,21 +488,21 @@
     "VISIBILITY_SECTIONS": {
       "COMMON": {
         "DECISION_LABEL": "의사결정을 위해:",
-        "DASHBOARD": "대시보드",
-        "ADMIN": "관리자",
+        "DASHBOARD": "Dashboard",
+        "ADMIN": "Admin",
         "SIDEBAR": {
-          "PROCUREMENT": "조달",
-          "SALES": "영업",
+          "PROCUREMENT": "Procurement",
+          "SALES": "Sales",
           "MRP": "MRP",
-          "FINANCE": "재무",
-          "ORDER_PIPELINE": "주문 파이프라인"
+          "FINANCE": "Finance",
+          "ORDER_PIPELINE": "Order Pipeline"
         },
         "PROFILE": {
-          "ARIA": "사용자 프로필 아바타",
-          "NAME": "아타빌 마로브",
-          "ROLE": "운영 부사장",
-          "STATUS": "온라인",
-          "BADGE": "관리자"
+          "ARIA": "User profile avatar",
+          "NAME": "Atabil Marove",
+          "ROLE": "VP of Operations",
+          "STATUS": "Online",
+          "BADGE": "Admin"
         }
       },
       "SALES_PERFORMANCE": {
@@ -591,7 +591,7 @@
         "DECISION_TEXT": "단순한 최종 주문 상태가 아닌 공정 단계별로 주문 병목 현상을 파악",
         "MOCKUP": {
           "WINDOW_TITLE": "Order Pipeline ( Demo Manufacture )",
-          "BACK_TO_LIST": "목록으로 돌아가기",
+          "BACK_TO_LIST": "Back To List",
           "STAGES": {
             "CUSTOMER_ORDER": "CUSTOMER ORDER",
             "PRODUCT": "PRODUCT",
@@ -603,7 +603,7 @@
             "INVOICE_RECEIPT": "INVOICE & RECEIPT"
           },
           "FIELDS": {
-            "NO_DATA": "데이터 없음",
+            "NO_DATA": "No Data",
             "SO_NO": "SO No:",
             "PO_NO": "Po No:",
             "ORDER": "Order:",

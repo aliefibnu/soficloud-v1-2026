@@ -488,21 +488,21 @@
     "VISIBILITY_SECTIONS": {
       "COMMON": {
         "DECISION_LABEL": "意思決定のために：",
-        "DASHBOARD": "ダッシュボード",
-        "ADMIN": "管理者",
+        "DASHBOARD": "Dashboard",
+        "ADMIN": "Admin",
         "SIDEBAR": {
-          "PROCUREMENT": "調達",
-          "SALES": "営業",
+          "PROCUREMENT": "Procurement",
+          "SALES": "Sales",
           "MRP": "MRP",
-          "FINANCE": "財務",
-          "ORDER_PIPELINE": "受注パイプライン"
+          "FINANCE": "Finance",
+          "ORDER_PIPELINE": "Order Pipeline"
         },
         "PROFILE": {
-          "ARIA": "ユーザープロフィールアバター",
-          "NAME": "アタビル・マロヴェ",
-          "ROLE": "事業運営副社長",
-          "STATUS": "オンライン",
-          "BADGE": "管理者"
+          "ARIA": "User profile avatar",
+          "NAME": "Atabil Marove",
+          "ROLE": "VP of Operations",
+          "STATUS": "Online",
+          "BADGE": "Admin"
         }
       },
       "SALES_PERFORMANCE": {
@@ -591,7 +591,7 @@
         "DECISION_TEXT": "最終的な注文ステータスだけでなく、工程の位置からボトルネックを特定",
         "MOCKUP": {
           "WINDOW_TITLE": "Order Pipeline ( Demo Manufacture )",
-          "BACK_TO_LIST": "一覧に戻る",
+          "BACK_TO_LIST": "Back To List",
           "STAGES": {
             "CUSTOMER_ORDER": "CUSTOMER ORDER",
             "PRODUCT": "PRODUCT",
@@ -603,7 +603,7 @@
             "INVOICE_RECEIPT": "INVOICE & RECEIPT"
           },
           "FIELDS": {
-            "NO_DATA": "データなし",
+            "NO_DATA": "No Data",
             "SO_NO": "SO No:",
             "PO_NO": "Po No:",
             "ORDER": "Order:",
