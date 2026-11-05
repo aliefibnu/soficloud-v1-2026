@@ -3,6 +3,7 @@
   [title]="'CONNECTED_PROCESS.TRANSACTION_FLOW.TITLE' | translate"
   [description]="'CONNECTED_PROCESS.TRANSACTION_FLOW.DESCRIPTION' | translate"
   stageBgClass="bg-gradient-to-r from-[#C8DFDC] to-[#AECFD0]"
+  stagePaddingClass="py-5 px-4 sm:py-6 sm:px-6 lg:py-6 lg:px-8 short:py-4"
   titleMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[620px]"
 >
   <div shell-shelf class="pl-0 pr-4 sm:pr-6 lg:pr-8 xl:pr-10 mb-0 relative z-10">
@@ -22,7 +23,7 @@
           (click)="selectCycle(cycle.id)"
           (keydown)="onTabKeydown($event, i)"
           [class]="
-            'group flex flex-col items-start text-left px-5 pt-3 pb-2 sm:px-6 sm:pt-3.5 sm:pb-2 rounded-t-3xl border-t border-x transition-all duration-200 cursor-pointer min-w-50 sm:min-w-60 select-none ' +
+            'group flex flex-col items-start text-left px-4 pt-2.5 pb-2 sm:px-5 sm:pt-3 sm:pb-2 rounded-t-2xl sm:rounded-t-3xl border-t border-x transition-all duration-200 cursor-pointer min-w-44 sm:min-w-56 select-none ' +
             (selectedCycle() === cycle.id
               ? 'bg-white border-slate-200/90 shadow-[0_-4px_20px_rgba(35,36,78,0.08)] relative z-20'
               : 'bg-[#F8FAFC] border-slate-200/70 hover:bg-white hover:border-slate-300/90 shadow-[0_-1px_4px_rgba(35,36,78,0.03)] relative z-10')
@@ -55,7 +56,7 @@
     [id]="'cycle-panel-' + selectedCycle()"
     role="tabpanel"
     [attr.aria-labelledby]="'tab-cycle-' + selectedCycle()"
-    class="w-full flex flex-col gap-6 sm:gap-8 lg:gap-10 short:gap-5 py-3 sm:py-5 lg:py-6 short:py-3.5"
+    class="w-full flex flex-col gap-4 sm:gap-5 lg:gap-6 short:gap-3 py-1 sm:py-2 lg:py-2.5 short:py-1"
   >
     <div class="relative w-full">
       <div
@@ -71,33 +72,33 @@
       >
         @for (step of currentSteps(); track step.id; let i = $index) {
           <li
-            class="snap-center shrink-0 w-56 sm:w-60 lg:w-auto bg-white rounded-md px-2 py-3.5 sm:px-2.5 sm:py-4 shadow-[0_4px_16px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col items-center text-center justify-center min-h-35 sm:min-h-38 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(35,36,78,0.12)] relative z-10"
+            class="snap-center shrink-0 w-56 sm:w-60 lg:w-auto bg-white rounded-md px-2 py-2.5 sm:px-2.5 sm:py-3 shadow-[0_4px_16px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col items-center text-center justify-center min-h-[118px] lg:h-[122.5px] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(35,36,78,0.12)] relative z-10"
           >
             <div
-              class="w-12 h-12 sm:w-14 sm:h-14 rounded-md flex items-center justify-center shrink-0 mb-2 sm:mb-2.5 text-[#2F65E8]"
+              class="w-10 h-10 sm:w-11 sm:h-11 rounded-md flex items-center justify-center shrink-0 mb-1.5 sm:mb-2 text-[#2F65E8]"
               style="background: radial-gradient(64.37% 118.95% at 50.57% 50%, #C3D7F7 0%, #EBF2FD 65.38%);"
               aria-hidden="true"
             >
               @if (step.imageSrc) {
                 <img
                   [ngSrc]="step.imageSrc"
-                  [width]="step.imageWidth ?? 30"
-                  [height]="step.imageHeight ?? 30"
+                  [width]="step.imageWidth ?? 26"
+                  [height]="step.imageHeight ?? 26"
                   alt=""
-                  class="w-7 h-7 sm:w-8 sm:h-8 object-contain select-none pointer-events-none"
+                  class="w-6 h-6 sm:w-6.5 sm:h-6.5 object-contain select-none pointer-events-none"
                 />
               }
             </div>
 
             <span
-              class="font-inter font-bold text-sm sm:text-[15px] lg:text-[15px] text-[#23244E] leading-snug tracking-tight"
+              class="font-inter font-bold text-xs sm:text-[13px] lg:text-[13.5px] text-[#23244E] leading-snug tracking-tight"
               style="font-family: var(--font-inter, 'Inter Variable', sans-serif);"
             >
               {{ step.titleKey | translate }}
             </span>
 
             <span
-              class="font-dm-sans font-normal text-xs text-[#23244E] leading-snug tracking-normal mt-1 sm:mt-1.5"
+              class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] lg:text-[11px] text-[#23244E] leading-snug tracking-normal mt-0.5 sm:mt-1"
               style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
             >
               {{ step.descKey | translate }}
@@ -109,19 +110,19 @@
 
     <div
       data-testid="callout-frame"
-      class="w-full bg-[#FDFDFD] rounded-lg p-5 sm:p-7 lg:py-8 lg:px-10 short:py-4.5 short:px-7 shadow-[0_4px_20px_rgba(35,36,78,0.04)] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12 short:gap-6"
+      class="w-full bg-[#FDFDFD] rounded-lg px-5 py-3 sm:px-7 sm:py-3.5 lg:px-8 lg:py-3 short:py-2.5 short:px-6 shadow-[0_4px_20px_rgba(35,36,78,0.04)] flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 lg:gap-8 short:gap-3 min-h-[72px] lg:h-[84px]"
     >
       <div class="w-full md:w-5/12 lg:w-5/12 flex flex-col items-center justify-center text-center shrink-0">
         <span
           data-testid="callout-title"
-          class="font-dm-sans font-bold text-2xl sm:text-3xl lg:text-[34px] xl:text-[36px] tracking-wide text-[#1C73E8] leading-tight sm:leading-none select-none uppercase text-center"
+          class="font-dm-sans font-bold text-xl sm:text-2xl lg:text-[34px] tracking-wide text-[#1C73E8] leading-tight sm:leading-none select-none uppercase text-center"
           style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
         >
           {{ calloutTitleKey | translate }}
         </span>
         <span
           data-testid="callout-tags"
-          class="font-dm-sans font-bold text-[11px] sm:text-xs lg:text-[12.5px] text-[#23244E] mt-1.5 sm:mt-2 tracking-normal leading-tight text-center"
+          class="font-dm-sans font-bold text-[10px] sm:text-[11px] lg:text-[12px] text-[#23244E] mt-1 sm:mt-1.5 tracking-normal leading-tight text-center"
           style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
         >
           {{ calloutTagsKey() | translate }}
@@ -130,7 +131,7 @@
 
       <div
         data-testid="callout-divider"
-        class="hidden md:block w-0.5 self-stretch bg-[#365AD2] rounded-full shrink-0 my-1 sm:my-2"
+        class="hidden md:block w-0.5 self-stretch bg-[#365AD2] rounded-full shrink-0 my-0.5"
         aria-hidden="true"
       ></div>
 
@@ -142,7 +143,7 @@
       <div class="w-full md:w-7/12 lg:w-7/12 flex items-center justify-center">
         <p
           data-testid="callout-disclaimer"
-          class="max-w-190 font-dm-sans font-normal text-xs sm:text-sm lg:text-[15px] xl:text-[15.5px] text-[#23244E] text-justify leading-relaxed tracking-normal"
+          class="max-w-190 font-dm-sans font-normal text-xs sm:text-[12.5px] lg:text-[13px] xl:text-[13.5px] text-[#23244E] text-justify leading-relaxed tracking-normal"
           style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
         >
           {{ calloutDisclaimerKey() | translate }}

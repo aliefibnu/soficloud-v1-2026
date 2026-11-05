@@ -90,7 +90,7 @@ describe('RoleReports', () => {
     );
   });
 
-  it('should render exactly 3 tier cards in a responsive grid with 16px corner radius and 314px min-height', () => {
+  it('should render exactly 3 tier cards in a responsive grid with 16px corner radius and 274px height', () => {
     const gridEl = fixture.debugElement.query(By.css('.grid'));
     expect(gridEl).toBeTruthy();
     expect(gridEl.nativeElement.classList.contains('md:grid-cols-3')).toBe(true);
@@ -99,7 +99,7 @@ describe('RoleReports', () => {
     expect(cards.length).toBe(3);
     for (const card of cards) {
       expect(card.nativeElement.classList.contains('rounded-2xl')).toBe(true);
-      expect(card.nativeElement.classList.contains('min-h-78.5')).toBe(true);
+      expect(card.nativeElement.classList.contains('lg:h-[274px]')).toBe(true);
     }
   });
 

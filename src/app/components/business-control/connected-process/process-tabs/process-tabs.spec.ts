@@ -222,7 +222,10 @@ describe('ConnectedProcess ProcessTabs', () => {
     ) as HTMLElement;
     expect(activeBtn).toBeTruthy();
 
-    vi.spyOn(activeBtn, 'getBoundingClientRect').mockReturnValue({
+    const buttons = listEl.querySelectorAll('[role="tab"]');
+    const firstBtn = buttons[0] as HTMLElement;
+
+    vi.spyOn(firstBtn, 'getBoundingClientRect').mockReturnValue({
       left: 44,
       top: 100,
       width: 86,
@@ -236,7 +239,7 @@ describe('ConnectedProcess ProcessTabs', () => {
 
     component.updateIndicator();
 
-    expect(component.indicatorLeft()).toBe(24); // 44 - 20 = 24
+    expect(component.indicatorLeft()).toBe(0); // 44 - 44 = 0px for first tab
     expect(component.indicatorWidth()).toBe(86); // 86px width
   });
 
@@ -248,5 +251,76 @@ describe('ConnectedProcess ProcessTabs', () => {
 
     component.ngOnDestroy();
     expect(disconnectSpy).toHaveBeenCalled();
+  });
+
+  it('should toggle isSticky when scrolled past top offset threshold', () => {
+    // Reset state for test
+    component.isSticky.set(false);
+    expect(component.isSticky()).toBe(false);
+
+    // Mock bounding rect as if it is scrolled under navbar
+    const hostEl = fixture.nativeElement;
+    vi.spyOn(hostEl, 'getBoundingClientRect').mockReturnValue({
+      top: 60,
+      bottom: 120,
+      left: 0,
+      right: 1200,
+      width: 1200,
+      height: 60,
+      x: 0,
+      y: 60,
+      toJSON: () => {},
+    });
+
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(true);
+    fixture.detectChanges();
+
+    const islandEl = fixture.debugElement.query(By.css('.rounded-b-\\[24px\\]'));
+    expect(islandEl).toBeTruthy();
+  });
+
+  it('should accurately update activeTabId based on readingLine position of sections', () => {
+    // Create mock sections
+    const s1 = document.createElement('div');
+    s1.id = 'satu-data';
+    const s2 = document.createElement('div');
+    s2.id = 'alur-transaksi';
+    document.body.appendChild(s1);
+    document.body.appendChild(s2);
+
+    try {
+      // Simulate reading line is around 300px (38% of 800px). When section 2 is at top=200 and bottom=900,
+      // it covers the readingLine (200 <= 304 and 900 > 304), so s2 must become active.
+      vi.spyOn(s1, 'getBoundingClientRect').mockReturnValue({
+        top: -600,
+        bottom: 200,
+        left: 0,
+        right: 1200,
+        width: 1200,
+        height: 800,
+        x: 0,
+        y: -600,
+        toJSON: () => {},
+      });
+
+      vi.spyOn(s2, 'getBoundingClientRect').mockReturnValue({
+        top: 200,
+        bottom: 1000,
+        left: 0,
+        right: 1200,
+        width: 1200,
+        height: 800,
+        x: 0,
+        y: 200,
+        toJSON: () => {},
+      });
+
+      component.updateActiveSectionByScroll();
+      expect(component.activeTabId()).toBe('alur-transaksi');
+    } finally {
+      document.body.removeChild(s1);
+      document.body.removeChild(s2);
+    }
   });
 });

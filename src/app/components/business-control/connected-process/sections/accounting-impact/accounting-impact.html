@@ -3,248 +3,26 @@
   [title]="'CONNECTED_PROCESS.ACCOUNTING_IMPACT.TITLE' | translate"
   [description]="'CONNECTED_PROCESS.ACCOUNTING_IMPACT.DESCRIPTION' | translate"
   stageBgClass="bg-[linear-gradient(322.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]"
+  stagePaddingClass="py-5 px-3 sm:py-6 sm:px-5 lg:py-6 lg:px-6 short:py-3.5"
   titleMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[640px]"
   descriptionMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[760px]"
 >
   <div
-    class="w-full max-w-[1070.41px] mx-auto flex flex-col gap-4 sm:gap-5 short:gap-3 py-2 sm:py-3 lg:py-4 short:py-1.5"
+    class="w-full max-w-[1100px] mx-auto flex flex-col gap-3 sm:gap-4 short:gap-2.5 py-1"
   >
     <div
       data-testid="accounting-pipeline-grid"
-      class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] items-stretch justify-items-center gap-2.5 sm:gap-3 lg:gap-0 max-w-[1070.41px] mx-auto w-full"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[minmax(0,1.25fr)_auto_minmax(0,1.25fr)_auto_minmax(0,1.25fr)_minmax(0,1fr)] items-stretch justify-items-stretch gap-3 sm:gap-4 lg:gap-2.5 xl:gap-3.5 max-w-[1100px] mx-auto w-full"
     >
-      <article
-        data-testid="accounting-col-source"
-        class="bg-[#FDFDFD] rounded-lg px-4 pt-4 pb-4 sm:px-5 sm:pt-4 sm:pb-5 lg:px-4 lg:pt-4 lg:pb-4 short:px-4 short:py-3.5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-between w-full lg:w-[304.05px] min-h-[265px] lg:min-h-[265px]"
-      >
-        <div class="mb-2 sm:mb-2.5 lg:mb-2 flex flex-col justify-start text-left">
-          <h3
-            id="accounting-col-1-heading"
-            class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-0.5"
-            style="
-              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-              font-weight: 700;
-            "
-          >
-            {{ col1TitleKey | translate }}
-          </h3>
-          <p
-            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] lg:text-[10.5px] text-[#23244E]/90 leading-[1.38] tracking-normal max-w-53.75"
-            style="
-              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-              font-weight: 400;
-            "
-          >
-            {{ col1SubtitleKey | translate }}
-          </p>
-        </div>
-
-        <ul aria-labelledby="accounting-col-1-heading" class="flex flex-col gap-1.5 sm:gap-2 w-full mt-auto">
-          @for (item of sourceDocuments; track item.id) {
-            <li
-              class="bg-white rounded-[7.5px] border border-[#23244E] h-[31px] min-h-[31px] flex items-stretch overflow-hidden"
-            >
-              <div
-                class="w-10 shrink-0 flex items-center justify-center bg-white border-r-[1.5px] border-[#5B94E8] rounded-l-[7px] select-none"
-                aria-hidden="true"
-              >
-                <img
-                  [ngSrc]="item.iconSrc"
-                  [width]="item.iconWidth"
-                  [height]="item.iconHeight"
-                  alt=""
-                  class="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain select-none pointer-events-none"
-                />
-              </div>
-              <span
-                class="px-2.5 sm:px-3 flex items-center font-dm-sans font-normal text-xs sm:text-[13px] lg:text-[13.5px] text-[#23244E] leading-snug tracking-normal text-left truncate"
-                style="
-                  font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-                  font-weight: 400;
-                "
-              >
-                {{ item.labelKey | translate }}
-              </span>
-            </li>
-          }
-        </ul>
-      </article>
-
-      <div
-        data-testid="pipeline-arrow"
-        class="flex items-center justify-center py-2 sm:py-2.5 lg:py-0 select-none"
-        aria-hidden="true"
-      >
-        <svg
-          viewBox="382 494.5 38 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-8 h-3.5 sm:w-[37.7px] sm:h-[15px] rotate-90 lg:rotate-0 shrink-0"
-        >
-          <path
-            d="M383.605 502.5H416.5"
-            stroke-width="3.50152"
-            stroke="url(#pipeArrowGrad1)"
-            stroke-linecap="round"
-          />
-          <path
-            d="M418.346 504.993L414.093 509.584C413.83 509.855 413.479 510.004 413.115 510C412.752 509.995 412.404 509.837 412.147 509.559C411.89 509.282 411.744 508.906 411.74 508.514C411.736 508.121 411.875 507.742 412.126 507.459L416.38 502.866C416.467 502.772 416.515 502.645 416.515 502.512C416.515 502.379 416.467 502.252 416.38 502.158L412.126 497.565C411.997 497.425 411.895 497.26 411.825 497.078C411.755 496.895 411.719 496.7 411.719 496.503C411.719 496.305 411.755 496.11 411.825 495.928C411.894 495.745 411.997 495.58 412.126 495.44C412.255 495.301 412.409 495.19 412.577 495.114C412.746 495.039 412.927 495 413.11 495C413.292 495 413.473 495.039 413.642 495.114C413.811 495.19 413.964 495.3 414.094 495.44L418.347 500.033C418.955 500.691 419.296 501.583 419.296 502.513C419.296 503.443 418.954 504.335 418.346 504.993Z"
-            fill="#1C73E8"
-          />
-          <defs>
-            <linearGradient
-              id="pipeArrowGrad1"
-              x1="383.605"
-              y1="502.5"
-              x2="416.5"
-              y2="502.5"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#1E37E1" />
-              <stop offset="0.699703" stop-color="#1C7DD8" />
-              <stop offset="1" stop-color="#6694EB" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
-      <article
-        data-testid="accounting-col-coa"
-        class="bg-[#FDFDFD] rounded-lg px-4 pt-4 pb-4 sm:px-5 sm:pt-4 sm:pb-5 lg:px-4 lg:pt-4 lg:pb-4 short:px-4 short:py-3.5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start w-full lg:w-[304.05px] min-h-[265px] lg:min-h-[265px]"
-      >
-        <div class="mb-1.5 sm:mb-2 flex flex-col justify-start text-left">
-          <h3
-            id="accounting-col-2-heading"
-            class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-0.5"
-            style="
-              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-              font-weight: 700;
-            "
-          >
-            {{ col2TitleKey | translate }}
-          </h3>
-          <p
-            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] lg:text-[10.5px] text-[#23244E]/90 leading-tight sm:leading-[1.35] tracking-normal"
-            style="
-              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-              font-weight: 400;
-            "
-          >
-            {{ col2SubtitleKey | translate }}
-          </p>
-        </div>
-
-        <ol
-          aria-labelledby="accounting-col-2-heading"
-          class="flex flex-col items-center justify-center w-full mt-2 lg:mt-2.5 mb-1"
-        >
-          @for (step of postingSteps; track step.id; let last = $last) {
-            <li class="w-full flex flex-col items-center">
-              <div
-                class="w-[181px] bg-white rounded-[7.5px] border border-[#23244E] flex items-center justify-center text-center px-3"
-                [class.h-[38px]]="step.id === 'journal'"
-                [class.h-[40px]]="step.id !== 'journal'"
-              >
-                <span
-                  class="font-dm-sans font-bold text-sm sm:text-[15px] lg:text-[16px] text-[#23244E] leading-tight tracking-tight select-none"
-                  style="
-                    font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
-                    font-weight: 700;
-                  "
-                >
-                  {{ step.labelKey | translate }}
-                </span>
-              </div>
-              @if (!last) {
-                <div
-                  data-testid="coa-vertical-arrow"
-                  class="h-[25px] flex items-center justify-center select-none"
-                  aria-hidden="true"
-                >
-                  <svg
-                    viewBox="579.5 479.5 16.5 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="w-[16.5px] h-[25px] block shrink-0"
-                  >
-                    <path
-                      d="M587.796 479.5V501.5"
-                      stroke-width="3.50152"
-                      [attr.stroke]="'url(#vertArrowGrad-' + step.id + ')'"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      d="M585.214 503.364L580.433 499.28C580.151 499.027 579.995 498.691 580 498.341C580.005 497.992 580.17 497.659 580.459 497.412C580.748 497.165 581.139 497.025 581.548 497.021C581.957 497.017 582.351 497.15 582.646 497.391L587.428 501.476C587.526 501.56 587.658 501.607 587.797 501.607C587.935 501.607 588.068 501.56 588.165 501.476L592.948 497.391C593.093 497.267 593.266 497.169 593.456 497.102C593.645 497.035 593.849 497 594.054 497C594.26 497 594.463 497.035 594.653 497.102C594.843 497.169 595.015 497.267 595.161 497.391C595.306 497.515 595.421 497.663 595.5 497.825C595.578 497.987 595.619 498.16 595.619 498.336C595.619 498.511 595.578 498.685 595.5 498.847C595.421 499.009 595.306 499.157 595.161 499.281L590.378 503.365C589.693 503.949 588.764 504.277 587.796 504.277C586.828 504.277 585.899 503.949 585.214 503.364Z"
-                      fill="#1C73E8"
-                    />
-                    <defs>
-                      <linearGradient
-                        [attr.id]="'vertArrowGrad-' + step.id"
-                        x1="587.796"
-                        y1="479.5"
-                        x2="587.796"
-                        y2="501.5"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#1E37E1" />
-                        <stop offset="0.699703" stop-color="#1C7DD8" />
-                        <stop offset="1" stop-color="#6694EB" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-              }
-            </li>
-          }
-        </ol>
-      </article>
-
-      <div
-        data-testid="pipeline-arrow"
-        class="flex items-center justify-center py-2 sm:py-2.5 lg:py-0 select-none"
-        aria-hidden="true"
-      >
-        <svg
-          viewBox="382 494.5 38 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-8 h-3.5 sm:w-[37.7px] sm:h-[15px] rotate-90 lg:rotate-0 shrink-0"
-        >
-          <path
-            d="M383.605 502.5H416.5"
-            stroke-width="3.50152"
-            stroke="url(#pipeArrowGrad2)"
-            stroke-linecap="round"
-          />
-          <path
-            d="M418.346 504.993L414.093 509.584C413.83 509.855 413.479 510.004 413.115 510C412.752 509.995 412.404 509.837 412.147 509.559C411.89 509.282 411.744 508.906 411.74 508.514C411.736 508.121 411.875 507.742 412.126 507.459L416.38 502.866C416.467 502.772 416.515 502.645 416.515 502.512C416.515 502.379 416.467 502.252 416.38 502.158L412.126 497.565C411.997 497.425 411.895 497.26 411.825 497.078C411.755 496.895 411.719 496.7 411.719 496.503C411.719 496.305 411.755 496.11 411.825 495.928C411.894 495.745 411.997 495.58 412.126 495.44C412.255 495.301 412.409 495.19 412.577 495.114C412.746 495.039 412.927 495 413.11 495C413.292 495 413.473 495.039 413.642 495.114C413.811 495.19 413.964 495.3 414.094 495.44L418.347 500.033C418.955 500.691 419.296 501.583 419.296 502.513C419.296 503.443 418.954 504.335 418.346 504.993Z"
-            fill="#1C73E8"
-          />
-          <defs>
-            <linearGradient
-              id="pipeArrowGrad2"
-              x1="383.605"
-              y1="502.5"
-              x2="416.5"
-              y2="502.5"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#1E37E1" />
-              <stop offset="0.699703" stop-color="#1C7DD8" />
-              <stop offset="1" stop-color="#6694EB" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
+      <!-- Column 1: Hasil Keuangan -->
       <article
         data-testid="accounting-col-results"
-        class="bg-[#FDFDFD] rounded-lg px-4 pt-4 pb-4 sm:px-5 sm:pt-4 sm:pb-5 lg:px-4 lg:pt-4 lg:pb-4 short:px-4 short:py-3.5 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-between w-full lg:w-[304.05px] min-h-[265px] lg:min-h-[265px]"
+        class="bg-[#FDFDFD] rounded-xl sm:rounded-2xl p-3.5 sm:p-4 lg:p-4 short:py-3 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-between w-full min-h-[250px] lg:h-[260px]"
       >
-        <div class="mb-2 sm:mb-2.5 lg:mb-2 flex flex-col justify-start text-left">
+        <div class="mb-2 flex flex-col justify-start text-left">
           <h3
             id="accounting-col-3-heading"
-            class="font-dm-sans font-bold text-lg sm:text-[19px] lg:text-[20px] text-[#23244E] leading-snug tracking-tight mb-0.5"
+            class="font-dm-sans font-bold text-base sm:text-lg lg:text-[19px] text-[#23244E] leading-snug tracking-tight mb-0.5"
             style="
               font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
               font-weight: 700;
@@ -253,7 +31,7 @@
             {{ col3TitleKey | translate }}
           </h3>
           <p
-            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] lg:text-[10.5px] text-[#23244E]/90 leading-[1.38] tracking-normal"
+            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] text-[#23244E]/90 leading-tight tracking-normal"
             style="
               font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
               font-weight: 400;
@@ -266,22 +44,17 @@
         <ul aria-labelledby="accounting-col-3-heading" class="flex flex-col gap-1.5 sm:gap-2 w-full mt-auto">
           @for (item of financialResults; track item.id) {
             <li
-              class="bg-white rounded-[7.5px] border border-[#23244E] h-[31px] min-h-[31px] flex items-stretch overflow-hidden"
+              class="bg-white rounded-[10px] border border-[#23244E] h-[33px] sm:h-[35px] flex items-center px-3 gap-2.5 overflow-hidden"
             >
-              <div
-                class="w-10 shrink-0 flex items-center justify-center bg-white border-r-[1.5px] border-[#5B94E8] rounded-l-[7px] select-none"
-                aria-hidden="true"
-              >
-                <img
-                  [ngSrc]="item.iconSrc"
-                  [width]="item.iconWidth"
-                  [height]="item.iconHeight"
-                  alt=""
-                  class="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain select-none pointer-events-none"
-                />
-              </div>
+              <img
+                [ngSrc]="item.iconSrc"
+                [width]="item.iconWidth"
+                [height]="item.iconHeight"
+                alt=""
+                class="w-4.5 h-4.5 sm:w-5 sm:h-5 object-contain shrink-0 select-none pointer-events-none"
+              />
               <span
-                class="px-2.5 sm:px-3 flex items-center font-dm-sans font-normal text-xs sm:text-[13px] lg:text-[13.5px] text-[#23244E] leading-snug tracking-normal text-left truncate"
+                class="font-dm-sans font-normal text-xs sm:text-[12.5px] lg:text-[13px] text-[#23244E] leading-snug tracking-normal text-left truncate"
                 style="
                   font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
                   font-weight: 400;
@@ -293,20 +66,199 @@
           }
         </ul>
       </article>
-    </div>
 
-    <div
-      data-testid="accounting-disclaimer"
-      class="w-full max-w-[1070.41px] min-h-[68px] mx-auto bg-[#FDFDFD] rounded-lg px-5 py-3.5 sm:px-6 sm:py-4 lg:px-7 lg:py-4 short:py-3 short:px-6 shadow-[0_4px_20px_rgba(35,36,78,0.04)] border border-white/70 flex items-center"
-    >
-      <p
-        data-testid="accounting-disclaimer-text"
-        class="font-dm-sans font-normal text-xs sm:text-sm lg:text-[14px] text-[#23244E] leading-relaxed tracking-normal text-left"
-        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400;"
+      <!-- Pipeline Arrow 1 -->
+      <div
+        data-testid="pipeline-arrow"
+        class="flex items-center justify-center py-1 lg:py-0 select-none shrink-0"
+        aria-hidden="true"
       >
-        <strong class="font-bold">{{ disclaimerLabelKey | translate }}</strong>
-        {{ ' ' + (disclaimerTextKey | translate) }}
-      </p>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 sm:w-6 sm:h-6 text-[#1C73E8] rotate-90 lg:rotate-0 shrink-0"
+        >
+          <path
+            d="M5 12H19M19 12L13 6M19 12L13 18"
+            stroke="#1C73E8"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <!-- Column 2: Posting & Pemetaan COA -->
+      <article
+        data-testid="accounting-col-coa"
+        class="bg-[#FDFDFD] rounded-xl sm:rounded-2xl p-3.5 sm:p-4 lg:p-4 short:py-3 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-between w-full min-h-[250px] lg:h-[260px]"
+      >
+        <div class="mb-2 flex flex-col justify-start text-left">
+          <h3
+            id="accounting-col-2-heading"
+            class="font-dm-sans font-bold text-base sm:text-lg lg:text-[19px] text-[#23244E] leading-snug tracking-tight mb-0.5"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 700;
+            "
+          >
+            {{ col2TitleKey | translate }}
+          </h3>
+          <p
+            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] text-[#23244E]/90 leading-tight tracking-normal"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ col2SubtitleKey | translate }}
+          </p>
+        </div>
+
+        <ol
+          aria-labelledby="accounting-col-2-heading"
+          class="flex flex-col items-center justify-center w-full mt-auto"
+        >
+          @for (step of postingSteps; track step.id; let last = $last) {
+            <li class="w-full flex flex-col items-center">
+              <div
+                class="w-full bg-white rounded-[10px] border border-[#23244E] flex items-center justify-center text-center px-3 h-[35px] sm:h-[37px]"
+              >
+                <span
+                  class="font-dm-sans font-bold text-xs sm:text-[13px] lg:text-[14px] text-[#23244E] leading-tight tracking-tight select-none"
+                  style="
+                    font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                    font-weight: 700;
+                  "
+                >
+                  {{ step.labelKey | translate }}
+                </span>
+              </div>
+              @if (!last) {
+                <div
+                  data-testid="coa-vertical-arrow"
+                  class="h-4 sm:h-5 flex items-center justify-center select-none text-[#1C73E8]"
+                  aria-hidden="true"
+                >
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    class="w-3.5 h-3.5 text-[#1C73E8]"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 1a.75.75 0 01.75.75v10.69l2.72-2.72a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 011.06-1.06L7.25 12.44V1.75A.75.75 0 018 1z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              }
+            </li>
+          }
+        </ol>
+      </article>
+
+      <!-- Pipeline Arrow 2 -->
+      <div
+        data-testid="pipeline-arrow"
+        class="flex items-center justify-center py-1 lg:py-0 select-none shrink-0"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 sm:w-6 sm:h-6 text-[#1C73E8] rotate-90 lg:rotate-0 shrink-0"
+        >
+          <path
+            d="M5 12H19M19 12L13 6M19 12L13 18"
+            stroke="#1C73E8"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <!-- Column 3: Dokumen Sumber -->
+      <article
+        data-testid="accounting-col-source"
+        class="bg-[#FDFDFD] rounded-xl sm:rounded-2xl p-3.5 sm:p-4 lg:p-4 short:py-3 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-between w-full min-h-[250px] lg:h-[260px]"
+      >
+        <div class="mb-2 flex flex-col justify-start text-left">
+          <h3
+            id="accounting-col-1-heading"
+            class="font-dm-sans font-bold text-base sm:text-lg lg:text-[19px] text-[#23244E] leading-snug tracking-tight mb-0.5"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 700;
+            "
+          >
+            {{ col1TitleKey | translate }}
+          </h3>
+          <p
+            class="font-dm-sans font-normal text-[10px] sm:text-[10.5px] text-[#23244E]/90 leading-tight tracking-normal"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ col1SubtitleKey | translate }}
+          </p>
+        </div>
+
+        <ul aria-labelledby="accounting-col-1-heading" class="flex flex-col gap-1.5 sm:gap-2 w-full mt-auto">
+          @for (item of sourceDocuments; track item.id) {
+            <li
+              class="bg-white rounded-[10px] border border-[#23244E] h-[33px] sm:h-[35px] flex items-center px-3 gap-2.5 overflow-hidden"
+            >
+              <img
+                [ngSrc]="item.iconSrc"
+                [width]="item.iconWidth"
+                [height]="item.iconHeight"
+                alt=""
+                class="w-4.5 h-4.5 sm:w-5 sm:h-5 object-contain shrink-0 select-none pointer-events-none"
+              />
+              <span
+                class="font-dm-sans font-normal text-xs sm:text-[12.5px] lg:text-[13px] text-[#23244E] leading-snug tracking-normal text-left truncate"
+                style="
+                  font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+                  font-weight: 400;
+                "
+              >
+                {{ item.labelKey | translate }}
+              </span>
+            </li>
+          }
+        </ul>
+      </article>
+
+      <!-- Column 4: Disclaimer (Penting) -->
+      <article
+        data-testid="accounting-disclaimer"
+        class="bg-[#FDFDFD] rounded-xl sm:rounded-2xl p-3.5 sm:p-4 lg:p-4 short:py-3 shadow-[0_4px_20px_rgba(35,36,78,0.06)] border border-white/70 flex flex-col justify-start w-full min-h-[140px] lg:h-[260px]"
+      >
+        <strong
+          class="font-dm-sans font-bold text-sm sm:text-base text-[#23244E] leading-snug mb-1.5 block"
+          style="
+            font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+            font-weight: 700;
+          "
+        >
+          {{ disclaimerLabelKey | translate }}
+        </strong>
+        <p
+          data-testid="accounting-disclaimer-text"
+          class="font-dm-sans font-normal text-xs sm:text-[12px] lg:text-[12.5px] text-[#23244E] leading-relaxed text-left"
+          style="
+            font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+            font-weight: 400;
+          "
+        >
+          {{ disclaimerTextKey | translate }}
+        </p>
+      </article>
     </div>
   </div>
 </app-process-section-shell>
