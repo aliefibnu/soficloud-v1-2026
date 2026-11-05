@@ -464,7 +464,12 @@ export class FullProcessMap {
       d: 'M 958 169 L 969 169 Q 974 169 974 164 L 974 106',
     },
 
-    // Manufacturing & General Ledger Stream (15 Connectors - Teal)
+    // Manufacturing & General Ledger Stream (19 Connectors - Teal)
+    { id: 'bom-to-mfg', theme: 'teal', markers: 'end', d: 'M 216 256 L 316 256 L 316 360' },
+    { id: 'plan-to-mfg', theme: 'teal', markers: 'end', d: 'M 216 321 L 286 321 L 286 360' },
+    { id: 'mo-to-mfg', theme: 'teal', markers: 'end', d: 'M 216 386 L 250 386' },
+    { id: 'mp-to-mfg', theme: 'teal', markers: 'end', d: 'M 216 451 L 286 451 L 286 412' },
+    { id: 'sc-to-mfg', theme: 'teal', markers: 'end', d: 'M 216 516 L 316 516 L 316 412' },
     { id: 'gr-to-mfg', theme: 'teal', markers: 'end', d: 'M 362 191 L 362 360' },
     { id: 'pl-to-mfg', theme: 'teal', markers: 'end', d: 'M 362 574 L 362 412' },
     { id: 'mfg-bi-gl-top', theme: 'teal', markers: 'both', d: 'M 443 380 L 461 380' },

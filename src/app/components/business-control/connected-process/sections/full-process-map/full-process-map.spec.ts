@@ -239,7 +239,7 @@ describe('FullProcessMap', () => {
     );
   });
 
-  it('should render the unified SVG connector overlay with 34 paths and arrowhead markers', () => {
+  it('should render the unified SVG connector overlay with 39 paths and arrowhead markers', () => {
     const svgEl = fixture.debugElement.query(By.css('[data-testid="fpm-connectors-svg"]'));
     expect(svgEl).toBeTruthy();
     expect(svgEl.nativeElement.getAttribute('aria-hidden')).toBe('true');
@@ -253,9 +253,30 @@ describe('FullProcessMap', () => {
     expect(markerTeal).toBeTruthy();
     expect(markerRed).toBeTruthy();
 
-    // Exactly 34 path elements
+    // Exactly 39 path elements
     const paths = svgEl.queryAll(By.css('path[id^="fpm-conn-"]'));
-    expect(paths.length).toBe(34);
+    expect(paths.length).toBe(39);
+
+    // Verify Manufacturing left cards connectors to Manufacturing node
+    const bomToMfg = svgEl.query(By.css('#fpm-conn-bom-to-mfg'));
+    expect(bomToMfg).toBeTruthy();
+    expect(bomToMfg.nativeElement.getAttribute('marker-end')).toBe('url(#fpm-arrow-teal)');
+
+    const planToMfg = svgEl.query(By.css('#fpm-conn-plan-to-mfg'));
+    expect(planToMfg).toBeTruthy();
+    expect(planToMfg.nativeElement.getAttribute('marker-end')).toBe('url(#fpm-arrow-teal)');
+
+    const moToMfg = svgEl.query(By.css('#fpm-conn-mo-to-mfg'));
+    expect(moToMfg).toBeTruthy();
+    expect(moToMfg.nativeElement.getAttribute('marker-end')).toBe('url(#fpm-arrow-teal)');
+
+    const mpToMfg = svgEl.query(By.css('#fpm-conn-mp-to-mfg'));
+    expect(mpToMfg).toBeTruthy();
+    expect(mpToMfg.nativeElement.getAttribute('marker-end')).toBe('url(#fpm-arrow-teal)');
+
+    const scToMfg = svgEl.query(By.css('#fpm-conn-sc-to-mfg'));
+    expect(scToMfg).toBeTruthy();
+    expect(scToMfg.nativeElement.getAttribute('marker-end')).toBe('url(#fpm-arrow-teal)');
 
     // Verify bidirectional connectors have marker-start and marker-end
     const siBiAps = svgEl.query(By.css('#fpm-conn-si-bi-aps'));
