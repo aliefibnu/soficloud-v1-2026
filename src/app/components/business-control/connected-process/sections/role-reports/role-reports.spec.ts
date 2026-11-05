@@ -164,12 +164,13 @@ describe('RoleReports', () => {
     expect(pill3.nativeElement.classList.contains('w-[20.83px]')).toBe(true);
   });
 
-  it('should render vertical bulleted department tags inside each card in #1C73E8 with font-weight 400', () => {
+  it('should render 2-column bulleted department tags inside each card in #23244E with font-weight 400', () => {
     const cards = fixture.debugElement.queryAll(By.css('article'));
     const tagList = cards[0].query(By.css('[aria-label="Department Tags"]'));
-    expect(tagList.nativeElement.classList.contains('text-[#1C73E8]')).toBe(true);
+    expect(tagList.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
+    expect(tagList.nativeElement.classList.contains('grid-cols-2')).toBe(true);
     expect(tagList.nativeElement.classList.contains('font-normal')).toBe(true);
-    expect(cards[0].query(By.css('[aria-label="Department Tags"] li')).nativeElement.classList.contains('leading-none')).toBe(true);
+    expect(cards[0].query(By.css('[aria-label="Department Tags"] li')).nativeElement.classList.contains('leading-tight')).toBe(true);
 
     const tags1 = cards[0]
       .queryAll(By.css('[aria-label="Department Tags"] li span:last-child'))
