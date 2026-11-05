@@ -25,7 +25,7 @@ export interface ProcessTab {
   imports: [TranslatePipe],
   templateUrl: './process-tabs.html',
   host: {
-    class: 'block w-full sticky top-[68px] sm:top-[72px] lg:top-[76px] z-50',
+    class: 'block w-full sticky top-[68px] sm:top-[72px] lg:top-[76px] z-30',
     '(window:resize)': 'onWindowResize()',
     '(window:scroll)': 'onWindowScroll()',
   },

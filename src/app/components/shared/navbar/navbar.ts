@@ -26,7 +26,7 @@ export interface NavLink {
   imports: [TranslatePipe, NgOptimizedImage],
   templateUrl: './navbar.html',
   host: {
-    class: 'block sticky top-0 z-50',
+    class: 'block sticky top-0 z-[60]',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'closeMenus()',
     '(window:scroll)': 'onWindowScroll()',
