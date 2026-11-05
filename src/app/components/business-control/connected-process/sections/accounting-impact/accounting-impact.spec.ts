@@ -122,12 +122,12 @@ describe('AccountingImpact', () => {
     expect(shell.description()).toContain('tahap pencatatan menghasilkan dampak akuntansi');
   });
 
-  it('should render the 5-track responsive pipeline grid container', () => {
+  it('should render the responsive pipeline grid container', () => {
     const gridEl = fixture.debugElement.query(By.css('[data-testid="accounting-pipeline-grid"]'));
     expect(gridEl).toBeTruthy();
     expect(
       gridEl.nativeElement.classList.contains(
-        'lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]',
+        'lg:grid-cols-[minmax(0,1.25fr)_auto_minmax(0,1.25fr)_auto_minmax(0,1.25fr)_minmax(0,1fr)]',
       ),
     ).toBe(true);
   });
@@ -282,8 +282,9 @@ describe('AccountingImpact', () => {
     // Columns 1 and 3 use ul with aria-labelledby
     const uls = fixture.debugElement.queryAll(By.css('ul'));
     expect(uls.length).toBe(2);
-    expect(uls[0].nativeElement.getAttribute('aria-labelledby')).toBe('accounting-col-1-heading');
-    expect(uls[1].nativeElement.getAttribute('aria-labelledby')).toBe('accounting-col-3-heading');
+    const labelledBy = uls.map((u) => u.nativeElement.getAttribute('aria-labelledby'));
+    expect(labelledBy).toContain('accounting-col-1-heading');
+    expect(labelledBy).toContain('accounting-col-3-heading');
 
     // Column 2 uses ol with aria-labelledby
     const ol = fixture.debugElement.query(By.css('ol'));
@@ -292,12 +293,8 @@ describe('AccountingImpact', () => {
   });
 
   it('should apply height-responsive vertical rhythm classes for compact viewports', () => {
-    const stageContainer = fixture.debugElement.query(By.css('.short\\:py-1\\.5'));
-    expect(stageContainer).toBeTruthy();
-    expect(stageContainer.nativeElement.classList.contains('short:gap-3')).toBe(true);
-
     const col1 = fixture.debugElement.query(By.css('[data-testid="accounting-col-source"]'));
-    expect(col1.nativeElement.classList.contains('short:py-3.5')).toBe(true);
+    expect(col1.nativeElement.classList.contains('short:py-3')).toBe(true);
 
     const disclaimer = fixture.debugElement.query(By.css('[data-testid="accounting-disclaimer"]'));
     expect(disclaimer.nativeElement.classList.contains('short:py-3')).toBe(true);

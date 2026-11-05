@@ -25,19 +25,25 @@ export interface ProcessTab {
   imports: [TranslatePipe],
   templateUrl: './process-tabs.html',
   host: {
-    class: 'block w-full',
+    class: 'block w-full sticky top-[68px] sm:top-[72px] lg:top-[76px] z-50',
     '(window:resize)': 'onWindowResize()',
+    '(window:scroll)': 'onWindowScroll()',
   },
 })
 export class ProcessTabs implements AfterViewInit, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
   readonly isBrowser = isPlatformBrowser(this.platformId);
 
   readonly tabsListRef = viewChild<ElementRef<HTMLElement>>('tabsListRef');
 
   private resizeObserver?: ResizeObserver;
+  readonly isSticky = signal<boolean>(false);
+  private scrollRafId: number | null = null;
+  private isUserClicking = false;
+  private userClickTimeout?: ReturnType<typeof setTimeout>;
 
   readonly tabs: readonly ProcessTab[] = [
     {
@@ -68,7 +74,7 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
   ];
 
   readonly activeTabId = signal<string>('satu-data');
-  readonly indicatorLeft = signal<number>(70);
+  readonly indicatorLeft = signal<number>(0);
   readonly indicatorWidth = signal<number>(140);
 
   readonly activeTabIndex = computed<number>(() => {
@@ -121,22 +127,110 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
           this.updateIndicator();
         });
       }
+
+      this.checkStickyState();
+      this.updateActiveSectionByScroll();
     }
   }
 
   ngOnDestroy(): void {
     this.resizeObserver?.disconnect();
+    if (this.scrollRafId !== null && typeof window !== 'undefined') {
+      window.cancelAnimationFrame(this.scrollRafId);
+    }
+    if (this.userClickTimeout) {
+      clearTimeout(this.userClickTimeout);
+    }
   }
 
   onWindowResize(): void {
     if (this.isBrowser) {
       this.updateIndicator();
+      this.checkStickyState();
+      this.updateActiveSectionByScroll();
+    }
+  }
+
+  onWindowScroll(): void {
+    if (this.isBrowser) {
+      this.checkStickyState();
+      if (this.scrollRafId !== null) return;
+      this.scrollRafId = window.requestAnimationFrame(() => {
+        this.scrollRafId = null;
+        this.updateActiveSectionByScroll();
+      });
+    }
+  }
+
+  private checkStickyState(): void {
+    if (!this.isBrowser) return;
+    const hostEl = this.elementRef.nativeElement;
+    const rect = hostEl.getBoundingClientRect();
+    const threshold = window.innerWidth >= 1024 ? 78 : window.innerWidth >= 640 ? 74 : 70;
+    // When the top of host element touches or is pinned against sticky position
+    const sticky = rect.top <= threshold + 2;
+    if (this.isSticky() !== sticky) {
+      this.isSticky.set(sticky);
+      requestAnimationFrame(() => this.updateIndicator());
+    }
+  }
+
+  updateActiveSectionByScroll(): void {
+    if (!this.isBrowser || this.isUserClicking) return;
+
+    const windowH = window.innerHeight || 800;
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    const docH = document.documentElement.scrollHeight;
+
+    // Check if scrolled near the bottom of the document -> activate last tab
+    if (docH > windowH && scrollY + windowH >= docH - 80) {
+      const lastTabId = this.tabs[this.tabs.length - 1].id;
+      if (this.activeTabId() !== lastTabId) {
+        this.activeTabId.set(lastTabId);
+        this.updateIndicator();
+      }
+      return;
+    }
+
+    // Natural reading line: placed around 38% of the viewport (eye focus level below sticky headers)
+    const stickyHeaderOffset = window.innerWidth >= 1024 ? 135 : 120;
+    const readingLine = Math.max(stickyHeaderOffset + 60, Math.floor(windowH * 0.38));
+
+    // Find the section that covers the reading line
+    for (const tab of this.tabs) {
+      const el = document.getElementById(tab.id);
+      if (!el) continue;
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= readingLine && rect.bottom > readingLine) {
+        if (this.activeTabId() !== tab.id) {
+          this.activeTabId.set(tab.id);
+          this.updateIndicator();
+        }
+        return;
+      }
+    }
+
+    // Fallback: If above the first section's reading line, default to first tab
+    const firstEl = document.getElementById(this.tabs[0].id);
+    if (firstEl && firstEl.getBoundingClientRect().top > readingLine) {
+      if (this.activeTabId() !== this.tabs[0].id) {
+        this.activeTabId.set(this.tabs[0].id);
+        this.updateIndicator();
+      }
     }
   }
 
   selectTab(id: string): void {
     this.activeTabId.set(id);
     if (this.isBrowser) {
+      this.isUserClicking = true;
+      if (this.userClickTimeout) {
+        clearTimeout(this.userClickTimeout);
+      }
+      this.userClickTimeout = setTimeout(() => {
+        this.isUserClicking = false;
+      }, 700);
+
       this.updateIndicator();
       setTimeout(() => {
         this.updateIndicator();
@@ -164,19 +258,22 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
     const listEl = this.tabsListRef()?.nativeElement;
     if (!listEl) return;
 
+    const firstBtn = listEl.querySelector(
+      `[data-tab-id="${this.tabs[0].id}"]`,
+    ) as HTMLElement | null;
     const activeBtn = listEl.querySelector(
       `[data-tab-id="${this.activeTabId()}"]`,
     ) as HTMLElement | null;
 
-    if (activeBtn) {
-      const listRect = listEl.getBoundingClientRect();
+    if (activeBtn && firstBtn) {
+      const firstRect = firstBtn.getBoundingClientRect();
       const btnRect = activeBtn.getBoundingClientRect();
-      const rawLeft = btnRect.left - listRect.left;
+      // Calculate relative to the first button (0px at 0% first tab)
+      const rawLeft = btnRect.left - firstRect.left;
       const safeLeft = Math.max(0, rawLeft);
-      const safeWidth = Math.min(btnRect.width, Math.max(0, listRect.width - safeLeft));
 
       this.indicatorLeft.set(safeLeft);
-      this.indicatorWidth.set(safeWidth);
+      this.indicatorWidth.set(btnRect.width);
     }
   }
 

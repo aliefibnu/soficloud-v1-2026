@@ -3,7 +3,7 @@ import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
 import { FullProcessMap } from './full-process-map';
 import { ProcessSectionShell } from '../../process-section-shell/process-section-shell';
-import { provideCustomImageLoader } from '../../../../systems/lib/image-loader';
+import { provideCustomImageLoader } from '../../../../../systems/lib/image-loader';
 
 describe('FullProcessMap', () => {
   let fixture: ComponentFixture<FullProcessMap>;

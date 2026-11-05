@@ -3,7 +3,7 @@ import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
 import { TransactionFlow } from './transaction-flow';
 import { ProcessSectionShell } from '../../process-section-shell/process-section-shell';
-import { provideCustomImageLoader } from '../../../../systems/lib/image-loader';
+import { provideCustomImageLoader } from '../../../../../systems/lib/image-loader';
 
 describe('TransactionFlow', () => {
   let fixture: ComponentFixture<TransactionFlow>;
