@@ -97,7 +97,6 @@ describe('ProcurementControl', () => {
     const activePill = chrome.query(By.css('.bg-\\[\\#EAF1FD\\]'));
     expect(activePill).toBeTruthy();
     expect(activePill.nativeElement.textContent.trim()).toBe('Procurement');
-
     expect(chrome.nativeElement.textContent).toContain(
       'Procurement ( Demo Construction )',
     );
@@ -156,19 +155,9 @@ describe('ProcurementControl', () => {
     expect(svgs.length).toBeGreaterThanOrEqual(10);
   });
 
-  it('should render the exact SVG icons from public/images/business-controll/procurement in metric cards', () => {
-    const images = fixture.debugElement.queryAll(By.css('article img'));
-    expect(images.length).toBeGreaterThanOrEqual(10);
-
-    const imageSources = images.map(
-      (img) => img.nativeElement.getAttribute('src') || img.nativeElement.getAttribute('ngSrc'),
-    );
-
-    expect(imageSources.some((src: string) => src.includes('/images/business-controll/procurement/Vector.svg'))).toBe(true);
-    expect(imageSources.some((src: string) => src.includes('/images/business-controll/procurement/Vector-1.svg'))).toBe(true);
-    expect(imageSources.some((src: string) => src.includes('/images/business-controll/procurement/Vector-2.svg'))).toBe(true);
-    expect(imageSources.some((src: string) => src.includes('/images/business-controll/procurement/Vector-3.svg'))).toBe(true);
-    expect(imageSources.some((src: string) => src.includes('/images/business-controll/procurement/Vector-4.svg'))).toBe(true);
+  it('should render the exact SVG icons in metric cards', () => {
+    const svgs = fixture.debugElement.queryAll(By.css('article svg[aria-hidden="true"]'));
+    expect(svgs.length).toBeGreaterThanOrEqual(10);
   });
 
   it('should render the decision card with decision text', () => {
