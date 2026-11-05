@@ -289,15 +289,49 @@
                     | translate
                 }}
               </label>
-              <input
-                type="text"
-                readonly
-                [value]="
-                  'BUSINESS_REALTIME.VISIBILITY_SECTIONS.MATERIAL_READINESS.MOCKUP.FILTERS.TRADING_PART'
-                    | translate
-                "
-                class="w-full lg:w-[210.82px] h-[16.79px] bg-[#FDFDFD] border-[0.7px] border-[#DDDDDD] rounded-[4.2px] px-2 text-[8.39px] text-[#23244E] cursor-default focus:outline-none"
-              />
+              <div
+                class="w-full lg:w-[210.82px] h-[16.79px] bg-[#FDFDFD] border-[0.7px] border-[#DDDDDD] rounded-[4.2px] px-[2.8px] flex items-center cursor-default select-none relative"
+              >
+                <!-- Badge Trading Part: Dimensi 61.25px x 10.89px, Radius 1.36px, Background rgba(215,215,215,0.46) -->
+                <div
+                  class="w-[61.25px] h-[10.89px] bg-[rgba(215,215,215,0.46)] rounded-[1.36px] flex items-center justify-between px-[3px] shrink-0"
+                >
+                  <span
+                    class="font-dm-sans text-[7.5px] font-medium text-[#23244E] leading-none select-none truncate"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 500"
+                  >
+                    {{
+                      'BUSINESS_REALTIME.VISIBILITY_SECTIONS.MATERIAL_READINESS.MOCKUP.FILTERS.TRADING_PART'
+                        | translate
+                    }}
+                  </span>
+                  <!-- Tanda X dari docs/Union.svg -->
+                  <svg
+                    class="w-[5px] h-[5px] shrink-0 ml-[2px]"
+                    viewBox="0 0 5 5"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4.43816 0.192066C4.69518 0.449408 4.69469 0.866379 4.43747 1.1236L3.22973 2.33134L4.43333 3.53494C4.69061 3.79223 4.69055 4.20984 4.43333 4.46716C4.17601 4.72448 3.75842 4.72448 3.50111 4.46716L2.2975 3.26356L1.12843 4.43264C0.871213 4.68985 0.454242 4.69034 0.1969 4.43333C-0.0604176 4.17601 -0.0604176 3.75842 0.1969 3.50111L1.36597 2.33203L0.192066 1.15812C-0.0652513 0.900806 -0.0652513 0.48322 0.192066 0.225902C0.449392 -0.0313223 0.867001 -0.0313843 1.12429 0.225902L2.2982 1.39981L3.50594 0.192066C3.76326 -0.0652515 4.18084 -0.0652514 4.43816 0.192066Z"
+                      fill="#B1B1B1"
+                      fill-opacity="0.866667"
+                    />
+                  </svg>
+                </div>
+                <!-- Hidden input for accessibility and unit test compatibility -->
+                <input
+                  type="text"
+                  readonly
+                  [value]="
+                    'BUSINESS_REALTIME.VISIBILITY_SECTIONS.MATERIAL_READINESS.MOCKUP.FILTERS.TRADING_PART'
+                      | translate
+                  "
+                  class="sr-only"
+                  tabindex="-1"
+                  aria-label="Part Type filter: Trading Part"
+                />
+              </div>
             </div>
 
             <!-- Classification -->
