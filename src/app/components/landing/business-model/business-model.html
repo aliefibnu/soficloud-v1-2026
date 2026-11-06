@@ -1,6 +1,6 @@
 <section
   id="resources"
-  class="relative w-full bg-[#9CBBF0] pb-8 sm:pb-10 lg:pb-[42px] overflow-hidden scroll-mt-20"
+  class="relative w-full bg-[#9CBBF0] pb-8 sm:pb-10 lg:pb-10.5 overflow-hidden scroll-mt-20"
   aria-labelledby="business-model-heading"
 >
   <div id="business-model" class="absolute -top-20" aria-hidden="true"></div>
@@ -9,32 +9,26 @@
     class="w-full bg-white rounded-b-[40px] sm:rounded-b-[60px] md:rounded-b-[80px] lg:rounded-b-[100px] py-section overflow-hidden"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 xl:gap-7 items-start">
-        <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
-          <div class="flex flex-col justify-end pt-1 lg:pt-1.5 pb-1 lg:pb-1.5">
-            <h2
-              id="business-model-heading"
-              class="font-dm-sans font-bold text-[24px] sm:text-[28px] md:text-[34px] lg:text-[38px] xl:text-[40px] text-[#182849] tracking-[-0.02em] leading-tight sm:leading-[1.15] whitespace-pre-line"
-            >
-              {{ 'BUSINESS_MODEL.HEADING' | translate }}
-            </h2>
-            <p
-              class="mt-2.5 sm:mt-3 md:mt-3.5 font-dm-sans font-normal text-sm sm:text-[15px] lg:text-[16px] text-slate-600 leading-relaxed max-w-lg xl:max-w-xl"
-            >
-              {{ 'BUSINESS_MODEL.SUBTITLE' | translate }}
-            </p>
-          </div>
+      <div class="text-center max-w-4xl mx-auto mb-8 sm:mb-10 lg:mb-12">
+        <h2
+          id="business-model-heading"
+          class="font-dm-sans font-bold text-[24px] sm:text-[28px] md:text-[34px] lg:text-[38px] xl:text-[40px] text-[#182849] tracking-[-0.02em] leading-tight sm:leading-[1.15]"
+        >
+          {{ 'BUSINESS_MODEL.HEADING' | translate }}
+        </h2>
+        <p
+          class="mt-2.5 sm:mt-3 md:mt-3.5 font-dm-sans font-normal text-sm sm:text-[15px] lg:text-[16px] text-slate-600 leading-relaxed max-w-xl mx-auto"
+        >
+          {{ 'BUSINESS_MODEL.SUBTITLE' | translate }}
+        </p>
+      </div>
 
-          @for (card of leftCards; track card.id) {
-            <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
-          }
-        </div>
-
-        <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
-          @for (card of rightCards; track card.id) {
-            <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
-          }
-        </div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 lg:grid-flow-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7 items-stretch"
+      >
+        @for (card of cards; track card.id) {
+          <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
+        }
       </div>
     </div>
   </div>
@@ -42,7 +36,7 @@
 
 <ng-template #cardTemplate let-card>
   <article
-    class="group relative bg-white rounded-xl sm:rounded-2xl border border-slate-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-blue-950/6 hover:-translate-y-1 transition-all duration-300 p-5 sm:p-6 lg:px-6 xl:px-7 lg:py-6 xl:py-7 min-h-fit sm:min-h-[280px] lg:min-h-[300px] flex flex-col justify-center overflow-hidden"
+    class="group relative bg-white rounded-xl sm:rounded-2xl border border-slate-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-blue-950/6 hover:-translate-y-1 transition-all duration-300 p-5 sm:p-6 lg:px-6 xl:px-7 lg:py-6 xl:py-7 min-h-fit sm:min-h-70 lg:min-h-75 flex flex-col justify-center overflow-hidden"
     [attr.aria-label]="
       'BUSINESS_MODEL.ARIA.CARD' | translate: { title: (card.titleKey | translate) }
     "
@@ -76,7 +70,7 @@
         <div class="mt-3.5 sm:mt-4 lg:mt-4.5 pt-0.5">
           <a
             href="#contact"
-            class="w-fit inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 min-h-11 sm:min-h-[46px] rounded-xl font-dm-sans font-semibold text-sm sm:text-base lg:text-[18px] leading-[130%] tracking-normal text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            class="w-fit inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 min-h-11 sm:min-h-11.5 rounded-xl font-dm-sans font-semibold text-sm sm:text-base lg:text-[18px] leading-[130%] tracking-normal text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             [attr.aria-label]="
               'BUSINESS_MODEL.ARIA.LEARN_MORE' | translate: { title: (card.titleKey | translate) }
             "

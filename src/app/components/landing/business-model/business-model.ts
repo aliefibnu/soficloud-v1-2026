@@ -25,7 +25,7 @@ export interface BusinessModelCard {
 export class BusinessModel {
   protected readonly languageService = inject(LanguageService);
 
-  readonly leftCards: readonly BusinessModelCard[] = [
+  readonly cards: readonly BusinessModelCard[] = [
     {
       id: 'manufacturing',
       number: '01',
@@ -44,9 +44,6 @@ export class BusinessModel {
       width: 219,
       height: 145,
     },
-  ];
-
-  readonly rightCards: readonly BusinessModelCard[] = [
     {
       id: 'construction',
       number: '03',
