@@ -8,7 +8,6 @@ import { provideCustomImageLoader } from '../../../systems/lib/image-loader';
 describe('BusinessControl', () => {
   let component: BusinessControl;
   let fixture: ComponentFixture<BusinessControl>;
-  let languageService: LanguageService;
   let translateService: TranslateService;
 
   beforeEach(async () => {
@@ -25,7 +24,6 @@ describe('BusinessControl', () => {
       ],
     }).compileComponents();
 
-    languageService = TestBed.inject(LanguageService);
     translateService = TestBed.inject(TranslateService);
 
     translateService.setTranslation('id', {
@@ -69,6 +67,10 @@ describe('BusinessControl', () => {
     fixture = TestBed.createComponent(BusinessControl);
     component = fixture.componentInstance;
     await fixture.whenStable();
+  });
+
+  afterEach(() => {
+    component.stopAutoPlay();
   });
 
   it('should create the component', () => {
@@ -165,136 +167,6 @@ describe('BusinessControl', () => {
     expect(component.isMenuOpen()).toBe(false);
   });
 
-  it('should have initial scroll-driven state at progress 0 with card 1 active and text 1 visible', () => {
-    component.setScrollProgress(0);
-    expect(component.scrollProgress()).toBe(0);
-    expect(component.progress12()).toBe(0);
-    expect(component.progress23()).toBe(0);
-    expect(component.progress34()).toBe(0);
-    expect(component.activeCard()).toBe(0);
-    expect(component.text1Opacity()).toBe(1);
-    expect(component.text2Opacity()).toBe(0);
-    expect(component.text3Opacity()).toBe(0);
-    expect(component.text4Opacity()).toBe(0);
-    expect(component.card1Opacity()).toBe(1);
-    expect(component.card2Opacity()).toBe(0);
-    expect(component.card3Opacity()).toBe(0);
-    expect(component.card4Opacity()).toBe(0);
-    expect(component.card1Transform()).toContain('translate3d(0, 0.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, 100.0px, 0)');
-    expect(component.card3Transform()).toContain('translate3d(0, 100.0px, 0)');
-    expect(component.card4Transform()).toContain('translate3d(0, 100.0px, 0)');
-  });
-
-  it('should keep card 1 settled and not start stacking while progress is below 0.14 in center screen', () => {
-    component.setScrollProgress(0.1);
-    expect(component.progress12()).toBe(0);
-    expect(component.progress23()).toBe(0);
-    expect(component.progress34()).toBe(0);
-    expect(component.activeCard()).toBe(0);
-    expect(component.card1Transform()).toContain('translate3d(0, 0.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, 100.0px, 0)');
-    expect(component.card2Opacity()).toBe(0);
-  });
-
-  it('should transition to card 2 covering card 1 and text 2 fading in around progress 0.42', () => {
-    component.setScrollProgress(0.42);
-    expect(component.progress12()).toBe(1);
-    expect(component.progress23()).toBe(0);
-    expect(component.progress34()).toBe(0);
-    expect(component.activeCard()).toBe(1);
-    expect(component.text1Opacity()).toBe(0);
-    expect(component.text2Opacity()).toBe(1);
-    expect(component.text3Opacity()).toBe(0);
-    expect(component.text4Opacity()).toBe(0);
-    expect(component.card1Opacity()).toBeCloseTo(0.85, 2);
-    expect(component.card2Opacity()).toBe(1);
-    expect(component.card3Opacity()).toBe(0);
-    expect(component.card4Opacity()).toBe(0);
-
-    // Tiered stack positioning: Card 1 peeks at -14px, Card 2 at 0px
-    expect(component.card1Transform()).toContain('translate3d(0, -14.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, 0.0px, 0)');
-  });
-
-  it('should transition to card 3 covering card 2 and text 3 fading in around progress 0.74', () => {
-    component.setScrollProgress(0.74);
-    expect(component.progress12()).toBe(1);
-    expect(component.progress23()).toBe(1);
-    expect(component.progress34()).toBe(0);
-    expect(component.activeCard()).toBe(2);
-    expect(component.text1Opacity()).toBe(0);
-    expect(component.text2Opacity()).toBe(0);
-    expect(component.text3Opacity()).toBe(1);
-    expect(component.text4Opacity()).toBe(0);
-    expect(component.card1Opacity()).toBeCloseTo(0.7, 2);
-    expect(component.card2Opacity()).toBeCloseTo(0.85, 2);
-    expect(component.card3Opacity()).toBe(1);
-    expect(component.card4Opacity()).toBe(0);
-
-    // Tiered stack positioning: Card 1 at -28px, Card 2 at -14px, Card 3 at 0px
-    expect(component.card1Transform()).toContain('translate3d(0, -28.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, -14.0px, 0)');
-    expect(component.card3Transform()).toContain('translate3d(0, 0.0px, 0)');
-  });
-
-  it('should transition to card 4 covering card 3 and text 4 fading in at progress 1.0', () => {
-    component.setScrollProgress(1);
-    expect(component.progress12()).toBe(1);
-    expect(component.progress23()).toBe(1);
-    expect(component.progress34()).toBe(1);
-    expect(component.activeCard()).toBe(3);
-    expect(component.text1Opacity()).toBe(0);
-    expect(component.text2Opacity()).toBe(0);
-    expect(component.text3Opacity()).toBe(0);
-    expect(component.text4Opacity()).toBe(1);
-    expect(component.card1Opacity()).toBeCloseTo(0.55, 2);
-    expect(component.card2Opacity()).toBeCloseTo(0.7, 2);
-    expect(component.card3Opacity()).toBeCloseTo(0.85, 2);
-    expect(component.card4Opacity()).toBe(1);
-
-    // Tiered stack positioning: Card 1 at -42px, Card 2 at -28px, Card 3 at -14px, Card 4 at 0px
-    expect(component.card1Transform()).toContain('translate3d(0, -42.0px, 0)');
-    expect(component.card2Transform()).toContain('translate3d(0, -28.0px, 0)');
-    expect(component.card3Transform()).toContain('translate3d(0, -14.0px, 0)');
-    expect(component.card4Transform()).toContain('translate3d(0, 0.0px, 0)');
-  });
-
-  it('should smoothly interpolate values during mid-scroll progress and ensure all 4 text opacities sum to 1', () => {
-    // Transition 1 midpoint
-    component.setScrollProgress(0.26);
-    expect(component.progress12()).toBeGreaterThan(0);
-    expect(component.progress12()).toBeLessThan(1);
-    expect(
-      component.text1Opacity() +
-        component.text2Opacity() +
-        component.text3Opacity() +
-        component.text4Opacity(),
-    ).toBeCloseTo(1, 4);
-
-    // Transition 2 midpoint
-    component.setScrollProgress(0.58);
-    expect(component.progress23()).toBeGreaterThan(0);
-    expect(component.progress23()).toBeLessThan(1);
-    expect(
-      component.text1Opacity() +
-        component.text2Opacity() +
-        component.text3Opacity() +
-        component.text4Opacity(),
-    ).toBeCloseTo(1, 4);
-
-    // Transition 3 midpoint
-    component.setScrollProgress(0.88);
-    expect(component.progress34()).toBeGreaterThan(0);
-    expect(component.progress34()).toBeLessThan(1);
-    expect(
-      component.text1Opacity() +
-        component.text2Opacity() +
-        component.text3Opacity() +
-        component.text4Opacity(),
-    ).toBeCloseTo(1, 4);
-  });
-
   it('should contain all required project cost items and KPI metrics', () => {
     expect(component.projectCostItems.length).toBe(5);
     expect(component.projectKpiMetrics.length).toBe(4);
@@ -319,494 +191,184 @@ describe('BusinessControl', () => {
     expect(component.dashboardCard.title).toBe('Dashboard');
   });
 
-  it('should call window.scrollTo when goToCard is triggered', () => {
-    const scrollToSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
-    component.goToCard(1);
-    expect(scrollToSpy).toHaveBeenCalled();
-    scrollToSpy.mockRestore();
-  });
-
-  it('should set isSnapping and call goToCard when snapToCard is called', () => {
-    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
-    expect(component.isSnapping()).toBe(false);
-    component.snapToCard(2);
-    expect(component.isSnapping()).toBe(true);
-    expect(goToSpy).toHaveBeenCalledWith(2);
-
-    // Calling again while snapping should be ignored
-    component.snapToCard(3);
-    expect(goToSpy).toHaveBeenCalledTimes(1);
-    goToSpy.mockRestore();
-  });
-
-  it('should handle wheel scroll down and up when pinned in showcase', () => {
-    const snapSpy = vi.spyOn(component, 'snapToCard').mockImplementation(() => {});
-    const mockTrack = document.createElement('div');
-    Object.defineProperty(mockTrack, 'getBoundingClientRect', {
-      value: () => ({ top: 70, bottom: 2500, height: 2430 }),
-    });
-    Object.defineProperty(component, 'trackRef', {
-      value: () => ({ nativeElement: mockTrack }),
-    });
-
-    const preventDefault = vi.fn();
-    // Scroll down at card 0 -> snaps to card 1
-    component.setScrollProgress(0);
-    component.onTrackWheel({ deltaY: 50, preventDefault } as unknown as WheelEvent);
-    expect(preventDefault).toHaveBeenCalled();
-    expect(snapSpy).toHaveBeenCalledWith(1);
-
-    // Scroll up at card 2 -> snaps to card 1
-    component.setScrollProgress(0.74);
-    component.onTrackWheel({ deltaY: -50, preventDefault } as unknown as WheelEvent);
-    expect(snapSpy).toHaveBeenCalledWith(1);
-
-    // Touchpad multi-packet test: micro-deltas (3, 4, 3) accumulate and snap to card 2
-    snapSpy.mockClear();
-    component.setScrollProgress(0.42); // at card 1
-    component.onTrackWheel({ deltaY: 3, preventDefault } as unknown as WheelEvent);
-    component.onTrackWheel({ deltaY: 4, preventDefault } as unknown as WheelEvent);
-    expect(snapSpy).not.toHaveBeenCalled();
-    component.onTrackWheel({ deltaY: 3, preventDefault } as unknown as WheelEvent);
-    expect(snapSpy).toHaveBeenCalledWith(2);
-
-    // Touchpad direction reversal test: immediately scrolling up after scrolling down cancels lock and snaps up
-    snapSpy.mockClear();
-    component.setScrollProgress(0.74); // at card 2
-    component.onTrackWheel({ deltaY: -3, preventDefault } as unknown as WheelEvent);
-    component.onTrackWheel({ deltaY: -4, preventDefault } as unknown as WheelEvent);
-    component.onTrackWheel({ deltaY: -3, preventDefault } as unknown as WheelEvent);
-    expect(snapSpy).toHaveBeenCalledWith(1);
-
-    snapSpy.mockRestore();
-  });
-
-  it('should allow native scroll to exit section at upper and lower boundaries', () => {
-    const snapSpy = vi.spyOn(component, 'snapToCard').mockImplementation(() => {});
-    const mockTrack = document.createElement('div');
-    Object.defineProperty(mockTrack, 'getBoundingClientRect', {
-      value: () => ({ top: 70, bottom: 2500, height: 2430 }),
-    });
-    Object.defineProperty(component, 'trackRef', {
-      value: () => ({ nativeElement: mockTrack }),
-    });
-
-    const preventDefault = vi.fn();
-    // At card 0, scrolling up (deltaY < 0) -> does NOT preventDefault (exits smoothly upward)
-    component.setScrollProgress(0);
-    component.onTrackWheel({ deltaY: -50, preventDefault } as unknown as WheelEvent);
-    expect(preventDefault).not.toHaveBeenCalled();
-    expect(snapSpy).not.toHaveBeenCalled();
-
-    // At card 3, scrolling down (deltaY > 0) -> does NOT preventDefault (exits smoothly downward)
-    component.setScrollProgress(1);
-    component.onTrackWheel({ deltaY: 50, preventDefault } as unknown as WheelEvent);
-    expect(preventDefault).not.toHaveBeenCalled();
-    expect(snapSpy).not.toHaveBeenCalled();
-
-    snapSpy.mockRestore();
-  });
-
-  describe('Anchor Navigation & Stacking Section Interactivity', () => {
-    beforeEach(() => {
-      // Mock trackRef element bounding rect
-      const mockTrack = document.createElement('div');
-      Object.defineProperty(mockTrack, 'getBoundingClientRect', {
-        value: () => ({
-          top: 800,
-          bottom: 4800,
-          height: 4000,
-          left: 0,
-          right: 1200,
-          width: 1200,
-          x: 0,
-          y: 800,
-          toJSON: () => {},
-        }),
-        configurable: true,
-      });
-
-      // Override viewChild trackRef
-      Object.defineProperty(component, 'trackRef', {
-        value: () => ({ nativeElement: mockTrack }),
-        configurable: true,
-      });
-
-      // Default window scrollY and innerHeight
-      Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true });
-      Object.defineProperty(window, 'innerHeight', {
-        value: 800,
-        writable: true,
-        configurable: true,
-      });
-    });
-
-    it('should immediately set scrollProgress to 1 and isNavigating to true when anchor is below stacking section', () => {
-      window.scrollY = 0; // At top of page (above section)
-      component.setScrollProgress(0);
-
-      // Trigger navigation to #features (known below)
-      component.checkAndHandleAnchor('features');
-
-      expect(component.isNavigating()).toBe(true);
-      expect(component.scrollProgress()).toBe(1);
-      expect(component.activeCard()).toBe(3);
-    });
-
-    it('should smoothly handle anchor navigation to sections below business-control when already scrolled past the section', () => {
-      window.scrollY = 6000; // Far past business control section (e.g. at pricing/solutions)
-      component.setScrollProgress(1);
-
-      // Trigger navigation to #features (known below)
-      const handled = component.checkAndHandleAnchor('features');
-
-      expect(handled).toBe(true);
-      expect(component.isNavigating()).toBe(true);
-      expect(component.scrollProgress()).toBe(1);
-    });
-
-    it('should immediately set scrollProgress to 0 and isNavigating to true when anchor is above stacking section', () => {
-      window.scrollY = 5000; // Past the section
-      component.setScrollProgress(1);
-
-      // Trigger navigation to #hero (above)
-      component.checkAndHandleAnchor('hero');
-
-      expect(component.isNavigating()).toBe(true);
-      expect(component.scrollProgress()).toBe(0);
+  describe('Carousel Navigation & Controls', () => {
+    it('should start at card 0 by default', () => {
       expect(component.activeCard()).toBe(0);
     });
 
-    it('should NOT update scrollProgress during intermediate scroll events while isNavigating is true', () => {
-      component.startAnchorNavigation(1);
-      expect(component.scrollProgress()).toBe(1);
-
-      // Simulate intermediate scroll event
-      const updateSpy = vi.spyOn(component, 'updateScrollProgress');
-      component.onWindowScroll();
-
-      expect(component.scrollProgress()).toBe(1);
-      expect(updateSpy).not.toHaveBeenCalled();
-      updateSpy.mockRestore();
-    });
-
-    it('should finish anchor navigation and re-synchronize scrollProgress on onScrollEnd', () => {
-      component.startAnchorNavigation(1);
-      expect(component.isNavigating()).toBe(true);
-
-      const updateSpy = vi.spyOn(component, 'updateScrollProgress');
-      component.onScrollEnd();
-
-      expect(component.isNavigating()).toBe(false);
-      expect(updateSpy).toHaveBeenCalled();
-      updateSpy.mockRestore();
-    });
-
-    it('should immediately finish anchor navigation and hand back control on user scroll interruption (wheel / touchstart)', () => {
-      component.startAnchorNavigation(1);
-      expect(component.isNavigating()).toBe(true);
-
-      const updateSpy = vi.spyOn(component, 'updateScrollProgress');
-      component.onUserScrollInterruption();
-
-      expect(component.isNavigating()).toBe(false);
-      expect(updateSpy).toHaveBeenCalled();
-      updateSpy.mockRestore();
-    });
-
-    it('should intercept anchor clicks on document and trigger checkAndHandleAnchor', () => {
-      const checkSpy = vi.spyOn(component, 'checkAndHandleAnchor');
-
-      const anchor = document.createElement('a');
-      anchor.setAttribute('href', '#features');
-      document.body.appendChild(anchor);
-
-      const clickEvent = new MouseEvent('click', { bubbles: true });
-      anchor.dispatchEvent(clickEvent);
-      component.onDocumentClick(clickEvent);
-
-      expect(checkSpy).toHaveBeenCalledWith('features');
-
-      checkSpy.mockRestore();
-      document.body.removeChild(anchor);
-    });
-
-    it('should handle repeated anchor clicks by clearing timers and applying new target', () => {
-      component.checkAndHandleAnchor('features');
-      expect(component.scrollProgress()).toBe(1);
-
-      window.scrollY = 3000;
-      component.checkAndHandleAnchor('hero');
-      expect(component.scrollProgress()).toBe(0);
-    });
-
-    it('should clean up navigation timers on destroy', () => {
-      component.startAnchorNavigation(1);
-      const clearSpy = vi.spyOn(component, 'clearNavTimers');
-
-      component.ngOnDestroy();
-
-      expect(clearSpy).toHaveBeenCalled();
-      clearSpy.mockRestore();
-    });
-  });
-
-  it('should reverse an in-flight snap instead of swallowing the opposite mouse-wheel direction', () => {
-    const snapSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
-    const mockTrack = document.createElement('div');
-
-    Object.defineProperty(mockTrack, 'getBoundingClientRect', {
-      value: () => ({ top: 70, bottom: 2500, height: 2430 }),
-    });
-
-    Object.defineProperty(component, 'trackRef', {
-      value: () => ({ nativeElement: mockTrack }),
-      configurable: true,
-    });
-
-    component.setScrollProgress(0);
-    component.snapToCard(1);
-
-    expect(snapSpy).toHaveBeenLastCalledWith(1);
-    expect(component.isSnapping()).toBe(true);
-
-    const preventDefault = vi.fn();
-
-    component.onTrackWheel({
-      deltaY: -80,
-      deltaMode: 0,
-      preventDefault,
-    } as unknown as WheelEvent);
-
-    expect(preventDefault).toHaveBeenCalled();
-    expect(snapSpy).toHaveBeenLastCalledWith(0);
-
-    snapSpy.mockRestore();
-  });
-
-  it('should render indicator buttons with appropriate shadows for active and inactive cards', async () => {
-    component.setScrollProgress(0);
-    fixture.detectChanges();
-    await fixture.whenStable();
-
-    const indicatorButtons = fixture.nativeElement.querySelectorAll('button[aria-label^="Go to card"]');
-    expect(indicatorButtons.length).toBe(4);
-
-    // Card 0 is active
-    expect(indicatorButtons[0].className).toContain('shadow-[0_2px_10px_#649cead9]');
-    // Cards 1, 2, 3 are inactive
-    expect(indicatorButtons[1].className).toContain('shadow-[0_2px_6px_#23244e30]');
-    expect(indicatorButtons[2].className).toContain('shadow-[0_2px_6px_#23244e30]');
-    expect(indicatorButtons[3].className).toContain('shadow-[0_2px_6px_#23244e30]');
-  });
-
-  it('should navigate to next card on horizontal swipe left', () => {
-    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
-    component.setScrollProgress(0); // at card 0
-
-    // Touch start at (150, 200)
-    component.onTrackTouchStart({
-      touches: [{ clientX: 150, clientY: 200 }],
-    } as unknown as TouchEvent);
-
-    // Touch end at (80, 205) -> diffX = -70, diffY = 5 (horizontal swipe left)
-    component.onTrackTouchEnd({
-      changedTouches: [{ clientX: 80, clientY: 205 }],
-    } as unknown as TouchEvent);
-
-    expect(goToSpy).toHaveBeenCalledWith(1);
-    goToSpy.mockRestore();
-  });
-
-  it('should navigate to previous card on horizontal swipe right', () => {
-    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
-    component.setScrollProgress(0.74); // at card 2
-
-    // Touch start at (100, 200)
-    component.onTrackTouchStart({
-      touches: [{ clientX: 100, clientY: 200 }],
-    } as unknown as TouchEvent);
-
-    // Touch end at (170, 195) -> diffX = 70, diffY = -5 (horizontal swipe right)
-    component.onTrackTouchEnd({
-      changedTouches: [{ clientX: 170, clientY: 195 }],
-    } as unknown as TouchEvent);
-
-    expect(goToSpy).toHaveBeenCalledWith(1);
-    goToSpy.mockRestore();
-  });
-
-  it('should ignore vertical touch gestures in swipe handler to preserve native vertical scroll', () => {
-    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
-    component.setScrollProgress(0.42); // at card 1
-
-    // Vertical drag: diffX = 10, diffY = 80
-    component.onTrackTouchStart({
-      touches: [{ clientX: 100, clientY: 200 }],
-    } as unknown as TouchEvent);
-
-    component.onTrackTouchEnd({
-      changedTouches: [{ clientX: 110, clientY: 120 }],
-    } as unknown as TouchEvent);
-
-    expect(goToSpy).not.toHaveBeenCalled();
-    goToSpy.mockRestore();
-  });
-
-  it('should render 4 mobile indicator pills and trigger goToCard on tap', async () => {
-    const goToSpy = vi.spyOn(component, 'goToCard').mockImplementation(() => {});
-    component.setScrollProgress(0);
-    fixture.detectChanges();
-    await fixture.whenStable();
-
-    const mobilePillButtons = fixture.nativeElement.querySelectorAll('button[aria-label^="Select card"]');
-    expect(mobilePillButtons.length).toBe(4);
-
-    mobilePillButtons[2].click();
-    expect(goToSpy).toHaveBeenCalledWith(2);
-
-    goToSpy.mockRestore();
-  });
-
-  describe('Mobile Swipeable Carousel Mode', () => {
-    it('should detect mobile breakpoint when window width is less than 1024', () => {
-      Object.defineProperty(window, 'innerWidth', { value: 375, writable: true, configurable: true });
-      component.checkMobileBreakpoint();
-      expect(component.isMobile()).toBe(true);
-
-      Object.defineProperty(window, 'innerWidth', { value: 1200, writable: true, configurable: true });
-      component.checkMobileBreakpoint();
-      expect(component.isMobile()).toBe(false);
-    });
-
-    it('should update mobileCardIndex directly on goToCard without scrolling window in mobile mode', () => {
-      component.isMobile.set(true);
-      const scrollToSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
-
-      component.goToCard(2);
-      expect(component.mobileCardIndex()).toBe(2);
+    it('should cycle forward and wrap around from card 3 to card 0 on nextCard()', () => {
+      expect(component.activeCard()).toBe(0);
+      component.nextCard();
+      expect(component.activeCard()).toBe(1);
+      component.nextCard();
       expect(component.activeCard()).toBe(2);
-      expect(scrollToSpy).not.toHaveBeenCalled();
-
-      // Clamp boundary tests
-      component.goToCard(5);
+      component.nextCard();
       expect(component.activeCard()).toBe(3);
+      component.nextCard();
+      expect(component.activeCard()).toBe(0);
+    });
+
+    it('should cycle backward and wrap around from card 0 to card 3 on prevCard()', () => {
+      expect(component.activeCard()).toBe(0);
+      component.prevCard();
+      expect(component.activeCard()).toBe(3);
+      component.prevCard();
+      expect(component.activeCard()).toBe(2);
+      component.prevCard();
+      expect(component.activeCard()).toBe(1);
+      component.prevCard();
+      expect(component.activeCard()).toBe(0);
+    });
+
+    it('should navigate directly to a specific card via goToCard() with circular wrapping', () => {
+      component.goToCard(2);
+      expect(component.activeCard()).toBe(2);
+
+      component.goToCard(4);
+      expect(component.activeCard()).toBe(0);
 
       component.goToCard(-1);
-      expect(component.activeCard()).toBe(0);
-
-      scrollToSpy.mockRestore();
-    });
-
-    it('should navigate sequentially with nextCard and prevCard within boundaries', () => {
-      component.isMobile.set(true);
-      component.mobileCardIndex.set(0);
-
-      component.nextCard();
-      expect(component.activeCard()).toBe(1);
-
-      component.nextCard();
-      expect(component.activeCard()).toBe(2);
-
-      component.nextCard();
       expect(component.activeCard()).toBe(3);
-
-      // Cannot advance past 3
-      component.nextCard();
-      expect(component.activeCard()).toBe(3);
-
-      component.prevCard();
-      expect(component.activeCard()).toBe(2);
-
-      component.prevCard();
-      expect(component.activeCard()).toBe(1);
-
-      component.prevCard();
-      expect(component.activeCard()).toBe(0);
-
-      // Cannot decrease below 0
-      component.prevCard();
-      expect(component.activeCard()).toBe(0);
     });
 
-    it('should compute valid horizontal slide transforms via getMobileCardTransform', () => {
-      component.isMobile.set(true);
-      component.mobileCardIndex.set(1); // active is 1
-
-      expect(component.getMobileCardTransform(0)).toBe('translate3d(-100%, 0, 0)');
-      expect(component.getMobileCardTransform(1)).toBe('translate3d(0%, 0, 0)');
-      expect(component.getMobileCardTransform(2)).toBe('translate3d(100%, 0, 0)');
-      expect(component.getMobileCardTransform(3)).toBe('translate3d(200%, 0, 0)');
+    it('should compute horizontal slide transforms via getCardTransform', () => {
+      component.goToCard(1);
+      expect(component.getCardTransform(0)).toBe('translate3d(-100%, 0, 0)');
+      expect(component.getCardTransform(1)).toBe('translate3d(0%, 0, 0)');
+      expect(component.getCardTransform(2)).toBe('translate3d(100%, 0, 0)');
+      expect(component.getCardTransform(3)).toBe('translate3d(200%, 0, 0)');
     });
 
-    it('should disable prev button at card 0 and next button at card 3 in mobile carousel', async () => {
-      component.isMobile.set(true);
-      component.mobileCardIndex.set(0);
+    it('should render 4 circular indicator buttons with active and inactive shadows', async () => {
+      component.goToCard(0);
       fixture.detectChanges();
       await fixture.whenStable();
 
-      const prevBtn = fixture.nativeElement.querySelector('button[aria-label="Previous card"]') as HTMLButtonElement;
-      const nextBtn = fixture.nativeElement.querySelector('button[aria-label="Next card"]') as HTMLButtonElement;
+      const indicatorButtons = fixture.nativeElement.querySelectorAll(
+        'button[aria-label^="Go to card"]',
+      );
+      expect(indicatorButtons.length).toBe(4);
+
+      expect(indicatorButtons[0].className).toContain('shadow-[0_2px_10px_#649cead9]');
+      expect(indicatorButtons[1].className).toContain('shadow-[0_2px_6px_#23244e30]');
+      expect(indicatorButtons[2].className).toContain('shadow-[0_2px_6px_#23244e30]');
+      expect(indicatorButtons[3].className).toContain('shadow-[0_2px_6px_#23244e30]');
+
+      indicatorButtons[2].click();
+      fixture.detectChanges();
+      expect(component.activeCard()).toBe(2);
+      expect(indicatorButtons[2].className).toContain('shadow-[0_2px_10px_#649cead9]');
+    });
+
+    it('should render Previous and Next arrow buttons with the arrow SVG gradient and navigate on click', () => {
+      const prevBtn = fixture.nativeElement.querySelector(
+        'button[aria-label="Previous card"]',
+      ) as HTMLButtonElement;
+      const nextBtn = fixture.nativeElement.querySelector(
+        'button[aria-label="Next card"]',
+      ) as HTMLButtonElement;
 
       expect(prevBtn).toBeTruthy();
       expect(nextBtn).toBeTruthy();
+      expect(prevBtn.querySelector('svg path[fill="url(#business-control-arrow-gradient)"]')).toBeTruthy();
+      expect(nextBtn.querySelector('svg path[fill="url(#business-control-arrow-gradient)"]')).toBeTruthy();
 
-      expect(prevBtn.disabled).toBe(true);
-      expect(nextBtn.disabled).toBe(false);
+      nextBtn.click();
+      expect(component.activeCard()).toBe(1);
 
-      // Advance to card 3
-      component.mobileCardIndex.set(3);
-      fixture.detectChanges();
-      await fixture.whenStable();
-
-      expect(prevBtn.disabled).toBe(false);
-      expect(nextBtn.disabled).toBe(true);
+      prevBtn.click();
+      expect(component.activeCard()).toBe(0);
     });
 
-    it('should ignore mouse-wheel events when in mobile mode', () => {
-      component.isMobile.set(true);
-      const snapSpy = vi.spyOn(component, 'snapToCard').mockImplementation(() => {});
-      const preventDefault = vi.fn();
+    it('should navigate to next card on horizontal touch swipe left and prev card on swipe right', () => {
+      component.goToCard(0);
 
-      component.onTrackWheel({
-        deltaY: 50,
-        deltaMode: 0,
-        preventDefault,
-      } as unknown as WheelEvent);
+      component.onTouchStart({
+        touches: [{ clientX: 200, clientY: 150 }],
+      } as unknown as TouchEvent);
+      component.onTouchEnd({
+        changedTouches: [{ clientX: 110, clientY: 155 }],
+      } as unknown as TouchEvent);
+      expect(component.activeCard()).toBe(1);
 
-      expect(preventDefault).not.toHaveBeenCalled();
-      expect(snapSpy).not.toHaveBeenCalled();
-      snapSpy.mockRestore();
+      component.onTouchStart({
+        touches: [{ clientX: 110, clientY: 150 }],
+      } as unknown as TouchEvent);
+      component.onTouchEnd({
+        changedTouches: [{ clientX: 200, clientY: 145 }],
+      } as unknown as TouchEvent);
+      expect(component.activeCard()).toBe(0);
+    });
+
+    it('should ignore vertical touch gestures in swipe handler', () => {
+      component.goToCard(1);
+
+      component.onTouchStart({
+        touches: [{ clientX: 100, clientY: 200 }],
+      } as unknown as TouchEvent);
+      component.onTouchEnd({
+        changedTouches: [{ clientX: 110, clientY: 100 }],
+      } as unknown as TouchEvent);
+
+      expect(component.activeCard()).toBe(1);
+    });
+
+    it('should navigate on mouse drag left and right', () => {
+      component.goToCard(0);
+
+      component.onMouseDown({ clientX: 300, clientY: 200 } as unknown as MouseEvent);
+      component.onMouseUp({ clientX: 200, clientY: 205 } as unknown as MouseEvent);
+      expect(component.activeCard()).toBe(1);
+
+      component.onMouseDown({ clientX: 200, clientY: 200 } as unknown as MouseEvent);
+      component.onMouseUp({ clientX: 300, clientY: 205 } as unknown as MouseEvent);
+      expect(component.activeCard()).toBe(0);
+    });
+
+    it('should auto-play every 5 seconds and pause on mouseenter / resume on mouseleave', () => {
+      vi.useFakeTimers();
+      component.goToCard(0);
+      component.startAutoPlay();
+
+      vi.advanceTimersByTime(5000);
+      expect(component.activeCard()).toBe(1);
+
+      component.onMouseEnter();
+      expect(component.isHovered()).toBe(true);
+      vi.advanceTimersByTime(10000);
+      expect(component.activeCard()).toBe(1);
+
+      component.onMouseLeave();
+      expect(component.isHovered()).toBe(false);
+      vi.advanceTimersByTime(5000);
+      expect(component.activeCard()).toBe(2);
+
+      component.stopAutoPlay();
+      vi.useRealTimers();
     });
 
     it('should link the real-time card CTA button to /business-realtime', () => {
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
-      const ctaLink = compiled.querySelector('a[routerlink="/business-realtime"], a[href="/business-realtime"]');
+      const ctaLink = compiled.querySelector(
+        'a[routerlink="/business-realtime"], a[href="/business-realtime"]',
+      );
       expect(ctaLink).toBeTruthy();
-      expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe('/business-realtime');
+      expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe(
+        '/business-realtime',
+      );
     });
 
     it('should link the connected-process card CTA button to /connected-process', () => {
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
-      const ctaLink = compiled.querySelector('a[routerlink="/connected-process"], a[href="/connected-process"]');
+      const ctaLink = compiled.querySelector(
+        'a[routerlink="/connected-process"], a[href="/connected-process"]',
+      );
       expect(ctaLink).toBeTruthy();
-      expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe('/connected-process');
-    });
-
-    it('should invoke checkAndHandleAnchor on ngAfterViewInit when initial hash is present', () => {
-      vi.useFakeTimers();
-      const anchorSpy = vi.spyOn(component, 'checkAndHandleAnchor').mockReturnValue(true);
-      window.location.hash = '#contact';
-
-      component.ngAfterViewInit();
-      vi.advanceTimersByTime(100);
-
-      expect(anchorSpy).toHaveBeenCalledWith('contact');
-      window.location.hash = '';
-      anchorSpy.mockRestore();
-      vi.useRealTimers();
+      expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe(
+        '/connected-process',
+      );
     });
   });
 });

@@ -1,12 +1,10 @@
 <section
-  #trackRef
-  class="w-full relative h-auto py-8 sm:py-12 lg:py-0 lg:h-[420vh] scroll-mt-20 touch-pan-y"
+  class="w-full relative py-section scroll-mt-20 select-none touch-pan-y"
   aria-label="Business Control Interactive Showcase"
 >
   <div
-    class="relative lg:sticky lg:top-20 lg:h-[calc(100dvh-5rem)] flex flex-col justify-center items-center w-full px-3 sm:px-4 lg:px-4 max-w-[1410px] mx-auto"
+    class="relative flex flex-col justify-center items-center w-full px-3 sm:px-4 lg:px-4 max-w-352.5 mx-auto"
   >
-    <!-- Section Header (Inter 600 Semi Bold & DM Sans 400 Regular #23244E) -->
     <div class="text-center mb-2.5 sm:mb-3.5 lg:mb-4.5 xl:mb-5 max-w-4xl mx-auto shrink-0 px-2">
       <h2
         class="text-xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#23244E] tracking-tight leading-tight"
@@ -16,37 +14,14 @@
       </h2>
     </div>
 
-    <!-- Main Container Card with Linear Gradient (#D7E4FA, #EBF2FD, #A9C4F166 40%) - Exact rx 24px -->
     <div
-      class="rounded-[20px] sm:rounded-[24px] px-4 pt-5 pb-3.5 sm:px-6 sm:pt-6 sm:pb-4.5 lg:px-8 lg:pt-8 lg:pb-5.5 xl:px-9 xl:pt-9 xl:pb-6 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-start max-h-none lg:max-h-[calc(100dvh-7.5rem)]"
+      class="rounded-[20px] sm:rounded-3xl px-4 pt-5 pb-4 sm:px-6 sm:pt-6 sm:pb-5 lg:px-8 lg:pt-8 lg:pb-6 xl:px-10 xl:pt-9 xl:pb-7 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-start"
       style="background: linear-gradient(180deg, #D7E4FA 0%, #EBF2FD 50%, rgba(169, 196, 241, 0.4) 100%);"
+      (touchstart)="onTouchStart($event)"
+      (touchend)="onTouchEnd($event)"
+      (mousedown)="onMouseDown($event)"
+      (mouseup)="onMouseUp($event)"
     >
-      <!-- Left Vertical Indicator Dots (Desktop only) -->
-      <div
-        class="hidden lg:flex flex-col items-center justify-center gap-6 absolute left-3.5 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30"
-        aria-label="Card navigation indicators"
-      >
-        @for (card of [0, 1, 2, 3]; track card) {
-          <button
-            type="button"
-            (click)="goToCard(card)"
-            [attr.aria-label]="'Go to card ' + (card + 1)"
-            class="w-4 h-4 rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
-            [class.bg-[#649CEA]]="activeCard() === card"
-            [class.shadow-[0_2px_10px_#649cead9]]="activeCard() === card"
-            [class.border-0]="activeCard() === card"
-            [class.scale-105]="activeCard() === card"
-            [class.bg-[#FDFDFD]]="activeCard() !== card"
-            [class.border-0]="activeCard() !== card"
-            [class.shadow-[0_2px_6px_#23244e30]]="activeCard() !== card"
-            [class.hover:shadow-[0_3px_8px_#23244e40]]="activeCard() !== card"
-            [class.hover:scale-110]="activeCard() !== card"
-            [class.hover:bg-white]="activeCard() !== card"
-          ></button>
-        }
-      </div>
-
-      <!-- Category Header: Centered horizontally relative to the ENTIRE blue container card -->
       <div class="relative w-full h-9 sm:h-11 mb-2 sm:mb-2.5 lg:mb-3 flex items-center justify-center text-center shrink-0">
         @for (header of categoryHeaders; track header.title; let i = $index) {
           <div
@@ -70,20 +45,16 @@
         }
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-8 items-center sm:pl-7 lg:pl-9">
-        <!-- LEFT COLUMN: Preview Cards Stack (Mockup) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 xl:gap-10 items-center">
         <div class="lg:col-span-7 flex flex-col justify-center">
-          <!-- Preview Cards Stacking Container (Aspect ratio 656/470, mathematically identical sizes) -->
-          <div class="relative w-full aspect-[656/470] max-h-[170px] xs:max-h-[210px] sm:max-h-[350px] lg:max-h-[440px] xl:max-h-[475px] overflow-hidden rounded-xl sm:rounded-2xl">
-            <!-- Card 1: Real-Time Income and Expense Chart -->
+          <div class="relative w-full aspect-656/470 max-h-52.5 xs:max-h-[250px] sm:max-h-92.5 lg:max-h-110 xl:max-h-118.75 overflow-hidden rounded-xl sm:rounded-2xl">
             <div
-              class="preview-card-1 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-transform duration-300 ease-out"
-              [class.!transition-none]="!isMobile() && isNavigating()"
-              [style.transition]="!isMobile() && isNavigating() ? 'none' : null"
-              [style.transform]="isMobile() ? getMobileCardTransform(0) : card1Transform()"
-              [style.opacity]="isMobile() ? (activeCard() === 0 ? 1 : 0) : card1Opacity()"
-              [style.zIndex]="isMobile() ? (activeCard() === 0 ? 20 : 10) : 10"
+              class="carousel-slide preview-card-1 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              [style.transform]="getCardTransform(0)"
+              [style.opacity]="activeCard() === 0 ? 1 : 0"
+              [style.zIndex]="activeCard() === 0 ? 20 : 10"
               [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
+              [attr.aria-hidden]="activeCard() !== 0"
             >
               <img
                 ngSrc="/images/landing/business-control/card-1-preview.svg"
@@ -95,15 +66,13 @@
               />
             </div>
 
-            <!-- Card 2: Connected Processes -->
             <div
-              class="preview-card-2 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-transform duration-300 ease-out"
-              [class.!transition-none]="!isMobile() && isNavigating()"
-              [style.transition]="!isMobile() && isNavigating() ? 'none' : null"
-              [style.transform]="isMobile() ? getMobileCardTransform(1) : card2Transform()"
-              [style.opacity]="isMobile() ? (activeCard() === 1 ? 1 : 0) : card2Opacity()"
-              [style.zIndex]="isMobile() ? (activeCard() === 1 ? 20 : 10) : 20"
+              class="carousel-slide preview-card-2 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              [style.transform]="getCardTransform(1)"
+              [style.opacity]="activeCard() === 1 ? 1 : 0"
+              [style.zIndex]="activeCard() === 1 ? 20 : 10"
               [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
+              [attr.aria-hidden]="activeCard() !== 1"
             >
               <img
                 ngSrc="/images/landing/business-control/card-2-preview.svg"
@@ -114,15 +83,13 @@
               />
             </div>
 
-            <!-- Card 3: Workflow & Approval -->
             <div
-              class="preview-card-3 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-transform duration-300 ease-out"
-              [class.!transition-none]="!isMobile() && isNavigating()"
-              [style.transition]="!isMobile() && isNavigating() ? 'none' : null"
-              [style.transform]="isMobile() ? getMobileCardTransform(2) : card3Transform()"
-              [style.opacity]="isMobile() ? (activeCard() === 2 ? 1 : 0) : card3Opacity()"
-              [style.zIndex]="isMobile() ? (activeCard() === 2 ? 20 : 10) : 30"
+              class="carousel-slide preview-card-3 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              [style.transform]="getCardTransform(2)"
+              [style.opacity]="activeCard() === 2 ? 1 : 0"
+              [style.zIndex]="activeCard() === 2 ? 20 : 10"
               [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
+              [attr.aria-hidden]="activeCard() !== 2"
             >
               <img
                 ngSrc="/images/landing/business-control/card-3-preview.svg"
@@ -133,15 +100,13 @@
               />
             </div>
 
-            <!-- Card 4: Financial & Cost Insight -->
             <div
-              class="preview-card-4 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-transform duration-300 ease-out"
-              [class.!transition-none]="!isMobile() && isNavigating()"
-              [style.transition]="!isMobile() && isNavigating() ? 'none' : null"
-              [style.transform]="isMobile() ? getMobileCardTransform(3) : card4Transform()"
-              [style.opacity]="isMobile() ? (activeCard() === 3 ? 1 : 0) : card4Opacity()"
-              [style.zIndex]="isMobile() ? (activeCard() === 3 ? 20 : 10) : 40"
+              class="carousel-slide preview-card-4 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              [style.transform]="getCardTransform(3)"
+              [style.opacity]="activeCard() === 3 ? 1 : 0"
+              [style.zIndex]="activeCard() === 3 ? 20 : 10"
               [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
+              [attr.aria-hidden]="activeCard() !== 3"
             >
               <img
                 ngSrc="/images/landing/business-control/card-4-preview.svg"
@@ -154,16 +119,13 @@
           </div>
         </div>
 
-        <!-- RIGHT COLUMN: Vertically Centered with the Left Card -->
-        <div class="lg:col-span-5 relative flex flex-col justify-center items-start self-center lg:pl-3 xl:pl-3">
+        <div class="lg:col-span-5 relative flex flex-col justify-center items-start self-center lg:pl-2 xl:pl-3">
           <div class="grid grid-cols-1 grid-rows-1 w-full self-center">
-            <!-- Text 1: Real-Time Monitoring -->
             <div
-              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
-              [class.!transition-none]="isNavigating()"
-              [style.transition]="isNavigating() ? 'none' : null"
+              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.opacity]="activeCard() === 0 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
+              [attr.aria-hidden]="activeCard() !== 0"
             >
               <div>
                 <h3
@@ -182,6 +144,7 @@
               <div class="pt-2 sm:pt-5 lg:pt-6">
                 <a
                   routerLink="/business-realtime"
+                  [attr.tabindex]="activeCard() === 0 ? 0 : -1"
                   class="inline-flex items-center justify-center px-6 py-2.5 sm:px-8 sm:py-4 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-[15.5px] shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
@@ -189,13 +152,11 @@
               </div>
             </div>
 
-            <!-- Text 2: Connected Business Processes -->
             <div
-              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
-              [class.!transition-none]="isNavigating()"
-              [style.transition]="isNavigating() ? 'none' : null"
+              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.opacity]="activeCard() === 1 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
+              [attr.aria-hidden]="activeCard() !== 1"
             >
               <div>
                 <h3
@@ -214,6 +175,7 @@
               <div class="pt-2 sm:pt-5 lg:pt-6">
                 <a
                   routerLink="/connected-process"
+                  [attr.tabindex]="activeCard() === 1 ? 0 : -1"
                   class="inline-flex items-center justify-center px-6 py-2.5 sm:px-8 sm:py-4 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-[15.5px] shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
@@ -221,13 +183,11 @@
               </div>
             </div>
 
-            <!-- Text 3: Structured Workflow & Approval -->
             <div
-              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
-              [class.!transition-none]="isNavigating()"
-              [style.transition]="isNavigating() ? 'none' : null"
+              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.opacity]="activeCard() === 2 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
+              [attr.aria-hidden]="activeCard() !== 2"
             >
               <div>
                 <h3
@@ -246,6 +206,7 @@
               <div class="pt-2 sm:pt-5 lg:pt-6">
                 <button
                   type="button"
+                  [attr.tabindex]="activeCard() === 2 ? 0 : -1"
                   class="inline-flex items-center justify-center px-6 py-2.5 sm:px-8 sm:py-4 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-[15.5px] shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
@@ -253,13 +214,11 @@
               </div>
             </div>
 
-            <!-- Text 4: Financial & Cost Insight -->
             <div
-              class="col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
-              [class.!transition-none]="isNavigating()"
-              [style.transition]="isNavigating() ? 'none' : null"
+              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.opacity]="activeCard() === 3 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
+              [attr.aria-hidden]="activeCard() !== 3"
             >
               <div>
                 <h3
@@ -278,6 +237,7 @@
               <div class="pt-2 sm:pt-5 lg:pt-6">
                 <button
                   type="button"
+                  [attr.tabindex]="activeCard() === 3 ? 0 : -1"
                   class="inline-flex items-center justify-center px-6 py-2.5 sm:px-8 sm:py-4 rounded-xl bg-linear-to-r from-[#205DE6] to-[#4085F0] hover:from-[#1a4ec2] hover:to-[#3575d9] text-white font-medium text-xs sm:text-[15.5px] shadow-md hover:shadow-lg shadow-blue-500/25 transition-all duration-200 cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {{ 'BUSINESS_CONTROL.CTA_BUTTON' | translate }}
@@ -288,31 +248,58 @@
         </div>
       </div>
 
-      <!-- Mobile Carousel Controls (Visible on < lg) -->
-      <div class="flex lg:hidden items-center justify-between w-full pt-3.5 mt-2 border-t border-blue-200/50">
+      <div class="flex items-center justify-center gap-6 sm:gap-8 mt-4 sm:mt-5 lg:mt-6">
         <button
           type="button"
           (click)="prevCard()"
-          [disabled]="activeCard() === 0"
-          [attr.aria-label]="'Previous card'"
-          class="w-8 h-8 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-[#23244E] transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer active:scale-95"
+          aria-label="Previous card"
+          class="group w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white shadow-[0_4px_14px_rgba(24,40,73,0.08)] hover:shadow-[0_6px_20px_rgba(24,40,73,0.14)] flex items-center justify-center transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3AE1] focus-visible:ring-offset-2 cursor-pointer"
         >
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
+          <svg
+            class="w-4 h-3 sm:w-4.5 sm:h-3.5 transition-transform group-hover:-translate-x-0.5 scale-x-[-1]"
+            viewBox="0 0 409 328"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M237.05 11.7931C240.87 8.02017 245.397 5.03688 250.37 3.01353C255.344 0.990185 260.667 -0.033522 266.037 0.000837067C271.406 0.0351961 276.716 1.12714 281.663 3.21397C286.61 5.3008 291.098 8.3417 294.87 12.1632L383.87 102.283C417.16 135.693 417.2 190.123 383.71 223.733L295.05 314.793C291.326 318.716 286.86 321.86 281.911 324.044C276.962 326.228 271.629 327.407 266.221 327.513C260.813 327.62 255.438 326.652 250.407 324.665C245.376 322.678 240.79 319.712 236.914 315.939C233.039 312.165 229.951 307.66 227.829 302.685C225.708 297.709 224.596 292.361 224.558 286.952C224.519 281.544 225.555 276.181 227.605 271.175C229.655 266.17 232.678 261.621 236.5 257.793L288.35 204.513H40.89C30.0453 204.513 19.6447 200.205 11.9763 192.537C4.30796 184.868 0 174.468 0 163.623C0 152.778 4.30796 142.378 11.9763 134.71C19.6447 127.041 30.0453 122.733 40.89 122.733H289.1L236.72 69.7333C232.943 65.9108 229.957 61.3815 227.932 56.4044C225.906 51.4273 224.882 46.0997 224.916 40.7264C224.95 35.3531 226.043 30.0393 228.132 25.0885C230.221 20.1377 233.265 15.6471 237.09 11.8732L237.05 11.7931Z"
+              fill="url(#business-control-arrow-gradient)"
+            />
+            <defs>
+              <linearGradient
+                id="business-control-arrow-gradient"
+                x1="242.5"
+                y1="-61"
+                x2="240.454"
+                y2="363.509"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#1E3AE1" />
+                <stop offset="0.593624" stop-color="#1D74D9" stop-opacity="0.55" />
+                <stop offset="1" stop-color="#D8E3F7" />
+              </linearGradient>
+            </defs>
           </svg>
         </button>
 
-        <div class="flex items-center gap-2" aria-label="Carousel pagination">
+        <div class="flex items-center gap-3 sm:gap-3.5" aria-label="Card navigation indicators">
           @for (card of [0, 1, 2, 3]; track card) {
             <button
               type="button"
               (click)="goToCard(card)"
-              [attr.aria-label]="'Select card ' + (card + 1)"
-              class="h-2 rounded-full transition-all duration-300 cursor-pointer focus:outline-none"
-              [class.w-6]="activeCard() === card"
-              [class.w-2]="activeCard() !== card"
+              [attr.aria-label]="'Go to card ' + (card + 1)"
+              [attr.aria-current]="activeCard() === card ? 'true' : null"
+              class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
               [class.bg-[#649CEA]]="activeCard() === card"
-              [class.bg-[#23244E]/25]="activeCard() !== card"
+              [class.shadow-[0_2px_10px_#649cead9]]="activeCard() === card"
+              [class.border-0]="activeCard() === card"
+              [class.scale-105]="activeCard() === card"
+              [class.bg-[#FDFDFD]]="activeCard() !== card"
+              [class.border-0]="activeCard() !== card"
+              [class.shadow-[0_2px_6px_#23244e30]]="activeCard() !== card"
+              [class.hover:shadow-[0_3px_8px_#23244e40]]="activeCard() !== card"
+              [class.hover:scale-110]="activeCard() !== card"
+              [class.hover:bg-white]="activeCard() !== card"
             ></button>
           }
         </div>
@@ -320,12 +307,19 @@
         <button
           type="button"
           (click)="nextCard()"
-          [disabled]="activeCard() === 3"
-          [attr.aria-label]="'Next card'"
-          class="w-8 h-8 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-[#23244E] transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer active:scale-95"
+          aria-label="Next card"
+          class="group w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white shadow-[0_4px_14px_rgba(24,40,73,0.08)] hover:shadow-[0_6px_20px_rgba(24,40,73,0.14)] flex items-center justify-center transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3AE1] focus-visible:ring-offset-2 cursor-pointer"
         >
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
+          <svg
+            class="w-4 h-3 sm:w-4.5 sm:h-3.5 transition-transform group-hover:translate-x-0.5"
+            viewBox="0 0 409 328"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M237.05 11.7931C240.87 8.02017 245.397 5.03688 250.37 3.01353C255.344 0.990185 260.667 -0.033522 266.037 0.000837067C271.406 0.0351961 276.716 1.12714 281.663 3.21397C286.61 5.3008 291.098 8.3417 294.87 12.1632L383.87 102.283C417.16 135.693 417.2 190.123 383.71 223.733L295.05 314.793C291.326 318.716 286.86 321.86 281.911 324.044C276.962 326.228 271.629 327.407 266.221 327.513C260.813 327.62 255.438 326.652 250.407 324.665C245.376 322.678 240.79 319.712 236.914 315.939C233.039 312.165 229.951 307.66 227.829 302.685C225.708 297.709 224.596 292.361 224.558 286.952C224.519 281.544 225.555 276.181 227.605 271.175C229.655 266.17 232.678 261.621 236.5 257.793L288.35 204.513H40.89C30.0453 204.513 19.6447 200.205 11.9763 192.537C4.30796 184.868 0 174.468 0 163.623C0 152.778 4.30796 142.378 11.9763 134.71C19.6447 127.041 30.0453 122.733 40.89 122.733H289.1L236.72 69.7333C232.943 65.9108 229.957 61.3815 227.932 56.4044C225.906 51.4273 224.882 46.0997 224.916 40.7264C224.95 35.3531 226.043 30.0393 228.132 25.0885C230.221 20.1377 233.265 15.6471 237.09 11.8732L237.05 11.7931Z"
+              fill="url(#business-control-arrow-gradient)"
+            />
           </svg>
         </button>
       </div>
