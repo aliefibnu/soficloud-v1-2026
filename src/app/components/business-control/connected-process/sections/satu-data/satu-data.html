@@ -10,7 +10,7 @@
   >
     @for (card of cards; track card.number) {
       <article
-        class="bg-white rounded-[25.09px] px-4 py-5 sm:px-5 sm:py-6 lg:px-5.5 lg:py-6 xl:px-6 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/60 flex flex-col items-center text-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(35,36,78,0.1)] w-full max-w-[340px] md:max-w-none justify-self-center min-h-[180px] lg:h-[200px]"
+        class="bg-white rounded-[25.09px] px-4 py-5 sm:px-5 sm:py-6 lg:px-5.5 lg:py-6 xl:px-6 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/60 flex flex-col items-center text-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(35,36,78,0.1)] w-full max-w-85 md:max-w-none justify-self-center min-h-45 lg:h-50"
       >
         <span
           class="font-dm-sans font-bold text-xl sm:text-2xl lg:text-[28px] text-[#23244E] mb-1.5 sm:mb-2 tracking-tight select-none leading-none"
@@ -25,7 +25,7 @@
           {{ card.titleKey | translate }}
         </h3>
         <p
-          class="font-dm-sans font-normal text-xs sm:text-[12.5px] lg:text-[13.5px] text-[#23244E] leading-relaxed tracking-normal max-w-[280px]"
+          class="font-dm-sans font-normal text-xs sm:text-[12.5px] lg:text-[13.5px] text-[#23244E] leading-relaxed tracking-normal max-w-70"
           style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400"
         >
           {{ card.descriptionKey | translate }}
