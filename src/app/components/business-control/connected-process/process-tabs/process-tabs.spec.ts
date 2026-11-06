@@ -280,6 +280,84 @@ describe('ConnectedProcess ProcessTabs', () => {
     expect(islandEl).toBeTruthy();
   });
 
+  it('should apply hysteresis around the sticky threshold and maintain constant vertical height classes', () => {
+    vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(1280);
+    component.isSticky.set(false);
+    fixture.detectChanges();
+
+    const hostEl = fixture.nativeElement as HTMLElement;
+    expect(hostEl.classList.contains('[overflow-anchor:none]')).toBe(true);
+
+    const sectionEl = fixture.debugElement.query(By.css('#process-tabs')).nativeElement as HTMLElement;
+    const firstTabBtn = fixture.debugElement.query(By.css('[role="tab"]')).nativeElement as HTMLElement;
+    const nonStickyBtnClasses = firstTabBtn.className;
+
+    // At top = 79px on desktop (stickyTop = 76px), within hysteresis band (77 < 79 <= 81), should stay non-sticky
+    const rectSpy = vi.spyOn(hostEl, 'getBoundingClientRect').mockReturnValue({
+      top: 79,
+      bottom: 139,
+      left: 0,
+      right: 1280,
+      width: 1280,
+      height: 60,
+      x: 0,
+      y: 79,
+      toJSON: () => {},
+    });
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(false);
+
+    // At top = 76px (pinned at stickyTop <= 77), should become sticky
+    rectSpy.mockReturnValue({
+      top: 76,
+      bottom: 136,
+      left: 0,
+      right: 1280,
+      width: 1280,
+      height: 60,
+      x: 0,
+      y: 76,
+      toJSON: () => {},
+    });
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(true);
+    fixture.detectChanges();
+
+    // Vertical padding on section and typography/padding on buttons must remain identical
+    expect(sectionEl.classList.contains('py-0')).toBe(true);
+    expect(firstTabBtn.className).toBe(nonStickyBtnClasses);
+
+    // Slight subpixel/jitter upward to top = 80px (<= stickyTop + 5 = 81px) must NOT un-stick
+    rectSpy.mockReturnValue({
+      top: 80,
+      bottom: 140,
+      left: 0,
+      right: 1280,
+      width: 1280,
+      height: 60,
+      x: 0,
+      y: 80,
+      toJSON: () => {},
+    });
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(true);
+
+    // Scrolling above hysteresis band (top = 82px > 81px) should cleanly un-stick
+    rectSpy.mockReturnValue({
+      top: 82,
+      bottom: 142,
+      left: 0,
+      right: 1280,
+      width: 1280,
+      height: 60,
+      x: 0,
+      y: 82,
+      toJSON: () => {},
+    });
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(false);
+  });
+
   it('should accurately update activeTabId based on readingLine position of sections', () => {
     // Create mock sections
     const s1 = document.createElement('div');

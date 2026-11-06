@@ -25,7 +25,8 @@ export interface ProcessTab {
   imports: [TranslatePipe],
   templateUrl: './process-tabs.html',
   host: {
-    class: 'block w-full sticky top-[68px] sm:top-[72px] lg:top-[76px] z-30',
+    class:
+      'block w-full sticky top-[68px] sm:top-[72px] lg:top-[76px] my-4 sm:my-6 lg:my-8 z-30 [overflow-anchor:none]',
     '(window:resize)': 'onWindowResize()',
     '(window:scroll)': 'onWindowScroll()',
   },
@@ -41,7 +42,10 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
 
   private resizeObserver?: ResizeObserver;
   readonly isSticky = signal<boolean>(false);
+  readonly isStickyTransitioning = signal<boolean>(false);
   private scrollRafId: number | null = null;
+  private stickyTransitionRafId: number | null = null;
+  private stickyTransitionTimeout?: ReturnType<typeof setTimeout>;
   private isUserClicking = false;
   private userClickTimeout?: ReturnType<typeof setTimeout>;
 
@@ -138,6 +142,12 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
     if (this.scrollRafId !== null && typeof window !== 'undefined') {
       window.cancelAnimationFrame(this.scrollRafId);
     }
+    if (this.stickyTransitionRafId !== null && typeof window !== 'undefined') {
+      window.cancelAnimationFrame(this.stickyTransitionRafId);
+    }
+    if (this.stickyTransitionTimeout) {
+      clearTimeout(this.stickyTransitionTimeout);
+    }
     if (this.userClickTimeout) {
       clearTimeout(this.userClickTimeout);
     }
@@ -166,13 +176,47 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
     if (!this.isBrowser) return;
     const hostEl = this.elementRef.nativeElement;
     const rect = hostEl.getBoundingClientRect();
-    const threshold = window.innerWidth >= 1024 ? 78 : window.innerWidth >= 640 ? 74 : 70;
-    // When the top of host element touches or is pinned against sticky position
-    const sticky = rect.top <= threshold + 2;
-    if (this.isSticky() !== sticky) {
+    const stickyTop = window.innerWidth >= 1024 ? 76 : window.innerWidth >= 640 ? 72 : 68;
+    // Apply a hysteresis band around stickyTop so subpixel scroll adjustments or trackpad jitter
+    // at the threshold cannot oscillate the sticky state back and forth.
+    const currentlySticky = this.isSticky();
+    const sticky = currentlySticky ? rect.top <= stickyTop + 5 : rect.top <= stickyTop + 1;
+
+    if (currentlySticky !== sticky) {
       this.isSticky.set(sticky);
-      requestAnimationFrame(() => this.updateIndicator());
+      this.syncIndicatorDuringStickyTransition();
     }
+  }
+
+  private syncIndicatorDuringStickyTransition(): void {
+    if (!this.isBrowser) return;
+    this.isStickyTransitioning.set(true);
+    this.updateIndicator();
+
+    if (this.stickyTransitionRafId !== null) {
+      window.cancelAnimationFrame(this.stickyTransitionRafId);
+      this.stickyTransitionRafId = null;
+    }
+    if (this.stickyTransitionTimeout) {
+      clearTimeout(this.stickyTransitionTimeout);
+    }
+
+    const step = (): void => {
+      this.updateIndicator();
+      if (this.isStickyTransitioning()) {
+        this.stickyTransitionRafId = window.requestAnimationFrame(step);
+      }
+    };
+    this.stickyTransitionRafId = window.requestAnimationFrame(step);
+
+    this.stickyTransitionTimeout = setTimeout(() => {
+      if (this.stickyTransitionRafId !== null) {
+        window.cancelAnimationFrame(this.stickyTransitionRafId);
+        this.stickyTransitionRafId = null;
+      }
+      this.isStickyTransitioning.set(false);
+      this.updateIndicator();
+    }, 320);
   }
 
   updateActiveSectionByScroll(): void {
