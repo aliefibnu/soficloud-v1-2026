@@ -67,6 +67,10 @@ describe('Features', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const firstTitle = compiled.querySelector('article h3');
     expect(firstTitle?.textContent?.trim()).toBe('Financial Management &\nAccounting');
+    expect(firstTitle?.classList.contains('text-[#202144]')).toBe(true);
+    expect(firstTitle?.classList.contains('items-center')).toBe(true);
+    expect(firstTitle?.classList.contains('justify-center')).toBe(true);
+    expect(firstTitle?.classList.contains('text-center')).toBe(true);
 
     const firstBtn = compiled.querySelector('article a');
     expect(firstBtn?.textContent?.trim()).toBe('Pelajari Selengkapnya');
