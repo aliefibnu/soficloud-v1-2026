@@ -3,9 +3,8 @@
   aria-label="Business Control Interactive Showcase"
 >
   <div
-    class="relative flex flex-col justify-center items-center w-full px-3 sm:px-4 lg:px-4 max-w-[1410px] mx-auto"
+    class="relative flex flex-col justify-center items-center w-full px-3 sm:px-4 lg:px-4 max-w-352.5 mx-auto"
   >
-    <!-- Section Header (Inter 600 Semi Bold & DM Sans 400 Regular #23244E) -->
     <div class="text-center mb-2.5 sm:mb-3.5 lg:mb-4.5 xl:mb-5 max-w-4xl mx-auto shrink-0 px-2">
       <h2
         class="text-xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-[#23244E] tracking-tight leading-tight"
@@ -15,16 +14,14 @@
       </h2>
     </div>
 
-    <!-- Main Container Card with Linear Gradient (#D7E4FA, #EBF2FD, #A9C4F166 40%) - Exact rx 24px -->
     <div
-      class="rounded-[20px] sm:rounded-[24px] px-4 pt-5 pb-4 sm:px-6 sm:pt-6 sm:pb-5 lg:px-8 lg:pt-8 lg:pb-6 xl:px-10 xl:pt-9 xl:pb-7 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-start"
+      class="rounded-[20px] sm:rounded-3xl px-4 pt-5 pb-4 sm:px-6 sm:pt-6 sm:pb-5 lg:px-8 lg:pt-8 lg:pb-6 xl:px-10 xl:pt-9 xl:pb-7 relative shadow-sm border border-blue-100/70 w-full overflow-hidden flex flex-col justify-start"
       style="background: linear-gradient(180deg, #D7E4FA 0%, #EBF2FD 50%, rgba(169, 196, 241, 0.4) 100%);"
       (touchstart)="onTouchStart($event)"
       (touchend)="onTouchEnd($event)"
       (mousedown)="onMouseDown($event)"
       (mouseup)="onMouseUp($event)"
     >
-      <!-- Category Header: Centered horizontally relative to the ENTIRE blue container card -->
       <div class="relative w-full h-9 sm:h-11 mb-2 sm:mb-2.5 lg:mb-3 flex items-center justify-center text-center shrink-0">
         @for (header of categoryHeaders; track header.title; let i = $index) {
           <div
@@ -49,11 +46,8 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 xl:gap-10 items-center">
-        <!-- LEFT COLUMN: Preview Cards Carousel -->
         <div class="lg:col-span-7 flex flex-col justify-center">
-          <!-- Preview Cards Container (Aspect ratio 656/470, mathematically identical sizes) -->
-          <div class="relative w-full aspect-[656/470] max-h-[210px] xs:max-h-[250px] sm:max-h-[370px] lg:max-h-[440px] xl:max-h-[475px] overflow-hidden rounded-xl sm:rounded-2xl">
-            <!-- Card 1: Real-Time Income and Expense Chart -->
+          <div class="relative w-full aspect-656/470 max-h-52.5 xs:max-h-[250px] sm:max-h-92.5 lg:max-h-110 xl:max-h-118.75 overflow-hidden rounded-xl sm:rounded-2xl">
             <div
               class="carousel-slide preview-card-1 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.transform]="getCardTransform(0)"
@@ -72,7 +66,6 @@
               />
             </div>
 
-            <!-- Card 2: Connected Processes -->
             <div
               class="carousel-slide preview-card-2 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.transform]="getCardTransform(1)"
@@ -90,7 +83,6 @@
               />
             </div>
 
-            <!-- Card 3: Workflow & Approval -->
             <div
               class="carousel-slide preview-card-3 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.transform]="getCardTransform(2)"
@@ -108,7 +100,6 @@
               />
             </div>
 
-            <!-- Card 4: Financial & Cost Insight -->
             <div
               class="carousel-slide preview-card-4 absolute inset-0 w-full h-full will-change-transform transform-gpu backface-hidden flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.transform]="getCardTransform(3)"
@@ -128,12 +119,10 @@
           </div>
         </div>
 
-        <!-- RIGHT COLUMN: Vertically Centered with the Left Card -->
         <div class="lg:col-span-5 relative flex flex-col justify-center items-start self-center lg:pl-2 xl:pl-3">
           <div class="grid grid-cols-1 grid-rows-1 w-full self-center">
-            <!-- Text 1: Real-Time Monitoring -->
             <div
-              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.opacity]="activeCard() === 0 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 0 ? 'auto' : 'none'"
               [attr.aria-hidden]="activeCard() !== 0"
@@ -163,9 +152,8 @@
               </div>
             </div>
 
-            <!-- Text 2: Connected Business Processes -->
             <div
-              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.opacity]="activeCard() === 1 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 1 ? 'auto' : 'none'"
               [attr.aria-hidden]="activeCard() !== 1"
@@ -195,9 +183,8 @@
               </div>
             </div>
 
-            <!-- Text 3: Structured Workflow & Approval -->
             <div
-              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.opacity]="activeCard() === 2 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 2 ? 'auto' : 'none'"
               [attr.aria-hidden]="activeCard() !== 2"
@@ -227,9 +214,8 @@
               </div>
             </div>
 
-            <!-- Text 4: Financial & Cost Insight -->
             <div
-              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-[420ms] ease-[cubic-bezier(0.22,0.8,0.25,1)]"
+              class="carousel-text col-start-1 row-start-1 w-full h-full flex flex-col justify-between items-start py-0.5 sm:py-1 transition-opacity duration-420 ease-[cubic-bezier(0.22,0.8,0.25,1)]"
               [style.opacity]="activeCard() === 3 ? 1 : 0"
               [style.pointerEvents]="activeCard() === 3 ? 'auto' : 'none'"
               [attr.aria-hidden]="activeCard() !== 3"
@@ -262,7 +248,6 @@
         </div>
       </div>
 
-      <!-- Bottom Carousel Controls (All Breakpoints) -->
       <div class="flex items-center justify-center gap-6 sm:gap-8 mt-4 sm:mt-5 lg:mt-6">
         <button
           type="button"
