@@ -86,6 +86,35 @@ describe('BusinessControl', () => {
     expect(headerContainer.querySelector('p')).toBeNull();
   });
 
+  it('should render the category header "REAL-TIME BUSINESS CONTROL" as single line with Inter 700 and preserve sub header', () => {
+    const compiled = fixture.debugElement.nativeElement as HTMLElement;
+    const categoryHeadings = compiled.querySelectorAll('h3');
+    const titles = Array.from(categoryHeadings).map((h) => h.textContent?.trim());
+    expect(titles).toContain('REAL-TIME BUSINESS CONTROL');
+
+    const realTimeHeader = Array.from(categoryHeadings).find((h) =>
+      h.textContent?.includes('REAL-TIME BUSINESS CONTROL'),
+    );
+    expect(realTimeHeader).toBeTruthy();
+    expect(realTimeHeader?.className).toContain('font-bold');
+    expect(realTimeHeader?.className).toContain('text-[#23244E]');
+    expect(realTimeHeader?.className).toContain('uppercase');
+    expect(realTimeHeader?.className).toContain('whitespace-nowrap');
+    expect(realTimeHeader?.style.fontFamily).toContain('var(--font-inter');
+
+    const headerWrapper = realTimeHeader?.parentElement;
+    expect(headerWrapper).toBeTruthy();
+
+    const subtitleEl = headerWrapper?.querySelector('span');
+    expect(subtitleEl).toBeTruthy();
+    expect(subtitleEl?.textContent?.trim()).toBe('REAL-TIME');
+    expect(subtitleEl?.className).toContain('uppercase');
+    expect(subtitleEl?.className).toContain('whitespace-nowrap');
+
+    const container = realTimeHeader?.closest('div.max-w-4xl');
+    expect(container).toBeTruthy();
+  });
+
   it('should toggle expense visibility correctly', () => {
     expect(component.isExpenseVisible()).toBe(true);
     component.toggleExpense();
