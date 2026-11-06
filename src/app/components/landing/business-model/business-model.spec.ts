@@ -26,7 +26,7 @@ describe('BusinessModel', () => {
 
     translateService.setTranslation('id', {
       BUSINESS_MODEL: {
-        HEADING: 'SOFICloud untuk Berbagai\nModel Bisnis',
+        HEADING: 'SOFICloud untuk Berbagai Model Bisnis',
         SUBTITLE:
           'Satu platform ERP yang dapat dikonfigurasi mengikuti karakter proses bisnis, struktur organisasi, dan kebutuhan operasional setiap perusahaan.',
         CTA_LEARN_MORE: 'Pelajari Selengkapnya',
@@ -58,7 +58,7 @@ describe('BusinessModel', () => {
 
     translateService.setTranslation('en', {
       BUSINESS_MODEL: {
-        HEADING: 'SOFICloud for Diverse\nBusiness Models',
+        HEADING: 'SOFICloud for Diverse Business Models',
         SUBTITLE:
           'A single ERP platform configurable to match the business process character, organizational structure, and operational needs of every company.',
         CTA_LEARN_MORE: 'Learn More',
@@ -111,6 +111,23 @@ describe('BusinessModel', () => {
     expect(subtitle?.textContent).toContain(
       'Satu platform ERP yang dapat dikonfigurasi',
     );
+  });
+
+  it('should render a centered header above a 2x2 grid container', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const heading = compiled.querySelector('#business-model-heading');
+    const headerContainer = heading?.parentElement;
+    expect(headerContainer?.classList.contains('text-center')).toBe(true);
+    expect(headerContainer?.classList.contains('mx-auto')).toBe(true);
+
+    const firstCard = compiled.querySelector('article');
+    const gridContainer = firstCard?.parentElement;
+    expect(gridContainer?.classList.contains('grid')).toBe(true);
+    expect(gridContainer?.classList.contains('lg:grid-cols-2')).toBe(true);
+    expect(gridContainer?.classList.contains('lg:grid-rows-2')).toBe(true);
+    expect(gridContainer?.classList.contains('lg:grid-flow-col')).toBe(true);
+    expect(gridContainer?.classList.contains('items-stretch')).toBe(true);
   });
 
   it('should render exactly 4 business model cards with numbers 01 to 04', () => {

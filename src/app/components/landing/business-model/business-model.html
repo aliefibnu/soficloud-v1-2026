@@ -9,32 +9,26 @@
     class="w-full bg-white rounded-b-[40px] sm:rounded-b-[60px] md:rounded-b-[80px] lg:rounded-b-[100px] py-section overflow-hidden"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 xl:gap-7 items-start">
-        <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
-          <div class="flex flex-col justify-end pt-1 lg:pt-1.5 pb-1 lg:pb-1.5">
-            <h2
-              id="business-model-heading"
-              class="font-dm-sans font-bold text-[24px] sm:text-[28px] md:text-[34px] lg:text-[38px] xl:text-[40px] text-[#182849] tracking-[-0.02em] leading-tight sm:leading-[1.15] whitespace-pre-line"
-            >
-              {{ 'BUSINESS_MODEL.HEADING' | translate }}
-            </h2>
-            <p
-              class="mt-2.5 sm:mt-3 md:mt-3.5 font-dm-sans font-normal text-sm sm:text-[15px] lg:text-[16px] text-slate-600 leading-relaxed max-w-lg xl:max-w-xl"
-            >
-              {{ 'BUSINESS_MODEL.SUBTITLE' | translate }}
-            </p>
-          </div>
+      <div class="text-center max-w-4xl mx-auto mb-8 sm:mb-10 lg:mb-12">
+        <h2
+          id="business-model-heading"
+          class="font-dm-sans font-bold text-[24px] sm:text-[28px] md:text-[34px] lg:text-[38px] xl:text-[40px] text-[#182849] tracking-[-0.02em] leading-tight sm:leading-[1.15]"
+        >
+          {{ 'BUSINESS_MODEL.HEADING' | translate }}
+        </h2>
+        <p
+          class="mt-2.5 sm:mt-3 md:mt-3.5 font-dm-sans font-normal text-sm sm:text-[15px] lg:text-[16px] text-slate-600 leading-relaxed max-w-xl mx-auto"
+        >
+          {{ 'BUSINESS_MODEL.SUBTITLE' | translate }}
+        </p>
+      </div>
 
-          @for (card of leftCards; track card.id) {
-            <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
-          }
-        </div>
-
-        <div class="flex flex-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
-          @for (card of rightCards; track card.id) {
-            <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
-          }
-        </div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 lg:grid-flow-col gap-4 sm:gap-5 lg:gap-6 xl:gap-7 items-stretch"
+      >
+        @for (card of cards; track card.id) {
+          <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: card }" />
+        }
       </div>
     </div>
   </div>
