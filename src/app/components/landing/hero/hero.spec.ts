@@ -50,10 +50,10 @@ describe('Hero', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the top badge with correct text', () => {
+  it('should not render the top badge above the title', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const badge = compiled.querySelector('.inline-flex');
-    expect(badge?.textContent).toContain('SOFICLOUD ENTERPRISE RESOURCE PLANNING');
+    const badge = compiled.querySelector('.border-\\[\\#93c5fd\\]\\/70');
+    expect(badge).toBeNull();
   });
 
   it('should render the H1 headline with Inter Extra Bold styling and highlighted text', () => {
@@ -142,7 +142,7 @@ describe('Hero', () => {
     expect(uiMockup).toBeTruthy();
   });
 
-  it('should include design enhancements like text-balance, play icon, and status dot', () => {
+  it('should include design enhancements like text-balance and play icon', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const h1 = compiled.querySelector('h1');
     expect(h1?.classList.contains('text-balance')).toBe(true);
@@ -152,10 +152,5 @@ describe('Hero', () => {
     expect(playIcon).toBeTruthy();
     expect(playIcon?.getAttribute('aria-hidden')).toBe('true');
     expect(playIcon?.classList.contains('sm:hidden')).toBe(false);
-
-    const badge = compiled.querySelector('.inline-flex');
-    const dot = badge?.querySelector('span.rounded-full');
-    expect(dot).toBeTruthy();
-    expect(dot?.classList.contains('sm:hidden')).toBe(true);
   });
 });
