@@ -74,4 +74,21 @@ describe('ScrollToTop', () => {
     expect(scrollToSpy).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
     scrollToSpy.mockRestore();
   });
+
+  it('should scroll even when app-business-control is present in the DOM', () => {
+    const businessControlMock = document.createElement('app-business-control');
+    document.body.appendChild(businessControlMock);
+
+    const heroMock = document.createElement('div');
+    heroMock.id = 'hero';
+    heroMock.scrollIntoView = () => {};
+    const scrollIntoViewSpy = vi.spyOn(heroMock, 'scrollIntoView');
+    document.body.appendChild(heroMock);
+
+    component.scrollToHero();
+    expect(scrollIntoViewSpy).toHaveBeenCalledWith({ behavior: 'smooth' });
+
+    document.body.removeChild(heroMock);
+    document.body.removeChild(businessControlMock);
+  });
 });

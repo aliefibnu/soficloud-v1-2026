@@ -280,4 +280,17 @@ describe('BusinessModel', () => {
       expect(btnEl?.classList.contains('tracking-normal')).toBe(true);
     });
   });
+
+  it('should render the white canvas with increased bottom corner radius classes', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const canvas = compiled.querySelector('#resources > div.w-full.bg-white');
+    expect(canvas).toBeTruthy();
+    expect(canvas?.classList.contains('rounded-b-[60px]')).toBe(true);
+    expect(canvas?.classList.contains('sm:rounded-b-[90px]')).toBe(true);
+    expect(canvas?.classList.contains('md:rounded-b-[120px]')).toBe(true);
+    expect(canvas?.classList.contains('lg:rounded-b-[150px]')).toBe(true);
+    expect(canvas?.classList.contains('xl:rounded-b-[160px]')).toBe(true);
+    expect(canvas?.classList.contains('overflow-hidden')).toBe(true);
+  });
 });

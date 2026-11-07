@@ -115,6 +115,21 @@ describe('WhyChooseUs', () => {
     expect(heading?.textContent).toContain('Mengapa Perusahaan Memilih SOFICloud?');
   });
 
+  it('should apply the linear gradient background and height classes to the top banner', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const banner = compiled.querySelector('#why-choose-us > div.pointer-events-none');
+    expect(banner).toBeTruthy();
+    expect(banner?.className).toContain(
+      'bg-[linear-gradient(180deg,#3874DB_-0.13%,#9CBBF0_65.48%,#C3D7F7_105.66%)]',
+    );
+    expect(banner?.className).toContain('bg-size-[100%_180%]');
+    expect(banner?.className).toContain('bg-top');
+    expect(banner?.className).toContain('h-56');
+    expect(banner?.className).toContain('sm:h-60');
+    expect(banner?.className).toContain('md:h-62');
+  });
+
   it('should render card images with 96x96 dimensions and enlarged size classes', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;

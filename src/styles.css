@@ -48,7 +48,13 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (min-width: 64rem) {
+  html {
+    scroll-padding-top: 6.5rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

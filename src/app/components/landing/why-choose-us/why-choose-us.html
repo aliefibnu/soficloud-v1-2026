@@ -1,11 +1,11 @@
 <section
   id="why-choose-us"
-  class="relative w-full bg-white py-section overflow-hidden select-none scroll-mt-20"
+  class="relative w-full bg-white py-section overflow-hidden select-none scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
   aria-labelledby="why-choose-us-heading"
 >
-  <div id="about" class="absolute -top-20" aria-hidden="true"></div>
+  <div id="about" class="absolute top-0" aria-hidden="true"></div>
   <div
-    class="absolute top-0 inset-x-0 h-75 sm:h-80 md:h-86 bg-linear-to-b from-[#336DEC] via-[#3572EF] 55% to-white pointer-events-none"
+    class="absolute top-0 inset-x-0 h-56 sm:h-60 md:h-62 bg-[linear-gradient(180deg,#3874DB_-0.13%,#9CBBF0_65.48%,#C3D7F7_105.66%)] bg-size-[100%_180%] bg-top pointer-events-none"
     aria-hidden="true"
   ></div>
 
@@ -39,15 +39,9 @@
         @let isCenter = offset === 0;
 
         <article
-          class="carousel-card absolute top-1/2 left-1/2 w-67.5 min-[420px]:w-75 sm:w-82.5 md:w-87.5 h-63.75 min-[420px]:h-65 sm:h-68.75 md:h-72.5 rounded-2xl p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center will-change-transform cursor-pointer"
-          [class.bg-white]="isCenter"
-          [class.border]="isCenter"
-          [class.border-slate-100/80]="isCenter"
+          class="carousel-card absolute top-1/2 left-1/2 w-67.5 min-[420px]:w-75 sm:w-82.5 md:w-87.5 h-63.75 min-[420px]:h-65 sm:h-68.75 md:h-72.5 rounded-2xl bg-white border border-slate-100/80 p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center will-change-transform cursor-pointer"
           [class.shadow-2xl]="isCenter"
           [class.shadow-slate-900/10]="isCenter"
-          [class.bg-white/85]="!isCenter"
-          [class.backdrop-blur-md]="!isCenter"
-          [class.border-white/50]="!isCenter"
           [style.transform]="getCardTransform(offset)"
           [style.opacity]="getCardOpacity(offset)"
           [style.zIndex]="getCardZIndex(offset)"
@@ -93,7 +87,9 @@
             </h3>
 
             <p
-              class="mt-1.5 sm:mt-2 font-dm-sans font-normal text-[11.5px] sm:text-xs md:text-[13px] text-slate-600 leading-relaxed text-center max-w-72.5"
+              class="mt-1.5 sm:mt-2 font-dm-sans font-normal text-[11.5px] sm:text-xs md:text-[13px] leading-relaxed text-center max-w-72.5 transition-colors duration-300"
+              [class.text-slate-600]="isCenter"
+              [class.text-slate-400/80]="!isCenter"
             >
               {{ 'WHY_CHOOSE_US.CARDS.' + card.id + '.DESCRIPTION' | translate }}
             </p>

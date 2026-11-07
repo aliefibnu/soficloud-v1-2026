@@ -184,19 +184,18 @@ export class WhyChooseUs {
       return 'translate(-50%, -50%) scale(1)';
     }
 
-    // Horizontal center distance: 385px creates a clear ~35px gap without overlap
-    const baseSpacing = 385;
-    const xTranslate = offset * baseSpacing;
-    const scale = Math.max(0.82, 1 - Math.abs(offset) * 0.06);
+    const abs = Math.abs(offset);
+    const sign = Math.sign(offset);
+    const xTranslate = abs === 1 ? sign * 335 : sign * 625 * (abs / 2);
+    const yTranslate = abs === 1 ? 14 : 22;
+    const scale = abs === 1 ? 0.85 : Math.max(0.72, 0.76 - (abs - 2) * 0.06);
 
-    return `translate(calc(-50% + ${xTranslate}px), -50%) scale(${scale})`;
+    return `translate(calc(-50% + ${xTranslate}px), calc(-50% + ${yTranslate}px)) scale(${scale})`;
   }
 
   getCardOpacity(offset: number): number {
     const abs = Math.abs(offset);
-    if (abs === 0) return 1;
-    if (abs === 1) return 0.7;
-    if (abs === 2) return 0.35;
+    if (abs <= 2) return 1;
     return 0;
   }
 

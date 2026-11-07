@@ -76,6 +76,12 @@ export class Navbar {
         if (isLanding) {
           if (this.isBrowser) {
             setTimeout(() => this.updateActiveSection(), 0);
+            const fragment = this.router.routerState.snapshot.root.fragment;
+            if (fragment) {
+              setTimeout(() => {
+                this.scrollToAnchorSmoothly(fragment);
+              }, 100);
+            }
           }
         } else {
           this.rawActiveLinkKey.set(null);
@@ -181,9 +187,41 @@ export class Navbar {
     this.isMobileLangSheetOpen.set(false);
   }
 
+  private getNavbarHeight(): number {
+    if (typeof document === 'undefined') return 88;
+    const header = this.elementRef.nativeElement.querySelector('header');
+    return header ? header.getBoundingClientRect().height : 88;
+  }
+
+  private scrollToAnchorSmoothly(anchorId: string): void {
+    if (typeof document === 'undefined' || typeof window === 'undefined') return;
+    const cleanId = anchorId.replace(/^#/, '').trim();
+    let target = document.getElementById(cleanId);
+    if (!target) {
+      if (cleanId === 'contact') {
+        target = document.getElementById('support');
+      } else if (cleanId === 'solutions') {
+        target = document.getElementById('business-model') || document.getElementById('resources');
+      }
+    }
+    if (target) {
+      const navHeight = this.getNavbarHeight();
+      const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+    }
+  }
+
   onNavClick(linkKey: string, href?: string, event?: Event): void {
     if (this.isLandingPage()) {
       this.rawActiveLinkKey.set(linkKey);
+      if (href) {
+        event?.preventDefault();
+        const cleanId = href.replace(/^#/, '').trim();
+        this.scrollToAnchorSmoothly(cleanId);
+        if (typeof window !== 'undefined' && window.history?.pushState) {
+          window.history.pushState(null, '', `#${cleanId}`);
+        }
+      }
     } else if (href) {
       event?.preventDefault();
       const cleanId = href.replace(/^#/, '').trim();
@@ -192,22 +230,16 @@ export class Navbar {
   }
 
   onMobileNavClick(linkKey: string, href?: string, event?: Event): void {
-    if (this.isLandingPage()) {
-      this.rawActiveLinkKey.set(linkKey);
-    } else if (href) {
-      event?.preventDefault();
-      const cleanId = href.replace(/^#/, '').trim();
-      this.router.navigate(['/'], { fragment: cleanId });
-    }
+    this.onNavClick(linkKey, href, event);
     this.closeMobileMenu();
   }
 
   onScheduleDemo(): void {
     if (this.isLandingPage()) {
       this.rawActiveLinkKey.set('HEADER.NAV.CONTACT');
-      if (typeof document !== 'undefined') {
-        const el = document.getElementById('support') || document.getElementById('contact');
-        el?.scrollIntoView({ behavior: 'smooth' });
+      this.scrollToAnchorSmoothly('contact');
+      if (typeof window !== 'undefined' && window.history?.pushState) {
+        window.history.pushState(null, '', '#contact');
       }
     } else {
       this.router.navigate(['/'], { fragment: 'contact' });
@@ -243,10 +275,12 @@ export class Navbar {
     const threshold = 140; // Reference reading line just beneath the navbar
     const featuresEl = document.getElementById('features');
     const businessModelEl =
-      document.getElementById('business-model') || document.getElementById('resources');
+      document.getElementById('solutions') ||
+      document.getElementById('business-model') ||
+      document.getElementById('resources');
     const customersEl = document.getElementById('customers');
     const pricingEl = document.getElementById('pricing');
-    const ctaEl = document.getElementById('support') || document.getElementById('contact');
+    const ctaEl = document.getElementById('contact') || document.getElementById('support');
 
     if (!featuresEl) {
       this.rawActiveLinkKey.set(null);
