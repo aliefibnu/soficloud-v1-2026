@@ -27,8 +27,9 @@ export interface VisibilityTab {
   imports: [TranslatePipe],
   templateUrl: './visibility-function.html',
   host: {
-    class: 'block w-full',
+    class: 'block w-full [overflow-anchor:none]',
     '(window:resize)': 'onWindowResize()',
+    '(window:scroll)': 'onWindowScroll()',
   },
 })
 export class VisibilityFunction implements AfterViewInit, OnDestroy {
@@ -37,9 +38,17 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
   readonly isBrowser = isPlatformBrowser(this.platformId);
 
+  readonly tabsSentinelRef = viewChild<ElementRef<HTMLElement>>('tabsSentinelRef');
   readonly tabsListRef = viewChild<ElementRef<HTMLElement>>('tabsListRef');
 
   private resizeObserver?: ResizeObserver;
+  readonly isSticky = signal<boolean>(false);
+  readonly isStickyTransitioning = signal<boolean>(false);
+  private scrollRafId: number | null = null;
+  private stickyTransitionRafId: number | null = null;
+  private stickyTransitionTimeout?: ReturnType<typeof setTimeout>;
+  private isUserClicking = false;
+  private userClickTimeout?: ReturnType<typeof setTimeout>;
 
   readonly tabs: readonly VisibilityTab[] = [
     {
@@ -80,8 +89,8 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
   ];
 
   readonly activeTabId = signal<string>('sales-performance');
-  readonly indicatorLeft = signal<number>(70);
-  readonly indicatorWidth = signal<number>(224);
+  readonly indicatorLeft = signal<number>(0);
+  readonly indicatorWidth = signal<number>(140);
 
   readonly activeTabIndex = computed<number>(() => {
     const idx = this.tabs.findIndex((t) => t.id === this.activeTabId());
@@ -140,22 +149,152 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
           this.updateIndicator();
         });
       }
+
+      this.checkStickyState();
+      this.updateActiveSectionByScroll();
     }
   }
 
   ngOnDestroy(): void {
     this.resizeObserver?.disconnect();
+    if (this.scrollRafId !== null && typeof window !== 'undefined') {
+      window.cancelAnimationFrame(this.scrollRafId);
+    }
+    if (this.stickyTransitionRafId !== null && typeof window !== 'undefined') {
+      window.cancelAnimationFrame(this.stickyTransitionRafId);
+    }
+    if (this.stickyTransitionTimeout) {
+      clearTimeout(this.stickyTransitionTimeout);
+    }
+    if (this.userClickTimeout) {
+      clearTimeout(this.userClickTimeout);
+    }
   }
 
   onWindowResize(): void {
     if (this.isBrowser) {
       this.updateIndicator();
+      this.checkStickyState();
+      this.updateActiveSectionByScroll();
+    }
+  }
+
+  onWindowScroll(): void {
+    if (this.isBrowser) {
+      this.checkStickyState();
+      if (this.scrollRafId !== null) return;
+      this.scrollRafId = window.requestAnimationFrame(() => {
+        this.scrollRafId = null;
+        this.updateActiveSectionByScroll();
+      });
+    }
+  }
+
+  private checkStickyState(): void {
+    if (!this.isBrowser) return;
+    const sentinelEl = this.tabsSentinelRef()?.nativeElement;
+    if (!sentinelEl) return;
+
+    const rect = sentinelEl.getBoundingClientRect();
+    const stickyTop = window.innerWidth >= 1024 ? 76 : window.innerWidth >= 640 ? 72 : 68;
+    // Apply a hysteresis band around stickyTop so subpixel scroll adjustments or trackpad jitter
+    // at the threshold cannot oscillate the sticky state back and forth.
+    const currentlySticky = this.isSticky();
+    const sticky = currentlySticky ? rect.top <= stickyTop + 5 : rect.top <= stickyTop + 1;
+
+    if (currentlySticky !== sticky) {
+      this.isSticky.set(sticky);
+      this.syncIndicatorDuringStickyTransition();
+    }
+  }
+
+  private syncIndicatorDuringStickyTransition(): void {
+    if (!this.isBrowser) return;
+    this.isStickyTransitioning.set(true);
+    this.updateIndicator();
+
+    if (this.stickyTransitionRafId !== null) {
+      window.cancelAnimationFrame(this.stickyTransitionRafId);
+      this.stickyTransitionRafId = null;
+    }
+    if (this.stickyTransitionTimeout) {
+      clearTimeout(this.stickyTransitionTimeout);
+    }
+
+    const step = (): void => {
+      this.updateIndicator();
+      if (this.isStickyTransitioning()) {
+        this.stickyTransitionRafId = window.requestAnimationFrame(step);
+      }
+    };
+    this.stickyTransitionRafId = window.requestAnimationFrame(step);
+
+    this.stickyTransitionTimeout = setTimeout(() => {
+      if (this.stickyTransitionRafId !== null) {
+        window.cancelAnimationFrame(this.stickyTransitionRafId);
+        this.stickyTransitionRafId = null;
+      }
+      this.isStickyTransitioning.set(false);
+      this.updateIndicator();
+    }, 320);
+  }
+
+  updateActiveSectionByScroll(): void {
+    if (!this.isBrowser || this.isUserClicking) return;
+
+    const windowH = window.innerHeight || 800;
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    const docH = document.documentElement.scrollHeight;
+
+    // Check if scrolled near the bottom of the document -> activate last tab
+    if (docH > windowH && scrollY + windowH >= docH - 80) {
+      const lastTabId = this.tabs[this.tabs.length - 1].id;
+      if (this.activeTabId() !== lastTabId) {
+        this.activeTabId.set(lastTabId);
+        this.updateIndicator();
+      }
+      return;
+    }
+
+    // Natural reading line: placed around 38% of the viewport (eye focus level below sticky headers)
+    const stickyHeaderOffset = window.innerWidth >= 1024 ? 135 : 120;
+    const readingLine = Math.max(stickyHeaderOffset + 60, Math.floor(windowH * 0.38));
+
+    // Find the section that covers the reading line
+    for (const tab of this.tabs) {
+      const el = document.getElementById(tab.id);
+      if (!el) continue;
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= readingLine && rect.bottom > readingLine) {
+        if (this.activeTabId() !== tab.id) {
+          this.activeTabId.set(tab.id);
+          this.updateIndicator();
+        }
+        return;
+      }
+    }
+
+    // Fallback: If above the first section's reading line, default to first tab
+    const firstEl = document.getElementById(this.tabs[0].id);
+    if (firstEl && firstEl.getBoundingClientRect().top > readingLine) {
+      if (this.activeTabId() !== this.tabs[0].id) {
+        this.activeTabId.set(this.tabs[0].id);
+        this.updateIndicator();
+      }
     }
   }
 
   selectTab(id: string): void {
     this.activeTabId.set(id);
     if (this.isBrowser) {
+      this.isUserClicking = true;
+      if (this.userClickTimeout) {
+        clearTimeout(this.userClickTimeout);
+      }
+      this.userClickTimeout = setTimeout(() => {
+        this.isUserClicking = false;
+      }, 700);
+
       this.updateIndicator();
       setTimeout(() => {
         this.updateIndicator();
@@ -187,19 +326,22 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
     const listEl = this.tabsListRef()?.nativeElement;
     if (!listEl) return;
 
+    const firstBtn = listEl.querySelector(
+      `[data-tab-id="${this.tabs[0].id}"]`,
+    ) as HTMLElement | null;
     const activeBtn = listEl.querySelector(
       `[data-tab-id="${this.activeTabId()}"]`,
     ) as HTMLElement | null;
 
-    if (activeBtn) {
-      const listRect = listEl.getBoundingClientRect();
+    if (activeBtn && firstBtn) {
+      const firstRect = firstBtn.getBoundingClientRect();
       const btnRect = activeBtn.getBoundingClientRect();
-      const rawLeft = btnRect.left - listRect.left;
+      // Calculate relative to the first button (0px at 0% first tab)
+      const rawLeft = btnRect.left - firstRect.left;
       const safeLeft = Math.max(0, rawLeft);
-      const safeWidth = Math.min(btnRect.width, Math.max(0, listRect.width - safeLeft));
 
       this.indicatorLeft.set(safeLeft);
-      this.indicatorWidth.set(safeWidth);
+      this.indicatorWidth.set(btnRect.width);
     }
   }
 

@@ -200,55 +200,226 @@ describe('BusinessRealtime VisibilityFunction', () => {
     expect(tabs[4].nativeElement.textContent.trim()).toBe('財務状況');
   });
 
-  it('should recalculate indicator dimensions when updateIndicator is called with mock bounding boxes', () => {
+  it('should recalculate indicator dimensions relative to the first button', () => {
     const listEl = component.tabsListRef()?.nativeElement;
     expect(listEl).toBeTruthy();
     if (!listEl) return;
 
-    // Mock bounding rects
-    vi.spyOn(listEl, 'getBoundingClientRect').mockReturnValue({
+    const firstBtn = listEl.querySelector(
+      `[data-tab-id="${component.tabs[0].id}"]`,
+    ) as HTMLElement;
+    expect(firstBtn).toBeTruthy();
+
+    // Mock first button rect
+    vi.spyOn(firstBtn, 'getBoundingClientRect').mockReturnValue({
       left: 100,
       top: 200,
-      width: 1000,
+      width: 85,
       height: 40,
-      right: 1100,
+      right: 185,
       bottom: 240,
       x: 100,
       y: 200,
       toJSON: () => {},
     });
 
-    const activeBtn = listEl.querySelector(
-      `[data-tab-id="${component.activeTabId()}"]`,
-    ) as HTMLElement;
-    expect(activeBtn).toBeTruthy();
+    // When first tab is active: 100 - 100 = 0px
+    component.activeTabId.set('sales-performance');
+    component.updateIndicator();
+    expect(component.indicatorLeft()).toBe(0);
+    expect(component.indicatorWidth()).toBe(85);
 
-    vi.spyOn(activeBtn, 'getBoundingClientRect').mockReturnValue({
-      left: 170,
+    // When second tab is active:
+    const secondBtn = listEl.querySelector(
+      `[data-tab-id="${component.tabs[1].id}"]`,
+    ) as HTMLElement;
+    expect(secondBtn).toBeTruthy();
+
+    vi.spyOn(secondBtn, 'getBoundingClientRect').mockReturnValue({
+      left: 210,
       top: 200,
-      width: 85,
+      width: 110,
       height: 40,
-      right: 255,
+      right: 320,
       bottom: 240,
-      x: 170,
+      x: 210,
       y: 200,
       toJSON: () => {},
     });
 
+    component.activeTabId.set('procurement-control');
     component.updateIndicator();
-
-    expect(component.indicatorLeft()).toBe(70); // 170 - 100 = 70
-    expect(component.indicatorWidth()).toBe(85); // 85px to cover the word
+    expect(component.indicatorLeft()).toBe(110); // 210 - 100 = 110
+    expect(component.indicatorWidth()).toBe(110);
   });
 
-  it('should disconnect resizeObserver on destroy', () => {
+  it('should toggle isSticky when sentinel crosses the sticky top offset threshold', () => {
+    component.isSticky.set(false);
+    expect(component.isSticky()).toBe(false);
+
+    const sentinelEl = component.tabsSentinelRef()?.nativeElement;
+    expect(sentinelEl).toBeTruthy();
+    if (!sentinelEl) return;
+
+    vi.spyOn(sentinelEl, 'getBoundingClientRect').mockReturnValue({
+      top: 60,
+      bottom: 60,
+      left: 0,
+      right: 1200,
+      width: 1200,
+      height: 0,
+      x: 0,
+      y: 60,
+      toJSON: () => {},
+    });
+
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(true);
+    fixture.detectChanges();
+
+    const islandEl = fixture.debugElement.query(By.css('.rounded-b-\\[24px\\]'));
+    expect(islandEl).toBeTruthy();
+  });
+
+  it('should apply hysteresis around the sticky threshold', () => {
+    vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(1280);
+    component.isSticky.set(false);
+    fixture.detectChanges();
+
+    const sentinelEl = component.tabsSentinelRef()?.nativeElement;
+    expect(sentinelEl).toBeTruthy();
+    if (!sentinelEl) return;
+
+    // At top = 79px on desktop (stickyTop = 76px), within hysteresis band (77 < 79 <= 81), should stay non-sticky
+    const rectSpy = vi.spyOn(sentinelEl, 'getBoundingClientRect').mockReturnValue({
+      top: 79,
+      bottom: 79,
+      left: 0,
+      right: 1280,
+      width: 1280,
+      height: 0,
+      x: 0,
+      y: 79,
+      toJSON: () => {},
+    });
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(false);
+
+    // At top = 76px (pinned at stickyTop <= 77), should become sticky
+    rectSpy.mockReturnValue({
+      top: 76,
+      bottom: 76,
+      left: 0,
+      right: 1280,
+      width: 1280,
+      height: 0,
+      x: 0,
+      y: 76,
+      toJSON: () => {},
+    });
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(true);
+    fixture.detectChanges();
+
+    // Slight subpixel/jitter upward to top = 80px (<= stickyTop + 5 = 81px) must NOT un-stick
+    rectSpy.mockReturnValue({
+      top: 80,
+      bottom: 80,
+      left: 0,
+      right: 1280,
+      width: 1280,
+      height: 0,
+      x: 0,
+      y: 80,
+      toJSON: () => {},
+    });
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(true);
+
+    // Scrolling above hysteresis band (top = 82px > 81px) should cleanly un-stick
+    rectSpy.mockReturnValue({
+      top: 82,
+      bottom: 82,
+      left: 0,
+      right: 1280,
+      width: 1280,
+      height: 0,
+      x: 0,
+      y: 82,
+      toJSON: () => {},
+    });
+    component.onWindowScroll();
+    expect(component.isSticky()).toBe(false);
+  });
+
+  it('should update active section by scroll position based on reading line', () => {
+    const sec1 = document.createElement('div');
+    sec1.id = 'sales-performance';
+    const sec2 = document.createElement('div');
+    sec2.id = 'procurement-control';
+
+    document.body.appendChild(sec1);
+    document.body.appendChild(sec2);
+
+    try {
+      // Simulate viewport height 1000 -> reading line = Math.max(135+60, 380) = 380px
+      vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(1000);
+      vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(1280);
+
+      // Section 2 spans across reading line: top = 200, bottom = 600
+      vi.spyOn(sec1, 'getBoundingClientRect').mockReturnValue({
+        top: -400,
+        bottom: 150,
+        left: 0,
+        right: 1000,
+        width: 1000,
+        height: 550,
+        x: 0,
+        y: -400,
+        toJSON: () => {},
+      });
+
+      vi.spyOn(sec2, 'getBoundingClientRect').mockReturnValue({
+        top: 150,
+        bottom: 700,
+        left: 0,
+        right: 1000,
+        width: 1000,
+        height: 550,
+        x: 0,
+        y: 150,
+        toJSON: () => {},
+      });
+
+      component.updateActiveSectionByScroll();
+      expect(component.activeTabId()).toBe('procurement-control');
+    } finally {
+      document.body.removeChild(sec1);
+      document.body.removeChild(sec2);
+    }
+  });
+
+  it('should disconnect resizeObserver and cancel active RAFs and timers on destroy', () => {
     const disconnectSpy = vi.fn();
     (component as unknown as { resizeObserver?: { disconnect: () => void } }).resizeObserver = {
       disconnect: disconnectSpy,
     };
 
+    const cancelRafSpy = vi.spyOn(window, 'cancelAnimationFrame');
+    const clearTimeoutSpy = vi.spyOn(window, 'clearTimeout');
+
+    (component as unknown as { scrollRafId: number }).scrollRafId = 123;
+    (component as unknown as { stickyTransitionRafId: number }).stickyTransitionRafId = 456;
+    (component as unknown as { stickyTransitionTimeout: number }).stickyTransitionTimeout = 789;
+    (component as unknown as { userClickTimeout: number }).userClickTimeout = 101;
+
     component.ngOnDestroy();
+
     expect(disconnectSpy).toHaveBeenCalled();
+    expect(cancelRafSpy).toHaveBeenCalledWith(123);
+    expect(cancelRafSpy).toHaveBeenCalledWith(456);
+    expect(clearTimeoutSpy).toHaveBeenCalledWith(789);
+    expect(clearTimeoutSpy).toHaveBeenCalledWith(101);
   });
 
   it('should attempt smooth scroll to section and update URL hash when tab is selected', () => {
