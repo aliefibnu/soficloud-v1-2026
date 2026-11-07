@@ -27,9 +27,17 @@ export class Hero {
   onAbout(): void {
     this.aboutClick.emit();
     this.contactClick.emit();
-    if (typeof document !== 'undefined') {
+    if (typeof document !== 'undefined' && typeof window !== 'undefined') {
       const target = document.getElementById('features') || document.getElementById('why-choose-us');
-      target?.scrollIntoView({ behavior: 'smooth' });
+      if (target) {
+        const header = document.querySelector('app-navbar header');
+        const navHeight = header ? header.getBoundingClientRect().height : 88;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+        if (window.history?.pushState) {
+          window.history.pushState(null, '', '#features');
+        }
+      }
     }
   }
 }
