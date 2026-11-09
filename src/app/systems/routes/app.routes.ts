@@ -19,4 +19,9 @@ export const routes: Routes = [
         (m) => m.ConnectedProcess,
       ),
   },
+  {
+    path: 'schedule-demo',
+    loadComponent: () =>
+      import('../../pages/schedule-demo/schedule-demo').then((m) => m.ScheduleDemo),
+  },
 ];

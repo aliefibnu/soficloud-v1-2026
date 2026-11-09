@@ -962,5 +962,60 @@
       "TITLE": "Connect the Process, Understand the Results",
       "DESCRIPTION": "Discuss transaction workflows, control checkpoints, and reporting requirements for your business with the SOFICloud team."
     }
+  },
+  "SCHEDULE_DEMO": {
+    "PAGE_TITLE": "Schedule a Demo - SOFICloud ERP",
+    "HERO": {
+      "TITLE": "Let's Find the Right Solution for Your Business",
+      "SUBTITLE": "Discover SOFICloud features and capabilities through a tailored demo built around your company's needs."
+    },
+    "CONTACT_INFO": {
+      "COMPANY_NAME": "PT Inforsys Indonesia",
+      "PHONE_LABEL": "Phone Number",
+      "PHONE_VALUE": "+62 778 416 0250",
+      "WHATSAPP_LABEL": "WhatsApp",
+      "WHATSAPP_VALUE": "+62 811 7774 744",
+      "EMAIL_LABEL": "Email",
+      "EMAIL_VALUE": "hello@inforsys.co.id",
+      "HOURS_LABEL": "Operating Hours",
+      "HOURS_DAYS": "Monday – Friday",
+      "HOURS_TIME": "08:00 – 17:00 WIB",
+      "ADDRESS_LABEL": "Office Address",
+      "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+      "ADDRESS_LINE2": "Batam, Kepulauan Riau 29464,",
+      "ADDRESS_LINE3": "Indonesia"
+    },
+    "FORM": {
+      "TITLE": "Contact Us",
+      "SUBTITLE": "Simply fill out the form below and we will get back to you shortly.",
+      "FIELDS": {
+        "NAME_PLACEHOLDER": "Full Name",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PHONE_PLACEHOLDER": "Phone Number",
+        "COMPANY_PLACEHOLDER": "Company Name",
+        "INDUSTRY_PLACEHOLDER": "Select Industry",
+        "POSITION_PLACEHOLDER": "Your Position"
+      },
+      "INDUSTRIES": {
+        "MANUFACTURING": "Manufacturing",
+        "TRADING": "Trading & Industry",
+        "CONSTRUCTION": "Construction",
+        "SERVICES": "Services",
+        "OTHERS": "Others"
+      },
+      "ERRORS": {
+        "NAME_REQUIRED": "Full name is required",
+        "EMAIL_INVALID": "Invalid email address format",
+        "PHONE_INVALID": "Invalid phone number format",
+        "COMPANY_REQUIRED": "Company name is required",
+        "INDUSTRY_REQUIRED": "Please select your company's industry",
+        "POSITION_REQUIRED": "Position is required"
+      },
+      "SUBMIT_BUTTON": "Schedule Demo"
+    },
+    "MAP": {
+      "TITLE": "PT Inforsys Indonesia Office Location Map",
+      "ARIA_LABEL": "Google Maps showing PT Inforsys Indonesia office location in Batam"
+    }
   }
 }

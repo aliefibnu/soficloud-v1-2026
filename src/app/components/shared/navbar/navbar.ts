@@ -55,7 +55,13 @@ export class Navbar {
     return path === '' || path === '/';
   }
 
+  private isScheduleDemoUrl(url: string): boolean {
+    const path = url.split(/[?#]/)[0];
+    return path === '/schedule-demo';
+  }
+
   readonly isLandingPage = signal(this.isLandingUrl(this.router.url));
+  readonly isScheduleDemoPage = signal(this.isScheduleDemoUrl(this.router.url));
   private readonly rawActiveLinkKey = signal<string | null>(null);
   readonly activeLinkKey = computed(() => (this.isLandingPage() ? this.rawActiveLinkKey() : null));
   readonly isLangMenuOpen = signal(false);
@@ -72,10 +78,22 @@ export class Navbar {
       )
       .subscribe((e) => {
         const isLanding = this.isLandingUrl(e.urlAfterRedirects);
+        const isScheduleDemo = this.isScheduleDemoUrl(e.urlAfterRedirects);
         this.isLandingPage.set(isLanding);
+        this.isScheduleDemoPage.set(isScheduleDemo);
         if (isLanding) {
           if (this.isBrowser) {
             setTimeout(() => this.updateActiveSection(), 0);
+            const fragment = this.router.routerState.snapshot.root.fragment;
+            if (fragment) {
+              setTimeout(() => {
+                this.scrollToAnchorSmoothly(fragment);
+              }, 100);
+            }
+          }
+        } else if (isScheduleDemo) {
+          this.rawActiveLinkKey.set(null);
+          if (this.isBrowser) {
             const fragment = this.router.routerState.snapshot.root.fragment;
             if (fragment) {
               setTimeout(() => {
@@ -235,14 +253,13 @@ export class Navbar {
   }
 
   onScheduleDemo(): void {
-    if (this.isLandingPage()) {
-      this.rawActiveLinkKey.set('HEADER.NAV.CONTACT');
-      this.scrollToAnchorSmoothly('contact');
+    if (this.isScheduleDemoPage()) {
+      this.scrollToAnchorSmoothly('schedule-demo-form');
       if (typeof window !== 'undefined' && window.history?.pushState) {
-        window.history.pushState(null, '', '#contact');
+        window.history.pushState(null, '', '#schedule-demo-form');
       }
     } else {
-      this.router.navigate(['/'], { fragment: 'contact' });
+      this.router.navigate(['/schedule-demo']);
     }
   }
 

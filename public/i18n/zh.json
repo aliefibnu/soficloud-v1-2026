@@ -962,5 +962,60 @@
       "TITLE": "贯通业务流程 洞悉经营成果",
       "DESCRIPTION": "与 SOFICloud 专家团队深入探讨适合您企业的业务交易流、关键控制点与报表需求。"
     }
+  },
+  "SCHEDULE_DEMO": {
+    "PAGE_TITLE": "预约演示 - SOFICloud ERP",
+    "HERO": {
+      "TITLE": "让我们为您的业务寻找最佳解决方案",
+      "SUBTITLE": "通过针对您公司需求量身定制的演示，深入了解 SOFICloud 的功能与特性。"
+    },
+    "CONTACT_INFO": {
+      "COMPANY_NAME": "PT Inforsys Indonesia",
+      "PHONE_LABEL": "电话号码",
+      "PHONE_VALUE": "+62 778 416 0250",
+      "WHATSAPP_LABEL": "WhatsApp",
+      "WHATSAPP_VALUE": "+62 811 7774 744",
+      "EMAIL_LABEL": "电子邮箱",
+      "EMAIL_VALUE": "hello@inforsys.co.id",
+      "HOURS_LABEL": "营业时间",
+      "HOURS_DAYS": "周一至周五",
+      "HOURS_TIME": "08:00 – 17:00 WIB",
+      "ADDRESS_LABEL": "办公地址",
+      "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+      "ADDRESS_LINE2": "Batam, Kepulauan Riau 29464,",
+      "ADDRESS_LINE3": "Indonesia"
+    },
+    "FORM": {
+      "TITLE": "联系我们",
+      "SUBTITLE": "填写下方表格，我们将尽快与您取得联系。",
+      "FIELDS": {
+        "NAME_PLACEHOLDER": "姓名",
+        "EMAIL_PLACEHOLDER": "电子邮箱",
+        "PHONE_PLACEHOLDER": "电话号码",
+        "COMPANY_PLACEHOLDER": "公司名称",
+        "INDUSTRY_PLACEHOLDER": "选择行业",
+        "POSITION_PLACEHOLDER": "您的职位"
+      },
+      "INDUSTRIES": {
+        "MANUFACTURING": "制造业",
+        "TRADING": "贸易与工业",
+        "CONSTRUCTION": "建筑工程",
+        "SERVICES": "服务业",
+        "OTHERS": "其他"
+      },
+      "ERRORS": {
+        "NAME_REQUIRED": "姓名不能为空",
+        "EMAIL_INVALID": "电子邮箱格式不正确",
+        "PHONE_INVALID": "电话号码格式不正确",
+        "COMPANY_REQUIRED": "公司名称不能为空",
+        "INDUSTRY_REQUIRED": "请选择您的行业",
+        "POSITION_REQUIRED": "职位不能为空"
+      },
+      "SUBMIT_BUTTON": "预约演示"
+    },
+    "MAP": {
+      "TITLE": "PT Inforsys Indonesia 办公地点地图",
+      "ARIA_LABEL": "显示位于巴淡岛的 PT Inforsys Indonesia 办公室位置的谷歌地图"
+    }
   }
 }
