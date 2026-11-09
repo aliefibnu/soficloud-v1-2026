@@ -64,6 +64,14 @@ export interface ProjectKpiMetric {
   imports: [TranslatePipe, NgOptimizedImage, RouterLink],
   templateUrl: './business-control.html',
   styles: `
+    .business-cta-btn {
+      background: linear-gradient(90deg, #1E37E1 0%, #1C7DD8 69.97%, #6694EB 100%);
+    }
+
+    .business-cta-btn:hover {
+      filter: brightness(1.06);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .carousel-slide,
       .carousel-text {
