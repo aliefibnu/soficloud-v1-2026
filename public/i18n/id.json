@@ -111,7 +111,7 @@
         "MARK_READ": "Tandai sudah dibaca",
         "ALERT_1_TITLE": "5 Pesanan Berisiko mengalami keterlambatan pengiriman",
         "ALERT_1_TIME": "10 mnt lalu",
-        "ALERT_2_TITLE": "Anggaran OPEX telah mencapai ambang batas 80,4%",
+        "ALERT_2_TITLE": "Rencana Produksi telah mencapai ambang batas 80,4%",
         "ALERT_2_TIME": "1 jam lalu",
         "ALERT_3_TITLE": "Faktur Jatuh Tempo Rp 2,1 Miliar menunggu konfirmasi",
         "ALERT_3_TIME": "3 jam lalu"
@@ -168,7 +168,7 @@
         "LIQUIDITY": {
           "TAG": "LIQUIDITY",
           "TITLE": "Cash & Bank Balance",
-          "PROJECTED": "Proyeksi akhir bulan: {{amount}}"
+          "PROJECTED": "Est. akhir bulan: {{amount}}"
         }
       },
       "MOBILE_TABS": {

@@ -111,7 +111,7 @@
         "MARK_READ": "标为已读",
         "ALERT_1_TITLE": "5 笔订单面临发货延迟风险",
         "ALERT_1_TIME": "10分钟前",
-        "ALERT_2_TITLE": "OPEX 预算达到 80.4% 阈值",
+        "ALERT_2_TITLE": "生产计划达到 80.4% 目标",
         "ALERT_2_TIME": "1小时前",
         "ALERT_3_TITLE": "21 亿印尼盾到期发票等待确认",
         "ALERT_3_TIME": "3小时前"

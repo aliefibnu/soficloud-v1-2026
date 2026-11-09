@@ -111,7 +111,7 @@
         "MARK_READ": "모두 읽음으로 표시",
         "ALERT_1_TITLE": "배송 지연 위험 주문 5건",
         "ALERT_1_TIME": "10분 전",
-        "ALERT_2_TITLE": "OPEX 예산 80.4% 임계값 도달",
+        "ALERT_2_TITLE": "생산 계획 80.4% 목표 도달",
         "ALERT_2_TIME": "1시간 전",
         "ALERT_3_TITLE": "21억 루피아 만기 인보이스 승인 대기 중",
         "ALERT_3_TIME": "3시간 전"

@@ -66,7 +66,7 @@ describe('Hero', () => {
     expect(h1?.textContent).toContain('Bisnis Yang');
     expect(h1?.textContent).toContain('Terus Bertumbuh');
 
-    const highlightedSpan = h1?.querySelector('.text-\\[\\#1d64ec\\]');
+    const highlightedSpan = h1?.querySelector('.text-\\[\\#1C73E8\\]');
     expect(highlightedSpan?.textContent).toContain('Terus Bertumbuh');
   });
 

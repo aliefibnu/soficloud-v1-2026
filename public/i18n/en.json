@@ -111,7 +111,7 @@
         "MARK_READ": "Mark as read",
         "ALERT_1_TITLE": "5 Orders at Risk of shipping delay",
         "ALERT_1_TIME": "10m ago",
-        "ALERT_2_TITLE": "OPEX Budget reached 80.4% threshold",
+        "ALERT_2_TITLE": "Production Plan reached 80.4% threshold",
         "ALERT_2_TIME": "1h ago",
         "ALERT_3_TITLE": "Rp 2.1B Due Invoices awaiting confirmation",
         "ALERT_3_TIME": "3h ago"
@@ -168,7 +168,7 @@
         "LIQUIDITY": {
           "TAG": "LIQUIDITY",
           "TITLE": "Cash & Bank Balance",
-          "PROJECTED": "Project month-end: {{amount}}"
+          "PROJECTED": "Est. month-end: {{amount}}"
         }
       },
       "MOBILE_TABS": {
