@@ -35,6 +35,7 @@ describe('Customers', () => {
           SUPPORT_TITLE: 'Dukungan Purna Jual',
           SUPPORT_DESC: 'Dukungan berkelanjutan setelah implementasi.',
         },
+        CTA_MORE: 'Lihat selengkapnya',
         CTA_EXPERIENCE: 'Lihat Pengalaman Bisnis',
         ARIA: {
           SECTION: 'Pelanggan SOFICloud',
@@ -64,6 +65,7 @@ describe('Customers', () => {
     expect(compiled.textContent).toContain('50+');
     expect(compiled.textContent).toContain('Pelanggan Kami');
     expect(compiled.textContent).toContain('Berbagai Industri');
+    expect(compiled.textContent).toContain('Lihat selengkapnya');
     expect(compiled.textContent).toContain('Lihat Pengalaman Bisnis');
   });
 
