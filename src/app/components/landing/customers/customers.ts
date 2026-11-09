@@ -127,7 +127,7 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
     .pulse-bottom-horizontal {
       stroke-dasharray: 80 1200;
       stroke-dashoffset: 80;
-      animation: pulseFlowBottomHoriz 3s linear infinite;
+      animation: pulseFlowTopHoriz 3s linear infinite;
     }
 
     @keyframes pulseFlowTopHoriz {
@@ -207,26 +207,6 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       100% {
         opacity: 0;
         stroke-dashoffset: -305;
-      }
-    }
-
-    @keyframes pulseFlowBottomHoriz {
-      0% {
-        opacity: 0;
-        stroke-dashoffset: 80;
-      }
-      8% {
-        opacity: 1;
-      }
-      88% {
-        opacity: 1;
-      }
-      96% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 0;
-        stroke-dashoffset: -710;
       }
     }
 
@@ -346,23 +326,40 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       );
     }
 
+    .cta-experience-btn,
+    .cta-more-btn {
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: all 0.25s ease-out;
+    }
+
     .cta-experience-btn {
       width: 200.01px;
       height: 40.82px;
-      border-radius: 8px;
-      border: 1px solid transparent;
       padding: 10.91px;
       gap: 7.27px;
       background:
         linear-gradient(#ffffff, #ffffff) padding-box,
         linear-gradient(90deg, #1E37E1 0%, #1C7DD8 50%, #6694EB 100%) border-box;
-      transition: all 0.25s ease-out;
     }
 
     .cta-experience-btn:hover {
       background:
         linear-gradient(#F0F5FE, #F0F5FE) padding-box,
         linear-gradient(90deg, #1E37E1 0%, #1C7DD8 50%, #6694EB 100%) border-box;
+      box-shadow: 0 4px 14px rgba(28, 115, 232, 0.12);
+    }
+
+    .cta-more-btn {
+      background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(90deg, #1E37E1 0%, #1C7DD8 69.97%, #6694EB 100%) border-box;
+    }
+
+    .cta-more-btn:hover {
+      background:
+        linear-gradient(#F0F5FE, #F0F5FE) padding-box,
+        linear-gradient(90deg, #1E37E1 0%, #1C7DD8 69.97%, #6694EB 100%) border-box;
       box-shadow: 0 4px 14px rgba(28, 115, 232, 0.12);
     }
 
