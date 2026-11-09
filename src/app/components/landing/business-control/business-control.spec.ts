@@ -29,6 +29,8 @@ describe('BusinessControl', () => {
     translateService.setTranslation('id', {
       BUSINESS_CONTROL: {
         HEADER_TITLE: 'Kendalikan Bisnis Dari Satu Tempat',
+        HEADER_SUBTITLE:
+          'Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan dapat ditelusuri kapan saja',
         CARD_TITLE: 'Real-Time Business Control',
         CARD_BADGE: 'REAL-TIME',
         CHART_TITLE: 'INCOME AND EXPENSIVE (IDR)',
@@ -77,13 +79,16 @@ describe('BusinessControl', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the header title without a subtitle', () => {
+  it('should render the header title and description', () => {
     const heading = fixture.debugElement.nativeElement.querySelector('h2');
     expect(heading).toBeTruthy();
     expect(heading.textContent).toContain('Kendalikan Bisnis Dari Satu Tempat');
 
-    const headerContainer = heading.parentElement;
-    expect(headerContainer.querySelector('p')).toBeNull();
+    const subtitle = fixture.debugElement.nativeElement.querySelector('.header-subtitle');
+    expect(subtitle).toBeTruthy();
+    expect(subtitle.textContent).toContain(
+      'Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan dapat ditelusuri kapan saja'
+    );
   });
 
   it('should toggle expense visibility correctly', () => {
