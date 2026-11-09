@@ -111,7 +111,7 @@
         "MARK_READ": "既読にする",
         "ALERT_1_TITLE": "配送遅延リスクのある注文が5件あります",
         "ALERT_1_TIME": "10分前",
-        "ALERT_2_TITLE": "OPEX予算が80.4%のしきい値に達しました",
+        "ALERT_2_TITLE": "生産計画が80.4%の目標に達しました",
         "ALERT_2_TIME": "1時間前",
         "ALERT_3_TITLE": "21億ルピアの期日請求書が確認待ちです",
         "ALERT_3_TIME": "3時間前"

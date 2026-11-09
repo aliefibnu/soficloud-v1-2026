@@ -171,10 +171,37 @@ const BASE_CHART_RAW_MONTHS: readonly RawMonthPoint[] = [
   {
     monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JUNE',
     shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.JUN',
-    revenueNumber: 4.23,
-    salesOrdersNumber: 2.69,
-    revenue: 'Rp 4,230,000,000.-',
-    salesOrders: 'Rp 2,690,000,000.-',
+    revenueNumber: 5.8,
+    salesOrdersNumber: 4.53,
+    revenue: 'Rp 5,800,000,000.-',
+    salesOrders: 'Rp 4,530,000,000.-',
+  },
+];
+
+const CANONICAL_Q3_MONTHS: readonly RawMonthPoint[] = [
+  {
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JULY',
+    shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.JUL',
+    revenueNumber: 6.54,
+    salesOrdersNumber: 4.9,
+    revenue: 'Rp 6,540,000,000.-',
+    salesOrders: 'Rp 4,900,000,000.-',
+  },
+  {
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.AUGUST',
+    shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.AUG',
+    revenueNumber: 7.12,
+    salesOrdersNumber: 5.3,
+    revenue: 'Rp 7,120,000,000.-',
+    salesOrders: 'Rp 5,300,000,000.-',
+  },
+  {
+    monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.SEPTEMBER',
+    shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.SEP',
+    revenueNumber: 8.2,
+    salesOrdersNumber: 5.8,
+    revenue: 'Rp 8,200,000,000.-',
+    salesOrders: 'Rp 5,800,000,000.-',
   },
 ];
 
@@ -312,20 +339,11 @@ export class UiMockup {
         sparklineSecondaryPath:
           'M 0,20 C 15,23 25,15 40,19 C 55,24 65,15 80,20 C 95,24 105,16 120,20 C 135,24 145,16 158,20',
       },
-      dynamicPoints: [
-        {
-          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JULY',
-          shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.JUL',
-          revenueNumber: 6.54,
-          salesOrdersNumber: 5.38,
-          revenue: 'Rp 6,540,000,000.-',
-          salesOrders: 'Rp 5,380,000,000.-',
-        },
-      ],
+      dynamicPoints: [CANONICAL_Q3_MONTHS[0]],
       highlightsData: {
         outstandingOrders: 'Rp 2,750,000,000.-',
         opexBudget: 'Rp 2,450,000,000.-',
-        cashCoverageMonths: '2.1',
+        cashCoverageMonths: '2.4',
         productionPlan: '11,200 (76.8%)',
         ordersAtRiskCount: 3,
       },
@@ -349,7 +367,7 @@ export class UiMockup {
       },
       sales: {
         orders: 'Rp 5,300,000,000.-',
-        growthRate: '+14.5%',
+        growthRate: '+8.2%',
         bars: [35, 55, 50, 70, 65, 85],
       },
       liquidity: {
@@ -360,28 +378,11 @@ export class UiMockup {
         sparklineSecondaryPath:
           'M 0,18 C 15,21 25,12 40,17 C 55,22 65,12 80,18 C 95,22 105,13 120,18 C 135,22 145,13 158,18',
       },
-      dynamicPoints: [
-        {
-          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JULY',
-          shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.JUL',
-          revenueNumber: 7.12,
-          salesOrdersNumber: 5.77,
-          revenue: 'Rp 7,120,000,000.-',
-          salesOrders: 'Rp 5,770,000,000.-',
-        },
-        {
-          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.AUGUST',
-          shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.AUG',
-          revenueNumber: 5.58,
-          salesOrdersNumber: 4.42,
-          revenue: 'Rp 5,580,000,000.-',
-          salesOrders: 'Rp 4,420,000,000.-',
-        },
-      ],
+      dynamicPoints: [CANONICAL_Q3_MONTHS[0], CANONICAL_Q3_MONTHS[1]],
       highlightsData: {
         outstandingOrders: 'Rp 2,980,000,000.-',
         opexBudget: 'Rp 2,620,000,000.-',
-        cashCoverageMonths: '2.2',
+        cashCoverageMonths: '2.4',
         productionPlan: '11,900 (78.5%)',
         ordersAtRiskCount: 4,
       },
@@ -405,7 +406,7 @@ export class UiMockup {
       },
       sales: {
         orders: 'Rp 5,800,000,000.-',
-        growthRate: '+18.4%',
+        growthRate: '+9.4%',
         bars: [35, 65, 55, 85, 75, 100],
       },
       liquidity: {
@@ -416,32 +417,7 @@ export class UiMockup {
         sparklineSecondaryPath:
           'M 0,18 C 15,21 25,10 40,16 C 55,22 65,10 80,17 C 95,23 105,11 120,17 C 135,22 145,11 158,18',
       },
-      dynamicPoints: [
-        {
-          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.JULY',
-          shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.JUL',
-          revenueNumber: 7.5,
-          salesOrdersNumber: 6.06,
-          revenue: 'Rp 7,500,000,000.-',
-          salesOrders: 'Rp 6,060,000,000.-',
-        },
-        {
-          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.AUGUST',
-          shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.AUG',
-          revenueNumber: 5.96,
-          salesOrdersNumber: 4.81,
-          revenue: 'Rp 5,960,000,000.-',
-          salesOrders: 'Rp 4,810,000,000.-',
-        },
-        {
-          monthKey: 'HERO.UI_MOCKUP.MONTHS_FULL.SEPTEMBER',
-          shortMonthKey: 'HERO.UI_MOCKUP.MONTHS.SEP',
-          revenueNumber: 8.2,
-          salesOrdersNumber: 5.8,
-          revenue: 'Rp 8,200,000,000.-',
-          salesOrders: 'Rp 5,800,000,000.-',
-        },
-      ],
+      dynamicPoints: [CANONICAL_Q3_MONTHS[0], CANONICAL_Q3_MONTHS[1], CANONICAL_Q3_MONTHS[2]],
       highlightsData: {
         outstandingOrders: 'Rp 3,250,000,000.-',
         opexBudget: 'Rp 2,800,000,000.-',

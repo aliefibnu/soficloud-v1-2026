@@ -19,7 +19,7 @@ const EN_TRANSLATIONS = {
         MARK_READ: 'Mark as read',
         ALERT_1_TITLE: '5 Orders at Risk of shipping delay',
         ALERT_1_TIME: '10m ago',
-        ALERT_2_TITLE: 'OPEX Budget reached 80.4% threshold',
+        ALERT_2_TITLE: 'Production Plan reached 80.4% threshold',
         ALERT_2_TIME: '1h ago',
         ALERT_3_TITLE: 'Rp 2.1B Due Invoices awaiting confirmation',
         ALERT_3_TIME: '3h ago',
@@ -77,7 +77,7 @@ const EN_TRANSLATIONS = {
         LIQUIDITY: {
           TAG: 'LIQUIDITY',
           TITLE: 'Cash & Bank Balance',
-          PROJECTED: 'Project month-end: {{amount}}',
+          PROJECTED: 'Est. month-end: {{amount}}',
         },
       },
       MOBILE_TABS: {
@@ -267,13 +267,13 @@ describe('UiMockup', () => {
     expect(compiled.textContent).toContain('SALES');
     expect(compiled.textContent).toContain('Sales Orders This Month');
     expect(compiled.textContent).toContain('Rp 5,800,000,000.-');
-    expect(compiled.textContent).toContain('+18.4% vs Last month');
+    expect(compiled.textContent).toContain('+9.4% vs Last month');
 
     // Card 4: Liquidity
     expect(compiled.textContent).toContain('LIQUIDITY');
     expect(compiled.textContent).toContain('Cash & Bank Balance');
     expect(compiled.textContent).toContain('Rp 6,720,000,000.-');
-    expect(compiled.textContent).toContain('Project month-end: Rp 5,150,000,000.-');
+    expect(compiled.textContent).toContain('Est. month-end: Rp 5,150,000,000.-');
   });
 
   it('should render 12-Month Sales Trend section with axes and legend', () => {
@@ -931,6 +931,59 @@ describe('UiMockup', () => {
     const moAnim = compiled.querySelector('.animate-floating-card-bottom-right');
     expect(moAnim).toBeTruthy();
     expect(moAnim?.querySelector('[aria-label="Budget utilization execution readiness"]')).toBeTruthy();
+  });
+
+  it('should maintain strict consistency between sales KPI cards and chart sales order points across all 3 months without historical data mutation', () => {
+    // 1. September View (default)
+    expect(component.selectedMonthIndex()).toBe(2);
+    expect(component.currentData().sales.orders).toBe('Rp 5,800,000,000.-');
+    let pts = component.chartPointsData();
+    expect(pts.length).toBe(12);
+
+    const julInSep = pts[9];
+    const augInSep = pts[10];
+    const sepInSep = pts[11];
+
+    expect(julInSep.salesOrders).toBe('Rp 4,900,000,000.-');
+    expect(julInSep.revenue).toBe('Rp 6,540,000,000.-');
+    expect(augInSep.salesOrders).toBe('Rp 5,300,000,000.-');
+    expect(augInSep.revenue).toBe('Rp 7,120,000,000.-');
+    expect(sepInSep.salesOrders).toBe('Rp 5,800,000,000.-');
+    expect(sepInSep.revenue).toBe('Rp 8,200,000,000.-');
+    expect(component.currentData().sales.orders).toBe(sepInSep.salesOrders);
+
+    // 2. August View
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(1);
+    expect(component.currentData().sales.orders).toBe('Rp 5,300,000,000.-');
+    pts = component.chartPointsData();
+    expect(pts.length).toBe(11);
+
+    const julInAug = pts[9];
+    const augInAug = pts[10];
+
+    // July must be immutable and identical to when viewed in September
+    expect(julInAug.salesOrders).toBe(julInSep.salesOrders);
+    expect(julInAug.revenue).toBe(julInSep.revenue);
+    // August must match August Sales KPI card
+    expect(augInAug.salesOrders).toBe('Rp 5,300,000,000.-');
+    expect(augInAug.revenue).toBe('Rp 7,120,000,000.-');
+    expect(component.currentData().sales.orders).toBe(augInAug.salesOrders);
+
+    // 3. July View
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(component.selectedMonthIndex()).toBe(0);
+    expect(component.currentData().sales.orders).toBe('Rp 4,900,000,000.-');
+    pts = component.chartPointsData();
+    expect(pts.length).toBe(10);
+
+    const julInJul = pts[9];
+    // July must be immutable and match July Sales KPI card
+    expect(julInJul.salesOrders).toBe(julInSep.salesOrders);
+    expect(julInJul.revenue).toBe(julInSep.revenue);
+    expect(component.currentData().sales.orders).toBe(julInJul.salesOrders);
   });
 });
 
