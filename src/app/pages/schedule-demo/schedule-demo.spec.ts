@@ -91,4 +91,22 @@ describe('ScheduleDemo', () => {
       window.location.hash = '';
     }
   });
+
+  it('should have responsive negative margin classes on host to underlap the navbar', () => {
+    const hostEl = fixture.nativeElement as HTMLElement;
+    expect(hostEl.classList.contains('-mt-[67px]')).toBe(true);
+    expect(hostEl.classList.contains('sm:-mt-[73px]')).toBe(true);
+    expect(hostEl.classList.contains('md:-mt-[77px]')).toBe(true);
+  });
+
+  it('should have responsive top padding classes on outer wrapper accounting for navbar height', () => {
+    const wrapper = fixture.nativeElement.querySelector('.relative.w-full');
+    expect(wrapper?.classList.contains('pt-[99px]')).toBe(true);
+    expect(wrapper?.classList.contains('sm:pt-[121px]')).toBe(true);
+    expect(wrapper?.classList.contains('md:pt-[125px]')).toBe(true);
+    expect(wrapper?.classList.contains('lg:pt-[141px]')).toBe(true);
+    expect(wrapper?.classList.contains('pb-8')).toBe(true);
+    expect(wrapper?.classList.contains('sm:pb-12')).toBe(true);
+    expect(wrapper?.classList.contains('lg:pb-16')).toBe(true);
+  });
 });
