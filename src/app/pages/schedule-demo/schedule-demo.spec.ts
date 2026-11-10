@@ -28,6 +28,8 @@ describe('ScheduleDemo', () => {
 
   afterEach(() => {
     scrollToSpy.mockRestore();
+    vi.useRealTimers();
+    window.location.hash = '';
   });
 
   it('should create', () => {
@@ -69,7 +71,7 @@ describe('ScheduleDemo', () => {
     expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
   });
 
-  it('should scroll to the target element smoothly when a fragment hash is present on initialization', async () => {
+  it('should scroll to the target element smoothly when a fragment hash is present on initialization', () => {
     vi.useFakeTimers();
     window.location.hash = '#schedule-demo-form';
     const formSection = document.getElementById('schedule-demo-form') ?? document.createElement('div');
@@ -78,12 +80,15 @@ describe('ScheduleDemo', () => {
     const scrollIntoViewSpy = vi.fn();
     formSection.scrollIntoView = scrollIntoViewSpy;
 
-    component.ngOnInit();
-    vi.advanceTimersByTime(100);
+    try {
+      component.ngOnInit();
+      vi.advanceTimersByTime(100);
 
-    expect(scrollIntoViewSpy).toHaveBeenCalledWith({ behavior: 'smooth' });
-    vi.useRealTimers();
-    formSection.remove();
-    window.location.hash = '';
+      expect(scrollIntoViewSpy).toHaveBeenCalledWith({ behavior: 'smooth' });
+    } finally {
+      vi.useRealTimers();
+      formSection.remove();
+      window.location.hash = '';
+    }
   });
 });
