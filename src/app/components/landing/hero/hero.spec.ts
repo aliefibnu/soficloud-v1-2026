@@ -153,4 +153,20 @@ describe('Hero', () => {
     expect(playIcon?.getAttribute('aria-hidden')).toBe('true');
     expect(playIcon?.classList.contains('sm:hidden')).toBe(false);
   });
+
+  it('should have responsive negative margin classes to underlap the navbar without sm:mt-0', () => {
+    const hostEl = fixture.nativeElement as HTMLElement;
+    expect(hostEl.classList.contains('-mt-[67px]')).toBe(true);
+    expect(hostEl.classList.contains('sm:-mt-[73px]')).toBe(true);
+    expect(hostEl.classList.contains('md:-mt-[77px]')).toBe(true);
+    expect(hostEl.classList.contains('sm:mt-0')).toBe(false);
+  });
+
+  it('should have responsive top padding classes matching navbar height and vertical spacing', () => {
+    const section = fixture.nativeElement.querySelector('section#hero');
+    expect(section?.classList.contains('pt-29.25')).toBe(true);
+    expect(section?.classList.contains('sm:pt-[137px]')).toBe(true);
+    expect(section?.classList.contains('md:pt-[157px]')).toBe(true);
+    expect(section?.classList.contains('lg:pt-[173px]')).toBe(true);
+  });
 });

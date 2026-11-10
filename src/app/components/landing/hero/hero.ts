@@ -8,7 +8,7 @@ import { UiMockup } from './ui-mockup/ui-mockup';
   imports: [TranslatePipe, UiMockup, NgOptimizedImage],
   templateUrl: './hero.html',
   host: {
-    class: 'relative block w-full overflow-hidden -mt-[77px] sm:mt-0',
+    class: 'relative block w-full overflow-hidden -mt-[67px] sm:-mt-[73px] md:-mt-[77px]',
   },
 })
 export class Hero {
