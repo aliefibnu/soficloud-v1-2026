@@ -57,8 +57,33 @@ describe('ScheduleDemo', () => {
     expect(formHeading.nativeElement.classList.contains('font-dm-sans')).toBe(true);
   });
 
+  it('should render the Google Maps section component', () => {
+    fixture.detectChanges();
+    const mapEl = fixture.debugElement.query(By.css('app-schedule-demo-map'));
+    expect(mapEl).toBeTruthy();
+  });
+
   it('should scroll to top on initialization when no fragment hash is present', () => {
+    window.location.hash = '';
     component.ngOnInit();
     expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
+  });
+
+  it('should scroll to the target element smoothly when a fragment hash is present on initialization', async () => {
+    vi.useFakeTimers();
+    window.location.hash = '#schedule-demo-form';
+    const formSection = document.getElementById('schedule-demo-form') ?? document.createElement('div');
+    formSection.id = 'schedule-demo-form';
+    document.body.appendChild(formSection);
+    const scrollIntoViewSpy = vi.fn();
+    formSection.scrollIntoView = scrollIntoViewSpy;
+
+    component.ngOnInit();
+    vi.advanceTimersByTime(100);
+
+    expect(scrollIntoViewSpy).toHaveBeenCalledWith({ behavior: 'smooth' });
+    vi.useRealTimers();
+    formSection.remove();
+    window.location.hash = '';
   });
 });

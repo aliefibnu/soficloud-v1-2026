@@ -355,9 +355,9 @@ flowchart LR
   - Implement form submission handler (prevent default, validate all fields, mark touched on invalid submit, log valid lead payload; no backend calls or page redirects in this phase).
 
 ### Phase 4: Google Maps Embed & Anchor Linking
-- [ ] **Map Container**: Construct rounded card frame matching page rhythm.
-- [ ] **Google Maps Embed**: Embed interactive iframe centered at PT Inforsys Indonesia Batam office with `loading="lazy"` and proper accessibility title.
-- [ ] **Anchor Target**: Ensure `#schedule-demo-form` ID is bound to the form section for direct scrolling from navbar and external links.
+- [x] **Map Container**: Construct rounded card frame matching page rhythm.
+- [x] **Google Maps Embed**: Embed interactive iframe centered at PT Inforsys Indonesia Batam office with `loading="lazy"` and proper accessibility title.
+- [x] **Anchor Target**: Ensure `#schedule-demo-form` ID is bound to the form section for direct scrolling from navbar and external links.
 
 ### Phase 5: Verification, Unit Testing & Accessibility Audits
 - [ ] **Unit Tests**: Write comprehensive test specs in `schedule-demo.spec.ts`:
