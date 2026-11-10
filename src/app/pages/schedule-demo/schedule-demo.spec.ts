@@ -34,10 +34,27 @@ describe('ScheduleDemo', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the anchor target for schedule-demo-form', () => {
+  it('should render the hero section component', () => {
     fixture.detectChanges();
-    const anchorEl = fixture.debugElement.query(By.css('#schedule-demo-form'));
-    expect(anchorEl).toBeTruthy();
+    const heroEl = fixture.debugElement.query(By.css('app-schedule-demo-hero'));
+    expect(heroEl).toBeTruthy();
+  });
+
+  it('should render the unified contact & form section card with anchor id #schedule-demo-form', () => {
+    fixture.detectChanges();
+    const contactSection = fixture.debugElement.query(By.css('#schedule-demo-form'));
+    expect(contactSection).toBeTruthy();
+    expect(contactSection.nativeElement.classList.contains('rounded-3xl')).toBe(true);
+
+    const companyInfoEl = fixture.debugElement.query(By.css('app-schedule-demo-company-info'));
+    expect(companyInfoEl).toBeTruthy();
+
+    const formEl = fixture.debugElement.query(By.css('app-schedule-demo-form'));
+    expect(formEl).toBeTruthy();
+
+    const formHeading = fixture.debugElement.query(By.css('h2#form-heading'));
+    expect(formHeading).toBeTruthy();
+    expect(formHeading.nativeElement.classList.contains('font-dm-sans')).toBe(true);
   });
 
   it('should scroll to top on initialization when no fragment hash is present', () => {

@@ -1,10 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { ScheduleDemoHero } from '../../components/schedule-demo/hero/hero';
+import { ScheduleDemoCompanyInfo } from '../../components/schedule-demo/company-info/company-info';
+import { ScheduleDemoForm } from '../../components/schedule-demo/form/form';
 
 @Component({
   selector: 'app-schedule-demo',
-  imports: [TranslatePipe],
+  imports: [ScheduleDemoHero, ScheduleDemoCompanyInfo, ScheduleDemoForm],
   templateUrl: './schedule-demo.html',
   host: {
     class: 'block min-h-screen bg-linear-to-b from-[#eaf2ff] via-[#f3f7fd] to-white',

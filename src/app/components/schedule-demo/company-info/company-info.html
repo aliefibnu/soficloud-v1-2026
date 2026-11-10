@@ -1,0 +1,88 @@
+<div class="flex flex-col h-full justify-between">
+  <div>
+    <!-- Company Header -->
+    <div class="border-b border-white/20 pb-5 mb-6">
+      <h3 class="font-dm-sans font-bold text-xl sm:text-2xl text-white tracking-tight">
+        {{ 'SCHEDULE_DEMO.CONTACT_INFO.COMPANY_NAME' | translate }}
+      </h3>
+    </div>
+
+    <!-- Contact Details List -->
+    <div class="space-y-4">
+      <!-- 1. Phone Number -->
+      <div class="border-b border-white/20 pb-4">
+        <span class="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1">
+          {{ 'SCHEDULE_DEMO.CONTACT_INFO.PHONE_LABEL' | translate }}
+        </span>
+        <a
+          href="tel:+627784160250"
+          class="font-dm-sans text-base sm:text-lg font-bold text-white hover:text-white/90 underline-offset-2 hover:underline transition-colors inline-flex items-center gap-2"
+        >
+          <svg class="w-4.5 h-4.5 text-white/90 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span>{{ 'SCHEDULE_DEMO.CONTACT_INFO.PHONE_VALUE' | translate }}</span>
+        </a>
+      </div>
+
+      <!-- 2. WhatsApp -->
+      <div class="border-b border-white/20 pb-4">
+        <span class="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1">
+          {{ 'SCHEDULE_DEMO.CONTACT_INFO.WHATSAPP_LABEL' | translate }}
+        </span>
+        <a
+          href="https://wa.me/628117774744"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-dm-sans text-base sm:text-lg font-bold text-white hover:text-white/90 underline-offset-2 hover:underline transition-colors inline-flex items-center gap-2"
+        >
+          <svg class="w-4.5 h-4.5 text-white/90 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          <span>{{ 'SCHEDULE_DEMO.CONTACT_INFO.WHATSAPP_VALUE' | translate }}</span>
+        </a>
+      </div>
+
+      <!-- 3. Email -->
+      <div class="border-b border-white/20 pb-4">
+        <span class="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1">
+          {{ 'SCHEDULE_DEMO.CONTACT_INFO.EMAIL_LABEL' | translate }}
+        </span>
+        <a
+          href="mailto:hello@inforsys.co.id"
+          class="font-dm-sans text-base sm:text-lg font-bold text-white hover:text-white/90 underline-offset-2 hover:underline transition-colors inline-flex items-center gap-2"
+        >
+          <svg class="w-4.5 h-4.5 text-white/90 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <span>{{ 'SCHEDULE_DEMO.CONTACT_INFO.EMAIL_VALUE' | translate }}</span>
+        </a>
+      </div>
+
+      <!-- 4. Operational Hours -->
+      <div class="border-b border-white/20 pb-4">
+        <span class="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1">
+          {{ 'SCHEDULE_DEMO.CONTACT_INFO.HOURS_LABEL' | translate }}
+        </span>
+        <div class="font-dm-sans text-base sm:text-lg font-bold text-white">
+          {{ 'SCHEDULE_DEMO.CONTACT_INFO.HOURS_DAYS' | translate }}
+        </div>
+        <div class="text-sm sm:text-base font-semibold text-white/90">
+          {{ 'SCHEDULE_DEMO.CONTACT_INFO.HOURS_TIME' | translate }}
+        </div>
+      </div>
+
+      <!-- 5. Office Address -->
+      <div class="pt-1">
+        <span class="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1">
+          {{ 'SCHEDULE_DEMO.CONTACT_INFO.ADDRESS_LABEL' | translate }}
+        </span>
+        <address class="not-italic font-dm-sans text-sm sm:text-base font-semibold text-white/95 leading-relaxed">
+          <span class="block">{{ 'SCHEDULE_DEMO.CONTACT_INFO.ADDRESS_LINE1' | translate }}</span>
+          <span class="block">{{ 'SCHEDULE_DEMO.CONTACT_INFO.ADDRESS_LINE2' | translate }}</span>
+          <span class="block">{{ 'SCHEDULE_DEMO.CONTACT_INFO.ADDRESS_LINE3' | translate }}</span>
+        </address>
+      </div>
+    </div>
+  </div>
+</div>
