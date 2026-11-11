@@ -28,11 +28,31 @@ describe('ScheduleDemoCompanyInfo', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the company name header', () => {
+  it('should have host classes for #0162EF background and 24px right/bottom radius', () => {
+    const hostEl = fixture.nativeElement as HTMLElement;
+    expect(hostEl.classList.contains('bg-[#0162EF]')).toBe(true);
+    expect(hostEl.classList.contains('lg:rounded-r-[24px]')).toBe(true);
+    expect(hostEl.classList.contains('lg:rounded-br-[24px]')).toBe(true);
+    expect(hostEl.classList.contains('lg:rounded-bl-none')).toBe(true);
+    expect(hostEl.classList.contains('rounded-b-[24px]')).toBe(true);
+  });
+
+  it('should render the company name header without a bottom divider line', () => {
     const heading = fixture.debugElement.query(By.css('h3'));
     expect(heading).toBeTruthy();
     expect(heading.nativeElement.classList.contains('font-dm-sans')).toBe(true);
     expect(heading.nativeElement.classList.contains('font-bold')).toBe(true);
+
+    const headerContainer = heading.parent;
+    expect(headerContainer?.nativeElement.classList.contains('border-b')).toBe(false);
+  });
+
+  it('should render bolder contact item divider lines with border-white/50', () => {
+    const dividers = fixture.debugElement.queryAll(By.css('.border-b'));
+    expect(dividers.length).toBe(4);
+    for (const divider of dividers) {
+      expect(divider.nativeElement.classList.contains('border-white/50')).toBe(true);
+    }
   });
 
   it('should render the clickable phone link with tel: scheme', () => {
