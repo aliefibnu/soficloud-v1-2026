@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ElementRef, inject, signal } from '@angular/core';
 import {
   FormControl,
@@ -24,7 +25,7 @@ export interface DemoLeadForm {
 
 @Component({
   selector: 'app-schedule-demo-form',
-  imports: [ReactiveFormsModule, TranslatePipe],
+  imports: [ReactiveFormsModule, TranslatePipe, NgOptimizedImage],
   templateUrl: './form.html',
   host: {
     class: 'block w-full',

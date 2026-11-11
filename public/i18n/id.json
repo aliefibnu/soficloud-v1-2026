@@ -987,13 +987,13 @@
     },
     "FORM": {
       "TITLE": "Hubungi kami",
-      "SUBTITLE": "Cukup isi formulir di bawah ini dan kami akan segera menghubungi Anda kembali.",
+      "SUBTITLE": "Cukup isi formulir di bawah ini dan\nkami akan segera menghubungi Anda kembali.",
       "FIELDS": {
         "NAME_PLACEHOLDER": "Nama",
         "EMAIL_PLACEHOLDER": "Email",
         "PHONE_PLACEHOLDER": "Nomor Telepon",
         "COMPANY_PLACEHOLDER": "Nama Perusahaan",
-        "INDUSTRY_PLACEHOLDER": "Pilih Industri",
+        "INDUSTRY_PLACEHOLDER": "Industri",
         "POSITION_PLACEHOLDER": "Posisi Anda"
       },
       "INDUSTRIES": {

@@ -176,4 +176,72 @@ describe('ScheduleDemoForm', () => {
 
     consoleInfoSpy.mockRestore();
   });
+
+  it('should match Figma specifications for Hubungi kami heading and description typography', () => {
+    fixture.detectChanges();
+    const heading = fixture.debugElement.query(By.css('#form-heading'));
+    expect(heading).toBeTruthy();
+    expect(heading.nativeElement.classList.contains('font-inter')).toBe(true);
+    expect(heading.nativeElement.classList.contains('font-semibold')).toBe(true);
+    expect(heading.nativeElement.classList.contains('lg:text-[46px]')).toBe(true);
+    expect(heading.nativeElement.classList.contains('leading-[100%]')).toBe(true);
+    expect(heading.nativeElement.classList.contains('tracking-normal')).toBe(true);
+    expect(heading.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
+
+    const description = fixture.debugElement.query(By.css('h2#form-heading + p'));
+    expect(description).toBeTruthy();
+    expect(description.nativeElement.classList.contains('font-dm-sans')).toBe(true);
+    expect(description.nativeElement.classList.contains('font-normal')).toBe(true);
+    expect(description.nativeElement.classList.contains('text-[14px]')).toBe(true);
+    expect(description.nativeElement.classList.contains('leading-relaxed')).toBe(true);
+    expect(description.nativeElement.classList.contains('lg:leading-[1.3]')).toBe(true);
+    expect(description.nativeElement.classList.contains('tracking-normal')).toBe(true);
+    expect(description.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
+    expect(description.nativeElement.classList.contains('whitespace-pre-line')).toBe(true);
+  });
+
+  it('should match Figma specifications for input boxes (4px radius, 1px #E8E8E8 border, DM Sans 400 #8B8B8B text, and schedule-demo SVG icons)', () => {
+    fixture.detectChanges();
+
+    const inputIds = [
+      '#demo-name',
+      '#demo-email',
+      '#demo-phone',
+      '#demo-company',
+      '#demo-position',
+    ];
+
+    for (const id of inputIds) {
+      const input = fixture.debugElement.query(By.css(id));
+      expect(input).toBeTruthy();
+      expect(input.nativeElement.classList.contains('rounded-[4px]')).toBe(true);
+      expect(input.nativeElement.classList.contains('border-[#E8E8E8]')).toBe(true);
+      expect(input.nativeElement.classList.contains('font-dm-sans')).toBe(true);
+      expect(input.nativeElement.classList.contains('font-normal')).toBe(true);
+      expect(input.nativeElement.classList.contains('placeholder:text-[#8B8B8B]')).toBe(true);
+    }
+
+    const trigger = fixture.debugElement.query(By.css('#demo-industry-trigger'));
+    expect(trigger).toBeTruthy();
+    expect(trigger.nativeElement.classList.contains('rounded-[4px]')).toBe(true);
+    expect(trigger.nativeElement.classList.contains('border-[#E8E8E8]')).toBe(true);
+    expect(trigger.nativeElement.classList.contains('font-dm-sans')).toBe(true);
+    expect(trigger.nativeElement.classList.contains('font-normal')).toBe(true);
+
+    // Verify all 6 icons from /images/schedule-demo
+    const imgs = fixture.debugElement.queryAll(By.css('form img'));
+    expect(imgs.length).toBe(6);
+    const expectedIcons = [
+      '/images/schedule-demo/nama.svg',
+      '/images/schedule-demo/email.svg',
+      '/images/schedule-demo/telpon.svg',
+      '/images/schedule-demo/perushaan.svg',
+      '/images/schedule-demo/industri.svg',
+      '/images/schedule-demo/posisi.svg',
+    ];
+
+    for (let i = 0; i < expectedIcons.length; i++) {
+      expect(imgs[i].nativeElement.getAttribute('src')).toContain(expectedIcons[i]);
+    }
+  });
 });

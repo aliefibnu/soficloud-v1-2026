@@ -56,7 +56,9 @@ describe('ScheduleDemo', () => {
 
     const formHeading = fixture.debugElement.query(By.css('h2#form-heading'));
     expect(formHeading).toBeTruthy();
-    expect(formHeading.nativeElement.classList.contains('font-dm-sans')).toBe(true);
+    expect(formHeading.nativeElement.classList.contains('font-inter')).toBe(true);
+    expect(formHeading.nativeElement.classList.contains('font-semibold')).toBe(true);
+    expect(formHeading.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
   });
 
   it('should render the Google Maps section component', () => {
