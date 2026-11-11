@@ -28,6 +28,14 @@ describe('ScheduleDemoHero', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should have block display and responsive bottom padding on host', () => {
+    const hostEl = fixture.nativeElement as HTMLElement;
+    expect(hostEl.classList.contains('block')).toBe(true);
+    expect(hostEl.classList.contains('w-full')).toBe(true);
+    expect(hostEl.classList.contains('pb-8')).toBe(true);
+    expect(hostEl.classList.contains('sm:pb-10')).toBe(true);
+  });
+
   it('should render the H1 display headline with Inter font, extra bold weight, and Figma-aligned 64px sizing', () => {
     const heading = fixture.debugElement.query(By.css('h1#hero-heading'));
     expect(heading).toBeTruthy();
