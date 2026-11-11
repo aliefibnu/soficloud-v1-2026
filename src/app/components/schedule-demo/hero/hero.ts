@@ -7,7 +7,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [NgOptimizedImage, TranslatePipe],
   templateUrl: './hero.html',
   host: {
-    class: 'block w-full pb-8 sm:pb-10',
+    class: 'block w-full pb-6 sm:pb-8',
   },
 })
 export class ScheduleDemoHero {}

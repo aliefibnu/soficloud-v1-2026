@@ -128,10 +128,11 @@ describe('ScheduleDemo', () => {
 
   it('should have responsive top padding classes on outer wrapper accounting for navbar height', () => {
     const wrapper = fixture.nativeElement.querySelector('.relative.w-full');
-    expect(wrapper?.classList.contains('pt-[79px]')).toBe(true);
-    expect(wrapper?.classList.contains('sm:pt-[89px]')).toBe(true);
-    expect(wrapper?.classList.contains('md:pt-[93px]')).toBe(true);
-    expect(wrapper?.classList.contains('lg:pt-[101px]')).toBe(true);
+    expect(wrapper?.classList.contains('pt-[88px]')).toBe(true);
+    expect(wrapper?.classList.contains('sm:pt-[100px]')).toBe(true);
+    expect(wrapper?.classList.contains('md:pt-[108px]')).toBe(true);
+    expect(wrapper?.classList.contains('lg:pt-[124px]')).toBe(true);
+    expect(wrapper?.classList.contains('xl:pt-[128px]')).toBe(true);
     expect(wrapper?.classList.contains('pb-8')).toBe(true);
     expect(wrapper?.classList.contains('sm:pb-12')).toBe(true);
     expect(wrapper?.classList.contains('lg:pb-16')).toBe(true);
