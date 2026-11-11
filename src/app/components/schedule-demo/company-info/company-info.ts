@@ -6,7 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [TranslatePipe],
   templateUrl: './company-info.html',
   host: {
-    class: 'block w-full h-full bg-[#0162EF] text-white p-6 sm:p-8 lg:p-10 xl:p-12 rounded-b-[24px] lg:rounded-bl-none lg:rounded-r-[24px] lg:rounded-br-[24px] overflow-hidden',
+    class: 'block w-full h-full bg-[#0162EF] text-white p-6 sm:p-8 lg:p-12 xl:p-14 rounded-[24px] overflow-hidden',
   },
 })
 export class ScheduleDemoCompanyInfo {}

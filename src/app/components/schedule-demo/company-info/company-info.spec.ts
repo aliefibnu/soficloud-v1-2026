@@ -28,23 +28,48 @@ describe('ScheduleDemoCompanyInfo', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have host classes for #0162EF background and 24px right/bottom radius', () => {
+  it('should have host classes for #0162EF background, uniform 24px radius, and symmetric padding', () => {
     const hostEl = fixture.nativeElement as HTMLElement;
     expect(hostEl.classList.contains('bg-[#0162EF]')).toBe(true);
-    expect(hostEl.classList.contains('lg:rounded-r-[24px]')).toBe(true);
-    expect(hostEl.classList.contains('lg:rounded-br-[24px]')).toBe(true);
-    expect(hostEl.classList.contains('lg:rounded-bl-none')).toBe(true);
-    expect(hostEl.classList.contains('rounded-b-[24px]')).toBe(true);
+    expect(hostEl.classList.contains('rounded-[24px]')).toBe(true);
+    expect(hostEl.classList.contains('xl:p-14')).toBe(true);
   });
 
-  it('should render the company name header without a bottom divider line', () => {
+  it('should render the company name header with DM Sans and bold weight', () => {
     const heading = fixture.debugElement.query(By.css('h3'));
     expect(heading).toBeTruthy();
     expect(heading.nativeElement.classList.contains('font-dm-sans')).toBe(true);
     expect(heading.nativeElement.classList.contains('font-bold')).toBe(true);
+    expect(heading.nativeElement.classList.contains('sm:text-[26px]')).toBe(true);
 
     const headerContainer = heading.parent;
     expect(headerContainer?.nativeElement.classList.contains('border-b')).toBe(false);
+  });
+
+  it('should render contact labels in Title Case without uppercase transform', () => {
+    const labels = fixture.debugElement.queryAll(By.css('span.text-xs'));
+    expect(labels.length).toBe(5);
+    for (const label of labels) {
+      expect(label.nativeElement.classList.contains('uppercase')).toBe(false);
+    }
+  });
+
+  it('should render contact values with uniform text-base and font-bold classes', () => {
+    const phoneEl = fixture.debugElement.query(By.css('a[href^="tel:"]'));
+    expect(phoneEl.nativeElement.classList.contains('text-base')).toBe(true);
+    expect(phoneEl.nativeElement.classList.contains('font-bold')).toBe(true);
+
+    const waEl = fixture.debugElement.query(By.css('a[href*="wa.me"]'));
+    expect(waEl.nativeElement.classList.contains('text-base')).toBe(true);
+    expect(waEl.nativeElement.classList.contains('font-bold')).toBe(true);
+
+    const emailEl = fixture.debugElement.query(By.css('a[href^="mailto:"]'));
+    expect(emailEl.nativeElement.classList.contains('text-base')).toBe(true);
+    expect(emailEl.nativeElement.classList.contains('font-bold')).toBe(true);
+
+    const addressEl = fixture.debugElement.query(By.css('address'));
+    expect(addressEl.nativeElement.classList.contains('text-base')).toBe(true);
+    expect(addressEl.nativeElement.classList.contains('font-bold')).toBe(true);
   });
 
   it('should render bolder contact item divider lines with border-white/50', () => {
