@@ -97,6 +97,33 @@ describe('ScheduleDemo', () => {
     expect(hostEl.classList.contains('-mt-[67px]')).toBe(true);
     expect(hostEl.classList.contains('sm:-mt-[73px]')).toBe(true);
     expect(hostEl.classList.contains('md:-mt-[77px]')).toBe(true);
+    expect(hostEl.classList.contains('bg-white')).toBe(true);
+    expect(hostEl.classList.contains('overflow-x-clip')).toBe(true);
+  });
+
+  it('should render the decorative blue gradient backdrop with bottom SVG curved transition', () => {
+    const backdropEl = fixture.nativeElement.querySelector('[aria-hidden="true"]');
+    expect(backdropEl).toBeTruthy();
+    expect(backdropEl.classList.contains('absolute')).toBe(true);
+    expect(backdropEl.classList.contains('top-0')).toBe(true);
+    expect(backdropEl.classList.contains('z-0')).toBe(true);
+    expect(backdropEl.style.background).toContain('linear-gradient');
+    // Browser normalizes hex colors (#3874DB) to rgb(56, 116, 219)
+    expect(backdropEl.style.background).toMatch(/rgb\(56,\s*116,\s*219\)|#3874db/i);
+
+    const svgCurve = backdropEl.querySelector('svg');
+    expect(svgCurve).toBeTruthy();
+    expect(svgCurve.getAttribute('viewBox')).toBe('0 0 1440 120');
+    const path = svgCurve.querySelector('path');
+    expect(path).toBeTruthy();
+    expect(path.getAttribute('fill')).toBe('#ffffff');
+  });
+
+  it('should render content container with z-10 stacking above the backdrop', () => {
+    const container = fixture.nativeElement.querySelector('.max-w-7xl');
+    expect(container).toBeTruthy();
+    expect(container.classList.contains('relative')).toBe(true);
+    expect(container.classList.contains('z-10')).toBe(true);
   });
 
   it('should have responsive top padding classes on outer wrapper accounting for navbar height', () => {

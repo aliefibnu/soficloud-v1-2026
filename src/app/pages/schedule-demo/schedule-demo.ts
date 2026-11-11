@@ -15,7 +15,7 @@ import { ScheduleDemoMap } from '../../components/schedule-demo/map/map';
   ],
   templateUrl: './schedule-demo.html',
   host: {
-    class: 'block min-h-screen bg-linear-to-b from-[#eaf2ff] via-[#f3f7fd] to-white -mt-[67px] sm:-mt-[73px] md:-mt-[77px]',
+    class: 'block relative min-h-screen bg-white overflow-x-clip -mt-[67px] sm:-mt-[73px] md:-mt-[77px]',
   },
 })
 export class ScheduleDemo implements OnInit {
