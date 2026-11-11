@@ -223,7 +223,7 @@
         </div>
 
         <!-- 5. Industry Dropdown (Industri) -->
-        <div class="relative">
+        <div class="relative" [class.z-30]="isDropdownOpen()">
           <label id="demo-industry-label" class="sr-only">
             {{ 'SCHEDULE_DEMO.FORM.FIELDS.INDUSTRY_PLACEHOLDER' | translate }}
           </label>
@@ -281,7 +281,7 @@
               role="listbox"
               id="industry-listbox"
               aria-labelledby="demo-industry-label"
-              class="absolute left-0 right-0 top-[calc(100%+6px)] z-30 bg-white border border-[#E8E8E8] rounded-[4px] shadow-[0_12px_36px_-6px_rgba(24,40,73,0.12),0_4px_12px_-2px_rgba(24,40,73,0.06)] p-1.5 max-h-60 overflow-y-auto animate-dropdown font-dm-sans font-normal"
+              class="absolute left-0 right-0 top-[calc(100%+6px)] z-40 bg-white border border-[#E8E8E8] rounded-[4px] shadow-[0_12px_36px_-6px_rgba(24,40,73,0.12),0_4px_12px_-2px_rgba(24,40,73,0.06)] p-1.5 max-h-60 overflow-y-auto animate-dropdown font-dm-sans font-normal"
             >
               @for (item of industries; track item.value) {
                 <li role="none">

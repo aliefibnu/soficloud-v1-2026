@@ -47,6 +47,9 @@ describe('ScheduleDemo', () => {
     const contactSection = fixture.debugElement.query(By.css('#schedule-demo-form'));
     expect(contactSection).toBeTruthy();
     expect(contactSection.nativeElement.classList.contains('rounded-3xl')).toBe(true);
+    expect(contactSection.nativeElement.classList.contains('relative')).toBe(true);
+    expect(contactSection.nativeElement.classList.contains('z-20')).toBe(true);
+    expect(contactSection.nativeElement.classList.contains('overflow-hidden')).toBe(false);
 
     const companyInfoEl = fixture.debugElement.query(By.css('app-schedule-demo-company-info'));
     expect(companyInfoEl).toBeTruthy();
@@ -61,10 +64,12 @@ describe('ScheduleDemo', () => {
     expect(formHeading.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
   });
 
-  it('should render the Google Maps section component', () => {
+  it('should render the Google Maps section component with lower stacking context than the form card', () => {
     fixture.detectChanges();
     const mapEl = fixture.debugElement.query(By.css('app-schedule-demo-map'));
     expect(mapEl).toBeTruthy();
+    expect(mapEl.nativeElement.classList.contains('relative')).toBe(true);
+    expect(mapEl.nativeElement.classList.contains('z-10')).toBe(true);
   });
 
   it('should scroll to top on initialization when no fragment hash is present', () => {

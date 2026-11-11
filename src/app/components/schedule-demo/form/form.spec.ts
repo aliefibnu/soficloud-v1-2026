@@ -121,6 +121,13 @@ describe('ScheduleDemoForm', () => {
     fixture.detectChanges();
     expect(component.isDropdownOpen()).toBe(true);
 
+    const dropdownContainer = fixture.debugElement.query(By.css('.relative.z-30'));
+    expect(dropdownContainer).toBeTruthy();
+
+    const listbox = fixture.debugElement.query(By.css('#industry-listbox'));
+    expect(listbox).toBeTruthy();
+    expect(listbox.nativeElement.classList.contains('z-40')).toBe(true);
+
     const firstOption = component.industries[0];
     component.selectIndustry(firstOption);
     fixture.detectChanges();
