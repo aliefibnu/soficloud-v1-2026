@@ -56,6 +56,9 @@ describe('ScheduleDemo', () => {
 
     const formEl = fixture.debugElement.query(By.css('app-schedule-demo-form'));
     expect(formEl).toBeTruthy();
+    expect(formEl.nativeElement.classList.contains('rounded-b-[24px]')).toBe(true);
+    expect(formEl.nativeElement.classList.contains('lg:rounded-bl-none')).toBe(true);
+    expect(formEl.nativeElement.classList.contains('lg:rounded-r-[24px]')).toBe(true);
 
     const formHeading = fixture.debugElement.query(By.css('h2#form-heading'));
     expect(formHeading).toBeTruthy();
