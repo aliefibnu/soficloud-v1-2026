@@ -1,1 +1,16 @@
-<app-hero />
+<main
+  id="main-content"
+  class="min-h-screen flex flex-col w-full selection:bg-[#365AD2] selection:text-white gap-8"
+>
+  <app-hero />
+  <app-process-tabs
+    [tabs]="tabs"
+    navAriaLabel="Smart workflow navigation"
+    tablistAriaLabel="Smart workflow milestones"
+    listMinWidthClass="min-w-max sm:min-w-0"
+  />
+  <app-workflow-section-1 />
+  <app-workflow-section-2 />
+  <app-workflow-section-3 />
+  <app-subfooter />
+</main>
