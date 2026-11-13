@@ -120,6 +120,9 @@ describe('ScheduleDemo', () => {
     expect(backdropEl.style.background).toContain('linear-gradient');
     // Browser normalizes hex colors (#3874DB) to rgb(56, 116, 219)
     expect(backdropEl.style.background).toMatch(/rgb\(56,\s*116,\s*219\)|#3874db/i);
+    expect(backdropEl.style.background).toContain('0%');
+    expect(backdropEl.style.background).toContain('51%');
+    expect(backdropEl.style.background).toContain('100%');
 
     const svgCurve = backdropEl.querySelector('svg');
     expect(svgCurve).toBeTruthy();
