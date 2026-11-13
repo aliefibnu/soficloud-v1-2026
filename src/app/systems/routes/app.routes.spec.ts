@@ -37,4 +37,22 @@ describe('app.routes', () => {
     )();
     expect(loadedComponent).toBeDefined();
   });
+
+  it('should include the smart-workflow route', () => {
+    const smartWorkflowRoute = routes.find(
+      (r: Route) => r.path === 'smart-workflow',
+    );
+    expect(smartWorkflowRoute).toBeDefined();
+    expect(smartWorkflowRoute?.loadComponent).toBeDefined();
+  });
+
+  it('should lazy load the SmartWorkflow component', async () => {
+    const smartWorkflowRoute = routes.find(
+      (r: Route) => r.path === 'smart-workflow',
+    );
+    const loadedComponent = await (
+      smartWorkflowRoute?.loadComponent as () => Promise<unknown>
+    )();
+    expect(loadedComponent).toBeDefined();
+  });
 });

@@ -404,5 +404,17 @@ describe('BusinessControl', () => {
         '/connected-process',
       );
     });
+
+    it('should link the smart-workflow card CTA button to /smart-workflow', () => {
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement as HTMLElement;
+      const ctaLink = compiled.querySelector(
+        'a[routerlink="/smart-workflow"], a[href="/smart-workflow"]',
+      );
+      expect(ctaLink).toBeTruthy();
+      expect(ctaLink?.getAttribute('routerlink') || ctaLink?.getAttribute('href')).toBe(
+        '/smart-workflow',
+      );
+    });
   });
 });

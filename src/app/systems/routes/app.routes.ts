@@ -20,6 +20,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'smart-workflow',
+    loadComponent: () =>
+      import('../../pages/business-control/smart-workflow/smart-workflow').then(
+        (m) => m.SmartWorkflow,
+      ),
+  },
+  {
     path: 'schedule-demo',
     loadComponent: () =>
       import('../../pages/schedule-demo/schedule-demo').then((m) => m.ScheduleDemo),
