@@ -52,18 +52,18 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
 
   readonly tabs: readonly VisibilityTab[] = [
     {
-      id: 'sales-performance',
-      titleKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TABS.SALES_PERFORMANCE',
-      defaultTitle: 'SALES PERFORMANCE',
-      altKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.ALTS.SALES_PERFORMANCE',
-      defaultAlt: 'Sales Performance Dashboard',
-    },
-    {
       id: 'procurement-control',
       titleKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TABS.PROCUREMENT_CONTROL',
       defaultTitle: 'PROCUREMENT CONTROL',
       altKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.ALTS.PROCUREMENT_CONTROL',
       defaultAlt: 'Procurement Control Dashboard',
+    },
+    {
+      id: 'sales-performance',
+      titleKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TABS.SALES_PERFORMANCE',
+      defaultTitle: 'SALES PERFORMANCE',
+      altKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.ALTS.SALES_PERFORMANCE',
+      defaultAlt: 'Sales Performance Dashboard',
     },
     {
       id: 'material-readiness',
@@ -73,22 +73,22 @@ export class VisibilityFunction implements AfterViewInit, OnDestroy {
       defaultAlt: 'Material Readiness Dashboard',
     },
     {
-      id: 'order-pipeline',
-      titleKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TABS.ORDER_PIPELINE',
-      defaultTitle: 'ORDER PIPELINE',
-      altKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.ALTS.ORDER_PIPELINE',
-      defaultAlt: 'Order Pipeline Dashboard',
-    },
-    {
       id: 'financial-visibility',
       titleKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TABS.FINANCIAL_VISIBILITY',
       defaultTitle: 'FINANCIAL VISIBILITY',
       altKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.ALTS.FINANCIAL_VISIBILITY',
       defaultAlt: 'Financial Visibility Dashboard',
     },
+    {
+      id: 'order-pipeline',
+      titleKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.TABS.ORDER_PIPELINE',
+      defaultTitle: 'ORDER PIPELINE',
+      altKey: 'BUSINESS_REALTIME.VISIBILITY_FUNCTION.ALTS.ORDER_PIPELINE',
+      defaultAlt: 'Order Pipeline Dashboard',
+    },
   ];
 
-  readonly activeTabId = signal<string>('sales-performance');
+  readonly activeTabId = signal<string>('procurement-control');
   readonly indicatorLeft = signal<number>(0);
   readonly indicatorWidth = signal<number>(140);
 
