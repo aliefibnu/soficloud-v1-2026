@@ -994,7 +994,8 @@
         "PHONE_PLACEHOLDER": "電話番号",
         "COMPANY_PLACEHOLDER": "貴社名",
         "INDUSTRY_PLACEHOLDER": "業種を選択",
-        "POSITION_PLACEHOLDER": "役職・役目"
+        "POSITION_PLACEHOLDER": "役職・役目",
+        "MESSAGE_PLACEHOLDER": "メッセージ"
       },
       "INDUSTRIES": {
         "MANUFACTURING": "製造業",

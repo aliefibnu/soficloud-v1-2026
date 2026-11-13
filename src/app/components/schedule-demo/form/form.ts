@@ -21,6 +21,7 @@ export interface DemoLeadForm {
   company: FormControl<string>;
   industry: FormControl<string>;
   position: FormControl<string>;
+  message: FormControl<string>;
 }
 
 @Component({
@@ -61,6 +62,7 @@ export class ScheduleDemoForm {
     company: this.fb.control('', [Validators.required, Validators.minLength(2)]),
     industry: this.fb.control('', [Validators.required]),
     position: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+    message: this.fb.control(''),
   });
 
   get fullNameControl(): FormControl<string> {
@@ -85,6 +87,10 @@ export class ScheduleDemoForm {
 
   get positionControl(): FormControl<string> {
     return this.form.controls.position;
+  }
+
+  get messageControl(): FormControl<string> {
+    return this.form.controls.message;
   }
 
   toggleDropdown(event?: MouseEvent): void {

@@ -36,6 +36,8 @@ describe('ScheduleDemoForm', () => {
     expect(component.companyControl.value).toBe('');
     expect(component.industryControl.value).toBe('');
     expect(component.positionControl.value).toBe('');
+    expect(component.messageControl.value).toBe('');
+    expect(component.messageControl.valid).toBe(true);
   });
 
   it('should validate full name requirement and minlength', () => {
@@ -152,6 +154,7 @@ describe('ScheduleDemoForm', () => {
     component.companyControl.setValue('PT Maju Bersama');
     component.industryControl.setValue('Manufaktur');
     component.positionControl.setValue('Operations Director');
+    component.messageControl.setValue('Ingin menjadwalkan demo modul akuntansi.');
 
     expect(component.form.valid).toBe(true);
 
@@ -167,6 +170,7 @@ describe('ScheduleDemoForm', () => {
         company: 'PT Maju Bersama',
         industry: 'Manufaktur',
         position: 'Operations Director',
+        message: 'Ingin menjadwalkan demo modul akuntansi.',
       }),
     );
     expect(component.isSubmitted()).toBe(true);
@@ -180,6 +184,7 @@ describe('ScheduleDemoForm', () => {
     fixture.detectChanges();
     expect(component.isSubmitted()).toBe(false);
     expect(component.fullNameControl.value).toBe('');
+    expect(component.messageControl.value).toBe('');
 
     consoleInfoSpy.mockRestore();
   });
@@ -216,6 +221,7 @@ describe('ScheduleDemoForm', () => {
       '#demo-phone',
       '#demo-company',
       '#demo-position',
+      '#demo-message',
     ];
 
     for (const id of inputIds) {
@@ -228,6 +234,10 @@ describe('ScheduleDemoForm', () => {
       expect(input.nativeElement.classList.contains('placeholder:text-[#8B8B8B]')).toBe(true);
     }
 
+    const messageWrapper = fixture.debugElement.query(By.css('.sm\\:col-span-2'));
+    expect(messageWrapper).toBeTruthy();
+    expect(messageWrapper.query(By.css('#demo-message'))).toBeTruthy();
+
     const trigger = fixture.debugElement.query(By.css('#demo-industry-trigger'));
     expect(trigger).toBeTruthy();
     expect(trigger.nativeElement.classList.contains('rounded-[4px]')).toBe(true);
@@ -235,9 +245,9 @@ describe('ScheduleDemoForm', () => {
     expect(trigger.nativeElement.classList.contains('font-dm-sans')).toBe(true);
     expect(trigger.nativeElement.classList.contains('font-normal')).toBe(true);
 
-    // Verify all 6 icons from /images/schedule-demo
+    // Verify all 7 icons from /images/schedule-demo
     const imgs = fixture.debugElement.queryAll(By.css('form img'));
-    expect(imgs.length).toBe(6);
+    expect(imgs.length).toBe(7);
     const expectedIcons = [
       '/images/schedule-demo/nama.svg',
       '/images/schedule-demo/email.svg',
@@ -245,6 +255,7 @@ describe('ScheduleDemoForm', () => {
       '/images/schedule-demo/perushaan.svg',
       '/images/schedule-demo/industri.svg',
       '/images/schedule-demo/posisi.svg',
+      '/images/schedule-demo/pesan.svg',
     ];
 
     for (let i = 0; i < expectedIcons.length; i++) {

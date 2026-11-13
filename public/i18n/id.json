@@ -994,7 +994,8 @@
         "PHONE_PLACEHOLDER": "Nomor Telepon",
         "COMPANY_PLACEHOLDER": "Nama Perusahaan",
         "INDUSTRY_PLACEHOLDER": "Industri",
-        "POSITION_PLACEHOLDER": "Posisi Anda"
+        "POSITION_PLACEHOLDER": "Posisi Anda",
+        "MESSAGE_PLACEHOLDER": "Pesan"
       },
       "INDUSTRIES": {
         "MANUFACTURING": "Manufaktur",

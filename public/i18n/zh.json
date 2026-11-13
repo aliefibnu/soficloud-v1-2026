@@ -994,7 +994,8 @@
         "PHONE_PLACEHOLDER": "电话号码",
         "COMPANY_PLACEHOLDER": "公司名称",
         "INDUSTRY_PLACEHOLDER": "选择行业",
-        "POSITION_PLACEHOLDER": "您的职位"
+        "POSITION_PLACEHOLDER": "您的职位",
+        "MESSAGE_PLACEHOLDER": "留言"
       },
       "INDUSTRIES": {
         "MANUFACTURING": "制造业",

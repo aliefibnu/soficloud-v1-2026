@@ -994,7 +994,8 @@
         "PHONE_PLACEHOLDER": "Phone Number",
         "COMPANY_PLACEHOLDER": "Company Name",
         "INDUSTRY_PLACEHOLDER": "Industry",
-        "POSITION_PLACEHOLDER": "Your Position"
+        "POSITION_PLACEHOLDER": "Your Position",
+        "MESSAGE_PLACEHOLDER": "Message"
       },
       "INDUSTRIES": {
         "MANUFACTURING": "Manufacturing",
