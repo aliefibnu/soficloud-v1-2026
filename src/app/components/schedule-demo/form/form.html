@@ -1,0 +1,393 @@
+<div>
+  <div class="mb-8 sm:mb-9 lg:mb-10">
+    <h2
+      id="form-heading"
+      class="font-inter font-semibold text-3xl sm:text-4xl lg:text-[46px] leading-[100%] tracking-normal text-[#23244E]"
+    >
+      {{ 'SCHEDULE_DEMO.FORM.TITLE' | translate }}
+    </h2>
+    <p
+      class="mt-4 sm:mt-6 font-dm-sans font-normal text-[14px] leading-relaxed lg:leading-[1.3] tracking-normal text-[#23244E] max-w-95 sm:max-w-105 whitespace-pre-line"
+    >
+      {{ 'SCHEDULE_DEMO.FORM.SUBTITLE' | translate }}
+    </p>
+  </div>
+
+  @if (isSubmitted()) {
+    <div
+      role="status"
+      aria-live="polite"
+      class="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-6 sm:p-8 text-center animate-fade-in"
+    >
+      <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mb-4 shadow-xs">
+        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h3 class="font-dm-sans text-xl font-bold text-emerald-950">
+        Terima Kasih! Permintaan Demo Anda Telah Diterima.
+      </h3>
+      <p class="mt-2 text-sm text-emerald-800 leading-relaxed max-w-md mx-auto">
+        Tim spesialis SOFICloud ERP akan segera menghubungi Anda melalui kontak yang Anda cantumkan untuk menjadwalkan sesi demonstrasi.
+      </p>
+      <div class="mt-6">
+        <button
+          type="button"
+          (click)="resetForm()"
+          class="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-800 shadow-xs hover:bg-emerald-50 transition-colors cursor-pointer"
+        >
+          Kirim formulir lain
+        </button>
+      </div>
+    </div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="space-y-4 sm:space-y-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+        <div>
+          <label for="demo-name" class="sr-only">
+            {{ 'SCHEDULE_DEMO.FORM.FIELDS.NAME_PLACEHOLDER' | translate }}
+          </label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 sm:pl-4.5 z-10">
+              <img
+                ngSrc="/images/schedule-demo/nama.svg"
+                width="13"
+                height="16"
+                alt=""
+                aria-hidden="true"
+                class="h-4 w-auto object-contain select-none"
+              />
+            </div>
+            <input
+              type="text"
+              id="demo-name"
+              formControlName="fullName"
+              autocomplete="name"
+              [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.NAME_PLACEHOLDER' | translate"
+              [attr.aria-invalid]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)"
+              [attr.aria-describedby]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched) ? 'demo-name-error' : null"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              [class.border-red-500]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)"
+              [class.focus:border-red-500]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)"
+              [class.focus:ring-red-500/20]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)"
+              [class.border-[#E8E8E8]]="!(fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched))"
+              [class.focus:border-[#1d44eb]]="!(fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched))"
+              [class.focus:ring-[#1d44eb]/20]="!(fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched))"
+            />
+          </div>
+          @if (fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)) {
+            <div id="demo-name-error" class="mt-1.5 flex items-center gap-1.5 text-xs sm:text-sm text-red-600 font-medium">
+              <svg class="h-4 w-4 shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+              </svg>
+              <span>{{ 'SCHEDULE_DEMO.FORM.ERRORS.NAME_REQUIRED' | translate }}</span>
+            </div>
+          }
+        </div>
+
+        <div>
+          <label for="demo-email" class="sr-only">
+            {{ 'SCHEDULE_DEMO.FORM.FIELDS.EMAIL_PLACEHOLDER' | translate }}
+          </label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 sm:pl-4 z-10">
+              <img
+                ngSrc="/images/schedule-demo/email.svg"
+                width="22"
+                height="14"
+                alt=""
+                aria-hidden="true"
+                class="h-3.5 w-auto object-contain select-none"
+              />
+            </div>
+            <input
+              type="email"
+              id="demo-email"
+              formControlName="email"
+              autocomplete="email"
+              [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.EMAIL_PLACEHOLDER' | translate"
+              [attr.aria-invalid]="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
+              [attr.aria-describedby]="emailControl.invalid && (emailControl.dirty || emailControl.touched) ? 'demo-email-error' : null"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              [class.border-red-500]="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
+              [class.focus:border-red-500]="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
+              [class.focus:ring-red-500/20]="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
+              [class.border-[#E8E8E8]]="!(emailControl.invalid && (emailControl.dirty || emailControl.touched))"
+              [class.focus:border-[#1d44eb]]="!(emailControl.invalid && (emailControl.dirty || emailControl.touched))"
+              [class.focus:ring-[#1d44eb]/20]="!(emailControl.invalid && (emailControl.dirty || emailControl.touched))"
+            />
+          </div>
+          @if (emailControl.invalid && (emailControl.dirty || emailControl.touched)) {
+            <div id="demo-email-error" class="mt-1.5 flex items-center gap-1.5 text-xs sm:text-sm text-red-600 font-medium">
+              <svg class="h-4 w-4 shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+              </svg>
+              <span>{{ 'SCHEDULE_DEMO.FORM.ERRORS.EMAIL_INVALID' | translate }}</span>
+            </div>
+          }
+        </div>
+
+        <div>
+          <label for="demo-phone" class="sr-only">
+            {{ 'SCHEDULE_DEMO.FORM.FIELDS.PHONE_PLACEHOLDER' | translate }}
+          </label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 sm:pl-4.5 z-10">
+              <img
+                ngSrc="/images/schedule-demo/telpon.svg"
+                width="13"
+                height="17"
+                alt=""
+                aria-hidden="true"
+                class="h-4 w-auto object-contain select-none"
+              />
+            </div>
+            <input
+              type="tel"
+              id="demo-phone"
+              formControlName="phone"
+              autocomplete="tel"
+              [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.PHONE_PLACEHOLDER' | translate"
+              [attr.aria-invalid]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)"
+              [attr.aria-describedby]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched) ? 'demo-phone-error' : null"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              [class.border-red-500]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)"
+              [class.focus:border-red-500]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)"
+              [class.focus:ring-red-500/20]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)"
+              [class.border-[#E8E8E8]]="!(phoneControl.invalid && (phoneControl.dirty || phoneControl.touched))"
+              [class.focus:border-[#1d44eb]]="!(phoneControl.invalid && (phoneControl.dirty || phoneControl.touched))"
+              [class.focus:ring-[#1d44eb]/20]="!(phoneControl.invalid && (phoneControl.dirty || phoneControl.touched))"
+            />
+          </div>
+          @if (phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)) {
+            <div id="demo-phone-error" class="mt-1.5 flex items-center gap-1.5 text-xs sm:text-sm text-red-600 font-medium">
+              <svg class="h-4 w-4 shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+              </svg>
+              <span>{{ 'SCHEDULE_DEMO.FORM.ERRORS.PHONE_INVALID' | translate }}</span>
+            </div>
+          }
+        </div>
+
+        <div>
+          <label for="demo-company" class="sr-only">
+            {{ 'SCHEDULE_DEMO.FORM.FIELDS.COMPANY_PLACEHOLDER' | translate }}
+          </label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 sm:pl-4.5 z-10">
+              <img
+                ngSrc="/images/schedule-demo/perushaan.svg"
+                width="14"
+                height="14"
+                alt=""
+                aria-hidden="true"
+                class="h-3.5 w-auto object-contain select-none"
+              />
+            </div>
+            <input
+              type="text"
+              id="demo-company"
+              formControlName="company"
+              autocomplete="organization"
+              [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.COMPANY_PLACEHOLDER' | translate"
+              [attr.aria-invalid]="companyControl.invalid && (companyControl.dirty || companyControl.touched)"
+              [attr.aria-describedby]="companyControl.invalid && (companyControl.dirty || companyControl.touched) ? 'demo-company-error' : null"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              [class.border-red-500]="companyControl.invalid && (companyControl.dirty || companyControl.touched)"
+              [class.focus:border-red-500]="companyControl.invalid && (companyControl.dirty || companyControl.touched)"
+              [class.focus:ring-red-500/20]="companyControl.invalid && (companyControl.dirty || companyControl.touched)"
+              [class.border-[#E8E8E8]]="!(companyControl.invalid && (companyControl.dirty || companyControl.touched))"
+              [class.focus:border-[#1d44eb]]="!(companyControl.invalid && (companyControl.dirty || companyControl.touched))"
+              [class.focus:ring-[#1d44eb]/20]="!(companyControl.invalid && (companyControl.dirty || companyControl.touched))"
+            />
+          </div>
+          @if (companyControl.invalid && (companyControl.dirty || companyControl.touched)) {
+            <div id="demo-company-error" class="mt-1.5 flex items-center gap-1.5 text-xs sm:text-sm text-red-600 font-medium">
+              <svg class="h-4 w-4 shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+              </svg>
+              <span>{{ 'SCHEDULE_DEMO.FORM.ERRORS.COMPANY_REQUIRED' | translate }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="relative" [class.z-30]="isDropdownOpen()">
+          <label id="demo-industry-label" class="sr-only">
+            {{ 'SCHEDULE_DEMO.FORM.FIELDS.INDUSTRY_PLACEHOLDER' | translate }}
+          </label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 sm:pl-4 z-10">
+              <img
+                ngSrc="/images/schedule-demo/industri.svg"
+                width="17"
+                height="16"
+                alt=""
+                aria-hidden="true"
+                class="h-4 w-auto object-contain select-none"
+              />
+            </div>
+            <button
+              type="button"
+              id="demo-industry-trigger"
+              role="combobox"
+              aria-haspopup="listbox"
+              [attr.aria-expanded]="isDropdownOpen()"
+              aria-controls="industry-listbox"
+              aria-labelledby="demo-industry-label"
+              (click)="toggleDropdown($event)"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-10 py-3 sm:py-3.5 text-left font-dm-sans font-normal text-sm sm:text-base cursor-pointer flex items-center justify-between transition-all focus:outline-hidden focus:ring-2"
+              [class.border-red-500]="industryControl.invalid && (industryControl.dirty || industryControl.touched)"
+              [class.focus:border-red-500]="industryControl.invalid && (industryControl.dirty || industryControl.touched)"
+              [class.focus:ring-red-500/20]="industryControl.invalid && (industryControl.dirty || industryControl.touched)"
+              [class.border-[#E8E8E8]]="!(industryControl.invalid && (industryControl.dirty || industryControl.touched))"
+              [class.focus:border-[#1d44eb]]="!(industryControl.invalid && (industryControl.dirty || industryControl.touched))"
+              [class.focus:ring-[#1d44eb]/20]="!(industryControl.invalid && (industryControl.dirty || industryControl.touched))"
+            >
+              @if (selectedIndustry()) {
+                <span class="text-[#23244E] font-normal truncate">{{ selectedIndustry()!.key | translate }}</span>
+              } @else {
+                <span class="text-[#8B8B8B] font-normal truncate">{{ 'SCHEDULE_DEMO.FORM.FIELDS.INDUSTRY_PLACEHOLDER' | translate }}</span>
+              }
+              <svg
+                class="h-4 w-4 text-[#8B8B8B] transition-transform duration-200 shrink-0 absolute right-3.5 top-1/2 -translate-y-1/2"
+                [class.rotate-180]="isDropdownOpen()"
+                [class.text-[#1d44eb]]="isDropdownOpen()"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+
+          @if (isDropdownOpen()) {
+            <ul
+              role="listbox"
+              id="industry-listbox"
+              aria-labelledby="demo-industry-label"
+              class="absolute left-0 right-0 top-[calc(100%+6px)] z-40 bg-white border border-[#E8E8E8] rounded-sm shadow-[0_12px_36px_-6px_rgba(24,40,73,0.12),0_4px_12px_-2px_rgba(24,40,73,0.06)] p-1.5 max-h-60 overflow-y-auto animate-dropdown font-dm-sans font-normal"
+            >
+              @for (item of industries; track item.value) {
+                <li role="none">
+                  <button
+                    type="button"
+                    role="option"
+                    [attr.aria-selected]="selectedIndustry()?.value === item.value"
+                    (click)="selectIndustry(item, $event)"
+                    class="w-full px-3.5 py-2.5 rounded-sm text-left text-sm sm:text-base font-dm-sans transition-colors cursor-pointer flex items-center justify-between"
+                    [class.bg-blue-50]="selectedIndustry()?.value === item.value"
+                    [class.text-[#1d44eb]]="selectedIndustry()?.value === item.value"
+                    [class.font-semibold]="selectedIndustry()?.value === item.value"
+                    [class.text-slate-700]="selectedIndustry()?.value !== item.value"
+                    [class.hover:bg-slate-50]="selectedIndustry()?.value !== item.value"
+                  >
+                    <span>{{ item.key | translate }}</span>
+                    @if (selectedIndustry()?.value === item.value) {
+                      <svg class="h-4 w-4 text-[#1d44eb] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    }
+                  </button>
+                </li>
+              }
+            </ul>
+          }
+
+          @if (industryControl.invalid && (industryControl.dirty || industryControl.touched)) {
+            <div id="demo-industry-error" class="mt-1.5 flex items-center gap-1.5 text-xs sm:text-sm text-red-600 font-medium">
+              <svg class="h-4 w-4 shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+              </svg>
+              <span>{{ 'SCHEDULE_DEMO.FORM.ERRORS.INDUSTRY_REQUIRED' | translate }}</span>
+            </div>
+          }
+        </div>
+
+        <div>
+          <label for="demo-position" class="sr-only">
+            {{ 'SCHEDULE_DEMO.FORM.FIELDS.POSITION_PLACEHOLDER' | translate }}
+          </label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 sm:pl-4 z-10">
+              <img
+                ngSrc="/images/schedule-demo/posisi.svg"
+                width="19"
+                height="15"
+                alt=""
+                aria-hidden="true"
+                class="h-3.5 w-auto object-contain select-none"
+              />
+            </div>
+            <input
+              type="text"
+              id="demo-position"
+              formControlName="position"
+              autocomplete="organization-title"
+              [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.POSITION_PLACEHOLDER' | translate"
+              [attr.aria-invalid]="positionControl.invalid && (positionControl.dirty || positionControl.touched)"
+              [attr.aria-describedby]="positionControl.invalid && (positionControl.dirty || positionControl.touched) ? 'demo-position-error' : null"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              [class.border-red-500]="positionControl.invalid && (positionControl.dirty || positionControl.touched)"
+              [class.focus:border-red-500]="positionControl.invalid && (positionControl.dirty || positionControl.touched)"
+              [class.focus:ring-red-500/20]="positionControl.invalid && (positionControl.dirty || positionControl.touched)"
+              [class.border-[#E8E8E8]]="!(positionControl.invalid && (positionControl.dirty || positionControl.touched))"
+              [class.focus:border-[#1d44eb]]="!(positionControl.invalid && (positionControl.dirty || positionControl.touched))"
+              [class.focus:ring-[#1d44eb]/20]="!(positionControl.invalid && (positionControl.dirty || positionControl.touched))"
+            />
+          </div>
+          @if (positionControl.invalid && (positionControl.dirty || positionControl.touched)) {
+            <div id="demo-position-error" class="mt-1.5 flex items-center gap-1.5 text-xs sm:text-sm text-red-600 font-medium">
+              <svg class="h-4 w-4 shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01" />
+              </svg>
+              <span>{{ 'SCHEDULE_DEMO.FORM.ERRORS.POSITION_REQUIRED' | translate }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="demo-message" class="sr-only">
+            {{ 'SCHEDULE_DEMO.FORM.FIELDS.MESSAGE_PLACEHOLDER' | translate }}
+          </label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 sm:pl-4.5 z-10">
+              <img
+                ngSrc="/images/schedule-demo/pesan.svg"
+                width="15"
+                height="16"
+                alt=""
+                aria-hidden="true"
+                class="h-4 w-auto object-contain select-none"
+              />
+            </div>
+            <input
+              type="text"
+              id="demo-message"
+              formControlName="message"
+              [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.MESSAGE_PLACEHOLDER' | translate"
+              class="w-full rounded-sm border border-[#E8E8E8] bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2 focus:border-[#1d44eb] focus:ring-[#1d44eb]/20"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-3 sm:pt-4">
+        <button
+          type="submit"
+          class="group relative overflow-hidden inline-flex items-center justify-center rounded-xl bg-[linear-gradient(90deg,#1E37E1_0%,#1C7DD8_70%,#6694EB_100%)] px-6 py-3 font-dm-sans font-semibold text-sm sm:text-base leading-[1.3] tracking-normal text-white shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.99] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E37E1] cursor-pointer"
+        >
+          <span class="relative z-10">{{ 'SCHEDULE_DEMO.FORM.SUBMIT_BUTTON' | translate }}</span>
+        </button>
+      </div>
+    </form>
+  }
+</div>

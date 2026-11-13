@@ -963,5 +963,61 @@
       "TITLE": "프로세스를 연결하고 결과를 파악하세요",
       "DESCRIPTION": "귀사의 거래 워크플로우, 통제 포인트 및 보고서 요구사항을 SOFICloud 팀과 함께 상담하세요."
     }
+  },
+  "SCHEDULE_DEMO": {
+    "PAGE_TITLE": "데모 신청 - SOFICloud ERP",
+    "HERO": {
+      "TITLE": "귀사의 비즈니스를 위한 최적의 솔루션을 찾아보세요",
+      "SUBTITLE": "귀사의 비즈니스 요구에 맞춘 맞춤형 데모를 통해 SOFICloud의 기능과 강력함을 직접 경험해보세요."
+    },
+    "CONTACT_INFO": {
+      "COMPANY_NAME": "PT Inforsys Indonesia",
+      "PHONE_LABEL": "전화번호",
+      "PHONE_VALUE": "+62 778 416 0250",
+      "WHATSAPP_LABEL": "WhatsApp",
+      "WHATSAPP_VALUE": "+62 811 7774 744",
+      "EMAIL_LABEL": "이메일",
+      "EMAIL_VALUE": "hello@inforsys.co.id",
+      "HOURS_LABEL": "운영 시간",
+      "HOURS_DAYS": "월요일 – 금요일",
+      "HOURS_TIME": "08:00 – 17:00 WIB",
+      "ADDRESS_LABEL": "사무실 주소",
+      "ADDRESS_LINE1": "Orchard Park Blok C No.18",
+      "ADDRESS_LINE2": "Batam, Kepulauan Riau 29464,",
+      "ADDRESS_LINE3": "Indonesia"
+    },
+    "FORM": {
+      "TITLE": "문의하기",
+      "SUBTITLE": "아래 양식을 작성해 주시면 담당자가 신속히 연락드리겠습니다.",
+      "FIELDS": {
+        "NAME_PLACEHOLDER": "이름",
+        "EMAIL_PLACEHOLDER": "이메일",
+        "PHONE_PLACEHOLDER": "전화번호",
+        "COMPANY_PLACEHOLDER": "회사명",
+        "INDUSTRY_PLACEHOLDER": "업종 선택",
+        "POSITION_PLACEHOLDER": "직책 / 직무",
+        "MESSAGE_PLACEHOLDER": "메시지"
+      },
+      "INDUSTRIES": {
+        "MANUFACTURING": "제조업",
+        "TRADING": "무역 및 유통",
+        "CONSTRUCTION": "건설업",
+        "SERVICES": "서비스업",
+        "OTHERS": "기타"
+      },
+      "ERRORS": {
+        "NAME_REQUIRED": "이름을 입력해 주세요",
+        "EMAIL_INVALID": "유효한 이메일 형식이 아닙니다",
+        "PHONE_INVALID": "유효한 전화번호 형식이 아닙니다",
+        "COMPANY_REQUIRED": "회사명을 입력해 주세요",
+        "INDUSTRY_REQUIRED": "업종을 선택해 주세요",
+        "POSITION_REQUIRED": "직책을 입력해 주세요"
+      },
+      "SUBMIT_BUTTON": "메시지 보내기"
+    },
+    "MAP": {
+      "TITLE": "PT Inforsys Indonesia 사무실 위치 지도",
+      "ARIA_LABEL": "바탐 소재 PT Inforsys Indonesia 사무실 위치를 표시하는 구글 지도"
+    }
   }
 }

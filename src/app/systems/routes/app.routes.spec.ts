@@ -19,4 +19,22 @@ describe('app.routes', () => {
     )();
     expect(loadedComponent).toBeDefined();
   });
+
+  it('should include the schedule-demo route', () => {
+    const scheduleDemoRoute = routes.find(
+      (r: Route) => r.path === 'schedule-demo',
+    );
+    expect(scheduleDemoRoute).toBeDefined();
+    expect(scheduleDemoRoute?.loadComponent).toBeDefined();
+  });
+
+  it('should lazy load the ScheduleDemo component', async () => {
+    const scheduleDemoRoute = routes.find(
+      (r: Route) => r.path === 'schedule-demo',
+    );
+    const loadedComponent = await (
+      scheduleDemoRoute?.loadComponent as () => Promise<unknown>
+    )();
+    expect(loadedComponent).toBeDefined();
+  });
 });

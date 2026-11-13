@@ -129,9 +129,25 @@ describe('Navbar', () => {
     expect(component.isMobileMenuOpen()).toBe(false);
   });
 
-  it('should set activeLinkKey to CONTACT when onScheduleDemo is called', () => {
+  it('should navigate to /schedule-demo when onScheduleDemo is called from another page', () => {
+    const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
     component.onScheduleDemo();
-    expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
+    expect(navSpy).toHaveBeenCalledWith(['/schedule-demo']);
+    navSpy.mockRestore();
+  });
+
+  it('should scroll to schedule-demo-form anchor when onScheduleDemo is called while already on /schedule-demo', () => {
+    component.isScheduleDemoPage.set(true);
+    const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    const formEl = document.createElement('div');
+    formEl.id = 'schedule-demo-form';
+    document.body.appendChild(formEl);
+
+    component.onScheduleDemo();
+
+    expect(scrollSpy).toHaveBeenCalled();
+    formEl.remove();
+    scrollSpy.mockRestore();
   });
 
   it('should navigate to root with fragment when onNavClick or onMobileNavClick is called on non-landing page', () => {
@@ -150,7 +166,7 @@ describe('Navbar', () => {
     expect(component.isMobileMenuOpen()).toBe(false);
 
     component.onScheduleDemo();
-    expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'contact' });
+    expect(navSpy).toHaveBeenCalledWith(['/schedule-demo']);
 
     navSpy.mockRestore();
   });
