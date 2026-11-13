@@ -251,4 +251,26 @@ describe('ScheduleDemoForm', () => {
       expect(imgs[i].nativeElement.getAttribute('src')).toContain(expectedIcons[i]);
     }
   });
+
+  it('should match Figma specifications for submit button (gradient, 12px radius, DM Sans SemiBold 130%/0%, compact inline sizing)', () => {
+    fixture.detectChanges();
+
+    const submitBtn = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submitBtn).toBeTruthy();
+
+    const classList = submitBtn.nativeElement.classList;
+    expect(classList.contains('inline-flex')).toBe(true);
+    expect(classList.contains('w-full')).toBe(false);
+    expect(classList.contains('px-6')).toBe(true);
+    expect(classList.contains('py-3')).toBe(true);
+    expect(classList.contains('rounded-[12px]')).toBe(true);
+    expect(classList.contains('bg-[linear-gradient(90deg,#1E37E1_0%,#1C7DD8_70%,#6694EB_100%)]')).toBe(true);
+    expect(classList.contains('font-dm-sans')).toBe(true);
+    expect(classList.contains('font-semibold')).toBe(true);
+    expect(classList.contains('text-sm')).toBe(true);
+    expect(classList.contains('sm:text-base')).toBe(true);
+    expect(classList.contains('leading-[1.3]')).toBe(true);
+    expect(classList.contains('tracking-normal')).toBe(true);
+    expect(classList.contains('text-white')).toBe(true);
+  });
 });
