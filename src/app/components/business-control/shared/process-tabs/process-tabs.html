@@ -5,7 +5,7 @@
   [class.sm:px-6]="!isSticky()"
   [class.lg:px-8]="!isSticky()"
   [class.px-0]="isSticky()"
-  aria-label="Connected process navigation"
+  [attr.aria-label]="navAriaLabel()"
 >
   <div class="max-w-7xl mx-auto flex justify-center">
     <!-- Outer container: transforms into dynamic island when sticky with constant vertical height -->
@@ -26,14 +26,14 @@
       <div
         class="w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden xl:overflow-visible"
       >
-        <div class="min-w-270 xl:min-w-0 w-full relative">
+        <div [class]="listMinWidthClass() + ' w-full relative'">
           <div
             #tabsListRef
             role="tablist"
-            aria-label="Connected process milestones"
+            [attr.aria-label]="tablistAriaLabel()"
             class="relative flex items-center justify-between w-full px-6 sm:px-10 lg:px-17.5"
           >
-            @for (tab of tabs; track tab.id; let i = $index) {
+            @for (tab of tabs(); track tab.id; let i = $index) {
               <button
                 type="button"
                 role="tab"
@@ -51,7 +51,7 @@
                 [style.font-weight]="700"
                 [style.color]="activeTabId() === tab.id ? '#23244E' : '#B1B1B1DD'"
               >
-                {{ tab.titleKey | translate }}
+                {{ tab.titleKey ? (tab.titleKey | translate) : tab.defaultTitle }}
               </button>
             }
           </div>

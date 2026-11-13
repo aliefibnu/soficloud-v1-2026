@@ -964,6 +964,13 @@
       "DESCRIPTION": "与 SOFICloud 专家团队深入探讨适合您企业的业务交易流、关键控制点与报表需求。"
     }
   },
+  "SMART_WORKFLOW": {
+    "PROCESS_TABS": {
+      "KAPABILITAS": "核心功能",
+      "JELAJAHI_TAMPILAN": "探索界面",
+      "STATUS_DAN_ALUR": "状态与流程"
+    }
+  },
   "SCHEDULE_DEMO": {
     "PAGE_TITLE": "预约演示 - SOFICloud ERP",
     "HERO": {

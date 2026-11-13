@@ -964,6 +964,13 @@
       "DESCRIPTION": "Discuss transaction workflows, control checkpoints, and reporting requirements for your business with the SOFICloud team."
     }
   },
+  "SMART_WORKFLOW": {
+    "PROCESS_TABS": {
+      "KAPABILITAS": "CAPABILITIES",
+      "JELAJAHI_TAMPILAN": "EXPLORE VIEWS",
+      "STATUS_DAN_ALUR": "STATUS & FLOW"
+    }
+  },
   "SCHEDULE_DEMO": {
     "PAGE_TITLE": "Schedule a Demo - SOFICloud ERP",
     "HERO": {

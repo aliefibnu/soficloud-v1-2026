@@ -1,7 +1,7 @@
 import { Component, ElementRef, signal, viewChild } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ProcessSectionShell } from '../../process-section-shell/process-section-shell';
+import { ProcessSectionShell } from '../../../shared/process-section-shell/process-section-shell';
 
 export type ProcessStreamId = 'purchasing' | 'manufacturing' | 'general-ledger' | 'sales';
 export type ProcessTheme = 'blue' | 'teal' | 'red';

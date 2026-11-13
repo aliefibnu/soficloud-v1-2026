@@ -1,9 +1,37 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
-import { ProcessTabs } from './process-tabs';
+import { ProcessTab, ProcessTabs } from './process-tabs';
 
-describe('ConnectedProcess ProcessTabs', () => {
+const CONNECTED_PROCESS_TABS: readonly ProcessTab[] = [
+  {
+    id: 'satu-data',
+    titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.SATU_DATA',
+    defaultTitle: 'SATU DATA',
+  },
+  {
+    id: 'alur-transaksi',
+    titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.ALUR_TRANSAKSI',
+    defaultTitle: 'ALUR TRANSAKSI',
+  },
+  {
+    id: 'dampak-akuntansi',
+    titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.DAMPAK_AKUNTANSI',
+    defaultTitle: 'DAMPAK AKUNTANSI',
+  },
+  {
+    id: 'laporan',
+    titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.LAPORAN',
+    defaultTitle: 'LAPORAN',
+  },
+  {
+    id: 'peta-lengkap',
+    titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.PETA_LENGKAP',
+    defaultTitle: 'PETA LENGKAP',
+  },
+];
+
+describe('Shared ProcessTabs', () => {
   let component: ProcessTabs;
   let fixture: ComponentFixture<ProcessTabs>;
   let translateService: TranslateService;
@@ -59,6 +87,7 @@ describe('ConnectedProcess ProcessTabs', () => {
 
     fixture = TestBed.createComponent(ProcessTabs);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('tabs', CONNECTED_PROCESS_TABS);
     fixture.detectChanges();
     await fixture.whenStable();
   });
@@ -91,6 +120,33 @@ describe('ConnectedProcess ProcessTabs', () => {
     expect(tabs[3].nativeElement.getAttribute('aria-controls')).toBe('laporan');
     expect(tabs[4].nativeElement.textContent.trim()).toBe('PETA LENGKAP');
     expect(tabs[4].nativeElement.getAttribute('aria-controls')).toBe('peta-lengkap');
+  });
+
+  it('should support a 3-tab configuration with defaultTitle fallback when titleKey is omitted', async () => {
+    const smartWorkflowTabs: readonly ProcessTab[] = [
+      { id: 'workflow-section-1', defaultTitle: 'SECTION 1' },
+      { id: 'workflow-section-2', defaultTitle: 'SECTION 2' },
+      { id: 'workflow-section-3', defaultTitle: 'SECTION 3' },
+    ];
+    fixture.componentRef.setInput('tabs', smartWorkflowTabs);
+    fixture.componentRef.setInput('navAriaLabel', 'Smart workflow navigation');
+    fixture.componentRef.setInput('tablistAriaLabel', 'Smart workflow milestones');
+    fixture.componentRef.setInput('listMinWidthClass', 'min-w-max sm:min-w-0');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const section = fixture.debugElement.query(By.css('#process-tabs'));
+    expect(section.nativeElement.getAttribute('aria-label')).toBe('Smart workflow navigation');
+
+    const tablist = fixture.debugElement.query(By.css('[role="tablist"]'));
+    expect(tablist.nativeElement.getAttribute('aria-label')).toBe('Smart workflow milestones');
+
+    const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
+    expect(tabs.length).toBe(3);
+    expect(tabs[0].nativeElement.textContent.trim()).toBe('SECTION 1');
+    expect(tabs[1].nativeElement.textContent.trim()).toBe('SECTION 2');
+    expect(tabs[2].nativeElement.textContent.trim()).toBe('SECTION 3');
+    expect(component.activeTabId()).toBe('workflow-section-1');
   });
 
   it('should have satu-data active by default with correct styles and accessibility attributes', () => {
@@ -135,25 +191,21 @@ describe('ConnectedProcess ProcessTabs', () => {
   it('should navigate tabs using arrow keys and Home/End keys', () => {
     const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
 
-    // Press ArrowRight on tab 0 -> moves to tab 1
     const eventRight = new KeyboardEvent('keydown', { key: 'ArrowRight' });
     tabs[0].nativeElement.dispatchEvent(eventRight);
     fixture.detectChanges();
     expect(component.activeTabId()).toBe('alur-transaksi');
 
-    // Press ArrowLeft on tab 1 -> moves back to tab 0
     const eventLeft = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
     tabs[1].nativeElement.dispatchEvent(eventLeft);
     fixture.detectChanges();
     expect(component.activeTabId()).toBe('satu-data');
 
-    // Press End -> moves to last tab
     const eventEnd = new KeyboardEvent('keydown', { key: 'End' });
     tabs[0].nativeElement.dispatchEvent(eventEnd);
     fixture.detectChanges();
     expect(component.activeTabId()).toBe('peta-lengkap');
 
-    // Press Home -> moves to first tab
     const eventHome = new KeyboardEvent('keydown', { key: 'Home' });
     tabs[4].nativeElement.dispatchEvent(eventHome);
     fixture.detectChanges();
@@ -204,7 +256,6 @@ describe('ConnectedProcess ProcessTabs', () => {
     expect(listEl).toBeTruthy();
     if (!listEl) return;
 
-    // Simulate mobile viewport where container left is 20 and tab button starts at 44 with width 86
     vi.spyOn(listEl, 'getBoundingClientRect').mockReturnValue({
       left: 20,
       top: 100,
@@ -239,8 +290,8 @@ describe('ConnectedProcess ProcessTabs', () => {
 
     component.updateIndicator();
 
-    expect(component.indicatorLeft()).toBe(0); // 44 - 44 = 0px for first tab
-    expect(component.indicatorWidth()).toBe(86); // 86px width
+    expect(component.indicatorLeft()).toBe(0);
+    expect(component.indicatorWidth()).toBe(86);
   });
 
   it('should disconnect resizeObserver on destroy', () => {
@@ -254,11 +305,9 @@ describe('ConnectedProcess ProcessTabs', () => {
   });
 
   it('should toggle isSticky when scrolled past top offset threshold', () => {
-    // Reset state for test
     component.isSticky.set(false);
     expect(component.isSticky()).toBe(false);
 
-    // Mock bounding rect as if it is scrolled under navbar
     const hostEl = fixture.nativeElement;
     vi.spyOn(hostEl, 'getBoundingClientRect').mockReturnValue({
       top: 60,
@@ -292,7 +341,6 @@ describe('ConnectedProcess ProcessTabs', () => {
     const firstTabBtn = fixture.debugElement.query(By.css('[role="tab"]')).nativeElement as HTMLElement;
     const nonStickyBtnClasses = firstTabBtn.className;
 
-    // At top = 79px on desktop (stickyTop = 76px), within hysteresis band (77 < 79 <= 81), should stay non-sticky
     const rectSpy = vi.spyOn(hostEl, 'getBoundingClientRect').mockReturnValue({
       top: 79,
       bottom: 139,
@@ -307,7 +355,6 @@ describe('ConnectedProcess ProcessTabs', () => {
     component.onWindowScroll();
     expect(component.isSticky()).toBe(false);
 
-    // At top = 76px (pinned at stickyTop <= 77), should become sticky
     rectSpy.mockReturnValue({
       top: 76,
       bottom: 136,
@@ -323,11 +370,9 @@ describe('ConnectedProcess ProcessTabs', () => {
     expect(component.isSticky()).toBe(true);
     fixture.detectChanges();
 
-    // Vertical padding on section and typography/padding on buttons must remain identical
     expect(sectionEl.classList.contains('py-0')).toBe(true);
     expect(firstTabBtn.className).toBe(nonStickyBtnClasses);
 
-    // Slight subpixel/jitter upward to top = 80px (<= stickyTop + 5 = 81px) must NOT un-stick
     rectSpy.mockReturnValue({
       top: 80,
       bottom: 140,
@@ -342,7 +387,6 @@ describe('ConnectedProcess ProcessTabs', () => {
     component.onWindowScroll();
     expect(component.isSticky()).toBe(true);
 
-    // Scrolling above hysteresis band (top = 82px > 81px) should cleanly un-stick
     rectSpy.mockReturnValue({
       top: 82,
       bottom: 142,
@@ -359,7 +403,6 @@ describe('ConnectedProcess ProcessTabs', () => {
   });
 
   it('should accurately update activeTabId based on readingLine position of sections', () => {
-    // Create mock sections
     const s1 = document.createElement('div');
     s1.id = 'satu-data';
     const s2 = document.createElement('div');
@@ -368,8 +411,6 @@ describe('ConnectedProcess ProcessTabs', () => {
     document.body.appendChild(s2);
 
     try {
-      // Simulate reading line is around 300px (38% of 800px). When section 2 is at top=200 and bottom=900,
-      // it covers the readingLine (200 <= 304 and 900 > 304), so s2 must become active.
       vi.spyOn(s1, 'getBoundingClientRect').mockReturnValue({
         top: -600,
         bottom: 200,

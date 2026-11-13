@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
 import { SatuData } from './satu-data';
-import { ProcessSectionShell } from '../../process-section-shell/process-section-shell';
+import { ProcessSectionShell } from '../../../shared/process-section-shell/process-section-shell';
 
 describe('SatuData', () => {
   let fixture: ComponentFixture<SatuData>;
