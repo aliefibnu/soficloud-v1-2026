@@ -160,7 +160,7 @@ describe('ProcurementControl', () => {
     expect(svgs.length).toBeGreaterThanOrEqual(10);
   });
 
-  it('should render the decision card with decision text', () => {
+  it('should render the decision card with decision text and procurement illustration', () => {
     const shellEl = fixture.debugElement.query(
       By.directive(VisibilitySectionShell),
     );
@@ -168,6 +168,14 @@ describe('ProcurementControl', () => {
     expect(shellEl.nativeElement.textContent).toContain('Untuk keputusan:');
     expect(shellEl.nativeElement.textContent).toContain(
       'Prioritaskan PO dan penerimaan barang yang belum selesai',
+    );
+
+    const decisionBox = shellEl.query(By.css('.bg-\\[\\#CB1C29\\]'));
+    expect(decisionBox).toBeTruthy();
+    const imgEl = decisionBox.query(By.css('img'));
+    expect(imgEl).toBeTruthy();
+    expect(imgEl.nativeElement.getAttribute('src')).toBe(
+      '/images/business-realtime/decisions/procurement.svg',
     );
   });
 });

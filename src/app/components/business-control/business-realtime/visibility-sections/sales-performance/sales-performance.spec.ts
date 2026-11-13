@@ -111,13 +111,21 @@ describe('SalesPerformance', () => {
     expect(card3.nativeElement.classList.contains('sm:w-[432.43px]')).toBe(true);
   });
 
-  it('should render the decision card with decision text and reversed layout', () => {
+  it('should render the decision card with decision text, illustration, and reversed layout', () => {
     const shellEl = fixture.debugElement.query(By.directive(VisibilitySectionShell));
     expect(shellEl).toBeTruthy();
     expect(shellEl.componentInstance.decisionReversed()).toBe(true);
     expect(shellEl.nativeElement.textContent).toContain('Untuk keputusan:');
     expect(shellEl.nativeElement.textContent).toContain(
       'Pantau perubahan pipeline dan selidiki bulan ketika kinerja mulai melemah',
+    );
+
+    const decisionBox = shellEl.query(By.css('.bg-\\[\\#CB1C29\\]'));
+    expect(decisionBox).toBeTruthy();
+    const imgEl = decisionBox.query(By.css('img'));
+    expect(imgEl).toBeTruthy();
+    expect(imgEl.nativeElement.getAttribute('src')).toBe(
+      '/images/business-realtime/decisions/sales-performance.svg',
     );
 
     const stageInner = shellEl.query(By.css('.flex.items-center.justify-center'));

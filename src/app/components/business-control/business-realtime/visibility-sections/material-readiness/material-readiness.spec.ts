@@ -211,14 +211,23 @@ describe('MaterialReadiness', () => {
     expect(rows[6].nativeElement.textContent).toContain('WORK IN PROCESS');
   });
 
-  it('should render the decision card with translated decision text', () => {
+  it('should render the decision card with translated decision text and illustration on the right', () => {
     const shellEl = fixture.debugElement.query(
       By.directive(VisibilitySectionShell),
     );
     expect(shellEl).toBeTruthy();
+    expect(shellEl.componentInstance.decisionReversed()).toBe(false);
     expect(shellEl.nativeElement.textContent).toContain('Untuk keputusan:');
     expect(shellEl.nativeElement.textContent).toContain(
       'Identifikasi kekurangan material, lalu ajukan pembelian atau jadwal ulang',
+    );
+
+    const decisionBox = shellEl.query(By.css('.bg-\\[\\#CB1C29\\]'));
+    expect(decisionBox).toBeTruthy();
+    const imgEl = decisionBox.query(By.css('img'));
+    expect(imgEl).toBeTruthy();
+    expect(imgEl.nativeElement.getAttribute('src')).toBe(
+      '/images/business-realtime/decisions/material-readiness.svg',
     );
   });
 });
