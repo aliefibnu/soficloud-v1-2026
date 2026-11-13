@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ProcessSectionShell } from '../../../shared/process-section-shell/process-section-shell';
 
 @Component({
-  selector: 'app-workflow-section-3',
+  selector: 'app-capabilities',
   imports: [ProcessSectionShell],
-  templateUrl: './workflow-section-3.html',
+  templateUrl: './capabilities.html',
 })
-export class WorkflowSection3 {}
+export class Capabilities {}

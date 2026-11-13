@@ -964,6 +964,13 @@
       "DESCRIPTION": "Diskusikan alur transaksi, titik kontrol, dan kebutuhan pelaporan perusahaan Anda bersama tim SOFICloud."
     }
   },
+  "SMART_WORKFLOW": {
+    "PROCESS_TABS": {
+      "KAPABILITAS": "KAPABILITAS",
+      "JELAJAHI_TAMPILAN": "JELAJAHI TAMPILAN",
+      "STATUS_DAN_ALUR": "STATUS DAN ALUR"
+    }
+  },
   "SCHEDULE_DEMO": {
     "PAGE_TITLE": "Jadwalkan Demo - SOFICloud ERP",
     "HERO": {

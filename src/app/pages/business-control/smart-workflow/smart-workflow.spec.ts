@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { SmartWorkflow } from './smart-workflow';
 
 describe('SmartWorkflow', () => {
   let component: SmartWorkflow;
   let fixture: ComponentFixture<SmartWorkflow>;
+  let translateService: TranslateService;
   let scrollToSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(async () => {
@@ -21,8 +22,30 @@ describe('SmartWorkflow', () => {
       ],
     }).compileComponents();
 
+    translateService = TestBed.inject(TranslateService);
+    translateService.setTranslation('id', {
+      SMART_WORKFLOW: {
+        PROCESS_TABS: {
+          KAPABILITAS: 'KAPABILITAS',
+          JELAJAHI_TAMPILAN: 'JELAJAHI TAMPILAN',
+          STATUS_DAN_ALUR: 'STATUS DAN ALUR',
+        },
+      },
+    });
+    translateService.setTranslation('en', {
+      SMART_WORKFLOW: {
+        PROCESS_TABS: {
+          KAPABILITAS: 'CAPABILITIES',
+          JELAJAHI_TAMPILAN: 'EXPLORE VIEWS',
+          STATUS_DAN_ALUR: 'STATUS & FLOW',
+        },
+      },
+    });
+    translateService.use('id');
+
     fixture = TestBed.createComponent(SmartWorkflow);
     component = fixture.componentInstance;
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 
@@ -34,8 +57,7 @@ describe('SmartWorkflow', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render hero, process-tabs with 3 tabs, 3 workflow sections, and subfooter in order without cta', () => {
-    fixture.detectChanges();
+  it('should render hero, localized 3-tab process-tabs, capabilities, explore-views, status-and-flow, and subfooter in order without cta', async () => {
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     expect(heroEl).toBeTruthy();
 
@@ -43,15 +65,29 @@ describe('SmartWorkflow', () => {
     expect(processTabsEl).toBeTruthy();
     const tabButtons = processTabsEl.queryAll(By.css('[role="tab"]'));
     expect(tabButtons.length).toBe(3);
+    expect(tabButtons.map((b) => b.nativeElement.textContent.trim())).toEqual([
+      'KAPABILITAS',
+      'JELAJAHI TAMPILAN',
+      'STATUS DAN ALUR',
+    ]);
     expect(tabButtons.map((b) => b.nativeElement.getAttribute('aria-controls'))).toEqual([
-      'workflow-section-1',
-      'workflow-section-2',
-      'workflow-section-3',
+      'kapabilitas',
+      'jelajahi-tampilan',
+      'status-dan-alur',
     ]);
 
-    expect(fixture.debugElement.query(By.css('app-workflow-section-1'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('app-workflow-section-2'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('app-workflow-section-3'))).toBeTruthy();
+    translateService.use('en');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(tabButtons.map((b) => b.nativeElement.textContent.trim())).toEqual([
+      'CAPABILITIES',
+      'EXPLORE VIEWS',
+      'STATUS & FLOW',
+    ]);
+
+    expect(fixture.debugElement.query(By.css('app-capabilities'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('app-explore-views'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('app-status-and-flow'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('app-subfooter'))).toBeTruthy();
 
     const ctaEl = fixture.debugElement.query(By.css('app-cta'));
@@ -65,9 +101,9 @@ describe('SmartWorkflow', () => {
     expect(children).toEqual([
       'app-hero',
       'app-process-tabs',
-      'app-workflow-section-1',
-      'app-workflow-section-2',
-      'app-workflow-section-3',
+      'app-capabilities',
+      'app-explore-views',
+      'app-status-and-flow',
       'app-subfooter',
     ]);
   });

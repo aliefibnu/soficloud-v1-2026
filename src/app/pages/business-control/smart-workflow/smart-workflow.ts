@@ -5,18 +5,18 @@ import {
   ProcessTab,
   ProcessTabs,
 } from '../../../components/business-control/shared/process-tabs/process-tabs';
-import { WorkflowSection1 } from '../../../components/business-control/smart-workflow/sections/workflow-section-1/workflow-section-1';
-import { WorkflowSection2 } from '../../../components/business-control/smart-workflow/sections/workflow-section-2/workflow-section-2';
-import { WorkflowSection3 } from '../../../components/business-control/smart-workflow/sections/workflow-section-3/workflow-section-3';
+import { Capabilities } from '../../../components/business-control/smart-workflow/sections/capabilities/capabilities';
+import { ExploreViews } from '../../../components/business-control/smart-workflow/sections/explore-views/explore-views';
+import { StatusAndFlow } from '../../../components/business-control/smart-workflow/sections/status-and-flow/status-and-flow';
 import { Subfooter } from '../../../components/business-control/smart-workflow/subfooter/subfooter';
 
 @Component({
   imports: [
     Hero,
     ProcessTabs,
-    WorkflowSection1,
-    WorkflowSection2,
-    WorkflowSection3,
+    Capabilities,
+    ExploreViews,
+    StatusAndFlow,
     Subfooter,
   ],
   selector: 'app-smart-workflow',
@@ -26,9 +26,21 @@ export class SmartWorkflow implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
 
   readonly tabs: readonly ProcessTab[] = [
-    { id: 'workflow-section-1', defaultTitle: 'SECTION 1' },
-    { id: 'workflow-section-2', defaultTitle: 'SECTION 2' },
-    { id: 'workflow-section-3', defaultTitle: 'SECTION 3' },
+    {
+      id: 'kapabilitas',
+      titleKey: 'SMART_WORKFLOW.PROCESS_TABS.KAPABILITAS',
+      defaultTitle: 'KAPABILITAS',
+    },
+    {
+      id: 'jelajahi-tampilan',
+      titleKey: 'SMART_WORKFLOW.PROCESS_TABS.JELAJAHI_TAMPILAN',
+      defaultTitle: 'JELAJAHI TAMPILAN',
+    },
+    {
+      id: 'status-dan-alur',
+      titleKey: 'SMART_WORKFLOW.PROCESS_TABS.STATUS_DAN_ALUR',
+      defaultTitle: 'STATUS DAN ALUR',
+    },
   ];
 
   ngOnInit(): void {

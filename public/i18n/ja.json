@@ -964,6 +964,13 @@
       "DESCRIPTION": "貴社の取引フロー、統制ポイント、およびレポート要件についてSOFICloudチームにご相談ください。"
     }
   },
+  "SMART_WORKFLOW": {
+    "PROCESS_TABS": {
+      "KAPABILITAS": "機能一覧",
+      "JELAJAHI_TAMPILAN": "画面を見る",
+      "STATUS_DAN_ALUR": "ステータス＆フロー"
+    }
+  },
   "SCHEDULE_DEMO": {
     "PAGE_TITLE": "デモを予約 - SOFICloud ERP",
     "HERO": {

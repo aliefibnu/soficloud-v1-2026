@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ProcessSectionShell } from '../../../shared/process-section-shell/process-section-shell';
-import { WorkflowSection2 } from './workflow-section-2';
+import { Capabilities } from './capabilities';
 
-describe('WorkflowSection2', () => {
-  let fixture: ComponentFixture<WorkflowSection2>;
-  let component: WorkflowSection2;
+describe('Capabilities', () => {
+  let fixture: ComponentFixture<Capabilities>;
+  let component: Capabilities;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkflowSection2],
+      imports: [Capabilities],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(WorkflowSection2);
+    fixture = TestBed.createComponent(Capabilities);
     component = fixture.componentInstance;
     fixture.detectChanges();
     await fixture.whenStable();
@@ -22,11 +22,11 @@ describe('WorkflowSection2', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should wrap content inside ProcessSectionShell with id="workflow-section-2"', () => {
+  it('should wrap content inside ProcessSectionShell with id="kapabilitas"', () => {
     const shell = fixture.debugElement.query(By.directive(ProcessSectionShell));
     expect(shell).toBeTruthy();
 
-    const section = fixture.debugElement.query(By.css('section#workflow-section-2'));
+    const section = fixture.debugElement.query(By.css('section#kapabilitas'));
     expect(section).toBeTruthy();
   });
 });
