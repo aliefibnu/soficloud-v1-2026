@@ -13,11 +13,11 @@ import { Hero } from '../../../components/business-control/business-realtime/her
   imports: [
     Hero,
     VisibilityFunction,
-    SalesPerformance,
     ProcurementControl,
+    SalesPerformance,
     MaterialReadiness,
-    OrderPipeline,
     FinancialVisibility,
+    OrderPipeline,
     Subfooter,
   ],
   selector: 'app-business-realtime',

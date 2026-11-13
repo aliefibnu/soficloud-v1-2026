@@ -33,6 +33,7 @@ describe('Footer', () => {
           ABOUT: 'About Inforsys',
           TERMS: 'Terms & Conditions',
           PRIVACY: 'Privacy Policy',
+          NEWS: 'News',
         },
         CUSTOMERS: {
           TITLE: 'Customers',
@@ -92,6 +93,7 @@ describe('Footer', () => {
     expect(compiled.textContent).toContain('About Inforsys');
     expect(compiled.textContent).toContain('Terms & Conditions');
     expect(compiled.textContent).toContain('Privacy Policy');
+    expect(compiled.textContent).toContain('News');
 
     expect(compiled.textContent).toContain('Customers');
     expect(compiled.textContent).toContain('Manufacturing');

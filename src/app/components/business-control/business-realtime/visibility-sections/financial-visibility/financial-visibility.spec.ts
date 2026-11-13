@@ -245,7 +245,7 @@ describe('FinancialVisibility', () => {
     expect(cardContent).toContain('0');
   });
 
-  it('should render the decision card with translated decision text', () => {
+  it('should render the decision card with translated decision text and illustration', () => {
     const shellEl = fixture.debugElement.query(
       By.directive(VisibilitySectionShell),
     );
@@ -253,6 +253,14 @@ describe('FinancialVisibility', () => {
     expect(shellEl.nativeElement.textContent).toContain('Untuk keputusan:');
     expect(shellEl.nativeElement.textContent).toContain(
       'Evaluasi kondisi keuangan dan tren pemasukan serta pengeluaran untuk menentukan prioritas anggaran dan menjaga kestabilan keuangan',
+    );
+
+    const decisionBox = shellEl.query(By.css('.bg-\\[\\#CB1C29\\]'));
+    expect(decisionBox).toBeTruthy();
+    const imgEl = decisionBox.query(By.css('img'));
+    expect(imgEl).toBeTruthy();
+    expect(imgEl.nativeElement.getAttribute('src')).toBe(
+      '/images/business-realtime/decisions/financial-visibility.svg',
     );
   });
 });

@@ -215,7 +215,7 @@ describe('OrderPipeline', () => {
     expect(connectors.length).toBe(7);
   });
 
-  it('should render the decision card with translated decision text', () => {
+  it('should render the decision card with translated decision text and illustration', () => {
     const shellEl = fixture.debugElement.query(
       By.directive(VisibilitySectionShell),
     );
@@ -223,6 +223,14 @@ describe('OrderPipeline', () => {
     expect(shellEl.nativeElement.textContent).toContain('Untuk keputusan:');
     expect(shellEl.nativeElement.textContent).toContain(
       'Cek hambatan order berdasarkan posisi proses, bukan sekadar status akhir pesanan',
+    );
+
+    const decisionBox = shellEl.query(By.css('.bg-\\[\\#CB1C29\\]'));
+    expect(decisionBox).toBeTruthy();
+    const imgEl = decisionBox.query(By.css('img'));
+    expect(imgEl).toBeTruthy();
+    expect(imgEl.nativeElement.getAttribute('src')).toBe(
+      '/images/business-realtime/decisions/order-pipeline.svg',
     );
   });
 });

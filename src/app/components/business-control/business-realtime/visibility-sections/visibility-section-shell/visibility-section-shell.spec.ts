@@ -13,6 +13,10 @@ import { VisibilitySectionShell } from './visibility-section-shell';
       [decisionText]="decisionText()"
       [decisionLabel]="decisionLabel()"
       [stageBgClass]="stageBgClass()"
+      [decisionImageSrc]="decisionImageSrc()"
+      [decisionImageWidth]="decisionImageWidth()"
+      [decisionImageHeight]="decisionImageHeight()"
+      [decisionImagePositionClass]="decisionImagePositionClass()"
     >
       <div id="test-projected-mockup">Projected Domain Mockup</div>
     </app-visibility-section-shell>
@@ -27,6 +31,10 @@ class TestHostComponent {
   readonly decisionText = signal('Pantau perubahan pipeline secara cepat.');
   readonly decisionLabel = signal('Untuk keputusan:');
   readonly stageBgClass = signal('bg-[#F9CEC8]');
+  readonly decisionImageSrc = signal<string | null>(null);
+  readonly decisionImageWidth = signal(127);
+  readonly decisionImageHeight = signal(108);
+  readonly decisionImagePositionClass = signal('left-0 top-0');
 }
 
 describe('VisibilitySectionShell', () => {
@@ -131,16 +139,27 @@ describe('VisibilitySectionShell', () => {
     expect(bodyText!.nativeElement.classList.contains('text-[#23244E]')).toBe(true);
   });
 
-  it('should render the #D9D9D9 placeholder rectangle with 8px radius in the decision card', () => {
+  it('should render the #D9D9D9 fallback rectangle by default and #CB1C29 card with illustration when decisionImageSrc is set', () => {
     const rectEl = fixture.debugElement.query(By.css('.bg-\\[\\#D9D9D9\\]'));
     expect(rectEl).toBeTruthy();
-    expect(rectEl.nativeElement.classList.contains('rounded-lg')).toBe(true);
-    expect(rectEl.nativeElement.classList.contains('h-32')).toBe(true);
+    expect(rectEl.nativeElement.classList.contains('rounded-[8px]')).toBe(true);
+    expect(rectEl.nativeElement.classList.contains('w-[127px]')).toBe(true);
+    expect(rectEl.nativeElement.classList.contains('h-[108px]')).toBe(true);
 
-    // No images or SVGs should exist in the decision card
-    const imgEl = fixture.debugElement.query(By.css('img'));
-    expect(imgEl).toBeNull();
-    const svgEl = fixture.debugElement.query(By.css('.bg-\\[\\#D9D9D9\\] svg'));
-    expect(svgEl).toBeNull();
+    expect(fixture.debugElement.query(By.css('img'))).toBeNull();
+
+    hostComponent.decisionImageSrc.set('/images/business-realtime/decisions/procurement.svg');
+    fixture.detectChanges();
+
+    expect(fixture.debugElement.query(By.css('.bg-\\[\\#D9D9D9\\]'))).toBeNull();
+    const redCardEl = fixture.debugElement.query(By.css('.bg-\\[\\#CB1C29\\]'));
+    expect(redCardEl).toBeTruthy();
+    expect(redCardEl.nativeElement.classList.contains('shadow-[0px_3px_15px_0px_rgba(0,0,0,0.08)]')).toBe(true);
+
+    const imgEl = redCardEl.query(By.css('img'));
+    expect(imgEl).toBeTruthy();
+    expect(imgEl.nativeElement.getAttribute('src')).toBe(
+      '/images/business-realtime/decisions/procurement.svg',
+    );
   });
 });

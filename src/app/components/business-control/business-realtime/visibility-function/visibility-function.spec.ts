@@ -106,21 +106,21 @@ describe('BusinessRealtime VisibilityFunction', () => {
 
     const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
     expect(tabs.length).toBe(5);
-    expect(tabs[0].nativeElement.textContent.trim()).toBe('KINERJA PENJUALAN');
-    expect(tabs[0].nativeElement.getAttribute('aria-controls')).toBe('sales-performance');
-    expect(tabs[1].nativeElement.textContent.trim()).toBe('PENGENDALIAN PENGADAAN');
-    expect(tabs[1].nativeElement.getAttribute('aria-controls')).toBe('procurement-control');
+    expect(tabs[0].nativeElement.textContent.trim()).toBe('PENGENDALIAN PENGADAAN');
+    expect(tabs[0].nativeElement.getAttribute('aria-controls')).toBe('procurement-control');
+    expect(tabs[1].nativeElement.textContent.trim()).toBe('KINERJA PENJUALAN');
+    expect(tabs[1].nativeElement.getAttribute('aria-controls')).toBe('sales-performance');
     expect(tabs[2].nativeElement.textContent.trim()).toBe('KESIAPAN MATERIAL');
     expect(tabs[2].nativeElement.getAttribute('aria-controls')).toBe('material-readiness');
-    expect(tabs[3].nativeElement.textContent.trim()).toBe('PIPELINE PESANAN');
-    expect(tabs[3].nativeElement.getAttribute('aria-controls')).toBe('order-pipeline');
-    expect(tabs[4].nativeElement.textContent.trim()).toBe('VISIBILITAS KEUANGAN');
-    expect(tabs[4].nativeElement.getAttribute('aria-controls')).toBe('financial-visibility');
+    expect(tabs[3].nativeElement.textContent.trim()).toBe('VISIBILITAS KEUANGAN');
+    expect(tabs[3].nativeElement.getAttribute('aria-controls')).toBe('financial-visibility');
+    expect(tabs[4].nativeElement.textContent.trim()).toBe('PIPELINE PESANAN');
+    expect(tabs[4].nativeElement.getAttribute('aria-controls')).toBe('order-pipeline');
   });
 
-  it('should have sales-performance active by default with correct styles', () => {
+  it('should have procurement-control active by default with correct styles', () => {
     const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
-    expect(component.activeTabId()).toBe('sales-performance');
+    expect(component.activeTabId()).toBe('procurement-control');
     expect(tabs[0].nativeElement.getAttribute('aria-selected')).toBe('true');
     expect(tabs[0].nativeElement.getAttribute('tabindex')).toBe('0');
     expect(tabs[0].nativeElement.style.color).toBe('rgb(35, 36, 78)');
@@ -134,7 +134,7 @@ describe('BusinessRealtime VisibilityFunction', () => {
     tabs[1].nativeElement.click();
     fixture.detectChanges();
 
-    expect(component.activeTabId()).toBe('procurement-control');
+    expect(component.activeTabId()).toBe('sales-performance');
     expect(tabs[1].nativeElement.getAttribute('aria-selected')).toBe('true');
     expect(tabs[0].nativeElement.getAttribute('aria-selected')).toBe('false');
   });
@@ -142,29 +142,29 @@ describe('BusinessRealtime VisibilityFunction', () => {
   it('should navigate tabs using arrow keys', () => {
     const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
 
-    // Press ArrowRight on tab 0 -> should move to tab 1
+    // Press ArrowRight on tab 0 -> should move to tab 1 (sales-performance)
     const eventRight = new KeyboardEvent('keydown', { key: 'ArrowRight' });
     tabs[0].nativeElement.dispatchEvent(eventRight);
     fixture.detectChanges();
-    expect(component.activeTabId()).toBe('procurement-control');
+    expect(component.activeTabId()).toBe('sales-performance');
 
-    // Press ArrowLeft on tab 1 -> should move back to tab 0
+    // Press ArrowLeft on tab 1 -> should move back to tab 0 (procurement-control)
     const eventLeft = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
     tabs[1].nativeElement.dispatchEvent(eventLeft);
     fixture.detectChanges();
-    expect(component.activeTabId()).toBe('sales-performance');
+    expect(component.activeTabId()).toBe('procurement-control');
 
-    // Press End -> should move to last tab
+    // Press End -> should move to last tab (order-pipeline)
     const eventEnd = new KeyboardEvent('keydown', { key: 'End' });
     tabs[0].nativeElement.dispatchEvent(eventEnd);
     fixture.detectChanges();
-    expect(component.activeTabId()).toBe('financial-visibility');
+    expect(component.activeTabId()).toBe('order-pipeline');
 
-    // Press Home -> should move to first tab
+    // Press Home -> should move to first tab (procurement-control)
     const eventHome = new KeyboardEvent('keydown', { key: 'Home' });
     tabs[4].nativeElement.dispatchEvent(eventHome);
     fixture.detectChanges();
-    expect(component.activeTabId()).toBe('sales-performance');
+    expect(component.activeTabId()).toBe('procurement-control');
   });
 
   it('should render the tablist with padding to provide leftover space on both sides of the line', () => {
@@ -193,11 +193,11 @@ describe('BusinessRealtime VisibilityFunction', () => {
     await fixture.whenStable();
 
     const tabs = fixture.debugElement.queryAll(By.css('[role="tab"]'));
-    expect(tabs[0].nativeElement.textContent.trim()).toBe('販売実績');
-    expect(tabs[1].nativeElement.textContent.trim()).toBe('調達管理');
+    expect(tabs[0].nativeElement.textContent.trim()).toBe('調達管理');
+    expect(tabs[1].nativeElement.textContent.trim()).toBe('販売実績');
     expect(tabs[2].nativeElement.textContent.trim()).toBe('資材準備状況');
-    expect(tabs[3].nativeElement.textContent.trim()).toBe('受注パイプライン');
-    expect(tabs[4].nativeElement.textContent.trim()).toBe('財務状況');
+    expect(tabs[3].nativeElement.textContent.trim()).toBe('財務状況');
+    expect(tabs[4].nativeElement.textContent.trim()).toBe('受注パイプライン');
   });
 
   it('should recalculate indicator dimensions relative to the first button', () => {
@@ -224,7 +224,7 @@ describe('BusinessRealtime VisibilityFunction', () => {
     });
 
     // When first tab is active: 100 - 100 = 0px
-    component.activeTabId.set('sales-performance');
+    component.activeTabId.set('procurement-control');
     component.updateIndicator();
     expect(component.indicatorLeft()).toBe(0);
     expect(component.indicatorWidth()).toBe(85);
@@ -247,7 +247,7 @@ describe('BusinessRealtime VisibilityFunction', () => {
       toJSON: () => {},
     });
 
-    component.activeTabId.set('procurement-control');
+    component.activeTabId.set('sales-performance');
     component.updateIndicator();
     expect(component.indicatorLeft()).toBe(110); // 210 - 100 = 110
     expect(component.indicatorWidth()).toBe(110);
