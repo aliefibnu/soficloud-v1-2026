@@ -1,5 +1,4 @@
 <div>
-  <!-- Form Header -->
   <div class="mb-8 sm:mb-9 lg:mb-10">
     <h2
       id="form-heading"
@@ -8,14 +7,13 @@
       {{ 'SCHEDULE_DEMO.FORM.TITLE' | translate }}
     </h2>
     <p
-      class="mt-4 sm:mt-6 font-dm-sans font-normal text-[14px] leading-relaxed lg:leading-[1.3] tracking-normal text-[#23244E] max-w-[380px] sm:max-w-[420px] whitespace-pre-line"
+      class="mt-4 sm:mt-6 font-dm-sans font-normal text-[14px] leading-relaxed lg:leading-[1.3] tracking-normal text-[#23244E] max-w-95 sm:max-w-105 whitespace-pre-line"
     >
       {{ 'SCHEDULE_DEMO.FORM.SUBTITLE' | translate }}
     </p>
   </div>
 
   @if (isSubmitted()) {
-    <!-- Submission Success Confirmation Card -->
     <div
       role="status"
       aria-live="polite"
@@ -43,10 +41,8 @@
       </div>
     </div>
   } @else {
-    <!-- Lead Capture Form -->
     <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="space-y-4 sm:space-y-5">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-        <!-- 1. Full Name (Nama) -->
         <div>
           <label for="demo-name" class="sr-only">
             {{ 'SCHEDULE_DEMO.FORM.FIELDS.NAME_PLACEHOLDER' | translate }}
@@ -70,7 +66,7 @@
               [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.NAME_PLACEHOLDER' | translate"
               [attr.aria-invalid]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)"
               [attr.aria-describedby]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched) ? 'demo-name-error' : null"
-              class="w-full rounded-[4px] border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
               [class.border-red-500]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)"
               [class.focus:border-red-500]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)"
               [class.focus:ring-red-500/20]="fullNameControl.invalid && (fullNameControl.dirty || fullNameControl.touched)"
@@ -90,7 +86,6 @@
           }
         </div>
 
-        <!-- 2. Email -->
         <div>
           <label for="demo-email" class="sr-only">
             {{ 'SCHEDULE_DEMO.FORM.FIELDS.EMAIL_PLACEHOLDER' | translate }}
@@ -114,7 +109,7 @@
               [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.EMAIL_PLACEHOLDER' | translate"
               [attr.aria-invalid]="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
               [attr.aria-describedby]="emailControl.invalid && (emailControl.dirty || emailControl.touched) ? 'demo-email-error' : null"
-              class="w-full rounded-[4px] border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
               [class.border-red-500]="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
               [class.focus:border-red-500]="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
               [class.focus:ring-red-500/20]="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
@@ -134,7 +129,6 @@
           }
         </div>
 
-        <!-- 3. Phone Number (Nomor Telepon) -->
         <div>
           <label for="demo-phone" class="sr-only">
             {{ 'SCHEDULE_DEMO.FORM.FIELDS.PHONE_PLACEHOLDER' | translate }}
@@ -158,7 +152,7 @@
               [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.PHONE_PLACEHOLDER' | translate"
               [attr.aria-invalid]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)"
               [attr.aria-describedby]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched) ? 'demo-phone-error' : null"
-              class="w-full rounded-[4px] border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
               [class.border-red-500]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)"
               [class.focus:border-red-500]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)"
               [class.focus:ring-red-500/20]="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)"
@@ -178,7 +172,6 @@
           }
         </div>
 
-        <!-- 4. Company Name (Nama Perusahaan) -->
         <div>
           <label for="demo-company" class="sr-only">
             {{ 'SCHEDULE_DEMO.FORM.FIELDS.COMPANY_PLACEHOLDER' | translate }}
@@ -202,7 +195,7 @@
               [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.COMPANY_PLACEHOLDER' | translate"
               [attr.aria-invalid]="companyControl.invalid && (companyControl.dirty || companyControl.touched)"
               [attr.aria-describedby]="companyControl.invalid && (companyControl.dirty || companyControl.touched) ? 'demo-company-error' : null"
-              class="w-full rounded-[4px] border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
               [class.border-red-500]="companyControl.invalid && (companyControl.dirty || companyControl.touched)"
               [class.focus:border-red-500]="companyControl.invalid && (companyControl.dirty || companyControl.touched)"
               [class.focus:ring-red-500/20]="companyControl.invalid && (companyControl.dirty || companyControl.touched)"
@@ -222,7 +215,6 @@
           }
         </div>
 
-        <!-- 5. Industry Dropdown (Industri) -->
         <div class="relative" [class.z-30]="isDropdownOpen()">
           <label id="demo-industry-label" class="sr-only">
             {{ 'SCHEDULE_DEMO.FORM.FIELDS.INDUSTRY_PLACEHOLDER' | translate }}
@@ -247,7 +239,7 @@
               aria-controls="industry-listbox"
               aria-labelledby="demo-industry-label"
               (click)="toggleDropdown($event)"
-              class="w-full rounded-[4px] border bg-white pl-11 sm:pl-12 pr-10 py-3 sm:py-3.5 text-left font-dm-sans font-normal text-sm sm:text-base cursor-pointer flex items-center justify-between transition-all focus:outline-hidden focus:ring-2"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-10 py-3 sm:py-3.5 text-left font-dm-sans font-normal text-sm sm:text-base cursor-pointer flex items-center justify-between transition-all focus:outline-hidden focus:ring-2"
               [class.border-red-500]="industryControl.invalid && (industryControl.dirty || industryControl.touched)"
               [class.focus:border-red-500]="industryControl.invalid && (industryControl.dirty || industryControl.touched)"
               [class.focus:ring-red-500/20]="industryControl.invalid && (industryControl.dirty || industryControl.touched)"
@@ -275,13 +267,12 @@
             </button>
           </div>
 
-          <!-- Dropdown Listbox Panel -->
           @if (isDropdownOpen()) {
             <ul
               role="listbox"
               id="industry-listbox"
               aria-labelledby="demo-industry-label"
-              class="absolute left-0 right-0 top-[calc(100%+6px)] z-40 bg-white border border-[#E8E8E8] rounded-[4px] shadow-[0_12px_36px_-6px_rgba(24,40,73,0.12),0_4px_12px_-2px_rgba(24,40,73,0.06)] p-1.5 max-h-60 overflow-y-auto animate-dropdown font-dm-sans font-normal"
+              class="absolute left-0 right-0 top-[calc(100%+6px)] z-40 bg-white border border-[#E8E8E8] rounded-sm shadow-[0_12px_36px_-6px_rgba(24,40,73,0.12),0_4px_12px_-2px_rgba(24,40,73,0.06)] p-1.5 max-h-60 overflow-y-auto animate-dropdown font-dm-sans font-normal"
             >
               @for (item of industries; track item.value) {
                 <li role="none">
@@ -290,7 +281,7 @@
                     role="option"
                     [attr.aria-selected]="selectedIndustry()?.value === item.value"
                     (click)="selectIndustry(item, $event)"
-                    class="w-full px-3.5 py-2.5 rounded-[4px] text-left text-sm sm:text-base font-dm-sans transition-colors cursor-pointer flex items-center justify-between"
+                    class="w-full px-3.5 py-2.5 rounded-sm text-left text-sm sm:text-base font-dm-sans transition-colors cursor-pointer flex items-center justify-between"
                     [class.bg-blue-50]="selectedIndustry()?.value === item.value"
                     [class.text-[#1d44eb]]="selectedIndustry()?.value === item.value"
                     [class.font-semibold]="selectedIndustry()?.value === item.value"
@@ -320,7 +311,6 @@
           }
         </div>
 
-        <!-- 6. Position (Posisi Anda) -->
         <div>
           <label for="demo-position" class="sr-only">
             {{ 'SCHEDULE_DEMO.FORM.FIELDS.POSITION_PLACEHOLDER' | translate }}
@@ -344,7 +334,7 @@
               [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.POSITION_PLACEHOLDER' | translate"
               [attr.aria-invalid]="positionControl.invalid && (positionControl.dirty || positionControl.touched)"
               [attr.aria-describedby]="positionControl.invalid && (positionControl.dirty || positionControl.touched) ? 'demo-position-error' : null"
-              class="w-full rounded-[4px] border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
+              class="w-full rounded-sm border bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2"
               [class.border-red-500]="positionControl.invalid && (positionControl.dirty || positionControl.touched)"
               [class.focus:border-red-500]="positionControl.invalid && (positionControl.dirty || positionControl.touched)"
               [class.focus:ring-red-500/20]="positionControl.invalid && (positionControl.dirty || positionControl.touched)"
@@ -364,7 +354,6 @@
           }
         </div>
 
-        <!-- 7. Message (Pesan) -->
         <div class="sm:col-span-2">
           <label for="demo-message" class="sr-only">
             {{ 'SCHEDULE_DEMO.FORM.FIELDS.MESSAGE_PLACEHOLDER' | translate }}
@@ -385,17 +374,16 @@
               id="demo-message"
               formControlName="message"
               [attr.placeholder]="'SCHEDULE_DEMO.FORM.FIELDS.MESSAGE_PLACEHOLDER' | translate"
-              class="w-full rounded-[4px] border border-[#E8E8E8] bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2 focus:border-[#1d44eb] focus:ring-[#1d44eb]/20"
+              class="w-full rounded-sm border border-[#E8E8E8] bg-white pl-11 sm:pl-12 pr-4 py-3 sm:py-3.5 font-dm-sans font-normal text-sm sm:text-base text-[#23244E] placeholder:text-[#8B8B8B] transition-all focus:outline-hidden focus:ring-2 focus:border-[#1d44eb] focus:ring-[#1d44eb]/20"
             />
           </div>
         </div>
       </div>
 
-      <!-- Submit CTA Button -->
       <div class="pt-3 sm:pt-4">
         <button
           type="submit"
-          class="group relative overflow-hidden inline-flex items-center justify-center rounded-[12px] bg-[linear-gradient(90deg,#1E37E1_0%,#1C7DD8_70%,#6694EB_100%)] px-6 py-3 font-dm-sans font-semibold text-sm sm:text-base leading-[1.3] tracking-normal text-white shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.99] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E37E1] cursor-pointer"
+          class="group relative overflow-hidden inline-flex items-center justify-center rounded-xl bg-[linear-gradient(90deg,#1E37E1_0%,#1C7DD8_70%,#6694EB_100%)] px-6 py-3 font-dm-sans font-semibold text-sm sm:text-base leading-[1.3] tracking-normal text-white shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.99] transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E37E1] cursor-pointer"
         >
           <span class="relative z-10">{{ 'SCHEDULE_DEMO.FORM.SUBMIT_BUTTON' | translate }}</span>
         </button>

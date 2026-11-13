@@ -1,12 +1,11 @@
-<div class="relative w-full pt-[88px] sm:pt-[100px] md:pt-[108px] lg:pt-[124px] xl:pt-[128px] pb-8 sm:pb-12 lg:pb-16">
-  <!-- Top Gradient Blue Backdrop with Curved Bottom Transition -->
+<div class="relative w-full pt-22 sm:pt-25 md:pt-27 lg:pt-31 xl:pt-32 pb-8 sm:pb-12 lg:pb-16">
   <div
-    class="pointer-events-none select-none absolute inset-x-0 top-0 z-0 h-[980px] sm:h-[1060px] md:h-[1120px] lg:h-[1080px] xl:h-[1150px] overflow-hidden"
+    class="pointer-events-none select-none absolute inset-x-0 top-0 z-0 h-245 sm:h-265 md:h-280 lg:h-270 xl:h-287.5 overflow-hidden"
     style="background: linear-gradient(180.68deg, #3874DB 0%, #9CBBF0 51%, #C3D7F7 100%);"
     aria-hidden="true"
   >
     <svg
-      class="absolute bottom-[-1px] left-0 w-full h-12 sm:h-16 md:h-20 lg:h-24 xl:h-[110px] block"
+      class="absolute -bottom-px left-0 w-full h-12 sm:h-16 md:h-20 lg:h-24 xl:h-27.5 block"
       viewBox="0 0 1440 120"
       fill="none"
       preserveAspectRatio="none"
@@ -17,23 +16,18 @@
   </div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex flex-col">
-    <!-- Hero Section -->
     <app-schedule-demo-hero />
 
-    <!-- Unified Contact & Form Section Card -->
     <section
       id="schedule-demo-form"
       class="scroll-mt-24 sm:scroll-mt-28 w-full rounded-3xl bg-white shadow-[0_16px_50px_-8px_rgba(24,40,73,0.08)] flex flex-col lg:flex-row items-stretch mb-8 sm:mb-10 relative z-20"
       aria-labelledby="form-heading"
     >
-      <!-- Left Panel: PT Inforsys Indonesia Information -->
-      <app-schedule-demo-company-info class="w-full lg:w-[380px] xl:w-[426px] shrink-0 flex flex-col" />
+      <app-schedule-demo-company-info class="w-full lg:w-95 xl:w-106.5 shrink-0 flex flex-col" />
 
-      <!-- Right Panel: Interactive Lead Capture Form Component -->
-      <app-schedule-demo-form class="flex-1 p-6 sm:p-8 lg:p-12 xl:p-14 flex flex-col justify-start bg-white rounded-b-[24px] lg:rounded-bl-none lg:rounded-r-[24px]" />
+      <app-schedule-demo-form class="flex-1 p-6 sm:p-8 lg:p-12 xl:p-14 flex flex-col justify-start bg-white rounded-b-3xl lg:rounded-bl-none lg:rounded-r-3xl" />
     </section>
 
-    <!-- Google Maps Location Section -->
     <app-schedule-demo-map class="relative z-10 block w-full" />
   </div>
 </div>
