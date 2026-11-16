@@ -1,0 +1,296 @@
+<app-process-section-shell
+  sectionId="jelajahi-tampilan"
+  [title]="'SMART_WORKFLOW.EXPLORE_THE_LOOK.TITLE' | translate"
+  [description]="'SMART_WORKFLOW.EXPLORE_THE_LOOK.DESCRIPTION' | translate"
+  stageBgClass="bg-[linear-gradient(322.37deg,#EDF3FB_-7.13%,#BDD2F6_42%,#C3D7F7_96.88%)]"
+  stagePaddingClass="pt-6 pb-6 px-4 sm:pt-7 sm:pb-7 sm:px-6 lg:pt-7.5 lg:pb-7 lg:px-12"
+  titleMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[660px]"
+  descriptionMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[700px]"
+>
+  <div shell-shelf class="pl-0 pr-4 sm:pr-6 lg:pr-18.5 mb-0 relative z-10">
+    <div
+      role="tablist"
+      [attr.aria-label]="'SMART_WORKFLOW.EXPLORE_THE_LOOK.TABLIST_ARIA_LABEL' | translate"
+      class="flex items-end gap-2.5 sm:gap-3.5 pt-3 overflow-x-auto lg:overflow-visible scrollbar-none [&::-webkit-scrollbar]:hidden"
+    >
+      @for (tab of tabs; track tab.id; let i = $index) {
+        <button
+          type="button"
+          role="tab"
+          [id]="'tab-look-' + tab.id"
+          [attr.aria-selected]="selectedTab() === tab.id"
+          [attr.tabindex]="selectedTab() === tab.id ? 0 : -1"
+          (click)="selectTab(tab.id)"
+          (keydown)="onTabKeydown($event, i)"
+          [class]="
+            'group flex flex-col items-start text-left px-5 pt-3 pb-2.5 sm:px-6 lg:px-7 sm:pt-3.5 sm:pb-3 rounded-t-2xl sm:rounded-t-3xl transition-all duration-200 cursor-pointer min-w-48 sm:min-w-56 lg:min-w-0 lg:flex-1 shrink-0 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#365AD2] focus-visible:ring-inset ' +
+            (selectedTab() === tab.id
+              ? 'bg-[#FDFDFD] shadow-[0_-2px_12px_rgba(35,36,78,0.06),0_2px_8px_rgba(35,36,78,0.06)] relative z-20'
+              : 'bg-[#FDFDFD] hover:bg-white shadow-[0_-1px_10px_rgba(35,36,78,0.04),0_2px_6px_rgba(35,36,78,0.05)] hover:shadow-[0_-2px_12px_rgba(35,36,78,0.06),0_2px_8px_rgba(35,36,78,0.06)] relative z-10')
+          "
+        >
+          <span
+            class="font-dm-sans font-bold text-base sm:text-[21px] tracking-tight leading-tight transition-colors"
+            [class.text-[#23244E]]="selectedTab() === tab.id"
+            [class.text-[#BABABA]]="selectedTab() !== tab.id"
+            [class.group-hover:text-[#23244E]]="selectedTab() !== tab.id"
+            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+          >
+            {{ tab.nameKey | translate }}
+          </span>
+          <span
+            class="font-dm-sans font-normal text-xs sm:text-[14.5px] mt-1 tracking-normal leading-snug transition-colors"
+            [class.text-[#23244E]]="selectedTab() === tab.id"
+            [class.text-[#BABABA]]="selectedTab() !== tab.id"
+            [class.group-hover:text-[#23244E]/70]="selectedTab() !== tab.id"
+            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+          >
+            {{ tab.subtitleKey | translate }}
+          </span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Tab Panel 1: Kewenangan / Permission Strategy -->
+  <div
+    id="panel-look-kewenangan"
+    role="tabpanel"
+    aria-labelledby="tab-look-kewenangan"
+    [attr.tabindex]="selectedTab() === 'kewenangan' ? 0 : null"
+    [attr.hidden]="selectedTab() === 'kewenangan' ? null : 'until-found'"
+    (beforematch)="selectTab('kewenangan')"
+  >
+    <div class="w-full max-w-280 mx-auto flex flex-col gap-5 sm:gap-7">
+      <div
+        data-testid="permission-strategy-card"
+        class="bg-[#FDFDFD] rounded-xl shadow-[0_4px_20px_rgba(35,36,78,0.05)] p-5 sm:p-6"
+      >
+        <div
+          data-testid="access-context-grid"
+          class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-9"
+        >
+          @for (field of contextFields; track field.id) {
+            <div class="flex flex-col">
+              <span
+                class="font-dm-sans font-normal text-xs text-[#2272E7] mb-2.5 leading-none"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+              >
+                {{ field.labelKey | translate }}
+              </span>
+              <div
+                class="rounded-[10px] bg-white border border-[#E0E0E0] shadow-[0_1px_2px_rgba(0,0,0,0.03)] px-3.5 py-2 min-h-[38px] flex items-center font-dm-sans font-semibold text-sm sm:text-[15px] text-[#23244E] leading-snug"
+                style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+              >
+                {{ field.valueKey | translate }}
+              </div>
+            </div>
+          }
+        </div>
+
+        <hr class="my-5 border-t border-[#E6E6E6]" aria-hidden="true" />
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-9">
+          <div data-testid="form-entry-column" class="flex flex-col">
+            <h3
+              class="font-dm-sans font-bold text-sm text-[#23244E] leading-snug mb-3.5 sm:mb-4"
+              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+            >
+              {{ 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.FORM_ENTRY.TITLE' | translate }}
+            </h3>
+            <ul class="grid grid-cols-2 gap-x-4 gap-y-3 m-0 p-0 list-none">
+              @for (item of formEntryPermissions; track item.id) {
+                <li class="flex items-center gap-2 min-w-0">
+                  <svg
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-3 h-3 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="0.6"
+                      y="0.6"
+                      width="10.8"
+                      height="10.8"
+                      rx="1.6"
+                      stroke="#2272E7"
+                      stroke-width="1.2"
+                    />
+                    @if (item.checked) {
+                      <path
+                        d="M3 6.2L5 8.2L9.2 3.8"
+                        stroke="#2272E7"
+                        stroke-width="1.35"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    }
+                  </svg>
+                  <span
+                    class="font-dm-sans font-normal text-xs sm:text-[12.5px] text-[#2272E7] leading-snug truncate"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+                  >
+                    {{ item.labelKey | translate }}
+                  </span>
+                  <span class="sr-only">
+                    :
+                    {{
+                      (item.checked
+                        ? 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.STATE_CHECKED'
+                        : 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.STATE_UNCHECKED'
+                      ) | translate
+                    }}
+                  </span>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <div data-testid="status-change-column" class="flex flex-col">
+            <h3
+              class="font-dm-sans font-bold text-sm text-[#23244E] leading-snug mb-3.5 sm:mb-4"
+              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+            >
+              {{
+                'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.STATUS_CHANGE.TITLE'
+                  | translate
+              }}
+            </h3>
+            <ul class="grid grid-cols-2 gap-x-4 gap-y-3 m-0 p-0 list-none">
+              @for (item of statusChangePermissions; track item.id) {
+                <li class="flex items-center gap-2 min-w-0">
+                  <svg
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-3 h-3 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="0.6"
+                      y="0.6"
+                      width="10.8"
+                      height="10.8"
+                      rx="1.6"
+                      stroke="#2272E7"
+                      stroke-width="1.2"
+                    />
+                    @if (item.checked) {
+                      <path
+                        d="M3 6.2L5 8.2L9.2 3.8"
+                        stroke="#2272E7"
+                        stroke-width="1.35"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    }
+                  </svg>
+                  <span
+                    class="font-dm-sans font-normal text-xs sm:text-[12.5px] text-[#2272E7] leading-snug truncate"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+                  >
+                    {{ item.labelKey | translate }}
+                  </span>
+                  <span class="sr-only">
+                    :
+                    {{
+                      (item.checked
+                        ? 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.STATE_CHECKED'
+                        : 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.STATE_UNCHECKED'
+                      ) | translate
+                    }}
+                  </span>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <div data-testid="amount-range-column" class="flex flex-col">
+            <h3
+              class="font-dm-sans font-bold text-sm text-[#23244E] leading-snug mb-3.5 sm:mb-4"
+              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+            >
+              {{
+                'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.AMOUNT_RANGE.TITLE' | translate
+              }}
+            </h3>
+            <dl class="flex flex-col gap-3 m-0">
+              @for (row of amountLimits; track row.id) {
+                <div class="flex items-center justify-between gap-4">
+                  <dt
+                    class="font-dm-sans font-normal text-xs sm:text-[12.5px] text-[#2272E7] leading-snug"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+                  >
+                    {{ row.labelKey | translate }}
+                  </dt>
+                  <dd
+                    class="m-0 font-dm-sans font-bold text-xs sm:text-sm text-[#23244E] leading-snug tabular-nums text-right"
+                    style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+                  >
+                    {{ row.valueKey | translate }}
+                  </dd>
+                </div>
+              }
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div
+        data-testid="explore-look-callout"
+        class="bg-[#FDFDFD] rounded-xl shadow-[0_4px_20px_rgba(35,36,78,0.05)] px-5 py-4 sm:px-6"
+      >
+        <p
+          class="font-dm-sans text-xs sm:text-[15px] lg:text-[15.5px] text-[#23244E] leading-snug"
+          style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+        >
+          <strong class="font-bold">
+            {{ 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.CALLOUT.LEAD' | translate }}
+          </strong>
+          <span>
+            : {{ 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.CALLOUT.TEXT' | translate }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Panels 2-4: Pending Figma Designs -->
+  @for (tab of placeholderTabs(); track tab.id) {
+    <div
+      [id]="'panel-look-' + tab.id"
+      role="tabpanel"
+      [attr.aria-labelledby]="'tab-look-' + tab.id"
+      [attr.tabindex]="selectedTab() === tab.id ? 0 : null"
+      [attr.hidden]="selectedTab() === tab.id ? null : 'until-found'"
+      (beforematch)="selectTab(tab.id)"
+    >
+      <div class="w-full max-w-280 mx-auto">
+        <div
+          [attr.data-testid]="'placeholder-panel-' + tab.id"
+          class="bg-[#FDFDFD] rounded-xl shadow-[0_4px_20px_rgba(35,36,78,0.05)] p-8 sm:p-12 min-h-65 flex flex-col items-center justify-center text-center gap-2"
+        >
+          <h3
+            class="font-dm-sans font-bold text-lg sm:text-xl text-[#23244E] leading-snug"
+            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+          >
+            {{ tab.nameKey | translate }}
+          </h3>
+          <p
+            class="font-dm-sans font-medium text-xs sm:text-sm text-[#2F65E8]"
+            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+          >
+            {{ tab.subtitleKey | translate }}
+          </p>
+          <p
+            class="font-dm-sans font-normal text-xs sm:text-sm text-[#64697D] max-w-md mt-1"
+            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
+          >
+            {{ 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PLACEHOLDER.NOTICE' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+  }
+</app-process-section-shell>

@@ -6,7 +6,7 @@ import {
   ProcessTabs,
 } from '../../../components/business-control/shared/process-tabs/process-tabs';
 import { Capabilities } from '../../../components/business-control/smart-workflow/sections/capabilities/capabilities';
-import { ExploreViews } from '../../../components/business-control/smart-workflow/sections/explore-views/explore-views';
+import { ExploreTheLook } from '../../../components/business-control/smart-workflow/sections/explore-the-look/explore-the-look';
 import { StatusAndFlow } from '../../../components/business-control/smart-workflow/sections/status-and-flow/status-and-flow';
 import { Subfooter } from '../../../components/business-control/smart-workflow/subfooter/subfooter';
 
@@ -15,7 +15,7 @@ import { Subfooter } from '../../../components/business-control/smart-workflow/s
     Hero,
     ProcessTabs,
     Capabilities,
-    ExploreViews,
+    ExploreTheLook,
     StatusAndFlow,
     Subfooter,
   ],

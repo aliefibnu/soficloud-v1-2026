@@ -1,10 +1,59 @@
 <app-process-section-shell
   sectionId="kapabilitas"
-  title="Capabilities"
-  description="Section content pending."
-  stageBgClass="bg-[linear-gradient(322.37deg,#EDF3FB_-7.13%,rgba(178,204,245,0.91)_36.2%,#C3D7F7_96.88%)]"
+  [title]="'SMART_WORKFLOW.CAPABILITIES.TITLE' | translate"
+  [description]="'SMART_WORKFLOW.CAPABILITIES.DESCRIPTION' | translate"
+  stageBgClass="bg-[linear-gradient(315deg,#FFEFED_0%,rgba(252,190,182,0.8)_51%,#FBCBC5_100%)]"
+  stagePaddingClass="pt-6 pb-8 px-4 sm:pt-8 sm:pb-10 sm:px-6 lg:pt-10 lg:pb-12 lg:px-10 short:py-6"
+  titleMaxWidthClass="max-w-xl sm:max-w-2xl lg:max-w-[680px]"
+  descriptionMaxWidthClass="max-w-md sm:max-w-lg lg:max-w-[540px]"
 >
-  <div class="min-h-45 w-full flex items-center justify-center">
-    <!-- Placeholder stage for Capabilities content -->
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 w-full max-w-267.5 mx-auto py-1"
+  >
+    @for (item of capabilities; track item.id) {
+      <article
+        class="bg-white rounded-xl p-5 sm:p-6 shadow-[0_4px_24px_rgba(35,36,78,0.06)] border border-white/60 flex flex-col justify-start transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(35,36,78,0.1)]"
+      >
+        <div class="flex items-start justify-between gap-4 mb-4 sm:mb-5">
+          <div
+            class="w-[95px] h-[71px] rounded-2xl flex items-center justify-center shrink-0"
+            style="background: radial-gradient(64.37% 118.95% at 50.57% 50%, #C3D7F7 0%, #EBF2FD 65.38%);"
+            aria-hidden="true"
+          >
+            <img
+              [ngSrc]="item.iconSrc"
+              [width]="item.iconWidth"
+              [height]="item.iconHeight"
+              alt=""
+              [class]="
+                'max-w-full max-h-full object-contain select-none pointer-events-none ' +
+                (item.iconOffsetClass ?? '')
+              "
+            />
+          </div>
+
+          <span
+            class="font-dm-sans font-bold text-base sm:text-[17px] text-[#23244E] leading-none tracking-tight select-none pt-0.5"
+            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700"
+          >
+            {{ item.number }}
+          </span>
+        </div>
+
+        <h3
+          class="font-dm-sans font-semibold text-[15px] sm:text-base text-[#23244E] leading-snug tracking-tight mb-2"
+          style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600"
+        >
+          {{ item.titleKey | translate }}
+        </h3>
+
+        <p
+          class="font-dm-sans font-normal text-[12.5px] sm:text-[13px] text-[#23244E] leading-relaxed tracking-normal"
+          style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400"
+        >
+          {{ item.descriptionKey | translate }}
+        </p>
+      </article>
+    }
   </div>
 </app-process-section-shell>

@@ -30,6 +30,19 @@ describe('SmartWorkflow', () => {
           JELAJAHI_TAMPILAN: 'JELAJAHI TAMPILAN',
           STATUS_DAN_ALUR: 'STATUS DAN ALUR',
         },
+        CAPABILITIES: {
+          TITLE: 'Setiap Kewenangan\nPunya Pengaturan Yang Jelas',
+          DESCRIPTION:
+            'Enam kapabilitas untuk membantu tim menjalankan\ntransaksi sesuai kebijakan perusahaan.',
+          CARDS: {
+            CARD_1: { TITLE: 'Hak Akses Sesuai Peran', DESCRIPTION: 'Desc 1' },
+            CARD_2: { TITLE: 'Kontrol Status dan Batas Nominal', DESCRIPTION: 'Desc 2' },
+            CARD_3: { TITLE: 'Approval Berjenjang', DESCRIPTION: 'Desc 3' },
+            CARD_4: { TITLE: 'Pelacakan Status Approval', DESCRIPTION: 'Desc 4' },
+            CARD_5: { TITLE: 'Riwayat Persetujuan', DESCRIPTION: 'Desc 5' },
+            CARD_6: { TITLE: 'Notifikasi Email dan WhatsApp', DESCRIPTION: 'Desc 6' },
+          },
+        },
       },
     });
     translateService.setTranslation('en', {
@@ -38,6 +51,19 @@ describe('SmartWorkflow', () => {
           KAPABILITAS: 'CAPABILITIES',
           JELAJAHI_TAMPILAN: 'EXPLORE VIEWS',
           STATUS_DAN_ALUR: 'STATUS & FLOW',
+        },
+        CAPABILITIES: {
+          TITLE: 'Every Authority Has\nClear Configuration',
+          DESCRIPTION:
+            'Six capabilities to help your team execute\ntransactions in line with company policies.',
+          CARDS: {
+            CARD_1: { TITLE: 'Role-Based Access Rights', DESCRIPTION: 'Desc 1' },
+            CARD_2: { TITLE: 'Status and Amount Limit Control', DESCRIPTION: 'Desc 2' },
+            CARD_3: { TITLE: 'Tiered Approval', DESCRIPTION: 'Desc 3' },
+            CARD_4: { TITLE: 'Approval Status Tracking', DESCRIPTION: 'Desc 4' },
+            CARD_5: { TITLE: 'Approval History', DESCRIPTION: 'Desc 5' },
+            CARD_6: { TITLE: 'Email and WhatsApp Notifications', DESCRIPTION: 'Desc 6' },
+          },
         },
       },
     });
@@ -57,7 +83,7 @@ describe('SmartWorkflow', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render hero, localized 3-tab process-tabs, capabilities, explore-views, status-and-flow, and subfooter in order without cta', async () => {
+  it('should render hero, localized 3-tab process-tabs, capabilities, explore-the-look, status-and-flow, and subfooter in order without cta', async () => {
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     expect(heroEl).toBeTruthy();
 
@@ -86,7 +112,7 @@ describe('SmartWorkflow', () => {
     ]);
 
     expect(fixture.debugElement.query(By.css('app-capabilities'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('app-explore-views'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('app-explore-the-look'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('app-status-and-flow'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('app-subfooter'))).toBeTruthy();
 
@@ -102,7 +128,7 @@ describe('SmartWorkflow', () => {
       'app-hero',
       'app-process-tabs',
       'app-capabilities',
-      'app-explore-views',
+      'app-explore-the-look',
       'app-status-and-flow',
       'app-subfooter',
     ]);
