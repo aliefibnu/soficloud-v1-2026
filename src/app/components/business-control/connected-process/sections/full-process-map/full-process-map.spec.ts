@@ -213,7 +213,7 @@ describe('FullProcessMap', () => {
     }
   });
 
-  it('should correctly position nodes and share customer-invoice-balance-sheet.svg between Customer Invoice and Balance Sheet', () => {
+  it('should correctly position nodes and render dedicated Balance Sheet, Customer Invoice, and updated SVG icons', () => {
     // Node #22 Balance Sheet (Teal theme, GL stream)
     const balanceSheet = fixture.debugElement.query(
       By.css('[data-testid="fpm-node-balance-sheet"]'),
@@ -223,7 +223,7 @@ describe('FullProcessMap', () => {
     expect(balanceSheet.nativeElement.style.top).toBe('372px');
     const bsImg = balanceSheet.query(By.css('img'));
     expect(bsImg.nativeElement.getAttribute('src')).toBe(
-      '/images/connected-process/full-process-map/customer-invoice-balance-sheet.svg',
+      '/images/connected-process/full-process-map/balance-sheet.svg',
     );
 
     // Node #26 Customer Invoice (Red theme, Sales stream)
@@ -235,8 +235,22 @@ describe('FullProcessMap', () => {
     expect(customerInvoice.nativeElement.style.top).toBe('574px');
     const ciImg = customerInvoice.query(By.css('img'));
     expect(ciImg.nativeElement.getAttribute('src')).toBe(
-      '/images/connected-process/full-process-map/customer-invoice-balance-sheet.svg',
+      '/images/connected-process/full-process-map/customer-invoice.svg',
     );
+
+    const expectedUpdatedIcons: Readonly<Record<string, string>> = {
+      planning: '/images/connected-process/full-process-map/planning.svg',
+      'trial-balance': '/images/connected-process/full-process-map/trial-balance.svg',
+      cogs: '/images/connected-process/full-process-map/cogs.svg',
+      receive: '/images/connected-process/full-process-map/receive.svg',
+      return: '/images/connected-process/full-process-map/return.svg',
+      'ar-statement': '/images/connected-process/full-process-map/ar-statement.svg',
+    };
+    for (const [nodeId, expectedSrc] of Object.entries(expectedUpdatedIcons)) {
+      const nodeEl = fixture.debugElement.query(By.css(`[data-testid="fpm-node-${nodeId}"] img`));
+      expect(nodeEl).toBeTruthy();
+      expect(nodeEl.nativeElement.getAttribute('src')).toBe(expectedSrc);
+    }
   });
 
   it('should render the unified SVG connector overlay with 39 paths and arrowhead markers', () => {
