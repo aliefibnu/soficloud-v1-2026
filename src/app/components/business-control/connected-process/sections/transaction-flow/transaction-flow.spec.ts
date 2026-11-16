@@ -349,9 +349,12 @@ describe('TransactionFlow', () => {
 
     const images = fixture.debugElement.queryAll(By.css('ol li img'));
     expect(images.length).toBe(5);
-    images.forEach((img) => {
-      expect(img.nativeElement.getAttribute('src')).toContain('calendar.svg');
-    });
+    const sources = images.map((img) => img.nativeElement.getAttribute('src') || '');
+    expect(sources[0]).toContain('purchase-requisition.svg');
+    expect(sources[1]).toContain('purchase-order.svg');
+    expect(sources[2]).toContain('goods-receipt.svg');
+    expect(sources[3]).toContain('supplier-invoice.svg');
+    expect(sources[4]).toContain('payment.svg');
   });
 
   it('should switch steps and callout dynamically when clicking Plan-to-Produce (P2PR)', () => {
@@ -386,9 +389,12 @@ describe('TransactionFlow', () => {
 
     const images = fixture.debugElement.queryAll(By.css('ol li img'));
     expect(images.length).toBe(5);
-    images.forEach((img) => {
-      expect(img.nativeElement.getAttribute('src')).toContain('calendar.svg');
-    });
+    const sources = images.map((img) => img.nativeElement.getAttribute('src') || '');
+    expect(sources[0]).toContain('bom-routing.svg');
+    expect(sources[1]).toContain('mrp.svg');
+    expect(sources[2]).toContain('procurement.svg');
+    expect(sources[3]).toContain('manufacturing-order.svg');
+    expect(sources[4]).toContain('costing-variance.svg');
   });
 
   it('should support keyboard navigation across tabs (ArrowRight, ArrowLeft, Home, End)', () => {
