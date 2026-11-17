@@ -128,12 +128,19 @@ describe('Hero', () => {
     expect(contactEmitted).toBe(true);
   });
 
-  it('should render the ambient background gradient layer with accessibility, overlay attributes, and bottom white fade transition', () => {
+  it('should render the ambient background gradient layer without horizontal 1440px mask clipping and with bottom white fade transition', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const bgContainer = compiled.querySelector('[aria-hidden="true"].pointer-events-none');
     expect(bgContainer).toBeTruthy();
     expect(bgContainer?.classList.contains('-z-10')).toBe(true);
     expect(bgContainer?.classList.contains('overflow-hidden')).toBe(true);
+    expect(bgContainer?.className).toContain('[mask-image:linear-gradient(');
+
+    const ambientCanvas = bgContainer?.querySelector('.hero-ambient-canvas');
+    expect(ambientCanvas).toBeTruthy();
+    expect(ambientCanvas?.classList.contains('w-360')).toBe(true);
+    expect(ambientCanvas?.classList.contains('overflow-hidden')).toBe(false);
+    expect(ambientCanvas?.className).not.toContain('mask-image');
 
     const bottomFade = bgContainer?.querySelector('.hero-bottom-fade');
     expect(bottomFade).toBeTruthy();
