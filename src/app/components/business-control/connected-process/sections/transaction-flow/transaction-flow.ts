@@ -1,7 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ProcessSectionShell } from '../../process-section-shell/process-section-shell';
+import { ProcessSectionShell } from '../../../shared/process-section-shell/process-section-shell';
 
 export type TransactionCycleId = 'O2C' | 'P2P' | 'P2PR';
 

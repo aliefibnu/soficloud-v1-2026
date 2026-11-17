@@ -98,7 +98,7 @@ describe('ProcessSectionShell', () => {
     expect(dividerEl).toBeTruthy();
     expect(dividerEl.nativeElement.getAttribute('aria-hidden')).toBe('true');
     expect(dividerEl.nativeElement.classList.contains('w-full')).toBe(true);
-    expect(dividerEl.nativeElement.classList.contains('max-w-214')).toBe(true);
+    expect(dividerEl.nativeElement.classList.contains('max-w-179.5')).toBe(true);
   });
 
   it('should render the description paragraph with correct styling and text', () => {

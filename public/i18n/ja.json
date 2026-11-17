@@ -964,6 +964,118 @@
       "DESCRIPTION": "貴社の取引フロー、統制ポイント、およびレポート要件についてSOFICloudチームにご相談ください。"
     }
   },
+  "SMART_WORKFLOW": {
+    "PROCESS_TABS": {
+      "KAPABILITAS": "機能一覧",
+      "JELAJAHI_TAMPILAN": "画面を見る",
+      "STATUS_DAN_ALUR": "ステータス＆フロー"
+    },
+    "CAPABILITIES": {
+      "TITLE": "すべての権限に\n明確な設定を",
+      "DESCRIPTION": "社内ポリシーに沿った取引実行をチームが\n進めるための6つの機能。",
+      "CARDS": {
+        "CARD_1": {
+          "TITLE": "役割に応じたアクセス権",
+          "DESCRIPTION": "Access Group、カテゴリ、品目ごとにアクセスを設定。ユーザーの権限に応じて閲覧、追加、編集、削除、印刷、エクスポートの権利を分けられます。"
+        },
+        "CARD_2": {
+          "TITLE": "ステータスと金額上限の制御",
+          "DESCRIPTION": "企業の統制要件に合わせて、取引ステータスの変更許可と Amount From から Amount To までの金額範囲を設定します。"
+        },
+        "CARD_3": {
+          "TITLE": "階層別承認",
+          "DESCRIPTION": "指定したレベルとユーザーに基づいて承認順序を構成。ドキュメントは設定された承認ルートに沿って進みます。"
+        },
+        "CARD_4": {
+          "TITLE": "承認ステータスの追跡",
+          "DESCRIPTION": "承認済みの担当者、対応待ちの担当者、次の承認者を確認し、ドキュメントの現在位置を明確に把握できます。"
+        },
+        "CARD_5": {
+          "TITLE": "承認履歴",
+          "DESCRIPTION": "Approval History で承認者、日時、ステータス、判断メモを追跡し、取引の監査やフォローアップに活用できます。"
+        },
+        "CARD_6": {
+          "TITLE": "メール・WhatsApp 通知",
+          "DESCRIPTION": "承認およびステータス変更の通知を関係者へ送信。メッセージテンプレートや自動送信も設定に従って動作します。"
+        }
+      }
+    },
+    "EXPLORE_THE_LOOK": {
+      "TITLE": "アクセス設定から\n通知配信まで",
+      "DESCRIPTION": "取引例を選択して、モジュール間で情報がどのように引き継がれるかを確認できます。各段階には\n異なるドキュメントと目的があります。",
+      "TABLIST_ARIA_LABEL": "スマートワークフロー表示ステージ",
+      "TABS": {
+        "KEWENANGAN": {
+          "NAME": "権限設定",
+          "SUBTITLE": "権限戦略"
+        },
+        "STATUS_APPROVAL": {
+          "NAME": "承認ステータス",
+          "SUBTITLE": "承認ステータス追跡"
+        },
+        "RIWAYAT": {
+          "NAME": "承認履歴",
+          "SUBTITLE": "承認履歴"
+        },
+        "NOTIFIKASI": {
+          "NAME": "通知",
+          "SUBTITLE": "メール・WhatsApp"
+        }
+      },
+      "PERMISSION_STRATEGY": {
+        "CONTEXT": {
+          "ACCESS_GROUP": {
+            "LABEL": "アクセスグループ",
+            "VALUE": "経理マネージャー"
+          },
+          "ACCESS_CATEGORY": {
+            "LABEL": "アクセスカテゴリ",
+            "VALUE": "取引"
+          },
+          "ACCESS_ITEM": {
+            "LABEL": "アクセス項目",
+            "VALUE": "購買発注"
+          }
+        },
+        "FORM_ENTRY": {
+          "TITLE": "フォーム入力",
+          "ITEMS": {
+            "READ": "閲覧",
+            "ADD": "追加",
+            "EDIT": "編集",
+            "DELETE": "削除",
+            "PRINT": "印刷",
+            "EXPORT": "エクスポート"
+          }
+        },
+        "STATUS_CHANGE": {
+          "TITLE": "ステータス変更権限",
+          "ITEMS": {
+            "ENTRY_CONFIRM": "入力確定",
+            "RUN_REVISE": "修正実行",
+            "ENTRY_VERIFY": "入力検証",
+            "RUN_CANCEL": "取消実行"
+          }
+        },
+        "AMOUNT_RANGE": {
+          "TITLE": "金額範囲",
+          "FROM_LABEL": "開始金額",
+          "FROM_VALUE": "Rp 0",
+          "TO_LABEL": "上限金額",
+          "TO_VALUE": "Rp 10,000,000"
+        },
+        "STATE_CHECKED": "有効",
+        "STATE_UNCHECKED": "無効",
+        "CALLOUT": {
+          "LEAD": "要件に応じた柔軟な制御",
+          "TEXT": "アクセスグループと取引項目ごとに権限を調整し、承認順序で担当者の順番を設定します。"
+        }
+      },
+      "PLACEHOLDER": {
+        "NOTICE": "このステージの画面プレビューは近日公開予定です。"
+      }
+    }
+  },
   "SCHEDULE_DEMO": {
     "PAGE_TITLE": "デモを予約 - SOFICloud ERP",
     "HERO": {

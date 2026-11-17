@@ -964,6 +964,118 @@
       "DESCRIPTION": "与 SOFICloud 专家团队深入探讨适合您企业的业务交易流、关键控制点与报表需求。"
     }
   },
+  "SMART_WORKFLOW": {
+    "PROCESS_TABS": {
+      "KAPABILITAS": "核心功能",
+      "JELAJAHI_TAMPILAN": "探索界面",
+      "STATUS_DAN_ALUR": "状态与流程"
+    },
+    "CAPABILITIES": {
+      "TITLE": "每一项权限\n都有清晰配置",
+      "DESCRIPTION": "六大核心能力，助力团队依照\n企业政策规范执行各项交易。",
+      "CARDS": {
+        "CARD_1": {
+          "TITLE": "按角色分配访问权限",
+          "DESCRIPTION": "按 Access Group、分类与物料配置访问权限。根据用户权限区分查看、新增、修改、删除、打印和导出操作。"
+        },
+        "CARD_2": {
+          "TITLE": "状态与金额上限控制",
+          "DESCRIPTION": "依据企业内控需求，设定交易状态变更权限及 Amount From 至 Amount To 的金额范围。"
+        },
+        "CARD_3": {
+          "TITLE": "分级审批",
+          "DESCRIPTION": "依据设定的层级和人员编排审批顺序，单据将严格按照已配置的审批路径流转。"
+        },
+        "CARD_4": {
+          "TITLE": "审批状态追踪",
+          "DESCRIPTION": "清晰查看已审批人、待处理人及下一级审批人，随时掌握单据所处环节。"
+        },
+        "CARD_5": {
+          "TITLE": "审批历史记录",
+          "DESCRIPTION": "在 Approval History 中追溯审批人、时间、状态与审批意见，便于核查与后续跟进。"
+        },
+        "CARD_6": {
+          "TITLE": "邮件与 WhatsApp 通知",
+          "DESCRIPTION": "向相关人员发送审批及状态变更通知，消息模板与自动发送均按系统配置执行。"
+        }
+      }
+    },
+    "EXPLORE_THE_LOOK": {
+      "TITLE": "从权限配置\n到消息通知",
+      "DESCRIPTION": "选择交易示例，查看各模块之间如何传递信息。每个阶段都对应\n不同的单据与控制目标。",
+      "TABLIST_ARIA_LABEL": "智能工作流界面阶段",
+      "TABS": {
+        "KEWENANGAN": {
+          "NAME": "权限配置",
+          "SUBTITLE": "权限策略"
+        },
+        "STATUS_APPROVAL": {
+          "NAME": "审批状态",
+          "SUBTITLE": "审批状态跟踪"
+        },
+        "RIWAYAT": {
+          "NAME": "审批记录",
+          "SUBTITLE": "审批历史"
+        },
+        "NOTIFIKASI": {
+          "NAME": "通知提醒",
+          "SUBTITLE": "邮件与 WhatsApp"
+        }
+      },
+      "PERMISSION_STRATEGY": {
+        "CONTEXT": {
+          "ACCESS_GROUP": {
+            "LABEL": "权限组",
+            "VALUE": "会计经理"
+          },
+          "ACCESS_CATEGORY": {
+            "LABEL": "访问类别",
+            "VALUE": "业务交易"
+          },
+          "ACCESS_ITEM": {
+            "LABEL": "访问项目",
+            "VALUE": "采购订单"
+          }
+        },
+        "FORM_ENTRY": {
+          "TITLE": "表单录入",
+          "ITEMS": {
+            "READ": "查看",
+            "ADD": "新增",
+            "EDIT": "修改",
+            "DELETE": "删除",
+            "PRINT": "打印",
+            "EXPORT": "导出"
+          }
+        },
+        "STATUS_CHANGE": {
+          "TITLE": "状态变更权限",
+          "ITEMS": {
+            "ENTRY_CONFIRM": "录入确认",
+            "RUN_REVISE": "执行修订",
+            "ENTRY_VERIFY": "录入核验",
+            "RUN_CANCEL": "执行取消"
+          }
+        },
+        "AMOUNT_RANGE": {
+          "TITLE": "金额范围",
+          "FROM_LABEL": "起始金额",
+          "FROM_VALUE": "Rp 0",
+          "TO_LABEL": "上限金额",
+          "TO_VALUE": "Rp 10,000,000"
+        },
+        "STATE_CHECKED": "已启用",
+        "STATE_UNCHECKED": "未启用",
+        "CALLOUT": {
+          "LEAD": "按需精细管控",
+          "TEXT": "按权限组与交易项目配置权限，并在审批流程中设定审批人员顺序。"
+        }
+      },
+      "PLACEHOLDER": {
+        "NOTICE": "该阶段的界面预览即将推出。"
+      }
+    }
+  },
   "SCHEDULE_DEMO": {
     "PAGE_TITLE": "预约演示 - SOFICloud ERP",
     "HERO": {

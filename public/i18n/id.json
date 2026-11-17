@@ -964,6 +964,118 @@
       "DESCRIPTION": "Diskusikan alur transaksi, titik kontrol, dan kebutuhan pelaporan perusahaan Anda bersama tim SOFICloud."
     }
   },
+  "SMART_WORKFLOW": {
+    "PROCESS_TABS": {
+      "KAPABILITAS": "KAPABILITAS",
+      "JELAJAHI_TAMPILAN": "JELAJAHI TAMPILAN",
+      "STATUS_DAN_ALUR": "STATUS DAN ALUR"
+    },
+    "CAPABILITIES": {
+      "TITLE": "Setiap Kewenangan\nPunya Pengaturan Yang Jelas",
+      "DESCRIPTION": "Enam kapabilitas untuk membantu tim menjalankan\ntransaksi sesuai kebijakan perusahaan.",
+      "CARDS": {
+        "CARD_1": {
+          "TITLE": "Hak Akses Sesuai Peran",
+          "DESCRIPTION": "Atur akses berdasarkan Access Group, kategori, dan item. Bedakan hak membaca, menambah, mengubah, menghapus, mencetak, dan mengekspor sesuai kewenangan pengguna."
+        },
+        "CARD_2": {
+          "TITLE": "Kontrol Status dan Batas Nominal",
+          "DESCRIPTION": "Tentukan izin perubahan status transaksi dan rentang nilai Amount From sampai Amount To sesuai kebutuhan pengendalian perusahaan."
+        },
+        "CARD_3": {
+          "TITLE": "Approval Berjenjang",
+          "DESCRIPTION": "Susun urutan persetujuan berdasarkan level dan pengguna yang ditetapkan. Dokumen mengikuti jalur approval yang telah dikonfigurasi."
+        },
+        "CARD_4": {
+          "TITLE": "Pelacakan Status Approval",
+          "DESCRIPTION": "Lihat pihak yang sudah menyetujui, pihak yang sedang menunggu tindakan, dan approver berikutnya agar posisi dokumen jelas."
+        },
+        "CARD_5": {
+          "TITLE": "Riwayat Persetujuan",
+          "DESCRIPTION": "Telusuri pemberi persetujuan, waktu, status, dan catatan keputusan dalam Approval History untuk pemeriksaan dan tindak lanjut transaksi."
+        },
+        "CARD_6": {
+          "TITLE": "Notifikasi Email dan WhatsApp",
+          "DESCRIPTION": "Sampaikan pemberitahuan approval dan perubahan status kepada pihak terkait. Template pesan serta pengiriman otomatis mengikuti pengaturan."
+        }
+      }
+    },
+    "EXPLORE_THE_LOOK": {
+      "TITLE": "Dari Pengaturan Akses\nHingga Pemberitahuan",
+      "DESCRIPTION": "Pilih contoh transaksi untuk melihat bagaimana modul saling meneruskan informasi. Setiap tahap memiliki\ndokumen dan tujuan yang berbeda.",
+      "TABLIST_ARIA_LABEL": "Tahapan alur kerja cerdas",
+      "TABS": {
+        "KEWENANGAN": {
+          "NAME": "Kewenangan",
+          "SUBTITLE": "Strategi Izin Akses"
+        },
+        "STATUS_APPROVAL": {
+          "NAME": "Status Persetujuan",
+          "SUBTITLE": "Pelacakan Status Persetujuan"
+        },
+        "RIWAYAT": {
+          "NAME": "Riwayat",
+          "SUBTITLE": "Riwayat Persetujuan"
+        },
+        "NOTIFIKASI": {
+          "NAME": "Notifikasi",
+          "SUBTITLE": "Email dan WhatsApp"
+        }
+      },
+      "PERMISSION_STRATEGY": {
+        "CONTEXT": {
+          "ACCESS_GROUP": {
+            "LABEL": "Grup Akses",
+            "VALUE": "Manajer Akuntansi"
+          },
+          "ACCESS_CATEGORY": {
+            "LABEL": "Kategori Akses",
+            "VALUE": "Transaksi"
+          },
+          "ACCESS_ITEM": {
+            "LABEL": "Item Akses",
+            "VALUE": "Pesanan Pembelian"
+          }
+        },
+        "FORM_ENTRY": {
+          "TITLE": "Entri Formulir",
+          "ITEMS": {
+            "READ": "Baca",
+            "ADD": "Tambah",
+            "EDIT": "Ubah",
+            "DELETE": "Hapus",
+            "PRINT": "Cetak",
+            "EXPORT": "Ekspor"
+          }
+        },
+        "STATUS_CHANGE": {
+          "TITLE": "Izin perubahan status",
+          "ITEMS": {
+            "ENTRY_CONFIRM": "Konfirmasi Entri",
+            "RUN_REVISE": "Jalankan Revisi",
+            "ENTRY_VERIFY": "Verifikasi Entri",
+            "RUN_CANCEL": "Jalankan Batal"
+          }
+        },
+        "AMOUNT_RANGE": {
+          "TITLE": "Rentang nominal",
+          "FROM_LABEL": "Nominal Dari",
+          "FROM_VALUE": "Rp 0",
+          "TO_LABEL": "Nominal Sampai",
+          "TO_VALUE": "Rp 10.000.000"
+        },
+        "STATE_CHECKED": "Aktif",
+        "STATE_UNCHECKED": "Tidak aktif",
+        "CALLOUT": {
+          "LEAD": "Kontrol sesuai kebutuhan",
+          "TEXT": "Sesuaikan kewenangan per Grup Akses dan item transaksi, lalu tetapkan urutan pengguna pada Urutan Persetujuan."
+        }
+      },
+      "PLACEHOLDER": {
+        "NOTICE": "Pratinjau tampilan untuk tahap ini akan segera tersedia."
+      }
+    }
+  },
   "SCHEDULE_DEMO": {
     "PAGE_TITLE": "Jadwalkan Demo - SOFICloud ERP",
     "HERO": {

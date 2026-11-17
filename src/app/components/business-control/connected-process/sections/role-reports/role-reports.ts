@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ProcessSectionShell } from '../../process-section-shell/process-section-shell';
+import { ProcessSectionShell } from '../../../shared/process-section-shell/process-section-shell';
 
 export interface RoleReportTier {
   readonly id: 'operational' | 'financial' | 'management';

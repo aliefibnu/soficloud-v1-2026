@@ -964,6 +964,118 @@
       "DESCRIPTION": "Discuss transaction workflows, control checkpoints, and reporting requirements for your business with the SOFICloud team."
     }
   },
+  "SMART_WORKFLOW": {
+    "PROCESS_TABS": {
+      "KAPABILITAS": "CAPABILITIES",
+      "JELAJAHI_TAMPILAN": "EXPLORE VIEWS",
+      "STATUS_DAN_ALUR": "STATUS & FLOW"
+    },
+    "CAPABILITIES": {
+      "TITLE": "Every Authority Has\nClear Configuration",
+      "DESCRIPTION": "Six capabilities to help your team execute\ntransactions in line with company policies.",
+      "CARDS": {
+        "CARD_1": {
+          "TITLE": "Role-Based Access Rights",
+          "DESCRIPTION": "Configure access by Access Group, category, and item. Differentiate read, create, edit, delete, print, and export rights according to user authority."
+        },
+        "CARD_2": {
+          "TITLE": "Status and Amount Limit Control",
+          "DESCRIPTION": "Define transaction status change permissions and Amount From to Amount To value ranges to match your company's control requirements."
+        },
+        "CARD_3": {
+          "TITLE": "Tiered Approval",
+          "DESCRIPTION": "Structure approval sequences based on designated levels and users. Documents follow the configured approval path."
+        },
+        "CARD_4": {
+          "TITLE": "Approval Status Tracking",
+          "DESCRIPTION": "View who has approved, who is awaiting action, and the next approver so every document's position stays clear."
+        },
+        "CARD_5": {
+          "TITLE": "Approval History",
+          "DESCRIPTION": "Trace approvers, timestamps, statuses, and decision notes in Approval History for transaction review and follow-up."
+        },
+        "CARD_6": {
+          "TITLE": "Email and WhatsApp Notifications",
+          "DESCRIPTION": "Deliver approval and status change notifications to relevant parties. Message templates and automated dispatch follow your settings."
+        }
+      }
+    },
+    "EXPLORE_THE_LOOK": {
+      "TITLE": "From Access Settings\nTo Notifications",
+      "DESCRIPTION": "Select a transaction example to see how modules pass information along. Each stage has\ndifferent documents and objectives.",
+      "TABLIST_ARIA_LABEL": "Smart workflow view stages",
+      "TABS": {
+        "KEWENANGAN": {
+          "NAME": "Authority",
+          "SUBTITLE": "Permission Strategy"
+        },
+        "STATUS_APPROVAL": {
+          "NAME": "Approval Status",
+          "SUBTITLE": "Approval Status Tracking"
+        },
+        "RIWAYAT": {
+          "NAME": "History",
+          "SUBTITLE": "Approval History"
+        },
+        "NOTIFIKASI": {
+          "NAME": "Notifications",
+          "SUBTITLE": "Email and WhatsApp"
+        }
+      },
+      "PERMISSION_STRATEGY": {
+        "CONTEXT": {
+          "ACCESS_GROUP": {
+            "LABEL": "Access Group",
+            "VALUE": "Accounting Manager"
+          },
+          "ACCESS_CATEGORY": {
+            "LABEL": "Access Category",
+            "VALUE": "Transaction"
+          },
+          "ACCESS_ITEM": {
+            "LABEL": "Access Item",
+            "VALUE": "Purchase Order"
+          }
+        },
+        "FORM_ENTRY": {
+          "TITLE": "Form Entry",
+          "ITEMS": {
+            "READ": "Read",
+            "ADD": "Add",
+            "EDIT": "Edit",
+            "DELETE": "Delete",
+            "PRINT": "Print",
+            "EXPORT": "Export"
+          }
+        },
+        "STATUS_CHANGE": {
+          "TITLE": "Status change permissions",
+          "ITEMS": {
+            "ENTRY_CONFIRM": "Entry-Confirm",
+            "RUN_REVISE": "Run-Revise",
+            "ENTRY_VERIFY": "Entry-Verify",
+            "RUN_CANCEL": "Run-Cancel"
+          }
+        },
+        "AMOUNT_RANGE": {
+          "TITLE": "Amount range",
+          "FROM_LABEL": "Amount From",
+          "FROM_VALUE": "Rp 0",
+          "TO_LABEL": "Amount To",
+          "TO_VALUE": "Rp 10,000,000"
+        },
+        "STATE_CHECKED": "Enabled",
+        "STATE_UNCHECKED": "Disabled",
+        "CALLOUT": {
+          "LEAD": "Control tailored to your needs",
+          "TEXT": "Configure permissions per Access Group and transaction item, then assign user order in the Approval Sequence."
+        }
+      },
+      "PLACEHOLDER": {
+        "NOTICE": "The visual preview for this stage will be available soon."
+      }
+    }
+  },
   "SCHEDULE_DEMO": {
     "PAGE_TITLE": "Schedule a Demo - SOFICloud ERP",
     "HERO": {

@@ -1,14 +1,17 @@
 import {
+  AfterViewInit,
   Component,
   computed,
-  signal,
-  viewChild,
+  DestroyRef,
+  effect,
   ElementRef,
   inject,
-  PLATFORM_ID,
-  AfterViewInit,
+  input,
+  linkedSignal,
   OnDestroy,
-  DestroyRef,
+  PLATFORM_ID,
+  signal,
+  viewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -16,7 +19,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 export interface ProcessTab {
   readonly id: string;
-  readonly titleKey: string;
+  readonly titleKey?: string;
   readonly defaultTitle: string;
 }
 
@@ -38,6 +41,11 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   readonly isBrowser = isPlatformBrowser(this.platformId);
 
+  readonly tabs = input.required<readonly ProcessTab[]>();
+  readonly navAriaLabel = input<string>('Process section navigation');
+  readonly tablistAriaLabel = input<string>('Process section milestones');
+  readonly listMinWidthClass = input<string>('min-w-270 xl:min-w-0');
+
   readonly tabsListRef = viewChild<ElementRef<HTMLElement>>('tabsListRef');
 
   private resizeObserver?: ResizeObserver;
@@ -49,48 +57,31 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
   private isUserClicking = false;
   private userClickTimeout?: ReturnType<typeof setTimeout>;
 
-  readonly tabs: readonly ProcessTab[] = [
-    {
-      id: 'satu-data',
-      titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.SATU_DATA',
-      defaultTitle: 'SATU DATA',
-    },
-    {
-      id: 'alur-transaksi',
-      titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.ALUR_TRANSAKSI',
-      defaultTitle: 'ALUR TRANSAKSI',
-    },
-    {
-      id: 'dampak-akuntansi',
-      titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.DAMPAK_AKUNTANSI',
-      defaultTitle: 'DAMPAK AKUNTANSI',
-    },
-    {
-      id: 'laporan',
-      titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.LAPORAN',
-      defaultTitle: 'LAPORAN',
-    },
-    {
-      id: 'peta-lengkap',
-      titleKey: 'CONNECTED_PROCESS.PROCESS_TABS.PETA_LENGKAP',
-      defaultTitle: 'PETA LENGKAP',
-    },
-  ];
-
-  readonly activeTabId = signal<string>('satu-data');
+  readonly activeTabId = linkedSignal<readonly ProcessTab[], string>({
+    source: this.tabs,
+    computation: (tabs) => tabs[0]?.id ?? '',
+  });
   readonly indicatorLeft = signal<number>(0);
   readonly indicatorWidth = signal<number>(140);
 
   readonly activeTabIndex = computed<number>(() => {
-    const idx = this.tabs.findIndex((t) => t.id === this.activeTabId());
+    const idx = this.tabs().findIndex((t) => t.id === this.activeTabId());
     return idx >= 0 ? idx : 0;
   });
 
-  readonly activeTab = computed<ProcessTab>(() => {
-    return this.tabs[this.activeTabIndex()] ?? this.tabs[0];
+  readonly activeTab = computed<ProcessTab | undefined>(() => {
+    const currentTabs = this.tabs();
+    return currentTabs[this.activeTabIndex()] ?? currentTabs[0];
   });
 
   constructor() {
+    effect(() => {
+      const currentTabs = this.tabs();
+      if (this.isBrowser && currentTabs.length > 0) {
+        requestAnimationFrame(() => this.updateIndicator());
+      }
+    });
+
     this.translate.onLangChange
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
@@ -220,7 +211,8 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
   }
 
   updateActiveSectionByScroll(): void {
-    if (!this.isBrowser || this.isUserClicking) return;
+    const currentTabs = this.tabs();
+    if (!this.isBrowser || this.isUserClicking || currentTabs.length === 0) return;
 
     const windowH = window.innerHeight || 800;
     const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
@@ -228,7 +220,7 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
 
     // Check if scrolled near the bottom of the document -> activate last tab
     if (docH > windowH && scrollY + windowH >= docH - 80) {
-      const lastTabId = this.tabs[this.tabs.length - 1].id;
+      const lastTabId = currentTabs[currentTabs.length - 1].id;
       if (this.activeTabId() !== lastTabId) {
         this.activeTabId.set(lastTabId);
         this.updateIndicator();
@@ -241,7 +233,7 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
     const readingLine = Math.max(stickyHeaderOffset + 60, Math.floor(windowH * 0.38));
 
     // Find the section that covers the reading line
-    for (const tab of this.tabs) {
+    for (const tab of currentTabs) {
       const el = document.getElementById(tab.id);
       if (!el) continue;
       const rect = el.getBoundingClientRect();
@@ -255,10 +247,10 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
     }
 
     // Fallback: If above the first section's reading line, default to first tab
-    const firstEl = document.getElementById(this.tabs[0].id);
+    const firstEl = document.getElementById(currentTabs[0].id);
     if (firstEl && firstEl.getBoundingClientRect().top > readingLine) {
-      if (this.activeTabId() !== this.tabs[0].id) {
-        this.activeTabId.set(this.tabs[0].id);
+      if (this.activeTabId() !== currentTabs[0].id) {
+        this.activeTabId.set(currentTabs[0].id);
         this.updateIndicator();
       }
     }
@@ -298,12 +290,13 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
   }
 
   updateIndicator(): void {
-    if (!this.isBrowser) return;
+    const currentTabs = this.tabs();
+    if (!this.isBrowser || currentTabs.length === 0) return;
     const listEl = this.tabsListRef()?.nativeElement;
     if (!listEl) return;
 
     const firstBtn = listEl.querySelector(
-      `[data-tab-id="${this.tabs[0].id}"]`,
+      `[data-tab-id="${currentTabs[0].id}"]`,
     ) as HTMLElement | null;
     const activeBtn = listEl.querySelector(
       `[data-tab-id="${this.activeTabId()}"]`,
@@ -322,8 +315,11 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
   }
 
   onTabKeydown(event: KeyboardEvent, currentIndex: number): void {
+    const currentTabs = this.tabs();
+    const total = currentTabs.length;
+    if (total === 0) return;
+
     let nextIndex: number | null = null;
-    const total = this.tabs.length;
 
     switch (event.key) {
       case 'ArrowRight':
@@ -344,7 +340,7 @@ export class ProcessTabs implements AfterViewInit, OnDestroy {
 
     if (nextIndex !== null) {
       event.preventDefault();
-      const nextTab = this.tabs[nextIndex];
+      const nextTab = currentTabs[nextIndex];
       if (nextTab) {
         this.selectTab(nextTab.id);
         if (this.isBrowser) {
