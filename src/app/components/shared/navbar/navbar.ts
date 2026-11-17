@@ -1,6 +1,5 @@
-import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import { isPlatformBrowser, NgOptimizedImage, NgTemplateOutlet, PlatformLocation } from '@angular/common';
 import {
-  afterNextRender,
   Component,
   computed,
   DestroyRef,
@@ -15,6 +14,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
+import { listenWindowScrollRaf } from '../../../systems/lib/viewport-observer';
 
 export interface NavLink {
   key: string;
@@ -23,13 +23,12 @@ export interface NavLink {
 
 @Component({
   selector: 'app-navbar',
-  imports: [TranslatePipe, NgOptimizedImage],
+  imports: [TranslatePipe, NgOptimizedImage, NgTemplateOutlet],
   templateUrl: './navbar.html',
   host: {
     class: 'block sticky top-0 z-[60]',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'closeMenus()',
-    '(window:scroll)': 'onWindowScroll()',
   },
 })
 export class Navbar {
@@ -39,6 +38,7 @@ export class Navbar {
   private readonly elementRef = inject(ElementRef);
   private readonly languageService = inject(LanguageService);
   private readonly router = inject(Router);
+  private readonly platformLocation = inject(PlatformLocation);
 
   readonly mobileSheetRef = viewChild<ElementRef<HTMLElement>>('mobileSheet');
 
@@ -60,8 +60,14 @@ export class Navbar {
     return path === '/schedule-demo';
   }
 
-  readonly isLandingPage = signal(this.isLandingUrl(this.router.url));
-  readonly isScheduleDemoPage = signal(this.isScheduleDemoUrl(this.router.url));
+  private get initialPath(): string {
+    return this.router.url && this.router.url !== '/'
+      ? this.router.url
+      : this.platformLocation.pathname || '/';
+  }
+
+  readonly isLandingPage = signal(this.isLandingUrl(this.initialPath));
+  readonly isScheduleDemoPage = signal(this.isScheduleDemoUrl(this.initialPath));
   private readonly rawActiveLinkKey = signal<string | null>(null);
   readonly activeLinkKey = computed(() => (this.isLandingPage() ? this.rawActiveLinkKey() : null));
   readonly isLangMenuOpen = signal(false);
@@ -71,6 +77,12 @@ export class Navbar {
   private scrollRafId: number | null = null;
 
   constructor() {
+    listenWindowScrollRaf(() => {
+      if (this.isLandingPage()) {
+        this.updateActiveSection();
+      }
+    });
+
     this.router.events
       .pipe(
         filter((e): e is NavigationEnd => e instanceof NavigationEnd),
@@ -83,12 +95,14 @@ export class Navbar {
         this.isScheduleDemoPage.set(isScheduleDemo);
         if (isLanding) {
           if (this.isBrowser) {
-            setTimeout(() => this.updateActiveSection(), 0);
             const fragment = this.router.routerState.snapshot.root.fragment;
             if (fragment) {
               setTimeout(() => {
                 this.scrollToAnchorSmoothly(fragment);
+                this.updateActiveSection();
               }, 100);
+            } else if (this.rawActiveLinkKey() !== null) {
+              this.rawActiveLinkKey.set(null);
             }
           }
         } else if (isScheduleDemo) {
@@ -107,10 +121,6 @@ export class Navbar {
       });
 
     if (this.isBrowser) {
-      afterNextRender(() => {
-        this.updateActiveSection();
-      });
-
       this.destroyRef.onDestroy(() => {
         if (this.scrollRafId !== null && typeof cancelAnimationFrame !== 'undefined') {
           cancelAnimationFrame(this.scrollRafId);

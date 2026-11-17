@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { DeferBlockBehavior, DeferBlockState, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { LanguageService } from './systems/lib/language.service';
@@ -9,6 +9,7 @@ describe('App', () => {
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideRouter([]), provideTranslateService(), LanguageService],
+      deferBlockBehavior: DeferBlockBehavior.Manual,
     }).compileComponents();
   });
 
@@ -21,6 +22,11 @@ describe('App', () => {
   it('should render navbar and footer', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
+    const blocks = await fixture.getDeferBlocks();
+    for (const block of blocks) {
+      await block.render(DeferBlockState.Complete);
+    }
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-navbar')).toBeTruthy();
     expect(compiled.querySelector('app-footer')).toBeTruthy();

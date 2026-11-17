@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, DeferBlockBehavior, DeferBlockState, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../systems/lib/language.service';
@@ -12,6 +12,7 @@ describe('Landing', () => {
     await TestBed.configureTestingModule({
       imports: [Landing],
       providers: [provideRouter([]), provideTranslateService(), LanguageService],
+      deferBlockBehavior: DeferBlockBehavior.Manual,
     }).compileComponents();
 
     fixture = TestBed.createComponent(Landing);
@@ -23,7 +24,11 @@ describe('Landing', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the cta component', () => {
+  it('should render the cta component when deferred blocks enter the viewport', async () => {
+    const blocks = await fixture.getDeferBlocks();
+    for (const block of blocks) {
+      await block.render(DeferBlockState.Complete);
+    }
     fixture.detectChanges();
     const ctaEl = fixture.nativeElement.querySelector('app-cta');
     expect(ctaEl).toBeTruthy();

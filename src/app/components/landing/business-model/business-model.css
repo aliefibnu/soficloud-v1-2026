@@ -209,11 +209,11 @@
   display: block;
 }
 
-.bm-speed-line-1 {
+.group:hover .bm-speed-line-1 {
   animation: bm-speed-line 0.8s ease-out infinite;
 }
 
-.bm-speed-line-2 {
+.group:hover .bm-speed-line-2 {
   animation: bm-speed-line 0.8s ease-out infinite 0.4s;
 }
 

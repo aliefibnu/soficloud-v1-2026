@@ -9,12 +9,25 @@ import {
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '../../../systems/lib/language.service';
+import { observeHostViewport } from '../../../systems/lib/viewport-observer';
 
 export interface WhyChooseUsCard {
   readonly id: number;
   readonly icon: string;
   readonly defaultTitle: string;
   readonly defaultDesc: string;
+}
+
+export interface WhyChooseUsCardViewModel {
+  readonly card: WhyChooseUsCard;
+  readonly index: number;
+  readonly offset: number;
+  readonly isVisible: boolean;
+  readonly isCenter: boolean;
+  readonly transform: string;
+  readonly opacity: number;
+  readonly zIndex: number;
+  readonly filter: string;
 }
 
 @Component({
@@ -59,8 +72,15 @@ export class WhyChooseUs {
   private mouseStartX = 0;
 
   constructor() {
+    observeHostViewport((visible) => {
+      if (visible && !this.isHovered()) {
+        this.startAutoPlay();
+      } else {
+        this.stopAutoPlay();
+      }
+    });
+
     if (isPlatformBrowser(this.platformId)) {
-      this.startAutoPlay();
       this.destroyRef.onDestroy(() => this.stopAutoPlay());
     }
   }
@@ -166,6 +186,25 @@ export class WhyChooseUs {
 
   readonly totalCards = computed(() => this.cards.length);
 
+  readonly cardViewModels = computed<readonly WhyChooseUsCardViewModel[]>(() => {
+    this.currentIndex();
+    return this.cards.map((card, index) => {
+      const offset = this.getShortestOffset(index);
+      const abs = Math.abs(offset);
+      return {
+        card,
+        index,
+        offset,
+        isVisible: abs <= 2,
+        isCenter: offset === 0,
+        transform: this.getCardTransform(offset),
+        opacity: this.getCardOpacity(offset),
+        zIndex: this.getCardZIndex(offset),
+        filter: this.getCardFilter(offset),
+      };
+    });
+  });
+
   /**
    * Computes shortest circular distance from current active index
    * e.g. for 9 items, returns range [-4, 4]
@@ -208,7 +247,8 @@ export class WhyChooseUs {
     const abs = Math.abs(offset);
     if (abs === 0) return 'none';
     if (abs === 1) return 'blur(2.8px)';
-    return 'blur(6px)';
+    if (abs === 2) return 'blur(6px)';
+    return 'none';
   }
 
   next(): void {

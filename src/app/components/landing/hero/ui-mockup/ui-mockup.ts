@@ -1,5 +1,13 @@
-import { Component, computed, inject, InjectionToken, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  InjectionToken,
+  input,
+  signal,
+} from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { observeHostViewport } from '../../../../systems/lib/viewport-observer';
 
 export const CURRENT_DATE = new InjectionToken<Date | (() => Date)>('CURRENT_DATE', {
   providedIn: 'root',
@@ -275,6 +283,12 @@ const CANONICAL_Q3_MONTHS: readonly RawMonthPoint[] = [
       animation: floating-card-bottom-right 6.5s ease-in-out infinite 1.7s;
     }
 
+    .mockup-animations-paused .animate-floating-card-left,
+    .mockup-animations-paused .animate-floating-card-top-right,
+    .mockup-animations-paused .animate-floating-card-bottom-right {
+      animation-play-state: paused !important;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .animate-floating-card-left,
       .animate-floating-card-top-right,
@@ -286,11 +300,18 @@ const CANONICAL_Q3_MONTHS: readonly RawMonthPoint[] = [
   `,
   host: {
     class: 'relative block w-full text-left font-dm-sans',
+    '[class.mockup-animations-paused]': '!isInViewport()',
     '(document:click)': 'onDocumentClick()',
     '(document:keydown.escape)': 'closeAllDropdowns()',
   },
 })
 export class UiMockup {
+  readonly isInViewport = signal<boolean>(true);
+
+  constructor() {
+    observeHostViewport((visible) => this.isInViewport.set(visible), '50px 0px');
+  }
+
   readonly currentDateInput = input<Date | undefined>(undefined, { alias: 'currentDate' });
   private readonly injectedDate = inject(CURRENT_DATE, { optional: true });
 

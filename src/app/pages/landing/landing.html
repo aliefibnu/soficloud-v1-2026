@@ -1,9 +1,45 @@
 <app-hero />
-<app-business-control />
+
+@defer (on viewport; hydrate on viewport) {
+  <app-business-control />
+} @placeholder {
+  <div class="w-full min-h-[540px]" aria-hidden="true"></div>
+}
+
 <!-- <app-overview-feature /> -->
-<app-features />
-<app-why-choose-us />
-<app-business-model />
-<app-customers />
-<app-price />
-<app-cta />
+
+@defer (on viewport; hydrate on viewport) {
+  <app-features />
+} @placeholder {
+  <div id="features" class="w-full min-h-[800px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-why-choose-us />
+} @placeholder {
+  <div id="why-choose-us" class="w-full min-h-[460px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-business-model />
+} @placeholder {
+  <div id="solutions" class="w-full min-h-[680px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-customers />
+} @placeholder {
+  <div id="customers" class="w-full min-h-[640px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-price />
+} @placeholder {
+  <div id="pricing" class="w-full min-h-[420px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-cta />
+} @placeholder {
+  <div id="contact" class="w-full min-h-[560px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+}

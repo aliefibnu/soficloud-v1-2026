@@ -10,6 +10,7 @@ import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../../systems/lib/language.service';
+import { observeHostViewport } from '../../../systems/lib/viewport-observer';
 
 export interface DataPoint {
   readonly id: number;
@@ -115,9 +116,13 @@ export class BusinessControl implements OnDestroy {
   private mouseStartY = 0;
 
   constructor() {
-    if (this.isBrowser) {
-      this.startAutoPlay();
-    }
+    observeHostViewport((visible) => {
+      if (visible && !this.isHovered()) {
+        this.startAutoPlay();
+      } else {
+        this.stopAutoPlay();
+      }
+    });
   }
 
   ngOnDestroy(): void {

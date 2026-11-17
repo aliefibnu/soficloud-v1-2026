@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { observeHostViewport } from '../../../systems/lib/viewport-observer';
 
 export type LogoAspect = 'ultra-wide' | 'wide' | 'standard' | 'square';
 
@@ -363,6 +364,10 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       box-shadow: 0 4px 14px rgba(28, 115, 232, 0.12);
     }
 
+    .marquee-paused * {
+      animation-play-state: paused !important;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .pulse-top-horizontal,
       .pulse-upper-right,
@@ -390,8 +395,24 @@ export class Customers implements OnInit {
   readonly topMarqueeContainer = viewChild<ElementRef<HTMLElement>>('topContainer');
   readonly topMarqueeTrack = viewChild<ElementRef<HTMLElement>>('topTrack');
 
-  private positionRafId: number | null = null;
-  private lastCheckTime = 0;
+  private centerObserver: IntersectionObserver | null = null;
+  private isInitialized = false;
+
+  readonly isInViewport = signal<boolean>(false);
+
+  constructor() {
+    observeHostViewport((visible) => {
+      this.isInViewport.set(visible);
+      if (!this.isInitialized) return;
+      if (visible) {
+        this.startRotationTimer();
+        this.startCenterObserver();
+      } else {
+        this.stopRotationTimer();
+        this.stopCenterObserver();
+      }
+    });
+  }
 
   readonly topCustomers = TOP_CUSTOMERS;
   readonly bottomRow1 = BOTTOM_ROW_1;
@@ -457,13 +478,17 @@ export class Customers implements OnInit {
   private lineCleanupTimeout: ReturnType<typeof setTimeout> | null = null;
 
   ngOnInit(): void {
-    this.startRotationTimer();
-    this.startCenterTracker();
+    this.isInitialized = true;
     this.triggerLineAnimation();
+
+    if (isPlatformBrowser(this.platformId) && this.isInViewport()) {
+      this.startRotationTimer();
+      this.startCenterObserver();
+    }
 
     this.destroyRef.onDestroy(() => {
       this.stopRotationTimer();
-      this.stopCenterTracker();
+      this.stopCenterObserver();
       if (this.logoTransitionTimeout) {
         clearTimeout(this.logoTransitionTimeout);
       }
@@ -496,35 +521,11 @@ export class Customers implements OnInit {
     this.isPaused.set(false);
   }
 
-  private startCenterTracker(): void {
-    if (!isPlatformBrowser(this.platformId)) {
+  private startCenterObserver(): void {
+    if (!isPlatformBrowser(this.platformId) || typeof IntersectionObserver === 'undefined') {
       return;
     }
-
-    this.ngZone.runOutsideAngular(() => {
-      const check = (timestamp: number) => {
-        if (timestamp - this.lastCheckTime >= 40) {
-          this.lastCheckTime = timestamp;
-          this.checkCenterCard();
-        }
-        this.positionRafId = requestAnimationFrame(check);
-      };
-
-      this.positionRafId = requestAnimationFrame(check);
-    });
-  }
-
-  private stopCenterTracker(): void {
-    if (this.positionRafId !== null) {
-      cancelAnimationFrame(this.positionRafId);
-      this.positionRafId = null;
-    }
-  }
-
-  private checkCenterCard(): void {
-    if (this.isPaused()) {
-      return;
-    }
+    this.stopCenterObserver();
 
     const containerEl = this.topMarqueeContainer()?.nativeElement;
     const trackEl = this.topMarqueeTrack()?.nativeElement;
@@ -532,47 +533,65 @@ export class Customers implements OnInit {
       return;
     }
 
-    const containerRect = containerEl.getBoundingClientRect();
-    if (containerRect.width === 0) {
-      return;
-    }
-
-    const centerX = containerRect.left + containerRect.width / 2;
     const cards = trackEl.querySelectorAll<HTMLElement>('.top-customer-card');
     if (!cards.length) {
       return;
     }
 
-    let closestIndex = -1;
-    let minDistance = Infinity;
+    this.ngZone.runOutsideAngular(() => {
+      this.centerObserver = new IntersectionObserver(
+        (entries) => {
+          if (this.isPaused() || !this.isInViewport()) {
+            return;
+          }
+          let closestIndex = -1;
+          let minDistance = Infinity;
 
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i];
-      const rect = card.getBoundingClientRect();
-      const cardCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(cardCenter - centerX);
+          for (const entry of entries) {
+            if (!entry.isIntersecting || !entry.rootBounds) continue;
+            const rootCenter = entry.rootBounds.left + entry.rootBounds.width / 2;
+            const cardCenter = entry.boundingClientRect.left + entry.boundingClientRect.width / 2;
+            const dist = Math.abs(cardCenter - rootCenter);
+            if (dist < minDistance) {
+              minDistance = dist;
+              const idx = entry.target.getAttribute('data-index');
+              if (idx !== null) {
+                closestIndex = Number(idx);
+              }
+            }
+          }
 
-      if (dist < minDistance) {
-        minDistance = dist;
-        const idx = card.getAttribute('data-index');
-        if (idx !== null) {
-          closestIndex = Number(idx);
-        }
+          if (closestIndex !== -1 && closestIndex !== this.activeCustomerIndex()) {
+            this.ngZone.run(() => {
+              this.activeCustomerIndex.set(closestIndex);
+              this.currentVirtual.set(20 + closestIndex);
+              this.triggerLogoTransition();
+            });
+          }
+        },
+        {
+          root: containerEl,
+          rootMargin: '0px -44% 0px -44%',
+          threshold: 0,
+        },
+      );
+
+      for (let i = 0; i < cards.length; i++) {
+        this.centerObserver.observe(cards[i]);
       }
-    }
+    });
+  }
 
-    if (closestIndex !== -1 && closestIndex !== this.activeCustomerIndex()) {
-      this.ngZone.run(() => {
-        this.activeCustomerIndex.set(closestIndex);
-        this.currentVirtual.set(20 + closestIndex);
-        this.triggerLogoTransition();
-      });
+  private stopCenterObserver(): void {
+    if (this.centerObserver) {
+      this.centerObserver.disconnect();
+      this.centerObserver = null;
     }
   }
 
   private advanceToNext(): void {
     const containerEl = this.topMarqueeContainer()?.nativeElement;
-    if (containerEl && containerEl.getBoundingClientRect().width > 0) {
+    if (containerEl && containerEl.offsetWidth > 0) {
       return;
     }
     const N = this.topCustomers.length;

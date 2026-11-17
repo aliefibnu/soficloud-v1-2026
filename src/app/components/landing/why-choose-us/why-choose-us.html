@@ -33,65 +33,62 @@
       role="region"
       [attr.aria-label]="'WHY_CHOOSE_US.ARIA.CAROUSEL' | translate"
     >
-      @for (card of cards; track card.id; let i = $index) {
-        @let offset = getShortestOffset(i);
-        @let isVisible = offset >= -2 && offset <= 2;
-        @let isCenter = offset === 0;
-
+      @for (vm of cardViewModels(); track vm.card.id) {
         <article
-          class="carousel-card absolute top-1/2 left-1/2 w-67.5 min-[420px]:w-75 sm:w-82.5 md:w-87.5 h-63.75 min-[420px]:h-65 sm:h-68.75 md:h-72.5 rounded-2xl bg-white border border-slate-100/80 p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center will-change-transform cursor-pointer"
-          [class.shadow-2xl]="isCenter"
-          [class.shadow-slate-900/10]="isCenter"
-          [style.transform]="getCardTransform(offset)"
-          [style.opacity]="getCardOpacity(offset)"
-          [style.zIndex]="getCardZIndex(offset)"
-          [style.filter]="getCardFilter(offset)"
-          [style.pointerEvents]="isVisible ? 'auto' : 'none'"
-          [attr.aria-hidden]="!isCenter"
+          class="carousel-card absolute top-1/2 left-1/2 w-67.5 min-[420px]:w-75 sm:w-82.5 md:w-87.5 h-63.75 min-[420px]:h-65 sm:h-68.75 md:h-72.5 rounded-2xl bg-white border border-slate-100/80 p-4 sm:p-5 md:p-6 shadow-xl transition-all duration-500 ease-out flex flex-col items-center justify-between text-center cursor-pointer"
+          [class.will-change-transform]="vm.isVisible"
+          [class.shadow-2xl]="vm.isCenter"
+          [class.shadow-slate-900/10]="vm.isCenter"
+          [style.transform]="vm.transform"
+          [style.opacity]="vm.opacity"
+          [style.zIndex]="vm.zIndex"
+          [style.filter]="vm.filter"
+          [style.pointerEvents]="vm.isVisible ? 'auto' : 'none'"
+          [attr.aria-hidden]="!vm.isCenter"
           role="group"
           aria-roledescription="slide"
           [attr.aria-label]="
             'WHY_CHOOSE_US.ARIA.SLIDE'
               | translate
                 : {
-                    current: card.id,
+                    current: vm.card.id,
                     total: totalCards(),
-                    title: ('WHY_CHOOSE_US.CARDS.' + card.id + '.TITLE' | translate),
+                    title: ('WHY_CHOOSE_US.CARDS.' + vm.card.id + '.TITLE' | translate),
                   }
           "
-          (click)="onCardClick(i, offset)"
+          (click)="onCardClick(vm.index, vm.offset)"
         >
           <div
             class="h-18 min-[420px]:h-20 sm:h-22 md:h-24 flex items-center justify-center w-full"
             aria-hidden="true"
           >
             <img
-              [ngSrc]="card.icon"
+              [ngSrc]="vm.card.icon"
               alt=""
               [width]="96"
               [height]="96"
               class="max-h-16 min-[420px]:max-h-17 sm:max-h-19 md:max-h-21 w-auto object-contain pointer-events-none drop-shadow-xs transition-all duration-500"
-              [class.grayscale]="!isCenter"
-              [class.opacity-40]="!isCenter"
-              [class.opacity-100]="isCenter"
+              [class.grayscale]="!vm.isCenter"
+              [class.opacity-40]="!vm.isCenter"
+              [class.opacity-100]="vm.isCenter"
             />
           </div>
 
           <div class="flex flex-col items-center justify-center flex-1 mt-1 sm:mt-1.5 w-full">
             <h3
               class="font-dm-sans font-bold text-sm sm:text-base md:text-[18px] leading-snug tracking-[-0.01em] whitespace-pre-line text-center transition-colors duration-300"
-              [class.text-[#182849]]="isCenter"
-              [class.text-slate-400]="!isCenter"
+              [class.text-[#182849]]="vm.isCenter"
+              [class.text-slate-400]="!vm.isCenter"
             >
-              {{ 'WHY_CHOOSE_US.CARDS.' + card.id + '.TITLE' | translate }}
+              {{ 'WHY_CHOOSE_US.CARDS.' + vm.card.id + '.TITLE' | translate }}
             </h3>
 
             <p
               class="mt-1.5 sm:mt-2 font-dm-sans font-normal text-[11.5px] sm:text-xs md:text-[13px] leading-relaxed text-center max-w-72.5 transition-colors duration-300"
-              [class.text-slate-600]="isCenter"
-              [class.text-slate-400/80]="!isCenter"
+              [class.text-slate-600]="vm.isCenter"
+              [class.text-slate-400/80]="!vm.isCenter"
             >
-              {{ 'WHY_CHOOSE_US.CARDS.' + card.id + '.DESCRIPTION' | translate }}
+              {{ 'WHY_CHOOSE_US.CARDS.' + vm.card.id + '.DESCRIPTION' | translate }}
             </p>
           </div>
         </article>

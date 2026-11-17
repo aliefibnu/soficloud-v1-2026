@@ -2,5 +2,9 @@
 <main>
   <router-outlet />
 </main>
-<app-footer />
+@defer (on viewport; hydrate on viewport) {
+  <app-footer />
+} @placeholder {
+  <div class="w-full min-h-[380px] bg-[#074DB8]" aria-hidden="true"></div>
+}
 <app-scroll-to-top />

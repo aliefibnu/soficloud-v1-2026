@@ -7,7 +7,11 @@ import {
 import { ViewportScroller } from '@angular/common';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideClientHydration } from '@angular/platform-browser';
+import {
+  provideClientHydration,
+  withEventReplay,
+  withIncrementalHydration,
+} from '@angular/platform-browser';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -26,7 +30,7 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
       }),
     ),
-    provideClientHydration(),
+    provideClientHydration(withEventReplay(), withIncrementalHydration()),
     provideHttpClient(withFetch()),
     provideTranslateService({
       fallbackLang: 'id',
