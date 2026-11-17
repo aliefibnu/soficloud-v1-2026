@@ -1,4 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProcessSectionShell } from '../../../shared/process-section-shell/process-section-shell';
 
@@ -37,13 +38,51 @@ export interface AmountLimitRow {
   readonly valueKey: string;
 }
 
+/** Stepper stage state in the Status Approval card. */
+export interface ApprovalStep {
+  readonly id: string;
+  readonly number: string;
+  readonly role: string;
+  readonly status: string;
+  readonly state: 'done' | 'active' | 'next';
+}
+
+/** Expense line item inside the Cash Advance summary table. */
+export interface CashAdvanceItem {
+  readonly label: string;
+  readonly amount: string;
+}
+
+/** Highlighted approver position card in the Status Approval tab. */
+export interface StatusPositionCard {
+  readonly id: 'current' | 'next';
+  readonly label: string;
+  readonly person: string;
+  readonly status: string;
+  readonly iconSrc: string;
+  readonly iconWidth: number;
+  readonly iconHeight: number;
+}
+
+/** Timeline step item in the Riwayat approval history card. */
+export interface HistoryTimelineItem {
+  readonly id: 'entry' | 'confirm' | 'running';
+  readonly badge: string;
+  readonly time: string;
+  readonly person: string;
+  readonly note: string;
+  readonly iconSrc: string;
+  readonly iconWidth: number;
+  readonly iconHeight: number;
+}
+
 /**
  * Interactive tabbed preview section for Smart Workflow ("Jelajahi Tampilan"),
- * showcasing role-based permission strategy and upcoming workflow stage views.
+ * showcasing role-based permission strategy, approval tracking, history, and notifications.
  */
 @Component({
   selector: 'app-explore-the-look',
-  imports: [ProcessSectionShell, TranslatePipe],
+  imports: [NgOptimizedImage, NgTemplateOutlet, ProcessSectionShell, TranslatePipe],
   templateUrl: './explore-the-look.html',
 })
 export class ExploreTheLook {
@@ -71,10 +110,6 @@ export class ExploreTheLook {
       subtitleKey: 'SMART_WORKFLOW.EXPLORE_THE_LOOK.TABS.NOTIFIKASI.SUBTITLE',
     },
   ];
-
-  readonly placeholderTabs = computed<readonly ExploreLookTab[]>(() =>
-    this.tabs.filter((tab) => tab.id !== 'kewenangan'),
-  );
 
   readonly contextFields: readonly AccessContextField[] = [
     {
@@ -165,6 +200,95 @@ export class ExploreTheLook {
       labelKey: 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.AMOUNT_RANGE.TO_LABEL',
       valueKey: 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PERMISSION_STRATEGY.AMOUNT_RANGE.TO_VALUE',
     },
+  ];
+
+  readonly approvalSteps: readonly ApprovalStep[] = [
+    {
+      id: 'marketing-manager',
+      number: '01',
+      role: 'Marketing Manager',
+      status: 'Approved',
+      state: 'done',
+    },
+    {
+      id: 'accounting-finance',
+      number: '02',
+      role: 'Accounting & Finance',
+      status: 'Waiting Approval',
+      state: 'active',
+    },
+    {
+      id: 'director',
+      number: '03',
+      role: 'Director',
+      status: 'Next Approver',
+      state: 'next',
+    },
+  ];
+
+  readonly cashAdvanceItems: readonly CashAdvanceItem[] = [
+    { label: 'Hotel Ticket', amount: 'Rp 3,600.000' },
+    { label: 'Flight Ticket', amount: 'Rp 4,200.000' },
+  ];
+
+  readonly statusPositions: readonly StatusPositionCard[] = [
+    {
+      id: 'current',
+      label: 'POSISI SAAT INI',
+      person: 'Hanifah Syakira',
+      status: 'Waiting Approval',
+      iconSrc: '/images/smart-workflow/explore-the-look/status-current-folder.svg',
+      iconWidth: 78,
+      iconHeight: 60,
+    },
+    {
+      id: 'next',
+      label: 'LANGKAH BERIKUTNYA',
+      person: 'Nabilla Warda',
+      status: 'Next Approver',
+      iconSrc: '/images/smart-workflow/explore-the-look/status-next-folder.svg',
+      iconWidth: 77,
+      iconHeight: 60,
+    },
+  ];
+
+  readonly historyTimeline: readonly HistoryTimelineItem[] = [
+    {
+      id: 'entry',
+      badge: 'Entry',
+      time: '12.00',
+      person: 'Atqiya Salsabilla',
+      note: 'Perjalanan dinas sesuai kebutuhan kegiatan.',
+      iconSrc: '/images/smart-workflow/explore-the-look/history-entry-folder.svg',
+      iconWidth: 37,
+      iconHeight: 29,
+    },
+    {
+      id: 'confirm',
+      badge: 'Confirm',
+      time: '14.20',
+      person: 'Hanifah Syakira',
+      note: 'Menunggu peninjauan rincian biaya.',
+      iconSrc: '/images/smart-workflow/explore-the-look/history-confirm-clipboard.svg',
+      iconWidth: 31,
+      iconHeight: 37,
+    },
+    {
+      id: 'running',
+      badge: 'Running',
+      time: '15.40',
+      person: 'Nabilla Warda',
+      note: 'Tindakan mengikuti urutan persetujuan.',
+      iconSrc: '/images/smart-workflow/explore-the-look/history-running-sync.svg',
+      iconWidth: 37,
+      iconHeight: 36,
+    },
+  ];
+
+  readonly notificationSpecs: readonly { readonly label: string; readonly value: string }[] = [
+    { label: 'Status:', value: 'Waiting Approval' },
+    { label: 'Keperluan:', value: 'Business Trip Jakarta' },
+    { label: 'Total:', value: 'Rp7.800.000' },
   ];
 
   /** Selects a workflow look tab and keeps it visible in horizontal scroll containers. */
