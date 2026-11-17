@@ -985,5 +985,26 @@ describe('UiMockup', () => {
     expect(julInJul.revenue).toBe(julInSep.revenue);
     expect(component.currentData().sales.orders).toBe(julInJul.salesOrders);
   });
+
+  it('should apply bottom fade mask and expanded white shade overlay while keeping floating bottom-right card unmasked', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const fadeContainer = compiled.querySelector('.mockup-bottom-fade');
+    expect(fadeContainer).toBeTruthy();
+
+    const backdropGlow = compiled.querySelector('.-z-10.blur-3xl');
+    expect(backdropGlow).toBeTruthy();
+    expect(backdropGlow?.classList.contains('bottom-24')).toBe(true);
+
+    const whiteOverlay = fadeContainer?.querySelector('.bg-linear-to-t.from-white');
+    expect(whiteOverlay).toBeTruthy();
+    expect(whiteOverlay?.classList.contains('h-24')).toBe(true);
+    expect(whiteOverlay?.classList.contains('lg:h-44')).toBe(true);
+
+    const moCard = compiled.querySelector('[aria-label="Budget utilization execution readiness"]');
+    expect(moCard).toBeTruthy();
+    expect(fadeContainer?.contains(moCard!)).toBe(false);
+  });
 });
 

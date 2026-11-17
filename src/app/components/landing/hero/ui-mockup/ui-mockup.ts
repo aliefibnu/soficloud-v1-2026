@@ -214,17 +214,21 @@ const CANONICAL_Q3_MONTHS: readonly RawMonthPoint[] = [
       mask-image: linear-gradient(
         to bottom,
         #000 0%,
-        #000 83%,
-        rgba(0, 0, 0, 0.8) 91%,
-        rgba(0, 0, 0, 0.25) 97%,
+        #000 66%,
+        rgba(0, 0, 0, 0.85) 75%,
+        rgba(0, 0, 0, 0.52) 84%,
+        rgba(0, 0, 0, 0.2) 92%,
+        rgba(0, 0, 0, 0.04) 97%,
         transparent 100%
       );
       -webkit-mask-image: linear-gradient(
         to bottom,
         #000 0%,
-        #000 83%,
-        rgba(0, 0, 0, 0.8) 91%,
-        rgba(0, 0, 0, 0.25) 97%,
+        #000 66%,
+        rgba(0, 0, 0, 0.85) 75%,
+        rgba(0, 0, 0, 0.52) 84%,
+        rgba(0, 0, 0, 0.2) 92%,
+        rgba(0, 0, 0, 0.04) 97%,
         transparent 100%
       );
     }

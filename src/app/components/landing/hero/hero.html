@@ -1,25 +1,31 @@
 <section id="hero" class="relative w-full pt-29.25 sm:pt-[137px] md:pt-[157px] lg:pt-[173px] pb-section overflow-x-clip">
   <div
-    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none"
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none [mask-image:linear-gradient(to_bottom,#000_0%,#000_72%,transparent_100%)]"
     aria-hidden="true"
   >
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-360 h-256 pointer-events-none">
+    <div
+      class="hero-ambient-canvas absolute top-0 left-1/2 -translate-x-1/2 w-360 h-256 pointer-events-none"
+    >
       <div
-        class="absolute -top-100.25 -left-137.5 w-333.25 h-328.5 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(168,195,240,0.45)_0%,rgba(168,195,240,0.45)_45%,#FAFCFE_100%)] blur-[235px]"
+        class="absolute -top-100.25 -left-137.5 w-333.25 h-328.5 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(168,195,240,0.45)_0%,rgba(168,195,240,0.28)_45%,transparent_100%)] blur-[235px]"
       ></div>
 
       <div
-        class="absolute top-86 left-23.25 w-170.25 h-167.75 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(168,195,240,0.45)_0%,rgba(168,195,240,0.45)_45%,#FAFCFE_100%)] blur-[235px]"
+        class="absolute top-86 left-23.25 w-170.25 h-167.75 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(168,195,240,0.45)_0%,rgba(168,195,240,0.25)_45%,transparent_100%)] blur-[235px]"
       ></div>
 
       <div
-        class="absolute -top-56 left-114 w-206.75 h-204.5 rounded-full bg-[radial-gradient(ellipse_at_center,#FFEFED_0%,#FAFCFE_100%)] blur-[176px]"
+        class="absolute -top-56 left-114 w-206.75 h-204.5 rounded-full bg-[radial-gradient(ellipse_at_center,#FFEFED_0%,transparent_100%)] blur-[176px]"
       ></div>
 
       <div
-        class="absolute -top-8 left-158 w-232 h-270.75 rotate-[15.85deg] rounded-[48%_52%_62%_38%/42%_55%_45%_58%] bg-[radial-gradient(ellipse_at_center,rgba(221,243,243,0.5)_0%,rgba(221,243,243,0.5)_50%,#F8FEFE_100%)] blur-[50px]"
+        class="absolute -top-8 left-158 w-232 h-270.75 rotate-[15.85deg] rounded-[48%_52%_62%_38%/42%_55%_45%_58%] bg-[radial-gradient(ellipse_at_center,rgba(221,243,243,0.5)_0%,rgba(221,243,243,0.35)_50%,transparent_100%)] blur-[50px]"
       ></div>
     </div>
+
+    <div
+      class="hero-bottom-fade pointer-events-none absolute inset-x-0 bottom-0 h-32 sm:h-44 lg:h-56 bg-linear-to-t from-white via-white/85 to-transparent"
+    ></div>
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
