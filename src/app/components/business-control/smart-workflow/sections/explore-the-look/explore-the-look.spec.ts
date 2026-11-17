@@ -265,7 +265,105 @@ describe('ExploreTheLook', () => {
     expect(tabButtons[1].nativeElement.getAttribute('aria-selected')).toBe('true');
     expect(panels[0].nativeElement.getAttribute('hidden')).toBe('until-found');
     expect(panels[1].nativeElement.hasAttribute('hidden')).toBe(false);
-    expect(panels[1].nativeElement.textContent).toContain('Pelacakan Status Persetujuan');
+    expect(panels[1].nativeElement.textContent).toContain('CASH ADVANCE REQUEST');
+    expect(panels[1].nativeElement.textContent).toContain('POSISI SAAT INI');
+  });
+
+  it('should render Status Approval stepper, cash advance table, and current/next cards with icons', () => {
+    const panel = fixture.debugElement.query(By.css('#panel-look-status-approval'));
+    expect(panel.nativeElement.textContent).toContain('Marketing Manager');
+    expect(panel.nativeElement.textContent).toContain('Accounting & Finance');
+    expect(panel.nativeElement.textContent).toContain('Director');
+    expect(panel.nativeElement.textContent).toContain('CA-2404-0001');
+    expect(panel.nativeElement.textContent).toContain('Rp 7,800.000');
+
+    const currentCard = fixture.debugElement.query(
+      By.css('[data-testid="status-position-card-current"]'),
+    );
+    expect(currentCard.nativeElement.textContent).toContain('Hanifah Syakira');
+    expect(currentCard.nativeElement.textContent).toContain('Waiting Approval');
+    expect(currentCard.query(By.css('img')).nativeElement.getAttribute('src')).toContain(
+      '/images/smart-workflow/explore-the-look/status-current-folder.svg',
+    );
+
+    const nextCard = fixture.debugElement.query(
+      By.css('[data-testid="status-position-card-next"]'),
+    );
+    expect(nextCard.nativeElement.textContent).toContain('Nabilla Warda');
+    expect(nextCard.nativeElement.textContent).toContain('Next Approver');
+    expect(nextCard.query(By.css('img')).nativeElement.getAttribute('src')).toContain(
+      '/images/smart-workflow/explore-the-look/status-next-folder.svg',
+    );
+  });
+
+  it('should render Riwayat cash advance table and 3 timeline history steps with icons', () => {
+    const tableCard = fixture.debugElement.query(By.css('[data-testid="riwayat-table-card"]'));
+    expect(tableCard.nativeElement.textContent).toContain('CASH ADVANCE REQUEST');
+    expect(tableCard.nativeElement.textContent).toContain('Hotel Ticket');
+    expect(tableCard.nativeElement.textContent).toContain('Flight Ticket');
+    expect(tableCard.nativeElement.textContent).toContain('Rp 7,800.000');
+
+    const entryStep = fixture.debugElement.query(By.css('[data-testid="riwayat-step-entry"]'));
+    const confirmStep = fixture.debugElement.query(By.css('[data-testid="riwayat-step-confirm"]'));
+    const runningStep = fixture.debugElement.query(By.css('[data-testid="riwayat-step-running"]'));
+
+    expect(entryStep.nativeElement.textContent).toContain('Atqiya Salsabilla');
+    expect(entryStep.nativeElement.textContent).toContain('12.00');
+    expect(entryStep.query(By.css('img')).nativeElement.getAttribute('src')).toContain(
+      '/images/smart-workflow/explore-the-look/history-entry-folder.svg',
+    );
+
+    expect(confirmStep.nativeElement.textContent).toContain('Hanifah Syakira');
+    expect(confirmStep.nativeElement.textContent).toContain('14.20');
+    expect(confirmStep.query(By.css('img')).nativeElement.getAttribute('src')).toContain(
+      '/images/smart-workflow/explore-the-look/history-confirm-clipboard.svg',
+    );
+
+    expect(runningStep.nativeElement.textContent).toContain('Nabilla Warda');
+    expect(runningStep.nativeElement.textContent).toContain('15.40');
+    expect(runningStep.query(By.css('img')).nativeElement.getAttribute('src')).toContain(
+      '/images/smart-workflow/explore-the-look/history-running-sync.svg',
+    );
+  });
+
+  it('should render Notifikasi email and WhatsApp cards with envelope icon and transaction summary', () => {
+    const emailCard = fixture.debugElement.query(By.css('[data-testid="notification-card-email"]'));
+    expect(emailCard.nativeElement.textContent).toContain('Email notification');
+    expect(emailCard.nativeElement.textContent).toContain('Approval Cash Advance CA-2404-0001');
+    expect(emailCard.query(By.css('img')).nativeElement.getAttribute('src')).toContain(
+      '/images/smart-workflow/explore-the-look/notification-envelope.svg',
+    );
+
+    const whatsappCard = fixture.debugElement.query(
+      By.css('[data-testid="notification-card-whatsapp"]'),
+    );
+    expect(whatsappCard.nativeElement.textContent).toContain('WhatsApp notification');
+    expect(whatsappCard.nativeElement.textContent).toContain('Transaksi CA-2404-0001');
+    expect(whatsappCard.nativeElement.textContent).toContain('Business Trip Jakarta');
+    expect(whatsappCard.nativeElement.textContent).toContain('Rp7.800.000');
+    expect(whatsappCard.query(By.css('img')).nativeElement.getAttribute('src')).toContain(
+      '/images/smart-workflow/explore-the-look/notification-envelope.svg',
+    );
+
+    const statusStage = fixture.debugElement.query(
+      By.css('[data-testid="panel-status-approval-content"]'),
+    ).nativeElement as HTMLElement;
+    const riwayatStage = fixture.debugElement.query(
+      By.css('[data-testid="panel-riwayat-content"]'),
+    ).nativeElement as HTMLElement;
+    const notifikasiStage = fixture.debugElement.query(
+      By.css('[data-testid="panel-notifikasi-stage"]'),
+    ).nativeElement as HTMLElement;
+
+    expect(statusStage.className).toContain('lg:min-h-[342px]');
+    expect(riwayatStage.className).toContain('lg:min-h-[342px]');
+    expect(notifikasiStage.className).toContain('lg:min-h-[342px]');
+
+    const connectorsSvg = fixture.debugElement.query(
+      By.css('[data-testid="riwayat-connectors-svg"]'),
+    ).nativeElement as SVGElement;
+    expect(connectorsSvg.getAttribute('class')).toContain('z-0');
+    expect(emailCard.nativeElement.innerHTML).not.toContain('sm:text-justify');
   });
 
   it('should support keyboard navigation with ArrowRight, ArrowLeft, End, and Home', async () => {

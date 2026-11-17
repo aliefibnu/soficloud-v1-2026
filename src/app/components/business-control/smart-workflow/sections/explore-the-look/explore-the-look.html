@@ -256,41 +256,497 @@
     </div>
   </div>
 
-  <!-- Tab Panels 2-4: Pending Figma Designs -->
-  @for (tab of placeholderTabs(); track tab.id) {
+  <!-- Shared Cash Advance Request Summary Table -->
+  <ng-template #cashAdvanceTable let-compact="compact">
     <div
-      [id]="'panel-look-' + tab.id"
-      role="tabpanel"
-      [attr.aria-labelledby]="'tab-look-' + tab.id"
-      [attr.tabindex]="selectedTab() === tab.id ? 0 : null"
-      [attr.hidden]="selectedTab() === tab.id ? null : 'until-found'"
-      (beforematch)="selectTab(tab.id)"
+      [class]="
+        'w-full bg-[#FDFDFD] overflow-hidden border-[#D7D7D7] ' +
+        (compact
+          ? 'rounded-[12.53px] border-[0.52px]'
+          : 'rounded-[14.58px] border-[0.61px] h-full flex flex-col justify-between')
+      "
     >
-      <div class="w-full max-w-280 mx-auto">
-        <div
-          [attr.data-testid]="'placeholder-panel-' + tab.id"
-          class="bg-[#FDFDFD] rounded-xl shadow-[0_4px_20px_rgba(35,36,78,0.05)] p-8 sm:p-12 min-h-65 flex flex-col items-center justify-center text-center gap-2"
+      <div
+        [class]="
+          'bg-[#F3F8FE] flex flex-wrap items-center justify-between gap-2 ' +
+          (compact ? 'min-h-[41.77px] px-[18px] py-2' : 'min-h-[48.6px] px-[21px] py-2.5')
+        "
+      >
+        <span
+          [class]="
+            'font-dm-sans font-semibold tracking-[0.02em] text-[#23244E] uppercase ' +
+            (compact ? 'text-[10.44px]' : 'text-[12.15px]')
+          "
         >
-          <h3
-            class="font-dm-sans font-bold text-lg sm:text-xl text-[#23244E] leading-snug"
-            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
-          >
-            {{ tab.nameKey | translate }}
-          </h3>
-          <p
-            class="font-dm-sans font-medium text-xs sm:text-sm text-[#2F65E8]"
-            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
-          >
-            {{ tab.subtitleKey | translate }}
-          </p>
-          <p
-            class="font-dm-sans font-normal text-xs sm:text-sm text-[#64697D] max-w-md mt-1"
-            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);"
-          >
-            {{ 'SMART_WORKFLOW.EXPLORE_THE_LOOK.PLACEHOLDER.NOTICE' | translate }}
-          </p>
+          CASH ADVANCE REQUEST
+        </span>
+        <span
+          [class]="
+            'font-dm-sans font-semibold text-[#23244E] ' +
+            (compact ? 'text-[10.44px]' : 'text-[12.15px]')
+          "
+        >
+          Business trip . Jakarta
+        </span>
+      </div>
+
+      <div [class]="compact ? 'px-[18px] pt-[14px] pb-[13px]' : 'px-[21px] pt-[16px] pb-[15px]'">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <span
+              [class]="
+                'font-dm-sans font-normal text-[#8B8B8B] leading-tight ' +
+                (compact ? 'text-[8.35px]' : 'text-[9.72px]')
+              "
+            >
+              Request No.
+            </span>
+            <span
+              [class]="
+                'font-dm-sans font-semibold text-[#23244E] leading-tight ' +
+                (compact ? 'text-[10.44px]' : 'text-[12.15px]')
+              "
+            >
+              CA-2404-0001
+            </span>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <span
+              [class]="
+                'font-dm-sans font-normal text-[#8B8B8B] leading-tight ' +
+                (compact ? 'text-[8.35px]' : 'text-[9.72px]')
+              "
+            >
+              Department
+            </span>
+            <span
+              [class]="
+                'font-dm-sans font-semibold text-[#23244E] leading-tight ' +
+                (compact ? 'text-[10.44px]' : 'text-[12.15px]')
+              "
+            >
+              General
+            </span>
+          </div>
         </div>
       </div>
+
+      @for (item of cashAdvanceItems; track item.label) {
+        <div
+          [class]="
+            'flex items-center justify-between gap-4 border-t border-[#EEEEEE] ' +
+            (compact ? 'px-[18px] py-[10.5px]' : 'px-[21px] py-[12px]')
+          "
+        >
+          <span
+            [class]="
+              'font-dm-sans font-normal text-[#8B8B8B] leading-tight ' +
+              (compact ? 'text-[8.35px]' : 'text-[9.72px]')
+            "
+          >
+            {{ item.label }}
+          </span>
+          <span
+            [class]="
+              'font-dm-sans font-semibold text-[#23244E] tabular-nums leading-tight ' +
+              (compact ? 'text-[10.44px]' : 'text-[12.15px]')
+            "
+          >
+            {{ item.amount }}
+          </span>
+        </div>
+      }
+
+      <div
+        [class]="
+          'flex items-center justify-between gap-4 border-t border-[#EEEEEE] ' +
+          (compact ? 'px-[18px] py-[11px]' : 'px-[21px] py-[13px]')
+        "
+      >
+        <span
+          [class]="
+            'font-dm-sans font-semibold text-[#23244E] leading-tight ' +
+            (compact ? 'text-[10.44px]' : 'text-[12.15px]')
+          "
+        >
+          Total Request
+        </span>
+        <span
+          [class]="
+            'font-dm-sans font-semibold text-[#23244E] tabular-nums leading-tight ' +
+            (compact ? 'text-[10.44px]' : 'text-[12.15px]')
+          "
+        >
+          Rp 7,800.000
+        </span>
+      </div>
     </div>
-  }
+  </ng-template>
+
+  <!-- Tab Panel 2: Status Approval -->
+  <div
+    id="panel-look-status-approval"
+    role="tabpanel"
+    aria-labelledby="tab-look-status-approval"
+    [attr.tabindex]="selectedTab() === 'status-approval' ? 0 : null"
+    [attr.hidden]="selectedTab() === 'status-approval' ? null : 'until-found'"
+    (beforematch)="selectTab('status-approval')"
+  >
+    <div
+      data-testid="panel-status-approval-content"
+      class="w-full max-w-280 mx-auto lg:min-h-[342px] flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-[43px]"
+    >
+      <!-- Left Card: 3-Step Approval Stepper + Cash Advance Summary -->
+      <div
+        data-testid="status-approval-main-card"
+        class="w-full lg:flex-1 lg:min-h-[306px] rounded-[12.53px] bg-[#FDFDFD] px-4 pt-5 pb-3.5 sm:px-[20px] sm:pt-[20px] sm:pb-[15px] shadow-[0_2px_10px_rgba(35,36,78,0.04)] flex flex-col justify-between gap-4"
+      >
+        <ol
+          class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 sm:gap-4 px-1 sm:px-[14px]"
+          aria-label="Approval stages"
+        >
+          @for (step of approvalSteps; track step.id) {
+            <li class="flex items-center gap-2.5">
+              @if (step.state === 'done') {
+                <span
+                  class="w-[26px] h-[27px] rounded-[5.22px] bg-[#0D9596] flex items-center justify-center shrink-0"
+                  aria-hidden="true"
+                >
+                  <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
+                    <path
+                      d="M1.5 4.5L4.1 7.1L9.5 1.7"
+                      stroke="#FDFDFD"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              } @else if (step.state === 'active') {
+                <span
+                  class="w-[26px] h-[27px] rounded-[5.22px] bg-[#0162EF] text-[#FDFDFD] font-dm-sans font-semibold text-[10px] flex items-center justify-center shrink-0"
+                >
+                  {{ step.number }}
+                </span>
+              } @else {
+                <span
+                  class="w-[25px] h-[26px] rounded-[4.7px] bg-[#FDFDFD] border border-[#DDDDDD] text-[#8B8B8B] font-dm-sans font-medium text-[10px] flex items-center justify-center shrink-0"
+                >
+                  {{ step.number }}
+                </span>
+              }
+
+              <div class="flex flex-col leading-tight">
+                <span
+                  [class]="
+                    'font-dm-sans font-semibold text-[11px] leading-[1.3] ' +
+                    (step.state === 'active' ? 'text-[#1C73E8]' : 'text-[#23244E]')
+                  "
+                >
+                  {{ step.role }}
+                </span>
+                <span class="font-dm-sans font-normal text-[9px] text-[#8B8B8B] leading-[1.3]">
+                  {{ step.status }}
+                </span>
+              </div>
+            </li>
+          }
+        </ol>
+
+        <ng-container *ngTemplateOutlet="cashAdvanceTable; context: { compact: true }" />
+      </div>
+
+      <!-- Right Cards: Posisi Saat Ini -> Langkah Berikutnya -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-0 shrink-0">
+        @for (card of statusPositions; track card.id; let isFirst = $first) {
+          <div
+            [attr.data-testid]="'status-position-card-' + card.id"
+            class="w-full sm:w-[185px] h-[260px] rounded-[16px] bg-[#FDFDFD] p-[24px] flex flex-col items-center text-center shadow-[0_2px_10px_rgba(35,36,78,0.04)]"
+          >
+            <div
+              class="w-[127px] h-[81px] rounded-[8px] bg-[radial-gradient(50%_50%_at_50%_50%,#C3D7F7_0%,#EBF2FD_65.38%)] flex items-center justify-center shrink-0"
+            >
+              <img
+                [ngSrc]="card.iconSrc"
+                [width]="card.iconWidth"
+                [height]="card.iconHeight"
+                alt=""
+                class="pointer-events-none select-none"
+              />
+            </div>
+
+            <span class="mt-[12px] font-dm-sans font-normal text-[11px] tracking-[0.01em] text-[#23244E] uppercase">
+              {{ card.label }}
+            </span>
+
+            <span class="mt-auto pt-5 font-dm-sans font-normal text-[14px] text-[#23244E] leading-snug">
+              {{ card.person }}
+            </span>
+            <span class="mt-1 font-dm-sans font-semibold text-[14px] text-[#1C73E8] leading-snug">
+              {{ card.status }}
+            </span>
+          </div>
+
+          @if (isFirst) {
+            <div class="flex items-center justify-center sm:w-[32px] py-1 sm:py-0" aria-hidden="true">
+              <svg
+                width="19"
+                height="15"
+                viewBox="0 0 19 15"
+                fill="none"
+                class="rotate-90 sm:rotate-0"
+              >
+                <defs>
+                  <linearGradient
+                    id="explore-look-status-arrow"
+                    x1="2"
+                    y1="8"
+                    x2="16"
+                    y2="8"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#1E3AE1" />
+                    <stop offset="0.5" stop-color="#1C7DD8" />
+                    <stop offset="1" stop-color="#6694EB" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M2 7.5H15.5"
+                  stroke="url(#explore-look-status-arrow)"
+                  stroke-width="3.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M17.872 9.993L12.82 14.584C12.507 14.855 12.091 15.004 11.659 15C11.227 14.995 10.814 14.837 10.509 14.559C10.204 14.282 10.03 13.906 10.026 13.514C10.021 13.121 10.186 12.742 10.484 12.459L15.536 7.866C15.64 7.772 15.698 7.645 15.698 7.512C15.698 7.379 15.64 7.252 15.536 7.158L10.484 2.565C10.331 2.425 10.209 2.26 10.126 2.078C10.043 1.895 10 1.7 10 1.503C10 1.305 10.043 1.11 10.126 0.928C10.209 0.745 10.33 0.58 10.484 0.44C10.637 0.301 10.819 0.19 11.02 0.114C11.22 0.039 11.435 0 11.652 0C11.869 0 12.084 0.039 12.285 0.114C12.485 0.19 12.667 0.3 12.821 0.44L17.872 5.033C18.595 5.691 19 6.583 19 7.513C19 8.443 18.594 9.335 17.872 9.993Z"
+                  fill="#1C73E8"
+                />
+              </svg>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Panel 3: Riwayat -->
+  <div
+    id="panel-look-riwayat"
+    role="tabpanel"
+    aria-labelledby="tab-look-riwayat"
+    [attr.tabindex]="selectedTab() === 'riwayat' ? 0 : null"
+    [attr.hidden]="selectedTab() === 'riwayat' ? null : 'until-found'"
+    (beforematch)="selectTab('riwayat')"
+  >
+    <div
+      data-testid="panel-riwayat-content"
+      class="w-full max-w-280 mx-auto lg:min-h-[342px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[24px]"
+    >
+      <!-- Left Wide Card: Cash Advance Request -->
+      <div
+        data-testid="riwayat-table-card"
+        class="w-full lg:flex-1 lg:h-[260px]"
+      >
+        <ng-container *ngTemplateOutlet="cashAdvanceTable; context: { compact: false }" />
+      </div>
+
+      <!-- Right Timeline Card: Entry -> Confirm -> Running -->
+      <div
+        data-testid="riwayat-timeline-card"
+        class="relative w-full sm:w-[360px] sm:mx-auto lg:mx-0 sm:h-[260px] rounded-[16px] bg-[#FDFDFD] px-4 py-3 sm:px-[62px] sm:py-[8px] flex flex-col justify-between gap-2 sm:gap-[6.12px] shadow-[0_2px_10px_rgba(35,36,78,0.04)] shrink-0"
+      >
+        @for (item of historyTimeline; track item.id) {
+          <div
+            [attr.data-testid]="'riwayat-step-' + item.id"
+            class="relative z-10 w-full sm:w-[236.35px] sm:h-[77.25px] rounded-[6.12px] bg-[#FDFDFD] p-[11px] sm:py-[9px] flex items-center gap-[11px] shadow-[0_2.29px_11.47px_rgba(0,0,0,0.08)]"
+          >
+            <div
+              class="w-[59.83px] h-[55.84px] rounded-[6.9px] bg-[radial-gradient(50%_50%_at_50%_50%,#C3D7F7_0%,#EBF2FD_65.38%)] flex items-center justify-center shrink-0"
+            >
+              <img
+                [ngSrc]="item.iconSrc"
+                [width]="item.iconWidth"
+                [height]="item.iconHeight"
+                alt=""
+                class="pointer-events-none select-none"
+              />
+            </div>
+
+            <div class="min-w-0 flex-1 flex flex-col justify-center">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-dm-sans font-normal text-[7.65px] text-[#B1B1B1] leading-none">
+                  {{ item.badge }}
+                </span>
+                <span class="font-dm-sans font-normal text-[7.65px] text-[#B1B1B1] leading-none tabular-nums">
+                  {{ item.time }}
+                </span>
+              </div>
+              <span class="mt-0.5 font-dm-sans font-semibold text-[13.77px] text-[#23244E] leading-tight truncate">
+                {{ item.person }}
+              </span>
+              <p class="mt-0.5 font-dm-sans font-normal text-[7.65px] text-[#23244E] leading-[1.28]">
+                {{ item.note }}
+              </p>
+            </div>
+          </div>
+        }
+
+        <!-- Curved Vector Connector Overlay matching Figma 360x260 geometry (sits at z-0 beneath z-10 cards) -->
+        <svg
+          viewBox="0 0 360 260"
+          fill="none"
+          aria-hidden="true"
+          data-testid="riwayat-connectors-svg"
+          class="pointer-events-none hidden sm:block absolute inset-0 w-full h-full z-0"
+        >
+          <defs>
+            <linearGradient
+              id="explore-look-history-arrow-1"
+              x1="274"
+              y1="89.5"
+              x2="344"
+              y2="89.5"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#1E37E1" />
+              <stop offset="0.5" stop-color="#1C7DD8" />
+              <stop offset="1" stop-color="#6694EB" />
+            </linearGradient>
+            <linearGradient
+              id="explore-look-history-arrow-2"
+              x1="86"
+              y1="177.5"
+              x2="16"
+              y2="177.5"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#1E37E1" />
+              <stop offset="0.5" stop-color="#1C7DD8" />
+              <stop offset="1" stop-color="#6694EB" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M274 47H338C341.31 47 344 49.686 344 53V126C344 129.314 341.31 132 338 132H301"
+            stroke="url(#explore-look-history-arrow-1)"
+            stroke-width="6"
+          />
+          <path
+            d="M299.76 136.123L307.63 143.99C308.11 144.455 308.76 144.711 309.44 144.703C310.11 144.695 310.75 144.424 311.23 143.948C311.7 143.472 311.97 142.829 311.98 142.156C311.99 141.483 311.73 140.834 311.27 140.348L303.4 132.479C303.24 132.318 303.14 132.1 303.14 131.872C303.14 131.645 303.24 131.427 303.4 131.266L311.27 123.395C311.51 123.156 311.7 122.872 311.83 122.56C311.95 122.248 312.02 121.913 312.02 121.575C312.02 121.237 311.95 120.902 311.83 120.59C311.7 120.277 311.51 119.993 311.27 119.754C311.03 119.515 310.74 119.325 310.43 119.196C310.12 119.067 309.79 119 309.45 119C309.11 119 308.77 119.067 308.46 119.196C308.15 119.325 307.87 119.515 307.63 119.754L299.76 127.624C298.63 128.752 298 130.281 298 131.874C298 133.467 298.63 134.995 299.76 136.123Z"
+            fill="#1C73E8"
+          />
+          <path
+            d="M86 135H22C18.686 135 16 137.686 16 141V214C16 217.314 18.686 220 22 220H59"
+            stroke="url(#explore-look-history-arrow-2)"
+            stroke-width="6"
+          />
+          <path
+            d="M60.242 224.123L52.372 231.99C51.885 232.455 51.236 232.711 50.563 232.703C49.89 232.695 49.247 232.424 48.772 231.948C48.296 231.472 48.026 230.829 48.019 230.156C48.011 229.483 48.268 228.834 48.733 228.348L56.604 220.479C56.765 220.318 56.855 220.1 56.855 219.872C56.855 219.645 56.765 219.427 56.604 219.266L48.733 211.395C48.494 211.156 48.304 210.872 48.175 210.56C48.045 210.248 47.979 209.913 47.979 209.575C47.978 209.237 48.045 208.902 48.174 208.59C48.304 208.277 48.493 207.993 48.732 207.754C48.971 207.515 49.255 207.325 49.568 207.196C49.88 207.067 50.215 207 50.553 207C50.891 207 51.226 207.067 51.538 207.196C51.85 207.325 52.134 207.515 52.373 207.754L60.244 215.624C61.369 216.752 62.001 218.281 62 219.874C62 221.467 61.368 222.995 60.242 224.123Z"
+            fill="#1C73E8"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Panel 4: Notifikasi -->
+  <div
+    id="panel-look-notifikasi"
+    role="tabpanel"
+    aria-labelledby="tab-look-notifikasi"
+    [attr.tabindex]="selectedTab() === 'notifikasi' ? 0 : null"
+    [attr.hidden]="selectedTab() === 'notifikasi' ? null : 'until-found'"
+    (beforematch)="selectTab('notifikasi')"
+  >
+    <div
+      data-testid="panel-notifikasi-stage"
+      class="w-full max-w-280 mx-auto lg:min-h-[342px] flex items-center"
+    >
+      <div
+        data-testid="panel-notifikasi-content"
+        class="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-[21.5px]"
+      >
+        <!-- Left Card: Email Notification -->
+        <article
+          data-testid="notification-card-email"
+          class="w-full min-h-[259.52px] lg:min-h-[276px] rounded-[17.21px] bg-[#FDFDFD] p-5 sm:px-[26px] sm:py-[24px] shadow-[0_4.3px_21.51px_rgba(0,0,0,0.08)] flex flex-col"
+        >
+          <header class="flex items-center gap-3.5 pb-4 border-b-[1.43px] border-[#D7D7D7]/85">
+            <img
+              ngSrc="/images/smart-workflow/explore-the-look/notification-envelope.svg"
+              width="57"
+              height="39"
+              alt=""
+              class="shrink-0 pointer-events-none select-none"
+            />
+            <div class="flex flex-col leading-snug">
+              <h3 class="font-dm-sans font-semibold text-[17.21px] text-[#23244E] leading-tight">
+                SOFICloud Customer
+              </h3>
+              <p class="font-dm-sans font-normal text-[14.34px] text-[#B1B1B1] leading-snug mt-0.5">
+                Email notification
+              </p>
+            </div>
+          </header>
+
+          <div class="pt-[18px] flex flex-col gap-3">
+            <h4 class="font-dm-sans font-semibold text-[17.21px] text-[#23244E] leading-snug">
+              Approval Cash Advance CA-2404-0001
+            </h4>
+            <p class="font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-[1.5] text-left">
+              Permintaan perjalanan dinas ke Jakarta sebesar Rp 7,800.000 menunggu peninjauan Accounting Finance
+            </p>
+            <p class="font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-[1.5] text-left">
+              Silahkan buka detail transaksi untuk melakukan tindak lanjut sesuai kewenangan Anda.
+            </p>
+          </div>
+        </article>
+
+        <!-- Right Card: WhatsApp Notification -->
+        <article
+          data-testid="notification-card-whatsapp"
+          class="w-full min-h-[259.52px] lg:min-h-[276px] rounded-[17.21px] bg-[#FDFDFD] p-5 sm:px-[26px] sm:py-[24px] shadow-[0_4.3px_21.51px_rgba(0,0,0,0.08)] flex flex-col"
+        >
+          <header class="flex items-center gap-3.5 pb-4 border-b-[1.43px] border-[#D7D7D7]/85">
+            <img
+              ngSrc="/images/smart-workflow/explore-the-look/notification-envelope.svg"
+              width="57"
+              height="39"
+              alt=""
+              class="shrink-0 pointer-events-none select-none"
+            />
+            <div class="flex flex-col leading-snug">
+              <h3 class="font-dm-sans font-semibold text-[17.21px] text-[#23244E] leading-tight">
+                SOFICloud Customer
+              </h3>
+              <p class="font-dm-sans font-normal text-[14.34px] text-[#B1B1B1] leading-snug mt-0.5">
+                WhatsApp notification
+              </p>
+            </div>
+          </header>
+
+          <div class="pt-[18px] flex flex-col">
+            <h4 class="font-dm-sans font-semibold text-[17.21px] text-[#23244E] leading-snug">
+              Transaksi CA-2404-0001
+            </h4>
+
+            <dl class="mt-2.5 flex flex-col gap-0.5">
+              @for (spec of notificationSpecs; track spec.label) {
+                <div class="grid grid-cols-[78px_1fr] items-baseline gap-2">
+                  <dt class="font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-[1.4]">
+                    {{ spec.label }}
+                  </dt>
+                  <dd class="font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-[1.4]">
+                    {{ spec.value }}
+                  </dd>
+                </div>
+              }
+            </dl>
+
+            <p class="mt-4 font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-[1.5]">
+              Detail transaksi tersedia di SOFICloud. Akses mengikuti otorisasi pengguna.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
 </app-process-section-shell>
