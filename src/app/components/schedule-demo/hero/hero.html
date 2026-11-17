@@ -6,14 +6,62 @@
     <div
       class="w-full lg:w-[46%] xl:w-123.75 2xl:w-138.75 shrink-0 flex items-end justify-center lg:justify-start pl-6 sm:pl-10 lg:pl-8 xl:pl-8.25 2xl:pl-9.5 pr-6 sm:pr-10 lg:pr-0 pt-6 sm:pt-8 lg:pt-8 xl:pt-8 2xl:pt-9.75 pb-0"
     >
-      <img
-        ngSrc="/images/schedule-demo/illustration.svg"
-        width="517"
-        height="606"
-        priority
-        [alt]="'SCHEDULE_DEMO.HERO.TITLE' | translate"
-        class="w-full h-auto max-w-[320px] sm:max-w-95 md:max-w-105 lg:max-w-110 xl:max-w-115 2xl:max-w-129.25 object-contain object-bottom select-none pointer-events-none"
-      />
+      <div
+        role="img"
+        [attr.aria-label]="'SCHEDULE_DEMO.HERO.TITLE' | translate"
+        data-testid="schedule-demo-hero-illustration"
+        class="relative w-full max-w-[320px] sm:max-w-95 md:max-w-105 lg:max-w-110 xl:max-w-115 2xl:max-w-129.25 aspect-[517/606] select-none pointer-events-none"
+      >
+        <img
+          ngSrc="/images/schedule-demo/dashed-ring.svg"
+          width="430"
+          height="430"
+          priority
+          alt=""
+          aria-hidden="true"
+          class="animate-hero-ring-spin absolute left-[16.325%] top-0 w-[83.172%] h-[70.957%] object-contain select-none pointer-events-none z-0"
+        />
+
+        <img
+          ngSrc="/images/schedule-demo/phone-mockup.svg"
+          width="350"
+          height="533"
+          priority
+          alt=""
+          aria-hidden="true"
+          class="absolute left-[26.692%] top-[11.981%] w-[67.698%] h-[87.954%] object-contain select-none pointer-events-none z-10"
+        />
+
+        <img
+          ngSrc="/images/schedule-demo/chat-bubble-left.svg"
+          width="238"
+          height="76"
+          priority
+          alt=""
+          aria-hidden="true"
+          class="absolute left-0 top-[39.209%] w-[46.035%] h-[12.541%] object-contain select-none pointer-events-none z-20"
+        />
+
+        <img
+          ngSrc="/images/schedule-demo/chat-bubble-right.svg"
+          width="216"
+          height="77"
+          priority
+          alt=""
+          aria-hidden="true"
+          class="absolute left-[58.405%] top-[59.341%] w-[41.780%] h-[12.706%] object-contain select-none pointer-events-none z-20"
+        />
+
+        <img
+          ngSrc="/images/schedule-demo/user-badge.svg"
+          width="75"
+          height="80"
+          priority
+          alt=""
+          aria-hidden="true"
+          class="absolute left-[81.625%] top-[1.915%] w-[14.507%] h-[13.201%] object-contain select-none pointer-events-none z-20"
+        />
+      </div>
     </div>
 
     <div

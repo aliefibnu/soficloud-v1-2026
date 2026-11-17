@@ -1,0 +1,35 @@
+<svg width="350" height="533" viewBox="0 0 350 533" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="12.1055" y="23.6241" width="292.675" height="563.49" rx="19.4307" transform="rotate(-4.62987 12.1055 23.6241)" fill="#365AD2"/>
+<rect y="24.6045" width="292.675" height="563.49" rx="19.4307" transform="rotate(-4.62987 0 24.6045)" fill="url(#paint0_linear_3357_2630)"/>
+<rect x="21.0645" y="74.0733" width="257.457" height="461.479" rx="4.85767" transform="rotate(-4.62987 21.0645 74.0733)" fill="#EBF2FD"/>
+<rect x="104.555" y="36.8506" width="59.5065" height="9.71534" rx="4.85767" transform="rotate(-4.62987 104.555 36.8506)" fill="#EBF2FD"/>
+<circle cx="179.996" cy="35.6128" r="4.85767" fill="#EBF2FD"/>
+<rect x="191.641" y="86.8272" width="75.2939" height="36.4325" rx="5" transform="rotate(-4.62987 191.641 86.8272)" fill="#1D74D9"/>
+<rect x="195.561" y="135.245" width="75.2939" height="36.4325" rx="5" transform="rotate(-4.62987 195.561 135.245)" fill="#1D74D9"/>
+<rect x="58.8867" y="355.421" width="229" height="60" rx="8.50092" transform="rotate(-4.62987 58.8867 355.421)" fill="#75A0E8"/>
+<rect x="65.748" y="440.144" width="229" height="60" rx="8.50092" transform="rotate(-4.62987 65.748 440.144)" fill="url(#paint1_linear_3357_2630)"/>
+<rect x="46.7793" y="205.909" width="151" height="125" rx="8.50092" transform="rotate(-4.62987 46.7793 205.909)" fill="url(#paint2_linear_3357_2630)"/>
+<rect x="56.084" y="97.8077" width="117" height="6" transform="rotate(-4.62987 56.084 97.8077)" fill="#75A0E8"/>
+<rect x="60.0391" y="146.648" width="117" height="6" transform="rotate(-4.62987 60.0391 146.648)" fill="#75A0E8"/>
+<rect x="91.4258" y="113.003" width="83" height="6" transform="rotate(-4.62987 91.4258 113.003)" fill="#75A0E8"/>
+<rect x="95.3809" y="161.843" width="83" height="6" transform="rotate(-4.62987 95.3809 161.843)" fill="#75A0E8"/>
+<path d="M139.612 264.768C145.974 268.168 150.528 274.632 151.154 282.356L151.583 287.662L107.856 291.204L107.426 285.897C106.8 278.174 110.255 271.06 115.986 266.681C119.342 269.289 123.627 270.697 128.172 270.329C132.718 269.961 136.719 267.881 139.612 264.768Z" fill="#FDFDFD"/>
+<ellipse cx="126.786" cy="250.569" rx="15.7595" ry="15.9725" transform="rotate(-4.62987 126.786 250.569)" fill="#FDFDFD"/>
+<defs>
+<linearGradient id="paint0_linear_3357_2630" x1="-16.5078" y1="-80.4052" x2="467.515" y2="398.612" gradientUnits="userSpaceOnUse">
+<stop stop-color="#1E3AE1"/>
+<stop offset="0.372915" stop-color="#1D74D9"/>
+<stop offset="1" stop-color="#3B76DA"/>
+</linearGradient>
+<linearGradient id="paint1_linear_3357_2630" x1="64.5702" y1="432.497" x2="79.8775" y2="537.613" gradientUnits="userSpaceOnUse">
+<stop stop-color="#1E3AE1"/>
+<stop offset="0.620192" stop-color="#1D74D9"/>
+<stop offset="1" stop-color="#3B76DA"/>
+</linearGradient>
+<linearGradient id="paint2_linear_3357_2630" x1="46.0026" y1="189.978" x2="130.92" y2="374.544" gradientUnits="userSpaceOnUse">
+<stop stop-color="#1E3AE1"/>
+<stop offset="0.620192" stop-color="#1D74D9"/>
+<stop offset="1" stop-color="#3B76DA"/>
+</linearGradient>
+</defs>
+</svg>
