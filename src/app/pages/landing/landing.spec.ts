@@ -2,11 +2,13 @@ import { ComponentFixture, DeferBlockBehavior, DeferBlockState, TestBed } from '
 import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../systems/lib/language.service';
+import { LandingAnchorService } from '../../systems/lib/landing-anchor.service';
 import { Landing } from './landing';
 
 describe('Landing', () => {
   let component: Landing;
   let fixture: ComponentFixture<Landing>;
+  let anchorService: LandingAnchorService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -15,6 +17,7 @@ describe('Landing', () => {
       deferBlockBehavior: DeferBlockBehavior.Manual,
     }).compileComponents();
 
+    anchorService = TestBed.inject(LandingAnchorService);
     fixture = TestBed.createComponent(Landing);
     component = fixture.componentInstance;
     await fixture.whenStable();
@@ -32,5 +35,16 @@ describe('Landing', () => {
     fixture.detectChanges();
     const ctaEl = fixture.nativeElement.querySelector('app-cta');
     expect(ctaEl).toBeTruthy();
+  });
+
+  it('should expose placeholder order markers and reset requiredOrder on destroy', () => {
+    const placeholders = fixture.nativeElement.querySelectorAll('[data-landing-placeholder]');
+    expect(placeholders.length).toBe(7);
+
+    anchorService.revealUpToAnchor('pricing');
+    expect(anchorService.requiredOrder()).toBe(6);
+
+    fixture.destroy();
+    expect(anchorService.requiredOrder()).toBe(0);
   });
 });

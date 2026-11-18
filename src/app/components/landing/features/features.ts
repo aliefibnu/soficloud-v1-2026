@@ -1,6 +1,7 @@
-  import { Component, signal } from '@angular/core';
+  import { Component, inject, signal } from '@angular/core';
   import { NgOptimizedImage } from '@angular/common';
   import { TranslatePipe } from '@ngx-translate/core';
+  import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 
   export interface FeatureLayer {
     name: string;
@@ -43,6 +44,7 @@
     },
   })
   export class Features {
+    private readonly anchorService = inject(LandingAnchorService);
     readonly hoveredCard = signal<number | null>(null);
 
     readonly cards: FeatureCard[] = [
@@ -534,5 +536,9 @@
 
     setHoveredCard(id: number | null): void {
       this.hoveredCard.set(id);
+    }
+
+    onLearnMore(event: Event): void {
+      this.anchorService.navigateOrScrollToAnchor('contact', event);
     }
   } 

@@ -2,12 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
+import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 import { Navbar } from './navbar';
 
 describe('Navbar', () => {
   let component: Navbar;
   let fixture: ComponentFixture<Navbar>;
   let languageService: LanguageService;
+  let anchorService: LandingAnchorService;
   let router: Router;
 
   beforeEach(async () => {
@@ -16,6 +18,7 @@ describe('Navbar', () => {
       providers: [
         provideTranslateService(),
         LanguageService,
+        LandingAnchorService,
         provideRouter([
           { path: '', component: Navbar },
           { path: 'business-realtime', component: Navbar },
@@ -26,6 +29,7 @@ describe('Navbar', () => {
     fixture = TestBed.createComponent(Navbar);
     component = fixture.componentInstance;
     languageService = TestBed.inject(LanguageService);
+    anchorService = TestBed.inject(LandingAnchorService);
     router = TestBed.inject(Router);
     await fixture.whenStable();
   });
@@ -297,6 +301,26 @@ describe('Navbar', () => {
 
       component.onNavClick('HEADER.NAV.PRICING');
       expect(component.activeLinkKey()).toBe('HEADER.NAV.PRICING');
+    });
+
+    it('should reveal deferred landing sections and delegate anchor scrolling when navigating to /#fragment from another page', async () => {
+      const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+
+      await router.navigateByUrl('/business-realtime');
+      expect(component.isLandingPage()).toBe(false);
+
+      const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+      component.onNavClick('HEADER.NAV.PRICING', '#pricing', new MouseEvent('click'));
+      expect(revealSpy).toHaveBeenCalledWith('pricing');
+      expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'pricing' });
+      navSpy.mockRestore();
+
+      await router.navigate(['/'], { fragment: 'pricing' });
+      await new Promise((resolve) => setTimeout(resolve, 150));
+
+      expect(revealSpy).toHaveBeenCalledWith('pricing');
+      expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
     });
   });
 });

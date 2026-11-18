@@ -1,45 +1,121 @@
 <app-hero />
 
-@defer (on viewport; hydrate on viewport) {
+@defer (
+  when anchorService.requiredOrder() >= 1;
+  on viewport;
+  hydrate when anchorService.requiredOrder() >= 1;
+  hydrate on viewport
+) {
   <app-business-control />
 } @placeholder {
-  <div class="w-full min-h-[540px]" aria-hidden="true"></div>
+  <div
+    data-landing-placeholder="1"
+    class="w-full min-h-[640px] sm:min-h-[760px] lg:min-h-[820px]"
+    aria-hidden="true"
+  ></div>
 }
 
 <!-- <app-overview-feature /> -->
 
-@defer (on viewport; hydrate on viewport) {
+@defer (
+  when anchorService.requiredOrder() >= 2;
+  on viewport;
+  hydrate when anchorService.requiredOrder() >= 2;
+  hydrate on viewport
+) {
   <app-features />
 } @placeholder {
-  <div id="features" class="w-full min-h-[800px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+  <div
+    id="features"
+    data-landing-placeholder="2"
+    class="w-full min-h-[3200px] md:min-h-[2200px] lg:min-h-[1600px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
+    aria-hidden="true"
+  ></div>
 }
 
-@defer (on viewport; hydrate on viewport) {
+@defer (
+  when anchorService.requiredOrder() >= 3;
+  on viewport;
+  hydrate when anchorService.requiredOrder() >= 3;
+  hydrate on viewport
+) {
   <app-why-choose-us />
 } @placeholder {
-  <div id="why-choose-us" class="w-full min-h-[460px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+  <div
+    id="why-choose-us"
+    data-landing-placeholder="3"
+    class="relative w-full min-h-[560px] sm:min-h-[600px] lg:min-h-[620px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
+    aria-hidden="true"
+  >
+    <div id="about" class="absolute top-0" aria-hidden="true"></div>
+  </div>
 }
 
-@defer (on viewport; hydrate on viewport) {
+@defer (
+  when anchorService.requiredOrder() >= 4;
+  on viewport;
+  hydrate when anchorService.requiredOrder() >= 4;
+  hydrate on viewport
+) {
   <app-business-model />
 } @placeholder {
-  <div id="solutions" class="w-full min-h-[680px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+  <div
+    id="solutions"
+    data-landing-placeholder="4"
+    class="relative w-full min-h-[1850px] lg:min-h-[1000px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
+    aria-hidden="true"
+  >
+    <div id="business-model" class="absolute top-0" aria-hidden="true"></div>
+    <div id="resources" class="absolute top-0" aria-hidden="true"></div>
+  </div>
 }
 
-@defer (on viewport; hydrate on viewport) {
+@defer (
+  when anchorService.requiredOrder() >= 5;
+  on viewport;
+  hydrate when anchorService.requiredOrder() >= 5;
+  hydrate on viewport
+) {
   <app-customers />
 } @placeholder {
-  <div id="customers" class="w-full min-h-[640px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+  <div
+    id="customers"
+    data-landing-placeholder="5"
+    class="w-full min-h-[1250px] lg:min-h-[820px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
+    aria-hidden="true"
+  ></div>
 }
 
-@defer (on viewport; hydrate on viewport) {
+@defer (
+  when anchorService.requiredOrder() >= 6;
+  on viewport;
+  hydrate when anchorService.requiredOrder() >= 6;
+  hydrate on viewport
+) {
   <app-price />
 } @placeholder {
-  <div id="pricing" class="w-full min-h-[420px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+  <div
+    id="pricing"
+    data-landing-placeholder="6"
+    class="w-full min-h-[700px] lg:min-h-[540px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
+    aria-hidden="true"
+  ></div>
 }
 
-@defer (on viewport; hydrate on viewport) {
+@defer (
+  when anchorService.requiredOrder() >= 7;
+  on viewport;
+  hydrate when anchorService.requiredOrder() >= 7;
+  hydrate on viewport
+) {
   <app-cta />
 } @placeholder {
-  <div id="contact" class="w-full min-h-[560px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32" aria-hidden="true"></div>
+  <div
+    id="contact"
+    data-landing-placeholder="7"
+    class="relative w-full min-h-[880px] md:min-h-[760px] lg:min-h-[840px] scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
+    aria-hidden="true"
+  >
+    <div id="support" class="absolute top-0" aria-hidden="true"></div>
+  </div>
 }
