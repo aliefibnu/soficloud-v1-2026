@@ -1,0 +1,18 @@
+<svg width="825" height="287" viewBox="615 487 825 287" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="637" y="585.102" width="983" height="612.914" fill="url(#paint_pedestal_linear)"/>
+<ellipse cx="1128.48" cy="586.939" rx="491.482" ry="99.9392" fill="#F3F3F3"/>
+<ellipse cx="1128.43" cy="578.335" rx="479.658" ry="91.3348" fill="url(#paint_pedestal_radial)"/>
+<defs>
+<linearGradient id="paint_pedestal_linear" x1="1620" y1="893.273" x2="637.039" y2="885.104" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C4CEE7"/>
+<stop offset="0.120192" stop-color="#C7D1EA"/>
+<stop offset="0.5" stop-color="#F0F2FA"/>
+<stop offset="0.836538" stop-color="#F7F7FC"/>
+<stop offset="1" stop-color="#E6EAF5"/>
+</linearGradient>
+<radialGradient id="paint_pedestal_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1128.43 578.335) rotate(-90) scale(112.538 615.798)">
+<stop stop-color="#DAE1F7"/>
+<stop offset="1" stop-color="#E3E5F5"/>
+</radialGradient>
+</defs>
+</svg>

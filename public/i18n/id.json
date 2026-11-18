@@ -965,6 +965,13 @@
     }
   },
   "SMART_WORKFLOW": {
+    "HERO": {
+      "TITLE_LINE_1": "Kewenangan Jelas",
+      "TITLE_LINE_2": "Persetujuan Lebih",
+      "TITLE_LINE_3": "Terkendali",
+      "DESCRIPTION": "SOFICloud membantu perusahaan mengatur akses pengguna dan proses persetujuan transaksi. Tentukan pihak yang berwenang, susun urutan approval, dan telusuri keputusan melalui status serta riwayat persetujuan.",
+      "TABLET_ALT": "Tampilan status persetujuan SOFICloud pada tablet"
+    },
     "PROCESS_TABS": {
       "KAPABILITAS": "KAPABILITAS",
       "JELAJAHI_TAMPILAN": "JELAJAHI TAMPILAN",
@@ -1073,6 +1080,18 @@
       },
       "PLACEHOLDER": {
         "NOTICE": "Pratinjau tampilan untuk tahap ini akan segera tersedia."
+      }
+    },
+    "STATUS_AND_FLOW": {
+      "TITLE": "Alur Mengikuti\nKonfigurasi Transaksi",
+      "DESCRIPTION": "Status transaksi menunjukkan posisi proses dokumen. Level approval menunjukkan urutan pihak yang memberi persetujuan. Keduanya diatur sesuai kewenangan perusahaan.",
+      "MAIN_FLOW": {
+        "TITLE": "Contoh Jalur Utama",
+        "CAPTION": "Pilihan tambahan sesuai izin. Alur mengikuti konfigurasi transaksi."
+      },
+      "APPROVER_SEQUENCE": {
+        "TITLE": "Contoh urutan approver",
+        "CAPTION": "Sesuaikan approval sesuai kebutuhan perusahaan anda."
       }
     }
   },

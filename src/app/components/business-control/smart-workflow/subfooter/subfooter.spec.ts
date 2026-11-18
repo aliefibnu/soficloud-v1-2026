@@ -29,4 +29,15 @@ describe('SmartWorkflow Subfooter', () => {
     const heading = fixture.debugElement.query(By.css('h2#subfooter-heading'));
     expect(heading).toBeTruthy();
   });
+
+  it('should display Sesuaikan Pengendalian on the first line before the line break', () => {
+    const headingEl = fixture.debugElement.query(By.css('h2#subfooter-heading'))
+      .nativeElement as HTMLElement;
+    const br = headingEl.querySelector('br');
+    expect(br).toBeTruthy();
+
+    const parts = headingEl.innerHTML.split(/<br\s*\/?>/i).map((part) => part.trim());
+    expect(parts[0]).toBe('Sesuaikan Pengendalian');
+    expect(parts[1]).toBe('Dengan Kebijakan Perusahaan Anda');
+  });
 });

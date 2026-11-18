@@ -965,6 +965,13 @@
     }
   },
   "SMART_WORKFLOW": {
+    "HERO": {
+      "TITLE_LINE_1": "明確な権限設定で",
+      "TITLE_LINE_2": "より統制された",
+      "TITLE_LINE_3": "承認フロー",
+      "DESCRIPTION": "SOFICloudは企業のユーザーアクセス管理と取引承認プロセスを支援します。権限者を定義し、承認順序を設定して、承認ステータスと履歴から意思決定を追跡できます。",
+      "TABLET_ALT": "タブレット上のSOFICloud承認ステータス画面"
+    },
     "PROCESS_TABS": {
       "KAPABILITAS": "機能一覧",
       "JELAJAHI_TAMPILAN": "画面を見る",
@@ -1073,6 +1080,18 @@
       },
       "PLACEHOLDER": {
         "NOTICE": "このステージの画面プレビューは近日公開予定です。"
+      }
+    },
+    "STATUS_AND_FLOW": {
+      "TITLE": "取引設定に沿った\n承認フロー構成",
+      "DESCRIPTION": "取引ステータスは文書の処理状況を示し、承認レベルは承認者の順序を定義します。いずれも企業の権限規定に沿って設定されます。",
+      "MAIN_FLOW": {
+        "TITLE": "メインフロー例",
+        "CAPTION": "権限に応じた追加オプション。フローは取引設定に従います。"
+      },
+      "APPROVER_SEQUENCE": {
+        "TITLE": "承認順序の例",
+        "CAPTION": "企業の要件に合わせて承認フローを柔軟に調整できます。"
       }
     }
   },
