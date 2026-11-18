@@ -965,6 +965,13 @@
     }
   },
   "SMART_WORKFLOW": {
+    "HERO": {
+      "TITLE_LINE_1": "权限划分清晰",
+      "TITLE_LINE_2": "审批流程更加",
+      "TITLE_LINE_3": "规范可控",
+      "DESCRIPTION": "SOFICloud帮助企业规范管理用户权限与交易审批流程。明确授权人员、配置审批顺序，并通过审批状态与历史记录全程追溯每项决策。",
+      "TABLET_ALT": "平板电脑上的SOFICloud审批状态界面"
+    },
     "PROCESS_TABS": {
       "KAPABILITAS": "核心功能",
       "JELAJAHI_TAMPILAN": "探索界面",

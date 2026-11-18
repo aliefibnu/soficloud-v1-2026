@@ -965,6 +965,13 @@
     }
   },
   "SMART_WORKFLOW": {
+    "HERO": {
+      "TITLE_LINE_1": "명확한 권한 설정으로",
+      "TITLE_LINE_2": "더욱 체계적인",
+      "TITLE_LINE_3": "승인 통제",
+      "DESCRIPTION": "SOFICloud는 기업의 사용자 접근 권한과 거래 승인 프로세스 관리를 지원합니다. 담당 권한자를 지정하고 승인 순서를 구성하며, 승인 상태와 이력을 통해 의사결정을 추적하세요.",
+      "TABLET_ALT": "태블릿 화면의 SOFICloud 승인 상태 미리보기"
+    },
     "PROCESS_TABS": {
       "KAPABILITAS": "주요 기능",
       "JELAJAHI_TAMPILAN": "화면 둘러보기",

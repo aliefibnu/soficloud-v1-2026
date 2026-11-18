@@ -965,6 +965,13 @@
     }
   },
   "SMART_WORKFLOW": {
+    "HERO": {
+      "TITLE_LINE_1": "Clear Authority",
+      "TITLE_LINE_2": "Better Controlled",
+      "TITLE_LINE_3": "Approvals",
+      "DESCRIPTION": "SOFICloud helps companies manage user access and transaction approval workflows. Define authorized personnel, configure approval sequences, and trace decisions through approval statuses and history.",
+      "TABLET_ALT": "SOFICloud approval status view on tablet"
+    },
     "PROCESS_TABS": {
       "KAPABILITAS": "CAPABILITIES",
       "JELAJAHI_TAMPILAN": "EXPLORE VIEWS",
