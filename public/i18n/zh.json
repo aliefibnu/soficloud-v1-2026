@@ -1081,6 +1081,18 @@
       "PLACEHOLDER": {
         "NOTICE": "该阶段的界面预览即将推出。"
       }
+    },
+    "STATUS_AND_FLOW": {
+      "TITLE": "流程遵循\n交易配置规则",
+      "DESCRIPTION": "交易状态用于指示单据所处的处理阶段，审批层级则规定了审批人的先后顺序。两者均根据企业权限规范进行配置。",
+      "MAIN_FLOW": {
+        "TITLE": "主流程示例",
+        "CAPTION": "按权限启用扩展选项，具体流转遵循交易配置。"
+      },
+      "APPROVER_SEQUENCE": {
+        "TITLE": "审批顺序示例",
+        "CAPTION": "可根据贵公司的业务需求灵活配置审批流程。"
+      }
     }
   },
   "SCHEDULE_DEMO": {

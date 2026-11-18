@@ -1,10 +1,170 @@
 <app-process-section-shell
   sectionId="status-dan-alur"
-  title="Status and Flow"
-  description="Section content pending."
-  stageBgClass="bg-[linear-gradient(310.74deg,#FFEFED_-9.86%,rgba(252,190,182,0.8)_43.43%,#FBCBC5_94.33%)]"
+  [title]="'SMART_WORKFLOW.STATUS_AND_FLOW.TITLE' | translate"
+  [description]="'SMART_WORKFLOW.STATUS_AND_FLOW.DESCRIPTION' | translate"
+  stageBgClass="bg-[linear-gradient(229.91deg,#DBE9E9_3.13%,#A1CECE_50.02%,#C9DEDE_97.91%)]"
+  stagePaddingClass="pt-7 pb-10 px-4 sm:pt-9 sm:pb-12 sm:px-6 lg:pt-[36px] lg:pb-[47px] lg:px-10"
+  titleMaxWidthClass="max-w-md sm:max-w-xl lg:max-w-[580px]"
+  descriptionMaxWidthClass="max-w-md sm:max-w-xl lg:max-w-[680px]"
 >
-  <div class="min-h-45 w-full flex items-center justify-center">
-    <!-- Placeholder stage for Status and Flow content -->
+  <div class="w-full max-w-[853px] mx-auto flex flex-col gap-6 sm:gap-8 lg:gap-[45px]">
+    <article
+      aria-labelledby="status-main-flow-heading"
+      class="w-full rounded-[23.21px] bg-[#FDFDFD] shadow-[0_3px_15px_rgba(0,0,0,0.08)] lg:min-h-[366px] px-5 py-6 sm:px-8 sm:py-8 lg:px-[58px] lg:pt-[36px] lg:pb-[37px]"
+    >
+      <h3
+        id="status-main-flow-heading"
+        class="font-dm-sans font-bold text-[18px] leading-[1.22] text-[#23244E] tracking-normal"
+        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700"
+      >
+        {{ 'SMART_WORKFLOW.STATUS_AND_FLOW.MAIN_FLOW.TITLE' | translate }}
+      </h3>
+
+      <ol
+        aria-labelledby="status-main-flow-heading"
+        class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-[12px] mt-7 sm:mt-9 lg:mt-[39px]"
+      >
+        @for (step of mainFlowSteps; track step; let last = $last; let idx = $index) {
+          <li class="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-2.5 sm:gap-[12px]">
+            <div
+              data-testid="main-flow-step"
+              class="w-full sm:w-[132px] md:w-[161px] h-[43.21px] rounded-[8.88px] bg-[#FDFDFD] shadow-[0_3.33px_16.64px_rgba(0,0,0,0.08)] px-4 flex items-center justify-center font-dm-sans font-semibold text-[16px] leading-none text-[#23244E] select-none"
+              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600"
+            >
+              {{ step }}
+            </div>
+
+            @if (!last) {
+              <svg
+                data-testid="main-flow-arrow"
+                viewBox="446 444.5 22.5 20"
+                width="22.5"
+                height="20"
+                fill="none"
+                aria-hidden="true"
+                class="w-[22.5px] h-[20px] shrink-0 rotate-90 sm:rotate-0"
+              >
+                <defs>
+                  <linearGradient
+                    [attr.id]="'status-flow-arrow-grad-' + idx"
+                    x1="446"
+                    y1="455.188"
+                    x2="466.311"
+                    y2="455.249"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#1E37E1" />
+                    <stop offset="0.699703" stop-color="#1C7DD8" />
+                    <stop offset="1" stop-color="#6694EB" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M446 455.188H466.31"
+                  stroke-width="5.07959"
+                  [attr.stroke]="'url(#status-flow-arrow-grad-' + idx + ')'"
+                />
+                <path
+                  d="M466.838 457.759L460.913 463.679C460.547 464.028 460.058 464.221 459.551 464.215C459.045 464.209 458.561 464.005 458.203 463.647C457.845 463.289 457.641 462.805 457.636 462.299C457.63 461.792 457.823 461.304 458.173 460.938L464.099 455.018C464.22 454.897 464.288 454.733 464.288 454.561C464.288 454.39 464.22 454.226 464.099 454.105L458.173 448.183C457.993 448.003 457.851 447.79 457.753 447.555C457.656 447.32 457.605 447.068 457.605 446.814C457.605 446.559 457.656 446.307 457.753 446.072C457.85 445.837 457.993 445.624 458.173 445.444C458.353 445.264 458.567 445.121 458.802 445.024C459.037 444.927 459.289 444.876 459.543 444.876C459.798 444.876 460.05 444.926 460.285 445.024C460.52 445.121 460.734 445.264 460.914 445.444L466.839 451.365C467.686 452.214 468.162 453.364 468.162 454.562C468.162 455.761 467.686 456.911 466.838 457.759Z"
+                  fill="#1C73E8"
+                />
+              </svg>
+            }
+          </li>
+        }
+      </ol>
+
+      <div
+        data-testid="optional-statuses-box"
+        class="w-full max-w-[632px] mx-auto mt-6 sm:mt-8 lg:mt-[29px] relative bg-[#FDFDFD] border-[1.5px] border-dashed border-[#1C7DD8] sm:border-none p-3.5 sm:px-[23px] sm:py-[22px]"
+      >
+        <svg
+          data-testid="optional-statuses-dashed-border"
+          viewBox="0 0 632 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          class="pointer-events-none hidden sm:block absolute inset-0 w-full h-full overflow-visible"
+        >
+          <defs>
+            <linearGradient
+              id="status-flow-dash-grad"
+              x1="0%"
+              y1="50%"
+              x2="100%"
+              y2="50%"
+            >
+              <stop offset="0%" stop-color="#1E37E1" />
+              <stop offset="70%" stop-color="#1C7DD8" />
+              <stop offset="100%" stop-color="#6694EB" />
+            </linearGradient>
+          </defs>
+          <rect
+            x="2"
+            y="0"
+            width="628"
+            height="100"
+            fill="none"
+            stroke="url(#status-flow-dash-grad)"
+            stroke-width="1.5"
+            stroke-dasharray="23.21 23.21"
+            vector-effect="non-scaling-stroke"
+          />
+        </svg>
+
+        <ul class="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-[12px]">
+          @for (status of optionalStatuses; track status) {
+            <li
+              data-testid="optional-status-item"
+              class="w-full h-[56px] rounded-[8.88px] bg-[#FDFDFD] border-[1.45px] border-[#D7D7D7]/85 px-3 flex items-center justify-center font-dm-sans font-normal text-[16px] leading-none text-[#23244E] select-none"
+              style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400"
+            >
+              {{ status }}
+            </li>
+          }
+        </ul>
+      </div>
+
+      <p
+        class="font-dm-sans font-semibold italic text-[15px] sm:text-[16px] leading-snug text-[#23244E] text-center mt-7 sm:mt-10 lg:mt-[41px]"
+        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600"
+      >
+        {{ 'SMART_WORKFLOW.STATUS_AND_FLOW.MAIN_FLOW.CAPTION' | translate }}
+      </p>
+    </article>
+
+    <article
+      aria-labelledby="status-approver-sequence-heading"
+      class="w-full rounded-[23.72px] bg-[#FDFDFD] shadow-[0_3.24px_16.18px_rgba(0,0,0,0.08)] lg:min-h-[158px] px-5 py-5 sm:px-7 lg:px-[29px] lg:pt-[22px] lg:pb-[16px]"
+    >
+      <h3
+        id="status-approver-sequence-heading"
+        class="font-dm-sans font-bold text-[18px] leading-[1.22] text-[#23244E] tracking-normal"
+        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 700"
+      >
+        {{ 'SMART_WORKFLOW.STATUS_AND_FLOW.APPROVER_SEQUENCE.TITLE' | translate }}
+      </h3>
+
+      <ol
+        aria-labelledby="status-approver-sequence-heading"
+        class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[14px] mt-4 sm:mt-[14px]"
+      >
+        @for (approver of approverSequence; track approver.number) {
+          <li
+            data-testid="approver-step"
+            class="min-h-[34px] rounded-[12.94px] bg-[#FDFDFD] shadow-[0_3.24px_16.18px_rgba(0,0,0,0.08)] px-3.5 py-1.5 flex items-center justify-center gap-3 font-dm-sans text-[15px] md:text-[13px] lg:text-[16px] leading-none text-[#23244E] select-none"
+            style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif)"
+          >
+            <span class="font-medium tabular-nums shrink-0">{{ approver.number }}</span>
+            <span class="font-normal whitespace-nowrap">{{ approver.role }}</span>
+          </li>
+        }
+      </ol>
+
+      <p
+        class="font-dm-sans font-semibold italic text-[15px] sm:text-[16px] leading-snug text-[#23244E] text-center mt-5 sm:mt-6 lg:mt-[28px]"
+        style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600"
+      >
+        {{ 'SMART_WORKFLOW.STATUS_AND_FLOW.APPROVER_SEQUENCE.CAPTION' | translate }}
+      </p>
+    </article>
   </div>
 </app-process-section-shell>

@@ -1081,6 +1081,18 @@
       "PLACEHOLDER": {
         "NOTICE": "The visual preview for this stage will be available soon."
       }
+    },
+    "STATUS_AND_FLOW": {
+      "TITLE": "Flow Follows\nTransaction Configuration",
+      "DESCRIPTION": "Transaction statuses indicate where a document stands in the process. Approval levels define the sequence of authorizing parties. Both are configured according to company authority.",
+      "MAIN_FLOW": {
+        "TITLE": "Main Flow Example",
+        "CAPTION": "Additional options based on permissions. Flow follows transaction configuration."
+      },
+      "APPROVER_SEQUENCE": {
+        "TITLE": "Approver Sequence Example",
+        "CAPTION": "Tailor approval sequences to fit your company's needs."
+      }
     }
   },
   "SCHEDULE_DEMO": {
