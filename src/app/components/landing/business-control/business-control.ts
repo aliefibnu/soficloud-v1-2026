@@ -105,6 +105,7 @@ export class BusinessControl implements OnDestroy {
   readonly currentIndex = signal<0 | 1 | 2 | 3>(0);
   readonly activeCard = computed<0 | 1 | 2 | 3>(() => this.currentIndex());
   readonly isHovered = signal<boolean>(false);
+  readonly isInViewport = signal<boolean>(false);
 
   private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
   readonly autoPlayDelayMs = 5000;
@@ -117,6 +118,7 @@ export class BusinessControl implements OnDestroy {
 
   constructor() {
     observeHostViewport((visible) => {
+      this.isInViewport.set(visible);
       if (visible && !this.isHovered()) {
         this.startAutoPlay();
       } else {
@@ -130,10 +132,10 @@ export class BusinessControl implements OnDestroy {
   }
 
   startAutoPlay(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || !this.isInViewport() || this.isHovered()) return;
     this.stopAutoPlay();
     this.autoPlayTimer = setInterval(() => {
-      if (!this.isHovered()) {
+      if (!this.isHovered() && this.isInViewport()) {
         this.nextCard();
       }
     }, this.autoPlayDelayMs);

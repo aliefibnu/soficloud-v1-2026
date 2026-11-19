@@ -62,6 +62,7 @@ export class WhyChooseUs {
 
   readonly currentIndex = signal<number>(0);
   readonly isHovered = signal<boolean>(false);
+  readonly isInViewport = signal<boolean>(false);
   readonly hoveredIndex = signal<number | null>(null);
 
   private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
@@ -73,6 +74,7 @@ export class WhyChooseUs {
 
   constructor() {
     observeHostViewport((visible) => {
+      this.isInViewport.set(visible);
       if (visible && !this.isHovered()) {
         this.startAutoPlay();
       } else {
@@ -86,10 +88,10 @@ export class WhyChooseUs {
   }
 
   startAutoPlay(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
+    if (!isPlatformBrowser(this.platformId) || !this.isInViewport() || this.isHovered()) return;
     this.stopAutoPlay();
     this.autoPlayTimer = setInterval(() => {
-      if (!this.isHovered()) {
+      if (!this.isHovered() && this.isInViewport()) {
         this.next();
       }
     }, this.autoPlayDelayMs);

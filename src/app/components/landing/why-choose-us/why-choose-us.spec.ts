@@ -3,47 +3,51 @@ import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { WhyChooseUs } from './why-choose-us';
 import { LanguageService } from '../../../systems/lib/language.service';
 
+async function setupWhyChooseUsTestingModule(): Promise<ComponentFixture<WhyChooseUs>> {
+  await TestBed.configureTestingModule({
+    imports: [WhyChooseUs],
+    providers: [
+      provideTranslateService({
+        fallbackLang: 'id',
+        lang: 'id',
+      }),
+      LanguageService,
+    ],
+  }).compileComponents();
+
+  const translateService = TestBed.inject(TranslateService);
+  translateService.setTranslation('id', {
+    WHY_CHOOSE_US: {
+      HEADING: 'Mengapa Perusahaan Memilih SOFICloud?',
+      SUBHEADING:
+        'ERP yang matang, terintegrasi, dan siap mendukung pertumbuhan bisnis Anda.',
+      ARIA: {
+        PREV_BUTTON: 'Kartu sebelumnya',
+        NEXT_BUTTON: 'Kartu berikutnya',
+      },
+      CARDS: {
+        '1': {
+          TITLE: 'Dikembangkan\nSejak 1998',
+          DESCRIPTION:
+            'Pengalaman lebih dari dua dekade membentuk SOFICloud menjadi ERP yang matang.',
+        },
+      },
+    },
+  });
+  translateService.use('id');
+
+  const fixture = TestBed.createComponent(WhyChooseUs);
+  await fixture.whenStable();
+  return fixture;
+}
+
 describe('WhyChooseUs', () => {
   let component: WhyChooseUs;
   let fixture: ComponentFixture<WhyChooseUs>;
-  let translateService: TranslateService;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [WhyChooseUs],
-      providers: [
-        provideTranslateService({
-          fallbackLang: 'id',
-          lang: 'id',
-        }),
-        LanguageService,
-      ],
-    }).compileComponents();
-
-    translateService = TestBed.inject(TranslateService);
-    translateService.setTranslation('id', {
-      WHY_CHOOSE_US: {
-        HEADING: 'Mengapa Perusahaan Memilih SOFICloud?',
-        SUBHEADING:
-          'ERP yang matang, terintegrasi, dan siap mendukung pertumbuhan bisnis Anda.',
-        ARIA: {
-          PREV_BUTTON: 'Kartu sebelumnya',
-          NEXT_BUTTON: 'Kartu berikutnya',
-        },
-        CARDS: {
-          '1': {
-            TITLE: 'Dikembangkan\nSejak 1998',
-            DESCRIPTION:
-              'Pengalaman lebih dari dua dekade membentuk SOFICloud menjadi ERP yang matang.',
-          },
-        },
-      },
-    });
-    translateService.use('id');
-
-    fixture = TestBed.createComponent(WhyChooseUs);
+    fixture = await setupWhyChooseUsTestingModule();
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
   it('should create the why-choose-us component', () => {
@@ -228,5 +232,98 @@ describe('WhyChooseUs', () => {
 
     vi.advanceTimersByTime(10000);
     expect(component.currentIndex()).toBe(0);
+  });
+});
+
+describe('WhyChooseUs viewport autoplay guard', () => {
+  const originalIO = globalThis.IntersectionObserver;
+  let observerCallback: IntersectionObserverCallback | null = null;
+  let component: WhyChooseUs;
+  let fixture: ComponentFixture<WhyChooseUs>;
+
+  const emitVisibility = (isIntersecting: boolean): void => {
+    observerCallback?.(
+      [{ isIntersecting } as IntersectionObserverEntry],
+      {} as IntersectionObserver,
+    );
+  };
+
+  beforeEach(async () => {
+    observerCallback = null;
+
+    class MockIntersectionObserver {
+      constructor(cb: IntersectionObserverCallback) {
+        observerCallback = cb;
+      }
+      observe = vi.fn();
+      disconnect = vi.fn();
+      unobserve = vi.fn();
+      takeRecords = vi.fn(() => []);
+      root = null;
+      rootMargin = '';
+      thresholds = [];
+    }
+
+    globalThis.IntersectionObserver =
+      MockIntersectionObserver as unknown as typeof IntersectionObserver;
+
+    fixture = await setupWhyChooseUsTestingModule();
+    component = fixture.componentInstance;
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    component?.stopAutoPlay();
+    vi.useRealTimers();
+    globalThis.IntersectionObserver = originalIO;
+  });
+
+  it('should not restart autoplay on touch end when scrolled offscreen', () => {
+    emitVisibility(true);
+    expect(component.isInViewport()).toBe(true);
+
+    component.onTouchStart({
+      touches: [{ clientX: 100 }],
+    } as unknown as TouchEvent);
+
+    emitVisibility(false);
+    expect(component.isInViewport()).toBe(false);
+
+    component.onTouchEnd({
+      changedTouches: [{ clientX: 105 }],
+    } as unknown as TouchEvent);
+
+    vi.advanceTimersByTime(10000);
+    expect(component.currentIndex()).toBe(0);
+  });
+
+  it('should not restart autoplay on mouse up or mouse leave when offscreen', () => {
+    emitVisibility(true);
+
+    component.onMouseDown({ clientX: 100 } as unknown as MouseEvent);
+    emitVisibility(false);
+    component.onMouseUp({ clientX: 105 } as unknown as MouseEvent);
+
+    vi.advanceTimersByTime(10000);
+    expect(component.currentIndex()).toBe(0);
+
+    component.onMouseEnter();
+    component.onMouseLeave();
+
+    vi.advanceTimersByTime(10000);
+    expect(component.currentIndex()).toBe(0);
+  });
+
+  it('should ignore resetAutoPlay while offscreen and resume when back in viewport', () => {
+    emitVisibility(false);
+    component.next();
+    component.resetAutoPlay();
+
+    vi.advanceTimersByTime(10000);
+    expect(component.currentIndex()).toBe(1);
+
+    emitVisibility(true);
+    vi.advanceTimersByTime(5000);
+    expect(component.currentIndex()).toBe(2);
   });
 });
