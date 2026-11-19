@@ -1,6 +1,7 @@
 <section
   id="customers"
   class="relative w-full bg-[linear-gradient(to_bottom,#9CBBF0_50%,#3874db_50%)] overflow-hidden scroll-mt-24 sm:scroll-mt-28 lg:scroll-mt-32"
+  [class.marquee-paused]="!isInViewport()"
   aria-labelledby="customers-heading"
 >
   <div
@@ -114,9 +115,11 @@
                 [attr.aria-label]="customer.name"
               >
                 <img
-                  [src]="customer.logo"
+                  [ngSrc]="customer.logo"
+                  [width]="customer.width"
+                  [height]="customer.height"
                   [alt]="customer.name"
-                  class="object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
+                  class="w-auto h-auto object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
                   [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                   [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                   [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -135,6 +138,7 @@
                   [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                   [class.scale-105]="customer.id === activeCustomer().id"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             }
@@ -157,9 +161,11 @@
                 [attr.aria-label]="customer.name"
               >
                 <img
-                  [src]="customer.logo"
+                  [ngSrc]="customer.logo"
+                  [width]="customer.width"
+                  [height]="customer.height"
                   [alt]="customer.name"
-                  class="object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
+                  class="w-auto h-auto object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
                   [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                   [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                   [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -178,6 +184,7 @@
                   [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                   [class.scale-105]="customer.id === activeCustomer().id"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             }
@@ -190,23 +197,6 @@
             viewBox="0 0 750 370"
             preserveAspectRatio="none"
           >
-            <defs>
-              <filter
-                id="circuit-glow"
-                filterUnits="userSpaceOnUse"
-                x="0"
-                y="0"
-                width="750"
-                height="370"
-              >
-                <feGaussianBlur stdDeviation="2.5" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-
             <line
               x1="20"
               y1="20"
@@ -252,12 +242,31 @@
               x2="20"
               y2="20"
               stroke="#1C73E8"
+              stroke-opacity="0.22"
+              stroke-width="6"
+              stroke-linecap="round"
+              class="pulse-top-horizontal"
+            />
+            <line
+              x1="730"
+              y1="20"
+              x2="20"
+              y2="20"
+              stroke="#1C73E8"
               stroke-width="2.5"
               stroke-linecap="round"
               class="pulse-top-horizontal"
-              filter="url(#circuit-glow)"
             />
 
+            <path
+              d="M 515 100 L 530 100 Q 545 100 545 85 L 545 20"
+              fill="none"
+              stroke="#1C73E8"
+              stroke-opacity="0.22"
+              stroke-width="6"
+              stroke-linecap="round"
+              class="pulse-upper-right"
+            />
             <path
               d="M 515 100 L 530 100 Q 545 100 545 85 L 545 20"
               fill="none"
@@ -265,9 +274,17 @@
               stroke-width="2.5"
               stroke-linecap="round"
               class="pulse-upper-right"
-              filter="url(#circuit-glow)"
             />
 
+            <path
+              d="M 515 175 L 545 175 Q 560 175 560 190 L 560 235 Q 560 250 575 250 L 615 250 Q 630 250 630 265 L 630 350"
+              fill="none"
+              stroke="#1C73E8"
+              stroke-opacity="0.22"
+              stroke-width="6"
+              stroke-linecap="round"
+              class="pulse-lower-right"
+            />
             <path
               d="M 515 175 L 545 175 Q 560 175 560 190 L 560 235 Q 560 250 575 250 L 615 250 Q 630 250 630 265 L 630 350"
               fill="none"
@@ -275,9 +292,17 @@
               stroke-width="2.5"
               stroke-linecap="round"
               class="pulse-lower-right"
-              filter="url(#circuit-glow)"
             />
 
+            <path
+              d="M 235 175 L 205 175 Q 190 175 190 190 L 190 235 Q 190 250 175 250 L 105 250 Q 90 250 90 265 L 90 350"
+              fill="none"
+              stroke="#1C73E8"
+              stroke-opacity="0.22"
+              stroke-width="6"
+              stroke-linecap="round"
+              class="pulse-left"
+            />
             <path
               d="M 235 175 L 205 175 Q 190 175 190 190 L 190 235 Q 190 250 175 250 L 105 250 Q 90 250 90 265 L 90 350"
               fill="none"
@@ -285,9 +310,19 @@
               stroke-width="2.5"
               stroke-linecap="round"
               class="pulse-left"
-              filter="url(#circuit-glow)"
             />
 
+            <line
+              x1="20"
+              y1="350"
+              x2="730"
+              y2="350"
+              stroke="#1C73E8"
+              stroke-opacity="0.22"
+              stroke-width="6"
+              stroke-linecap="round"
+              class="pulse-bottom-horizontal"
+            />
             <line
               x1="20"
               y1="350"
@@ -297,7 +332,6 @@
               stroke-width="2.5"
               stroke-linecap="round"
               class="pulse-bottom-horizontal"
-              filter="url(#circuit-glow)"
             />
           </svg>
 
@@ -315,28 +349,34 @@
               class="w-full flex-1 flex flex-col items-center justify-center min-h-34 py-1 overflow-hidden transition-all duration-300"
             >
               <div class="h-16 w-full flex items-center justify-center">
-                <img
-                  [src]="activeCustomer().logo"
-                  [alt]="activeCustomer().name"
-                  [class.logo-switch-active]="isLogoTransitioning()"
-                  class="object-contain select-none transition-all duration-300"
-                  [class.max-h-9]="activeCustomer().aspect === 'ultra-wide'"
-                  [class.sm:max-h-10]="activeCustomer().aspect === 'ultra-wide'"
-                  [class.max-w-[86%]]="activeCustomer().aspect === 'ultra-wide'"
-                  [class.sm:max-w-[88%]]="activeCustomer().aspect === 'ultra-wide'"
-                  [class.max-h-10]="activeCustomer().aspect === 'wide'"
-                  [class.sm:max-h-11]="activeCustomer().aspect === 'wide'"
-                  [class.max-w-[82%]]="activeCustomer().aspect === 'wide'"
-                  [class.sm:max-w-[85%]]="activeCustomer().aspect === 'wide'"
-                  [class.max-h-11]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
-                  [class.sm:max-h-12]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
-                  [class.max-w-[78%]]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
-                  [class.sm:max-w-[80%]]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
-                  [class.max-h-12]="activeCustomer().aspect === 'square'"
-                  [class.sm:max-h-13]="activeCustomer().aspect === 'square'"
-                  [class.max-w-[62%]]="activeCustomer().aspect === 'square'"
-                  [class.sm:max-w-[65%]]="activeCustomer().aspect === 'square'"
-                />
+                @for (customer of [activeCustomer()]; track customer.id) {
+                  <img
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
+                    [alt]="customer.name"
+                    loading="eager"
+                    decoding="async"
+                    [class.logo-switch-active]="isLogoTransitioning()"
+                    class="w-auto h-auto object-contain select-none transition-all duration-300"
+                    [class.max-h-9]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-10]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[86%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[88%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-10]="customer.aspect === 'wide'"
+                    [class.sm:max-h-11]="customer.aspect === 'wide'"
+                    [class.max-w-[82%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[85%]]="customer.aspect === 'wide'"
+                    [class.max-h-11]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-12]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[80%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-12]="customer.aspect === 'square'"
+                    [class.sm:max-h-13]="customer.aspect === 'square'"
+                    [class.max-w-[62%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[65%]]="customer.aspect === 'square'"
+                  />
+                }
               </div>
               <p
                 [class.name-switch-active]="isLogoTransitioning()"
@@ -366,9 +406,11 @@
                   [attr.aria-label]="customer.name"
                 >
                   <img
-                    [src]="customer.logo"
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
                     [alt]="customer.name"
-                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="w-auto h-auto object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
                     [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                     [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                     [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -386,6 +428,7 @@
                     [class.max-w-[60%]]="customer.aspect === 'square'"
                     [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
+                  decoding="async"
                   />
                 </div>
               }
@@ -395,9 +438,11 @@
                   [attr.aria-label]="customer.name"
                 >
                   <img
-                    [src]="customer.logo"
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
                     [alt]="customer.name"
-                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="w-auto h-auto object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
                     [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                     [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                     [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -415,6 +460,7 @@
                     [class.max-w-[60%]]="customer.aspect === 'square'"
                     [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
+                  decoding="async"
                   />
                 </div>
               }
@@ -431,9 +477,11 @@
                   [attr.aria-label]="customer.name"
                 >
                   <img
-                    [src]="customer.logo"
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
                     [alt]="customer.name"
-                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="w-auto h-auto object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
                     [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                     [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                     [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -451,6 +499,7 @@
                     [class.max-w-[60%]]="customer.aspect === 'square'"
                     [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
+                  decoding="async"
                   />
                 </div>
               }
@@ -460,9 +509,11 @@
                   [attr.aria-label]="customer.name"
                 >
                   <img
-                    [src]="customer.logo"
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
                     [alt]="customer.name"
-                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="w-auto h-auto object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
                     [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                     [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                     [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -480,6 +531,7 @@
                     [class.max-w-[60%]]="customer.aspect === 'square'"
                     [class.sm:max-w-[62%]]="customer.aspect === 'square'"
                     loading="lazy"
+                  decoding="async"
                   />
                 </div>
               }

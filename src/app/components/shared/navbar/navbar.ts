@@ -1,4 +1,4 @@
-import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import { isPlatformBrowser, NgOptimizedImage, NgTemplateOutlet, PlatformLocation } from '@angular/common';
 import {
   afterNextRender,
   Component,
@@ -11,10 +11,18 @@ import {
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
+import {
+  NavigationEnd,
+  NavigationSkipped,
+  NavigationSkippedCode,
+  Router,
+  Scroll,
+} from '@angular/router';
 import { filter } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
+import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
+import { listenWindowScrollRaf } from '../../../systems/lib/viewport-observer';
 
 export interface NavLink {
   key: string;
@@ -23,13 +31,12 @@ export interface NavLink {
 
 @Component({
   selector: 'app-navbar',
-  imports: [TranslatePipe, NgOptimizedImage],
+  imports: [TranslatePipe, NgOptimizedImage, NgTemplateOutlet],
   templateUrl: './navbar.html',
   host: {
     class: 'block sticky top-0 z-[60]',
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'closeMenus()',
-    '(window:scroll)': 'onWindowScroll()',
   },
 })
 export class Navbar {
@@ -38,7 +45,9 @@ export class Navbar {
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef);
   private readonly languageService = inject(LanguageService);
+  private readonly anchorService = inject(LandingAnchorService);
   private readonly router = inject(Router);
+  private readonly platformLocation = inject(PlatformLocation);
 
   readonly mobileSheetRef = viewChild<ElementRef<HTMLElement>>('mobileSheet');
 
@@ -60,63 +69,158 @@ export class Navbar {
     return path === '/schedule-demo';
   }
 
-  readonly isLandingPage = signal(this.isLandingUrl(this.router.url));
-  readonly isScheduleDemoPage = signal(this.isScheduleDemoUrl(this.router.url));
+  private get initialPath(): string {
+    return this.router.url && this.router.url !== '/'
+      ? this.router.url
+      : this.platformLocation.pathname || '/';
+  }
+
+  readonly isLandingPage = signal(this.isLandingUrl(this.initialPath));
+  readonly isScheduleDemoPage = signal(this.isScheduleDemoUrl(this.initialPath));
   private readonly rawActiveLinkKey = signal<string | null>(null);
   readonly activeLinkKey = computed(() => (this.isLandingPage() ? this.rawActiveLinkKey() : null));
   readonly isLangMenuOpen = signal(false);
   readonly isMobileMenuOpen = signal(false);
   readonly isMobileLangSheetOpen = signal(false);
 
-  private scrollRafId: number | null = null;
+  private pendingFragmentNavigationId: number | null = null;
+  private pendingFragmentRequestId: number | null = null;
+  private pendingFragmentFallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
+    listenWindowScrollRaf(() => {
+      if (this.isLandingPage()) {
+        this.updateActiveSection();
+      }
+    });
+
     this.router.events
       .pipe(
-        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        filter(
+          (e): e is NavigationEnd | NavigationSkipped =>
+            e instanceof NavigationEnd ||
+            (e instanceof NavigationSkipped &&
+              e.code === NavigationSkippedCode.IgnoredSameUrlNavigation),
+        ),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((e) => {
-        const isLanding = this.isLandingUrl(e.urlAfterRedirects);
-        const isScheduleDemo = this.isScheduleDemoUrl(e.urlAfterRedirects);
+        const url = e instanceof NavigationEnd ? e.urlAfterRedirects : e.url;
+        const isLanding = this.isLandingUrl(url);
+        const isScheduleDemo = this.isScheduleDemoUrl(url);
         this.isLandingPage.set(isLanding);
         this.isScheduleDemoPage.set(isScheduleDemo);
+        this.clearPendingFragment();
+
+        const fragment =
+          this.router.parseUrl(url).fragment ||
+          this.router.routerState.snapshot.root.fragment;
+
         if (isLanding) {
           if (this.isBrowser) {
-            setTimeout(() => this.updateActiveSection(), 0);
-            const fragment = this.router.routerState.snapshot.root.fragment;
             if (fragment) {
-              setTimeout(() => {
-                this.scrollToAnchorSmoothly(fragment);
-              }, 100);
+              this.anchorService.revealUpToAnchor(fragment);
+              this.scheduleFragmentScroll(e.id, fragment, true);
+            } else if (this.rawActiveLinkKey() !== null) {
+              this.rawActiveLinkKey.set(null);
             }
           }
         } else if (isScheduleDemo) {
           this.rawActiveLinkKey.set(null);
-          if (this.isBrowser) {
-            const fragment = this.router.routerState.snapshot.root.fragment;
-            if (fragment) {
-              setTimeout(() => {
-                this.scrollToAnchorSmoothly(fragment);
-              }, 100);
-            }
+          if (this.isBrowser && fragment) {
+            this.scheduleFragmentScroll(e.id, fragment, false);
           }
         } else {
           this.rawActiveLinkKey.set(null);
         }
       });
 
+    this.router.events
+      .pipe(
+        filter((e): e is Scroll => e instanceof Scroll),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((e) => {
+        if (!this.isBrowser || this.pendingFragmentNavigationId !== e.routerEvent.id) {
+          return;
+        }
+        const hasNewerAnchorAction =
+          this.anchorService.currentRequestId !== this.pendingFragmentRequestId;
+        this.clearPendingFragment();
+        if (hasNewerAnchorAction) {
+          return;
+        }
+        const fragment = e.anchor || this.router.parseUrl(this.router.url).fragment;
+        if (!fragment) {
+          return;
+        }
+        const focusTarget = this.anchorService.consumePendingFocusRequest(fragment);
+        if (this.isLandingPage()) {
+          if (focusTarget) {
+            void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection(), true);
+          } else {
+            void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection());
+          }
+        } else if (this.isScheduleDemoPage()) {
+          if (focusTarget) {
+            void this.anchorService.scrollToAnchor(fragment, undefined, true);
+          } else {
+            void this.anchorService.scrollToAnchor(fragment);
+          }
+        }
+      });
+
     if (this.isBrowser) {
       afterNextRender(() => {
-        this.updateActiveSection();
+        if (this.isLandingPage()) {
+          this.updateActiveSection();
+        }
       });
 
       this.destroyRef.onDestroy(() => {
-        if (this.scrollRafId !== null && typeof cancelAnimationFrame !== 'undefined') {
-          cancelAnimationFrame(this.scrollRafId);
-          this.scrollRafId = null;
-        }
+        this.clearPendingFragment();
       });
+    }
+  }
+
+  private scheduleFragmentScroll(navId: number, fragment: string, isLanding: boolean): void {
+    this.pendingFragmentNavigationId = navId;
+    this.pendingFragmentRequestId = this.anchorService.currentRequestId;
+    // Fallback for initial SSR hydration where RouterScroller suppresses the Scroll event
+    this.pendingFragmentFallbackTimer = setTimeout(() => {
+      if (this.pendingFragmentNavigationId !== navId) {
+        return;
+      }
+      const hasNewerAnchorAction =
+        this.anchorService.currentRequestId !== this.pendingFragmentRequestId;
+      this.clearPendingFragment();
+      if (hasNewerAnchorAction) {
+        return;
+      }
+      if (isLanding) {
+        const focusTarget = this.anchorService.consumePendingFocusRequest(fragment);
+        if (focusTarget) {
+          void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection(), true);
+        } else {
+          void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection());
+        }
+      } else {
+        const focusTarget = this.anchorService.consumePendingFocusRequest(fragment);
+        if (focusTarget) {
+          void this.anchorService.scrollToAnchor(fragment, undefined, true);
+        } else {
+          void this.anchorService.scrollToAnchor(fragment);
+        }
+      }
+    }, 120);
+  }
+
+  private clearPendingFragment(): void {
+    this.pendingFragmentNavigationId = null;
+    this.pendingFragmentRequestId = null;
+    if (this.pendingFragmentFallbackTimer !== null) {
+      clearTimeout(this.pendingFragmentFallbackTimer);
+      this.pendingFragmentFallbackTimer = null;
     }
   }
 
@@ -205,59 +309,41 @@ export class Navbar {
     this.isMobileLangSheetOpen.set(false);
   }
 
-  private getNavbarHeight(): number {
-    if (typeof document === 'undefined') return 88;
-    const header = this.elementRef.nativeElement.querySelector('header');
-    return header ? header.getBoundingClientRect().height : 88;
-  }
-
-  private scrollToAnchorSmoothly(anchorId: string): void {
-    if (typeof document === 'undefined' || typeof window === 'undefined') return;
-    const cleanId = anchorId.replace(/^#/, '').trim();
-    let target = document.getElementById(cleanId);
-    if (!target) {
-      if (cleanId === 'contact') {
-        target = document.getElementById('support');
-      } else if (cleanId === 'solutions') {
-        target = document.getElementById('business-model') || document.getElementById('resources');
-      }
-    }
-    if (target) {
-      const navHeight = this.getNavbarHeight();
-      const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight;
-      window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-    }
-  }
-
   onNavClick(linkKey: string, href?: string, event?: Event): void {
+    if (this.anchorService.isModifiedClick(event)) {
+      return;
+    }
+
     if (this.isLandingPage()) {
       this.rawActiveLinkKey.set(linkKey);
       if (href) {
         event?.preventDefault();
-        const cleanId = href.replace(/^#/, '').trim();
-        this.scrollToAnchorSmoothly(cleanId);
-        if (typeof window !== 'undefined' && window.history?.pushState) {
-          window.history.pushState(null, '', `#${cleanId}`);
-        }
+        this.clearPendingFragment();
+        const cleanId = this.anchorService.normalizeAnchor(href);
+        void this.anchorService.scrollToAnchor(cleanId, () => this.updateActiveSection(), true);
+        this.anchorService.pushHashIfChanged(cleanId);
       }
     } else if (href) {
       event?.preventDefault();
-      const cleanId = href.replace(/^#/, '').trim();
+      const cleanId = this.anchorService.normalizeAnchor(href);
       this.router.navigate(['/'], { fragment: cleanId });
     }
   }
 
   onMobileNavClick(linkKey: string, href?: string, event?: Event): void {
+    if (this.anchorService.isModifiedClick(event)) {
+      return;
+    }
+
     this.onNavClick(linkKey, href, event);
     this.closeMobileMenu();
   }
 
   onScheduleDemo(): void {
     if (this.isScheduleDemoPage()) {
-      this.scrollToAnchorSmoothly('schedule-demo-form');
-      if (typeof window !== 'undefined' && window.history?.pushState) {
-        window.history.pushState(null, '', '#schedule-demo-form');
-      }
+      this.clearPendingFragment();
+      void this.anchorService.scrollToAnchor('schedule-demo-form');
+      this.anchorService.pushHashIfChanged('schedule-demo-form');
     } else {
       this.router.navigate(['/schedule-demo']);
     }
@@ -265,11 +351,7 @@ export class Navbar {
 
   onWindowScroll(): void {
     if (!this.isBrowser || !this.isLandingPage()) return;
-    if (this.scrollRafId !== null) return;
-    this.scrollRafId = window.requestAnimationFrame(() => {
-      this.scrollRafId = null;
-      this.updateActiveSection();
-    });
+    this.updateActiveSection();
   }
 
   updateActiveSection(): void {
@@ -290,14 +372,11 @@ export class Navbar {
     }
 
     const threshold = 140; // Reference reading line just beneath the navbar
-    const featuresEl = document.getElementById('features');
-    const businessModelEl =
-      document.getElementById('solutions') ||
-      document.getElementById('business-model') ||
-      document.getElementById('resources');
-    const customersEl = document.getElementById('customers');
-    const pricingEl = document.getElementById('pricing');
-    const ctaEl = document.getElementById('contact') || document.getElementById('support');
+    const featuresEl = this.anchorService.resolveTargetElement('features');
+    const businessModelEl = this.anchorService.resolveTargetElement('solutions');
+    const customersEl = this.anchorService.resolveTargetElement('customers');
+    const pricingEl = this.anchorService.resolveTargetElement('pricing');
+    const ctaEl = this.anchorService.resolveTargetElement('contact');
 
     if (!featuresEl) {
       this.rawActiveLinkKey.set(null);

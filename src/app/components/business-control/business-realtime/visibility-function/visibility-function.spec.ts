@@ -429,6 +429,7 @@ describe('BusinessRealtime VisibilityFunction', () => {
     dummySection.scrollIntoView = scrollSpy;
     document.body.appendChild(dummySection);
 
+    const originalUrl = window.location.pathname + window.location.search + window.location.hash;
     const replaceStateSpy = vi.spyOn(history, 'replaceState');
 
     try {
@@ -441,6 +442,7 @@ describe('BusinessRealtime VisibilityFunction', () => {
     } finally {
       document.body.removeChild(dummySection);
       replaceStateSpy.mockRestore();
+      window.history.replaceState(null, '', originalUrl || '/');
     }
   });
 });

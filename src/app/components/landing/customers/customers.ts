@@ -10,8 +10,9 @@ import {
   PLATFORM_ID,
   NgZone,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { observeHostViewport } from '../../../systems/lib/viewport-observer';
 
 export type LogoAspect = 'ultra-wide' | 'wide' | 'standard' | 'square';
 
@@ -19,6 +20,8 @@ export interface CustomerCompany {
   id: number;
   name: string;
   logo: string;
+  width: number;
+  height: number;
   aspect?: LogoAspect;
 }
 
@@ -34,69 +37,69 @@ export interface VisibleTopCard {
 }
 
 export const TOP_CUSTOMERS: CustomerCompany[] = [
-  { id: 1, name: 'PT. Madeira Threads Indonesia', logo: 'images/landing/customers/customer-3.svg', aspect: 'wide' },
-  { id: 2, name: 'PT. VMC Fishing Tackle Indonesia', logo: 'images/landing/customers/customer-10.svg', aspect: 'square' },
-  { id: 3, name: 'PT. Sanipak Indonesia', logo: 'images/landing/customers/customer-4.svg', aspect: 'wide' },
-  { id: 4, name: 'PT Rajawali Sakti Utama', logo: 'images/landing/customers/customer-2.svg', aspect: 'standard' },
-  { id: 5, name: 'PT. Agro Sarimas Indonesia', logo: 'images/landing/customers/customer-21.svg', aspect: 'square' },
-  { id: 6, name: 'PT. Fanindo Cipta Propertindo', logo: 'images/landing/customers/customer-5.svg', aspect: 'standard' },
-  { id: 7, name: 'PT. Suntech Plastics Industries Batam', logo: 'images/landing/customers/customer-16.webp', aspect: 'standard' },
-  { id: 8, name: 'PT. Bumi Sarimas Indonesia', logo: 'images/landing/customers/customer43.webp', aspect: 'square' },
-  { id: 9, name: 'PT. Inhil Sarimas Kelapa', logo: 'images/landing/customers/customer46.webp', aspect: 'square' },
-  { id: 10, name: 'PT. Adhya Tirta Lampung', logo: 'images/landing/customers/customer36.webp', aspect: 'standard' },
+  { id: 1, name: 'PT. Madeira Threads Indonesia', logo: '/images/landing/customers/customer-3.svg', width: 1678, height: 560, aspect: 'wide' },
+  { id: 2, name: 'PT. VMC Fishing Tackle Indonesia', logo: '/images/landing/customers/customer-10.svg', width: 790, height: 805, aspect: 'square' },
+  { id: 3, name: 'PT. Sanipak Indonesia', logo: '/images/landing/customers/customer-4.svg', width: 1619, height: 569, aspect: 'wide' },
+  { id: 4, name: 'PT Rajawali Sakti Utama', logo: '/images/landing/customers/customer-2.svg', width: 1362, height: 856, aspect: 'standard' },
+  { id: 5, name: 'PT. Agro Sarimas Indonesia', logo: '/images/landing/customers/customer-21.svg', width: 1029, height: 900, aspect: 'square' },
+  { id: 6, name: 'PT. Fanindo Cipta Propertindo', logo: '/images/landing/customers/customer-5.svg', width: 1000, height: 616, aspect: 'standard' },
+  { id: 7, name: 'PT. Suntech Plastics Industries Batam', logo: '/images/landing/customers/customer-16.webp', width: 1273, height: 810, aspect: 'standard' },
+  { id: 8, name: 'PT. Bumi Sarimas Indonesia', logo: '/images/landing/customers/customer43.webp', width: 115, height: 117, aspect: 'square' },
+  { id: 9, name: 'PT. Inhil Sarimas Kelapa', logo: '/images/landing/customers/customer46.webp', width: 125, height: 119, aspect: 'square' },
+  { id: 10, name: 'PT. Adhya Tirta Lampung', logo: '/images/landing/customers/customer36.webp', width: 589, height: 276, aspect: 'standard' },
 ];
 
 export const BOTTOM_ROW_1: CustomerCompany[] = [
-  { id: 11, name: 'PT. Kubota Indonesia', logo: 'images/landing/customers/customer50.webp', aspect: 'wide' },
-  { id: 12, name: 'PT. Inhil Sarimas Kelapa', logo: 'images/landing/customers/customer46.webp', aspect: 'square' },
-  { id: 13, name: 'PT. Adhya Tirta Lampung', logo: 'images/landing/customers/customer36.webp', aspect: 'standard' },
-  { id: 14, name: 'PT. Bumi Sarimas Indonesia', logo: 'images/landing/customers/customer43.webp', aspect: 'square' },
-  { id: 15, name: 'PT. Katsuyama Finetech Indonesia', logo: 'images/landing/customers/customer-1.svg', aspect: 'standard' },
-  { id: 16, name: 'PT. ASL Shipyard Indonesia', logo: 'images/landing/customers/customer-6.svg', aspect: 'standard' },
-  { id: 17, name: 'PT. Cemara Intan Shipyard', logo: 'images/landing/customers/customer-7.svg', aspect: 'standard' },
-  { id: 18, name: 'PT. Bukti Alam Persada', logo: 'images/landing/customers/customer-8.svg', aspect: 'ultra-wide' },
-  { id: 19, name: 'PT. Sindomas Precast', logo: 'images/landing/customers/customer-11.svg', aspect: 'ultra-wide' },
-  { id: 20, name: 'PT. Yoshikawa Electronics Bintan', logo: 'images/landing/customers/customer-12.svg', aspect: 'wide' },
-  { id: 21, name: 'PT. Samudera Indonesia Tbk', logo: 'images/landing/customers/customer-13.svg', aspect: 'standard' },
-  { id: 22, name: 'Sekolah Mondial', logo: 'images/landing/customers/customer-14.svg', aspect: 'square' },
-  { id: 23, name: 'PT. Kopegtel Batam', logo: 'images/landing/customers/customer-15.svg', aspect: 'ultra-wide' },
-  { id: 24, name: 'PT. Amber Karya', logo: 'images/landing/customers/customer-17.svg', aspect: 'square' },
-  { id: 25, name: 'PT. Agro Sarimas Indonesia', logo: 'images/landing/customers/customer-21.svg', aspect: 'square' },
-  { id: 26, name: 'PT. Vinnex Coatindo', logo: 'images/landing/customers/customer-19.svg', aspect: 'standard' },
-  { id: 27, name: 'PT. Venturindo Jaya Batam', logo: 'images/landing/customers/customer20.webp', aspect: 'ultra-wide' },
-  { id: 28, name: 'PT. Nittoh Batam', logo: 'images/landing/customers/customer-22.svg', aspect: 'standard' },
-  { id: 29, name: 'PT. Takamori Indonesia', logo: 'images/landing/customers/customer-23.svg', aspect: 'square' },
-  { id: 30, name: 'PT. World Wide Equipment South East Asia', logo: 'images/landing/customers/customer-24.svg', aspect: 'square' },
-  { id: 31, name: 'PT. Bahtera Bahari Shipyard', logo: 'images/landing/customers/customer-25.svg', aspect: 'square' },
-  { id: 32, name: 'PT. EX Batam Indonesia', logo: 'images/landing/customers/customer-26.svg', aspect: 'standard' },
+  { id: 11, name: 'PT. Kubota Indonesia', logo: '/images/landing/customers/customer50.webp', width: 1253, height: 266, aspect: 'wide' },
+  { id: 12, name: 'PT. Inhil Sarimas Kelapa', logo: '/images/landing/customers/customer46.webp', width: 125, height: 119, aspect: 'square' },
+  { id: 13, name: 'PT. Adhya Tirta Lampung', logo: '/images/landing/customers/customer36.webp', width: 589, height: 276, aspect: 'standard' },
+  { id: 14, name: 'PT. Bumi Sarimas Indonesia', logo: '/images/landing/customers/customer43.webp', width: 115, height: 117, aspect: 'square' },
+  { id: 15, name: 'PT. Katsuyama Finetech Indonesia', logo: '/images/landing/customers/customer-1.svg', width: 1156, height: 624, aspect: 'standard' },
+  { id: 16, name: 'PT. ASL Shipyard Indonesia', logo: '/images/landing/customers/customer-6.svg', width: 1290, height: 708, aspect: 'standard' },
+  { id: 17, name: 'PT. Cemara Intan Shipyard', logo: '/images/landing/customers/customer-7.svg', width: 1024, height: 459, aspect: 'standard' },
+  { id: 18, name: 'PT. Bukti Alam Persada', logo: '/images/landing/customers/customer-8.svg', width: 770, height: 87, aspect: 'ultra-wide' },
+  { id: 19, name: 'PT. Sindomas Precast', logo: '/images/landing/customers/customer-11.svg', width: 781, height: 71, aspect: 'ultra-wide' },
+  { id: 20, name: 'PT. Yoshikawa Electronics Bintan', logo: '/images/landing/customers/customer-12.svg', width: 1686, height: 355, aspect: 'wide' },
+  { id: 21, name: 'PT. Samudera Indonesia Tbk', logo: '/images/landing/customers/customer-13.svg', width: 1263, height: 848, aspect: 'standard' },
+  { id: 22, name: 'Sekolah Mondial', logo: '/images/landing/customers/customer-14.svg', width: 1024, height: 1024, aspect: 'square' },
+  { id: 23, name: 'PT. Kopegtel Batam', logo: '/images/landing/customers/customer-15.svg', width: 1730, height: 235, aspect: 'ultra-wide' },
+  { id: 24, name: 'PT. Amber Karya', logo: '/images/landing/customers/customer-17.svg', width: 1024, height: 922, aspect: 'square' },
+  { id: 25, name: 'PT. Agro Sarimas Indonesia', logo: '/images/landing/customers/customer-21.svg', width: 1029, height: 900, aspect: 'square' },
+  { id: 26, name: 'PT. Vinnex Coatindo', logo: '/images/landing/customers/customer-19.svg', width: 1024, height: 671, aspect: 'standard' },
+  { id: 27, name: 'PT. Venturindo Jaya Batam', logo: '/images/landing/customers/customer20.webp', width: 283, height: 56, aspect: 'ultra-wide' },
+  { id: 28, name: 'PT. Nittoh Batam', logo: '/images/landing/customers/customer-22.svg', width: 904, height: 489, aspect: 'standard' },
+  { id: 29, name: 'PT. Takamori Indonesia', logo: '/images/landing/customers/customer-23.svg', width: 1024, height: 939, aspect: 'square' },
+  { id: 30, name: 'PT. World Wide Equipment South East Asia', logo: '/images/landing/customers/customer-24.svg', width: 602, height: 679, aspect: 'square' },
+  { id: 31, name: 'PT. Bahtera Bahari Shipyard', logo: '/images/landing/customers/customer-25.svg', width: 500, height: 630, aspect: 'square' },
+  { id: 32, name: 'PT. EX Batam Indonesia', logo: '/images/landing/customers/customer-26.svg', width: 300, height: 200, aspect: 'standard' },
 ];
 
 export const BOTTOM_ROW_2: CustomerCompany[] = [
-  { id: 33, name: 'PT. Batam Teknologi Gas', logo: 'images/landing/customers/customer-9.svg', aspect: 'square' },
-  { id: 34, name: 'PT. Suntech Plastics Indonesia', logo: 'images/landing/customers/customer-16.webp', aspect: 'standard' },
-  { id: 35, name: 'PT. Fanindo Cipta Propertindo', logo: 'images/landing/customers/customer-5.svg', aspect: 'standard' },
-  { id: 36, name: 'PT. Lytech Batam', logo: 'images/landing/customers/customer49.webp', aspect: 'standard' },
-  { id: 37, name: 'PT. Takamori Indonesia', logo: 'images/landing/customers/customer-23.svg', aspect: 'square' },
-  { id: 38, name: 'PT. Kebakkramat Elang Perkasa', logo: 'images/landing/customers/customer28.webp', aspect: 'standard' },
-  { id: 39, name: 'PT. Perkasa Inovasi Logistik', logo: 'images/landing/customers/customer-29.svg', aspect: 'wide' },
-  { id: 40, name: 'PT. Wahana Idea Cipta', logo: 'images/landing/customers/customer30.webp', aspect: 'standard' },
-  { id: 41, name: 'PT. Primo Microphones Indonesia', logo: 'images/landing/customers/customer-31.svg', aspect: 'wide' },
-  { id: 42, name: 'PT. Inti Duta Logistik', logo: 'images/landing/customers/customer-33.svg', aspect: 'square' },
-  { id: 43, name: 'PT. Sumitomo Wiring Systems Batam', logo: 'images/landing/customers/customer-34.svg', aspect: 'ultra-wide' },
-  { id: 44, name: 'PT. Lubrikan Jasa Tama', logo: 'images/landing/customers/customer-35.svg', aspect: 'standard' },
-  { id: 45, name: 'PT. Adhya Tirta Lampung', logo: 'images/landing/customers/customer36.webp', aspect: 'standard' },
-  { id: 46, name: 'Rumah Kita Batam', logo: 'images/landing/customers/customer-37.svg', aspect: 'square' },
-  { id: 47, name: 'PT. Koperasi Karyawan BMW', logo: 'images/landing/customers/customer-38.svg', aspect: 'square' },
-  { id: 48, name: 'PT. Batam Niaga Perkasa', logo: 'images/landing/customers/customer-39.svg', aspect: 'square' },
-  { id: 49, name: 'PT. LKD Multi Industri', logo: 'images/landing/customers/customer40.webp', aspect: 'ultra-wide' },
-  { id: 50, name: 'PT. Awak Samudera Transportasi', logo: 'images/landing/customers/customer-41.svg', aspect: 'standard' },
-  { id: 51, name: 'PT. Soonle Metalindo Perkasa', logo: 'images/landing/customers/customer42.webp', aspect: 'wide' },
-  { id: 52, name: 'PT. Castroindo Perkasa', logo: 'images/landing/customers/customer44.webp', aspect: 'ultra-wide' },
-  { id: 53, name: 'PT. Primetech Indonesia', logo: 'images/landing/customers/customer47.webp', aspect: 'wide' },
+  { id: 33, name: 'PT. Batam Teknologi Gas', logo: '/images/landing/customers/customer-9.svg', width: 820, height: 688, aspect: 'square' },
+  { id: 34, name: 'PT. Suntech Plastics Indonesia', logo: '/images/landing/customers/customer-16.webp', width: 1273, height: 810, aspect: 'standard' },
+  { id: 35, name: 'PT. Fanindo Cipta Propertindo', logo: '/images/landing/customers/customer-5.svg', width: 1000, height: 616, aspect: 'standard' },
+  { id: 36, name: 'PT. Lytech Batam', logo: '/images/landing/customers/customer49.webp', width: 220, height: 95, aspect: 'standard' },
+  { id: 37, name: 'PT. Takamori Indonesia', logo: '/images/landing/customers/customer-23.svg', width: 1024, height: 939, aspect: 'square' },
+  { id: 38, name: 'PT. Kebakkramat Elang Perkasa', logo: '/images/landing/customers/customer28.webp', width: 169, height: 112, aspect: 'standard' },
+  { id: 39, name: 'PT. Perkasa Inovasi Logistik', logo: '/images/landing/customers/customer-29.svg', width: 1000, height: 320, aspect: 'wide' },
+  { id: 40, name: 'PT. Wahana Idea Cipta', logo: '/images/landing/customers/customer30.webp', width: 180, height: 97, aspect: 'standard' },
+  { id: 41, name: 'PT. Primo Microphones Indonesia', logo: '/images/landing/customers/customer-31.svg', width: 1698, height: 397, aspect: 'wide' },
+  { id: 42, name: 'PT. Inti Duta Logistik', logo: '/images/landing/customers/customer-33.svg', width: 1024, height: 1024, aspect: 'square' },
+  { id: 43, name: 'PT. Sumitomo Wiring Systems Batam', logo: '/images/landing/customers/customer-34.svg', width: 1741, height: 292, aspect: 'ultra-wide' },
+  { id: 44, name: 'PT. Lubrikan Jasa Tama', logo: '/images/landing/customers/customer-35.svg', width: 1024, height: 471, aspect: 'standard' },
+  { id: 45, name: 'PT. Adhya Tirta Lampung', logo: '/images/landing/customers/customer36.webp', width: 589, height: 276, aspect: 'standard' },
+  { id: 46, name: 'Rumah Kita Batam', logo: '/images/landing/customers/customer-37.svg', width: 961, height: 743, aspect: 'square' },
+  { id: 47, name: 'PT. Koperasi Karyawan BMW', logo: '/images/landing/customers/customer-38.svg', width: 1000, height: 888, aspect: 'square' },
+  { id: 48, name: 'PT. Batam Niaga Perkasa', logo: '/images/landing/customers/customer-39.svg', width: 920, height: 1024, aspect: 'square' },
+  { id: 49, name: 'PT. LKD Multi Industri', logo: '/images/landing/customers/customer40.webp', width: 471, height: 73, aspect: 'ultra-wide' },
+  { id: 50, name: 'PT. Awak Samudera Transportasi', logo: '/images/landing/customers/customer-41.svg', width: 1446, height: 866, aspect: 'standard' },
+  { id: 51, name: 'PT. Soonle Metalindo Perkasa', logo: '/images/landing/customers/customer42.webp', width: 518, height: 126, aspect: 'wide' },
+  { id: 52, name: 'PT. Castroindo Perkasa', logo: '/images/landing/customers/customer44.webp', width: 531, height: 70, aspect: 'ultra-wide' },
+  { id: 53, name: 'PT. Primetech Indonesia', logo: '/images/landing/customers/customer47.webp', width: 381, height: 79, aspect: 'wide' },
 ];
 
 @Component({
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, NgOptimizedImage],
   selector: 'app-customers',
   styles: `
     /* Flow pulse animations: independent linear loops flowing continuously */
@@ -363,6 +366,10 @@ export const BOTTOM_ROW_2: CustomerCompany[] = [
       box-shadow: 0 4px 14px rgba(28, 115, 232, 0.12);
     }
 
+    .marquee-paused * {
+      animation-play-state: paused !important;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .pulse-top-horizontal,
       .pulse-upper-right,
@@ -390,8 +397,24 @@ export class Customers implements OnInit {
   readonly topMarqueeContainer = viewChild<ElementRef<HTMLElement>>('topContainer');
   readonly topMarqueeTrack = viewChild<ElementRef<HTMLElement>>('topTrack');
 
-  private positionRafId: number | null = null;
-  private lastCheckTime = 0;
+  private centerObserver: IntersectionObserver | null = null;
+  private isInitialized = false;
+
+  readonly isInViewport = signal<boolean>(false);
+
+  constructor() {
+    observeHostViewport((visible) => {
+      this.isInViewport.set(visible);
+      if (!this.isInitialized) return;
+      if (visible) {
+        this.startRotationTimer();
+        this.startCenterObserver();
+      } else {
+        this.stopRotationTimer();
+        this.stopCenterObserver();
+      }
+    });
+  }
 
   readonly topCustomers = TOP_CUSTOMERS;
   readonly bottomRow1 = BOTTOM_ROW_1;
@@ -457,13 +480,17 @@ export class Customers implements OnInit {
   private lineCleanupTimeout: ReturnType<typeof setTimeout> | null = null;
 
   ngOnInit(): void {
-    this.startRotationTimer();
-    this.startCenterTracker();
+    this.isInitialized = true;
     this.triggerLineAnimation();
+
+    if (isPlatformBrowser(this.platformId) && this.isInViewport()) {
+      this.startRotationTimer();
+      this.startCenterObserver();
+    }
 
     this.destroyRef.onDestroy(() => {
       this.stopRotationTimer();
-      this.stopCenterTracker();
+      this.stopCenterObserver();
       if (this.logoTransitionTimeout) {
         clearTimeout(this.logoTransitionTimeout);
       }
@@ -496,35 +523,11 @@ export class Customers implements OnInit {
     this.isPaused.set(false);
   }
 
-  private startCenterTracker(): void {
-    if (!isPlatformBrowser(this.platformId)) {
+  private startCenterObserver(): void {
+    if (!isPlatformBrowser(this.platformId) || typeof IntersectionObserver === 'undefined') {
       return;
     }
-
-    this.ngZone.runOutsideAngular(() => {
-      const check = (timestamp: number) => {
-        if (timestamp - this.lastCheckTime >= 40) {
-          this.lastCheckTime = timestamp;
-          this.checkCenterCard();
-        }
-        this.positionRafId = requestAnimationFrame(check);
-      };
-
-      this.positionRafId = requestAnimationFrame(check);
-    });
-  }
-
-  private stopCenterTracker(): void {
-    if (this.positionRafId !== null) {
-      cancelAnimationFrame(this.positionRafId);
-      this.positionRafId = null;
-    }
-  }
-
-  private checkCenterCard(): void {
-    if (this.isPaused()) {
-      return;
-    }
+    this.stopCenterObserver();
 
     const containerEl = this.topMarqueeContainer()?.nativeElement;
     const trackEl = this.topMarqueeTrack()?.nativeElement;
@@ -532,47 +535,74 @@ export class Customers implements OnInit {
       return;
     }
 
-    const containerRect = containerEl.getBoundingClientRect();
-    if (containerRect.width === 0) {
-      return;
-    }
-
-    const centerX = containerRect.left + containerRect.width / 2;
     const cards = trackEl.querySelectorAll<HTMLElement>('.top-customer-card');
     if (!cards.length) {
       return;
     }
 
-    let closestIndex = -1;
-    let minDistance = Infinity;
+    this.ngZone.runOutsideAngular(() => {
+      const intersectingCards = new Set<Element>();
+      this.centerObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              intersectingCards.add(entry.target);
+            } else {
+              intersectingCards.delete(entry.target);
+            }
+          }
+          if (this.isPaused() || !this.isInViewport()) {
+            return;
+          }
+          const rootRect = entries[0]?.rootBounds ?? containerEl.getBoundingClientRect();
+          const rootCenter = rootRect.left + rootRect.width / 2;
+          let closestIndex = -1;
+          let minDistance = Infinity;
 
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i];
-      const rect = card.getBoundingClientRect();
-      const cardCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(cardCenter - centerX);
+          for (const cardEl of intersectingCards) {
+            const cardRect = cardEl.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const dist = Math.abs(cardCenter - rootCenter);
+            if (dist < minDistance) {
+              minDistance = dist;
+              const idx = cardEl.getAttribute('data-index');
+              if (idx !== null) {
+                closestIndex = Number(idx);
+              }
+            }
+          }
 
-      if (dist < minDistance) {
-        minDistance = dist;
-        const idx = card.getAttribute('data-index');
-        if (idx !== null) {
-          closestIndex = Number(idx);
-        }
+          if (closestIndex !== -1 && closestIndex !== this.activeCustomerIndex()) {
+            this.ngZone.run(() => {
+              this.activeCustomerIndex.set(closestIndex);
+              this.currentVirtual.set(20 + closestIndex);
+              this.triggerLogoTransition();
+            });
+          }
+        },
+        {
+          root: containerEl,
+          rootMargin: '0px -48% 0px -48%',
+          threshold: 0,
+        },
+      );
+
+      for (let i = 0; i < cards.length; i++) {
+        this.centerObserver.observe(cards[i]);
       }
-    }
+    });
+  }
 
-    if (closestIndex !== -1 && closestIndex !== this.activeCustomerIndex()) {
-      this.ngZone.run(() => {
-        this.activeCustomerIndex.set(closestIndex);
-        this.currentVirtual.set(20 + closestIndex);
-        this.triggerLogoTransition();
-      });
+  private stopCenterObserver(): void {
+    if (this.centerObserver) {
+      this.centerObserver.disconnect();
+      this.centerObserver = null;
     }
   }
 
   private advanceToNext(): void {
     const containerEl = this.topMarqueeContainer()?.nativeElement;
-    if (containerEl && containerEl.getBoundingClientRect().width > 0) {
+    if (this.centerObserver && containerEl && containerEl.offsetWidth > 0) {
       return;
     }
     const N = this.topCustomers.length;

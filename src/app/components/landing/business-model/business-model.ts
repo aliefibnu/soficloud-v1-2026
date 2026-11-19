@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '../../../systems/lib/language.service';
+import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 
 export interface BusinessModelCard {
   readonly id: string;
@@ -24,6 +25,11 @@ export interface BusinessModelCard {
 })
 export class BusinessModel {
   protected readonly languageService = inject(LanguageService);
+  private readonly anchorService = inject(LandingAnchorService);
+
+  onLearnMore(event: Event): void {
+    this.anchorService.navigateOrScrollToAnchor('contact', event, true, true);
+  }
 
   readonly cards: readonly BusinessModelCard[] = [
     {

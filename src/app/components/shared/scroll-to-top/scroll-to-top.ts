@@ -1,6 +1,7 @@
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { listenWindowScrollRaf } from '../../../systems/lib/viewport-observer';
 
 @Component({
   selector: 'app-scroll-to-top',
@@ -8,17 +9,23 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './scroll-to-top.html',
   host: {
     class: 'contents',
-    '(window:scroll)': 'onWindowScroll()',
   },
 })
 export class ScrollToTop {
   private readonly platformId = inject(PLATFORM_ID);
   readonly isVisible = signal(false);
 
+  constructor() {
+    listenWindowScrollRaf(() => this.onWindowScroll());
+  }
+
   onWindowScroll(): void {
     if (isPlatformBrowser(this.platformId)) {
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      this.isVisible.set(scrollY > 300);
+      const next = scrollY > 300;
+      if (next !== this.isVisible()) {
+        this.isVisible.set(next);
+      }
     }
   }
 

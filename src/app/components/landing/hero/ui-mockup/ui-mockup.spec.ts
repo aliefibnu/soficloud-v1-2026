@@ -1006,5 +1006,50 @@ describe('UiMockup', () => {
     expect(moCard).toBeTruthy();
     expect(fadeContainer?.contains(moCard!)).toBe(false);
   });
+
+  it('should pause floating card animations via host class when out of viewport', () => {
+    fixture.detectChanges();
+    const host = fixture.nativeElement as HTMLElement;
+    const cards = [
+      host.querySelector('.animate-floating-card-left'),
+      host.querySelector('.animate-floating-card-top-right'),
+      host.querySelector('.animate-floating-card-bottom-right'),
+    ];
+
+    expect(host.classList.contains('mockup-animations-paused')).toBe(false);
+    for (const card of cards) {
+      expect(card).toBeTruthy();
+      expect(getComputedStyle(card!).animationPlayState).not.toBe('paused');
+    }
+
+    component.isInViewport.set(false);
+    fixture.detectChanges();
+
+    expect(host.classList.contains('mockup-animations-paused')).toBe(true);
+    for (const card of cards) {
+      expect(getComputedStyle(card!).animationPlayState).toBe('paused');
+    }
+
+    component.isInViewport.set(true);
+    fixture.detectChanges();
+
+    expect(host.classList.contains('mockup-animations-paused')).toBe(false);
+    for (const card of cards) {
+      expect(getComputedStyle(card!).animationPlayState).not.toBe('paused');
+    }
+  });
+
+  it('should render the notification badge with centered text trimming and leading-none', () => {
+    fixture.detectChanges();
+    const host = fixture.nativeElement as HTMLElement;
+    const badgeText = host.querySelector('.notification-badge-text') as HTMLElement | null;
+    expect(badgeText).toBeTruthy();
+    expect(badgeText?.textContent?.trim()).toBe('3');
+
+    const badge = badgeText?.parentElement as HTMLElement | null;
+    expect(badge).toBeTruthy();
+    expect(badge?.classList.contains('leading-none')).toBe(true);
+    expect(badge?.classList.contains('tabular-nums')).toBe(true);
+  });
 });
 

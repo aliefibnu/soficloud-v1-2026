@@ -10,6 +10,7 @@ import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../../systems/lib/language.service';
+import { observeHostViewport } from '../../../systems/lib/viewport-observer';
 
 export interface DataPoint {
   readonly id: number;
@@ -104,6 +105,7 @@ export class BusinessControl implements OnDestroy {
   readonly currentIndex = signal<0 | 1 | 2 | 3>(0);
   readonly activeCard = computed<0 | 1 | 2 | 3>(() => this.currentIndex());
   readonly isHovered = signal<boolean>(false);
+  readonly isInViewport = signal<boolean>(false);
 
   private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
   readonly autoPlayDelayMs = 5000;
@@ -115,9 +117,14 @@ export class BusinessControl implements OnDestroy {
   private mouseStartY = 0;
 
   constructor() {
-    if (this.isBrowser) {
-      this.startAutoPlay();
-    }
+    observeHostViewport((visible) => {
+      this.isInViewport.set(visible);
+      if (visible && !this.isHovered()) {
+        this.startAutoPlay();
+      } else {
+        this.stopAutoPlay();
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -125,10 +132,10 @@ export class BusinessControl implements OnDestroy {
   }
 
   startAutoPlay(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || !this.isInViewport() || this.isHovered()) return;
     this.stopAutoPlay();
     this.autoPlayTimer = setInterval(() => {
-      if (!this.isHovered()) {
+      if (!this.isHovered() && this.isInViewport()) {
         this.nextCard();
       }
     }, this.autoPlayDelayMs);

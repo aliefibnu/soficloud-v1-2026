@@ -206,8 +206,8 @@ describe('Capabilities', () => {
 
     for (const container of iconContainers) {
       const el = container.nativeElement as HTMLElement;
-      expect(el.classList.contains('w-[95px]')).toBe(true);
-      expect(el.classList.contains('h-[71px]')).toBe(true);
+      expect(el.classList.contains('w-23.75')).toBe(true);
+      expect(el.classList.contains('h-17.75')).toBe(true);
       const bg = el.style.background;
       expect(bg).toContain('radial-gradient');
       expect(bg).toContain('64.37% 118.95%');

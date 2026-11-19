@@ -70,6 +70,7 @@
         <div class="mt-3.5 sm:mt-4 lg:mt-4.5 pt-0.5">
           <a
             href="#contact"
+            (click)="onLearnMore($event)"
             class="w-fit inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 min-h-11 sm:min-h-11.5 rounded-xl font-dm-sans font-semibold text-sm sm:text-base lg:text-[18px] leading-[130%] tracking-normal text-white bg-linear-to-r from-[#1D3FE0] to-[#4F8CEB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             [attr.aria-label]="
               'BUSINESS_MODEL.ARIA.LEARN_MORE' | translate: { title: (card.titleKey | translate) }

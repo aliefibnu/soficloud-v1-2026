@@ -5,70 +5,73 @@ import { BusinessControl } from './business-control';
 import { LanguageService } from '../../../systems/lib/language.service';
 import { provideCustomImageLoader } from '../../../systems/lib/image-loader';
 
+async function setupBusinessControlTestingModule(): Promise<ComponentFixture<BusinessControl>> {
+  await TestBed.configureTestingModule({
+    imports: [BusinessControl],
+    providers: [
+      provideRouter([]),
+      provideTranslateService({
+        fallbackLang: 'id',
+        lang: 'id',
+      }),
+      LanguageService,
+      provideCustomImageLoader(),
+    ],
+  }).compileComponents();
+
+  const translateService = TestBed.inject(TranslateService);
+  translateService.setTranslation('id', {
+    BUSINESS_CONTROL: {
+      HEADER_TITLE: 'Kendalikan Bisnis Dari Satu Tempat',
+      HEADER_SUBTITLE:
+        'Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan dapat ditelusuri kapan saja',
+      CARD_TITLE: 'Real-Time Business Control',
+      CARD_BADGE: 'REAL-TIME',
+      CHART_TITLE: 'INCOME AND EXPENSIVE (IDR)',
+      EXPENSE: 'Expense',
+      INCOME: 'Income',
+      CONTENT_TITLE: 'Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat',
+      CONTENT_DESC:
+        'Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view.',
+      CTA_BUTTON: 'Lihat Kapabilitas',
+      CARDS: {
+        REALTIME: {
+          TAB: 'Monitoring Real-Time',
+          TITLE: 'Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat.',
+          DESC: 'Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view.',
+        },
+        CONNECTED: {
+          TAB: 'Proses Terhubung',
+          TITLE: 'Seluruh Proses\nBisnis Terhubung\nDalam Satu\nSistem.',
+          DESC: 'Data mengalir dari Sales ke Procurement, Inventory, Manufacturing, Project, hingga Finance & Accounting tanpa input berulang.',
+        },
+        WORKFLOW: {
+          TAB: 'Workflow & Approval',
+          TITLE: 'Workflow & Approval Terstruktur Sesuai Kebijakan Perusahaan.',
+          DESC: 'Dokumen bergerak melalui tahapan Diajukan, Ditinjau, Disetujui, Diproses, dan Selesai, lengkap dengan approval chain serta audit trail.',
+        },
+        INSIGHT: {
+          TAB: 'Insight Keuangan',
+          TITLE: 'Insight Keuangan Dan Biaya Untuk Keputusan Yang Lebih Cerdas.',
+          DESC: 'Revenue, gross margin, cash flow, AR/AP, inventory value, budget versus actual, cost, dan profitability dapat dianalisa dalam satu financial surface.',
+        },
+      },
+    },
+  });
+  translateService.use('id');
+
+  const fixture = TestBed.createComponent(BusinessControl);
+  await fixture.whenStable();
+  return fixture;
+}
+
 describe('BusinessControl', () => {
   let component: BusinessControl;
   let fixture: ComponentFixture<BusinessControl>;
-  let translateService: TranslateService;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [BusinessControl],
-      providers: [
-        provideRouter([]),
-        provideTranslateService({
-          fallbackLang: 'id',
-          lang: 'id',
-        }),
-        LanguageService,
-        provideCustomImageLoader(),
-      ],
-    }).compileComponents();
-
-    translateService = TestBed.inject(TranslateService);
-
-    translateService.setTranslation('id', {
-      BUSINESS_CONTROL: {
-        HEADER_TITLE: 'Kendalikan Bisnis Dari Satu Tempat',
-        HEADER_SUBTITLE:
-          'Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan dapat ditelusuri kapan saja',
-        CARD_TITLE: 'Real-Time Business Control',
-        CARD_BADGE: 'REAL-TIME',
-        CHART_TITLE: 'INCOME AND EXPENSIVE (IDR)',
-        EXPENSE: 'Expense',
-        INCOME: 'Income',
-        CONTENT_TITLE: 'Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat',
-        CONTENT_DESC:
-          'Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view.',
-        CTA_BUTTON: 'Lihat Kapabilitas',
-        CARDS: {
-          REALTIME: {
-            TAB: 'Monitoring Real-Time',
-            TITLE: 'Pantau Bisnis Secara Real-Time Untuk Keputusan Yang Lebih Cepat.',
-            DESC: 'Sales, cash position, inventory alert, outstanding process, production, project, dan KPI bisnis tersedia dalam satu management view.',
-          },
-          CONNECTED: {
-            TAB: 'Proses Terhubung',
-            TITLE: 'Seluruh Proses\nBisnis Terhubung\nDalam Satu\nSistem.',
-            DESC: 'Data mengalir dari Sales ke Procurement, Inventory, Manufacturing, Project, hingga Finance & Accounting tanpa input berulang.',
-          },
-          WORKFLOW: {
-            TAB: 'Workflow & Approval',
-            TITLE: 'Workflow & Approval Terstruktur Sesuai Kebijakan Perusahaan.',
-            DESC: 'Dokumen bergerak melalui tahapan Diajukan, Ditinjau, Disetujui, Diproses, dan Selesai, lengkap dengan approval chain serta audit trail.',
-          },
-          INSIGHT: {
-            TAB: 'Insight Keuangan',
-            TITLE: 'Insight Keuangan Dan Biaya Untuk Keputusan Yang Lebih Cerdas.',
-            DESC: 'Revenue, gross margin, cash flow, AR/AP, inventory value, budget versus actual, cost, dan profitability dapat dianalisa dalam satu financial surface.',
-          },
-        },
-      },
-    });
-    translateService.use('id');
-
-    fixture = TestBed.createComponent(BusinessControl);
+    fixture = await setupBusinessControlTestingModule();
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
   afterEach(() => {
@@ -77,6 +80,11 @@ describe('BusinessControl', () => {
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render section with id="business-control"', () => {
+    const section = fixture.debugElement.nativeElement.querySelector('section#business-control');
+    expect(section).toBeTruthy();
   });
 
   it('should render the header title and description', () => {
@@ -416,5 +424,98 @@ describe('BusinessControl', () => {
         '/smart-workflow',
       );
     });
+  });
+});
+
+describe('BusinessControl viewport autoplay guard', () => {
+  const originalIO = globalThis.IntersectionObserver;
+  let observerCallback: IntersectionObserverCallback | null = null;
+  let component: BusinessControl;
+  let fixture: ComponentFixture<BusinessControl>;
+
+  const emitVisibility = (isIntersecting: boolean): void => {
+    observerCallback?.(
+      [{ isIntersecting } as IntersectionObserverEntry],
+      {} as IntersectionObserver,
+    );
+  };
+
+  beforeEach(async () => {
+    observerCallback = null;
+
+    class MockIntersectionObserver {
+      constructor(cb: IntersectionObserverCallback) {
+        observerCallback = cb;
+      }
+      observe = vi.fn();
+      disconnect = vi.fn();
+      unobserve = vi.fn();
+      takeRecords = vi.fn(() => []);
+      root = null;
+      rootMargin = '';
+      thresholds = [];
+    }
+
+    globalThis.IntersectionObserver =
+      MockIntersectionObserver as unknown as typeof IntersectionObserver;
+
+    fixture = await setupBusinessControlTestingModule();
+    component = fixture.componentInstance;
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    component?.stopAutoPlay();
+    vi.useRealTimers();
+    globalThis.IntersectionObserver = originalIO;
+  });
+
+  it('should not restart autoplay on touch end when scrolled offscreen', () => {
+    emitVisibility(true);
+    expect(component.isInViewport()).toBe(true);
+
+    component.onTouchStart({
+      touches: [{ clientX: 100, clientY: 200 }],
+    } as unknown as TouchEvent);
+
+    emitVisibility(false);
+    expect(component.isInViewport()).toBe(false);
+
+    component.onTouchEnd({
+      changedTouches: [{ clientX: 105, clientY: 50 }],
+    } as unknown as TouchEvent);
+
+    vi.advanceTimersByTime(10000);
+    expect(component.activeCard()).toBe(0);
+  });
+
+  it('should not restart autoplay on mouse up or mouse leave when offscreen', () => {
+    emitVisibility(true);
+
+    component.onMouseDown({ clientX: 100, clientY: 200 } as unknown as MouseEvent);
+    emitVisibility(false);
+    component.onMouseUp({ clientX: 105, clientY: 200 } as unknown as MouseEvent);
+
+    vi.advanceTimersByTime(10000);
+    expect(component.activeCard()).toBe(0);
+
+    component.onMouseEnter();
+    component.onMouseLeave();
+
+    vi.advanceTimersByTime(10000);
+    expect(component.activeCard()).toBe(0);
+  });
+
+  it('should ignore resetAutoPlay while offscreen and resume when back in viewport', () => {
+    emitVisibility(false);
+    component.goToCard(1);
+    component.resetAutoPlay();
+
+    vi.advanceTimersByTime(10000);
+    expect(component.activeCard()).toBe(1);
+
+    emitVisibility(true);
+    vi.advanceTimersByTime(5000);
+    expect(component.activeCard()).toBe(2);
   });
 });

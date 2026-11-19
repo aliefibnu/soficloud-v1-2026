@@ -14,7 +14,10 @@
     >
       <div class="w-28 sm:w-44 shrink-0 flex items-center">
         <img
-          src="/soficloud-logo.svg"
+          ngSrc="/soficloud-logo.svg"
+          width="322"
+          height="74"
+          loading="eager"
           [alt]="'HERO.UI_MOCKUP.HEADER.LOGO_ALT' | translate"
           class="h-4.5 sm:h-6 w-auto object-contain select-none pointer-events-none"
         />
@@ -96,9 +99,9 @@
             </svg>
             @if (unreadCount() > 0) {
               <span
-                class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-rose-500 text-white rounded-full text-[8.5px] font-bold flex items-center justify-center shadow-xs"
+                class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-rose-500 text-white rounded-full text-[9px] leading-none font-bold tabular-nums flex items-center justify-center shadow-xs"
               >
-                {{ unreadCount() }}
+                <span class="notification-badge-text">{{ unreadCount() }}</span>
               </span>
             }
           </button>
@@ -760,7 +763,7 @@
       class="will-change-transform animate-floating-card-left hover:[animation-play-state:paused] pointer-events-auto"
     >
       <aside
-        class="w-48 sm:w-52 lg:w-56 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4.5 sm:p-5 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
+        class="w-48 sm:w-52 lg:w-56 bg-white/95 rounded-2xl sm:rounded-3xl p-4.5 sm:p-5 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
         [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.PROJECT_CASH.ARIA_LABEL' | translate"
       >
         <div>
@@ -794,7 +797,7 @@
       class="will-change-transform animate-floating-card-top-right hover:[animation-play-state:paused] pointer-events-auto"
     >
       <aside
-        class="w-36 sm:w-40 lg:w-42 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
+        class="w-36 sm:w-40 lg:w-42 bg-white/95 rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
         [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.OPEX_ARIA_LABEL' | translate"
       >
         <span
@@ -846,7 +849,7 @@
       class="will-change-transform animate-floating-card-bottom-right hover:[animation-play-state:paused] pointer-events-auto"
     >
       <aside
-        class="w-38 sm:w-42 lg:w-44 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
+        class="w-38 sm:w-42 lg:w-44 bg-white/95 rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 lg:p-4 border border-slate-100 shadow-[0_20px_45px_-10px_rgba(24,40,73,0.12),0_4px_16px_rgba(24,40,73,0.06)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-10px_rgba(24,40,73,0.18)] select-none"
         [attr.aria-label]="'HERO.UI_MOCKUP.FLOATING.BUDGET_UTILIZATION.MO_ARIA_LABEL' | translate"
       >
         <div>

@@ -1,24 +1,40 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, Router } from '@angular/router';
+import {
+  NavigationEnd,
+  NavigationSkipped,
+  NavigationSkippedCode,
+  provideRouter,
+  Router,
+  Scroll,
+} from '@angular/router';
+import { Subject } from 'rxjs';
 import { provideTranslateService } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
+import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 import { Navbar } from './navbar';
 
 describe('Navbar', () => {
   let component: Navbar;
   let fixture: ComponentFixture<Navbar>;
   let languageService: LanguageService;
+  let anchorService: LandingAnchorService;
   let router: Router;
+  let originalUrl: string;
 
   beforeEach(async () => {
+    originalUrl = window.location.pathname + window.location.search + window.location.hash;
+    window.history.replaceState(null, '', '/');
+
     await TestBed.configureTestingModule({
       imports: [Navbar],
       providers: [
         provideTranslateService(),
         LanguageService,
+        LandingAnchorService,
         provideRouter([
           { path: '', component: Navbar },
           { path: 'business-realtime', component: Navbar },
+          { path: 'schedule-demo', component: Navbar },
         ]),
       ],
     }).compileComponents();
@@ -26,8 +42,15 @@ describe('Navbar', () => {
     fixture = TestBed.createComponent(Navbar);
     component = fixture.componentInstance;
     languageService = TestBed.inject(LanguageService);
+    anchorService = TestBed.inject(LandingAnchorService);
     router = TestBed.inject(Router);
     await fixture.whenStable();
+  });
+
+  afterEach(() => {
+    anchorService.reset();
+    vi.restoreAllMocks();
+    window.history.replaceState(null, '', originalUrl || '/');
   });
 
   it('should create', () => {
@@ -297,6 +320,298 @@ describe('Navbar', () => {
 
       component.onNavClick('HEADER.NAV.PRICING');
       expect(component.activeLinkKey()).toBe('HEADER.NAV.PRICING');
+    });
+
+    it('should reveal deferred landing sections only after landing navigation succeeds when navigating from another page', async () => {
+      const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+
+      await router.navigateByUrl('/business-realtime');
+      expect(component.isLandingPage()).toBe(false);
+
+      const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+      component.onNavClick('HEADER.NAV.PRICING', '#pricing', new MouseEvent('click'));
+      expect(revealSpy).not.toHaveBeenCalled();
+      expect(anchorService.requiredOrder()).toBe(0);
+      expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'pricing' });
+      navSpy.mockRestore();
+
+      await router.navigate(['/'], { fragment: 'pricing' });
+      await new Promise((resolve) => setTimeout(resolve, 150));
+
+      expect(revealSpy).toHaveBeenCalledWith('pricing');
+      expect(anchorService.requiredOrder()).toBe(6);
+      expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
+    });
+
+    it('should not leak requiredOrder when cross-route landing navigation is cancelled', async () => {
+      const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
+
+      await router.navigateByUrl('/business-realtime');
+      expect(component.isLandingPage()).toBe(false);
+
+      const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(false);
+      component.onNavClick('HEADER.NAV.PRICING', '#pricing', new MouseEvent('click'));
+      await Promise.resolve();
+      navSpy.mockRestore();
+
+      expect(revealSpy).not.toHaveBeenCalled();
+      expect(anchorService.requiredOrder()).toBe(0);
+
+      await router.navigateByUrl('/');
+      expect(anchorService.requiredOrder()).toBe(0);
+    });
+
+    it('should restore pricing fragment scroll when Back produces a same-URL NavigationSkipped event', async () => {
+      const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      const events$ = router.events as unknown as Subject<unknown>;
+
+      try {
+        await router.navigateByUrl('/#pricing');
+        await new Promise((resolve) => setTimeout(resolve, 150));
+
+        expect(revealSpy).toHaveBeenCalledWith('pricing');
+        expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
+
+        revealSpy.mockClear();
+        scrollSpy.mockClear();
+
+        // In-page click uses pushState, leaving Router URL at /#pricing
+        component.onNavClick('HEADER.NAV.FEATURES', '#features', new MouseEvent('click', { button: 0 }));
+        expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function), true);
+
+        revealSpy.mockClear();
+        scrollSpy.mockClear();
+
+        // Capture the real NavigationSkipped emitted when navigating back to /#pricing
+        let skippedEvent: NavigationSkipped | null = null;
+        const sub = router.events.subscribe((e) => {
+          if (e instanceof NavigationSkipped) {
+            skippedEvent = e;
+          }
+        });
+
+        await router.navigateByUrl('/#pricing');
+        sub.unsubscribe();
+
+        expect(skippedEvent).not.toBeNull();
+        expect(skippedEvent!.code).toBe(NavigationSkippedCode.IgnoredSameUrlNavigation);
+
+        // Dispatch the Scroll event that RouterScroller emits for IgnoredSameUrlNavigation
+        events$.next(new Scroll(skippedEvent!, null, 'pricing'));
+
+        expect(revealSpy).toHaveBeenCalledWith('pricing');
+        expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
+      } finally {
+        pushStateSpy.mockRestore();
+      }
+    });
+
+    it('should ignore stale Scroll events and NavigationSkipped events from UrlHandlingStrategy', async () => {
+      const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const events$ = router.events as unknown as Subject<unknown>;
+
+      // Unregistered / stale Scroll event should be discarded
+      const staleSkipped = new NavigationSkipped(
+        999,
+        '/#pricing',
+        'stale',
+        NavigationSkippedCode.IgnoredSameUrlNavigation,
+      );
+      events$.next(new Scroll(staleSkipped, null, 'pricing'));
+
+      // NavigationSkipped with IgnoredByUrlHandlingStrategy should not schedule fragment scroll
+      const ignoredStrategy = new NavigationSkipped(
+        1000,
+        '/#pricing',
+        'ignored by strategy',
+        NavigationSkippedCode.IgnoredByUrlHandlingStrategy,
+      );
+      events$.next(ignoredStrategy);
+      events$.next(new Scroll(ignoredStrategy, null, 'pricing'));
+
+      await new Promise((resolve) => setTimeout(resolve, 150));
+
+      expect(revealSpy).not.toHaveBeenCalled();
+      expect(scrollSpy).not.toHaveBeenCalled();
+    });
+
+    it('should cancel pending fragment fallback and Scroll when user clicks a newer navbar anchor', async () => {
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      const events$ = router.events as unknown as Subject<unknown>;
+
+      try {
+        let navEndEvent: NavigationEnd | null = null;
+        const sub = router.events.subscribe((e) => {
+          if (e instanceof NavigationEnd) {
+            navEndEvent = e;
+          }
+        });
+
+        await router.navigateByUrl('/#pricing');
+        sub.unsubscribe();
+        expect(navEndEvent).not.toBeNull();
+
+        // User clicks Features before the 120ms fallback or Scroll event fires
+        component.onNavClick('HEADER.NAV.FEATURES', '#features', new MouseEvent('click', { button: 0 }));
+        expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
+        expect(scrollSpy).toHaveBeenCalledTimes(1);
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function), true);
+
+        // Even if the pending Scroll event arrives and the 120ms fallback window passes,
+        // the older /#pricing fragment must not override the newer #features click
+        events$.next(new Scroll(navEndEvent!, null, 'pricing'));
+        await new Promise((resolve) => setTimeout(resolve, 150));
+
+        expect(scrollSpy).toHaveBeenCalledTimes(1);
+      } finally {
+        pushStateSpy.mockRestore();
+      }
+    });
+
+    it('should invalidate pending fragment scroll when an external in-page anchor action starts', async () => {
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      const windowScrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+      const featuresEl = document.createElement('div');
+      featuresEl.id = 'features';
+      document.body.appendChild(featuresEl);
+      const events$ = router.events as unknown as Subject<unknown>;
+
+      try {
+        let navEndEvent: NavigationEnd | null = null;
+        const sub = router.events.subscribe((e) => {
+          if (e instanceof NavigationEnd) {
+            navEndEvent = e;
+          }
+        });
+
+        await router.navigateByUrl('/#pricing');
+        sub.unsubscribe();
+        expect(navEndEvent).not.toBeNull();
+
+        const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor');
+
+        // External component (e.g., Hero or Footer) starts an in-page anchor action
+        anchorService.navigateOrScrollToAnchor('features', new MouseEvent('click', { button: 0 }));
+        expect(scrollSpy).toHaveBeenCalledTimes(1);
+        expect(scrollSpy).toHaveBeenCalledWith('features');
+
+        // Pending Scroll event and 120ms fallback timer for /#pricing must both be aborted
+        events$.next(new Scroll(navEndEvent!, null, 'pricing'));
+        await new Promise((resolve) => setTimeout(resolve, 150));
+
+        expect(scrollSpy).toHaveBeenCalledTimes(1);
+      } finally {
+        featuresEl.remove();
+        pushStateSpy.mockRestore();
+        windowScrollSpy.mockRestore();
+      }
+    });
+
+    it('should preserve browser default behavior for modified clicks on desktop and mobile nav links', async () => {
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+      const modifiedEvents: MouseEvent[] = [
+        new MouseEvent('click', { ctrlKey: true }),
+        new MouseEvent('click', { metaKey: true }),
+        new MouseEvent('click', { shiftKey: true }),
+        new MouseEvent('click', { altKey: true }),
+        new MouseEvent('click', { button: 1 }),
+      ];
+
+      const initialActiveKey = component.activeLinkKey();
+      expect(initialActiveKey).not.toBe('HEADER.NAV.FEATURES');
+
+      component.isMobileMenuOpen.set(true);
+      for (const event of modifiedEvents) {
+        const preventSpy = vi.spyOn(event, 'preventDefault');
+        component.onNavClick('HEADER.NAV.FEATURES', '#features', event);
+        component.onMobileNavClick('HEADER.NAV.FEATURES', '#features', event);
+        expect(preventSpy).not.toHaveBeenCalled();
+      }
+
+      const alreadyPrevented = new MouseEvent('click', { cancelable: true });
+      alreadyPrevented.preventDefault();
+      component.onNavClick('HEADER.NAV.FEATURES', '#features', alreadyPrevented);
+      component.onMobileNavClick('HEADER.NAV.FEATURES', '#features', alreadyPrevented);
+
+      expect(component.activeLinkKey()).toBe(initialActiveKey);
+      expect(component.isMobileMenuOpen()).toBe(true);
+      expect(scrollSpy).not.toHaveBeenCalled();
+      expect(pushStateSpy).not.toHaveBeenCalled();
+      expect(navSpy).not.toHaveBeenCalled();
+
+      // Non-landing route modified clicks
+      component.isLandingPage.set(false);
+      anchorService.reset();
+      const ctrlOffLanding = new MouseEvent('click', { ctrlKey: true });
+      const preventOffLandingSpy = vi.spyOn(ctrlOffLanding, 'preventDefault');
+      component.onNavClick('HEADER.NAV.PRICING', '#pricing', ctrlOffLanding);
+      component.onMobileNavClick('HEADER.NAV.PRICING', '#pricing', ctrlOffLanding);
+
+      expect(preventOffLandingSpy).not.toHaveBeenCalled();
+      expect(anchorService.requiredOrder()).toBe(0);
+      expect(navSpy).not.toHaveBeenCalled();
+      expect(component.isMobileMenuOpen()).toBe(true);
+    });
+
+    it('should handle plain primary clicks and keyboard-triggered clicks in navbar normally', () => {
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+
+      const plainClick = new MouseEvent('click', { button: 0, detail: 1 });
+      const plainPreventSpy = vi.spyOn(plainClick, 'preventDefault');
+      component.onNavClick('HEADER.NAV.FEATURES', '#features', plainClick);
+
+      expect(plainPreventSpy).toHaveBeenCalledTimes(1);
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.FEATURES');
+      expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function), true);
+      expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
+
+      component.isMobileMenuOpen.set(true);
+      const keyboardClick = new MouseEvent('click', { button: 0, detail: 0 });
+      const keyboardPreventSpy = vi.spyOn(keyboardClick, 'preventDefault');
+      component.onMobileNavClick('HEADER.NAV.CONTACT', '#contact', keyboardClick);
+
+      expect(keyboardPreventSpy).toHaveBeenCalledTimes(1);
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
+      expect(component.isMobileMenuOpen()).toBe(false);
+      expect(scrollSpy).toHaveBeenCalledWith('contact', expect.any(Function), true);
+      expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#contact');
+    });
+
+    it('should still scroll without pushing duplicate history entries when clicking the current fragment', () => {
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      pushStateSpy.mockClear();
+      const originalUrl = window.location.pathname + window.location.search + window.location.hash;
+
+      try {
+        window.location.hash = '#features';
+        const click = new MouseEvent('click', { button: 0, cancelable: true });
+        component.onNavClick('HEADER.NAV.FEATURES', '#features', click);
+
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function), true);
+        expect(pushStateSpy).not.toHaveBeenCalled();
+
+        component.isLandingPage.set(false);
+        component.isScheduleDemoPage.set(true);
+        window.location.hash = '#schedule-demo-form';
+        component.onScheduleDemo();
+
+        expect(scrollSpy).toHaveBeenCalledWith('schedule-demo-form');
+        expect(pushStateSpy).not.toHaveBeenCalled();
+      } finally {
+        pushStateSpy.mockRestore();
+        window.history.replaceState(null, '', originalUrl || '/');
+      }
     });
   });
 });

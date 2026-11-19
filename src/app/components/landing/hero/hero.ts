@@ -1,7 +1,8 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UiMockup } from './ui-mockup/ui-mockup';
+import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 
 @Component({
   selector: 'app-hero',
@@ -12,6 +13,8 @@ import { UiMockup } from './ui-mockup/ui-mockup';
   },
 })
 export class Hero {
+  private readonly anchorService = inject(LandingAnchorService);
+
   readonly contactClick = output<void>();
   readonly videoClick = output<void>();
   readonly aboutClick = output<void>();
@@ -27,17 +30,6 @@ export class Hero {
   onAbout(): void {
     this.aboutClick.emit();
     this.contactClick.emit();
-    if (typeof document !== 'undefined' && typeof window !== 'undefined') {
-      const target = document.getElementById('features') || document.getElementById('why-choose-us');
-      if (target) {
-        const header = document.querySelector('app-navbar header');
-        const navHeight = header ? header.getBoundingClientRect().height : 88;
-        const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight;
-        window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-        if (window.history?.pushState) {
-          window.history.pushState(null, '', '#features');
-        }
-      }
-    }
+    this.anchorService.navigateOrScrollToAnchor('features');
   }
 }
