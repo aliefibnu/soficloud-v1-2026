@@ -1,8 +1,8 @@
 import { Component, inject, output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UiMockup } from './ui-mockup/ui-mockup';
-import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 
 @Component({
   selector: 'app-hero',
@@ -13,7 +13,7 @@ import { LandingAnchorService } from '../../../systems/lib/landing-anchor.servic
   },
 })
 export class Hero {
-  private readonly anchorService = inject(LandingAnchorService);
+  private readonly router = inject(Router);
 
   readonly contactClick = output<void>();
   readonly videoClick = output<void>();
@@ -30,6 +30,6 @@ export class Hero {
   onAbout(): void {
     this.aboutClick.emit();
     this.contactClick.emit();
-    this.anchorService.navigateOrScrollToAnchor('features');
+    void this.router.navigate(['/recognize-sofi']);
   }
 }

@@ -1150,5 +1150,15 @@
       "TITLE": "PT Inforsys Indonesia 办公地点地图",
       "ARIA_LABEL": "显示位于巴淡岛的 PT Inforsys Indonesia 办公室位置的谷歌地图"
     }
+  },
+  "RECOGNIZE_SOFI": {
+    "WHAT_IS": {
+      "TITLE_LINE_1": "什么是",
+      "TITLE_LINE_2": "SOFICloud ERP？",
+      "PARAGRAPH_1": "SOFICloud ERP 是由 PT Inforsys Indonesia 打造的一体化企业管理系统，将销售、采购、库存、仓储、生产、项目以及财务与会计整合在同一平台中。",
+      "PARAGRAPH_2": "跨部门的数据互联让每笔业务都能从客户订单一路追溯至财务报表中的收付款记录。",
+      "PARAGRAPH_3": "SOFICloud ERP 帮助企业规范工作流程、控制成本，并实时掌握库存、订单进度及经营绩效。一体化的审批流程与报表功能也为规范化运营和管理层决策提供有力支持。",
+      "IMAGE_ALT": "业务人员正在笔记本电脑上使用 SOFICloud ERP 审阅运营文件与财务报表"
+    }
   }
 }

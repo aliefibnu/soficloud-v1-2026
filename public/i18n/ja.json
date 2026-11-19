@@ -1150,5 +1150,15 @@
       "TITLE": "PT Inforsys Indonesia オフィス所在地マップ",
       "ARIA_LABEL": "バタム島の PT Inforsys Indonesia オフィスの所在地を示す Google マップ"
     }
+  },
+  "RECOGNIZE_SOFI": {
+    "WHAT_IS": {
+      "TITLE_LINE_1": "SOFICloud ERP",
+      "TITLE_LINE_2": "とは？",
+      "PARAGRAPH_1": "SOFICloud ERPは、PT Inforsys Indonesiaが提供する統合業務管理システムです。販売、購買、在庫、倉庫、生産、プロジェクト、財務・会計までを単一のプラットフォームで連携します。",
+      "PARAGRAPH_2": "部門間のデータ連携により、顧客からの受注から財務諸表に記録される入金まで、すべての取引を一貫して追跡できます。",
+      "PARAGRAPH_3": "SOFICloud ERPは業務プロセスの整理、コスト管理、在庫や受注進捗、業績の把握を支援します。統合された承認フローとレポート機能により、業務統制と経営判断も力強く支えます。",
+      "IMAGE_ALT": "ノートパソコンでSOFICloud ERPを使い業務書類と財務レポートを確認するビジネス担当者"
+    }
   }
 }

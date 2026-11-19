@@ -1150,5 +1150,15 @@
       "TITLE": "Peta Lokasi Kantor PT Inforsys Indonesia",
       "ARIA_LABEL": "Peta Google Maps menunjukkan lokasi kantor PT Inforsys Indonesia di Batam"
     }
+  },
+  "RECOGNIZE_SOFI": {
+    "WHAT_IS": {
+      "TITLE_LINE_1": "Apa itu",
+      "TITLE_LINE_2": "SOFICloud ERP?",
+      "PARAGRAPH_1": "SOFICloud ERP adalah sistem pengelolaan bisnis terintegrasi dari PT Inforsys Indonesia yang menghubungkan penjualan, pembelian, persediaan, gudang, produksi, proyek, hingga keuangan dan akuntansi dalam satu platform.",
+      "PARAGRAPH_2": "Keterhubungan data antarbagian memungkinkan transaksi ditelusuri dari pesanan pelanggan hingga pembayaran tercatat dalam laporan keuangan.",
+      "PARAGRAPH_3": "SOFICloud ERP membantu perusahaan menata proses kerja, mengendalikan biaya, serta memantau stok, progres pesanan, dan kinerja usaha. Alur persetujuan dan laporan terintegrasi juga mendukung ketertiban kerja serta pengambilan keputusan manajemen.",
+      "IMAGE_ALT": "Profesional bisnis meninjau dokumen operasional dan laporan keuangan menggunakan SOFICloud ERP di laptop"
+    }
   }
 }

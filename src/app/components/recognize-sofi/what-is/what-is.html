@@ -1,0 +1,67 @@
+<section
+  id="what-is-soficloud"
+  aria-labelledby="what-is-heading"
+  class="w-full bg-white flex items-center justify-center py-12 sm:py-16 lg:py-8 short:py-5 lg:min-h-[calc(100svh-77px)]"
+>
+  <div class="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-0">
+    <div
+      class="relative w-full lg:min-h-[520px] xl:min-h-[580px] 2xl:min-h-[617px] short:min-h-[470px] flex items-center"
+    >
+      <!-- Blue gradient backdrop card (overlapped by 111px / 8.95% on the left on desktop) -->
+      <div
+        aria-hidden="true"
+        data-testid="what-is-card-bg"
+        class="pointer-events-none absolute inset-0 lg:left-[8.95%] rounded-[24px] lg:rounded-[32px] bg-[linear-gradient(117.53deg,#D7E4FA_1.14%,#EBF2FD_65.08%,rgba(169,196,241,0.4)_101.15%)]"
+      ></div>
+
+      <!-- Content layer -->
+      <div
+        class="relative z-10 w-full flex flex-col lg:flex-row lg:items-center gap-7 sm:gap-9 lg:gap-0 p-5 sm:p-8 lg:p-0"
+      >
+        <!-- Left column: Overlapping image -->
+        <div class="w-full lg:w-[51.77%] shrink-0 lg:py-[52px] xl:py-[68px] short:py-[40px]">
+          <div class="relative w-full aspect-4/3 rounded-[18px] overflow-hidden">
+            <img
+              ngSrc="/images/recognize-sofi/what-is/women-writing.png"
+              width="642"
+              height="482"
+              [alt]="'RECOGNIZE_SOFI.WHAT_IS.IMAGE_ALT' | translate"
+              class="w-full h-full object-cover block select-none"
+            />
+          </div>
+        </div>
+
+        <!-- Right column: Heading, divider, and 3 justified paragraphs -->
+        <div
+          class="w-full lg:flex-1 lg:pl-[48px] xl:pl-[73px] lg:pr-[44px] xl:pr-[85px] lg:py-[56px] xl:py-[72px] short:py-[40px]"
+        >
+          <div class="w-full lg:max-w-[440px]">
+            <h2
+              id="what-is-heading"
+              class="font-inter font-extrabold text-[#23244E] text-[30px] sm:text-[36px] lg:text-[40px] xl:text-[46px] short:text-[38px] leading-[1.16] tracking-normal"
+            >
+              <span class="block">{{ 'RECOGNIZE_SOFI.WHAT_IS.TITLE_LINE_1' | translate }}</span>
+              <span class="block">{{ 'RECOGNIZE_SOFI.WHAT_IS.TITLE_LINE_2' | translate }}</span>
+            </h2>
+
+            <div
+              aria-hidden="true"
+              data-testid="what-is-divider"
+              class="w-full h-[2px] bg-[#1C73E8] mt-4 mb-5 xl:mt-4 xl:mb-6 short:my-4"
+            ></div>
+
+            <div class="space-y-3.5 xl:space-y-4 short:space-y-3">
+              @for (key of paragraphKeys; track key) {
+                <p
+                  class="font-dm-sans font-normal text-[#23244E] text-[13.5px] sm:text-[14px] leading-[1.58] short:leading-[1.5] text-justify"
+                >
+                  {{ key | translate }}
+                </p>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
