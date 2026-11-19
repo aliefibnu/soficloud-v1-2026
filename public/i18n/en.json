@@ -1150,5 +1150,15 @@
       "TITLE": "PT Inforsys Indonesia Office Location Map",
       "ARIA_LABEL": "Google Maps showing PT Inforsys Indonesia office location in Batam"
     }
+  },
+  "RECOGNIZE_SOFI": {
+    "WHAT_IS": {
+      "TITLE_LINE_1": "What is",
+      "TITLE_LINE_2": "SOFICloud ERP?",
+      "PARAGRAPH_1": "SOFICloud ERP is an integrated business management system by PT Inforsys Indonesia that connects sales, purchasing, inventory, warehousing, production, projects, and finance and accounting in a single platform.",
+      "PARAGRAPH_2": "Cross-departmental data connectivity enables transactions to be traced from customer orders all the way to payments recorded in financial statements.",
+      "PARAGRAPH_3": "SOFICloud ERP helps companies structure workflows, control costs, and monitor stock, order progress, and business performance. Integrated approval workflows and reporting also support operational discipline and management decision-making.",
+      "IMAGE_ALT": "Business professional reviewing operational documents and financial reports with SOFICloud ERP on a laptop"
+    }
   }
 }

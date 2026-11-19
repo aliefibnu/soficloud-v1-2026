@@ -55,4 +55,22 @@ describe('app.routes', () => {
     )();
     expect(loadedComponent).toBeDefined();
   });
+
+  it('should include the recognize-sofi route', () => {
+    const recognizeSofiRoute = routes.find(
+      (r: Route) => r.path === 'recognize-sofi',
+    );
+    expect(recognizeSofiRoute).toBeDefined();
+    expect(recognizeSofiRoute?.loadComponent).toBeDefined();
+  });
+
+  it('should lazy load the RecognizeSofi component', async () => {
+    const recognizeSofiRoute = routes.find(
+      (r: Route) => r.path === 'recognize-sofi',
+    );
+    const loadedComponent = await (
+      recognizeSofiRoute?.loadComponent as () => Promise<unknown>
+    )();
+    expect(loadedComponent).toBeDefined();
+  });
 });

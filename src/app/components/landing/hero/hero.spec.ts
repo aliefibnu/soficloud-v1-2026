@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
+import { vi } from 'vitest';
 import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 import { Hero } from './hero';
 
@@ -7,6 +9,7 @@ describe('Hero', () => {
   let component: Hero;
   let fixture: ComponentFixture<Hero>;
   let translateService: TranslateService;
+  let router: Router;
   let originalUrl: string;
 
   beforeEach(async () => {
@@ -15,6 +18,7 @@ describe('Hero', () => {
     await TestBed.configureTestingModule({
       imports: [Hero],
       providers: [
+        provideRouter([]),
         provideTranslateService({
           fallbackLang: 'id',
           lang: 'id',
@@ -22,6 +26,7 @@ describe('Hero', () => {
       ],
     }).compileComponents();
 
+    router = TestBed.inject(Router);
     translateService = TestBed.inject(TranslateService);
     translateService.setTranslation('id', {
       HERO: {
@@ -119,7 +124,8 @@ describe('Hero', () => {
     expect(emitted).toBe(true);
   });
 
-  it('should emit aboutClick and contactClick output when "Kenali Soficloud" button is clicked', () => {
+  it('should emit aboutClick and contactClick and navigate to /recognize-sofi when "Kenali Soficloud" button is clicked', () => {
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
     let aboutEmitted = false;
     let contactEmitted = false;
     component.aboutClick.subscribe(() => {
@@ -136,6 +142,7 @@ describe('Hero', () => {
 
     expect(aboutEmitted).toBe(true);
     expect(contactEmitted).toBe(true);
+    expect(navigateSpy).toHaveBeenCalledWith(['/recognize-sofi']);
   });
 
   it('should render the ambient background gradient layer without horizontal 1440px mask clipping and with bottom white fade transition', () => {

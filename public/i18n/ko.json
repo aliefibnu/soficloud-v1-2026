@@ -1150,5 +1150,15 @@
       "TITLE": "PT Inforsys Indonesia 사무실 위치 지도",
       "ARIA_LABEL": "바탐 소재 PT Inforsys Indonesia 사무실 위치를 표시하는 구글 지도"
     }
+  },
+  "RECOGNIZE_SOFI": {
+    "WHAT_IS": {
+      "TITLE_LINE_1": "SOFICloud ERP란",
+      "TITLE_LINE_2": "무엇인가요?",
+      "PARAGRAPH_1": "SOFICloud ERP는 PT Inforsys Indonesia가 제공하는 통합 비즈니스 관리 시스템으로, 영업, 구매, 재고, 창고, 생산, 프로젝트, 재무 및 회계를 하나의 플랫폼으로 연결합니다.",
+      "PARAGRAPH_2": "부서 간 데이터 연계를 통해 고객 주문부터 재무제표에 기록되는 결제까지 모든 거래 흐름을 투명하게 추적할 수 있습니다.",
+      "PARAGRAPH_3": "SOFICloud ERP는 기업의 업무 프로세스 체계화, 비용 통제, 재고·주문 진행 상황 및 경영 성과 모니터링을 지원합니다. 통합 결재 흐름과 보고서는 업무 질서 유지와 경영진의 의사결정에도 도움을 줍니다.",
+      "IMAGE_ALT": "노트북으로 SOFICloud ERP를 사용해 업무 문서와 재무 보고서를 검토하는 비즈니스 담당자"
+    }
   }
 }

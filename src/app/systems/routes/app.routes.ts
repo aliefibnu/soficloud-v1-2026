@@ -31,4 +31,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('../../pages/schedule-demo/schedule-demo').then((m) => m.ScheduleDemo),
   },
+  {
+    path: 'recognize-sofi',
+    loadComponent: () =>
+      import('../../pages/recognize-sofi/recognize-sofi').then((m) => m.RecognizeSofi),
+  },
 ];
