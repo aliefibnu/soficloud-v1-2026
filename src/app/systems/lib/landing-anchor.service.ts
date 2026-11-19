@@ -31,6 +31,8 @@ const ANCHOR_FALLBACKS: Readonly<Record<string, readonly string[]>> = {
  */
 @Service()
 export class LandingAnchorService {
+  private static readonly TARGET_READY_TIMEOUT_MS = 4000;
+
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly appRef = inject(ApplicationRef);
@@ -215,15 +217,12 @@ export class LandingAnchorService {
     const requestId = ++this.activeRequestId;
     this.clearPendingInterruption();
     this.clearPostScrollWatch();
-    let resolveInterrupted!: () => void;
+    const abortController = new AbortController();
     let userInterrupted = false;
-    const interrupted = new Promise<void>((resolve) => {
-      resolveInterrupted = resolve;
-    });
     const cancelPendingRequest = () => {
       if (!userInterrupted) {
         userInterrupted = true;
-        resolveInterrupted();
+        abortController.abort();
       }
     };
     const interruptionEvents: readonly (keyof WindowEventMap)[] = [
@@ -242,7 +241,7 @@ export class LandingAnchorService {
     window.addEventListener('keydown', onInterruptionKeyDown, { passive: true });
     let cleanupRequestInterruption!: () => void;
     cleanupRequestInterruption = () => {
-      resolveInterrupted();
+      abortController.abort();
       for (const eventName of interruptionEvents) {
         window.removeEventListener(eventName, cancelPendingRequest);
       }
@@ -256,10 +255,12 @@ export class LandingAnchorService {
     try {
       const order = this.revealUpToAnchor(cleanId);
       if (order > 0 || !this.resolveTargetElement(cleanId)) {
-        const ready = await Promise.race([
-          this.waitForTargetReady(cleanId, order, requestId, () => userInterrupted),
-          interrupted.then(() => false),
-        ]);
+        const ready = await this.waitForTargetReady(
+          cleanId,
+          order,
+          requestId,
+          abortController.signal,
+        );
         if (!ready || requestId !== this.activeRequestId || userInterrupted) {
           return;
         }
@@ -340,48 +341,145 @@ export class LandingAnchorService {
     cleanId: string,
     maxOrder: number,
     requestId: number,
-    isInterrupted: () => boolean,
+    signal: AbortSignal,
   ): Promise<boolean> {
-    const deadline = Date.now() + 4000;
+    const deadline = Date.now() + LandingAnchorService.TARGET_READY_TIMEOUT_MS;
 
-    while (requestId === this.activeRequestId && !isInterrupted()) {
-      await this.appRef.whenStable();
-      if (requestId !== this.activeRequestId || isInterrupted()) {
-        return false;
-      }
-
+    while (requestId === this.activeRequestId && !signal.aborted) {
       const target = this.resolveTargetElement(cleanId);
       const pendingPlaceholders = maxOrder > 0 && this.hasPendingPlaceholder(maxOrder);
 
       if (!pendingPlaceholders && target) {
         // Wait for layout stabilization across two animation frames after defer swap
-        return this.waitForLayoutStabilization(cleanId, requestId, isInterrupted);
-      }
-
-      // Non-landing target that does not exist in DOM — bail out immediately
-      if (maxOrder === 0 && !target) {
-        return false;
+        return this.waitForLayoutStabilization(cleanId, requestId, signal);
       }
 
       if (Date.now() >= deadline) {
         return target !== null;
       }
 
-      await this.waitNextFrameOrTick();
+      const step = await this.waitForNextReadinessCheck(
+        deadline,
+        signal,
+        maxOrder === 0 && !target,
+      );
+      if (requestId !== this.activeRequestId || signal.aborted) {
+        return false;
+      }
+
+      // Non-landing target that does not exist in DOM once app is stable — bail out immediately
+      if (maxOrder === 0 && step.becameStable && !this.resolveTargetElement(cleanId)) {
+        return false;
+      }
+
+      if (step.timedOut) {
+        const currentTarget = this.resolveTargetElement(cleanId);
+        const stillPendingPlaceholders = maxOrder > 0 && this.hasPendingPlaceholder(maxOrder);
+        if (!stillPendingPlaceholders && currentTarget) {
+          return this.waitForLayoutStabilization(cleanId, requestId, signal);
+        }
+        return currentTarget !== null;
+      }
     }
 
     return false;
   }
 
+  private waitForNextReadinessCheck(
+    deadline: number,
+    signal: AbortSignal,
+    wakeOnImmediateStability: boolean,
+  ): Promise<{ timedOut: boolean; becameStable: boolean }> {
+    if (signal.aborted) {
+      return Promise.resolve({ timedOut: false, becameStable: false });
+    }
+
+    const remainingMs = deadline - Date.now();
+    if (remainingMs <= 0) {
+      return Promise.resolve({ timedOut: true, becameStable: false });
+    }
+
+    return new Promise((resolve) => {
+      let settled = false;
+      let sawUnstable = false;
+      let stabilitySub: { unsubscribe: () => void } | null = null;
+      let deadlineTimer: ReturnType<typeof setTimeout> | null = null;
+      let frameTimer: ReturnType<typeof setTimeout> | null = null;
+      let frameId: number | null = null;
+
+      const cleanup = () => {
+        if (deadlineTimer !== null) {
+          clearTimeout(deadlineTimer);
+          deadlineTimer = null;
+        }
+        if (frameTimer !== null) {
+          clearTimeout(frameTimer);
+          frameTimer = null;
+        }
+        if (frameId !== null && typeof cancelAnimationFrame === 'function') {
+          cancelAnimationFrame(frameId);
+          frameId = null;
+        }
+        stabilitySub?.unsubscribe();
+        stabilitySub = null;
+        signal.removeEventListener('abort', onAbort);
+      };
+
+      const settle = (result: { timedOut: boolean; becameStable: boolean }) => {
+        if (settled) {
+          return;
+        }
+        settled = true;
+        cleanup();
+        resolve(result);
+      };
+
+      const onAbort = () => settle({ timedOut: false, becameStable: false });
+      signal.addEventListener('abort', onAbort, { once: true });
+
+      deadlineTimer = setTimeout(() => {
+        settle({ timedOut: true, becameStable: false });
+      }, remainingMs);
+
+      stabilitySub = this.appRef.isStable.subscribe((stable) => {
+        if (!stable) {
+          sawUnstable = true;
+          return;
+        }
+        if (sawUnstable || wakeOnImmediateStability) {
+          settle({ timedOut: false, becameStable: true });
+        }
+      });
+
+      if (settled) {
+        stabilitySub.unsubscribe();
+        stabilitySub = null;
+        return;
+      }
+
+      if (typeof requestAnimationFrame === 'function') {
+        frameId = requestAnimationFrame(() => {
+          frameId = null;
+          settle({ timedOut: false, becameStable: false });
+        });
+      } else {
+        frameTimer = setTimeout(() => {
+          frameTimer = null;
+          settle({ timedOut: false, becameStable: false });
+        }, Math.min(16, remainingMs));
+      }
+    });
+  }
+
   private async waitForLayoutStabilization(
     cleanId: string,
     requestId: number,
-    isInterrupted: () => boolean,
+    signal: AbortSignal,
   ): Promise<boolean> {
     let previousTop: number | null = null;
     for (let frame = 0; frame < 8; frame++) {
-      await this.waitNextFrameOrTick();
-      if (requestId !== this.activeRequestId || isInterrupted()) {
+      await this.waitNextFrameOrTick(signal);
+      if (requestId !== this.activeRequestId || signal.aborted) {
         return false;
       }
       const target = this.resolveTargetElement(cleanId);
@@ -468,12 +566,50 @@ export class LandingAnchorService {
     this.cleanupPendingInterruption?.();
   }
 
-  private waitNextFrameOrTick(): Promise<void> {
+  private waitNextFrameOrTick(signal?: AbortSignal): Promise<void> {
+    if (signal?.aborted) {
+      return Promise.resolve();
+    }
+
     return new Promise((resolve) => {
+      let settled = false;
+      let timerId: ReturnType<typeof setTimeout> | null = null;
+      let frameId: number | null = null;
+
+      const cleanup = () => {
+        if (timerId !== null) {
+          clearTimeout(timerId);
+          timerId = null;
+        }
+        if (frameId !== null && typeof cancelAnimationFrame === 'function') {
+          cancelAnimationFrame(frameId);
+          frameId = null;
+        }
+        signal?.removeEventListener('abort', onAbort);
+      };
+
+      const settle = () => {
+        if (settled) {
+          return;
+        }
+        settled = true;
+        cleanup();
+        resolve();
+      };
+
+      const onAbort = () => settle();
+      signal?.addEventListener('abort', onAbort, { once: true });
+
       if (typeof requestAnimationFrame === 'function') {
-        requestAnimationFrame(() => resolve());
+        frameId = requestAnimationFrame(() => {
+          frameId = null;
+          settle();
+        });
       } else {
-        setTimeout(resolve, 16);
+        timerId = setTimeout(() => {
+          timerId = null;
+          settle();
+        }, 16);
       }
     });
   }

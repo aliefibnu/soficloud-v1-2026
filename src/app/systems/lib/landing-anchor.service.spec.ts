@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, PendingTasks } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -320,6 +320,241 @@ describe('LandingAnchorService', () => {
     } finally {
       pushStateSpy.mockRestore();
       window.history.replaceState(null, '', originalUrl || '/');
+    }
+  });
+
+  it('should end the wait at the 4-second deadline and scroll even while the application remains unstable', async () => {
+    vi.useFakeTimers();
+    const pendingTasks = TestBed.inject(PendingTasks);
+    const removeTask = pendingTasks.add();
+
+    try {
+      const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+      vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+        return setTimeout(() => cb(16), 16) as unknown as number;
+      });
+      vi.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
+        clearTimeout(id);
+      });
+
+      const placeholder = document.createElement('div');
+      placeholder.setAttribute('data-landing-placeholder', '6');
+      placeholder.id = 'pricing';
+      vi.spyOn(placeholder, 'getBoundingClientRect').mockReturnValue({ top: 1800 } as DOMRect);
+      document.body.append(placeholder);
+
+      let resolved = false;
+      const scrollPromise = service.scrollToAnchor('pricing').then(() => {
+        resolved = true;
+      });
+
+      await vi.advanceTimersByTimeAsync(3999);
+      expect(resolved).toBe(false);
+      expect(scrollSpy).not.toHaveBeenCalled();
+
+      await vi.advanceTimersByTimeAsync(1);
+      await scrollPromise;
+
+      expect(resolved).toBe(true);
+      expect(scrollSpy).toHaveBeenCalledTimes(1);
+      expect(scrollSpy).toHaveBeenCalledWith({ top: 1712, behavior: 'smooth' });
+    } finally {
+      removeTask();
+      vi.useRealTimers();
+    }
+  });
+
+  it('should resolve without scrolling at the 4-second deadline when no target exists and the app remains unstable', async () => {
+    vi.useFakeTimers();
+    const pendingTasks = TestBed.inject(PendingTasks);
+    const removeTask = pendingTasks.add();
+
+    try {
+      const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+      vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+        return setTimeout(() => cb(16), 16) as unknown as number;
+      });
+      vi.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
+        clearTimeout(id);
+      });
+
+      let resolved = false;
+      const scrollPromise = service.scrollToAnchor('pricing').then(() => {
+        resolved = true;
+      });
+
+      await vi.advanceTimersByTimeAsync(3999);
+      expect(resolved).toBe(false);
+
+      await vi.advanceTimersByTimeAsync(1);
+      await scrollPromise;
+
+      expect(resolved).toBe(true);
+      expect(scrollSpy).not.toHaveBeenCalled();
+    } finally {
+      removeTask();
+      vi.useRealTimers();
+    }
+  });
+
+  it('should scroll an already-rendered target with layout settling without waiting for global stability', async () => {
+    const pendingTasks = TestBed.inject(PendingTasks);
+    const removeTask = pendingTasks.add();
+
+    try {
+      const tops = [700, 900, 900];
+      let frameReads = 0;
+      vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+        queueMicrotask(() => cb(16));
+        return 1;
+      });
+      const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+
+      const features = document.createElement('section');
+      features.id = 'features';
+      vi.spyOn(features, 'getBoundingClientRect').mockImplementation(() => {
+        const index = Math.min(frameReads++, tops.length - 1);
+        return { top: tops[index] } as DOMRect;
+      });
+
+      const lowerPlaceholder = document.createElement('div');
+      lowerPlaceholder.setAttribute('data-landing-placeholder', '6');
+      lowerPlaceholder.id = 'pricing';
+      document.body.append(features, lowerPlaceholder);
+
+      await service.scrollToAnchor('features');
+
+      expect(frameReads).toBeGreaterThanOrEqual(3);
+      expect(scrollSpy).toHaveBeenCalledTimes(1);
+      expect(scrollSpy).toHaveBeenCalledWith({ top: 812, behavior: 'smooth' });
+    } finally {
+      removeTask();
+    }
+  });
+
+  it('should scroll as soon as requested placeholders clear even while an unrelated pending task keeps the app unstable', async () => {
+    vi.useFakeTimers();
+    const pendingTasks = TestBed.inject(PendingTasks);
+    const removeTask = pendingTasks.add();
+
+    try {
+      vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+        return setTimeout(() => cb(16), 16) as unknown as number;
+      });
+      vi.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
+        clearTimeout(id);
+      });
+      const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+
+      const placeholder2 = document.createElement('div');
+      placeholder2.setAttribute('data-landing-placeholder', '2');
+      placeholder2.id = 'features';
+      document.body.append(placeholder2);
+
+      let resolved = false;
+      const scrollPromise = service.scrollToAnchor('features').then(() => {
+        resolved = true;
+      });
+
+      await vi.advanceTimersByTimeAsync(16);
+      expect(resolved).toBe(false);
+      expect(scrollSpy).not.toHaveBeenCalled();
+
+      placeholder2.remove();
+      const features = document.createElement('section');
+      features.id = 'features';
+      vi.spyOn(features, 'getBoundingClientRect').mockReturnValue({ top: 900 } as DOMRect);
+      document.body.append(features);
+
+      await vi.advanceTimersByTimeAsync(64);
+      await scrollPromise;
+
+      expect(resolved).toBe(true);
+      expect(scrollSpy).toHaveBeenCalledTimes(1);
+      expect(scrollSpy).toHaveBeenCalledWith({ top: 812, behavior: 'smooth' });
+    } finally {
+      removeTask();
+      vi.useRealTimers();
+    }
+  });
+
+  it('should immediately release a waiting request on reset() while the application remains unstable', async () => {
+    vi.useFakeTimers();
+    const pendingTasks = TestBed.inject(PendingTasks);
+    const removeTask = pendingTasks.add();
+
+    try {
+      const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+      vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+        return setTimeout(() => cb(16), 16) as unknown as number;
+      });
+      vi.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
+        clearTimeout(id);
+      });
+
+      const placeholder = document.createElement('div');
+      placeholder.setAttribute('data-landing-placeholder', '6');
+      placeholder.id = 'pricing';
+      document.body.append(placeholder);
+
+      let resolved = false;
+      const scrollPromise = service.scrollToAnchor('pricing').then(() => {
+        resolved = true;
+      });
+
+      await vi.advanceTimersByTimeAsync(32);
+      expect(resolved).toBe(false);
+
+      service.reset();
+      await scrollPromise;
+
+      expect(resolved).toBe(true);
+      expect(service.requiredOrder()).toBe(0);
+      expect(scrollSpy).not.toHaveBeenCalled();
+
+      await vi.advanceTimersByTimeAsync(5000);
+      expect(scrollSpy).not.toHaveBeenCalled();
+    } finally {
+      removeTask();
+      vi.useRealTimers();
+    }
+  });
+
+  it('should immediately release a superseded waiting request when a newer anchor scroll starts while unstable', async () => {
+    const pendingTasks = TestBed.inject(PendingTasks);
+    const removeTask = pendingTasks.add();
+
+    try {
+      vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+        queueMicrotask(() => cb(16));
+        return 1;
+      });
+      const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+
+      const placeholder6 = document.createElement('div');
+      placeholder6.setAttribute('data-landing-placeholder', '6');
+      placeholder6.id = 'pricing';
+      const features = document.createElement('section');
+      features.id = 'features';
+      vi.spyOn(features, 'getBoundingClientRect').mockReturnValue({ top: 900 } as DOMRect);
+      document.body.append(features, placeholder6);
+
+      let firstResolved = false;
+      const first = service.scrollToAnchor('pricing').then(() => {
+        firstResolved = true;
+      });
+
+      await Promise.resolve();
+      expect(firstResolved).toBe(false);
+
+      const second = service.scrollToAnchor('features');
+      await Promise.all([first, second]);
+
+      expect(firstResolved).toBe(true);
+      expect(scrollSpy).toHaveBeenCalledTimes(1);
+      expect(scrollSpy).toHaveBeenCalledWith({ top: 812, behavior: 'smooth' });
+    } finally {
+      removeTask();
     }
   });
 });
