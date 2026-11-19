@@ -1,5 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, Router } from '@angular/router';
+import {
+  NavigationSkipped,
+  NavigationSkippedCode,
+  provideRouter,
+  Router,
+  Scroll,
+} from '@angular/router';
+import { Subject } from 'rxjs';
 import { provideTranslateService } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
 import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
@@ -321,6 +328,84 @@ describe('Navbar', () => {
 
       expect(revealSpy).toHaveBeenCalledWith('pricing');
       expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
+    });
+
+    it('should restore pricing fragment scroll when Back produces a same-URL NavigationSkipped event', async () => {
+      const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      const events$ = router.events as unknown as Subject<unknown>;
+
+      try {
+        await router.navigateByUrl('/#pricing');
+        await new Promise((resolve) => setTimeout(resolve, 150));
+
+        expect(revealSpy).toHaveBeenCalledWith('pricing');
+        expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
+
+        revealSpy.mockClear();
+        scrollSpy.mockClear();
+
+        // In-page click uses pushState, leaving Router URL at /#pricing
+        component.onNavClick('HEADER.NAV.FEATURES', '#features', new MouseEvent('click', { button: 0 }));
+        expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function));
+
+        revealSpy.mockClear();
+        scrollSpy.mockClear();
+
+        // Capture the real NavigationSkipped emitted when navigating back to /#pricing
+        let skippedEvent: NavigationSkipped | null = null;
+        const sub = router.events.subscribe((e) => {
+          if (e instanceof NavigationSkipped) {
+            skippedEvent = e;
+          }
+        });
+
+        await router.navigateByUrl('/#pricing');
+        sub.unsubscribe();
+
+        expect(skippedEvent).not.toBeNull();
+        expect(skippedEvent!.code).toBe(NavigationSkippedCode.IgnoredSameUrlNavigation);
+
+        // Dispatch the Scroll event that RouterScroller emits for IgnoredSameUrlNavigation
+        events$.next(new Scroll(skippedEvent!, null, 'pricing'));
+
+        expect(revealSpy).toHaveBeenCalledWith('pricing');
+        expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
+      } finally {
+        pushStateSpy.mockRestore();
+      }
+    });
+
+    it('should ignore stale Scroll events and NavigationSkipped events from UrlHandlingStrategy', async () => {
+      const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const events$ = router.events as unknown as Subject<unknown>;
+
+      // Unregistered / stale Scroll event should be discarded
+      const staleSkipped = new NavigationSkipped(
+        999,
+        '/#pricing',
+        'stale',
+        NavigationSkippedCode.IgnoredSameUrlNavigation,
+      );
+      events$.next(new Scroll(staleSkipped, null, 'pricing'));
+
+      // NavigationSkipped with IgnoredByUrlHandlingStrategy should not schedule fragment scroll
+      const ignoredStrategy = new NavigationSkipped(
+        1000,
+        '/#pricing',
+        'ignored by strategy',
+        NavigationSkippedCode.IgnoredByUrlHandlingStrategy,
+      );
+      events$.next(ignoredStrategy);
+      events$.next(new Scroll(ignoredStrategy, null, 'pricing'));
+
+      await new Promise((resolve) => setTimeout(resolve, 150));
+
+      expect(revealSpy).not.toHaveBeenCalled();
+      expect(scrollSpy).not.toHaveBeenCalled();
     });
 
     it('should preserve browser default behavior for modified clicks on desktop and mobile nav links', async () => {

@@ -11,7 +11,13 @@ import {
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, Scroll } from '@angular/router';
+import {
+  NavigationEnd,
+  NavigationSkipped,
+  NavigationSkippedCode,
+  Router,
+  Scroll,
+} from '@angular/router';
 import { filter } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageOption, LanguageService } from '../../../systems/lib/language.service';
@@ -89,18 +95,24 @@ export class Navbar {
 
     this.router.events
       .pipe(
-        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        filter(
+          (e): e is NavigationEnd | NavigationSkipped =>
+            e instanceof NavigationEnd ||
+            (e instanceof NavigationSkipped &&
+              e.code === NavigationSkippedCode.IgnoredSameUrlNavigation),
+        ),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((e) => {
-        const isLanding = this.isLandingUrl(e.urlAfterRedirects);
-        const isScheduleDemo = this.isScheduleDemoUrl(e.urlAfterRedirects);
+        const url = e instanceof NavigationEnd ? e.urlAfterRedirects : e.url;
+        const isLanding = this.isLandingUrl(url);
+        const isScheduleDemo = this.isScheduleDemoUrl(url);
         this.isLandingPage.set(isLanding);
         this.isScheduleDemoPage.set(isScheduleDemo);
         this.clearPendingFragment();
 
         const fragment =
-          this.router.parseUrl(e.urlAfterRedirects).fragment ||
+          this.router.parseUrl(url).fragment ||
           this.router.routerState.snapshot.root.fragment;
 
         if (isLanding) {
