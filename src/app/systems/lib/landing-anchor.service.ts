@@ -189,7 +189,11 @@ export class LandingAnchorService {
     this.watchPostScrollDrift(cleanId, requestId, onComplete);
   }
 
-  private isModifiedClick(event?: Event): boolean {
+  /**
+   * Returns `true` when a click event should be left to the browser's default
+   * navigation (e.g., Ctrl/Cmd/Shift/Alt-click, middle-click, or already handled).
+   */
+  isModifiedClick(event?: Event): boolean {
     if (!event) {
       return false;
     }

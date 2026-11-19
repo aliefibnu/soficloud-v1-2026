@@ -322,5 +322,79 @@ describe('Navbar', () => {
       expect(revealSpy).toHaveBeenCalledWith('pricing');
       expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
     });
+
+    it('should preserve browser default behavior for modified clicks on desktop and mobile nav links', async () => {
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+      const modifiedEvents: MouseEvent[] = [
+        new MouseEvent('click', { ctrlKey: true }),
+        new MouseEvent('click', { metaKey: true }),
+        new MouseEvent('click', { shiftKey: true }),
+        new MouseEvent('click', { altKey: true }),
+        new MouseEvent('click', { button: 1 }),
+      ];
+
+      const initialActiveKey = component.activeLinkKey();
+      expect(initialActiveKey).not.toBe('HEADER.NAV.FEATURES');
+
+      component.isMobileMenuOpen.set(true);
+      for (const event of modifiedEvents) {
+        const preventSpy = vi.spyOn(event, 'preventDefault');
+        component.onNavClick('HEADER.NAV.FEATURES', '#features', event);
+        component.onMobileNavClick('HEADER.NAV.FEATURES', '#features', event);
+        expect(preventSpy).not.toHaveBeenCalled();
+      }
+
+      const alreadyPrevented = new MouseEvent('click', { cancelable: true });
+      alreadyPrevented.preventDefault();
+      component.onNavClick('HEADER.NAV.FEATURES', '#features', alreadyPrevented);
+      component.onMobileNavClick('HEADER.NAV.FEATURES', '#features', alreadyPrevented);
+
+      expect(component.activeLinkKey()).toBe(initialActiveKey);
+      expect(component.isMobileMenuOpen()).toBe(true);
+      expect(scrollSpy).not.toHaveBeenCalled();
+      expect(pushStateSpy).not.toHaveBeenCalled();
+      expect(navSpy).not.toHaveBeenCalled();
+
+      // Non-landing route modified clicks
+      component.isLandingPage.set(false);
+      anchorService.reset();
+      const ctrlOffLanding = new MouseEvent('click', { ctrlKey: true });
+      const preventOffLandingSpy = vi.spyOn(ctrlOffLanding, 'preventDefault');
+      component.onNavClick('HEADER.NAV.PRICING', '#pricing', ctrlOffLanding);
+      component.onMobileNavClick('HEADER.NAV.PRICING', '#pricing', ctrlOffLanding);
+
+      expect(preventOffLandingSpy).not.toHaveBeenCalled();
+      expect(anchorService.requiredOrder()).toBe(0);
+      expect(navSpy).not.toHaveBeenCalled();
+      expect(component.isMobileMenuOpen()).toBe(true);
+    });
+
+    it('should handle plain primary clicks and keyboard-triggered clicks in navbar normally', () => {
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+
+      const plainClick = new MouseEvent('click', { button: 0, detail: 1 });
+      const plainPreventSpy = vi.spyOn(plainClick, 'preventDefault');
+      component.onNavClick('HEADER.NAV.FEATURES', '#features', plainClick);
+
+      expect(plainPreventSpy).toHaveBeenCalledTimes(1);
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.FEATURES');
+      expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function));
+      expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
+
+      component.isMobileMenuOpen.set(true);
+      const keyboardClick = new MouseEvent('click', { button: 0, detail: 0 });
+      const keyboardPreventSpy = vi.spyOn(keyboardClick, 'preventDefault');
+      component.onMobileNavClick('HEADER.NAV.CONTACT', '#contact', keyboardClick);
+
+      expect(keyboardPreventSpy).toHaveBeenCalledTimes(1);
+      expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
+      expect(component.isMobileMenuOpen()).toBe(false);
+      expect(scrollSpy).toHaveBeenCalledWith('contact', expect.any(Function));
+      expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#contact');
+    });
   });
 });

@@ -266,6 +266,10 @@ export class Navbar {
   }
 
   onNavClick(linkKey: string, href?: string, event?: Event): void {
+    if (this.anchorService.isModifiedClick(event)) {
+      return;
+    }
+
     if (this.isLandingPage()) {
       this.rawActiveLinkKey.set(linkKey);
       if (href) {
@@ -285,6 +289,10 @@ export class Navbar {
   }
 
   onMobileNavClick(linkKey: string, href?: string, event?: Event): void {
+    if (this.anchorService.isModifiedClick(event)) {
+      return;
+    }
+
     this.onNavClick(linkKey, href, event);
     this.closeMobileMenu();
   }
