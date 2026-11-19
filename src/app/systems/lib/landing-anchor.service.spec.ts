@@ -112,6 +112,22 @@ describe('LandingAnchorService', () => {
     });
   });
 
+  it('should stop a pending anchor jump when the visitor manually scrolls', async () => {
+    const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    const placeholder = document.createElement('div');
+    placeholder.setAttribute('data-landing-placeholder', '6');
+    placeholder.id = 'pricing';
+    document.body.append(placeholder);
+
+    const scrollPromise = service.scrollToAnchor('pricing');
+    await Promise.resolve();
+    window.dispatchEvent(new WheelEvent('wheel'));
+    await scrollPromise;
+
+    expect(scrollSpy).not.toHaveBeenCalled();
+    expect(service.requiredOrder()).toBe(6);
+  });
+
   it('should cancel an older scroll request when a newer anchor scroll starts', async () => {
     vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
       setTimeout(() => cb(16), 0);

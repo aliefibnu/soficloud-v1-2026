@@ -43,6 +43,7 @@ export class LandingAnchorService {
 
   private activeRequestId = 0;
   private cleanupScrollListeners: (() => void) | null = null;
+  private cleanupPendingInterruption: (() => void) | null = null;
   private postScrollTimer: ReturnType<typeof setTimeout> | null = null;
 
   /** Monotonically increasing counter incremented on each anchor scroll or reset. */
@@ -76,6 +77,7 @@ export class LandingAnchorService {
   /** Resets eager revelation state when leaving the landing route. */
   reset(): void {
     this.activeRequestId++;
+    this.clearPendingInterruption();
     this.clearPostScrollWatch();
     this.requiredOrder.set(0);
   }
@@ -166,31 +168,78 @@ export class LandingAnchorService {
     }
 
     const requestId = ++this.activeRequestId;
+    this.clearPendingInterruption();
     this.clearPostScrollWatch();
+    let resolveInterrupted!: () => void;
+    let userInterrupted = false;
+    const interrupted = new Promise<void>((resolve) => {
+      resolveInterrupted = resolve;
+    });
+    const cancelPendingRequest = () => {
+      if (!userInterrupted) {
+        userInterrupted = true;
+        resolveInterrupted();
+      }
+    };
+    const interruptionEvents: readonly (keyof WindowEventMap)[] = [
+      'wheel',
+      'touchstart',
+      'pointerdown',
+    ];
+    for (const eventName of interruptionEvents) {
+      window.addEventListener(eventName, cancelPendingRequest, { passive: true, once: true });
+    }
+    const onInterruptionKeyDown = (event: KeyboardEvent) => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) {
+        cancelPendingRequest();
+      }
+    };
+    window.addEventListener('keydown', onInterruptionKeyDown, { passive: true });
+    let cleanupRequestInterruption!: () => void;
+    cleanupRequestInterruption = () => {
+      resolveInterrupted();
+      for (const eventName of interruptionEvents) {
+        window.removeEventListener(eventName, cancelPendingRequest);
+      }
+      window.removeEventListener('keydown', onInterruptionKeyDown);
+      if (this.cleanupPendingInterruption === cleanupRequestInterruption) {
+        this.cleanupPendingInterruption = null;
+      }
+    };
+    this.cleanupPendingInterruption = cleanupRequestInterruption;
 
-    const order = this.revealUpToAnchor(cleanId);
-    if (order > 0 || !this.resolveTargetElement(cleanId)) {
-      const ready = await this.waitForTargetReady(cleanId, order, requestId);
-      if (!ready || requestId !== this.activeRequestId) {
+    try {
+      const order = this.revealUpToAnchor(cleanId);
+      if (order > 0 || !this.resolveTargetElement(cleanId)) {
+        const ready = await Promise.race([
+          this.waitForTargetReady(cleanId, order, requestId, () => userInterrupted),
+          interrupted.then(() => false),
+        ]);
+        if (!ready || requestId !== this.activeRequestId || userInterrupted) {
+          return;
+        }
+      }
+
+      const target = this.resolveTargetElement(cleanId);
+      if (!target || userInterrupted) {
         return;
       }
+
+      // Switch to the post-scroll watcher synchronously so there is no gap in input tracking.
+      this.clearPendingInterruption();
+      const behavior = this.prefersReducedMotion() ? 'auto' : 'smooth';
+      const targetTop = this.computeTargetScrollTop(target);
+      window.scrollTo({ top: targetTop, behavior });
+
+      if (behavior === 'auto' || Math.abs(window.scrollY - targetTop) <= 2) {
+        onComplete?.();
+        return;
+      }
+
+      this.watchPostScrollDrift(cleanId, requestId, onComplete);
+    } finally {
+      cleanupRequestInterruption();
     }
-
-    const target = this.resolveTargetElement(cleanId);
-    if (!target) {
-      return;
-    }
-
-    const behavior = this.prefersReducedMotion() ? 'auto' : 'smooth';
-    const targetTop = this.computeTargetScrollTop(target);
-    window.scrollTo({ top: targetTop, behavior });
-
-    if (behavior === 'auto' || Math.abs(window.scrollY - targetTop) <= 2) {
-      onComplete?.();
-      return;
-    }
-
-    this.watchPostScrollDrift(cleanId, requestId, onComplete);
   }
 
   /**
@@ -242,12 +291,13 @@ export class LandingAnchorService {
     cleanId: string,
     maxOrder: number,
     requestId: number,
+    isInterrupted: () => boolean,
   ): Promise<boolean> {
     const deadline = Date.now() + 4000;
 
-    while (requestId === this.activeRequestId) {
+    while (requestId === this.activeRequestId && !isInterrupted()) {
       await this.appRef.whenStable();
-      if (requestId !== this.activeRequestId) {
+      if (requestId !== this.activeRequestId || isInterrupted()) {
         return false;
       }
 
@@ -256,7 +306,7 @@ export class LandingAnchorService {
 
       if (!pendingPlaceholders && target) {
         // Wait for layout stabilization across two animation frames after defer swap
-        return this.waitForLayoutStabilization(cleanId, requestId);
+        return this.waitForLayoutStabilization(cleanId, requestId, isInterrupted);
       }
 
       // Non-landing target that does not exist in DOM — bail out immediately
@@ -274,11 +324,15 @@ export class LandingAnchorService {
     return false;
   }
 
-  private async waitForLayoutStabilization(cleanId: string, requestId: number): Promise<boolean> {
+  private async waitForLayoutStabilization(
+    cleanId: string,
+    requestId: number,
+    isInterrupted: () => boolean,
+  ): Promise<boolean> {
     let previousTop: number | null = null;
     for (let frame = 0; frame < 8; frame++) {
       await this.waitNextFrameOrTick();
-      if (requestId !== this.activeRequestId) {
+      if (requestId !== this.activeRequestId || isInterrupted()) {
         return false;
       }
       const target = this.resolveTargetElement(cleanId);
@@ -359,6 +413,10 @@ export class LandingAnchorService {
     }
     this.cleanupScrollListeners?.();
     this.cleanupScrollListeners = null;
+  }
+
+  private clearPendingInterruption(): void {
+    this.cleanupPendingInterruption?.();
   }
 
   private waitNextFrameOrTick(): Promise<void> {
