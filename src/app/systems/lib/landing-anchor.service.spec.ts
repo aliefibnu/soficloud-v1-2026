@@ -158,4 +158,63 @@ describe('LandingAnchorService', () => {
     expect(service.requiredOrder()).toBe(6);
     expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'pricing' });
   });
+
+  it('should preserve browser default behavior for modified clicks on landing and non-landing routes', async () => {
+    const scrollSpy = vi.spyOn(service, 'scrollToAnchor').mockResolvedValue();
+    const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+    const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+
+    const modifiedEvents: MouseEvent[] = [
+      new MouseEvent('click', { ctrlKey: true }),
+      new MouseEvent('click', { metaKey: true }),
+      new MouseEvent('click', { shiftKey: true }),
+      new MouseEvent('click', { altKey: true }),
+      new MouseEvent('click', { button: 1 }),
+    ];
+
+    for (const event of modifiedEvents) {
+      const preventSpy = vi.spyOn(event, 'preventDefault');
+      service.navigateOrScrollToAnchor('features', event);
+      expect(preventSpy).not.toHaveBeenCalled();
+    }
+
+    const alreadyPrevented = new MouseEvent('click', { cancelable: true });
+    alreadyPrevented.preventDefault();
+    service.navigateOrScrollToAnchor('features', alreadyPrevented);
+
+    expect(scrollSpy).not.toHaveBeenCalled();
+    expect(pushStateSpy).not.toHaveBeenCalled();
+    expect(service.requiredOrder()).toBe(0);
+
+    await router.navigateByUrl('/business-realtime');
+    const ctrlClickOffLanding = new MouseEvent('click', { ctrlKey: true });
+    const preventOffLandingSpy = vi.spyOn(ctrlClickOffLanding, 'preventDefault');
+
+    service.navigateOrScrollToAnchor('features', ctrlClickOffLanding);
+
+    expect(preventOffLandingSpy).not.toHaveBeenCalled();
+    expect(navSpy).not.toHaveBeenCalled();
+    expect(service.requiredOrder()).toBe(0);
+  });
+
+  it('should handle plain primary clicks and keyboard-triggered clicks normally', () => {
+    const scrollSpy = vi.spyOn(service, 'scrollToAnchor').mockResolvedValue();
+    const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+
+    const plainClick = new MouseEvent('click', { button: 0, detail: 1 });
+    const plainPreventSpy = vi.spyOn(plainClick, 'preventDefault');
+    service.navigateOrScrollToAnchor('features', plainClick);
+
+    expect(plainPreventSpy).toHaveBeenCalledTimes(1);
+    expect(scrollSpy).toHaveBeenCalledWith('features');
+    expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
+
+    const keyboardClick = new MouseEvent('click', { button: 0, detail: 0 });
+    const keyboardPreventSpy = vi.spyOn(keyboardClick, 'preventDefault');
+    service.navigateOrScrollToAnchor('contact', keyboardClick);
+
+    expect(keyboardPreventSpy).toHaveBeenCalledTimes(1);
+    expect(scrollSpy).toHaveBeenCalledWith('contact');
+    expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#contact');
+  });
 });

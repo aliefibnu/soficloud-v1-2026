@@ -112,8 +112,14 @@ export class LandingAnchorService {
   /**
    * Navigates to `/` with `anchorId` as fragment when on a non-landing route,
    * or reveals deferred sections and scrolls smoothly when already on `/`.
+   * Leaves modified clicks (Ctrl/Cmd/Shift/Alt, non-primary button, or already prevented)
+   * to the browser's native link handling.
    */
   navigateOrScrollToAnchor(anchorId: string, event?: Event, updateHash = true): void {
+    if (this.isModifiedClick(event)) {
+      return;
+    }
+
     const cleanId = this.normalizeAnchor(anchorId);
     if (!cleanId) {
       return;
@@ -181,6 +187,25 @@ export class LandingAnchorService {
     }
 
     this.watchPostScrollDrift(cleanId, requestId, onComplete);
+  }
+
+  private isModifiedClick(event?: Event): boolean {
+    if (!event) {
+      return false;
+    }
+    if (event.defaultPrevented) {
+      return true;
+    }
+    if (typeof MouseEvent !== 'undefined' && event instanceof MouseEvent) {
+      return (
+        event.button !== 0 ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.shiftKey ||
+        event.altKey
+      );
+    }
+    return false;
   }
 
   private prefersReducedMotion(): boolean {
