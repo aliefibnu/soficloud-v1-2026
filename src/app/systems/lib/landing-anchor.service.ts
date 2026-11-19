@@ -337,6 +337,10 @@ export class LandingAnchorService {
     return false;
   }
 
+  private isReadyTarget(target: HTMLElement | null): boolean {
+    return target !== null && target.closest('[data-landing-placeholder]') === null;
+  }
+
   private async waitForTargetReady(
     cleanId: string,
     maxOrder: number,
@@ -355,7 +359,7 @@ export class LandingAnchorService {
       }
 
       if (Date.now() >= deadline) {
-        return target !== null;
+        return this.isReadyTarget(target);
       }
 
       const step = await this.waitForNextReadinessCheck(
@@ -378,7 +382,7 @@ export class LandingAnchorService {
         if (!stillPendingPlaceholders && currentTarget) {
           return this.waitForLayoutStabilization(cleanId, requestId, signal);
         }
-        return currentTarget !== null;
+        return this.isReadyTarget(currentTarget);
       }
     }
 

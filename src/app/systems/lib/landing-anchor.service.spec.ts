@@ -323,7 +323,7 @@ describe('LandingAnchorService', () => {
     }
   });
 
-  it('should end the wait at the 4-second deadline and scroll even while the application remains unstable', async () => {
+  it('should end the wait at the 4-second deadline and scroll a mounted target even while an earlier placeholder and pending task remain', async () => {
     vi.useFakeTimers();
     const pendingTasks = TestBed.inject(PendingTasks);
     const removeTask = pendingTasks.add();
@@ -337,11 +337,13 @@ describe('LandingAnchorService', () => {
         clearTimeout(id);
       });
 
-      const placeholder = document.createElement('div');
-      placeholder.setAttribute('data-landing-placeholder', '6');
-      placeholder.id = 'pricing';
-      vi.spyOn(placeholder, 'getBoundingClientRect').mockReturnValue({ top: 1800 } as DOMRect);
-      document.body.append(placeholder);
+      const earlierPlaceholder = document.createElement('div');
+      earlierPlaceholder.setAttribute('data-landing-placeholder', '1');
+      earlierPlaceholder.id = 'business-control';
+      const pricing = document.createElement('section');
+      pricing.id = 'pricing';
+      vi.spyOn(pricing, 'getBoundingClientRect').mockReturnValue({ top: 1800 } as DOMRect);
+      document.body.append(earlierPlaceholder, pricing);
 
       let resolved = false;
       const scrollPromise = service.scrollToAnchor('pricing').then(() => {
@@ -358,6 +360,49 @@ describe('LandingAnchorService', () => {
       expect(resolved).toBe(true);
       expect(scrollSpy).toHaveBeenCalledTimes(1);
       expect(scrollSpy).toHaveBeenCalledWith({ top: 1712, behavior: 'smooth' });
+    } finally {
+      removeTask();
+      vi.useRealTimers();
+    }
+  });
+
+  it('should resolve without scrolling or focusing at the 4-second deadline when the target is still a placeholder', async () => {
+    vi.useFakeTimers();
+    const pendingTasks = TestBed.inject(PendingTasks);
+    const removeTask = pendingTasks.add();
+
+    try {
+      const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+      vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+        return setTimeout(() => cb(17), 17) as unknown as number;
+      });
+      vi.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
+        clearTimeout(id);
+      });
+
+      const placeholder = document.createElement('div');
+      placeholder.setAttribute('data-landing-placeholder', '3');
+      placeholder.id = 'why-choose-us';
+      const nestedAlias = document.createElement('div');
+      nestedAlias.id = 'about';
+      const focusSpy = vi.spyOn(nestedAlias, 'focus');
+      placeholder.append(nestedAlias);
+      document.body.append(placeholder);
+
+      let resolved = false;
+      const scrollPromise = service.scrollToAnchor('about', undefined, true).then(() => {
+        resolved = true;
+      });
+
+      await vi.advanceTimersByTimeAsync(3999);
+      expect(resolved).toBe(false);
+
+      await vi.advanceTimersByTimeAsync(1);
+      await scrollPromise;
+
+      expect(resolved).toBe(true);
+      expect(focusSpy).not.toHaveBeenCalled();
+      expect(scrollSpy).not.toHaveBeenCalled();
     } finally {
       removeTask();
       vi.useRealTimers();
