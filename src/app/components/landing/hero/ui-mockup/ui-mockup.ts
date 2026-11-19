@@ -6,6 +6,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { observeHostViewport } from '../../../../systems/lib/viewport-observer';
 
@@ -215,7 +216,7 @@ const CANONICAL_Q3_MONTHS: readonly RawMonthPoint[] = [
 
 @Component({
   selector: 'app-ui-mockup',
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, NgOptimizedImage],
   templateUrl: './ui-mockup.html',
   styles: `
     .mockup-bottom-fade {

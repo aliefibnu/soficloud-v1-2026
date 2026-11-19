@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { Customers } from './customers';
+import { provideCustomImageLoader } from '../../../systems/lib/image-loader';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 async function setupCustomersTestingModule(): Promise<ComponentFixture<Customers>> {
   await TestBed.configureTestingModule({
     imports: [Customers],
     providers: [
+      provideCustomImageLoader(),
       provideTranslateService({
         fallbackLang: 'id',
         lang: 'id',
@@ -142,6 +144,58 @@ describe('Customers', () => {
     component.selectCustomer(7);
     expect(component.activeCustomerIndex()).toBe(7);
     expect(component.activeCustomer().name).toBe('PT. Bumi Sarimas Indonesia');
+  });
+
+  it('should define explicit positive width and height metadata for all customer logos', () => {
+    const allCustomers = [
+      ...component.topCustomers,
+      ...component.bottomRow1,
+      ...component.bottomRow2,
+    ];
+    for (const customer of allCustomers) {
+      expect(Number.isInteger(customer.width)).toBe(true);
+      expect(Number.isInteger(customer.height)).toBe(true);
+      expect(customer.width).toBeGreaterThan(0);
+      expect(customer.height).toBeGreaterThan(0);
+    }
+  });
+
+  it('should render explicit width and height attributes on all customer images including customer-4.svg', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const images = Array.from(compiled.querySelectorAll('img'));
+    expect(images.length).toBeGreaterThan(0);
+
+    for (const img of images) {
+      const width = Number(img.getAttribute('width'));
+      const height = Number(img.getAttribute('height'));
+      expect(width).toBeGreaterThan(0);
+      expect(height).toBeGreaterThan(0);
+      expect(img.classList.contains('w-auto')).toBe(true);
+      expect(img.classList.contains('h-auto')).toBe(true);
+    }
+
+    const sanipakImages = images.filter((img) =>
+      img.getAttribute('src')?.includes('customer-4.svg'),
+    );
+    expect(sanipakImages.length).toBe(3); // 2 in top marquee + 1 in center showcase
+    for (const img of sanipakImages) {
+      expect(img.getAttribute('width')).toBe('1619');
+      expect(img.getAttribute('height')).toBe('569');
+    }
+  });
+
+  it('should update showcase img dimensions cleanly when active customer changes', async () => {
+    component.selectCustomer(0);
+    vi.advanceTimersByTime(20);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const showcaseImg = compiled.querySelector('img.logo-switch-active') as HTMLImageElement | null;
+    expect(showcaseImg).toBeTruthy();
+    expect(showcaseImg?.getAttribute('src')).toContain('customer-3.svg');
+    expect(showcaseImg?.getAttribute('width')).toBe('1678');
+    expect(showcaseImg?.getAttribute('height')).toBe('560');
   });
 });
 

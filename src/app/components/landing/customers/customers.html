@@ -115,9 +115,11 @@
                 [attr.aria-label]="customer.name"
               >
                 <img
-                  [src]="customer.logo"
+                  [ngSrc]="customer.logo"
+                  [width]="customer.width"
+                  [height]="customer.height"
                   [alt]="customer.name"
-                  class="object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
+                  class="w-auto h-auto object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
                   [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                   [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                   [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -159,9 +161,11 @@
                 [attr.aria-label]="customer.name"
               >
                 <img
-                  [src]="customer.logo"
+                  [ngSrc]="customer.logo"
+                  [width]="customer.width"
+                  [height]="customer.height"
                   [alt]="customer.name"
-                  class="object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
+                  class="w-auto h-auto object-contain pointer-events-none transition-transform duration-300 ease-out select-none"
                   [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                   [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                   [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -345,28 +349,34 @@
               class="w-full flex-1 flex flex-col items-center justify-center min-h-34 py-1 overflow-hidden transition-all duration-300"
             >
               <div class="h-16 w-full flex items-center justify-center">
-                <img
-                  [src]="activeCustomer().logo"
-                  [alt]="activeCustomer().name"
-                  [class.logo-switch-active]="isLogoTransitioning()"
-                  class="object-contain select-none transition-all duration-300"
-                  [class.max-h-9]="activeCustomer().aspect === 'ultra-wide'"
-                  [class.sm:max-h-10]="activeCustomer().aspect === 'ultra-wide'"
-                  [class.max-w-[86%]]="activeCustomer().aspect === 'ultra-wide'"
-                  [class.sm:max-w-[88%]]="activeCustomer().aspect === 'ultra-wide'"
-                  [class.max-h-10]="activeCustomer().aspect === 'wide'"
-                  [class.sm:max-h-11]="activeCustomer().aspect === 'wide'"
-                  [class.max-w-[82%]]="activeCustomer().aspect === 'wide'"
-                  [class.sm:max-w-[85%]]="activeCustomer().aspect === 'wide'"
-                  [class.max-h-11]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
-                  [class.sm:max-h-12]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
-                  [class.max-w-[78%]]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
-                  [class.sm:max-w-[80%]]="!activeCustomer().aspect || activeCustomer().aspect === 'standard'"
-                  [class.max-h-12]="activeCustomer().aspect === 'square'"
-                  [class.sm:max-h-13]="activeCustomer().aspect === 'square'"
-                  [class.max-w-[62%]]="activeCustomer().aspect === 'square'"
-                  [class.sm:max-w-[65%]]="activeCustomer().aspect === 'square'"
-                />
+                @for (customer of [activeCustomer()]; track customer.id) {
+                  <img
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
+                    [alt]="customer.name"
+                    loading="eager"
+                    decoding="async"
+                    [class.logo-switch-active]="isLogoTransitioning()"
+                    class="w-auto h-auto object-contain select-none transition-all duration-300"
+                    [class.max-h-9]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-h-10]="customer.aspect === 'ultra-wide'"
+                    [class.max-w-[86%]]="customer.aspect === 'ultra-wide'"
+                    [class.sm:max-w-[88%]]="customer.aspect === 'ultra-wide'"
+                    [class.max-h-10]="customer.aspect === 'wide'"
+                    [class.sm:max-h-11]="customer.aspect === 'wide'"
+                    [class.max-w-[82%]]="customer.aspect === 'wide'"
+                    [class.sm:max-w-[85%]]="customer.aspect === 'wide'"
+                    [class.max-h-11]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-h-12]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-w-[78%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.sm:max-w-[80%]]="!customer.aspect || customer.aspect === 'standard'"
+                    [class.max-h-12]="customer.aspect === 'square'"
+                    [class.sm:max-h-13]="customer.aspect === 'square'"
+                    [class.max-w-[62%]]="customer.aspect === 'square'"
+                    [class.sm:max-w-[65%]]="customer.aspect === 'square'"
+                  />
+                }
               </div>
               <p
                 [class.name-switch-active]="isLogoTransitioning()"
@@ -396,9 +406,11 @@
                   [attr.aria-label]="customer.name"
                 >
                   <img
-                    [src]="customer.logo"
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
                     [alt]="customer.name"
-                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="w-auto h-auto object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
                     [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                     [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                     [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -426,9 +438,11 @@
                   [attr.aria-label]="customer.name"
                 >
                   <img
-                    [src]="customer.logo"
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
                     [alt]="customer.name"
-                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="w-auto h-auto object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
                     [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                     [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                     [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -463,9 +477,11 @@
                   [attr.aria-label]="customer.name"
                 >
                   <img
-                    [src]="customer.logo"
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
                     [alt]="customer.name"
-                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="w-auto h-auto object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
                     [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                     [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                     [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
@@ -493,9 +509,11 @@
                   [attr.aria-label]="customer.name"
                 >
                   <img
-                    [src]="customer.logo"
+                    [ngSrc]="customer.logo"
+                    [width]="customer.width"
+                    [height]="customer.height"
                     [alt]="customer.name"
-                    class="object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
+                    class="w-auto h-auto object-contain filter grayscale group-hover/item:filter-none transition-all duration-300 select-none"
                     [class.max-h-4.5]="customer.aspect === 'ultra-wide'"
                     [class.sm:max-h-5]="customer.aspect === 'ultra-wide'"
                     [class.max-w-[80%]]="customer.aspect === 'ultra-wide'"
