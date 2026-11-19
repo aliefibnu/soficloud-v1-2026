@@ -539,6 +539,6 @@
     }
 
     onLearnMore(event: Event): void {
-      this.anchorService.navigateOrScrollToAnchor('contact', event);
+      this.anchorService.navigateOrScrollToAnchor('contact', event, true, true);
     }
-  } 
+  }

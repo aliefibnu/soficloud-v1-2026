@@ -15,6 +15,6 @@ export class Footer {
   private readonly anchorService = inject(LandingAnchorService);
 
   onSectionLink(anchorId: string, event: Event): void {
-    this.anchorService.navigateOrScrollToAnchor(anchorId, event);
+    this.anchorService.navigateOrScrollToAnchor(anchorId, event, true, true);
   }
 }

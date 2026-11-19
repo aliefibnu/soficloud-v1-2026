@@ -74,6 +74,41 @@ describe('LandingAnchorService', () => {
     expect(service.resolveTargetElement('#solutions')).toBe(businessModel);
   });
 
+  it('should focus an explicitly activated target without changing the navbar offset scroll', async () => {
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+      cb(16);
+      return 1;
+    });
+    const scrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    const target = document.createElement('section');
+    target.id = 'features';
+    vi.spyOn(target, 'getBoundingClientRect').mockReturnValue({ top: 900 } as DOMRect);
+    const focusSpy = vi.spyOn(target, 'focus');
+    document.body.append(target);
+
+    await service.scrollToAnchor('features', undefined, true);
+
+    expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true });
+    expect(scrollSpy).toHaveBeenCalledWith({ top: 812, behavior: 'smooth' });
+  });
+
+  it('should leave passive anchor scrolls unfocused', async () => {
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+      cb(16);
+      return 1;
+    });
+    vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    const target = document.createElement('section');
+    target.id = 'features';
+    vi.spyOn(target, 'getBoundingClientRect').mockReturnValue({ top: 900 } as DOMRect);
+    const focusSpy = vi.spyOn(target, 'focus');
+    document.body.append(target);
+
+    await service.scrollToAnchor('features');
+
+    expect(focusSpy).not.toHaveBeenCalled();
+  });
+
   it('should wait for deferred placeholders to clear before scrolling to a landing anchor', async () => {
     vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
       cb(16);
@@ -173,6 +208,19 @@ describe('LandingAnchorService', () => {
     expect(preventSpy).toHaveBeenCalled();
     expect(service.requiredOrder()).toBe(0);
     expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'pricing' });
+  });
+
+  it('should consume explicit cross-route focus requests once and discard mismatched fragments', async () => {
+    await router.navigateByUrl('/business-realtime');
+
+    service.navigateOrScrollToAnchor('features', new MouseEvent('click'), true, true);
+
+    expect(service.consumePendingFocusRequest('contact')).toBe(false);
+    expect(service.consumePendingFocusRequest('features')).toBe(false);
+
+    service.navigateOrScrollToAnchor('features', new MouseEvent('click'), true, true);
+    expect(service.consumePendingFocusRequest('features')).toBe(true);
+    expect(service.consumePendingFocusRequest('features')).toBe(false);
   });
 
   it('should preserve browser default behavior for modified clicks on landing and non-landing routes', async () => {

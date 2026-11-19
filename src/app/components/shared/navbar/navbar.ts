@@ -154,10 +154,19 @@ export class Navbar {
         if (!fragment) {
           return;
         }
+        const focusTarget = this.anchorService.consumePendingFocusRequest(fragment);
         if (this.isLandingPage()) {
-          void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection());
+          if (focusTarget) {
+            void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection(), true);
+          } else {
+            void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection());
+          }
         } else if (this.isScheduleDemoPage()) {
-          void this.anchorService.scrollToAnchor(fragment);
+          if (focusTarget) {
+            void this.anchorService.scrollToAnchor(fragment, undefined, true);
+          } else {
+            void this.anchorService.scrollToAnchor(fragment);
+          }
         }
       });
 
@@ -189,9 +198,19 @@ export class Navbar {
         return;
       }
       if (isLanding) {
-        void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection());
+        const focusTarget = this.anchorService.consumePendingFocusRequest(fragment);
+        if (focusTarget) {
+          void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection(), true);
+        } else {
+          void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection());
+        }
       } else {
-        void this.anchorService.scrollToAnchor(fragment);
+        const focusTarget = this.anchorService.consumePendingFocusRequest(fragment);
+        if (focusTarget) {
+          void this.anchorService.scrollToAnchor(fragment, undefined, true);
+        } else {
+          void this.anchorService.scrollToAnchor(fragment);
+        }
       }
     }, 120);
   }
@@ -301,7 +320,7 @@ export class Navbar {
         event?.preventDefault();
         this.clearPendingFragment();
         const cleanId = this.anchorService.normalizeAnchor(href);
-        void this.anchorService.scrollToAnchor(cleanId, () => this.updateActiveSection());
+        void this.anchorService.scrollToAnchor(cleanId, () => this.updateActiveSection(), true);
         this.anchorService.pushHashIfChanged(cleanId);
       }
     } else if (href) {

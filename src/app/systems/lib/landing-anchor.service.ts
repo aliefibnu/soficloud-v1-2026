@@ -45,6 +45,7 @@ export class LandingAnchorService {
   private cleanupScrollListeners: (() => void) | null = null;
   private cleanupPendingInterruption: (() => void) | null = null;
   private postScrollTimer: ReturnType<typeof setTimeout> | null = null;
+  private pendingFocusAnchorId: string | null = null;
 
   /** Monotonically increasing counter incremented on each anchor scroll or reset. */
   get currentRequestId(): number {
@@ -77,6 +78,7 @@ export class LandingAnchorService {
   /** Resets eager revelation state when leaving the landing route. */
   reset(): void {
     this.activeRequestId++;
+    this.pendingFocusAnchorId = null;
     this.clearPendingInterruption();
     this.clearPostScrollWatch();
     this.requiredOrder.set(0);
@@ -124,7 +126,12 @@ export class LandingAnchorService {
    * Leaves modified clicks (Ctrl/Cmd/Shift/Alt, non-primary button, or already prevented)
    * to the browser's native link handling.
    */
-  navigateOrScrollToAnchor(anchorId: string, event?: Event, updateHash = true): void {
+  navigateOrScrollToAnchor(
+    anchorId: string,
+    event?: Event,
+    updateHash = true,
+    focusTarget = false,
+  ): void {
     if (this.isModifiedClick(event)) {
       return;
     }
@@ -142,8 +149,13 @@ export class LandingAnchorService {
     const isLanding = currentPath === '' || currentPath === '/';
 
     if (isLanding || !this.router) {
+      this.pendingFocusAnchorId = null;
       event?.preventDefault();
-      void this.scrollToAnchor(cleanId);
+      if (focusTarget) {
+        void this.scrollToAnchor(cleanId, undefined, true);
+      } else {
+        void this.scrollToAnchor(cleanId);
+      }
       if (updateHash) {
         this.pushHashIfChanged(cleanId);
       }
@@ -151,7 +163,19 @@ export class LandingAnchorService {
     }
 
     event?.preventDefault();
+    this.pendingFocusAnchorId = focusTarget ? cleanId : null;
     void this.router.navigate(['/'], { fragment: cleanId });
+  }
+
+  /** Consumes a focus request carried by an explicit cross-route anchor activation. */
+  consumePendingFocusRequest(anchorId: string): boolean {
+    const cleanId = this.normalizeAnchor(anchorId);
+    if (this.pendingFocusAnchorId === null) {
+      return false;
+    }
+    const matches = this.pendingFocusAnchorId === cleanId;
+    this.pendingFocusAnchorId = null;
+    return matches;
   }
 
   /** Updates the browser URL hash without pushing a duplicate entry for the current fragment. */
@@ -174,7 +198,11 @@ export class LandingAnchorService {
    * placeholders to be replaced and layout to stabilize, then scrolls smoothly
    * to the target offset beneath the sticky navbar.
    */
-  async scrollToAnchor(anchorId: string, onComplete?: () => void): Promise<void> {
+  async scrollToAnchor(
+    anchorId: string,
+    onComplete?: () => void,
+    focusTarget = false,
+  ): Promise<void> {
     if (!this.isBrowser || typeof window === 'undefined') {
       return;
     }
@@ -240,6 +268,10 @@ export class LandingAnchorService {
       const target = this.resolveTargetElement(cleanId);
       if (!target || userInterrupted) {
         return;
+      }
+
+      if (focusTarget) {
+        target.focus({ preventScroll: true });
       }
 
       // Switch to the post-scroll watcher synchronously so there is no gap in input tracking.
