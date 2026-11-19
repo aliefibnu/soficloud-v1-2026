@@ -84,6 +84,7 @@ export class Navbar {
   readonly isMobileLangSheetOpen = signal(false);
 
   private pendingFragmentNavigationId: number | null = null;
+  private pendingFragmentRequestId: number | null = null;
   private pendingFragmentFallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
@@ -143,7 +144,12 @@ export class Navbar {
         if (!this.isBrowser || this.pendingFragmentNavigationId !== e.routerEvent.id) {
           return;
         }
+        const hasNewerAnchorAction =
+          this.anchorService.currentRequestId !== this.pendingFragmentRequestId;
         this.clearPendingFragment();
+        if (hasNewerAnchorAction) {
+          return;
+        }
         const fragment = e.anchor || this.router.parseUrl(this.router.url).fragment;
         if (!fragment) {
           return;
@@ -170,12 +176,18 @@ export class Navbar {
 
   private scheduleFragmentScroll(navId: number, fragment: string, isLanding: boolean): void {
     this.pendingFragmentNavigationId = navId;
+    this.pendingFragmentRequestId = this.anchorService.currentRequestId;
     // Fallback for initial SSR hydration where RouterScroller suppresses the Scroll event
     this.pendingFragmentFallbackTimer = setTimeout(() => {
       if (this.pendingFragmentNavigationId !== navId) {
         return;
       }
+      const hasNewerAnchorAction =
+        this.anchorService.currentRequestId !== this.pendingFragmentRequestId;
       this.clearPendingFragment();
+      if (hasNewerAnchorAction) {
+        return;
+      }
       if (isLanding) {
         void this.anchorService.scrollToAnchor(fragment, () => this.updateActiveSection());
       } else {
@@ -186,6 +198,7 @@ export class Navbar {
 
   private clearPendingFragment(): void {
     this.pendingFragmentNavigationId = null;
+    this.pendingFragmentRequestId = null;
     if (this.pendingFragmentFallbackTimer !== null) {
       clearTimeout(this.pendingFragmentFallbackTimer);
       this.pendingFragmentFallbackTimer = null;
@@ -286,6 +299,7 @@ export class Navbar {
       this.rawActiveLinkKey.set(linkKey);
       if (href) {
         event?.preventDefault();
+        this.clearPendingFragment();
         const cleanId = this.anchorService.normalizeAnchor(href);
         void this.anchorService.scrollToAnchor(cleanId, () => this.updateActiveSection());
         if (typeof window !== 'undefined' && window.history?.pushState) {
@@ -311,6 +325,7 @@ export class Navbar {
 
   onScheduleDemo(): void {
     if (this.isScheduleDemoPage()) {
+      this.clearPendingFragment();
       void this.anchorService.scrollToAnchor('schedule-demo-form');
       if (typeof window !== 'undefined' && window.history?.pushState) {
         window.history.pushState(null, '', '#schedule-demo-form');

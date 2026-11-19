@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
+  NavigationEnd,
   NavigationSkipped,
   NavigationSkippedCode,
   provideRouter,
@@ -406,6 +407,79 @@ describe('Navbar', () => {
 
       expect(revealSpy).not.toHaveBeenCalled();
       expect(scrollSpy).not.toHaveBeenCalled();
+    });
+
+    it('should cancel pending fragment fallback and Scroll when user clicks a newer navbar anchor', async () => {
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      const events$ = router.events as unknown as Subject<unknown>;
+
+      try {
+        let navEndEvent: NavigationEnd | null = null;
+        const sub = router.events.subscribe((e) => {
+          if (e instanceof NavigationEnd) {
+            navEndEvent = e;
+          }
+        });
+
+        await router.navigateByUrl('/#pricing');
+        sub.unsubscribe();
+        expect(navEndEvent).not.toBeNull();
+
+        // User clicks Features before the 120ms fallback or Scroll event fires
+        component.onNavClick('HEADER.NAV.FEATURES', '#features', new MouseEvent('click', { button: 0 }));
+        expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
+        expect(scrollSpy).toHaveBeenCalledTimes(1);
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function));
+
+        // Even if the pending Scroll event arrives and the 120ms fallback window passes,
+        // the older /#pricing fragment must not override the newer #features click
+        events$.next(new Scroll(navEndEvent!, null, 'pricing'));
+        await new Promise((resolve) => setTimeout(resolve, 150));
+
+        expect(scrollSpy).toHaveBeenCalledTimes(1);
+      } finally {
+        pushStateSpy.mockRestore();
+      }
+    });
+
+    it('should invalidate pending fragment scroll when an external in-page anchor action starts', async () => {
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      const windowScrollSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+      const featuresEl = document.createElement('div');
+      featuresEl.id = 'features';
+      document.body.appendChild(featuresEl);
+      const events$ = router.events as unknown as Subject<unknown>;
+
+      try {
+        let navEndEvent: NavigationEnd | null = null;
+        const sub = router.events.subscribe((e) => {
+          if (e instanceof NavigationEnd) {
+            navEndEvent = e;
+          }
+        });
+
+        await router.navigateByUrl('/#pricing');
+        sub.unsubscribe();
+        expect(navEndEvent).not.toBeNull();
+
+        const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor');
+
+        // External component (e.g., Hero or Footer) starts an in-page anchor action
+        anchorService.navigateOrScrollToAnchor('features', new MouseEvent('click', { button: 0 }));
+        expect(scrollSpy).toHaveBeenCalledTimes(1);
+        expect(scrollSpy).toHaveBeenCalledWith('features');
+
+        // Pending Scroll event and 120ms fallback timer for /#pricing must both be aborted
+        events$.next(new Scroll(navEndEvent!, null, 'pricing'));
+        await new Promise((resolve) => setTimeout(resolve, 150));
+
+        expect(scrollSpy).toHaveBeenCalledTimes(1);
+      } finally {
+        featuresEl.remove();
+        pushStateSpy.mockRestore();
+        windowScrollSpy.mockRestore();
+      }
     });
 
     it('should preserve browser default behavior for modified clicks on desktop and mobile nav links', async () => {

@@ -45,6 +45,11 @@ export class LandingAnchorService {
   private cleanupScrollListeners: (() => void) | null = null;
   private postScrollTimer: ReturnType<typeof setTimeout> | null = null;
 
+  /** Monotonically increasing counter incremented on each anchor scroll or reset. */
+  get currentRequestId(): number {
+    return this.activeRequestId;
+  }
+
   /** Normalizes an anchor string by stripping a leading `#` and trimming whitespace. */
   normalizeAnchor(anchorId: string): string {
     return anchorId.replace(/^#/, '').trim();
