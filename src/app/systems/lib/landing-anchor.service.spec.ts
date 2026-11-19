@@ -233,4 +233,45 @@ describe('LandingAnchorService', () => {
     expect(scrollSpy).toHaveBeenCalledWith('contact');
     expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#contact');
   });
+
+  it('should ignore Object.prototype keys in anchor lookups while still resolving matching DOM IDs', async () => {
+    const prototypeKeys = ['toString', 'constructor', 'valueOf', 'hasOwnProperty'];
+    for (const key of prototypeKeys) {
+      expect(service.getSectionOrder(key)).toBe(0);
+      expect(service.getSectionOrder(`#${key}`)).toBe(0);
+      expect(service.resolveTargetElement(key)).toBeNull();
+      await expect(service.scrollToAnchor(key)).resolves.toBeUndefined();
+    }
+
+    const domEl = document.createElement('div');
+    domEl.id = 'toString';
+    document.body.append(domEl);
+    expect(service.resolveTargetElement('toString')).toBe(domEl);
+  });
+
+  it('should still scroll without pushing a duplicate history entry for the current fragment', () => {
+    const scrollSpy = vi.spyOn(service, 'scrollToAnchor').mockResolvedValue();
+    const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+    const originalUrl = window.location.pathname + window.location.search + window.location.hash;
+
+    try {
+      window.location.hash = '#features';
+
+      const sameFragmentClick = new MouseEvent('click', { button: 0, cancelable: true });
+      service.navigateOrScrollToAnchor('features', sameFragmentClick);
+
+      expect(sameFragmentClick.defaultPrevented).toBe(true);
+      expect(scrollSpy).toHaveBeenCalledWith('features');
+      expect(pushStateSpy).not.toHaveBeenCalled();
+
+      const differentFragmentClick = new MouseEvent('click', { button: 0, cancelable: true });
+      service.navigateOrScrollToAnchor('contact', differentFragmentClick);
+
+      expect(scrollSpy).toHaveBeenCalledWith('contact');
+      expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#contact');
+    } finally {
+      pushStateSpy.mockRestore();
+      window.history.replaceState(null, '', originalUrl || '/');
+    }
+  });
 });

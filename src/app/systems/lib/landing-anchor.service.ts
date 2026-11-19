@@ -59,7 +59,7 @@ export class LandingAnchorService {
   /** Returns the 1-based deferred section order for a landing anchor, or `0` if none. */
   getSectionOrder(anchorId: string): number {
     const cleanId = this.normalizeAnchor(anchorId);
-    return LANDING_ANCHOR_ORDER[cleanId] ?? 0;
+    return Object.hasOwn(LANDING_ANCHOR_ORDER, cleanId) ? LANDING_ANCHOR_ORDER[cleanId] : 0;
   }
 
   /**
@@ -94,7 +94,9 @@ export class LandingAnchorService {
       return direct;
     }
 
-    const fallbacks = ANCHOR_FALLBACKS[cleanId];
+    const fallbacks = Object.hasOwn(ANCHOR_FALLBACKS, cleanId)
+      ? ANCHOR_FALLBACKS[cleanId]
+      : undefined;
     if (fallbacks) {
       for (const fallbackId of fallbacks) {
         const el = this.document.getElementById(fallbackId);
@@ -142,14 +144,29 @@ export class LandingAnchorService {
     if (isLanding || !this.router) {
       event?.preventDefault();
       void this.scrollToAnchor(cleanId);
-      if (updateHash && this.isBrowser && typeof window !== 'undefined' && window.history?.pushState) {
-        window.history.pushState(null, '', `#${cleanId}`);
+      if (updateHash) {
+        this.pushHashIfChanged(cleanId);
       }
       return;
     }
 
     event?.preventDefault();
     void this.router.navigate(['/'], { fragment: cleanId });
+  }
+
+  /** Updates the browser URL hash without pushing a duplicate entry for the current fragment. */
+  pushHashIfChanged(anchorId: string): void {
+    if (!this.isBrowser || typeof window === 'undefined' || !window.history?.pushState) {
+      return;
+    }
+    const cleanId = this.normalizeAnchor(anchorId);
+    if (!cleanId) {
+      return;
+    }
+    const targetHash = `#${cleanId}`;
+    if (window.location.hash !== targetHash) {
+      window.history.pushState(null, '', targetHash);
+    }
   }
 
   /**

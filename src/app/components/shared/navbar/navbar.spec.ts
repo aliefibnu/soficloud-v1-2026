@@ -575,5 +575,32 @@ describe('Navbar', () => {
       expect(scrollSpy).toHaveBeenCalledWith('contact', expect.any(Function));
       expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#contact');
     });
+
+    it('should still scroll without pushing duplicate history entries when clicking the current fragment', () => {
+      const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
+      const pushStateSpy = vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
+      pushStateSpy.mockClear();
+      const originalUrl = window.location.pathname + window.location.search + window.location.hash;
+
+      try {
+        window.location.hash = '#features';
+        const click = new MouseEvent('click', { button: 0, cancelable: true });
+        component.onNavClick('HEADER.NAV.FEATURES', '#features', click);
+
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function));
+        expect(pushStateSpy).not.toHaveBeenCalled();
+
+        component.isLandingPage.set(false);
+        component.isScheduleDemoPage.set(true);
+        window.location.hash = '#schedule-demo-form';
+        component.onScheduleDemo();
+
+        expect(scrollSpy).toHaveBeenCalledWith('schedule-demo-form');
+        expect(pushStateSpy).not.toHaveBeenCalled();
+      } finally {
+        pushStateSpy.mockRestore();
+        window.history.replaceState(null, '', originalUrl || '/');
+      }
+    });
   });
 });

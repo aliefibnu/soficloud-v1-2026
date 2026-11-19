@@ -302,9 +302,7 @@ export class Navbar {
         this.clearPendingFragment();
         const cleanId = this.anchorService.normalizeAnchor(href);
         void this.anchorService.scrollToAnchor(cleanId, () => this.updateActiveSection());
-        if (typeof window !== 'undefined' && window.history?.pushState) {
-          window.history.pushState(null, '', `#${cleanId}`);
-        }
+        this.anchorService.pushHashIfChanged(cleanId);
       }
     } else if (href) {
       event?.preventDefault();
@@ -326,9 +324,7 @@ export class Navbar {
     if (this.isScheduleDemoPage()) {
       this.clearPendingFragment();
       void this.anchorService.scrollToAnchor('schedule-demo-form');
-      if (typeof window !== 'undefined' && window.history?.pushState) {
-        window.history.pushState(null, '', '#schedule-demo-form');
-      }
+      this.anchorService.pushHashIfChanged('schedule-demo-form');
     } else {
       this.router.navigate(['/schedule-demo']);
     }
