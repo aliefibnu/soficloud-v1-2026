@@ -311,7 +311,7 @@ describe('Navbar', () => {
       expect(component.activeLinkKey()).toBe('HEADER.NAV.PRICING');
     });
 
-    it('should reveal deferred landing sections and delegate anchor scrolling when navigating to /#fragment from another page', async () => {
+    it('should reveal deferred landing sections only after landing navigation succeeds when navigating from another page', async () => {
       const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
       const scrollSpy = vi.spyOn(anchorService, 'scrollToAnchor').mockResolvedValue();
 
@@ -320,7 +320,8 @@ describe('Navbar', () => {
 
       const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
       component.onNavClick('HEADER.NAV.PRICING', '#pricing', new MouseEvent('click'));
-      expect(revealSpy).toHaveBeenCalledWith('pricing');
+      expect(revealSpy).not.toHaveBeenCalled();
+      expect(anchorService.requiredOrder()).toBe(0);
       expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'pricing' });
       navSpy.mockRestore();
 
@@ -328,7 +329,26 @@ describe('Navbar', () => {
       await new Promise((resolve) => setTimeout(resolve, 150));
 
       expect(revealSpy).toHaveBeenCalledWith('pricing');
+      expect(anchorService.requiredOrder()).toBe(6);
       expect(scrollSpy).toHaveBeenCalledWith('pricing', expect.any(Function));
+    });
+
+    it('should not leak requiredOrder when cross-route landing navigation is cancelled', async () => {
+      const revealSpy = vi.spyOn(anchorService, 'revealUpToAnchor');
+
+      await router.navigateByUrl('/business-realtime');
+      expect(component.isLandingPage()).toBe(false);
+
+      const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(false);
+      component.onNavClick('HEADER.NAV.PRICING', '#pricing', new MouseEvent('click'));
+      await Promise.resolve();
+      navSpy.mockRestore();
+
+      expect(revealSpy).not.toHaveBeenCalled();
+      expect(anchorService.requiredOrder()).toBe(0);
+
+      await router.navigateByUrl('/');
+      expect(anchorService.requiredOrder()).toBe(0);
     });
 
     it('should restore pricing fragment scroll when Back produces a same-URL NavigationSkipped event', async () => {

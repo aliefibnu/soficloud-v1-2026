@@ -309,7 +309,6 @@ export class Navbar {
     } else if (href) {
       event?.preventDefault();
       const cleanId = this.anchorService.normalizeAnchor(href);
-      this.anchorService.revealUpToAnchor(cleanId);
       this.router.navigate(['/'], { fragment: cleanId });
     }
   }

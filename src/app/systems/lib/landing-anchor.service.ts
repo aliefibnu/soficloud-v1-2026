@@ -147,7 +147,6 @@ export class LandingAnchorService {
     }
 
     event?.preventDefault();
-    this.revealUpToAnchor(cleanId);
     void this.router.navigate(['/'], { fragment: cleanId });
   }
 

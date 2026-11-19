@@ -146,7 +146,7 @@ describe('LandingAnchorService', () => {
     });
   });
 
-  it('should reveal target order and navigate to root fragment when called from another route', async () => {
+  it('should navigate to root fragment without prematurely mutating requiredOrder when called from another route', async () => {
     await router.navigateByUrl('/business-realtime');
     const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
     const event = new MouseEvent('click');
@@ -155,7 +155,7 @@ describe('LandingAnchorService', () => {
     service.navigateOrScrollToAnchor('#pricing', event);
 
     expect(preventSpy).toHaveBeenCalled();
-    expect(service.requiredOrder()).toBe(6);
+    expect(service.requiredOrder()).toBe(0);
     expect(navSpy).toHaveBeenCalledWith(['/'], { fragment: 'pricing' });
   });
 
