@@ -283,9 +283,9 @@ const CANONICAL_Q3_MONTHS: readonly RawMonthPoint[] = [
       animation: floating-card-bottom-right 6.5s ease-in-out infinite 1.7s;
     }
 
-    .mockup-animations-paused .animate-floating-card-left,
-    .mockup-animations-paused .animate-floating-card-top-right,
-    .mockup-animations-paused .animate-floating-card-bottom-right {
+    :host(.mockup-animations-paused) .animate-floating-card-left,
+    :host(.mockup-animations-paused) .animate-floating-card-top-right,
+    :host(.mockup-animations-paused) .animate-floating-card-bottom-right {
       animation-play-state: paused !important;
     }
 
