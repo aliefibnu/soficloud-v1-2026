@@ -10,8 +10,12 @@ class DummyRouteComponent {}
 describe('LandingAnchorService', () => {
   let service: LandingAnchorService;
   let router: Router;
+  let originalUrl: string;
 
   beforeEach(async () => {
+    originalUrl = window.location.pathname + window.location.search + window.location.hash;
+    window.history.replaceState(null, '', '/');
+
     await TestBed.configureTestingModule({
       providers: [
         LandingAnchorService,
@@ -30,6 +34,7 @@ describe('LandingAnchorService', () => {
     service.reset();
     vi.restoreAllMocks();
     document.body.innerHTML = '';
+    window.history.replaceState(null, '', originalUrl || '/');
   });
 
   it('should map canonical anchors and aliases to the expected section order', () => {
@@ -212,6 +217,7 @@ describe('LandingAnchorService', () => {
 
   it('should consume explicit cross-route focus requests once and discard mismatched fragments', async () => {
     await router.navigateByUrl('/business-realtime');
+    const navSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
 
     service.navigateOrScrollToAnchor('features', new MouseEvent('click'), true, true);
 
@@ -221,6 +227,7 @@ describe('LandingAnchorService', () => {
     service.navigateOrScrollToAnchor('features', new MouseEvent('click'), true, true);
     expect(service.consumePendingFocusRequest('features')).toBe(true);
     expect(service.consumePendingFocusRequest('features')).toBe(false);
+    expect(navSpy).toHaveBeenCalledTimes(2);
   });
 
   it('should preserve browser default behavior for modified clicks on landing and non-landing routes', async () => {

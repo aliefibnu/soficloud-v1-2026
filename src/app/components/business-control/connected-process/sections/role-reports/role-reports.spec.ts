@@ -99,7 +99,7 @@ describe('RoleReports', () => {
     expect(cards.length).toBe(3);
     for (const card of cards) {
       expect(card.nativeElement.classList.contains('rounded-2xl')).toBe(true);
-      expect(card.nativeElement.classList.contains('lg:h-[274px]')).toBe(true);
+      expect(card.nativeElement.classList.contains('lg:h-68.5')).toBe(true);
     }
   });
 

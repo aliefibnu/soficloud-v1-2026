@@ -19,8 +19,12 @@ describe('Navbar', () => {
   let languageService: LanguageService;
   let anchorService: LandingAnchorService;
   let router: Router;
+  let originalUrl: string;
 
   beforeEach(async () => {
+    originalUrl = window.location.pathname + window.location.search + window.location.hash;
+    window.history.replaceState(null, '', '/');
+
     await TestBed.configureTestingModule({
       imports: [Navbar],
       providers: [
@@ -30,6 +34,7 @@ describe('Navbar', () => {
         provideRouter([
           { path: '', component: Navbar },
           { path: 'business-realtime', component: Navbar },
+          { path: 'schedule-demo', component: Navbar },
         ]),
       ],
     }).compileComponents();
@@ -40,6 +45,12 @@ describe('Navbar', () => {
     anchorService = TestBed.inject(LandingAnchorService);
     router = TestBed.inject(Router);
     await fixture.whenStable();
+  });
+
+  afterEach(() => {
+    anchorService.reset();
+    vi.restoreAllMocks();
+    window.history.replaceState(null, '', originalUrl || '/');
   });
 
   it('should create', () => {
@@ -370,7 +381,7 @@ describe('Navbar', () => {
         // In-page click uses pushState, leaving Router URL at /#pricing
         component.onNavClick('HEADER.NAV.FEATURES', '#features', new MouseEvent('click', { button: 0 }));
         expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
-        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function));
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function), true);
 
         revealSpy.mockClear();
         scrollSpy.mockClear();
@@ -450,7 +461,7 @@ describe('Navbar', () => {
         component.onNavClick('HEADER.NAV.FEATURES', '#features', new MouseEvent('click', { button: 0 }));
         expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
         expect(scrollSpy).toHaveBeenCalledTimes(1);
-        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function));
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function), true);
 
         // Even if the pending Scroll event arrives and the 120ms fallback window passes,
         // the older /#pricing fragment must not override the newer #features click
@@ -561,7 +572,7 @@ describe('Navbar', () => {
 
       expect(plainPreventSpy).toHaveBeenCalledTimes(1);
       expect(component.activeLinkKey()).toBe('HEADER.NAV.FEATURES');
-      expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function));
+      expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function), true);
       expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#features');
 
       component.isMobileMenuOpen.set(true);
@@ -572,7 +583,7 @@ describe('Navbar', () => {
       expect(keyboardPreventSpy).toHaveBeenCalledTimes(1);
       expect(component.activeLinkKey()).toBe('HEADER.NAV.CONTACT');
       expect(component.isMobileMenuOpen()).toBe(false);
-      expect(scrollSpy).toHaveBeenCalledWith('contact', expect.any(Function));
+      expect(scrollSpy).toHaveBeenCalledWith('contact', expect.any(Function), true);
       expect(pushStateSpy).toHaveBeenCalledWith(null, '', '#contact');
     });
 
@@ -587,7 +598,7 @@ describe('Navbar', () => {
         const click = new MouseEvent('click', { button: 0, cancelable: true });
         component.onNavClick('HEADER.NAV.FEATURES', '#features', click);
 
-        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function));
+        expect(scrollSpy).toHaveBeenCalledWith('features', expect.any(Function), true);
         expect(pushStateSpy).not.toHaveBeenCalled();
 
         component.isLandingPage.set(false);

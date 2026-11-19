@@ -234,10 +234,10 @@ describe('BusinessModel', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    // 1. Section heading & subtitle (DM Sans alignment)
+    // 1. Section heading (Inter SemiBold) & subtitle (DM Sans Regular)
     const heading = compiled.querySelector('#business-model-heading');
-    expect(heading?.classList.contains('font-dm-sans')).toBe(true);
-    expect(heading?.classList.contains('font-bold')).toBe(true);
+    expect(heading?.classList.contains('font-inter')).toBe(true);
+    expect(heading?.classList.contains('font-semibold')).toBe(true);
 
     const subtitle = heading?.parentElement?.querySelector('p');
     expect(subtitle?.classList.contains('font-dm-sans')).toBe(true);
@@ -247,17 +247,17 @@ describe('BusinessModel', () => {
     expect(articles.length).toBe(4);
 
     articles.forEach((article) => {
-      // 2. Card Number ("01" - DM Sans, 700, Bold, 28px, Line Height 100%, Letter Spacing 0%)
+      // 2. Card Number ("01" - Inter, 700, Bold, 28px, Line Height 100%, Letter Spacing 0%)
       const numberEl = article.querySelector('span');
-      expect(numberEl?.classList.contains('font-dm-sans')).toBe(true);
+      expect(numberEl?.classList.contains('font-inter')).toBe(true);
       expect(numberEl?.classList.contains('font-bold')).toBe(true);
       expect(numberEl?.classList.contains('lg:text-[28px]')).toBe(true);
       expect(numberEl?.classList.contains('leading-none')).toBe(true);
       expect(numberEl?.classList.contains('tracking-normal')).toBe(true);
 
-      // 3. Card Title ("Manufacturing" - DM Sans, 700, Bold, 28px, Line Height 100%, Letter Spacing 0%)
+      // 3. Card Title ("Manufacturing" - Inter, 700, Bold, 28px, Line Height 100%, Letter Spacing 0%)
       const titleEl = article.querySelector('h3');
-      expect(titleEl?.classList.contains('font-dm-sans')).toBe(true);
+      expect(titleEl?.classList.contains('font-inter')).toBe(true);
       expect(titleEl?.classList.contains('font-bold')).toBe(true);
       expect(titleEl?.classList.contains('lg:text-[28px]')).toBe(true);
       expect(titleEl?.classList.contains('leading-none')).toBe(true);

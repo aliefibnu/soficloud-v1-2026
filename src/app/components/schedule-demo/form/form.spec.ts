@@ -227,7 +227,7 @@ describe('ScheduleDemoForm', () => {
     for (const id of inputIds) {
       const input = fixture.debugElement.query(By.css(id));
       expect(input).toBeTruthy();
-      expect(input.nativeElement.classList.contains('rounded-[4px]')).toBe(true);
+      expect(input.nativeElement.classList.contains('rounded-sm')).toBe(true);
       expect(input.nativeElement.classList.contains('border-[#E8E8E8]')).toBe(true);
       expect(input.nativeElement.classList.contains('font-dm-sans')).toBe(true);
       expect(input.nativeElement.classList.contains('font-normal')).toBe(true);
@@ -240,7 +240,7 @@ describe('ScheduleDemoForm', () => {
 
     const trigger = fixture.debugElement.query(By.css('#demo-industry-trigger'));
     expect(trigger).toBeTruthy();
-    expect(trigger.nativeElement.classList.contains('rounded-[4px]')).toBe(true);
+    expect(trigger.nativeElement.classList.contains('rounded-sm')).toBe(true);
     expect(trigger.nativeElement.classList.contains('border-[#E8E8E8]')).toBe(true);
     expect(trigger.nativeElement.classList.contains('font-dm-sans')).toBe(true);
     expect(trigger.nativeElement.classList.contains('font-normal')).toBe(true);
@@ -274,7 +274,7 @@ describe('ScheduleDemoForm', () => {
     expect(classList.contains('w-full')).toBe(false);
     expect(classList.contains('px-6')).toBe(true);
     expect(classList.contains('py-3')).toBe(true);
-    expect(classList.contains('rounded-[12px]')).toBe(true);
+    expect(classList.contains('rounded-xl')).toBe(true);
     expect(classList.contains('bg-[linear-gradient(90deg,#1E37E1_0%,#1C7DD8_70%,#6694EB_100%)]')).toBe(true);
     expect(classList.contains('font-dm-sans')).toBe(true);
     expect(classList.contains('font-semibold')).toBe(true);

@@ -56,9 +56,9 @@ describe('ScheduleDemo', () => {
 
     const formEl = fixture.debugElement.query(By.css('app-schedule-demo-form'));
     expect(formEl).toBeTruthy();
-    expect(formEl.nativeElement.classList.contains('rounded-b-[24px]')).toBe(true);
+    expect(formEl.nativeElement.classList.contains('rounded-b-3xl')).toBe(true);
     expect(formEl.nativeElement.classList.contains('lg:rounded-bl-none')).toBe(true);
-    expect(formEl.nativeElement.classList.contains('lg:rounded-r-[24px]')).toBe(true);
+    expect(formEl.nativeElement.classList.contains('lg:rounded-r-3xl')).toBe(true);
 
     const formHeading = fixture.debugElement.query(By.css('h2#form-heading'));
     expect(formHeading).toBeTruthy();
@@ -141,11 +141,11 @@ describe('ScheduleDemo', () => {
 
   it('should have responsive top padding classes on outer wrapper accounting for navbar height', () => {
     const wrapper = fixture.nativeElement.querySelector('.relative.w-full');
-    expect(wrapper?.classList.contains('pt-[88px]')).toBe(true);
-    expect(wrapper?.classList.contains('sm:pt-[100px]')).toBe(true);
-    expect(wrapper?.classList.contains('md:pt-[108px]')).toBe(true);
-    expect(wrapper?.classList.contains('lg:pt-[124px]')).toBe(true);
-    expect(wrapper?.classList.contains('xl:pt-[128px]')).toBe(true);
+    expect(wrapper?.classList.contains('pt-22')).toBe(true);
+    expect(wrapper?.classList.contains('sm:pt-25')).toBe(true);
+    expect(wrapper?.classList.contains('md:pt-27')).toBe(true);
+    expect(wrapper?.classList.contains('lg:pt-31')).toBe(true);
+    expect(wrapper?.classList.contains('xl:pt-32')).toBe(true);
     expect(wrapper?.classList.contains('pb-8')).toBe(true);
     expect(wrapper?.classList.contains('sm:pb-12')).toBe(true);
     expect(wrapper?.classList.contains('lg:pb-16')).toBe(true);

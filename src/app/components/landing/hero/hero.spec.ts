@@ -1,13 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
+import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 import { Hero } from './hero';
 
 describe('Hero', () => {
   let component: Hero;
   let fixture: ComponentFixture<Hero>;
   let translateService: TranslateService;
+  let originalUrl: string;
 
   beforeEach(async () => {
+    originalUrl = window.location.pathname + window.location.search + window.location.hash;
+
     await TestBed.configureTestingModule({
       imports: [Hero],
       providers: [
@@ -44,6 +48,12 @@ describe('Hero', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     await fixture.whenStable();
+  });
+
+  afterEach(() => {
+    TestBed.inject(LandingAnchorService).reset();
+    vi.restoreAllMocks();
+    window.history.replaceState(null, '', originalUrl || '/');
   });
 
   it('should create the hero component', () => {
