@@ -41,10 +41,23 @@ describe('Landing', () => {
     const placeholders = fixture.nativeElement.querySelectorAll('[data-landing-placeholder]');
     expect(placeholders.length).toBe(7);
 
+    const firstPlaceholder = fixture.nativeElement.querySelector('[data-landing-placeholder="1"]');
+    expect(firstPlaceholder?.id).toBe('business-control');
+
     anchorService.revealUpToAnchor('pricing');
     expect(anchorService.requiredOrder()).toBe(6);
 
     fixture.destroy();
     expect(anchorService.requiredOrder()).toBe(0);
+  });
+
+  it('should preserve the #business-control target when the first deferred block completes', async () => {
+    const blocks = await fixture.getDeferBlocks();
+    await blocks[0].render(DeferBlockState.Complete);
+    fixture.detectChanges();
+
+    const target = fixture.nativeElement.querySelector('#business-control');
+    expect(target?.tagName).toBe('SECTION');
+    expect(target?.closest('app-business-control')).toBeTruthy();
   });
 });

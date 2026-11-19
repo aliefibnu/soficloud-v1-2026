@@ -82,6 +82,11 @@ describe('BusinessControl', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should render section with id="business-control"', () => {
+    const section = fixture.debugElement.nativeElement.querySelector('section#business-control');
+    expect(section).toBeTruthy();
+  });
+
   it('should render the header title and description', () => {
     const heading = fixture.debugElement.nativeElement.querySelector('h2');
     expect(heading).toBeTruthy();
