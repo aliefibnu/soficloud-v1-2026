@@ -1038,5 +1038,18 @@ describe('UiMockup', () => {
       expect(getComputedStyle(card!).animationPlayState).not.toBe('paused');
     }
   });
+
+  it('should render the notification badge with centered text trimming and leading-none', () => {
+    fixture.detectChanges();
+    const host = fixture.nativeElement as HTMLElement;
+    const badgeText = host.querySelector('.notification-badge-text') as HTMLElement | null;
+    expect(badgeText).toBeTruthy();
+    expect(badgeText?.textContent?.trim()).toBe('3');
+
+    const badge = badgeText?.parentElement as HTMLElement | null;
+    expect(badge).toBeTruthy();
+    expect(badge?.classList.contains('leading-none')).toBe(true);
+    expect(badge?.classList.contains('tabular-nums')).toBe(true);
+  });
 });
 

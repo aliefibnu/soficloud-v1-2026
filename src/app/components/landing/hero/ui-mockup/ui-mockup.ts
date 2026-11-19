@@ -219,6 +219,10 @@ const CANONICAL_Q3_MONTHS: readonly RawMonthPoint[] = [
   imports: [TranslatePipe, NgOptimizedImage],
   templateUrl: './ui-mockup.html',
   styles: `
+    .notification-badge-text {
+      text-box: trim-both cap alphabetic;
+    }
+
     .mockup-bottom-fade {
       mask-image: linear-gradient(
         to bottom,
