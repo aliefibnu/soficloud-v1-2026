@@ -539,22 +539,31 @@ export class Customers implements OnInit {
     }
 
     this.ngZone.runOutsideAngular(() => {
+      const intersectingCards = new Set<Element>();
       this.centerObserver = new IntersectionObserver(
         (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              intersectingCards.add(entry.target);
+            } else {
+              intersectingCards.delete(entry.target);
+            }
+          }
           if (this.isPaused() || !this.isInViewport()) {
             return;
           }
+          const rootRect = entries[0]?.rootBounds ?? containerEl.getBoundingClientRect();
+          const rootCenter = rootRect.left + rootRect.width / 2;
           let closestIndex = -1;
           let minDistance = Infinity;
 
-          for (const entry of entries) {
-            if (!entry.isIntersecting || !entry.rootBounds) continue;
-            const rootCenter = entry.rootBounds.left + entry.rootBounds.width / 2;
-            const cardCenter = entry.boundingClientRect.left + entry.boundingClientRect.width / 2;
+          for (const cardEl of intersectingCards) {
+            const cardRect = cardEl.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
             const dist = Math.abs(cardCenter - rootCenter);
             if (dist < minDistance) {
               minDistance = dist;
-              const idx = entry.target.getAttribute('data-index');
+              const idx = cardEl.getAttribute('data-index');
               if (idx !== null) {
                 closestIndex = Number(idx);
               }
@@ -571,7 +580,7 @@ export class Customers implements OnInit {
         },
         {
           root: containerEl,
-          rootMargin: '0px -44% 0px -44%',
+          rootMargin: '0px -48% 0px -48%',
           threshold: 0,
         },
       );
@@ -591,7 +600,7 @@ export class Customers implements OnInit {
 
   private advanceToNext(): void {
     const containerEl = this.topMarqueeContainer()?.nativeElement;
-    if (containerEl && containerEl.offsetWidth > 0) {
+    if (this.centerObserver && containerEl && containerEl.offsetWidth > 0) {
       return;
     }
     const N = this.topCustomers.length;
