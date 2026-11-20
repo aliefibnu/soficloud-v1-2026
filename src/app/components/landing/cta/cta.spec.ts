@@ -25,7 +25,7 @@ describe('Cta', () => {
         DESCRIPTION:
           'SOFICloud siap membantu perusahaan mengelola proses bisnis secara lebih terintegrasi, terkontrol, dan mudah dipantau. Hubungi tim kami untuk berdiskusi mengenai kebutuhan ERP perusahaan Anda.',
         SCHEDULE_DEMO: 'Jadwalkan Demo',
-        CONTACT_US: 'Kontak kami',
+        CONTACT_US: 'Hubungi Kami',
         PHONE_LABEL: 'Phone',
         PHONE_VALUE: '+62 778 416 0250',
         WHATSAPP_LABEL: 'WhatsApp',
@@ -79,27 +79,15 @@ describe('Cta', () => {
     expect(card).toBeTruthy();
   });
 
-  it('should render primary and secondary buttons with DM Sans and emit events on click', () => {
+  it('should render "Hubungi Kami" primary button with DM Sans and emit contactUs on click', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const buttons = compiled.querySelectorAll('button');
-    expect(buttons.length).toBe(2);
+    expect(buttons.length).toBe(1);
 
-    const scheduleDemoBtn = buttons[0];
-    expect(scheduleDemoBtn.textContent?.trim()).toContain('Jadwalkan Demo');
-    expect(scheduleDemoBtn.classList.contains('font-dm-sans')).toBe(true);
-    expect(scheduleDemoBtn.classList.contains('font-semibold')).toBe(true);
-
-    const contactUsBtn = buttons[1];
-    expect(contactUsBtn.textContent?.trim()).toContain('Kontak kami');
+    const contactUsBtn = buttons[0];
+    expect(contactUsBtn.textContent?.trim()).toContain('Hubungi Kami');
     expect(contactUsBtn.classList.contains('font-dm-sans')).toBe(true);
     expect(contactUsBtn.classList.contains('font-semibold')).toBe(true);
-
-    let demoEmitted = false;
-    component.scheduleDemo.subscribe(() => {
-      demoEmitted = true;
-    });
-    scheduleDemoBtn.click();
-    expect(demoEmitted).toBe(true);
 
     let contactEmitted = false;
     component.contactUs.subscribe(() => {
