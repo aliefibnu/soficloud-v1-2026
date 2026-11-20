@@ -1,16 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
+import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 import { Features } from './features';
 
 describe('Features', () => {
   let component: Features;
   let fixture: ComponentFixture<Features>;
   let translateService: TranslateService;
+  let anchorService: LandingAnchorService;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Features],
       providers: [
+        provideRouter([{ path: 'financial-management-1', component: Features }]),
         provideTranslateService({
           fallbackLang: 'id',
           lang: 'id',
@@ -18,6 +23,8 @@ describe('Features', () => {
       ],
     }).compileComponents();
 
+    anchorService = TestBed.inject(LandingAnchorService);
+    router = TestBed.inject(Router);
     translateService = TestBed.inject(TranslateService);
     translateService.setTranslation('id', {
       FEATURES: {
@@ -27,7 +34,7 @@ describe('Features', () => {
         CTA_LEARN_MORE: 'Pelajari Selengkapnya',
         CARDS: {
           FINANCIAL: {
-            TITLE: 'Financial Management &\nAccounting',
+            TITLE: 'Manajemen Keuangan &\nAkuntansi',
             DESC: 'Kelola proses keuangan dan accounting dari transaksi operasional hingga laporan keuangan, cash control, cost analysis dan management insight.',
           },
         },
@@ -66,18 +73,47 @@ describe('Features', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const firstTitle = compiled.querySelector('article h3');
-    expect(firstTitle?.textContent?.trim()).toBe('Financial Management &\nAccounting');
+    expect(firstTitle?.textContent?.trim()).toBe('Manajemen Keuangan &\nAkuntansi');
     expect(firstTitle?.classList.contains('text-[#202144]')).toBe(true);
     expect(firstTitle?.classList.contains('items-center')).toBe(true);
     expect(firstTitle?.classList.contains('justify-center')).toBe(true);
     expect(firstTitle?.classList.contains('text-center')).toBe(true);
 
     const firstBtn = compiled.querySelector('article a');
-    expect(firstBtn?.textContent?.trim()).toBe('Pelajari Selengkapnya');
+    expect(firstBtn?.textContent).toContain('Pelajari Selengkapnya');
+    expect(firstBtn?.querySelector('.sr-only')?.textContent).toContain(
+      'Manajemen Keuangan &\nAkuntansi',
+    );
+    expect(firstBtn?.getAttribute('href')).toBe('/financial-management-1');
     expect(firstBtn?.classList.contains('w-full')).toBe(true);
 
     const cardParagraphs = compiled.querySelectorAll('article p');
     expect(cardParagraphs.length).toBe(0);
+  });
+
+  it('should link only the first feature card to /financial-management-1 and keep #contact anchor behavior for remaining cards', async () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const links = Array.from(compiled.querySelectorAll('article a')) as HTMLAnchorElement[];
+    expect(links.length).toBe(9);
+
+    const anchorSpy = vi
+      .spyOn(anchorService, 'navigateOrScrollToAnchor')
+      .mockImplementation(() => {});
+
+    expect(links[0].getAttribute('href')).toBe('/financial-management-1');
+    links[0].click();
+    await fixture.whenStable();
+    expect(router.url).toBe('/financial-management-1');
+    expect(anchorSpy).not.toHaveBeenCalled();
+
+    for (const link of links.slice(1)) {
+      expect(link.getAttribute('href')).toBe('#contact');
+    }
+
+    const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+    links[1].dispatchEvent(clickEvent);
+    expect(anchorSpy).toHaveBeenCalledWith('contact', clickEvent, true, true);
   });
 
   it('should update hoveredCard state when setHoveredCard is called', () => {
