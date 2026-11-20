@@ -7,10 +7,10 @@
   titleMaxWidthClass="max-w-md sm:max-w-xl lg:max-w-[580px]"
   descriptionMaxWidthClass="max-w-md sm:max-w-xl lg:max-w-[680px]"
 >
-  <div class="w-full max-w-[853px] mx-auto flex flex-col gap-6 sm:gap-8 lg:gap-[45px]">
+  <div class="w-full max-w-213.25 mx-auto flex flex-col gap-6 sm:gap-8 lg:gap-11.25">
     <article
       aria-labelledby="status-main-flow-heading"
-      class="w-full rounded-[23.21px] bg-[#FDFDFD] shadow-[0_3px_15px_rgba(0,0,0,0.08)] lg:min-h-[366px] px-5 py-6 sm:px-8 sm:py-8 lg:px-[58px] lg:pt-[36px] lg:pb-[37px]"
+      class="w-full rounded-[23.21px] bg-[#FDFDFD] shadow-[0_3px_15px_rgba(0,0,0,0.08)] lg:min-h-91.5 px-5 py-6 sm:px-8 sm:py-8 lg:px-14.5 lg:pt-9 lg:pb-9.25"
     >
       <h3
         id="status-main-flow-heading"
@@ -22,13 +22,13 @@
 
       <ol
         aria-labelledby="status-main-flow-heading"
-        class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-[12px] mt-7 sm:mt-9 lg:mt-[39px]"
+        class="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 mt-7 sm:mt-9 lg:mt-9.75"
       >
         @for (step of mainFlowSteps; track step; let last = $last; let idx = $index) {
-          <li class="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-2.5 sm:gap-[12px]">
+          <li class="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3">
             <div
               data-testid="main-flow-step"
-              class="w-full sm:w-[132px] md:w-[161px] h-[43.21px] rounded-[8.88px] bg-[#FDFDFD] shadow-[0_3.33px_16.64px_rgba(0,0,0,0.08)] px-4 flex items-center justify-center font-dm-sans font-semibold text-[16px] leading-none text-[#23244E] select-none"
+              class="w-full sm:w-33 md:w-40.25 h-[43.21px] rounded-[8.88px] bg-[#FDFDFD] shadow-[0_3.33px_16.64px_rgba(0,0,0,0.08)] px-4 flex items-center justify-center font-dm-sans font-semibold text-[16px] leading-none text-[#23244E] select-none"
               style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600"
             >
               {{ step }}
@@ -42,7 +42,7 @@
                 height="20"
                 fill="none"
                 aria-hidden="true"
-                class="w-[22.5px] h-[20px] shrink-0 rotate-90 sm:rotate-0"
+                class="w-[22.5px] h-5 shrink-0 rotate-90 sm:rotate-0"
               >
                 <defs>
                   <linearGradient
@@ -75,7 +75,7 @@
 
       <div
         data-testid="optional-statuses-box"
-        class="w-full max-w-[632px] mx-auto mt-6 sm:mt-8 lg:mt-[29px] relative bg-[#FDFDFD] border-[1.5px] border-dashed border-[#1C7DD8] sm:border-none p-3.5 sm:px-[23px] sm:py-[22px]"
+        class="w-full max-w-158 mx-auto mt-6 sm:mt-8 lg:mt-7.25 relative bg-[#FDFDFD] border-[1.5px] border-dashed border-[#1C7DD8] sm:border-none p-3.5 sm:px-5.75 sm:py-5.5"
       >
         <svg
           data-testid="optional-statuses-dashed-border"
@@ -110,11 +110,11 @@
           />
         </svg>
 
-        <ul class="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-[12px]">
+        <ul class="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3">
           @for (status of optionalStatuses; track status) {
             <li
               data-testid="optional-status-item"
-              class="w-full h-[56px] rounded-[8.88px] bg-[#FDFDFD] border-[1.45px] border-[#D7D7D7]/85 px-3 flex items-center justify-center font-dm-sans font-normal text-[16px] leading-none text-[#23244E] select-none"
+              class="w-full h-14 rounded-[8.88px] bg-[#FDFDFD] border-[1.45px] border-[#D7D7D7]/85 px-3 flex items-center justify-center font-dm-sans font-normal text-[16px] leading-none text-[#23244E] select-none"
               style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 400"
             >
               {{ status }}
@@ -124,7 +124,7 @@
       </div>
 
       <p
-        class="font-dm-sans font-semibold italic text-[15px] sm:text-[16px] leading-snug text-[#23244E] text-center mt-7 sm:mt-10 lg:mt-[41px]"
+        class="font-dm-sans font-semibold italic text-[15px] sm:text-[16px] leading-snug text-[#23244E] text-center mt-7 sm:mt-10 lg:mt-10.25"
         style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600"
       >
         {{ 'SMART_WORKFLOW.STATUS_AND_FLOW.MAIN_FLOW.CAPTION' | translate }}
@@ -133,7 +133,7 @@
 
     <article
       aria-labelledby="status-approver-sequence-heading"
-      class="w-full rounded-[23.72px] bg-[#FDFDFD] shadow-[0_3.24px_16.18px_rgba(0,0,0,0.08)] lg:min-h-[158px] px-5 py-5 sm:px-7 lg:px-[29px] lg:pt-[22px] lg:pb-[16px]"
+      class="w-full rounded-[23.72px] bg-[#FDFDFD] shadow-[0_3.24px_16.18px_rgba(0,0,0,0.08)] lg:min-h-39.5 px-5 py-5 sm:px-7 lg:px-7.25 lg:pt-5.5 lg:pb-4"
     >
       <h3
         id="status-approver-sequence-heading"
@@ -145,12 +145,12 @@
 
       <ol
         aria-labelledby="status-approver-sequence-heading"
-        class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[14px] mt-4 sm:mt-[14px]"
+        class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-3.5 mt-4 sm:mt-3.5"
       >
         @for (approver of approverSequence; track approver.number) {
           <li
             data-testid="approver-step"
-            class="min-h-[34px] rounded-[12.94px] bg-[#FDFDFD] shadow-[0_3.24px_16.18px_rgba(0,0,0,0.08)] px-3.5 py-1.5 flex items-center justify-center gap-3 font-dm-sans text-[15px] md:text-[13px] lg:text-[16px] leading-none text-[#23244E] select-none"
+            class="min-h-8.5 rounded-[12.94px] bg-[#FDFDFD] shadow-[0_3.24px_16.18px_rgba(0,0,0,0.08)] px-3.5 py-1.5 flex items-center justify-center gap-3 font-dm-sans text-[15px] md:text-[13px] lg:text-[16px] leading-none text-[#23244E] select-none"
             style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif)"
           >
             <span class="font-medium tabular-nums shrink-0">{{ approver.number }}</span>
@@ -160,7 +160,7 @@
       </ol>
 
       <p
-        class="font-dm-sans font-semibold italic text-[15px] sm:text-[16px] leading-snug text-[#23244E] text-center mt-5 sm:mt-6 lg:mt-[28px]"
+        class="font-dm-sans font-semibold italic text-[15px] sm:text-[16px] leading-snug text-[#23244E] text-center mt-5 sm:mt-6 lg:mt-7"
         style="font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif); font-weight: 600"
       >
         {{ 'SMART_WORKFLOW.STATUS_AND_FLOW.APPROVER_SEQUENCE.CAPTION' | translate }}

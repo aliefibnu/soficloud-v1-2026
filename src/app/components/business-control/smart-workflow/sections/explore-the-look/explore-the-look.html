@@ -52,7 +52,6 @@
     </div>
   </div>
 
-  <!-- Tab Panel 1: Kewenangan / Permission Strategy -->
   <div
     id="panel-look-kewenangan"
     role="tabpanel"
@@ -256,7 +255,6 @@
     </div>
   </div>
 
-  <!-- Shared Cash Advance Request Summary Table -->
   <ng-template #cashAdvanceTable let-compact="compact">
     <div
       [class]="
@@ -269,7 +267,7 @@
       <div
         [class]="
           'bg-[#F3F8FE] flex flex-wrap items-center justify-between gap-2 ' +
-          (compact ? 'min-h-[41.77px] px-[18px] py-2' : 'min-h-[48.6px] px-[21px] py-2.5')
+          (compact ? 'min-h-[41.77px] px-4.5 py-2' : 'min-h-[48.6px] px-5.25 py-2.5')
         "
       >
         <span
@@ -290,7 +288,7 @@
         </span>
       </div>
 
-      <div [class]="compact ? 'px-[18px] pt-[14px] pb-[13px]' : 'px-[21px] pt-[16px] pb-[15px]'">
+      <div [class]="compact ? 'px-4.5 pt-3.5 pb-3.25' : 'px-5.25 pt-4 pb-3.75'">
         <div class="grid grid-cols-2 gap-4">
           <div class="flex flex-col gap-1.5">
             <span
@@ -335,7 +333,7 @@
         <div
           [class]="
             'flex items-center justify-between gap-4 border-t border-[#EEEEEE] ' +
-            (compact ? 'px-[18px] py-[10.5px]' : 'px-[21px] py-[12px]')
+            (compact ? 'px-4.5 py-[10.5px]' : 'px-5.25 py-3')
           "
         >
           <span
@@ -360,7 +358,7 @@
       <div
         [class]="
           'flex items-center justify-between gap-4 border-t border-[#EEEEEE] ' +
-          (compact ? 'px-[18px] py-[11px]' : 'px-[21px] py-[13px]')
+          (compact ? 'px-4.5 py-2.75' : 'px-5.25 py-3.25')
         "
       >
         <span
@@ -383,7 +381,6 @@
     </div>
   </ng-template>
 
-  <!-- Tab Panel 2: Status Approval -->
   <div
     id="panel-look-status-approval"
     role="tabpanel"
@@ -394,22 +391,21 @@
   >
     <div
       data-testid="panel-status-approval-content"
-      class="w-full max-w-280 mx-auto lg:min-h-[342px] flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-[43px]"
+      class="w-full max-w-280 mx-auto lg:min-h-85.5 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10.75"
     >
-      <!-- Left Card: 3-Step Approval Stepper + Cash Advance Summary -->
       <div
         data-testid="status-approval-main-card"
-        class="w-full lg:flex-1 lg:min-h-[306px] rounded-[12.53px] bg-[#FDFDFD] px-4 pt-5 pb-3.5 sm:px-[20px] sm:pt-[20px] sm:pb-[15px] shadow-[0_2px_10px_rgba(35,36,78,0.04)] flex flex-col justify-between gap-4"
+        class="w-full lg:flex-1 lg:min-h-76.5 rounded-[12.53px] bg-[#FDFDFD] px-4 pt-5 pb-3.5 sm:px-5 sm:pt-5 sm:pb-3.75 shadow-[0_2px_10px_rgba(35,36,78,0.04)] flex flex-col justify-between gap-4"
       >
         <ol
-          class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 sm:gap-4 px-1 sm:px-[14px]"
+          class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 sm:gap-4 px-1 sm:px-3.5"
           aria-label="Approval stages"
         >
           @for (step of approvalSteps; track step.id) {
             <li class="flex items-center gap-2.5">
               @if (step.state === 'done') {
                 <span
-                  class="w-[26px] h-[27px] rounded-[5.22px] bg-[#0D9596] flex items-center justify-center shrink-0"
+                  class="w-6.5 h-6.75 rounded-[5.22px] bg-[#0D9596] flex items-center justify-center shrink-0"
                   aria-hidden="true"
                 >
                   <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
@@ -424,13 +420,13 @@
                 </span>
               } @else if (step.state === 'active') {
                 <span
-                  class="w-[26px] h-[27px] rounded-[5.22px] bg-[#0162EF] text-[#FDFDFD] font-dm-sans font-semibold text-[10px] flex items-center justify-center shrink-0"
+                  class="w-6.5 h-6.75 rounded-[5.22px] bg-[#0162EF] text-[#FDFDFD] font-dm-sans font-semibold text-[10px] flex items-center justify-center shrink-0"
                 >
                   {{ step.number }}
                 </span>
               } @else {
                 <span
-                  class="w-[25px] h-[26px] rounded-[4.7px] bg-[#FDFDFD] border border-[#DDDDDD] text-[#8B8B8B] font-dm-sans font-medium text-[10px] flex items-center justify-center shrink-0"
+                  class="w-6.25 h-6.5 rounded-[4.7px] bg-[#FDFDFD] border border-[#DDDDDD] text-[#8B8B8B] font-dm-sans font-medium text-[10px] flex items-center justify-center shrink-0"
                 >
                   {{ step.number }}
                 </span>
@@ -456,15 +452,14 @@
         <ng-container *ngTemplateOutlet="cashAdvanceTable; context: { compact: true }" />
       </div>
 
-      <!-- Right Cards: Posisi Saat Ini -> Langkah Berikutnya -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-0 shrink-0">
         @for (card of statusPositions; track card.id; let isFirst = $first) {
           <div
             [attr.data-testid]="'status-position-card-' + card.id"
-            class="w-full sm:w-[185px] h-[260px] rounded-[16px] bg-[#FDFDFD] p-[24px] flex flex-col items-center text-center shadow-[0_2px_10px_rgba(35,36,78,0.04)]"
+            class="w-full sm:w-46.25 h-65 rounded-2xl bg-[#FDFDFD] p-6 flex flex-col items-center text-center shadow-[0_2px_10px_rgba(35,36,78,0.04)]"
           >
             <div
-              class="w-[127px] h-[81px] rounded-[8px] bg-[radial-gradient(50%_50%_at_50%_50%,#C3D7F7_0%,#EBF2FD_65.38%)] flex items-center justify-center shrink-0"
+              class="w-31.75 h-20.25 rounded-lg bg-[radial-gradient(50%_50%_at_50%_50%,#C3D7F7_0%,#EBF2FD_65.38%)] flex items-center justify-center shrink-0"
             >
               <img
                 [ngSrc]="card.iconSrc"
@@ -475,7 +470,7 @@
               />
             </div>
 
-            <span class="mt-[12px] font-dm-sans font-normal text-[11px] tracking-[0.01em] text-[#23244E] uppercase">
+            <span class="mt-3 font-dm-sans font-normal text-[11px] tracking-[0.01em] text-[#23244E] uppercase">
               {{ card.label }}
             </span>
 
@@ -488,7 +483,7 @@
           </div>
 
           @if (isFirst) {
-            <div class="flex items-center justify-center sm:w-[32px] py-1 sm:py-0" aria-hidden="true">
+            <div class="flex items-center justify-center sm:w-8 py-1 sm:py-0" aria-hidden="true">
               <svg
                 width="19"
                 height="15"
@@ -528,7 +523,6 @@
     </div>
   </div>
 
-  <!-- Tab Panel 3: Riwayat -->
   <div
     id="panel-look-riwayat"
     role="tabpanel"
@@ -539,25 +533,23 @@
   >
     <div
       data-testid="panel-riwayat-content"
-      class="w-full max-w-280 mx-auto lg:min-h-[342px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[24px]"
+      class="w-full max-w-280 mx-auto lg:min-h-85.5 flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-6"
     >
-      <!-- Left Wide Card: Cash Advance Request -->
       <div
         data-testid="riwayat-table-card"
-        class="w-full lg:flex-1 lg:h-[260px]"
+        class="w-full lg:flex-1 lg:h-65"
       >
         <ng-container *ngTemplateOutlet="cashAdvanceTable; context: { compact: false }" />
       </div>
 
-      <!-- Right Timeline Card: Entry -> Confirm -> Running -->
       <div
         data-testid="riwayat-timeline-card"
-        class="relative w-full sm:w-[360px] sm:mx-auto lg:mx-0 sm:h-[260px] rounded-[16px] bg-[#FDFDFD] px-4 py-3 sm:px-[62px] sm:py-[8px] flex flex-col justify-between gap-2 sm:gap-[6.12px] shadow-[0_2px_10px_rgba(35,36,78,0.04)] shrink-0"
+        class="relative w-full sm:w-90 sm:mx-auto lg:mx-0 sm:h-65 rounded-2xl bg-[#FDFDFD] px-4 py-3 sm:px-15.5 sm:py-2 flex flex-col justify-between gap-2 sm:gap-[6.12px] shadow-[0_2px_10px_rgba(35,36,78,0.04)] shrink-0"
       >
         @for (item of historyTimeline; track item.id) {
           <div
             [attr.data-testid]="'riwayat-step-' + item.id"
-            class="relative z-10 w-full sm:w-[236.35px] sm:h-[77.25px] rounded-[6.12px] bg-[#FDFDFD] p-[11px] sm:py-[9px] flex items-center gap-[11px] shadow-[0_2.29px_11.47px_rgba(0,0,0,0.08)]"
+            class="relative z-10 w-full sm:w-[236.35px] sm:h-[77.25px] rounded-[6.12px] bg-[#FDFDFD] p-2.75 sm:py-2.25 flex items-center gap-2.75 shadow-[0_2.29px_11.47px_rgba(0,0,0,0.08)]"
           >
             <div
               class="w-[59.83px] h-[55.84px] rounded-[6.9px] bg-[radial-gradient(50%_50%_at_50%_50%,#C3D7F7_0%,#EBF2FD_65.38%)] flex items-center justify-center shrink-0"
@@ -590,7 +582,6 @@
           </div>
         }
 
-        <!-- Curved Vector Connector Overlay matching Figma 360x260 geometry (sits at z-0 beneath z-10 cards) -->
         <svg
           viewBox="0 0 360 260"
           fill="none"
@@ -647,7 +638,6 @@
     </div>
   </div>
 
-  <!-- Tab Panel 4: Notifikasi -->
   <div
     id="panel-look-notifikasi"
     role="tabpanel"
@@ -658,16 +648,15 @@
   >
     <div
       data-testid="panel-notifikasi-stage"
-      class="w-full max-w-280 mx-auto lg:min-h-[342px] flex items-center"
+      class="w-full max-w-280 mx-auto lg:min-h-85.5 flex items-center"
     >
       <div
         data-testid="panel-notifikasi-content"
         class="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-[21.5px]"
       >
-        <!-- Left Card: Email Notification -->
         <article
           data-testid="notification-card-email"
-          class="w-full min-h-[259.52px] lg:min-h-[276px] rounded-[17.21px] bg-[#FDFDFD] p-5 sm:px-[26px] sm:py-[24px] shadow-[0_4.3px_21.51px_rgba(0,0,0,0.08)] flex flex-col"
+          class="w-full min-h-[259.52px] lg:min-h-69 rounded-[17.21px] bg-[#FDFDFD] p-5 sm:px-6.5 sm:py-6 shadow-[0_4.3px_21.51px_rgba(0,0,0,0.08)] flex flex-col"
         >
           <header class="flex items-center gap-3.5 pb-4 border-b-[1.43px] border-[#D7D7D7]/85">
             <img
@@ -687,23 +676,22 @@
             </div>
           </header>
 
-          <div class="pt-[18px] flex flex-col gap-3">
+          <div class="pt-4.5 flex flex-col gap-3">
             <h4 class="font-dm-sans font-semibold text-[17.21px] text-[#23244E] leading-snug">
               Approval Cash Advance CA-2404-0001
             </h4>
-            <p class="font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-[1.5] text-left">
+            <p class="font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-normal text-left">
               Permintaan perjalanan dinas ke Jakarta sebesar Rp 7,800.000 menunggu peninjauan Accounting Finance
             </p>
-            <p class="font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-[1.5] text-left">
+            <p class="font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-normal text-left">
               Silahkan buka detail transaksi untuk melakukan tindak lanjut sesuai kewenangan Anda.
             </p>
           </div>
         </article>
 
-        <!-- Right Card: WhatsApp Notification -->
         <article
           data-testid="notification-card-whatsapp"
-          class="w-full min-h-[259.52px] lg:min-h-[276px] rounded-[17.21px] bg-[#FDFDFD] p-5 sm:px-[26px] sm:py-[24px] shadow-[0_4.3px_21.51px_rgba(0,0,0,0.08)] flex flex-col"
+          class="w-full min-h-[259.52px] lg:min-h-69 rounded-[17.21px] bg-[#FDFDFD] p-5 sm:px-6.5 sm:py-6 shadow-[0_4.3px_21.51px_rgba(0,0,0,0.08)] flex flex-col"
         >
           <header class="flex items-center gap-3.5 pb-4 border-b-[1.43px] border-[#D7D7D7]/85">
             <img
@@ -723,7 +711,7 @@
             </div>
           </header>
 
-          <div class="pt-[18px] flex flex-col">
+          <div class="pt-4.5 flex flex-col">
             <h4 class="font-dm-sans font-semibold text-[17.21px] text-[#23244E] leading-snug">
               Transaksi CA-2404-0001
             </h4>
@@ -741,7 +729,7 @@
               }
             </dl>
 
-            <p class="mt-4 font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-[1.5]">
+            <p class="mt-4 font-dm-sans font-normal text-[14.34px] text-[#23244E] leading-normal">
               Detail transaksi tersedia di SOFICloud. Akses mengikuti otorisasi pengguna.
             </p>
           </div>
