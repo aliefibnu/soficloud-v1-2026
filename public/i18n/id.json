@@ -1169,6 +1169,44 @@
       "PARAGRAPH_1": "Kami membangun SOFICloud agar perusahaan dapat menggunakan ERP dengan proses yang mudah dipahami dan biaya terjangkau. Kebutuhan bisnis menjadi dasar penentuan modul, alur kerja, dan tahapan penerapan.",
       "PARAGRAPH_2": "Tim kami membantu menerjemahkan aktivitas sehari-hari ke dalam sistem terintegrasi, sehingga pengguna lebih mudah beradaptasi, transaksi tercatat tertib, dan manfaat ERP dapat dirasakan dalam operasional bisnis.",
       "IMAGE_ALT": "Tim implementasi SOFICloud berdiskusi bersama di depan laptop untuk menata proses bisnis terintegrasi"
+    },
+    "OUR_JOURNEY": {
+      "ARIA_LABEL": "Perjalanan dan Komitmen SOFICloud",
+      "PREV_ARIA_LABEL": "Slide sebelumnya",
+      "NEXT_ARIA_LABEL": "Slide berikutnya",
+      "INDICATOR_GROUP_ARIA_LABEL": "Indikator navigasi slide",
+      "GO_TO_SLIDE_ARIA_LABEL": "Buka slide",
+      "SLIDES": {
+        "OUR_JOURNEY": {
+          "EYEBROW": "PERJALANAN KAMI",
+          "TITLE": "Sejak 1998, tumbuh bersama\nkepercayaan pelanggan.",
+          "PARAGRAPH_1": "Dikembangkan oleh PT Inforsys Indonesia yang berpengalaman sejak 1998, SOFICloud ERP dibangun berdasarkan pemahaman terhadap kebutuhan operasional perusahaan di berbagai bidang usaha.",
+          "PARAGRAPH_2": "Berawal dari pengembangan perangkat lunak sistem keuangan hingga pengelolaan bisnis terintegrasi, perjalanan ini dibentuk melalui kebutuhan nyata dan kepercayaan pelanggan. Setiap implementasi memberikan pemahaman baru tentang proses bisnis perusahaan.",
+          "PARAGRAPH_3": "Pengalaman tersebut menjadi bekal untuk terus menyempurnakan produk, memperkuat fitur, serta menghadirkan solusi yang relevan, didukung pendampingan sejak penerapan hingga penggunaan sehari-hari.",
+          "IMAGE_ALT": "Anggota tim SOFICloud meninjau dokumen operasional bersama tablet dan laptop"
+        },
+        "SUSTAINABLE_DEVELOPMENT": {
+          "EYEBROW": "PENGEMBANGAN BERKELANJUTAN",
+          "TITLE": "Terus berkembang dari kebutuhan\ndi lapangan.",
+          "PARAGRAPH_1": "Riset dan pengembangan produk berjalan seiring dengan pengalaman implementasi. Beragam kebutuhan operasional menjadi masukan untuk menyempurnakan fitur, kemudahan penggunaan, dan keterhubungan antarbagian.",
+          "PARAGRAPH_2": "Kami juga mengembangkan teknologi produk agar mengikuti perubahan cara kerja perusahaan. Pilihan layanan cloud serta tampilan responsif memberikan fleksibilitas akses melalui berbagai perangkat, sesuai kebutuhan dan hak akses pengguna.",
+          "IMAGE_ALT": "Perwakilan SOFICloud berjabat tangan bersama mitra bisnis di luar ruangan"
+        },
+        "FOR_BUSINESS": {
+          "EYEBROW": "UNTUK BISNIS YANG BERTUMBUH",
+          "TITLE": "Fokus pada kebutuhan usaha kecil\ndan menengah.",
+          "PARAGRAPH_1": "Perusahaan yang sedang bertumbuh membutuhkan kontrol yang lebih rapi atas penjualan, pembelian, persediaan, produksi, dan keuangan. Pada saat yang sama, investasi sistem perlu disesuaikan dengan skala usaha, kesiapan tim, dan prioritas bisnis.",
+          "PARAGRAPH_2": "SOFICloud hadir untuk membantu perusahaan membangun pengelolaan yang terintegrasi dengan cakupan modul sesuai kebutuhannya. Untuk usaha manufaktur, proses produksi dan biaya dapat dikelola dalam sistem yang terhubung dengan persediaan, penjualan, dan akuntansi.",
+          "IMAGE_ALT": "Dua konsultan SOFICloud mendiskusikan alur bisnis dan modul ERP di ruang rapat"
+        },
+        "OUR_COMMITMENT": {
+          "EYEBROW": "KOMITMEN KAMI",
+          "TITLE": "Mendampingi penerapan, mendukung\npenggunaan sehari-hari.",
+          "PARAGRAPH_1": "Kami ingin menjadi mitra yang memahami kebutuhan IT pelanggan. Pendampingan tim membantu perusahaan menyiapkan alur kerja, mengenalkan sistem kepada pengguna, dan menjalankan ERP dalam kegiatan operasionalnya.",
+          "PARAGRAPH_2": "Dengan pengembangan yang berkesinambungan dan hubungan kerja yang baik, kami berkomitmen memberikan pelayanan yang mendukung pertumbuhan perusahaan, khususnya industri kecil dan menengah di Indonesia.",
+          "IMAGE_ALT": "Tim pendampingan SOFICloud membantu pengguna mengoperasikan sistem ERP pada laptop"
+        }
+      }
     }
   }
 }

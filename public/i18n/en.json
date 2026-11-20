@@ -1169,6 +1169,44 @@
       "PARAGRAPH_1": "We built SOFICloud so companies can adopt ERP through an easy-to-understand process at an affordable cost. Business needs guide the selection of modules, workflows, and implementation stages.",
       "PARAGRAPH_2": "Our team helps translate day-to-day activities into an integrated system, enabling users to adapt more easily, keeping transactions neatly recorded, and delivering tangible ERP benefits across business operations.",
       "IMAGE_ALT": "SOFICloud implementation team collaborating around a laptop to configure integrated business processes"
+    },
+    "OUR_JOURNEY": {
+      "ARIA_LABEL": "SOFICloud Journey and Commitment",
+      "PREV_ARIA_LABEL": "Previous slide",
+      "NEXT_ARIA_LABEL": "Next slide",
+      "INDICATOR_GROUP_ARIA_LABEL": "Slide navigation indicators",
+      "GO_TO_SLIDE_ARIA_LABEL": "Go to slide",
+      "SLIDES": {
+        "OUR_JOURNEY": {
+          "EYEBROW": "OUR JOURNEY",
+          "TITLE": "Since 1998, growing together\nwith customer trust.",
+          "PARAGRAPH_1": "Developed by PT Inforsys Indonesia with experience since 1998, SOFICloud ERP is built on a deep understanding of operational needs across diverse industries.",
+          "PARAGRAPH_2": "Starting from financial software development to integrated business management, this journey has been shaped by real-world needs and customer trust. Every implementation brings fresh insight into how businesses operate.",
+          "PARAGRAPH_3": "That experience drives us to continuously refine the product, strengthen features, and deliver relevant solutions backed by hands-on guidance from implementation to daily use.",
+          "IMAGE_ALT": "SOFICloud team member reviewing operational documents with a tablet and laptop"
+        },
+        "SUSTAINABLE_DEVELOPMENT": {
+          "EYEBROW": "SUSTAINABLE DEVELOPMENT",
+          "TITLE": "Continuously evolving from\nreal-world needs.",
+          "PARAGRAPH_1": "Product research and development advance alongside implementation experience. Diverse operational requirements serve as input to refine features, ease of use, and cross-departmental connectivity.",
+          "PARAGRAPH_2": "We also evolve product technology to keep pace with changing ways of working. Cloud service options and responsive interfaces provide flexible access across devices based on user needs and access rights.",
+          "IMAGE_ALT": "SOFICloud representative shaking hands with a business partner outdoors"
+        },
+        "FOR_BUSINESS": {
+          "EYEBROW": "FOR GROWING BUSINESSES",
+          "TITLE": "Focused on small and medium\nenterprise needs.",
+          "PARAGRAPH_1": "Growing companies need tighter control over sales, purchasing, inventory, production, and finance. At the same time, system investment must align with business scale, team readiness, and priorities.",
+          "PARAGRAPH_2": "SOFICloud helps companies build integrated management with module coverage tailored to their needs. For manufacturing businesses, production processes and costs are managed within a system connected to inventory, sales, and accounting.",
+          "IMAGE_ALT": "Two SOFICloud consultants reviewing business workflows and ERP modules at a desk"
+        },
+        "OUR_COMMITMENT": {
+          "EYEBROW": "OUR COMMITMENT",
+          "TITLE": "Guiding implementation, supporting\ndaily operations.",
+          "PARAGRAPH_1": "We strive to be a partner who truly understands each customer's IT needs. Our team guides companies in structuring workflows, onboarding users, and running ERP smoothly in daily operations.",
+          "PARAGRAPH_2": "Through continuous improvement and strong working relationships, we are committed to delivering services that support company growth, especially for small and medium industries in Indonesia.",
+          "IMAGE_ALT": "SOFICloud support team guiding users through the ERP system on a laptop"
+        }
+      }
     }
   }
 }
