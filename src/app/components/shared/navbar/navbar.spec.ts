@@ -101,6 +101,40 @@ describe('Navbar', () => {
     expect(component.isMobileMenuOpen()).toBe(false);
   });
 
+  it('should keep header flush and layer top bar above mobile dropdown and backdrop when open', () => {
+    const header = fixture.nativeElement.querySelector('header') as HTMLElement;
+    const topBar = header.firstElementChild as HTMLElement;
+    const mobileMenu = fixture.nativeElement.querySelector('#mobile-menu') as HTMLElement;
+
+    expect(header.classList.contains('border-x')).toBe(false);
+    expect(topBar.classList.contains('z-30')).toBe(true);
+    expect(topBar.classList.contains('bg-white')).toBe(true);
+    expect(topBar.classList.contains('rounded-b-4xl')).toBe(true);
+    expect(topBar.classList.contains('max-lg:border-b-transparent')).toBe(false);
+    expect(topBar.classList.contains('max-lg:shadow-none')).toBe(false);
+    expect(mobileMenu.classList.contains('z-20')).toBe(true);
+    expect(mobileMenu.classList.contains('top-[calc(100%-1px)]')).toBe(true);
+    expect(mobileMenu.classList.contains('bg-white')).toBe(true);
+
+    component.toggleMobileMenu();
+    fixture.detectChanges();
+
+    const backdrop = header.querySelector('.fixed.inset-0.top-0') as HTMLElement;
+    expect(topBar.classList.contains('rounded-b-4xl')).toBe(false);
+    expect(topBar.classList.contains('rounded-b-none')).toBe(true);
+    expect(topBar.classList.contains('max-lg:border-b-transparent')).toBe(true);
+    expect(topBar.classList.contains('max-lg:shadow-none')).toBe(true);
+    expect(backdrop).toBeTruthy();
+    expect(backdrop.classList.contains('z-10')).toBe(true);
+
+    component.closeMobileMenu();
+    fixture.detectChanges();
+
+    expect(topBar.classList.contains('rounded-b-4xl')).toBe(true);
+    expect(topBar.classList.contains('max-lg:border-b-transparent')).toBe(false);
+    expect(topBar.classList.contains('max-lg:shadow-none')).toBe(false);
+  });
+
   it('should open and close mobile language sheet', () => {
     component.openMobileLangSheet();
     expect(component.isMobileLangSheetOpen()).toBe(true);
