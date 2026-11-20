@@ -261,39 +261,39 @@
     "CTA_LEARN_MORE": "Pelajari Selengkapnya",
     "CARDS": {
       "FINANCIAL": {
-        "TITLE": "Financial Management &\nAccounting",
+        "TITLE": "Manajemen Keuangan &\nAkuntansi",
         "DESC": "Kelola proses keuangan dan accounting dari transaksi operasional hingga laporan keuangan, cash control, cost analysis dan management insight."
       },
       "SALES": {
-        "TITLE": "Sales & Order\nManagement",
+        "TITLE": "Manajemen Penjualan &\nPesanan",
         "DESC": "Kelola proses penjualan dari quotation, Sales Order dan pemenuhan pesanan hingga delivery, invoice dan monitoring revenue."
       },
       "PROCUREMENT": {
-        "TITLE": "Procurement &\nVendor Management",
+        "TITLE": "Manajemen Pengadaan &\nVendor",
         "DESC": "Kelola kebutuhan pembelian dari Purchase Requisition, approval, vendor, Purchase Order hingga penerimaan barang dan supplier invoice."
       },
       "INVENTORY": {
-        "TITLE": "Inventory & Warehouse\nManagement",
+        "TITLE": "Manajemen Persediaan &\nGudang",
         "DESC": "Pantau stock dan pergerakan barang secara real-time di berbagai gudang, lengkap dengan location, allocation, transfer, opname dan stock control."
       },
       "MANUFACTURING": {
-        "TITLE": "Manufacturing &\nProduction Control",
+        "TITLE": "Manufaktur & Kontrol\nProduksi",
         "DESC": "Kelola perencanaan dan pelaksanaan produksi dari BOM, Routing dan MRP hingga Production Order, WIP serta analisa biaya produksi."
       },
       "PROJECT": {
-        "TITLE": "Project & Cost\nManagement",
+        "TITLE": "Manajemen Proyek &\nBiaya",
         "DESC": "Kelola project budget, progress dan realisasi biaya untuk memantau cost, budget vs actual serta profitability setiap proyek."
       },
       "WORKFLOW": {
-        "TITLE": "Workflow, Approval &\nInternal Control",
+        "TITLE": "Alur Kerja, Persetujuan\n& Kontrol Internal",
         "DESC": "Atur workflow, multi-level approval dan otorisasi sesuai struktur perusahaan, lengkap dengan status proses dan audit trail."
       },
       "ANALYTICS": {
-        "TITLE": "Business Analytics &\nReporting",
+        "TITLE": "Analitik Bisnis &\nPelaporan",
         "DESC": "Ubah transaksi harian menjadi dashboard, laporan dan analisa yang membantu management membaca kinerja dan mengambil keputusan."
       },
       "SECURITY": {
-        "TITLE": "Security, Cloud &\nAuditability",
+        "TITLE": "Keamanan, Cloud &\nAuditabilitas",
         "DESC": "Lindungi akses, data dan histori transaksi melalui role-based authorization, audit trail, cloud access, backup dan monitoring."
       }
     }
