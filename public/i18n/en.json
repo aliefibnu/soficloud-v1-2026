@@ -1093,6 +1093,10 @@
         "TITLE": "Approver Sequence Example",
         "CAPTION": "Tailor approval sequences to fit your company's needs."
       }
+    },
+    "SUBFOOTER": {
+      "TITLE": "Tailor Control\nTo Your Company Policies",
+      "DESCRIPTION": "Discuss access rights, transaction authority, approval sequences, and notification requirements with the SOFICloud team."
     }
   },
   "SCHEDULE_DEMO": {
