@@ -1,1 +1,63 @@
-<p>strong-erp works!</p>
+<section
+  id="strong-erp"
+  aria-labelledby="strong-erp-heading"
+  class="relative w-full overflow-hidden bg-white flex items-center justify-center py-12 sm:py-16 lg:py-8 short:py-5 lg:min-h-[calc(100svh-77px)]"
+>
+  <!-- Subtle ambient glow matching design reference -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      class="absolute -left-[12%] top-1/2 -translate-y-1/2 w-[52%] h-[88%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(215,228,250,0.52)_0%,rgba(235,242,253,0.22)_48%,rgba(255,255,255,0)_76%)]"
+    ></div>
+    <div
+      class="absolute -right-[10%] -bottom-[14%] w-[44%] h-[68%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(210,242,240,0.45)_0%,rgba(230,246,248,0.18)_46%,rgba(255,255,255,0)_74%)]"
+    ></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-0">
+    <div
+      class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 sm:gap-10 lg:gap-8 xl:gap-10"
+    >
+      <!-- Left column: Heading, divider, and 2 paragraphs -->
+      <div class="w-full lg:w-[37.5%] lg:max-w-[459px] shrink-0">
+        <h2
+          id="strong-erp-heading"
+          class="font-inter font-extrabold text-[#23244E] text-[30px] sm:text-[36px] lg:text-[38px] xl:text-[46px] short:text-[36px] leading-[1.18] tracking-normal"
+        >
+          {{ 'RECOGNIZE_SOFI.STRONG_ERP.TITLE' | translate }}
+        </h2>
+
+        <div
+          aria-hidden="true"
+          data-testid="strong-erp-divider"
+          class="w-full max-w-[396px] h-[2px] bg-[#365AD2] my-4 short:my-3.5"
+        ></div>
+
+        <div class="w-full max-w-[430px] space-y-4 short:space-y-3">
+          @for (key of paragraphKeys; track key) {
+            <p
+              class="font-dm-sans font-normal text-[#23244E] text-[13.5px] sm:text-[14px] leading-[1.58] short:leading-[1.5] text-left"
+            >
+              {{ key | translate }}
+            </p>
+          }
+        </div>
+      </div>
+
+      <!-- Right column: Rounded feature photo -->
+      <div class="w-full lg:w-[61.53%] lg:max-w-[763px]">
+        <div
+          data-testid="strong-erp-image-frame"
+          class="relative w-full aspect-[763/479] short:max-h-[420px] rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] overflow-hidden"
+        >
+          <img
+            ngSrc="/images/recognize-sofi/strong-erp/picture.png"
+            width="763"
+            height="479"
+            [alt]="'RECOGNIZE_SOFI.STRONG_ERP.IMAGE_ALT' | translate"
+            class="w-full h-full object-cover block select-none"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
