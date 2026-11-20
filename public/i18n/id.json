@@ -1093,6 +1093,10 @@
         "TITLE": "Contoh urutan approver",
         "CAPTION": "Sesuaikan approval sesuai kebutuhan perusahaan anda."
       }
+    },
+    "SUBFOOTER": {
+      "TITLE": "Sesuaikan Pengendalian\nDengan Kebijakan Perusahaan Anda",
+      "DESCRIPTION": "Diskusikan hak akses, kewenangan transaksi, urutan approval, serta kebutuhan notifikasi bersama tim SOFICloud."
     }
   },
   "SCHEDULE_DEMO": {

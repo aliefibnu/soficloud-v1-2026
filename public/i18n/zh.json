@@ -1093,6 +1093,10 @@
         "TITLE": "审批顺序示例",
         "CAPTION": "可根据贵公司的业务需求灵活配置审批流程。"
       }
+    },
+    "SUBFOOTER": {
+      "TITLE": "依据企业政策\n定制管控机制",
+      "DESCRIPTION": "与 SOFICloud 团队探讨适合贵企业的访问权限、交易授权、审批顺序及通知需求。"
     }
   },
   "SCHEDULE_DEMO": {
