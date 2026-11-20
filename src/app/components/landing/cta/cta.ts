@@ -11,12 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   },
 })
 export class Cta {
-  readonly scheduleDemo = output<void>();
   readonly contactUs = output<void>();
-
-  onScheduleDemo(): void {
-    this.scheduleDemo.emit();
-  }
 
   onContactUs(): void {
     this.contactUs.emit();
