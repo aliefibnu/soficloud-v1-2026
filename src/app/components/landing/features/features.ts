@@ -1,5 +1,6 @@
   import { Component, inject, signal } from '@angular/core';
   import { NgOptimizedImage } from '@angular/common';
+  import { RouterLink } from '@angular/router';
   import { TranslatePipe } from '@ngx-translate/core';
   import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 
@@ -21,6 +22,7 @@
     id: number;
     titleKey: string;
     descKey: string;
+    route?: string;
     topBg: string;
     domeBg: string;
     layers: FeatureLayer[];
@@ -28,7 +30,7 @@
 
   @Component({
     selector: 'app-features',
-    imports: [NgOptimizedImage, TranslatePipe],
+    imports: [NgOptimizedImage, RouterLink, TranslatePipe],
     templateUrl: './features.html',
     styles: `
       @media (prefers-reduced-motion: reduce) {
@@ -46,12 +48,15 @@
   export class Features {
     private readonly anchorService = inject(LandingAnchorService);
     readonly hoveredCard = signal<number | null>(null);
+    readonly ctaButtonClass =
+      'w-full inline-flex items-center justify-center px-6 py-3 rounded-xl font-dm-sans font-semibold text-sm sm:text-[15px] text-[#FDFDFD] bg-linear-to-r from-[#1E37E1] to-[#6694EB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.99] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2';
 
     readonly cards: FeatureCard[] = [
       {
         id: 1,
         titleKey: 'FEATURES.CARDS.FINANCIAL.TITLE',
         descKey: 'FEATURES.CARDS.FINANCIAL.DESC',
+        route: '/financial-management-1',
         topBg: 'linear-gradient(180deg, #FFEFED 0%, #FBCBC5 100%)',
         domeBg: '#FFDFDC',
         layers: [
