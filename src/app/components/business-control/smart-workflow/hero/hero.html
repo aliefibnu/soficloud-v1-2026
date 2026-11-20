@@ -1,7 +1,7 @@
 <section id="hero" class="relative w-full py-3 sm:py-4 lg:py-6 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-[1360px] mx-auto">
+  <div class="max-w-340 mx-auto">
     <div
-      class="relative w-full rounded-3xl lg:rounded-[32px] overflow-hidden shadow-[0px_3px_15px_0px_rgba(0,0,0,0.08)] lg:aspect-[1360/762] min-h-[500px] lg:min-h-0 flex flex-col lg:flex-row items-center justify-between"
+      class="relative w-full rounded-3xl lg:rounded-4xl overflow-hidden shadow-[0px_3px_15px_0px_rgba(0,0,0,0.08)] lg:aspect-1360/762 min-h-125 lg:min-h-0 flex flex-col lg:flex-row items-center justify-between"
       style="
         background: conic-gradient(
           from 19.5deg at 53.25% 48.04%,
@@ -12,12 +12,11 @@
         );
       "
     >
-      <!-- Left Column: Typography -->
       <div
-        class="w-full lg:w-[48%] lg:max-w-[650px] h-full flex flex-col justify-center px-6 py-8 sm:px-10 sm:py-10 lg:py-0 lg:pl-[63.5px] lg:pr-2 z-10 select-text"
+        class="w-full lg:w-[48%] lg:max-w-162.5 h-full flex flex-col justify-center px-6 py-8 sm:px-10 sm:py-10 lg:py-0 lg:pl-[63.5px] lg:pr-2 z-10 select-text"
       >
         <h1
-          class="font-inter font-extrabold text-[#23244E] text-[32px] sm:text-[40px] md:text-[48px] lg:text-[clamp(36px,4.44vw,64px)] leading-[1.25] tracking-normal max-w-[590px]"
+          class="font-inter font-extrabold text-[#23244E] text-[32px] sm:text-[40px] md:text-[48px] lg:text-[clamp(36px,4.44vw,64px)] leading-tight tracking-normal max-w-147.5"
           style="font-family: var(--font-inter, 'Inter Variable', sans-serif); font-weight: 800"
         >
           <span class="block whitespace-nowrap">{{ 'SMART_WORKFLOW.HERO.TITLE_LINE_1' | translate }}</span>
@@ -26,7 +25,7 @@
         </h1>
 
         <p
-          class="font-dm-sans font-normal text-[#23244E] text-[13px] sm:text-[14px] leading-[1.6] text-justify max-w-[504px] mt-3 sm:mt-4 lg:mt-[18px]"
+          class="font-dm-sans font-normal text-[#23244E] text-[13px] sm:text-[14px] leading-[1.6] text-justify max-w-126 mt-3 sm:mt-4 lg:mt-4.5"
           style="
             font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
             font-weight: 400;
@@ -36,11 +35,10 @@
         </p>
       </div>
 
-      <!-- Right Column: Tablet Stage (Meja Pedestal + Approval Mockup Tablet) -->
       <div
-        class="w-full lg:w-[60.66%] h-auto lg:h-full relative lg:absolute lg:top-0 lg:-right-[4.78%] flex items-end justify-end pointer-events-none select-none overflow-hidden"
+        class="w-full lg:w-[60.66%] h-auto lg:h-full relative lg:absolute lg:top-0 lg:right-[-4.78%] flex items-end justify-end pointer-events-none select-none overflow-hidden"
       >
-        <div class="relative w-full aspect-[825/762]">
+        <div class="relative w-full aspect-825/762">
           <img
             ngSrc="/images/smart-workflow/hero-pedestal.svg"
             width="825"
