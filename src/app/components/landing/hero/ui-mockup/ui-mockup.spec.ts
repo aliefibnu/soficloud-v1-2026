@@ -986,7 +986,7 @@ describe('UiMockup', () => {
     expect(component.currentData().sales.orders).toBe(julInJul.salesOrders);
   });
 
-  it('should apply bottom fade mask and expanded white shade overlay while keeping floating bottom-right card unmasked', () => {
+  it('should apply subtle bottom fade mask and reduced white shade overlay while keeping floating bottom-right card unmasked', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
@@ -995,12 +995,13 @@ describe('UiMockup', () => {
 
     const backdropGlow = compiled.querySelector('.-z-10.blur-3xl');
     expect(backdropGlow).toBeTruthy();
-    expect(backdropGlow?.classList.contains('bottom-24')).toBe(true);
+    expect(backdropGlow?.classList.contains('bottom-20')).toBe(true);
 
     const whiteOverlay = fadeContainer?.querySelector('.bg-linear-to-t.from-white');
     expect(whiteOverlay).toBeTruthy();
-    expect(whiteOverlay?.classList.contains('h-24')).toBe(true);
-    expect(whiteOverlay?.classList.contains('lg:h-44')).toBe(true);
+    expect(whiteOverlay?.classList.contains('h-20')).toBe(true);
+    expect(whiteOverlay?.classList.contains('lg:h-36')).toBe(true);
+    expect(whiteOverlay?.classList.contains('via-white/60')).toBe(true);
 
     const moCard = compiled.querySelector('[aria-label="Budget utilization execution readiness"]');
     expect(moCard).toBeTruthy();
