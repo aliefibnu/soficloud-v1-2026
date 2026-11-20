@@ -1159,6 +1159,12 @@
       "PARAGRAPH_2": "Cross-departmental data connectivity enables transactions to be traced from customer orders all the way to payments recorded in financial statements.",
       "PARAGRAPH_3": "SOFICloud ERP helps companies structure workflows, control costs, and monitor stock, order progress, and business performance. Integrated approval workflows and reporting also support operational discipline and management decision-making.",
       "IMAGE_ALT": "Business professional reviewing operational documents and financial reports with SOFICloud ERP on a laptop"
+    },
+    "STRONG_ERP": {
+      "TITLE": "Powerful ERP, with simpler implementation.",
+      "PARAGRAPH_1": "We built SOFICloud so companies can adopt ERP through an easy-to-understand process at an affordable cost. Business needs guide the selection of modules, workflows, and implementation stages.",
+      "PARAGRAPH_2": "Our team helps translate day-to-day activities into an integrated system, enabling users to adapt more easily, keeping transactions neatly recorded, and delivering tangible ERP benefits across business operations.",
+      "IMAGE_ALT": "SOFICloud implementation team collaborating around a laptop to configure integrated business processes"
     }
   }
 }
