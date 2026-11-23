@@ -423,4 +423,30 @@ describe('FinancialManagement1 FinancialControl', () => {
       'Claims, reimbursements, and advances move from request to settlement',
     );
   });
+
+  it('should preserve full readable heading typography without short-viewport font shrinking while keeping compact spacing and Payment Priority header strip', () => {
+    const section = fixture.debugElement.query(By.css('section#financial-control'));
+    expect(section.nativeElement.classList.contains('short:pt-3')).toBe(true);
+    expect(section.nativeElement.classList.contains('short:pb-10')).toBe(true);
+
+    const h2 = fixture.debugElement.query(By.css('h2#financial-control-heading'));
+    expect(h2.nativeElement.className).not.toContain('short:text-');
+
+    const cardHeadings = fixture.debugElement.queryAll(By.css('article h3'));
+    expect(cardHeadings.length).toBe(3);
+    for (const heading of cardHeadings) {
+      expect(heading.nativeElement.className).not.toContain('short:text-');
+    }
+
+    const grid = fixture.debugElement.query(By.css('section#financial-control > div.grid'));
+    expect(grid.nativeElement.classList.contains('short:mt-5')).toBe(true);
+
+    const paymentTitle = fixture.debugElement.query(By.css('h4#payment-priority-title'));
+    const paymentHeaderStrip = paymentTitle.nativeElement.parentElement as HTMLElement;
+    expect(paymentHeaderStrip.classList.contains('border-b')).toBe(true);
+    expect(paymentHeaderStrip.className).toContain('shadow-[0_3px_12px_rgba(35,36,78,0.04)]');
+
+    const stepperContainer = fixture.debugElement.query(By.css('.approval-stepper-container'));
+    expect(stepperContainer.nativeElement.classList.contains('short:py-5')).toBe(true);
+  });
 });
