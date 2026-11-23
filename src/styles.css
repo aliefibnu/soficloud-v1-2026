@@ -109,3 +109,14 @@ html {
   initial-value: 0px;
 }
 
+/* Progressive enhancement for smooth neutral-to-blue gradient interpolation */
+:root {
+  --in-oklab: ;
+}
+
+@supports (background: conic-gradient(from 0deg at 50% 50% in oklab, white, black)) {
+  :root {
+    --in-oklab: in oklab;
+  }
+}
+

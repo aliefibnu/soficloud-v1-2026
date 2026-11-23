@@ -6,7 +6,14 @@
   justify-content: space-between;
   min-block-size: 15.5rem;
   overflow: clip;
-  background: linear-gradient(50deg, #ffffff 28%, #f4f8ff 64%, #e3edfc 100%);
+  background-color: #fdfdfd;
+  background-image: conic-gradient(
+    from -2.93deg at 87.54% 30.63% var(--in-oklab),
+    #fdfdfd -64.78deg,
+    rgba(205, 223, 251, 0.9) 45.88deg,
+    #fdfdfd 295.22deg,
+    rgba(205, 223, 251, 0.9) 405.88deg
+  );
 }
 
 .capability-card-copy {

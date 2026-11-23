@@ -236,4 +236,18 @@ describe('TenCapabilities', () => {
     ).nativeElement;
     expect(firstDesc.textContent.trim()).toContain('Period Control, and Closing.');
   });
+
+  it('should style capability cards with the Figma conic-gradient and #fdfdfd base background', () => {
+    const cards = fixture.debugElement.queryAll(By.css('article.capability-card'));
+    expect(cards.length).toBe(10);
+
+    const injectedStyles = Array.from(document.head.querySelectorAll('style'))
+      .map((styleEl) => styleEl.textContent ?? '')
+      .join('\n');
+
+    expect(injectedStyles).toContain('background-color: #fdfdfd');
+    expect(injectedStyles).toContain('conic-gradient');
+    expect(injectedStyles).toContain('from -2.93deg at 87.54% 30.63%');
+    expect(injectedStyles).toContain('rgba(205, 223, 251, 0.9)');
+  });
 });
