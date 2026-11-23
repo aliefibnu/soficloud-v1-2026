@@ -1219,6 +1219,14 @@
       "BADGE_NUMBER": "01",
       "BADGE_LABEL": "Financial Management & Accounting",
       "ILLUSTRATION_ALT": "Illustration of SOFICloud financial report clipboard, magnifying glass, and calculator"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "Financial management sections",
+      "FINANCIAL_CONTROL": "FINANCIAL CONTROL",
+      "TEN_CAPABILITIES": "10 CAPABILITIES",
+      "EXPENSE_ADVANCE": "EXPENSE & ADVANCE",
+      "REPORTING": "REPORTING",
+      "INTEGRATION": "INTEGRATION"
     }
   }
 }

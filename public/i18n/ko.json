@@ -1219,6 +1219,14 @@
       "BADGE_NUMBER": "01",
       "BADGE_LABEL": "재무 관리 및 회계",
       "ILLUSTRATION_ALT": "SOFICloud 재무 보고서 클립보드, 돋보기, 계산기 일러스트"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "재무 관리 섹션",
+      "FINANCIAL_CONTROL": "재무 통제",
+      "TEN_CAPABILITIES": "10가지 기능",
+      "EXPENSE_ADVANCE": "비용 및 가지급금",
+      "REPORTING": "리포팅",
+      "INTEGRATION": "시스템 연동"
     }
   }
 }

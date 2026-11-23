@@ -1219,6 +1219,14 @@
       "BADGE_NUMBER": "01",
       "BADGE_LABEL": "財務管理・会計",
       "ILLUSTRATION_ALT": "SOFICloudの財務レポートクリップボード、虫眼鏡、電卓のイラスト"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "財務管理セクション",
+      "FINANCIAL_CONTROL": "財務管理",
+      "TEN_CAPABILITIES": "10の機能",
+      "EXPENSE_ADVANCE": "経費・仮払金",
+      "REPORTING": "レポート",
+      "INTEGRATION": "システム連携"
     }
   }
 }

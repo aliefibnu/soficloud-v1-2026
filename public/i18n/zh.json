@@ -1219,6 +1219,14 @@
       "BADGE_NUMBER": "01",
       "BADGE_LABEL": "财务管理与会计",
       "ILLUSTRATION_ALT": "SOFICloud 财务报表写字板、放大镜与计算器插图"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "财务管理板块",
+      "FINANCIAL_CONTROL": "财务管控",
+      "TEN_CAPABILITIES": "10项核心能力",
+      "EXPENSE_ADVANCE": "报销与预付款",
+      "REPORTING": "财务报表",
+      "INTEGRATION": "系统集成"
     }
   }
 }

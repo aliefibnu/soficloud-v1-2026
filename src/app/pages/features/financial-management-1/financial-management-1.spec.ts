@@ -35,9 +35,26 @@ describe('FinancialManagement1', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render app-hero', () => {
+  it('should render app-hero followed by app-section-tabs with 5 tabs', () => {
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
+    const tabsEl = fixture.debugElement.query(By.css('app-section-tabs'));
     expect(heroEl).toBeTruthy();
+    expect(tabsEl).toBeTruthy();
+
+    const children = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelector('div')?.children ?? [],
+    ).map((el) => el.tagName.toLowerCase());
+    expect(children).toEqual(['app-hero', 'app-section-tabs']);
+
+    const tabLinks = fixture.debugElement.queryAll(By.css('app-section-tabs nav ul li a'));
+    expect(tabLinks.length).toBe(5);
+    expect(component.tabs.map((t) => t.id)).toEqual([
+      'financial-control',
+      'capabilities',
+      'expense-advance',
+      'reporting',
+      'integration',
+    ]);
   });
 
   it('should scroll to top (0, 0) on initialization in browser when no hash is present', () => {

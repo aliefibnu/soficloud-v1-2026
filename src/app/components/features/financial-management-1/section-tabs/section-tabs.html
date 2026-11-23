@@ -1,0 +1,63 @@
+<div
+  id="financial-management-tabs"
+  class="relative w-full py-0 transition-[padding] duration-300 ease-out"
+  [class.px-4]="!isSticky()"
+  [class.sm:px-6]="!isSticky()"
+  [class.lg:px-8]="!isSticky()"
+  [class.px-0]="isSticky()"
+>
+  <div class="max-w-7xl mx-auto flex justify-center">
+    <div
+      class="w-full pb-2.5 sm:pb-3 transition-[max-width,background-color,box-shadow,border-radius,padding] duration-300 ease-out shadow-none"
+      [class.max-w-7xl]="!isSticky()"
+      [class.max-w-5xl]="isSticky()"
+      [class.bg-white]="isSticky()"
+      [class.rounded-b-[24px]]="isSticky()"
+      [class.overflow-hidden]="isSticky()"
+      [class.px-4]="isSticky()"
+      [class.sm:px-6]="isSticky()"
+      [style.box-shadow]="
+        isSticky()
+          ? 'var(--shadow-dynamic-island, 0 14px 34px -4px rgba(24, 40, 73, 0.18), 0 6px 14px -2px rgba(24, 40, 73, 0.10))'
+          : 'none'
+      "
+    >
+      <nav [attr.aria-label]="navAriaLabel()" class="relative w-full">
+        <div
+          #scrollerRef
+          class="tabs-scroller relative w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden py-1"
+          [class.more-start]="moreStart()"
+          [class.more-end]="moreEnd()"
+        >
+          <ul
+            #tabsListRef
+            class="tabs-list relative flex flex-nowrap items-center justify-between w-max min-w-full lg:w-full m-0 border-b border-[#D8D8D8] px-4 sm:px-10 gap-2 sm:gap-4 lg:gap-0 transition-[padding] duration-300 ease-out"
+            [class.lg:px-16]="!isSticky()"
+            [class.xl:px-20]="!isSticky()"
+            [class.lg:px-8]="isSticky()"
+            [style.--active-tab-anchor]="anchorName"
+          >
+            @for (tab of tabs(); track tab.id) {
+              <li class="shrink-0 list-none scroll-snap-item">
+                <a
+                  [id]="'tab-' + tab.id"
+                  [href]="'#' + tab.id"
+                  [attr.data-tab-id]="tab.id"
+                  [attr.aria-current]="activeTabId() === tab.id ? 'true' : null"
+                  [style.anchor-name]="activeTabId() === tab.id ? anchorName : null"
+                  (click)="onTabClick($event, tab.id)"
+                  class="tab-link relative inline-flex items-center justify-center min-h-11 px-4 sm:px-5 lg:px-7 pt-3.5 pb-4.5 font-dm-sans font-semibold uppercase text-xs sm:text-[13px] lg:text-[15px] leading-none tracking-[0.02em] whitespace-nowrap select-none cursor-pointer transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#365AD2] rounded-xs"
+                  [class.text-[#23244E]]="activeTabId() === tab.id"
+                  [class.text-[#717386]]="activeTabId() !== tab.id"
+                  [class.hover:text-[#23244E]]="activeTabId() !== tab.id"
+                >
+                  {{ tab.titleKey ? (tab.titleKey | translate) : tab.defaultTitle }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

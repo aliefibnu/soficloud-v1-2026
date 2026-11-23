@@ -1219,6 +1219,14 @@
       "BADGE_NUMBER": "01",
       "BADGE_LABEL": "Financial Management & Accounting",
       "ILLUSTRATION_ALT": "Ilustrasi papan klip laporan keuangan, kaca pembesar, dan kalkulator SOFICloud"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "Bagian manajemen keuangan",
+      "FINANCIAL_CONTROL": "KONTROL KEUANGAN",
+      "TEN_CAPABILITIES": "10 KAPABILITAS",
+      "EXPENSE_ADVANCE": "BIAYA & UANG MUKA",
+      "REPORTING": "PELAPORAN",
+      "INTEGRATION": "INTEGRASI"
     }
   }
 }
