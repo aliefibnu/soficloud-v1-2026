@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideRouter, Router } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { FinancialManagement1 } from './financial-management-1';
 
@@ -14,12 +15,16 @@ describe('FinancialManagement1', () => {
     await TestBed.configureTestingModule({
       imports: [FinancialManagement1],
       providers: [
+        provideRouter([{ path: 'financial-management-1', component: FinancialManagement1 }]),
         provideTranslateService({
           fallbackLang: 'id',
           lang: 'id',
         }),
       ],
     }).compileComponents();
+
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/financial-management-1');
 
     fixture = TestBed.createComponent(FinancialManagement1);
     component = fixture.componentInstance;
@@ -51,6 +56,9 @@ describe('FinancialManagement1', () => {
 
     const tabLinks = fixture.debugElement.queryAll(By.css('app-section-tabs nav ul li a'));
     expect(tabLinks.length).toBe(5);
+    expect(tabLinks[0].nativeElement.getAttribute('href')).toBe(
+      '/financial-management-1#financial-control',
+    );
     expect(component.tabs.map((t) => t.id)).toEqual([
       'financial-control',
       'capabilities',

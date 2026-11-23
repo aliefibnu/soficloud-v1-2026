@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideRouter, Router } from '@angular/router';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { FeatureTab, SectionTabs } from './section-tabs';
 
@@ -114,15 +115,19 @@ describe('FinancialManagement1 SectionTabs', () => {
     const links = fixture.debugElement.queryAll(By.css('nav ul li a'));
     expect(links.length).toBe(5);
     expect(links[0].nativeElement.textContent.trim()).toBe('FINANCIAL CONTROL');
-    expect(links[0].nativeElement.getAttribute('href')).toBe('#financial-control');
+    expect(links[0].nativeElement.getAttribute('href')).toBe(
+      component.getTabHref('financial-control'),
+    );
     expect(links[1].nativeElement.textContent.trim()).toBe('10 CAPABILITIES');
-    expect(links[1].nativeElement.getAttribute('href')).toBe('#capabilities');
+    expect(links[1].nativeElement.getAttribute('href')).toBe(component.getTabHref('capabilities'));
     expect(links[2].nativeElement.textContent.trim()).toBe('EXPENSE & ADVANCE');
-    expect(links[2].nativeElement.getAttribute('href')).toBe('#expense-advance');
+    expect(links[2].nativeElement.getAttribute('href')).toBe(
+      component.getTabHref('expense-advance'),
+    );
     expect(links[3].nativeElement.textContent.trim()).toBe('REPORTING');
-    expect(links[3].nativeElement.getAttribute('href')).toBe('#reporting');
+    expect(links[3].nativeElement.getAttribute('href')).toBe(component.getTabHref('reporting'));
     expect(links[4].nativeElement.textContent.trim()).toBe('INTEGRATION');
-    expect(links[4].nativeElement.getAttribute('href')).toBe('#integration');
+    expect(links[4].nativeElement.getAttribute('href')).toBe(component.getTabHref('integration'));
   });
 
   it('should mark only the first tab active by default with aria-current and WCAG AA color classes', () => {
@@ -184,8 +189,44 @@ describe('FinancialManagement1 SectionTabs', () => {
     expect(component.activeTabId()).toBe('expense-advance');
     expect(links[2].nativeElement.getAttribute('aria-current')).toBe('true');
     expect(links[0].nativeElement.getAttribute('aria-current')).toBeNull();
-    expect(replaceStateSpy).toHaveBeenCalledWith(null, '', '#expense-advance');
+    expect(replaceStateSpy).toHaveBeenCalledWith(null, '', component.getTabHref('expense-advance'));
 
+    replaceStateSpy.mockRestore();
+  });
+
+  it('should preserve modified, non-primary, and already-prevented link clicks without switching tabs', () => {
+    const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
+    const selectTabSpy = vi.spyOn(component, 'selectTab');
+
+    const modifiers: readonly MouseEventInit[] = [
+      { ctrlKey: true, button: 0, cancelable: true },
+      { metaKey: true, button: 0, cancelable: true },
+      { shiftKey: true, button: 0, cancelable: true },
+      { altKey: true, button: 0, cancelable: true },
+      { button: 1, cancelable: true },
+    ];
+
+    for (const init of modifiers) {
+      const event = new MouseEvent('click', init);
+      component.onTabClick(event, 'reporting');
+      expect(event.defaultPrevented).toBe(false);
+    }
+
+    const alreadyPrevented = new MouseEvent('click', { button: 0, cancelable: true });
+    alreadyPrevented.preventDefault();
+    component.onTabClick(alreadyPrevented, 'reporting');
+
+    expect(selectTabSpy).not.toHaveBeenCalled();
+    expect(replaceStateSpy).not.toHaveBeenCalled();
+    expect(component.activeTabId()).toBe('financial-control');
+
+    const primaryClick = new MouseEvent('click', { button: 0, cancelable: true });
+    component.onTabClick(primaryClick, 'reporting');
+    expect(primaryClick.defaultPrevented).toBe(true);
+    expect(selectTabSpy).toHaveBeenCalledWith('reporting');
+    expect(component.activeTabId()).toBe('reporting');
+
+    selectTabSpy.mockRestore();
     replaceStateSpy.mockRestore();
   });
 
@@ -394,5 +435,61 @@ describe('FinancialManagement1 SectionTabs', () => {
     component.ngOnDestroy();
     expect(disconnectSpy).toHaveBeenCalled();
     expect(cleanupSpy).toHaveBeenCalled();
+  });
+
+  it('should emit route-qualified hrefs when navigated via Router so Ctrl+Click stays on the current route', async () => {
+    TestBed.resetTestingModule();
+    await TestBed.configureTestingModule({
+      imports: [SectionTabs],
+      providers: [
+        provideRouter([{ path: 'financial-management-1', component: SectionTabs }]),
+        provideTranslateService({ fallbackLang: 'en', lang: 'en' }),
+      ],
+    }).compileComponents();
+
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/financial-management-1');
+
+    const routedFixture = TestBed.createComponent(SectionTabs);
+    routedFixture.componentRef.setInput('tabs', FINANCIAL_TABS);
+    routedFixture.detectChanges();
+    await routedFixture.whenStable();
+
+    const links = routedFixture.debugElement.queryAll(By.css('nav ul li a'));
+    expect(links[0].nativeElement.getAttribute('href')).toBe(
+      '/financial-management-1#financial-control',
+    );
+    expect(links[1].nativeElement.getAttribute('href')).toBe(
+      '/financial-management-1#capabilities',
+    );
+  });
+
+  it('should activate and scroll to the matching section when initialized with a URL hash', async () => {
+    vi.useFakeTimers();
+    const dummySection = document.createElement('section');
+    dummySection.id = 'capabilities';
+    dummySection.setAttribute('tabindex', '-1');
+    const scrollSpy = vi.fn();
+    const focusSpy = vi.fn();
+    dummySection.scrollIntoView = scrollSpy;
+    dummySection.focus = focusSpy;
+    document.body.appendChild(dummySection);
+
+    window.history.replaceState(null, '', '#capabilities');
+
+    try {
+      const hashFixture = TestBed.createComponent(SectionTabs);
+      hashFixture.componentRef.setInput('tabs', FINANCIAL_TABS);
+      hashFixture.detectChanges();
+
+      expect(hashFixture.componentInstance.activeTabId()).toBe('capabilities');
+      vi.advanceTimersByTime(60);
+
+      expect(scrollSpy).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
+      expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true });
+    } finally {
+      vi.useRealTimers();
+      document.body.removeChild(dummySection);
+    }
   });
 });

@@ -1,8 +1,9 @@
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, PlatformLocation } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   computed,
+  DestroyRef,
   ElementRef,
   inject,
   input,
@@ -12,7 +13,10 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { filter } from 'rxjs';
 
 export interface FeatureTab {
   readonly id: string;
@@ -37,6 +41,9 @@ let nextSectionTabsInstanceId = 0;
 export class SectionTabs implements AfterViewInit, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly router = inject(Router, { optional: true });
+  private readonly platformLocation = inject(PlatformLocation, { optional: true });
+  private readonly destroyRef = inject(DestroyRef);
   readonly isBrowser = isPlatformBrowser(this.platformId);
 
   readonly tabs = input.required<readonly FeatureTab[]>();
@@ -49,6 +56,7 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
   readonly isSticky = signal<boolean>(false);
   readonly moreStart = signal<boolean>(false);
   readonly moreEnd = signal<boolean>(false);
+  private readonly currentBaseUrl = signal<string>(this.resolveBaseUrl());
 
   readonly activeTabId = linkedSignal<readonly FeatureTab[], string>({
     source: this.tabs,
@@ -68,8 +76,23 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
   private scrollRafId: number | null = null;
   private isUserClicking = false;
   private userClickTimeout?: ReturnType<typeof setTimeout>;
+  private initialHashScrollTimeout?: ReturnType<typeof setTimeout>;
   private edgeFadeObserver?: IntersectionObserver;
   private scrollendCleanup?: () => void;
+
+  constructor() {
+    this.router?.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((event) => {
+        const basePath = event.urlAfterRedirects.split('#')[0];
+        if (basePath) {
+          this.currentBaseUrl.set(basePath);
+        }
+      });
+  }
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) return;
@@ -78,6 +101,10 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
       const hashId = window.location.hash.slice(1);
       if (this.tabs().some((t) => t.id === hashId)) {
         this.activeTabId.set(hashId);
+        const scrollBehavior: ScrollBehavior = this.prefersReducedMotion() ? 'auto' : 'smooth';
+        this.initialHashScrollTimeout = setTimeout(() => {
+          this.scrollTargetIntoView(hashId, scrollBehavior);
+        }, 50);
       }
     }
 
@@ -96,6 +123,13 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
     if (this.userClickTimeout) {
       clearTimeout(this.userClickTimeout);
     }
+    if (this.initialHashScrollTimeout) {
+      clearTimeout(this.initialHashScrollTimeout);
+    }
+  }
+
+  getTabHref(id: string): string {
+    return `${this.currentBaseUrl()}#${id}`;
   }
 
   onWindowResize(): void {
@@ -115,6 +149,17 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
   }
 
   onTabClick(event: MouseEvent, id: string): void {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
     event.preventDefault();
     this.selectTab(id);
   }
@@ -142,16 +187,10 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
       container: 'nearest',
     } as ScrollIntoViewOptions);
 
-    const targetEl = document.getElementById(id);
-    if (targetEl) {
-      targetEl.scrollIntoView?.({ behavior: scrollBehavior, block: 'start' });
-      if (targetEl.hasAttribute('tabindex')) {
-        targetEl.focus({ preventScroll: true });
-      }
-    }
+    this.scrollTargetIntoView(id, scrollBehavior);
 
     if (typeof history !== 'undefined' && typeof history.replaceState === 'function') {
-      history.replaceState(null, '', `#${id}`);
+      history.replaceState(null, '', this.getTabHref(id));
     }
   }
 
@@ -275,6 +314,26 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
 
     this.edgeFadeObserver.observe(firstItem);
     this.edgeFadeObserver.observe(lastItem);
+  }
+
+  private scrollTargetIntoView(id: string, behavior: ScrollBehavior): void {
+    const targetEl = document.getElementById(id);
+    if (!targetEl) return;
+    targetEl.scrollIntoView?.({ behavior, block: 'start' });
+    if (targetEl.hasAttribute('tabindex')) {
+      targetEl.focus({ preventScroll: true });
+    }
+  }
+
+  private resolveBaseUrl(): string {
+    if (this.router && (this.router.navigated || !this.isBrowser)) {
+      const routerPath = this.router.url.split('#')[0];
+      if (routerPath) return routerPath;
+    }
+    if (this.isBrowser) {
+      return `${window.location.pathname}${window.location.search}`;
+    }
+    return this.platformLocation?.pathname || '';
   }
 
   private prefersReducedMotion(): boolean {

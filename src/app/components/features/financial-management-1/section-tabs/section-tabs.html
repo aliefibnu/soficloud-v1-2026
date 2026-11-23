@@ -41,7 +41,7 @@
               <li class="shrink-0 list-none scroll-snap-item">
                 <a
                   [id]="'tab-' + tab.id"
-                  [href]="'#' + tab.id"
+                  [href]="getTabHref(tab.id)"
                   [attr.data-tab-id]="tab.id"
                   [attr.aria-current]="activeTabId() === tab.id ? 'true' : null"
                   [style.anchor-name]="activeTabId() === tab.id ? anchorName : null"
