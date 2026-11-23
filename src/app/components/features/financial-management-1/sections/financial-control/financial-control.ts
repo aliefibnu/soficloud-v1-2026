@@ -18,6 +18,14 @@ export interface PaymentPriorityRow {
   readonly statusKey: string;
 }
 
+export interface ApprovalHistoryStep {
+  readonly id: string;
+  readonly stepNumber: number;
+  readonly roleKey: string;
+  readonly metaKey: string;
+  readonly state: 'approved' | 'pending';
+}
+
 @Component({
   selector: 'app-financial-control',
   imports: [NgOptimizedImage, TranslatePipe],
@@ -89,6 +97,30 @@ export class FinancialControl {
       dueDateKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.ROWS.ROW_3.DUE_DATE',
       amountKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.ROWS.ROW_3.AMOUNT',
       statusKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.ROWS.ROW_3.STATUS',
+    },
+  ];
+
+  readonly approvalSteps: readonly ApprovalHistoryStep[] = [
+    {
+      id: 'finance-supervisor',
+      stepNumber: 1,
+      roleKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.STEPS.SUPERVISOR.ROLE',
+      metaKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.STEPS.SUPERVISOR.META',
+      state: 'approved',
+    },
+    {
+      id: 'finance-manager',
+      stepNumber: 2,
+      roleKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.STEPS.MANAGER.ROLE',
+      metaKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.STEPS.MANAGER.META',
+      state: 'approved',
+    },
+    {
+      id: 'finance-director',
+      stepNumber: 3,
+      roleKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.STEPS.DIRECTOR.ROLE',
+      metaKey: 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.STEPS.DIRECTOR.META',
+      state: 'pending',
     },
   ];
 }

@@ -283,5 +283,126 @@
         </div>
       </div>
     </article>
+
+    <article
+      class="lg:col-span-2 bg-[#FDFDFD] rounded-3xl border border-[#EEF1F7] shadow-[0_10px_36px_rgba(35,36,78,0.08)] pt-6 sm:pt-7 pb-7 sm:pb-9 pr-5 sm:pr-7 lg:pr-8 pl-0 grid grid-cols-1 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] gap-7 lg:gap-8 xl:gap-10 items-stretch"
+    >
+      <div class="flex flex-col">
+        <div
+          class="inline-flex flex-col self-start rounded-r-xl pl-5 sm:pl-7 pr-8 sm:pr-12 py-2.5 sm:py-3"
+          [style.background]="ribbonBackground"
+        >
+          <span
+            class="font-inter font-semibold text-[#23244E] text-[13px] sm:text-[15px] leading-snug tracking-[0.01em] uppercase"
+          >
+            {{ 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.RIBBON_TITLE' | translate }}
+          </span>
+          <span
+            class="mt-0.5 font-dm-sans font-medium text-[#23244E] text-[10px] sm:text-[11px] leading-none tracking-[0.04em] uppercase"
+          >
+            {{
+              'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.RIBBON_SUBTITLE' | translate
+            }}
+          </span>
+        </div>
+
+        <div class="pl-5 sm:pl-7 lg:pl-8 mt-6 sm:mt-8 flex-1 flex flex-col justify-center">
+          <h3
+            class="font-inter font-bold text-[#23244E] text-[22px] sm:text-[26px] xl:text-[30px] leading-[1.22] tracking-[-0.02em]"
+          >
+            {{ 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.HEADING' | translate }}
+          </h3>
+          <p
+            class="mt-4 sm:mt-5 font-dm-sans font-normal text-[#23244E] text-[13px] sm:text-[13.5px] leading-[1.6] max-w-100"
+          >
+            {{ 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.DESCRIPTION' | translate }}
+          </p>
+        </div>
+      </div>
+
+      <div class="pl-5 sm:pl-7 lg:pl-0 flex items-center">
+        <div
+          class="approval-board-card w-full rounded-2xl bg-white border border-[#EEF1F7] shadow-[0_8px_28px_rgba(35,36,78,0.09)]"
+        >
+          <div
+            class="px-5 sm:px-7 py-4 sm:py-5 border-b border-[#EEF1F7] shadow-[0_4px_16px_rgba(35,36,78,0.04)]"
+          >
+            <p
+              class="font-dm-sans font-medium text-[#595C78] text-[10.5px] sm:text-[11px] leading-snug tracking-[0.04em] uppercase"
+            >
+              {{
+                'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.BOARD_EYEBROW' | translate
+              }}
+            </p>
+            <h4
+              id="approval-history-title"
+              class="mt-0.5 font-dm-sans font-semibold text-[#23244E] text-[15px] sm:text-[17px] leading-snug"
+            >
+              {{ 'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.APPROVAL_CARD.BOARD_TITLE' | translate }}
+            </h4>
+          </div>
+
+          <div class="approval-stepper-container px-5 sm:px-8 py-8 sm:py-11">
+            <ol
+              role="list"
+              aria-labelledby="approval-history-title"
+              class="approval-stepper-list"
+            >
+              @for (step of approvalSteps; track step.id; let isLast = $last) {
+                <li
+                  class="approval-step-item"
+                  [attr.aria-current]="step.state === 'pending' ? 'step' : null"
+                >
+                  <div class="approval-step-visual">
+                    @if (step.state === 'approved') {
+                      <div
+                        class="approval-step-node rounded-full bg-white border border-[#EEF1F7] shadow-[0_6px_20px_rgba(35,36,78,0.09)] flex items-center justify-center"
+                      >
+                        <img
+                          ngSrc="/images/landing/features/1/check.svg"
+                          width="26"
+                          height="20"
+                          alt=""
+                          aria-hidden="true"
+                          draggable="false"
+                          class="w-6 h-5 object-contain pointer-events-none select-none"
+                        />
+                      </div>
+                    } @else {
+                      <div
+                        class="approval-step-node rounded-full bg-white border-[2.5px] border-[#6394E0] shadow-[0_4px_14px_rgba(74,131,223,0.14)] flex items-center justify-center"
+                      >
+                        <span
+                          class="font-inter font-semibold text-[#23244E] text-[16px] sm:text-[18px] leading-none"
+                        >
+                          {{ step.stepNumber }}
+                        </span>
+                      </div>
+                    }
+
+                    @if (!isLast) {
+                      <span aria-hidden="true" class="approval-step-connector"></span>
+                    }
+                  </div>
+
+                  <div class="approval-step-copy">
+                    <p
+                      class="font-dm-sans font-semibold text-[#23244E] text-[13px] sm:text-[14px] leading-snug"
+                    >
+                      {{ step.roleKey | translate }}
+                    </p>
+                    <p
+                      class="mt-0.5 font-dm-sans font-normal text-[#595C78] text-[11px] sm:text-[11.5px] leading-snug"
+                    >
+                      {{ step.metaKey | translate }}
+                    </p>
+                  </div>
+                </li>
+              }
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
 </section>

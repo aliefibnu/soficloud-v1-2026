@@ -1287,6 +1287,28 @@
             "STATUS": "Approved"
           }
         }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "모든 신청 건에는 상태, 승인 권한, 코멘트, 의사결정 이력이 함께 기록됩니다.",
+        "DESCRIPTION": "경비 청구, 정산, 가지급금은 요청부터 정산 및 회계 처리까지 추적 가능한 경로로 이어집니다.",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
       }
     }
   }

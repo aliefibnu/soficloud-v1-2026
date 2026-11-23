@@ -50,3 +50,88 @@
     transition: none !important;
   }
 }
+
+.approval-board-card {
+  overflow: clip;
+}
+
+.approval-stepper-container {
+  container-type: inline-size;
+  --approval-node-size: 3.75rem;
+}
+
+.approval-stepper-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.approval-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.875rem;
+}
+
+.approval-step-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+}
+
+.approval-step-node {
+  position: relative;
+  z-index: 1;
+  inline-size: var(--approval-node-size);
+  block-size: var(--approval-node-size);
+  flex-shrink: 0;
+}
+
+.approval-step-connector {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: calc(50% + var(--approval-node-size) / 2);
+  inline-size: calc(100% + 0.75rem - var(--approval-node-size));
+  block-size: 2px;
+  background-color: #3b76d6;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+@container (inline-size < 420px) {
+  .approval-stepper-container {
+    --approval-node-size: 3.25rem;
+  }
+
+  .approval-stepper-list {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .approval-step-item {
+    flex-direction: row;
+    align-items: center;
+    text-align: start;
+    gap: 1rem;
+  }
+
+  .approval-step-visual {
+    inline-size: auto;
+    flex-shrink: 0;
+  }
+
+  .approval-step-connector {
+    inset-block-start: calc(100% + 0.125rem);
+    inset-inline-start: 50%;
+    inline-size: 2px;
+    block-size: 1.125rem;
+    transform: translateX(-50%);
+  }
+}

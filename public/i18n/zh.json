@@ -1287,6 +1287,28 @@
             "STATUS": "Approved"
           }
         }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "每笔申请均具备清晰的状态、审批权限、批注与决策历史。",
+        "DESCRIPTION": "费用报销、垫付及预支从发起申请到核销与会计入账全程可追溯。",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
       }
     }
   }

@@ -56,6 +56,29 @@ const ID_TRANSLATIONS = {
           },
         },
       },
+      APPROVAL_CARD: {
+        RIBBON_TITLE: 'FINANCIAL REPORTING & ACCOUNTING',
+        RIBBON_SUBTITLE: 'REPORT',
+        HEADING: 'Setiap pengajuan memiliki status, otorisasi, komentar, dan histori keputusan.',
+        DESCRIPTION:
+          'Claim, reimbursement, dan advance bergerak dari request hingga settlement dan accounting dengan jalur yang dapat ditelusuri.',
+        BOARD_EYEBROW: 'CLAIM EXPENSE · REQ-260903-018',
+        BOARD_TITLE: 'Approval History',
+        STEPS: {
+          SUPERVISOR: {
+            ROLE: 'Finance Supervisor',
+            META: 'Approved · 09.42',
+          },
+          MANAGER: {
+            ROLE: 'Finance Manager',
+            META: 'Approved · 10.06',
+          },
+          DIRECTOR: {
+            ROLE: 'Finance Director',
+            META: 'Waiting for approval',
+          },
+        },
+      },
     },
   },
 };
@@ -110,6 +133,30 @@ const EN_TRANSLATIONS = {
             DUE_DATE: '28 Jul',
             AMOUNT: 'Rp19.6M',
             STATUS: 'Approved',
+          },
+        },
+      },
+      APPROVAL_CARD: {
+        RIBBON_TITLE: 'FINANCIAL REPORTING & ACCOUNTING',
+        RIBBON_SUBTITLE: 'REPORT',
+        HEADING:
+          'Every submission has a clear status, authorization, comments, and decision history.',
+        DESCRIPTION:
+          'Claims, reimbursements, and advances move from request to settlement and accounting along a fully traceable path.',
+        BOARD_EYEBROW: 'CLAIM EXPENSE · REQ-260903-018',
+        BOARD_TITLE: 'Approval History',
+        STEPS: {
+          SUPERVISOR: {
+            ROLE: 'Finance Supervisor',
+            META: 'Approved · 09.42',
+          },
+          MANAGER: {
+            ROLE: 'Finance Manager',
+            META: 'Approved · 10.06',
+          },
+          DIRECTOR: {
+            ROLE: 'Finance Director',
+            META: 'Waiting for approval',
           },
         },
       },
@@ -177,9 +224,9 @@ describe('FinancialManagement1 FinancialControl', () => {
     );
   });
 
-  it('should render two feature cards with flush-left gradient ribbons', () => {
+  it('should render three feature cards with flush-left gradient ribbons', () => {
     const cards = fixture.debugElement.queryAll(By.css('article'));
-    expect(cards.length).toBe(2);
+    expect(cards.length).toBe(3);
 
     const card1Text = cards[0].nativeElement.textContent;
     expect(card1Text).toContain('FINANCIAL REPORTING & ACCOUNTING');
@@ -189,8 +236,13 @@ describe('FinancialManagement1 FinancialControl', () => {
     expect(card2Text).toContain('CASH, RECEIVABLE & PAYMENT CONTROL');
     expect(card2Text).toContain('CONTROL');
 
-    const ribbons = fixture.debugElement.queryAll(By.css('article > div.rounded-r-xl'));
-    expect(ribbons.length).toBe(2);
+    const card3Text = cards[2].nativeElement.textContent;
+    expect(card3Text).toContain('FINANCIAL REPORTING & ACCOUNTING');
+    expect(card3Text).toContain('REPORT');
+    expect(cards[2].nativeElement.classList.contains('lg:col-span-2')).toBe(true);
+
+    const ribbons = fixture.debugElement.queryAll(By.css('article div.rounded-r-xl'));
+    expect(ribbons.length).toBe(3);
     for (const ribbon of ribbons) {
       const bg = (ribbon.nativeElement as HTMLElement).style.background;
       expect(bg).toContain('linear-gradient');
@@ -200,20 +252,21 @@ describe('FinancialManagement1 FinancialControl', () => {
   });
 
   it('should render staggered 4-step accounting pipeline with calendar icons and 3 decorative elbow connectors', () => {
-    const ol = fixture.debugElement.query(By.css('ol'));
+    const reportingCard = fixture.debugElement.queryAll(By.css('article'))[0];
+    const ol = reportingCard.query(By.css('ol'));
     expect(ol).toBeTruthy();
 
-    const stepItems = fixture.debugElement.queryAll(By.css('ol > li'));
+    const stepItems = reportingCard.queryAll(By.css('ol > li'));
     expect(stepItems.length).toBe(4);
 
-    const stepCards = fixture.debugElement.queryAll(By.css('.flow-step-card'));
+    const stepCards = reportingCard.queryAll(By.css('.flow-step-card'));
     expect(stepCards.length).toBe(4);
     expect(stepCards[0].nativeElement.classList.contains('mr-auto')).toBe(true);
     expect(stepCards[1].nativeElement.classList.contains('ml-auto')).toBe(true);
     expect(stepCards[2].nativeElement.classList.contains('mr-auto')).toBe(true);
     expect(stepCards[3].nativeElement.classList.contains('ml-auto')).toBe(true);
 
-    const images = fixture.debugElement.queryAll(By.css('ol img'));
+    const images = reportingCard.queryAll(By.css('ol img'));
     expect(images.length).toBe(4);
     for (const img of images) {
       expect(img.nativeElement.getAttribute('src')).toContain(
@@ -223,7 +276,7 @@ describe('FinancialManagement1 FinancialControl', () => {
       expect(img.nativeElement.getAttribute('aria-hidden')).toBe('true');
     }
 
-    const connectors = fixture.debugElement.queryAll(By.css('ol svg'));
+    const connectors = reportingCard.queryAll(By.css('ol svg'));
     expect(connectors.length).toBe(3);
     for (const svg of connectors) {
       expect(svg.nativeElement.getAttribute('aria-hidden')).toBe('true');
@@ -299,5 +352,75 @@ describe('FinancialManagement1 FinancialControl', () => {
     for (const cell of statusCells) {
       expect(cell.nativeElement.getAttribute('data-label')).toBe('Status');
     }
+  });
+
+  it('should render the full-width Approval History card with localized heading, description, and 3-step stepper', async () => {
+    const cards = fixture.debugElement.queryAll(By.css('article'));
+    const approvalCard = cards[2];
+
+    const heading = approvalCard.query(By.css('h3'));
+    const description = approvalCard.query(By.css('h3 + p'));
+    expect(heading.nativeElement.textContent.trim()).toBe(
+      'Setiap pengajuan memiliki status, otorisasi, komentar, dan histori keputusan.',
+    );
+    expect(description.nativeElement.textContent.trim()).toContain(
+      'Claim, reimbursement, dan advance bergerak dari request hingga settlement',
+    );
+
+    const boardEyebrow = approvalCard.query(By.css('.approval-board-card p'));
+    const boardTitle = approvalCard.query(By.css('h4#approval-history-title'));
+    expect(boardEyebrow.nativeElement.textContent.trim()).toBe('CLAIM EXPENSE · REQ-260903-018');
+    expect(boardTitle.nativeElement.textContent.trim()).toBe('Approval History');
+
+    const stepperList = approvalCard.query(By.css('ol.approval-stepper-list'));
+    expect(stepperList).toBeTruthy();
+    expect(stepperList.nativeElement.getAttribute('role')).toBe('list');
+    expect(stepperList.nativeElement.getAttribute('aria-labelledby')).toBe(
+      'approval-history-title',
+    );
+
+    const steps = approvalCard.queryAll(By.css('ol.approval-stepper-list > li'));
+    expect(steps.length).toBe(3);
+
+    expect(steps[0].nativeElement.getAttribute('aria-current')).toBeNull();
+    expect(steps[1].nativeElement.getAttribute('aria-current')).toBeNull();
+    expect(steps[2].nativeElement.getAttribute('aria-current')).toBe('step');
+
+    const checkImages = approvalCard.queryAll(By.css('ol.approval-stepper-list img'));
+    expect(checkImages.length).toBe(2);
+    for (const img of checkImages) {
+      expect(img.nativeElement.getAttribute('src')).toContain(
+        '/images/landing/features/1/check.svg',
+      );
+      expect(img.nativeElement.getAttribute('alt')).toBe('');
+      expect(img.nativeElement.getAttribute('aria-hidden')).toBe('true');
+    }
+
+    expect(steps[2].query(By.css('.approval-step-node span')).nativeElement.textContent.trim()).toBe(
+      '3',
+    );
+
+    const connectors = approvalCard.queryAll(By.css('.approval-step-connector'));
+    expect(connectors.length).toBe(2);
+    for (const connector of connectors) {
+      expect(connector.nativeElement.getAttribute('aria-hidden')).toBe('true');
+    }
+
+    expect(steps.map((s) => s.query(By.css('.approval-step-copy p')).nativeElement.textContent.trim())).toEqual([
+      'Finance Supervisor',
+      'Finance Manager',
+      'Finance Director',
+    ]);
+
+    translateService.use('en');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(heading.nativeElement.textContent.trim()).toBe(
+      'Every submission has a clear status, authorization, comments, and decision history.',
+    );
+    expect(description.nativeElement.textContent.trim()).toContain(
+      'Claims, reimbursements, and advances move from request to settlement',
+    );
   });
 });
