@@ -1,0 +1,39 @@
+.capability-card {
+  container: capability-card / inline-size;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-block-size: 15.5rem;
+  overflow: clip;
+  background: linear-gradient(50deg, #ffffff 28%, #f4f8ff 64%, #e3edfc 100%);
+}
+
+.capability-card-copy {
+  position: relative;
+  z-index: 1;
+  padding: 1.75rem 1.5rem 0.5rem;
+}
+
+.capability-card-illustration {
+  display: block;
+  align-self: flex-end;
+  inline-size: min(72%, 15.5rem);
+  block-size: auto;
+  translate: var(--cap-img-x, 0%) var(--cap-img-y, 0%);
+}
+
+@container capability-card (inline-size >= 420px) {
+  .capability-card-copy {
+    inline-size: 56%;
+    margin-block: auto;
+    padding: 2rem 0.5rem 2rem 2.25rem;
+  }
+
+  .capability-card-illustration {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    inline-size: var(--cap-img-w, 43cqi);
+  }
+}

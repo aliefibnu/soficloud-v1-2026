@@ -40,24 +40,35 @@ describe('FinancialManagement1', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render app-hero, app-section-tabs, and app-financial-control in order', () => {
+  it('should render app-hero, app-section-tabs, app-financial-control, and app-ten-capabilities in order', () => {
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     const tabsEl = fixture.debugElement.query(By.css('app-section-tabs'));
     const financialControlEl = fixture.debugElement.query(By.css('app-financial-control'));
+    const tenCapabilitiesEl = fixture.debugElement.query(By.css('app-ten-capabilities'));
     expect(heroEl).toBeTruthy();
     expect(tabsEl).toBeTruthy();
     expect(financialControlEl).toBeTruthy();
+    expect(tenCapabilitiesEl).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#financial-control'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('#capabilities'))).toBeTruthy();
 
     const children = Array.from(
       (fixture.nativeElement as HTMLElement).querySelector('div')?.children ?? [],
     ).map((el) => el.tagName.toLowerCase());
-    expect(children).toEqual(['app-hero', 'app-section-tabs', 'app-financial-control']);
+    expect(children).toEqual([
+      'app-hero',
+      'app-section-tabs',
+      'app-financial-control',
+      'app-ten-capabilities',
+    ]);
 
     const tabLinks = fixture.debugElement.queryAll(By.css('app-section-tabs nav ul li a'));
     expect(tabLinks.length).toBe(5);
     expect(tabLinks[0].nativeElement.getAttribute('href')).toBe(
       '/financial-management-1#financial-control',
+    );
+    expect(tabLinks[1].nativeElement.getAttribute('href')).toBe(
+      '/financial-management-1#capabilities',
     );
     expect(component.tabs.map((t) => t.id)).toEqual([
       'financial-control',

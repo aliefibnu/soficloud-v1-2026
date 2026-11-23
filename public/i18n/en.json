@@ -1310,6 +1310,52 @@
           }
         }
       }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "Functional Depth for Operations and Accounting",
+      "SUBTITLE": "Ten capabilities connecting daily transactions, controls, accounting records, and company financial statements.",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "General Ledger & Financial Accounting",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "Account Receivable",
+          "DESCRIPTION": "Customer Invoice, Outstanding AR, AR Aging, Receipt, Advance Receipt, Credit Note, and Customer Statement."
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "Account Payable",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "Cash & Bank Management",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "Expense, Reimbursement & Advance",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "Payment Planning & Budget Control",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "FIXED_ASSET": {
+          "TITLE": "Fixed Asset Management",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "Cost & Management Accounting",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "Multi-Currency & Forex",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "Accounting Automation",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        }
+      }
     }
   }
 }

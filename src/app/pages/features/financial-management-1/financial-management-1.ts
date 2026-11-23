@@ -7,9 +7,10 @@ import {
   SectionTabs,
 } from '../../../components/features/financial-management-1/section-tabs/section-tabs';
 import { FinancialControl } from '../../../components/features/financial-management-1/sections/financial-control/financial-control';
+import { TenCapabilities } from '../../../components/features/financial-management-1/sections/ten-capabilities/ten-capabilities';
 
 @Component({
-  imports: [Hero, SectionTabs, FinancialControl, TranslatePipe],
+  imports: [Hero, SectionTabs, FinancialControl, TenCapabilities, TranslatePipe],
   selector: 'app-financial-management-1',
   templateUrl: './financial-management-1.html',
 })

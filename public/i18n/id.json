@@ -1310,6 +1310,52 @@
           }
         }
       }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "Kedalaman Fungsi Untuk Operasional Dan Accounting",
+      "SUBTITLE": "Sepuluh kapabilitas yang menghubungkan transaksi harian, kontrol, pencatatan accounting, dan laporan keuangan perusahaan.",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "Buku Besar & Akuntansi Keuangan",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "Piutang Usaha",
+          "DESCRIPTION": "Faktur Pelanggan, Piutang Belum Lunas, Aging Piutang, Penerimaan, Uang Muka Diterima, Nota Kredit, dan Rekening Koran Pelanggan."
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "Utang Usaha",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "Manajemen Kas & Bank",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "Biaya, Reimburse & Uang Muka",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "Perencanaan Pembayaran & Kontrol Anggaran",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "FIXED_ASSET": {
+          "TITLE": "Manajemen Aset Tetap",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "Akuntansi Biaya & Manajemen",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "Multi-Mata Uang & Valas",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "Otomasi Akuntansi",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        }
+      }
     }
   }
 }
