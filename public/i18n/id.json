@@ -1208,5 +1208,17 @@
         }
       }
     }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "Kendalikan Keuangan",
+      "TITLE_LINE_2": "Perusahaan dari",
+      "TITLE_LINE_3": "Transaksi hingga",
+      "TITLE_LINE_4": "Laporan Keuangan",
+      "DESCRIPTION": "SOFICloud menghubungkan transaksi operasional dengan proses accounting secara otomatis mulai dari jurnal, receivable, payable, cash & bank, reimbursement, advance, fixed assets, hingga analisa manajemen.",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "Financial Management & Accounting",
+      "ILLUSTRATION_ALT": "Ilustrasi papan klip laporan keuangan, kaca pembesar, dan kalkulator SOFICloud"
+    }
   }
 }

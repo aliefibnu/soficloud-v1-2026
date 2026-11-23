@@ -1208,5 +1208,17 @@
         }
       }
     }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "Control Company",
+      "TITLE_LINE_2": "Finances from",
+      "TITLE_LINE_3": "Transactions to",
+      "TITLE_LINE_4": "Financial Reports",
+      "DESCRIPTION": "SOFICloud automatically connects operational transactions with accounting processes, from journals, receivables, payables, cash & bank, reimbursement, advances, and fixed assets to management analysis.",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "Financial Management & Accounting",
+      "ILLUSTRATION_ALT": "Illustration of SOFICloud financial report clipboard, magnifying glass, and calculator"
+    }
   }
 }

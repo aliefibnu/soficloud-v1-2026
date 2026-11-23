@@ -136,4 +136,24 @@ describe('Features', () => {
       }
     }
   });
+
+  it('should apply Figma counter-rotation only on the first card clipboard and magnifying glass layers', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const articles = Array.from(compiled.querySelectorAll('article'));
+
+    const firstCardImgs = Array.from(articles[0].querySelectorAll('.feature-layer img')) as HTMLImageElement[];
+    expect(firstCardImgs.length).toBe(3);
+    expect(firstCardImgs[0].style.rotate).toBe('-16.5deg');
+    expect(firstCardImgs[1].style.rotate).toBe('-18deg');
+    expect(firstCardImgs[2].style.rotate).toBe('');
+
+    for (const article of articles.slice(1)) {
+      const imgs = Array.from(article.querySelectorAll('.feature-layer img')) as HTMLImageElement[];
+      expect(imgs.length).toBeGreaterThan(0);
+      for (const img of imgs) {
+        expect(img.style.rotate).toBe('');
+      }
+    }
+  });
 });

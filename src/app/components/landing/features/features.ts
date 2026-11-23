@@ -15,6 +15,7 @@
     bottomPct?: number;
     widthPct?: number;
     heightPct?: number;
+    rotateDeg?: number;
     hoverClass: string;
   }
 
@@ -35,9 +36,12 @@
     styles: `
       @media (prefers-reduced-motion: reduce) {
         .group,
-        .group * {
+        .group .feature-layer {
           transition-duration: 0.01ms !important;
           transform: none !important;
+          translate: 0 !important;
+          rotate: 0deg !important;
+          scale: 1 !important;
         }
       }
     `,
@@ -63,26 +67,28 @@
           {
             name: 'Group 10284.svg',
             src: '/images/landing/features/1/Group 10284.svg',
-            w: 383,
-            h: 521,
+            w: 387,
+            h: 539,
             z: 10,
-            leftPct: 24,
-            bottomPct: -13,
-            widthPct: 43,
-            heightPct: 108,
+            leftPct: 26.5,
+            bottomPct: -7.5,
+            widthPct: 41.5,
+            heightPct: 106.5,
+            rotateDeg: -16.5,
             hoverClass:
               'origin-bottom group-hover:scale-[1.02]',
           },
           {
             name: 'Group 9410.svg',
             src: '/images/landing/features/1/Group 9410.svg',
-            w: 312,
-            h: 332,
+            w: 315,
+            h: 335,
             z: 20,
-            leftPct: 13,
-            bottomPct: -26,
-            widthPct: 42,
-            heightPct: 82,
+            leftPct: 20.5,
+            bottomPct: -16,
+            widthPct: 34,
+            heightPct: 66.6,
+            rotateDeg: -18,
             hoverClass:
               'origin-bottom group-hover:scale-105 group-hover:-rotate-3 group-hover:-translate-x-1',
           },
@@ -92,10 +98,10 @@
             w: 174,
             h: 191,
             z: 25,
-            leftPct: 54,
-            bottomPct: -15,
-            widthPct: 30,
-            heightPct: 60,
+            leftPct: 60.5,
+            bottomPct: -5.5,
+            widthPct: 18.5,
+            heightPct: 37.4,
             hoverClass:
               'origin-bottom group-hover:scale-105 group-hover:rotate-3 group-hover:translate-x-1',
           },

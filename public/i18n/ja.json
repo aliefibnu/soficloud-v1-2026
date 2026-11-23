@@ -1208,5 +1208,17 @@
         }
       }
     }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "日々の取引から",
+      "TITLE_LINE_2": "財務諸表まで",
+      "TITLE_LINE_3": "企業の財務を",
+      "TITLE_LINE_4": "一元管理",
+      "DESCRIPTION": "SOFICloudは仕訳、売掛金・買掛金、現預金・銀行、経費精算、仮払金、固定資産から経営分析まで、業務取引と会計プロセスを自動で連携します。",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "財務管理・会計",
+      "ILLUSTRATION_ALT": "SOFICloudの財務レポートクリップボード、虫眼鏡、電卓のイラスト"
+    }
   }
 }

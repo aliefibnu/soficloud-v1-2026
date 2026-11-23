@@ -1208,5 +1208,17 @@
         }
       }
     }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "일상 거래부터",
+      "TITLE_LINE_2": "재무제표까지",
+      "TITLE_LINE_3": "기업 재무를",
+      "TITLE_LINE_4": "완벽하게 관리",
+      "DESCRIPTION": "SOFICloud는 분개, 매출채권, 매입채무, 현금 및 은행, 비용 정산, 가지급금, 고정자산부터 경영 분석까지 운영 거래와 회계 프로세스를 자동으로 연결합니다.",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "재무 관리 및 회계",
+      "ILLUSTRATION_ALT": "SOFICloud 재무 보고서 클립보드, 돋보기, 계산기 일러스트"
+    }
   }
 }

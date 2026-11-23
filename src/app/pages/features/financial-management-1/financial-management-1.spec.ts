@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideTranslateService } from '@ngx-translate/core';
 import { FinancialManagement1 } from './financial-management-1';
 
 describe('FinancialManagement1', () => {
@@ -12,6 +13,12 @@ describe('FinancialManagement1', () => {
 
     await TestBed.configureTestingModule({
       imports: [FinancialManagement1],
+      providers: [
+        provideTranslateService({
+          fallbackLang: 'id',
+          lang: 'id',
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FinancialManagement1);

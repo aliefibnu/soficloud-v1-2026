@@ -42,7 +42,7 @@
 
             @for (layer of card.layers; track layer.name) {
               <div
-                class="absolute pointer-events-none will-change-transform transition-all duration-300 ease-out {{ layer.hoverClass }}"
+                class="feature-layer absolute pointer-events-none will-change-transform translate-0 rotate-0 scale-100 transition-all duration-300 ease-out {{ layer.hoverClass }}"
                 [style.left.%]="layer.leftPct !== undefined ? layer.leftPct : null"
                 [style.top.%]="layer.topPct !== undefined ? layer.topPct : null"
                 [style.bottom]="layer.bottomPct !== undefined ? (layer.bottomPct === 0 ? '-1px' : layer.bottomPct + '%') : null"
@@ -57,6 +57,7 @@
                   alt=""
                   class="w-full h-full object-contain pointer-events-none"
                   [class.object-bottom]="layer.bottomPct !== undefined"
+                  [style.rotate]="layer.rotateDeg !== undefined ? layer.rotateDeg + 'deg' : null"
                 />
               </div>
             }

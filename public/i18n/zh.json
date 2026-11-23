@@ -1208,5 +1208,17 @@
         }
       }
     }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "从日常交易到",
+      "TITLE_LINE_2": "财务报表",
+      "TITLE_LINE_3": "全面掌控",
+      "TITLE_LINE_4": "企业财务",
+      "DESCRIPTION": "SOFICloud 将业务交易与会计流程自动连接，涵盖总账凭证、应收应付、现金与银行、报销、预付款、固定资产直至管理层分析。",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "财务管理与会计",
+      "ILLUSTRATION_ALT": "SOFICloud 财务报表写字板、放大镜与计算器插图"
+    }
   }
 }
