@@ -124,4 +124,34 @@ describe('FinancialManagement1 Hero', () => {
     const textCol = fixture.debugElement.query(By.css('.select-text'));
     expect(textCol).toBeTruthy();
   });
+
+  it('should position and orient the 3 illustration layers according to the Figma hero layout', () => {
+    const layers = fixture.debugElement.queryAll(By.css('.hero-illustration .hero-layer'));
+    expect(layers.length).toBe(3);
+
+    const expectedLayouts = [
+      { left: 'left-[15.2%]', top: 'top-[-4%]', width: 'w-[70.4%]', imgWidth: '387', imgHeight: '539', imgRotate: false },
+      { left: 'left-[-1.7%]', top: 'top-[34.1%]', width: 'w-[57.3%]', imgWidth: '315', imgHeight: '335', imgRotate: false },
+      { left: 'left-[67.8%]', top: 'top-[63.6%]', width: 'w-[31.1%]', imgWidth: '174', imgHeight: '191', imgRotate: true },
+    ];
+
+    layers.forEach((layerDe, index) => {
+      const layerEl = layerDe.nativeElement as HTMLElement;
+      const imgEl = layerEl.querySelector('img') as HTMLImageElement;
+      const expected = expectedLayouts[index];
+
+      expect(layerEl.classList.contains(expected.left)).toBe(true);
+      expect(layerEl.classList.contains(expected.top)).toBe(true);
+      expect(layerEl.classList.contains(expected.width)).toBe(true);
+      expect(layerEl.classList.contains('translate-0')).toBe(true);
+      expect(layerEl.classList.contains('rotate-0')).toBe(true);
+      expect(layerEl.classList.contains('scale-100')).toBe(true);
+      expect(layerEl.className).not.toContain('rotate-[16.6deg]');
+      expect(layerEl.className).not.toContain('rotate-[20deg]');
+
+      expect(imgEl.getAttribute('width')).toBe(expected.imgWidth);
+      expect(imgEl.getAttribute('height')).toBe(expected.imgHeight);
+      expect(imgEl.classList.contains('-rotate-[4.3deg]')).toBe(expected.imgRotate);
+    });
+  });
 });

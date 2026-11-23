@@ -8,9 +8,12 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './hero.html',
   styles: `
     @media (prefers-reduced-motion: reduce) {
-      .hero-illustration,
-      .hero-illustration * {
-        transition-duration: 0.01ms !important;
+      .hero-illustration .hero-layer {
+        transition: none !important;
+        transform: none !important;
+        translate: 0 !important;
+        rotate: 0deg !important;
+        scale: 1 !important;
       }
     }
   `,
