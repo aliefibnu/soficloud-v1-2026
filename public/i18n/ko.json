@@ -1227,6 +1227,67 @@
       "EXPENSE_ADVANCE": "비용 및 가지급금",
       "REPORTING": "리포팅",
       "INTEGRATION": "시스템 연동"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "한 곳에서 비즈니스를 통합 관리",
+      "SUBTITLE": "확인하려는 영역을 선택하세요. 모든 프로세스가 동일한 데이터로 연결되어 언제든 추적할 수 있습니다",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "운영 거래에서 바로 읽을 수 있는 재무 정보까지",
+        "DESCRIPTION": "회계 영향은 원천 전표에서 자동으로 생성됩니다. 재무팀은 일관된 데이터로 분개, 원장, 재무제표까지 추적할 수 있습니다.",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "자금 수요, 만기일, 지급 우선순위를 하나의 컨트롤 보드에서 관리.",
+        "DESCRIPTION": "미결 채권·채무, 만기일, 지급 제안, 승인 내역, 현금 및 은행 잔고를 확인하여 재무팀의 다음 의사결정을 지원합니다.",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "거래처",
+          "DUE_DATE": "만기일",
+          "AMOUNT": "금액",
+          "STATUS": "상태"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "7월 26일",
+            "AMOUNT": "Rp42,8 Jt",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "7월 27일",
+            "AMOUNT": "Rp28,4 Jt",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "7월 28일",
+            "AMOUNT": "Rp19,6 Jt",
+            "STATUS": "Approved"
+          }
+        }
+      }
     }
   }
 }

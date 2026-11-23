@@ -1227,6 +1227,67 @@
       "EXPENSE_ADVANCE": "报销与预付款",
       "REPORTING": "财务报表",
       "INTEGRATION": "系统集成"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "在一个平台全面掌控业务",
+      "SUBTITLE": "选择您想查看的领域。每个流程都连接到同一套数据，随时可追溯",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "从业务交易到清晰可读的财务信息",
+        "DESCRIPTION": "会计影响由原始单据自动生成。财务团队可以基于一致的数据追溯凭证、总账直至财务报表。",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "在一个控制看板中掌握资金需求、到期日与付款优先级。",
+        "DESCRIPTION": "未清应收应付、到期日、付款建议、审批状态以及现金与银行头寸一目了然，助力财务团队快速决策。",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "供应商",
+          "DUE_DATE": "到期日",
+          "AMOUNT": "金额",
+          "STATUS": "状态"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "7月26日",
+            "AMOUNT": "Rp42,8 Jt",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "7月27日",
+            "AMOUNT": "Rp28,4 Jt",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "7月28日",
+            "AMOUNT": "Rp19,6 Jt",
+            "STATUS": "Approved"
+          }
+        }
+      }
     }
   }
 }

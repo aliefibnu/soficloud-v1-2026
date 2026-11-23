@@ -1227,6 +1227,67 @@
       "EXPENSE_ADVANCE": "EXPENSE & ADVANCE",
       "REPORTING": "REPORTING",
       "INTEGRATION": "INTEGRATION"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "Control Your Business From One Place",
+      "SUBTITLE": "Choose the area you want to inspect. Every process connects to the same data and can be traced at any time",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "From Operational Transactions to Ready-to-Read Financial Information",
+        "DESCRIPTION": "Accounting impact is formed directly from source documents. Finance can trace journals, ledgers, and financial statements with consistent data.",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "Cash requirements, due dates, and payment priorities in a single control board.",
+        "DESCRIPTION": "Outstanding AR/AP, due dates, payment proposals, approvals, and cash & bank positions are available to help Finance decide the next step.",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "Vendor",
+          "DUE_DATE": "Due Date",
+          "AMOUNT": "Amount",
+          "STATUS": "Status"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "26 Jul",
+            "AMOUNT": "Rp42.8M",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "27 Jul",
+            "AMOUNT": "Rp28.4M",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "28 Jul",
+            "AMOUNT": "Rp19.6M",
+            "STATUS": "Approved"
+          }
+        }
+      }
     }
   }
 }

@@ -1227,6 +1227,67 @@
       "EXPENSE_ADVANCE": "経費・仮払金",
       "REPORTING": "レポート",
       "INTEGRATION": "システム連携"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "一つの画面からビジネスを統制",
+      "SUBTITLE": "確認したい領域を選択してください。すべてのプロセスが同一データで連携し、いつでも追跡できます",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "業務取引から読み取りやすい財務情報へ",
+        "DESCRIPTION": "会計インパクトは元伝票から自動生成されます。経理部門は仕訳、元帳、財務諸表まで一貫したデータで追跡できます。",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "資金需要、支払期日、支払優先度をひとつのコントロールボードに集約。",
+        "DESCRIPTION": "未決済の売掛金・買掛金、支払期日、支払提案、承認状況、現預金・銀行残高を確認し、経理部門の次の判断を支援します。",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "取引先",
+          "DUE_DATE": "期日",
+          "AMOUNT": "金額",
+          "STATUS": "ステータス"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "7月26日",
+            "AMOUNT": "Rp42,8 Jt",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "7月27日",
+            "AMOUNT": "Rp28,4 Jt",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "7月28日",
+            "AMOUNT": "Rp19,6 Jt",
+            "STATUS": "Approved"
+          }
+        }
+      }
     }
   }
 }

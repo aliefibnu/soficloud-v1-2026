@@ -1,0 +1,61 @@
+.payment-table-wrapper {
+  container-type: inline-size;
+}
+
+@container (width < 400px) {
+  .payment-table,
+  .payment-table tbody,
+  .payment-table tr,
+  .payment-table th,
+  .payment-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .payment-table thead {
+    display: none;
+  }
+
+  .payment-row {
+    padding-block: 0.75rem;
+  }
+
+  .payment-cell-vendor {
+    padding: 0 0 0.375rem;
+    font-weight: 600;
+  }
+
+  .payment-cell-date,
+  .payment-cell-amount,
+  .payment-cell-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2rem 0;
+    text-align: left;
+  }
+
+  .payment-cell-date::before {
+    content: var(--label-due-date) ':';
+    color: #686b82;
+    font-weight: 400;
+  }
+
+  .payment-cell-amount::before {
+    content: var(--label-amount) ':';
+    color: #686b82;
+    font-weight: 400;
+  }
+
+  .payment-cell-status::before {
+    content: var(--label-status) ':';
+    color: #686b82;
+    font-weight: 400;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-step-card {
+    transition: none !important;
+  }
+}
