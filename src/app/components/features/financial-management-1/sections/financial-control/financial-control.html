@@ -205,21 +205,7 @@
             aria-labelledby="payment-priority-title"
             class="payment-table-wrapper overflow-x-auto rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#365AD2]"
           >
-            <table
-              class="payment-table w-full border-collapse text-left"
-              [style.--label-due-date]="
-                'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.COLUMNS.DUE_DATE'
-                  | translate
-              "
-              [style.--label-amount]="
-                'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.COLUMNS.AMOUNT'
-                  | translate
-              "
-              [style.--label-status]="
-                'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.COLUMNS.STATUS'
-                  | translate
-              "
-            >
+            <table class="payment-table w-full border-collapse text-left">
               <thead class="sr-only">
                 <tr>
                   <th scope="col">
@@ -259,15 +245,29 @@
                     </th>
                     <td
                       class="payment-cell-date py-3.5 px-3 font-dm-sans font-normal text-[#686B82] text-[11.5px] sm:text-[12px] leading-snug whitespace-nowrap"
+                      [attr.data-label]="
+                        'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.COLUMNS.DUE_DATE'
+                          | translate
+                      "
                     >
                       {{ row.dueDateKey | translate }}
                     </td>
                     <td
                       class="payment-cell-amount py-3.5 px-3 font-dm-sans font-medium text-[#23244E] text-[12.5px] sm:text-[13px] leading-snug tabular-nums whitespace-nowrap"
+                      [attr.data-label]="
+                        'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.COLUMNS.AMOUNT'
+                          | translate
+                      "
                     >
                       {{ row.amountKey | translate }}
                     </td>
-                    <td class="payment-cell-status py-3.5 pl-3 text-right whitespace-nowrap">
+                    <td
+                      class="payment-cell-status py-3.5 pl-3 text-right whitespace-nowrap"
+                      [attr.data-label]="
+                        'FINANCIAL_MANAGEMENT_1.FINANCIAL_CONTROL.CASH_CONTROL_CARD.COLUMNS.STATUS'
+                          | translate
+                      "
+                    >
                       <span
                         class="inline-flex items-center justify-center min-w-19 px-3.5 py-1.5 rounded-full bg-[#0F7E7F] text-white font-dm-sans font-medium text-[11px] leading-none"
                         [style.background-image]="statusPillGradient"

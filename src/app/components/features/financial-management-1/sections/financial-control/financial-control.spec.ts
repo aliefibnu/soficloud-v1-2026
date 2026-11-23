@@ -266,4 +266,38 @@ describe('FinancialManagement1 FinancialControl', () => {
       expect(bgImage).toContain('rgb(16, 191, 193)');
     }
   });
+
+  it('should expose translated data-label attributes on responsive payment cells for stacked mobile layout', async () => {
+    const dateCells = fixture.debugElement.queryAll(By.css('.payment-cell-date'));
+    const amountCells = fixture.debugElement.queryAll(By.css('.payment-cell-amount'));
+    const statusCells = fixture.debugElement.queryAll(By.css('.payment-cell-status'));
+
+    expect(dateCells.length).toBe(3);
+    expect(amountCells.length).toBe(3);
+    expect(statusCells.length).toBe(3);
+
+    for (const cell of dateCells) {
+      expect(cell.nativeElement.getAttribute('data-label')).toBe('Jatuh Tempo');
+    }
+    for (const cell of amountCells) {
+      expect(cell.nativeElement.getAttribute('data-label')).toBe('Nominal');
+    }
+    for (const cell of statusCells) {
+      expect(cell.nativeElement.getAttribute('data-label')).toBe('Status');
+    }
+
+    translateService.use('en');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    for (const cell of dateCells) {
+      expect(cell.nativeElement.getAttribute('data-label')).toBe('Due Date');
+    }
+    for (const cell of amountCells) {
+      expect(cell.nativeElement.getAttribute('data-label')).toBe('Amount');
+    }
+    for (const cell of statusCells) {
+      expect(cell.nativeElement.getAttribute('data-label')).toBe('Status');
+    }
+  });
 });

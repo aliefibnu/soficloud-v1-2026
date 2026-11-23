@@ -13,6 +13,7 @@
   }
 
   .payment-table thead {
+    /* Hide column headers from layout and screen readers; labels are injected per cell via ::before */
     display: none;
   }
 
@@ -35,20 +36,10 @@
     text-align: left;
   }
 
-  .payment-cell-date::before {
-    content: var(--label-due-date) ':';
-    color: #686b82;
-    font-weight: 400;
-  }
-
-  .payment-cell-amount::before {
-    content: var(--label-amount) ':';
-    color: #686b82;
-    font-weight: 400;
-  }
-
+  .payment-cell-date::before,
+  .payment-cell-amount::before,
   .payment-cell-status::before {
-    content: var(--label-status) ':';
+    content: attr(data-label) ':';
     color: #686b82;
     font-weight: 400;
   }
