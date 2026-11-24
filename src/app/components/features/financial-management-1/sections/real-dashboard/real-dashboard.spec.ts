@@ -219,6 +219,34 @@ describe('RealDashboard', () => {
     expect(chrome.query(By.css('main'))).toBeNull();
   });
 
+  it('should render the A user avatar and toggle the profile popover in the dashboard mockup', () => {
+    const chrome = fixture.debugElement.query(By.css('app-erp-window-chrome'));
+    const avatar = chrome.query(By.css('[aria-label="User Avatar"]'));
+    expect(avatar).toBeTruthy();
+    expect(avatar.nativeElement.textContent.trim()).toBe('A');
+
+    const avatarBtn = chrome.query(By.css('button[aria-label="Avatar profil pengguna"]'));
+    expect(avatarBtn).toBeTruthy();
+    expect(avatarBtn.nativeElement.getAttribute('aria-expanded')).toBe('false');
+    expect(chrome.query(By.css('[role="dialog"]'))).toBeNull();
+
+    avatarBtn.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(avatarBtn.nativeElement.getAttribute('aria-expanded')).toBe('true');
+    const dialog = chrome.query(By.css('[role="dialog"]'));
+    expect(dialog).toBeTruthy();
+    expect(dialog.nativeElement.textContent).toContain('Atabil Marove');
+    expect(dialog.nativeElement.textContent).toContain('VP of Operations');
+    expect(dialog.nativeElement.textContent).toContain('Online');
+    expect(dialog.nativeElement.textContent).toContain('Admin');
+
+    avatarBtn.nativeElement.click();
+    fixture.detectChanges();
+    expect(avatarBtn.nativeElement.getAttribute('aria-expanded')).toBe('false');
+    expect(chrome.query(By.css('[role="dialog"]'))).toBeNull();
+  });
+
   it('should render shared balance sheet cards with semantic tables for Assets, Liabilities, and Equity', () => {
     const balanceSheetHost = fixture.debugElement.query(By.css('app-finance-balance-sheet-cards'));
     expect(balanceSheetHost).toBeTruthy();

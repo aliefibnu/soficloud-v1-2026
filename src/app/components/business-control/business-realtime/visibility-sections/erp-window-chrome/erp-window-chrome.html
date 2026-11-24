@@ -1,14 +1,12 @@
 <div
   [class]="'w-full ' + windowWidthClass() + ' ' + windowHeightClass() + ' rounded-2xl lg:rounded-[16.79px] shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-[#EDEDED] bg-[#FDFDFD] overflow-hidden flex flex-col shrink-0'"
 >
-  <div class="overflow-x-auto scrollbar-none w-full h-full flex flex-col">
-    <div class="min-w-170 lg:min-w-0 w-full h-full flex flex-col">
-      <!-- Header -->
-      <header
-        class="relative z-20 h-[40.16px] px-3 sm:px-4 bg-[#FDFDFD] border-b border-[#EDEDED] rounded-t-2xl lg:rounded-t-[16.13px] shadow-[0px_4.03px_20.16px_0px_rgba(0,0,0,0.08)] flex items-center justify-between select-none shrink-0"
-      >
-        <div class="flex items-center">
-          <div class="w-32 sm:w-36 lg:w-[162.33px] shrink-0 flex items-center gap-1.5 pl-0 sm:pl-1 lg:pl-[7.7px]">
+  <!-- Header -->
+  <header
+    class="relative z-20 h-[40.16px] px-3 sm:px-4 bg-[#FDFDFD] border-b border-[#EDEDED] rounded-t-2xl lg:rounded-t-[16.13px] shadow-[0px_4.03px_20.16px_0px_rgba(0,0,0,0.08)] flex items-center justify-between gap-2 select-none shrink-0"
+  >
+    <div class="flex items-center min-w-0 flex-1">
+      <div class="w-auto sm:w-36 lg:w-[162.33px] shrink-0 flex items-center gap-1.5 pl-0 sm:pl-1 lg:pl-[7.7px]">
             @if (logoSrc(); as src) {
               <img
                 [ngSrc]="src"
@@ -50,7 +48,7 @@
           </div>
 
           <span
-            class="pl-3 sm:pl-4 lg:pl-[24px] font-dm-sans font-semibold text-[10.75px] text-[#23244E] tracking-tight inline-flex items-center"
+            class="min-w-0 truncate pl-2.5 sm:pl-4 lg:pl-[24px] font-dm-sans font-semibold text-[10.75px] text-[#23244E] tracking-tight block"
             style="
               font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
               font-weight: 600;
@@ -60,7 +58,7 @@
           </span>
         </div>
 
-        <div class="relative pr-1 sm:pr-2 lg:pr-[3px]">
+        <div class="relative shrink-0 pr-1 sm:pr-2 lg:pr-[3px]">
           <button
             type="button"
             (click)="toggleProfile($event)"
@@ -145,8 +143,9 @@
         </div>
       </header>
 
-      <!-- Body -->
-      <div class="flex-1 flex min-h-0 w-full">
+  <!-- Scrollable Body -->
+  <div class="overflow-x-auto scrollbar-none w-full flex-1 min-h-0 flex flex-col">
+    <div class="min-w-170 lg:min-w-0 w-full flex-1 flex min-h-0">
         <!-- Sidebar -->
         <aside
           class="w-32 sm:w-36 lg:w-[162.334px] shrink-0 bg-[#FDFDFD] border-r border-[#EDEDED] rounded-bl-2xl lg:rounded-bl-[16.13px] shadow-[0px_4.03px_20.16px_0px_rgba(0,0,0,0.08)] pt-[16.29px] pb-4 px-2 sm:px-2.5 lg:px-0 flex flex-col items-center gap-4 sm:gap-5 lg:gap-[20.15px] select-none"
@@ -231,4 +230,3 @@
       </div>
     </div>
   </div>
-</div>

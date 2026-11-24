@@ -114,6 +114,21 @@ describe('ErpWindowChrome', () => {
     expect(avatar.nativeElement.textContent.trim()).toBe('A');
   });
 
+  it('should keep header and avatar outside horizontal scroll container for mobile/tablet visibility', () => {
+    const header = fixture.debugElement.query(By.css('header'));
+    const scrollContainer = fixture.debugElement.query(By.css('.overflow-x-auto'));
+    expect(header).toBeTruthy();
+    expect(scrollContainer).toBeTruthy();
+    expect(scrollContainer.nativeElement.contains(header.nativeElement)).toBe(false);
+
+    const avatarWrapper = header.query(By.css('[aria-label="User Avatar"]'))?.nativeElement.closest('div.relative');
+    expect(avatarWrapper?.classList.contains('shrink-0')).toBe(true);
+
+    const titleSpan = header.query(By.css('span.truncate'));
+    expect(titleSpan).toBeTruthy();
+    expect(titleSpan.nativeElement.classList.contains('min-w-0')).toBe(true);
+  });
+
   it('should render 5 sidebar navigation items', () => {
     const aside = fixture.debugElement.query(By.css('aside'));
     expect(aside).toBeTruthy();
