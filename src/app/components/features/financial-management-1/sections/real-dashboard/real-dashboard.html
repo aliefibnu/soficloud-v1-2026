@@ -1,0 +1,307 @@
+<section
+  id="reporting"
+  tabindex="-1"
+  aria-labelledby="real-dashboard-heading"
+  class="real-dashboard-section w-full pt-8 sm:pt-10 lg:pt-12 pb-6 sm:pb-8 lg:pb-10 short:pt-6 short:pb-6 scroll-mt-12 sm:scroll-mt-14 lg:scroll-mt-12 focus:outline-none"
+>
+  <div class="w-full max-w-350 mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="text-center max-w-4xl mx-auto">
+      <h2
+        id="real-dashboard-heading"
+        class="font-inter font-semibold text-white text-[26px] sm:text-[34px] lg:text-[42px] leading-[1.18] tracking-[-0.02em]"
+      >
+        {{ 'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.TITLE' | translate }}
+      </h2>
+
+      <p
+        class="mt-2.5 sm:mt-3 font-dm-sans font-normal text-white/95 text-[13.5px] sm:text-[15px] leading-[1.48] max-w-4xl mx-auto"
+      >
+        {{ 'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.SUBTITLE' | translate }}
+      </p>
+    </div>
+
+    <div
+      class="mt-8 sm:mt-10 lg:mt-11 short:mt-8 grid grid-cols-1 lg:grid-cols-[minmax(280px,340px)_minmax(0,1fr)] xl:grid-cols-[minmax(330px,380px)_minmax(0,1fr)] gap-6 lg:gap-8 xl:gap-10 items-center"
+    >
+      <ol
+        role="list"
+        [attr.aria-label]="'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.LIST_ARIA_LABEL' | translate"
+        class="flex flex-col gap-4 sm:gap-5 m-0 p-0 list-none"
+      >
+        @for (card of reportCategories; track card.id) {
+          <li>
+            <article
+              [attr.data-category-id]="card.id"
+              class="real-dashboard-card relative bg-[#FDFDFD] rounded-xl flex flex-col justify-center"
+            >
+              <h3
+                class="font-dm-sans font-bold text-[#1B1D36] text-[18px] sm:text-[19px] leading-[1.2] tracking-[-0.01em]"
+              >
+                {{ card.titleKey | translate }}
+              </h3>
+              <p
+                class="mt-2 pr-8 font-dm-sans font-normal text-[#23244E] text-[13px] sm:text-[13.5px] leading-[1.48]"
+              >
+                {{ card.descriptionKey | translate }}
+              </p>
+
+              <span
+                class="real-dashboard-card-badge absolute bottom-0 right-0 w-8.5 h-8 rounded-tl-[10px] flex items-center justify-center font-dm-sans font-semibold text-[12.5px] text-white tabular-nums select-none pointer-events-none"
+                aria-hidden="true"
+              >
+                {{ card.number }}
+              </span>
+            </article>
+          </li>
+        }
+      </ol>
+
+      <div class="real-dashboard-stage w-full min-w-0">
+        <app-erp-window-chrome
+          activeModule="finance"
+          [moduleTitle]="
+            'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.WINDOW_TITLE'
+              | translate
+          "
+          [showStatusPills]="true"
+          [useSemanticMain]="false"
+          avatarInitial="A"
+          logoSrc="/images/landing/features/1/cart.svg"
+          windowWidthClass="w-full"
+          windowHeightClass="h-auto"
+          mainWidthClass=""
+          mainPaddingClass="px-3 sm:px-5 lg:px-6"
+          contentContainerClass="w-full flex-1 flex flex-col gap-3.5 xl:gap-4"
+        >
+          <app-finance-balance-sheet-cards
+            [categories]="balanceSheetCategories"
+            layout="fluid"
+          />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 xl:gap-4 w-full">
+            <article
+              data-chart-id="cash-bank-balance"
+              class="min-w-0 w-full rounded-md border-[0.75px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4px_10px_rgba(0,0,0,0.025)] relative px-3.5 pt-3.5 pb-3 flex flex-col overflow-clip"
+            >
+              <div
+                class="absolute top-0 right-0 w-[15.39px] h-[18.14px] bg-[#DDDDDD] rounded-tr-[5.6px] flex flex-col items-center justify-center gap-[1.4px] pointer-events-none"
+                aria-hidden="true"
+              >
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+              </div>
+
+              <h4
+                class="font-dm-sans font-bold text-[10px] sm:text-[10.5px] text-[#23244E] tracking-tight uppercase leading-none mb-2 pr-4"
+              >
+                {{ 'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.CHARTS.CASH_BANK_BALANCE' | translate }}
+              </h4>
+
+              <svg
+                role="img"
+                [attr.aria-label]="
+                  'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.CHARTS.CASH_BANK_ARIA' | translate
+                "
+                class="w-full h-auto block select-none"
+                viewBox="0 0 324 156"
+                fill="none"
+              >
+                <line x1="104" y1="132" x2="304" y2="132" stroke="#E5E5E5" stroke-width="0.7" />
+
+                @for (tick of cashBankXTicks; track tick.label) {
+                  <line
+                    [attr.x1]="tick.pos"
+                    y1="10"
+                    [attr.x2]="tick.pos"
+                    y2="135"
+                    stroke="#E5E5E5"
+                    stroke-width="0.7"
+                  />
+                }
+
+                @for (bar of cashBankBalances; track bar.id) {
+                  <text
+                    x="97"
+                    [attr.y]="bar.centerY + 2.5"
+                    font-size="7.4"
+                    fill="#6B6D7C"
+                    font-family="'DM Sans Variable', 'DM Sans', sans-serif"
+                    text-anchor="end"
+                  >
+                    {{ bar.label }}
+                  </text>
+                  @if (bar.barPath) {
+                    <path
+                      [attr.d]="bar.barPath"
+                      [attr.fill]="bar.fill"
+                      [attr.stroke]="bar.stroke"
+                      stroke-width="0.9"
+                    />
+                  }
+                }
+
+                <g
+                  font-size="7.2"
+                  fill="#787A88"
+                  font-family="'DM Sans Variable', 'DM Sans', sans-serif"
+                  text-anchor="middle"
+                >
+                  @for (tick of cashBankXTicks; track tick.label) {
+                    <text [attr.x]="tick.pos" y="146">{{ tick.label }}</text>
+                  }
+                </g>
+              </svg>
+
+              <table class="sr-only">
+                <caption>
+                  {{ 'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.CHARTS.CASH_BANK_BALANCE' | translate }}
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Account</th>
+                    <th scope="col">Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (bar of cashBankBalances; track bar.id) {
+                    <tr>
+                      <td>{{ bar.label }}</td>
+                      <td>{{ bar.formattedValue }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </article>
+
+            <article
+              data-chart-id="customer-billing-receipt"
+              class="min-w-0 w-full rounded-md border-[0.75px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4px_10px_rgba(0,0,0,0.025)] relative px-3.5 pt-3.5 pb-3 flex flex-col overflow-clip"
+            >
+              <div
+                class="absolute top-0 right-0 w-[15.39px] h-[18.14px] bg-[#DDDDDD] rounded-tr-[5.6px] flex flex-col items-center justify-center gap-[1.4px] pointer-events-none"
+                aria-hidden="true"
+              >
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+                <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+              </div>
+
+              <h4
+                class="font-dm-sans font-bold text-[10px] sm:text-[10.5px] text-[#23244E] tracking-tight uppercase leading-none mb-2 pr-4"
+              >
+                {{
+                  'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.CHARTS.CUSTOMER_BILLING_RECEIPT'
+                    | translate
+                }}
+              </h4>
+
+              <svg
+                role="img"
+                [attr.aria-label]="
+                  'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.CHARTS.CUSTOMER_BILLING_ARIA' | translate
+                "
+                class="w-full h-auto block select-none"
+                viewBox="0 0 324 156"
+                fill="none"
+              >
+                <rect
+                  data-legend-pill
+                  x="158"
+                  y="2"
+                  width="22"
+                  height="9.5"
+                  rx="2.5"
+                  fill="#FFDCD8"
+                  stroke="#E6A39B"
+                  stroke-width="0.9"
+                />
+
+                @for (tick of billingYTicks; track tick.label) {
+                  <line
+                    x1="44"
+                    [attr.y1]="tick.pos"
+                    x2="310"
+                    [attr.y2]="tick.pos"
+                    stroke="#E5E5E5"
+                    stroke-width="0.7"
+                  />
+                  <text
+                    x="40"
+                    [attr.y]="tick.pos + 2.5"
+                    font-size="7.2"
+                    fill="#787A88"
+                    font-family="'DM Sans Variable', 'DM Sans', sans-serif"
+                    text-anchor="end"
+                  >
+                    {{ tick.label }}
+                  </text>
+                }
+
+                @for (x of billingVerticalGridLines; track x) {
+                  <line
+                    [attr.x1]="x"
+                    y1="18"
+                    [attr.x2]="x"
+                    y2="130"
+                    stroke="#E5E5E5"
+                    stroke-width="0.7"
+                  />
+                }
+
+                @for (col of billingReceipts; track col.id) {
+                  <path
+                    [attr.d]="col.barPath"
+                    [attr.fill]="col.fill"
+                    [attr.stroke]="col.stroke"
+                    stroke-width="0.9"
+                  />
+                }
+
+                <g
+                  font-size="6.8"
+                  fill="#787A88"
+                  font-family="'DM Sans Variable', 'DM Sans', sans-serif"
+                  text-anchor="end"
+                >
+                  @for (col of billingReceipts; track col.id) {
+                    <text
+                      [attr.x]="col.centerX + 4"
+                      y="140"
+                      [attr.transform]="'rotate(-26 ' + (col.centerX + 4) + ' 140)'"
+                    >
+                      {{ col.label }}
+                    </text>
+                  }
+                </g>
+              </svg>
+
+              <table class="sr-only">
+                <caption>
+                  {{
+                    'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.CHARTS.CUSTOMER_BILLING_RECEIPT'
+                      | translate
+                  }}
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Month</th>
+                    <th scope="col">Billing Receipt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (col of billingReceipts; track col.id) {
+                    <tr>
+                      <td>{{ col.label }}</td>
+                      <td>{{ col.valueMillions }} M</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </article>
+          </div>
+        </app-erp-window-chrome>
+      </div>
+    </div>
+  </div>
+</section>

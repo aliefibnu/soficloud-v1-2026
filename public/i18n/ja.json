@@ -1361,6 +1361,7 @@
       "TITLE": "統制されたフローで管理する経費と仮払金",
       "SUBTITLE": "注目すべき5つの領域：従業員立替精算、経費申請、業務仮払金、仕入先前払金、および支払計画と予算統制。",
       "TABS": {
+        "ARIA_LABEL": "経費および仮払金フロー",
         "REIMBURSEMENT": {
           "TITLE": "立替精算",
           "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
@@ -1398,7 +1399,140 @@
             "SUBTITLE": "Outstanding & aging"
           }
         }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "仮払申請から精算完了まで",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
       }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "実画面ダッシュボードを原寸比率で表示",
+      "SUBTITLE": "製品画面の実証としてスクリーンショットを使用し、トリミングや引き伸ばし、無理な枠への収め込みを行わず本来のサイズで表示しています。",
+      "LIST_ARIA_LABEL": "財務レポートのカテゴリ",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "財務諸表",
+          "DESCRIPTION": "貸借対照表、損益計算書、キャッシュフロー計算書、売上原価（COGS）、株主資本等変動計算書。"
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "売掛金・買掛金",
+          "DESCRIPTION": "売掛・買掛年齢調べ（AR/AP Aging）、得意先・仕入先明細表、支払期日分析。"
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "会計レポート",
+          "DESCRIPTION": "総勘定元帳、試算表、仕訳一覧表、勘定科目推移表。"
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "経営分析",
+          "DESCRIPTION": "予実対比（Budget vs Actual）、コストセンター別分析、収益性分析、原価分析。"
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "現金および銀行残高の横棒グラフ",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "月別の顧客請求回収額の縦棒グラフ"
+      }
+    },
+    "INTEGRATION": {
+      "TITLE": "業務取引がそのまま\n会計インパクトを形成",
+      "SUBTITLE": "経理部門が業務取引を再入力する必要はありません。フローを選択して、業務伝票が総勘定元帳（General Ledger）へ連携される流れをご覧ください。",
+      "TABS_ARIA_LABEL": "会計連携フロー",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "完了した受注が売掛金、\n入金、仕訳へと連動します。",
+          "STEPS_ARIA_LABEL": "Sales to Cash の手順",
+          "STEPS": {
+            "SALES_ORDER": "受注（Sales Order）",
+            "DELIVERY": "出荷（Delivery）",
+            "CUSTOMER_INVOICE": "請求書（Customer Invoice）",
+            "AR": "売掛金（AR）",
+            "RECEIPT": "入金（Receipt）",
+            "GENERAL_LEDGER": "総勘定元帳（GL）"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "購買は申請からサプライヤーへの\n支払まで連動します。",
+          "STEPS_ARIA_LABEL": "Procure to Pay の手順",
+          "STEPS": {
+            "PR_PO": "PR / PO",
+            "GOODS_RECEIPT": "入庫（Goods Receipt）",
+            "SUPPLIER_INVOICE": "仕入請求（Supplier Invoice）",
+            "AP": "買掛金（AP）",
+            "PAYMENT": "支払（Payment）",
+            "GENERAL_LEDGER": "総勘定元帳（GL）"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "材料と生産実績が在庫評価額および\n売上原価（COGS）を形成します。",
+          "STEPS_ARIA_LABEL": "Manufacture to COGs の手順",
+          "STEPS": {
+            "MATERIAL_ISSUE": "材料出庫",
+            "WIP": "仕掛品（WIP）",
+            "FINISHED_GOODS": "完成品入庫",
+            "PRODUCTION_COST": "製造原価",
+            "COGS": "売上原価（COGS）",
+            "GENERAL_LEDGER": "総勘定元帳（GL）"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "予算、原価、売上がプロジェクトの\n利益率として可視化されます。",
+          "STEPS_ARIA_LABEL": "Project to Profitability の手順",
+          "STEPS": {
+            "PROJECT_BUDGET": "プロジェクト予算",
+            "MATERIAL_EXPENSE": "資材・経費",
+            "PROJECT_COST": "プロジェクト原価",
+            "REVENUE": "売上",
+            "PROFITABILITY": "収益性"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "経費精算と仮払いは適切な\nコストセンターまたはプロジェクトへ連携します。",
+          "STEPS_ARIA_LABEL": "Expense to Accounting の手順",
+          "STEPS": {
+            "CLAIM_ADVANCE": "経費精算 / 仮払い",
+            "APPROVAL": "承認",
+            "PAYMENT": "支払",
+            "SETTLEMENT": "精算",
+            "COST_CENTRE": "コストセンター / プロジェクト",
+            "GENERAL_LEDGER": "総勘定元帳（GL）"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "貴社の財務業務フローがSOFICloudで\nどのように運用できるかご覧ください。",
+      "DESCRIPTION": "日々の業務取引、承認、資金管理から、\n財務諸表および経営分析まで一貫して対応します。"
     }
   }
 }

@@ -1,0 +1,149 @@
+<div
+  [class]="
+    layout() === 'fluid'
+      ? 'grid grid-cols-3 gap-3.5 xl:gap-4 w-full'
+      : 'flex justify-center gap-[32.17px] w-full'
+  "
+>
+  @for (category of categories(); track category.key) {
+    <article
+      [class]="
+        layout() === 'fluid'
+          ? 'min-w-0 w-full rounded-[6px] border-[0.75px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4px_10px_rgba(0,0,0,0.025)] relative px-3 pt-3 pb-3.5 flex flex-col justify-start gap-3 overflow-clip'
+          : 'w-[174.85px] h-[263.71px] rounded-[5.6px] border-[0.7px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4.2px_8.83px_0px_rgba(0,0,0,0.02)] relative p-[12.59px] flex flex-col justify-start gap-[14px] overflow-hidden shrink-0'
+      "
+    >
+      <!-- 3-Dots Menu Tab Top-Right -->
+      <div
+        class="absolute top-0 right-0 w-[15.39px] h-[18.14px] bg-[#DDDDDD] rounded-tr-[5.6px] flex flex-col items-center justify-center gap-[1.4px] pointer-events-none"
+        aria-hidden="true"
+      >
+        <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+        <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+        <span class="w-[1.4px] h-[1.4px] rounded-full bg-[#23244E]"></span>
+      </div>
+
+      <!-- Card Header -->
+      <div class="flex items-start justify-between pr-3">
+        <div class="text-[#D9D9D9] pt-0.5" aria-hidden="true">
+          @switch (category.iconType) {
+            @case ('building') {
+              <svg class="w-[17px] h-[19px] shrink-0 block" viewBox="0 0 17 19" fill="none">
+                <path
+                  d="M9.791 18.139H0V0H9.791V18.139ZM1.399 12.558H4.196V9.768H1.399V12.558ZM5.594 12.558H8.392V9.768H5.594V12.558ZM1.399 8.372H4.196V5.581H1.399V8.372ZM5.594 8.372H8.392V5.581H5.594V8.372ZM1.399 4.184H4.196V1.393H1.399V4.184ZM5.594 4.184H8.392V1.393H5.594V4.184Z"
+                  fill="#D9D9D9"
+                />
+                <path
+                  d="M16.787 18.134H11.192V8.368H16.787V18.134ZM12.59 13.948V18.133H15.388V13.948H12.59Z"
+                  fill="#D9D9D9"
+                />
+                <rect x="11.192" y="5.581" width="5.595" height="1.395" fill="#D9D9D9" />
+              </svg>
+            }
+            @case ('bank') {
+              <svg class="w-[20px] h-[17px] shrink-0 block" viewBox="0 0 20 17" fill="none">
+                <path d="M9.791 0L19.583 6.976H0L9.791 0Z" fill="#D9D9D9" />
+                <rect x="2.797" y="6.981" width="1.399" height="6.976" fill="#D9D9D9" />
+                <rect x="6.993" y="6.981" width="1.399" height="6.976" fill="#D9D9D9" />
+                <rect x="11.19" y="6.981" width="1.399" height="6.976" fill="#D9D9D9" />
+                <rect x="15.387" y="6.981" width="1.399" height="6.976" fill="#D9D9D9" />
+                <rect x="1.398" y="13.955" width="16.785" height="1.395" fill="#D9D9D9" />
+                <rect x="0" y="15.348" width="19.583" height="1.395" fill="#D9D9D9" />
+              </svg>
+            }
+            @case ('equity') {
+              <svg class="w-[17px] h-[17px] shrink-0 block" viewBox="0 0 17 17" fill="none">
+                <rect x="0" y="4.188" width="4.196" height="12.558" rx="1.401" fill="#D9D9D9" />
+                <path
+                  d="M13.986 0C14.76 0 15.386 0.628 15.386 1.402V6.396C15.386 6.768 15.535 7.124 15.798 7.387L16.374 7.961C16.637 8.224 16.786 8.581 16.786 8.954V15.343C16.786 16.117 16.158 16.744 15.384 16.744H6.997C6.223 16.744 5.595 16.117 5.595 15.343V1.402C5.595 0.628 6.223 0 6.997 0H13.986ZM6.994 13.957H8.392V12.561H6.994V13.957ZM9.792 13.957H11.19V12.561H9.792V13.957ZM12.588 13.957H13.987V12.561H12.588V13.957ZM6.994 11.164H8.392V9.768H6.994V11.164ZM9.792 11.164H11.19V9.768H9.792V11.164ZM12.588 11.164H13.987V9.768H12.588V11.164ZM6.994 8.369H8.392V6.973H6.994V8.369ZM9.792 8.369H11.19V6.973H9.792V8.369ZM12.588 8.369H13.987V6.973H12.588V8.369ZM6.994 1.393V4.184H13.988V1.393H6.994Z"
+                  fill="#D9D9D9"
+                />
+              </svg>
+            }
+          }
+        </div>
+
+        <div class="flex flex-col items-end text-right min-w-0">
+          <span
+            class="font-dm-sans font-bold text-[14.01px] text-[#0162EF] tracking-tight uppercase leading-none"
+          >
+            {{ category.titleKey | translate }}
+          </span>
+          <span class="font-dm-sans text-[8.41px] text-[#23244E] leading-none mt-1">
+            {{ category.periodKey | translate }}
+          </span>
+          <span
+            class="font-dm-sans font-bold text-[10.51px] text-[#23244E] tracking-tight leading-none mt-1.5 tabular-nums whitespace-nowrap"
+          >
+            {{ category.total }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Semantic Balance Sheet Table -->
+      <div
+        [class]="
+          layout() === 'fluid'
+            ? 'w-full rounded-[3px] overflow-clip border border-[#DDDDDD]/70'
+            : 'w-[149.67px] mx-auto rounded-[3px] overflow-clip border border-[#DDDDDD]/70'
+        "
+      >
+        <table class="w-full border-collapse font-dm-sans text-[7px] text-[#23244E] bg-[#FDFDFD]">
+          <caption class="sr-only">
+            {{ category.titleKey | translate }} — {{ category.periodKey | translate }} ({{ category.total }})
+          </caption>
+          <thead>
+            <tr class="bg-[#0162EF] text-[#FDFDFD] h-[18.14px] select-none leading-none">
+              <th
+                scope="col"
+                class="pl-2 pr-1 py-0 text-left font-semibold uppercase tracking-wider"
+              >
+                {{
+                  'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.TABLE.NAME'
+                    | translate
+                }}
+              </th>
+              <th
+                scope="col"
+                class="pl-1 pr-2 py-0 text-right font-semibold tracking-normal whitespace-nowrap"
+              >
+                {{
+                  'BUSINESS_REALTIME.VISIBILITY_SECTIONS.FINANCIAL_VISIBILITY.MOCKUP.TABLE.PERIOD'
+                    | translate
+                }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of category.items; track item.nameKey; let idx = $index) {
+              <tr class="h-[18.14px] leading-none" [class.bg-[#F3F8FE]]="idx % 2 === 1">
+                <td class="pl-2 pr-1 py-0.5 text-left align-middle">
+                  @if (layout() === 'compact' && item.nameLines) {
+                    <span class="flex flex-col justify-center leading-[7.5px]">
+                      @for (line of item.nameLines; track line) {
+                        <span class="font-medium">{{ line }}</span>
+                      }
+                    </span>
+                  } @else {
+                    <span class="font-medium block truncate">{{ item.nameKey | translate }}</span>
+                  }
+                </td>
+                <td class="pl-1 pr-2 py-0.5 text-right align-middle tabular-nums whitespace-nowrap">
+                  @if (layout() === 'compact' && item.amountLines) {
+                    <span class="flex flex-col items-end justify-center leading-[7.5px]">
+                      @for (line of item.amountLines; track line) {
+                        <span class="font-medium">{{ line }}</span>
+                      }
+                    </span>
+                  } @else {
+                    <span class="font-medium">{{ item.amount }}</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </article>
+  }
+</div>

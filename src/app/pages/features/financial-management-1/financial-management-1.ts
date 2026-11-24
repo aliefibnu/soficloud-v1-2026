@@ -8,12 +8,26 @@ import {
 } from '../../../components/features/financial-management-1/section-tabs/section-tabs';
 import { ExpenseAndAdvance } from '../../../components/features/financial-management-1/sections/expense-and-advance/expense-and-advance';
 import { FinancialControl } from '../../../components/features/financial-management-1/sections/financial-control/financial-control';
+import { Integration } from '../../../components/features/financial-management-1/sections/integration/integration';
+import { RealDashboard } from '../../../components/features/financial-management-1/sections/real-dashboard/real-dashboard';
 import { TenCapabilities } from '../../../components/features/financial-management-1/sections/ten-capabilities/ten-capabilities';
+import { Subfooter } from '../../../components/features/financial-management-1/subfooter/subfooter';
 
 @Component({
-  imports: [Hero, SectionTabs, FinancialControl, TenCapabilities, ExpenseAndAdvance, TranslatePipe],
+  imports: [
+    Hero,
+    SectionTabs,
+    FinancialControl,
+    TenCapabilities,
+    ExpenseAndAdvance,
+    RealDashboard,
+    Integration,
+    Subfooter,
+    TranslatePipe,
+  ],
   selector: 'app-financial-management-1',
   templateUrl: './financial-management-1.html',
+  styleUrl: './financial-management-1.css',
 })
 export class FinancialManagement1 implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);

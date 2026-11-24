@@ -1361,6 +1361,7 @@
       "TITLE": "통제된 흐름으로 관리하는 비용과 가지급금",
       "SUBTITLE": "강조되는 다섯 가지 영역: 임직원 경비 정산, 비용 청구, 운영 가지급금, 공급업체 선급금, 그리고 지급 계획 및 예산 통제.",
       "TABS": {
+        "ARIA_LABEL": "경비 및 가지급금 워크플로우",
         "REIMBURSEMENT": {
           "TITLE": "경비 정산",
           "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
@@ -1398,7 +1399,140 @@
             "SUBTITLE": "Outstanding & aging"
           }
         }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "가지급금 신청부터 정산 완료까지",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
       }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "실제 대시보드를 원본 비율 그대로 표시",
+      "SUBTITLE": "실제 제품 화면의 증빙으로 스크린샷을 사용하며, 자르거나 늘이거나 프레임에 억지로 맞추지 않고 원본 크기 그대로 유지합니다.",
+      "LIST_ARIA_LABEL": "재무 보고서 카테고리",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "재무제표",
+          "DESCRIPTION": "재무상태표, 손익계산서, 현금흐름표, 매출원가(COGS) 및 자본변동표."
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "매출채권 및 매입채무",
+          "DESCRIPTION": "AR/AP 연령 분석, 고객/공급업체 거래명세서 및 만기일 분석."
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "회계 보고서",
+          "DESCRIPTION": "총계정원장, 시산표, 분개장 목록 및 계정 변동 내역."
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "경영 분석",
+          "DESCRIPTION": "예산 대 실적, 코스트 센터, 수익성 및 원가 분석."
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "현금 및 은행 잔액 가로 막대 차트",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "월별 고객 청구 수금액 세로 막대 차트"
+      }
+    },
+    "INTEGRATION": {
+      "TITLE": "비즈니스 거래가 곧\n회계 영향으로 이어집니다",
+      "SUBTITLE": "재무팀이 운영 거래를 다시 입력할 필요가 없습니다. 흐름을 선택하여 업무 전표가 총계정원장(General Ledger)으로 연결되는 과정을 확인하세요.",
+      "TABS_ARIA_LABEL": "회계 통합 프로세스",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "완료된 주문이 매출채권,\n수금, 그리고 전표로 연결됩니다.",
+          "STEPS_ARIA_LABEL": "Sales to Cash 단계",
+          "STEPS": {
+            "SALES_ORDER": "판매 주문",
+            "DELIVERY": "출고 / 배송",
+            "CUSTOMER_INVOICE": "고객 송장",
+            "AR": "매출채권 (AR)",
+            "RECEIPT": "수금",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "구매는 요청에서 공급업체\n지급까지 이어집니다.",
+          "STEPS_ARIA_LABEL": "Procure to Pay 단계",
+          "STEPS": {
+            "PR_PO": "PR / PO",
+            "GOODS_RECEIPT": "입고 확인",
+            "SUPPLIER_INVOICE": "공급업체 송장",
+            "AP": "매입채무 (AP)",
+            "PAYMENT": "지급",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "자재와 생산 실적이 재고 자산 가치와\n매출원가(COGS)를 형성합니다.",
+          "STEPS_ARIA_LABEL": "Manufacture to COGs 단계",
+          "STEPS": {
+            "MATERIAL_ISSUE": "자재 출고",
+            "WIP": "재공품 (WIP)",
+            "FINISHED_GOODS": "완제품 입고",
+            "PRODUCTION_COST": "생산 원가",
+            "COGS": "매출원가 (COGS)",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "예산, 비용, 매출이 프로젝트\n수익률로 연결됩니다.",
+          "STEPS_ARIA_LABEL": "Project to Profitability 단계",
+          "STEPS": {
+            "PROJECT_BUDGET": "프로젝트 예산",
+            "MATERIAL_EXPENSE": "자재 / 경비",
+            "PROJECT_COST": "프로젝트 원가",
+            "REVENUE": "매출",
+            "PROFITABILITY": "수익성"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "비용 청구와 가지급금이 올바른\n코스트센터 또는 프로젝트로 연결됩니다.",
+          "STEPS_ARIA_LABEL": "Expense to Accounting 단계",
+          "STEPS": {
+            "CLAIM_ADVANCE": "청구 / 가지급금",
+            "APPROVAL": "승인",
+            "PAYMENT": "지급",
+            "SETTLEMENT": "정산",
+            "COST_CENTRE": "코스트센터 / 프로젝트",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "귀사의 재무 업무 흐름이 SOFICloud에서\n어떻게 실행되는지 확인해 보세요.",
+      "DESCRIPTION": "운영 거래, 승인, 자금 통제부터\n재무제표 및 경영 분석까지 하나로 연결됩니다."
     }
   }
 }

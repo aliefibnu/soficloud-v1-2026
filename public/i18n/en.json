@@ -1361,6 +1361,7 @@
       "TITLE": "Expense and Advance in a Controlled Flow",
       "SUBTITLE": "Five highlighted areas: employee reimbursement, expense claim, operational advance, supplier advance payment, as well as payment planning & budget control.",
       "TABS": {
+        "ARIA_LABEL": "Expense and advance workflows",
         "REIMBURSEMENT": {
           "TITLE": "Reimbursement",
           "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
@@ -1398,7 +1399,140 @@
             "SUBTITLE": "Outstanding & aging"
           }
         }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "From cash request to settlement",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
       }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "Real Dashboard Displayed In Full Ratio",
+      "SUBTITLE": "Screenshots are used as product display proof and kept in their original size without cropping, stretching, or forced framing.",
+      "LIST_ARIA_LABEL": "Financial reporting categories",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "Financial Statements",
+          "DESCRIPTION": "Balance Sheet, Income Statement, Cash Flow, COGS, and Changes in Equity."
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "Receivable & Payable",
+          "DESCRIPTION": "AR/AP Aging, Customer/Supplier Statement, and Due Date Analysis."
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "Accounting Reports",
+          "DESCRIPTION": "General Ledger, Trial Balance, Journal Listing, and Account Movement."
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "Management Analysis",
+          "DESCRIPTION": "Budget vs Actual, Cost Centre, Profitability, and Cost Analysis."
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "Cash and Bank Balance horizontal bar chart in millions",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "Customer Billing Receipt vertical column chart by month"
+      }
+    },
+    "INTEGRATION": {
+      "TITLE": "Business transactions form\naccounting impact",
+      "SUBTITLE": "Finance does not need to re-record operational transactions. Select a flow to see how business documents move into the General Ledger.",
+      "TABS_ARIA_LABEL": "Accounting integration workflows",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "Completed orders become receivables,\nreceipts, and journals.",
+          "STEPS_ARIA_LABEL": "Sales to Cash workflow steps",
+          "STEPS": {
+            "SALES_ORDER": "Sales Order",
+            "DELIVERY": "Delivery",
+            "CUSTOMER_INVOICE": "Customer Invoice",
+            "AR": "AR",
+            "RECEIPT": "Receipt",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "Purchases move from requisition to\nsupplier payment.",
+          "STEPS_ARIA_LABEL": "Procure to Pay workflow steps",
+          "STEPS": {
+            "PR_PO": "PR / PO",
+            "GOODS_RECEIPT": "Goods Receipt",
+            "SUPPLIER_INVOICE": "Supplier Invoice",
+            "AP": "AP",
+            "PAYMENT": "Payment",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "Materials and production output build\ninventory value and COGS.",
+          "STEPS_ARIA_LABEL": "Manufacture to COGs workflow steps",
+          "STEPS": {
+            "MATERIAL_ISSUE": "Material Issue",
+            "WIP": "WIP",
+            "FINISHED_GOODS": "Finished Goods",
+            "PRODUCTION_COST": "Production Cost",
+            "COGS": "COGS",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "Budgets, costs, and revenue are read as\nproject margin.",
+          "STEPS_ARIA_LABEL": "Project to Profitability workflow steps",
+          "STEPS": {
+            "PROJECT_BUDGET": "Project Budget",
+            "MATERIAL_EXPENSE": "Material / Expense",
+            "PROJECT_COST": "Project Cost",
+            "REVENUE": "Revenue",
+            "PROFITABILITY": "Profitability"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "Claims and advances flow into the right\ncost centre or project.",
+          "STEPS_ARIA_LABEL": "Expense to Accounting workflow steps",
+          "STEPS": {
+            "CLAIM_ADVANCE": "Claim / Advance",
+            "APPROVAL": "Approval",
+            "PAYMENT": "Payment",
+            "SETTLEMENT": "Settlement",
+            "COST_CENTRE": "Cost Centre / Project",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "See how your company's finance workflows\ncan run on SOFICloud.",
+      "DESCRIPTION": "From operational transactions, approvals, and cash control,\nto financial statements and management analysis."
     }
   }
 }
