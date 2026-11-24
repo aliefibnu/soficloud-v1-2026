@@ -1479,10 +1479,10 @@
         },
         "PROCURE_TO_PAY": {
           "TAB_LABEL": "Procure to Pay",
-          "HEADLINE": "検収済みの仕入が買掛金、\n支払、仕訳へと連動します。",
+          "HEADLINE": "購買は申請からサプライヤーへの\n支払まで連動します。",
           "STEPS_ARIA_LABEL": "Procure to Pay の手順",
           "STEPS": {
-            "PURCHASE_ORDER": "発注（Purchase Order）",
+            "PR_PO": "PR / PO",
             "GOODS_RECEIPT": "入庫（Goods Receipt）",
             "SUPPLIER_INVOICE": "仕入請求（Supplier Invoice）",
             "AP": "買掛金（AP）",
@@ -1492,44 +1492,47 @@
         },
         "MANUFACTURE_TO_COGS": {
           "TAB_LABEL": "Manufacture to COGs",
-          "HEADLINE": "完了した製造工程が仕掛品、\n在庫、売上原価（COGS）を形成します。",
+          "HEADLINE": "材料と生産実績が在庫評価額および\n売上原価（COGS）を形成します。",
           "STEPS_ARIA_LABEL": "Manufacture to COGs の手順",
           "STEPS": {
-            "BOM_ROUTING": "BOM & 工程",
             "MATERIAL_ISSUE": "材料出庫",
-            "WORK_ORDER": "製造指図",
+            "WIP": "仕掛品（WIP）",
             "FINISHED_GOODS": "完成品入庫",
+            "PRODUCTION_COST": "製造原価",
             "COGS": "売上原価（COGS）",
             "GENERAL_LEDGER": "総勘定元帳（GL）"
           }
         },
         "PROJECT_TO_PROFITABILITY": {
           "TAB_LABEL": "Project to Profitability",
-          "HEADLINE": "プロジェクトの原価と進捗が\n請求、利益率、仕訳と連動します。",
+          "HEADLINE": "予算、原価、売上がプロジェクトの\n利益率として可視化されます。",
           "STEPS_ARIA_LABEL": "Project to Profitability の手順",
           "STEPS": {
             "PROJECT_BUDGET": "プロジェクト予算",
-            "COST_ALLOCATION": "原価配賦",
-            "PROGRESS_BILLING": "出来高請求",
-            "PROJECT_REVENUE": "プロジェクト売上",
-            "PROFITABILITY": "収益性分析",
-            "GENERAL_LEDGER": "総勘定元帳（GL）"
+            "MATERIAL_EXPENSE": "資材・経費",
+            "PROJECT_COST": "プロジェクト原価",
+            "REVENUE": "売上",
+            "PROFITABILITY": "収益性"
           }
         },
         "EXPENSE_TO_ACCOUNTING": {
           "TAB_LABEL": "Expense to Accounting",
-          "HEADLINE": "承認された経費申請が精算、\n未払金、仕訳へと連動します。",
+          "HEADLINE": "経費精算と仮払いは適切な\nコストセンターまたはプロジェクトへ連携します。",
           "STEPS_ARIA_LABEL": "Expense to Accounting の手順",
           "STEPS": {
-            "EXPENSE_CLAIM": "経費申請",
+            "CLAIM_ADVANCE": "経費精算 / 仮払い",
             "APPROVAL": "承認",
-            "CASH_ADVANCE": "仮払金",
+            "PAYMENT": "支払",
             "SETTLEMENT": "精算",
-            "AP_BANK": "未払金 / 銀行",
+            "COST_CENTRE": "コストセンター / プロジェクト",
             "GENERAL_LEDGER": "総勘定元帳（GL）"
           }
         }
       }
+    },
+    "SUBFOOTER": {
+      "TITLE": "貴社の財務業務フローがSOFICloudで\nどのように運用できるかご覧ください。",
+      "DESCRIPTION": "日々の業務取引、承認、資金管理から、\n財務諸表および経営分析まで一貫して対応します。"
     }
   }
 }

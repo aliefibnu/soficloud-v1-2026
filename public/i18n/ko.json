@@ -1479,10 +1479,10 @@
         },
         "PROCURE_TO_PAY": {
           "TAB_LABEL": "Procure to Pay",
-          "HEADLINE": "입고된 구매가 매입채무,\n지급, 그리고 전표로 연결됩니다.",
+          "HEADLINE": "구매는 요청에서 공급업체\n지급까지 이어집니다.",
           "STEPS_ARIA_LABEL": "Procure to Pay 단계",
           "STEPS": {
-            "PURCHASE_ORDER": "구매 주문",
+            "PR_PO": "PR / PO",
             "GOODS_RECEIPT": "입고 확인",
             "SUPPLIER_INVOICE": "공급업체 송장",
             "AP": "매입채무 (AP)",
@@ -1492,44 +1492,47 @@
         },
         "MANUFACTURE_TO_COGS": {
           "TAB_LABEL": "Manufacture to COGs",
-          "HEADLINE": "완료된 생산 공정이 재공품(WIP),\n재고, 그리고 매출원가(COGS)를 형성합니다.",
+          "HEADLINE": "자재와 생산 실적이 재고 자산 가치와\n매출원가(COGS)를 형성합니다.",
           "STEPS_ARIA_LABEL": "Manufacture to COGs 단계",
           "STEPS": {
-            "BOM_ROUTING": "BOM & 공정",
             "MATERIAL_ISSUE": "자재 출고",
-            "WORK_ORDER": "작업 지시",
+            "WIP": "재공품 (WIP)",
             "FINISHED_GOODS": "완제품 입고",
+            "PRODUCTION_COST": "생산 원가",
             "COGS": "매출원가 (COGS)",
             "GENERAL_LEDGER": "총계정원장"
           }
         },
         "PROJECT_TO_PROFITABILITY": {
           "TAB_LABEL": "Project to Profitability",
-          "HEADLINE": "프로젝트 원가와 진행률이\n청구, 수익성, 그리고 전표로 연결됩니다.",
+          "HEADLINE": "예산, 비용, 매출이 프로젝트\n수익률로 연결됩니다.",
           "STEPS_ARIA_LABEL": "Project to Profitability 단계",
           "STEPS": {
             "PROJECT_BUDGET": "프로젝트 예산",
-            "COST_ALLOCATION": "원가 배부",
-            "PROGRESS_BILLING": "기성 청구",
-            "PROJECT_REVENUE": "프로젝트 매출",
-            "PROFITABILITY": "수익성",
-            "GENERAL_LEDGER": "총계정원장"
+            "MATERIAL_EXPENSE": "자재 / 경비",
+            "PROJECT_COST": "프로젝트 원가",
+            "REVENUE": "매출",
+            "PROFITABILITY": "수익성"
           }
         },
         "EXPENSE_TO_ACCOUNTING": {
           "TAB_LABEL": "Expense to Accounting",
-          "HEADLINE": "승인된 비용 청구가 정산,\n미지급금, 그리고 전표로 연결됩니다.",
+          "HEADLINE": "비용 청구와 가지급금이 올바른\n코스트센터 또는 프로젝트로 연결됩니다.",
           "STEPS_ARIA_LABEL": "Expense to Accounting 단계",
           "STEPS": {
-            "EXPENSE_CLAIM": "비용 청구",
+            "CLAIM_ADVANCE": "청구 / 가지급금",
             "APPROVAL": "승인",
-            "CASH_ADVANCE": "가지급금",
+            "PAYMENT": "지급",
             "SETTLEMENT": "정산",
-            "AP_BANK": "AP / 은행",
+            "COST_CENTRE": "코스트센터 / 프로젝트",
             "GENERAL_LEDGER": "총계정원장"
           }
         }
       }
+    },
+    "SUBFOOTER": {
+      "TITLE": "귀사의 재무 업무 흐름이 SOFICloud에서\n어떻게 실행되는지 확인해 보세요.",
+      "DESCRIPTION": "운영 거래, 승인, 자금 통제부터\n재무제표 및 경영 분석까지 하나로 연결됩니다."
     }
   }
 }

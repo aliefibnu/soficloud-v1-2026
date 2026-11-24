@@ -19,7 +19,7 @@ export interface IntegrationStep {
   readonly iconHeight: number;
 }
 
-/** Tab metadata and 6-step accounting flow definition. */
+/** Tab metadata and multi-step accounting flow definition. */
 export interface IntegrationFlowTab {
   readonly id: IntegrationTabId;
   readonly labelKey: string;
@@ -43,6 +43,66 @@ const STAGE_ICONS = {
     width: 119,
     height: 135,
   },
+  prPo: { src: '/images/landing/features/1/PR-PO.svg', width: 120, height: 139 },
+  goodsReceipt: { src: '/images/landing/features/1/goods-receipt.svg', width: 110, height: 140 },
+  supplierInvoice: {
+    src: '/images/landing/features/1/supplier-invoice.svg',
+    width: 109,
+    height: 140,
+  },
+  ap: { src: '/images/landing/features/1/AP.svg', width: 103, height: 133 },
+  payment: { src: '/images/landing/features/1/claim-request.svg', width: 226, height: 194 },
+  generalLedger1: {
+    src: '/images/landing/features/1/general-ledger-1.svg',
+    width: 112,
+    height: 131,
+  },
+  materialIssue: {
+    src: '/images/landing/features/1/material-issue.svg',
+    width: 119,
+    height: 135,
+  },
+  wip: { src: '/images/landing/features/1/wip.svg', width: 120, height: 139 },
+  finishedGoods: {
+    src: '/images/landing/features/1/finished-goods.svg',
+    width: 120,
+    height: 139,
+  },
+  productionCost: {
+    src: '/images/landing/features/1/production-cost.svg',
+    width: 120,
+    height: 135,
+  },
+  cogs: { src: '/images/landing/features/1/delivery.svg', width: 120, height: 137 },
+  projectBudget: {
+    src: '/images/landing/features/1/project-budget.svg',
+    width: 114,
+    height: 149,
+  },
+  materialExpense: {
+    src: '/images/landing/features/1/material-expense.svg',
+    width: 109,
+    height: 131,
+  },
+  projectCost: {
+    src: '/images/landing/features/1/project-cost.svg',
+    width: 133,
+    height: 144,
+  },
+  revenue: { src: '/images/landing/features/1/revenue.svg', width: 123, height: 142 },
+  profitability: {
+    src: '/images/landing/features/1/profitability.svg',
+    width: 123,
+    height: 135,
+  },
+  claimAdvance: {
+    src: '/images/landing/features/1/claim-advance.svg',
+    width: 122,
+    height: 138,
+  },
+  approval: { src: '/images/landing/features/1/approval.svg', width: 120, height: 127 },
+  settlement: { src: '/images/landing/features/1/settlement.svg', width: 112, height: 137 },
+  costCentre: { src: '/images/landing/features/1/cost-centre.svg', width: 122, height: 127 },
 } as const;
 
 type StageIconKey = keyof typeof STAGE_ICONS;
@@ -97,12 +157,12 @@ export class Integration {
       headlineKey: 'FINANCIAL_MANAGEMENT_1.INTEGRATION.FLOWS.PROCURE_TO_PAY.HEADLINE',
       stepsAriaLabelKey: 'FINANCIAL_MANAGEMENT_1.INTEGRATION.FLOWS.PROCURE_TO_PAY.STEPS_ARIA_LABEL',
       steps: buildSteps('PROCURE_TO_PAY', [
-        { id: 'purchase-order', key: 'PURCHASE_ORDER', icon: 'salesOrder' },
-        { id: 'goods-receipt', key: 'GOODS_RECEIPT', icon: 'delivery' },
-        { id: 'supplier-invoice', key: 'SUPPLIER_INVOICE', icon: 'customerInvoice' },
-        { id: 'ap', key: 'AP', icon: 'ar' },
-        { id: 'payment', key: 'PAYMENT', icon: 'receipt' },
-        { id: 'general-ledger', key: 'GENERAL_LEDGER', icon: 'generalLedger' },
+        { id: 'pr-po', key: 'PR_PO', icon: 'prPo' },
+        { id: 'goods-receipt', key: 'GOODS_RECEIPT', icon: 'goodsReceipt' },
+        { id: 'supplier-invoice', key: 'SUPPLIER_INVOICE', icon: 'supplierInvoice' },
+        { id: 'ap', key: 'AP', icon: 'ap' },
+        { id: 'payment', key: 'PAYMENT', icon: 'payment' },
+        { id: 'general-ledger', key: 'GENERAL_LEDGER', icon: 'generalLedger1' },
       ]),
     },
     {
@@ -112,12 +172,12 @@ export class Integration {
       stepsAriaLabelKey:
         'FINANCIAL_MANAGEMENT_1.INTEGRATION.FLOWS.MANUFACTURE_TO_COGS.STEPS_ARIA_LABEL',
       steps: buildSteps('MANUFACTURE_TO_COGS', [
-        { id: 'bom-routing', key: 'BOM_ROUTING', icon: 'salesOrder' },
-        { id: 'material-issue', key: 'MATERIAL_ISSUE', icon: 'delivery' },
-        { id: 'work-order', key: 'WORK_ORDER', icon: 'customerInvoice' },
-        { id: 'finished-goods', key: 'FINISHED_GOODS', icon: 'ar' },
-        { id: 'cogs', key: 'COGS', icon: 'receipt' },
-        { id: 'general-ledger', key: 'GENERAL_LEDGER', icon: 'generalLedger' },
+        { id: 'material-issue', key: 'MATERIAL_ISSUE', icon: 'materialIssue' },
+        { id: 'wip', key: 'WIP', icon: 'wip' },
+        { id: 'finished-goods', key: 'FINISHED_GOODS', icon: 'finishedGoods' },
+        { id: 'production-cost', key: 'PRODUCTION_COST', icon: 'productionCost' },
+        { id: 'cogs', key: 'COGS', icon: 'cogs' },
+        { id: 'general-ledger', key: 'GENERAL_LEDGER', icon: 'generalLedger1' },
       ]),
     },
     {
@@ -127,12 +187,11 @@ export class Integration {
       stepsAriaLabelKey:
         'FINANCIAL_MANAGEMENT_1.INTEGRATION.FLOWS.PROJECT_TO_PROFITABILITY.STEPS_ARIA_LABEL',
       steps: buildSteps('PROJECT_TO_PROFITABILITY', [
-        { id: 'project-budget', key: 'PROJECT_BUDGET', icon: 'salesOrder' },
-        { id: 'cost-allocation', key: 'COST_ALLOCATION', icon: 'delivery' },
-        { id: 'progress-billing', key: 'PROGRESS_BILLING', icon: 'customerInvoice' },
-        { id: 'project-revenue', key: 'PROJECT_REVENUE', icon: 'ar' },
-        { id: 'profitability', key: 'PROFITABILITY', icon: 'receipt' },
-        { id: 'general-ledger', key: 'GENERAL_LEDGER', icon: 'generalLedger' },
+        { id: 'project-budget', key: 'PROJECT_BUDGET', icon: 'projectBudget' },
+        { id: 'material-expense', key: 'MATERIAL_EXPENSE', icon: 'materialExpense' },
+        { id: 'project-cost', key: 'PROJECT_COST', icon: 'projectCost' },
+        { id: 'revenue', key: 'REVENUE', icon: 'revenue' },
+        { id: 'profitability', key: 'PROFITABILITY', icon: 'profitability' },
       ]),
     },
     {
@@ -142,12 +201,12 @@ export class Integration {
       stepsAriaLabelKey:
         'FINANCIAL_MANAGEMENT_1.INTEGRATION.FLOWS.EXPENSE_TO_ACCOUNTING.STEPS_ARIA_LABEL',
       steps: buildSteps('EXPENSE_TO_ACCOUNTING', [
-        { id: 'expense-claim', key: 'EXPENSE_CLAIM', icon: 'salesOrder' },
-        { id: 'approval', key: 'APPROVAL', icon: 'delivery' },
-        { id: 'cash-advance', key: 'CASH_ADVANCE', icon: 'customerInvoice' },
-        { id: 'settlement', key: 'SETTLEMENT', icon: 'ar' },
-        { id: 'ap-bank', key: 'AP_BANK', icon: 'receipt' },
-        { id: 'general-ledger', key: 'GENERAL_LEDGER', icon: 'generalLedger' },
+        { id: 'claim-advance', key: 'CLAIM_ADVANCE', icon: 'claimAdvance' },
+        { id: 'approval', key: 'APPROVAL', icon: 'approval' },
+        { id: 'payment', key: 'PAYMENT', icon: 'payment' },
+        { id: 'settlement', key: 'SETTLEMENT', icon: 'settlement' },
+        { id: 'cost-centre', key: 'COST_CENTRE', icon: 'costCentre' },
+        { id: 'general-ledger', key: 'GENERAL_LEDGER', icon: 'generalLedger1' },
       ]),
     },
   ];

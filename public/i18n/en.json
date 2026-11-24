@@ -1479,10 +1479,10 @@
         },
         "PROCURE_TO_PAY": {
           "TAB_LABEL": "Procure to Pay",
-          "HEADLINE": "Received purchases become payables,\npayments, and journals.",
+          "HEADLINE": "Purchases move from requisition to\nsupplier payment.",
           "STEPS_ARIA_LABEL": "Procure to Pay workflow steps",
           "STEPS": {
-            "PURCHASE_ORDER": "Purchase Order",
+            "PR_PO": "PR / PO",
             "GOODS_RECEIPT": "Goods Receipt",
             "SUPPLIER_INVOICE": "Supplier Invoice",
             "AP": "AP",
@@ -1492,44 +1492,47 @@
         },
         "MANUFACTURE_TO_COGS": {
           "TAB_LABEL": "Manufacture to COGs",
-          "HEADLINE": "Completed production builds\nWIP, inventory, and COGS.",
+          "HEADLINE": "Materials and production output build\ninventory value and COGS.",
           "STEPS_ARIA_LABEL": "Manufacture to COGs workflow steps",
           "STEPS": {
-            "BOM_ROUTING": "BOM & Routing",
             "MATERIAL_ISSUE": "Material Issue",
-            "WORK_ORDER": "Work Order",
+            "WIP": "WIP",
             "FINISHED_GOODS": "Finished Goods",
+            "PRODUCTION_COST": "Production Cost",
             "COGS": "COGS",
             "GENERAL_LEDGER": "General Ledger"
           }
         },
         "PROJECT_TO_PROFITABILITY": {
           "TAB_LABEL": "Project to Profitability",
-          "HEADLINE": "Project costs and progress connect to\nbilling, margin, and journals.",
+          "HEADLINE": "Budgets, costs, and revenue are read as\nproject margin.",
           "STEPS_ARIA_LABEL": "Project to Profitability workflow steps",
           "STEPS": {
             "PROJECT_BUDGET": "Project Budget",
-            "COST_ALLOCATION": "Cost Allocation",
-            "PROGRESS_BILLING": "Progress Billing",
-            "PROJECT_REVENUE": "Project Revenue",
-            "PROFITABILITY": "Profitability",
-            "GENERAL_LEDGER": "General Ledger"
+            "MATERIAL_EXPENSE": "Material / Expense",
+            "PROJECT_COST": "Project Cost",
+            "REVENUE": "Revenue",
+            "PROFITABILITY": "Profitability"
           }
         },
         "EXPENSE_TO_ACCOUNTING": {
           "TAB_LABEL": "Expense to Accounting",
-          "HEADLINE": "Approved expense claims become\nsettlements, payables, and journals.",
+          "HEADLINE": "Claims and advances flow into the right\ncost centre or project.",
           "STEPS_ARIA_LABEL": "Expense to Accounting workflow steps",
           "STEPS": {
-            "EXPENSE_CLAIM": "Expense Claim",
+            "CLAIM_ADVANCE": "Claim / Advance",
             "APPROVAL": "Approval",
-            "CASH_ADVANCE": "Cash Advance",
+            "PAYMENT": "Payment",
             "SETTLEMENT": "Settlement",
-            "AP_BANK": "AP / Bank",
+            "COST_CENTRE": "Cost Centre / Project",
             "GENERAL_LEDGER": "General Ledger"
           }
         }
       }
+    },
+    "SUBFOOTER": {
+      "TITLE": "See how your company's finance workflows\ncan run on SOFICloud.",
+      "DESCRIPTION": "From operational transactions, approvals, and cash control,\nto financial statements and management analysis."
     }
   }
 }

@@ -26,10 +26,10 @@ const ID_TRANSLATIONS = {
         },
         PROCURE_TO_PAY: {
           TAB_LABEL: 'Procure to Pay',
-          HEADLINE: 'Pembelian yang diterima menjadi payable,\npayment, dan jurnal.',
+          HEADLINE: 'Pembelian bergerak dari kebutuhan hingga\npembayaran supplier.',
           STEPS_ARIA_LABEL: 'Tahapan alur Procure to Pay',
           STEPS: {
-            PURCHASE_ORDER: 'Purchase Order',
+            PR_PO: 'PR / PO',
             GOODS_RECEIPT: 'Goods Receipt',
             SUPPLIER_INVOICE: 'Supplier Invoice',
             AP: 'AP',
@@ -39,40 +39,39 @@ const ID_TRANSLATIONS = {
         },
         MANUFACTURE_TO_COGS: {
           TAB_LABEL: 'Manufacture to COGs',
-          HEADLINE: 'Proses produksi yang selesai membentuk\nWIP, persediaan, dan COGS.',
+          HEADLINE: 'Material dan hasil produksi membentuk\ninventory value serta COGS.',
           STEPS_ARIA_LABEL: 'Tahapan alur Manufacture to COGs',
           STEPS: {
-            BOM_ROUTING: 'BOM & Routing',
             MATERIAL_ISSUE: 'Material Issue',
-            WORK_ORDER: 'Work Order',
+            WIP: 'WIP',
             FINISHED_GOODS: 'Finished Goods',
+            PRODUCTION_COST: 'Production Cost',
             COGS: 'COGS',
             GENERAL_LEDGER: 'General Ledger',
           },
         },
         PROJECT_TO_PROFITABILITY: {
           TAB_LABEL: 'Project to Profitability',
-          HEADLINE: 'Biaya dan progres proyek terhubung ke\nbilling, margin, dan jurnal.',
+          HEADLINE: 'Budget, biaya, dan revenue dibaca sebagai\nmargin proyek.',
           STEPS_ARIA_LABEL: 'Tahapan alur Project to Profitability',
           STEPS: {
             PROJECT_BUDGET: 'Project Budget',
-            COST_ALLOCATION: 'Cost Allocation',
-            PROGRESS_BILLING: 'Progress Billing',
-            PROJECT_REVENUE: 'Project Revenue',
+            MATERIAL_EXPENSE: 'Material / Expense',
+            PROJECT_COST: 'Project Cost',
+            REVENUE: 'Revenue',
             PROFITABILITY: 'Profitability',
-            GENERAL_LEDGER: 'General Ledger',
           },
         },
         EXPENSE_TO_ACCOUNTING: {
           TAB_LABEL: 'Expense to Accounting',
-          HEADLINE: 'Pengajuan biaya yang disetujui menjadi\nsettlement, payable, dan jurnal.',
+          HEADLINE: 'Claim dan advance masuk ke cost centre\natau project yang tepat.',
           STEPS_ARIA_LABEL: 'Tahapan alur Expense to Accounting',
           STEPS: {
-            EXPENSE_CLAIM: 'Expense Claim',
+            CLAIM_ADVANCE: 'Claim / Advance',
             APPROVAL: 'Approval',
-            CASH_ADVANCE: 'Cash Advance',
+            PAYMENT: 'Payment',
             SETTLEMENT: 'Settlement',
-            AP_BANK: 'AP / Bank',
+            COST_CENTRE: 'Cost Centre / Project',
             GENERAL_LEDGER: 'General Ledger',
           },
         },
@@ -206,8 +205,90 @@ describe('Integration', () => {
     const procurePanel = fixture.debugElement.query(By.css('[data-tab-panel="procure-to-pay"]'));
     expect(salesPanel.nativeElement.getAttribute('hidden')).toBe('until-found');
     expect(procurePanel.nativeElement.getAttribute('hidden')).toBeNull();
-    expect(procurePanel.nativeElement.textContent).toContain('Purchase Order');
+    expect(procurePanel.nativeElement.textContent).toContain('PR / PO');
     expect(procurePanel.nativeElement.textContent).toContain('Supplier Invoice');
+  });
+
+  it('should render the 6 Procure to Pay steps with dedicated SVG assets and 5 arrow connectors', () => {
+    const procureTab = fixture.debugElement.query(By.css('button[data-tab-id="procure-to-pay"]'));
+    procureTab.nativeElement.click();
+    fixture.detectChanges();
+
+    const panel = fixture.debugElement.query(By.css('[data-tab-panel="procure-to-pay"]'));
+    expect(panel).toBeTruthy();
+    expect(panel.query(By.css('h3')).nativeElement.textContent.replace(/\s+/g, ' ').trim()).toBe(
+      'Pembelian bergerak dari kebutuhan hingga pembayaran supplier.',
+    );
+
+    const steps = panel.queryAll(By.css('ol > li[data-step-id]'));
+    expect(steps.length).toBe(6);
+    expect(steps.map((s) => s.query(By.css('span')).nativeElement.textContent.trim())).toEqual([
+      'PR / PO',
+      'Goods Receipt',
+      'Supplier Invoice',
+      'AP',
+      'Payment',
+      'General Ledger',
+    ]);
+
+    const imgs = panel.queryAll(By.css('ol img.integration-step-icon'));
+    expect(imgs.length).toBe(6);
+    expect(imgs.map((img) => img.nativeElement.getAttribute('src'))).toEqual([
+      '/images/landing/features/1/PR-PO.svg',
+      '/images/landing/features/1/goods-receipt.svg',
+      '/images/landing/features/1/supplier-invoice.svg',
+      '/images/landing/features/1/AP.svg',
+      '/images/landing/features/1/claim-request.svg',
+      '/images/landing/features/1/general-ledger-1.svg',
+    ]);
+
+    const arrows = panel.queryAll(By.css('.integration-step-arrow img'));
+    expect(arrows.length).toBe(5);
+    for (const arrow of arrows) {
+      expect(arrow.nativeElement.getAttribute('src')).toBe('/images/landing/features/1/arrow.svg');
+    }
+  });
+
+  it('should render the 6 Manufacture to COGs steps with dedicated SVG assets and 5 arrow connectors', () => {
+    const manufactureTab = fixture.debugElement.query(
+      By.css('button[data-tab-id="manufacture-to-cogs"]'),
+    );
+    manufactureTab.nativeElement.click();
+    fixture.detectChanges();
+
+    const panel = fixture.debugElement.query(By.css('[data-tab-panel="manufacture-to-cogs"]'));
+    expect(panel).toBeTruthy();
+    expect(panel.query(By.css('h3')).nativeElement.textContent.replace(/\s+/g, ' ').trim()).toBe(
+      'Material dan hasil produksi membentuk inventory value serta COGS.',
+    );
+
+    const steps = panel.queryAll(By.css('ol > li[data-step-id]'));
+    expect(steps.length).toBe(6);
+    expect(steps.map((s) => s.query(By.css('span')).nativeElement.textContent.trim())).toEqual([
+      'Material Issue',
+      'WIP',
+      'Finished Goods',
+      'Production Cost',
+      'COGS',
+      'General Ledger',
+    ]);
+
+    const imgs = panel.queryAll(By.css('ol img.integration-step-icon'));
+    expect(imgs.length).toBe(6);
+    expect(imgs.map((img) => img.nativeElement.getAttribute('src'))).toEqual([
+      '/images/landing/features/1/material-issue.svg',
+      '/images/landing/features/1/wip.svg',
+      '/images/landing/features/1/finished-goods.svg',
+      '/images/landing/features/1/production-cost.svg',
+      '/images/landing/features/1/delivery.svg',
+      '/images/landing/features/1/general-ledger-1.svg',
+    ]);
+
+    const arrows = panel.queryAll(By.css('.integration-step-arrow img'));
+    expect(arrows.length).toBe(5);
+    for (const arrow of arrows) {
+      expect(arrow.nativeElement.getAttribute('src')).toBe('/images/landing/features/1/arrow.svg');
+    }
   });
 
   it('should support WAI-ARIA keyboard navigation with ArrowRight, ArrowLeft, End, and Home', () => {
@@ -243,6 +324,88 @@ describe('Integration', () => {
 
     expect(component.activeTabId()).toBe('project-to-profitability');
     expect(projectPanel.nativeElement.getAttribute('hidden')).toBeNull();
+  });
+
+  it('should render the 5 Project to Profitability steps with dedicated SVG assets and 4 arrow connectors', () => {
+    const projectTab = fixture.debugElement.query(
+      By.css('button[data-tab-id="project-to-profitability"]'),
+    );
+    projectTab.nativeElement.click();
+    fixture.detectChanges();
+
+    const panel = fixture.debugElement.query(By.css('[data-tab-panel="project-to-profitability"]'));
+    expect(panel).toBeTruthy();
+    expect(panel.query(By.css('h3')).nativeElement.textContent.replace(/\s+/g, ' ').trim()).toBe(
+      'Budget, biaya, dan revenue dibaca sebagai margin proyek.',
+    );
+
+    const steps = panel.queryAll(By.css('ol > li[data-step-id]'));
+    expect(steps.length).toBe(5);
+    expect(steps.map((s) => s.query(By.css('span')).nativeElement.textContent.trim())).toEqual([
+      'Project Budget',
+      'Material / Expense',
+      'Project Cost',
+      'Revenue',
+      'Profitability',
+    ]);
+
+    const imgs = panel.queryAll(By.css('ol img.integration-step-icon'));
+    expect(imgs.length).toBe(5);
+    expect(imgs.map((img) => img.nativeElement.getAttribute('src'))).toEqual([
+      '/images/landing/features/1/project-budget.svg',
+      '/images/landing/features/1/material-expense.svg',
+      '/images/landing/features/1/project-cost.svg',
+      '/images/landing/features/1/revenue.svg',
+      '/images/landing/features/1/profitability.svg',
+    ]);
+
+    const arrows = panel.queryAll(By.css('.integration-step-arrow img'));
+    expect(arrows.length).toBe(4);
+    for (const arrow of arrows) {
+      expect(arrow.nativeElement.getAttribute('src')).toBe('/images/landing/features/1/arrow.svg');
+    }
+  });
+
+  it('should render the 6 Expense to Accounting steps with dedicated SVG assets and 5 arrow connectors', () => {
+    const expenseTab = fixture.debugElement.query(
+      By.css('button[data-tab-id="expense-to-accounting"]'),
+    );
+    expenseTab.nativeElement.click();
+    fixture.detectChanges();
+
+    const panel = fixture.debugElement.query(By.css('[data-tab-panel="expense-to-accounting"]'));
+    expect(panel).toBeTruthy();
+    expect(panel.query(By.css('h3')).nativeElement.textContent.replace(/\s+/g, ' ').trim()).toBe(
+      'Claim dan advance masuk ke cost centre atau project yang tepat.',
+    );
+
+    const steps = panel.queryAll(By.css('ol > li[data-step-id]'));
+    expect(steps.length).toBe(6);
+    expect(steps.map((s) => s.query(By.css('span')).nativeElement.textContent.trim())).toEqual([
+      'Claim / Advance',
+      'Approval',
+      'Payment',
+      'Settlement',
+      'Cost Centre / Project',
+      'General Ledger',
+    ]);
+
+    const imgs = panel.queryAll(By.css('ol img.integration-step-icon'));
+    expect(imgs.length).toBe(6);
+    expect(imgs.map((img) => img.nativeElement.getAttribute('src'))).toEqual([
+      '/images/landing/features/1/claim-advance.svg',
+      '/images/landing/features/1/approval.svg',
+      '/images/landing/features/1/claim-request.svg',
+      '/images/landing/features/1/settlement.svg',
+      '/images/landing/features/1/cost-centre.svg',
+      '/images/landing/features/1/general-ledger-1.svg',
+    ]);
+
+    const arrows = panel.queryAll(By.css('.integration-step-arrow img'));
+    expect(arrows.length).toBe(5);
+    for (const arrow of arrows) {
+      expect(arrow.nativeElement.getAttribute('src')).toBe('/images/landing/features/1/arrow.svg');
+    }
   });
 
   it('should position step icons out of flow inside uniform aspect-ratio tiles', () => {

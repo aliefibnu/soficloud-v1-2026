@@ -40,7 +40,7 @@ describe('FinancialManagement1', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render app-hero, app-section-tabs, app-financial-control, app-ten-capabilities, gradient band (app-expense-and-advance + app-real-dashboard), and app-integration in order', () => {
+  it('should render app-hero, app-section-tabs, app-financial-control, app-ten-capabilities, gradient band (app-expense-and-advance + app-real-dashboard), app-integration, and app-subfooter in order', () => {
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     const tabsEl = fixture.debugElement.query(By.css('app-section-tabs'));
     const financialControlEl = fixture.debugElement.query(By.css('app-financial-control'));
@@ -48,6 +48,7 @@ describe('FinancialManagement1', () => {
     const expenseAndAdvanceEl = fixture.debugElement.query(By.css('app-expense-and-advance'));
     const realDashboardEl = fixture.debugElement.query(By.css('app-real-dashboard'));
     const integrationEl = fixture.debugElement.query(By.css('app-integration'));
+    const subfooterEl = fixture.debugElement.query(By.css('app-subfooter'));
     expect(heroEl).toBeTruthy();
     expect(tabsEl).toBeTruthy();
     expect(financialControlEl).toBeTruthy();
@@ -55,11 +56,13 @@ describe('FinancialManagement1', () => {
     expect(expenseAndAdvanceEl).toBeTruthy();
     expect(realDashboardEl).toBeTruthy();
     expect(integrationEl).toBeTruthy();
+    expect(subfooterEl).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#financial-control'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#capabilities'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#expense-advance'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#reporting'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#integration'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('#subfooter'))).toBeTruthy();
 
     const children = Array.from(
       (fixture.nativeElement as HTMLElement).querySelector('div')?.children ?? [],
@@ -71,6 +74,7 @@ describe('FinancialManagement1', () => {
       'app-ten-capabilities',
       'div',
       'app-integration',
+      'app-subfooter',
     ]);
 
     const gradientBand = fixture.debugElement.query(By.css('[data-gradient-band]'));
