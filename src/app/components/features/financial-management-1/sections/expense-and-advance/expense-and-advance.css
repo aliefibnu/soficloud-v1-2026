@@ -1,0 +1,134 @@
+.expense-advance-section {
+  background-color: #346dd4;
+  background-image: linear-gradient(180deg, #346dd4 0%, #3975dc 55%, #3b77de 100%);
+}
+
+.expense-shelf-tab {
+  position: relative;
+  border-block-start: 3px solid transparent;
+}
+
+.expense-shelf-tab--active {
+  z-index: 20;
+  background-color: #ffffff;
+  border-block-start-color: #23244e;
+  box-shadow: 0 -2px 14px rgba(24, 40, 73, 0.08);
+}
+
+.expense-shelf-tab--inactive {
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    inset 0 -6px 10px -6px rgba(35, 36, 78, 0.14),
+    0 -2px 10px rgba(24, 40, 73, 0.05);
+}
+
+@media (forced-colors: active) {
+  .expense-shelf-tab--active {
+    border: 2px solid Highlight;
+    border-block-end: 0;
+  }
+
+  .expense-shelf-tab--inactive {
+    border: 1px solid CanvasText;
+  }
+}
+
+.expense-advance-stage {
+  position: relative;
+  z-index: 15;
+  background-color: #c7ddfb;
+  background-image: linear-gradient(180deg, #cbe0fc 0%, #bed6f9 55%, #c9defa 100%);
+  box-shadow: 0 20px 48px rgba(20, 42, 92, 0.18);
+}
+
+.expense-step-card {
+  container: expense-step-card / inline-size;
+  position: relative;
+  min-block-size: 13.25rem;
+  overflow: clip;
+  transition:
+    transform 220ms ease-out,
+    box-shadow 220ms ease-out;
+}
+
+.expense-step-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(35, 36, 78, 0.11);
+}
+
+.expense-step-badge {
+  background-color: #e4eefc;
+  background-image: linear-gradient(145deg, #f7faff 0%, #d4e3fa 100%);
+  border: 1px solid rgba(195, 215, 247, 0.85);
+  box-shadow: 0 4px 12px rgba(54, 90, 210, 0.1);
+}
+
+.expense-step-artwork {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.expense-claim-art {
+  position: absolute;
+  inset-block-start: -3.5cqi;
+  inset-inline-end: 2cqi;
+  inline-size: 47cqi;
+  block-size: auto;
+  max-inline-size: none;
+}
+
+.expense-workflow-stage {
+  position: absolute;
+  inset-block-start: -3cqi;
+  inset-inline-end: -19cqi;
+  inline-size: 86cqi;
+  aspect-ratio: 396 / 215;
+  transform: rotate(-2.5deg);
+  transform-origin: center;
+}
+
+.expense-workflow-layer {
+  position: absolute;
+  block-size: auto;
+  max-inline-size: none;
+}
+
+.expense-workflow-layer-board {
+  z-index: 10;
+  inset-inline-start: 17%;
+  inset-block-end: -8%;
+  inline-size: 68%;
+}
+
+.expense-workflow-layer-check {
+  z-index: 20;
+  inset-inline-start: 10%;
+  inset-block-start: 14%;
+  inline-size: 17%;
+}
+
+.expense-workflow-layer-pencil {
+  z-index: 25;
+  inset-inline-start: 62%;
+  inset-block-start: 7%;
+  inline-size: 36%;
+}
+
+.expense-workflow-layer-slip {
+  z-index: 20;
+  inset-inline-start: 71%;
+  inset-block-end: -11%;
+  inline-size: 18%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expense-step-card {
+    transition: none;
+  }
+
+  .expense-step-card:hover {
+    transform: none;
+  }
+}
