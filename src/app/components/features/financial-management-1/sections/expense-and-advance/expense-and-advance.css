@@ -1,6 +1,5 @@
 .expense-advance-section {
-  background-color: #346dd4;
-  background-image: linear-gradient(180deg, #346dd4 0%, #3975dc 55%, #3b77de 100%);
+  background: transparent;
 }
 
 .expense-shelf-tablist {

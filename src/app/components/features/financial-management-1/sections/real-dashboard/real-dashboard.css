@@ -1,6 +1,5 @@
 .real-dashboard-section {
-  background-color: #93b4ef;
-  background-image: linear-gradient(180deg, #83a9ea 0%, #a0bef2 50%, #b6cdf6 100%);
+  background: transparent;
 }
 
 .real-dashboard-card {

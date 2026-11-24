@@ -23,6 +23,7 @@ import { TenCapabilities } from '../../../components/features/financial-manageme
   ],
   selector: 'app-financial-management-1',
   templateUrl: './financial-management-1.html',
+  styleUrl: './financial-management-1.css',
 })
 export class FinancialManagement1 implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);

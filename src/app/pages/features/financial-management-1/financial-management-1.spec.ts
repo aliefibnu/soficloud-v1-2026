@@ -66,9 +66,22 @@ describe('FinancialManagement1', () => {
       'app-section-tabs',
       'app-financial-control',
       'app-ten-capabilities',
-      'app-expense-and-advance',
-      'app-real-dashboard',
+      'div',
     ]);
+
+    const gradientBand = fixture.debugElement.query(By.css('[data-gradient-band]'));
+    expect(gradientBand).toBeTruthy();
+    expect(gradientBand.nativeElement.classList.contains('financial-gradient-band')).toBe(true);
+
+    const bandChildren = Array.from(
+      (gradientBand.nativeElement as HTMLElement).children,
+    ).map((el) => el.tagName.toLowerCase());
+    expect(bandChildren).toEqual(['app-expense-and-advance', 'app-real-dashboard', 'svg']);
+
+    const bottomWave = gradientBand.query(By.css('svg[data-bottom-wave]'));
+    expect(bottomWave).toBeTruthy();
+    expect(bottomWave.nativeElement.getAttribute('aria-hidden')).toBe('true');
+    expect(bottomWave.query(By.css('path'))?.nativeElement.getAttribute('fill')).toBe('#ffffff');
 
     const tabLinks = fixture.debugElement.queryAll(By.css('app-section-tabs nav ul li a'));
     expect(tabLinks.length).toBe(5);
