@@ -130,6 +130,10 @@ describe('ScheduleDemoForm', () => {
     expect(listbox).toBeTruthy();
     expect(listbox.nativeElement.classList.contains('z-40')).toBe(true);
 
+    const optionButtons = listbox.queryAll(By.css('button[role="option"]'));
+    expect(optionButtons.length).toBe(component.industries.length);
+    expect(optionButtons[0].nativeElement.classList.contains('font-bold')).toBe(true);
+
     const firstOption = component.industries[0];
     component.selectIndustry(firstOption);
     fixture.detectChanges();
@@ -137,6 +141,19 @@ describe('ScheduleDemoForm', () => {
     expect(component.isDropdownOpen()).toBe(false);
     expect(component.selectedIndustry()).toEqual(firstOption);
     expect(component.industryControl.value).toBe(firstOption.value);
+
+    // Verify trigger button displays selected option with font-bold
+    const triggerText = fixture.debugElement.query(By.css('#demo-industry-trigger span'));
+    expect(triggerText.nativeElement.classList.contains('font-bold')).toBe(true);
+
+    // Reopen dropdown and verify selected option has bg-[#1d44eb], text-white, and NO checkmark SVG
+    component.toggleDropdown();
+    fixture.detectChanges();
+    const updatedOptionButtons = fixture.debugElement.queryAll(By.css('button[role="option"]'));
+    const selectedBtn = updatedOptionButtons[0];
+    expect(selectedBtn.nativeElement.classList.contains('bg-[#1d44eb]')).toBe(true);
+    expect(selectedBtn.nativeElement.classList.contains('text-white')).toBe(true);
+    expect(selectedBtn.query(By.css('svg'))).toBeNull();
   });
 
   it('should close dropdown on closeDropdown or escape key', () => {
