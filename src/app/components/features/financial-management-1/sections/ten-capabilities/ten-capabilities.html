@@ -1,0 +1,56 @@
+<section
+  id="capabilities"
+  tabindex="-1"
+  aria-labelledby="capabilities-heading"
+  class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-8 sm:pb-16 lg:pt-10 lg:pb-20 scroll-mt-32 lg:scroll-mt-36 focus:outline-none"
+>
+  <div class="text-center max-w-4xl mx-auto">
+    <h2
+      id="capabilities-heading"
+      class="font-inter font-bold text-[#23244E] text-[26px] sm:text-[34px] lg:text-[42px] leading-[1.2] tracking-[-0.02em]"
+    >
+      {{ 'FINANCIAL_MANAGEMENT_1.TEN_CAPABILITIES.TITLE' | translate }}
+    </h2>
+
+    <p
+      class="mt-2.5 sm:mt-3 font-dm-sans font-normal text-[#23244E] text-[14px] sm:text-[15.5px] leading-[1.55] max-w-2xl mx-auto"
+    >
+      {{ 'FINANCIAL_MANAGEMENT_1.TEN_CAPABILITIES.SUBTITLE' | translate }}
+    </p>
+  </div>
+
+  <div class="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7">
+    @for (item of capabilities; track item.id) {
+      <article
+        class="capability-card rounded-xl border border-[#EEF2F9] shadow-[0_12px_36px_rgba(35,36,78,0.08)]"
+      >
+        <div class="capability-card-copy">
+          <h3
+            class="font-inter font-bold text-[#23244E] text-[21px] sm:text-[24px] xl:text-[26px] leading-[1.18] tracking-[-0.02em]"
+          >
+            {{ item.titleKey | translate }}
+          </h3>
+          <p
+            class="mt-2.5 font-dm-sans font-normal text-[#23244E] text-[12px] sm:text-[12.5px] leading-[1.52]"
+          >
+            {{ item.descriptionKey | translate }}
+          </p>
+        </div>
+
+        <img
+          [ngSrc]="item.imageSrc"
+          [width]="item.imageWidth"
+          [height]="item.imageHeight"
+          alt=""
+          aria-hidden="true"
+          draggable="false"
+          loading="lazy"
+          [style.--cap-img-w]="item.illustrationWidthCqi"
+          [style.--cap-img-x]="item.offsetX"
+          [style.--cap-img-y]="item.offsetY"
+          class="capability-card-illustration select-none pointer-events-none"
+        />
+      </article>
+    }
+  </div>
+</section>

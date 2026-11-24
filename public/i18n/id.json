@@ -261,39 +261,39 @@
     "CTA_LEARN_MORE": "Pelajari Selengkapnya",
     "CARDS": {
       "FINANCIAL": {
-        "TITLE": "Financial Management &\nAccounting",
+        "TITLE": "Manajemen Keuangan &\nAkuntansi",
         "DESC": "Kelola proses keuangan dan accounting dari transaksi operasional hingga laporan keuangan, cash control, cost analysis dan management insight."
       },
       "SALES": {
-        "TITLE": "Sales & Order\nManagement",
+        "TITLE": "Manajemen Penjualan &\nPesanan",
         "DESC": "Kelola proses penjualan dari quotation, Sales Order dan pemenuhan pesanan hingga delivery, invoice dan monitoring revenue."
       },
       "PROCUREMENT": {
-        "TITLE": "Procurement &\nVendor Management",
+        "TITLE": "Manajemen Pengadaan &\nVendor",
         "DESC": "Kelola kebutuhan pembelian dari Purchase Requisition, approval, vendor, Purchase Order hingga penerimaan barang dan supplier invoice."
       },
       "INVENTORY": {
-        "TITLE": "Inventory & Warehouse\nManagement",
+        "TITLE": "Manajemen Persediaan &\nGudang",
         "DESC": "Pantau stock dan pergerakan barang secara real-time di berbagai gudang, lengkap dengan location, allocation, transfer, opname dan stock control."
       },
       "MANUFACTURING": {
-        "TITLE": "Manufacturing &\nProduction Control",
+        "TITLE": "Manufaktur & Kontrol\nProduksi",
         "DESC": "Kelola perencanaan dan pelaksanaan produksi dari BOM, Routing dan MRP hingga Production Order, WIP serta analisa biaya produksi."
       },
       "PROJECT": {
-        "TITLE": "Project & Cost\nManagement",
+        "TITLE": "Manajemen Proyek &\nBiaya",
         "DESC": "Kelola project budget, progress dan realisasi biaya untuk memantau cost, budget vs actual serta profitability setiap proyek."
       },
       "WORKFLOW": {
-        "TITLE": "Workflow, Approval &\nInternal Control",
+        "TITLE": "Alur Kerja, Persetujuan\n& Kontrol Internal",
         "DESC": "Atur workflow, multi-level approval dan otorisasi sesuai struktur perusahaan, lengkap dengan status proses dan audit trail."
       },
       "ANALYTICS": {
-        "TITLE": "Business Analytics &\nReporting",
+        "TITLE": "Analitik Bisnis &\nPelaporan",
         "DESC": "Ubah transaksi harian menjadi dashboard, laporan dan analisa yang membantu management membaca kinerja dan mengambil keputusan."
       },
       "SECURITY": {
-        "TITLE": "Security, Cloud &\nAuditability",
+        "TITLE": "Keamanan, Cloud &\nAuditabilitas",
         "DESC": "Lindungi akses, data dan histori transaksi melalui role-based authorization, audit trail, cloud access, backup dan monitoring."
       }
     }
@@ -1205,6 +1205,198 @@
           "PARAGRAPH_1": "Kami ingin menjadi mitra yang memahami kebutuhan IT pelanggan. Pendampingan tim membantu perusahaan menyiapkan alur kerja, mengenalkan sistem kepada pengguna, dan menjalankan ERP dalam kegiatan operasionalnya.",
           "PARAGRAPH_2": "Dengan pengembangan yang berkesinambungan dan hubungan kerja yang baik, kami berkomitmen memberikan pelayanan yang mendukung pertumbuhan perusahaan, khususnya industri kecil dan menengah di Indonesia.",
           "IMAGE_ALT": "Tim pendampingan SOFICloud membantu pengguna mengoperasikan sistem ERP pada laptop"
+        }
+      }
+    }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "Kendalikan Keuangan",
+      "TITLE_LINE_2": "Perusahaan dari",
+      "TITLE_LINE_3": "Transaksi hingga",
+      "TITLE_LINE_4": "Laporan Keuangan",
+      "DESCRIPTION": "SOFICloud menghubungkan transaksi operasional dengan proses accounting secara otomatis mulai dari jurnal, receivable, payable, cash & bank, reimbursement, advance, fixed assets, hingga analisa manajemen.",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "Financial Management & Accounting",
+      "ILLUSTRATION_ALT": "Ilustrasi papan klip laporan keuangan, kaca pembesar, dan kalkulator SOFICloud"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "Bagian manajemen keuangan",
+      "FINANCIAL_CONTROL": "KONTROL KEUANGAN",
+      "TEN_CAPABILITIES": "10 KAPABILITAS",
+      "EXPENSE_ADVANCE": "BIAYA & UANG MUKA",
+      "REPORTING": "PELAPORAN",
+      "INTEGRATION": "INTEGRASI"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "Kendalikan Bisnis Dari Satu Tempat",
+      "SUBTITLE": "Pilih area yang ingin dilihat. Setiap proses terhubung ke data yang sama dan dapat ditelusuri kapan saja",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "Dari Transaksi Operasional Menuju Informasi Keuangan Yang Siap Dibaca",
+        "DESCRIPTION": "Accounting impact terbentuk dari dokumen sumber. Finance dapat menelusuri jurnal, ledger, sampai laporan keuangan dengan data yang konsisten.",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "Kebutuhan cash, jatuh tempo, dan prioritas pembayaran dalam satu control board.",
+        "DESCRIPTION": "Outstanding AR/AP, due date, payment proposal, approval, serta posisi cash & bank tersedia untuk membantu Finance menentukan langkah berikutnya.",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "Vendor",
+          "DUE_DATE": "Jatuh Tempo",
+          "AMOUNT": "Nominal",
+          "STATUS": "Status"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "26 Jul",
+            "AMOUNT": "Rp42,8 Jt",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "27 Jul",
+            "AMOUNT": "Rp28,4 Jt",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "28 Jul",
+            "AMOUNT": "Rp19,6 Jt",
+            "STATUS": "Approved"
+          }
+        }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "Setiap pengajuan memiliki status, otorisasi, komentar, dan histori keputusan.",
+        "DESCRIPTION": "Claim, reimbursement, dan advance bergerak dari request hingga settlement dan accounting dengan jalur yang dapat ditelusuri.",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
+      }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "Kedalaman Fungsi Untuk Operasional Dan Accounting",
+      "SUBTITLE": "Sepuluh kapabilitas yang menghubungkan transaksi harian, kontrol, pencatatan accounting, dan laporan keuangan perusahaan.",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "Buku Besar & Akuntansi Keuangan",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "Piutang Usaha",
+          "DESCRIPTION": "Faktur Pelanggan, Piutang Belum Lunas, Aging Piutang, Penerimaan, Uang Muka Diterima, Nota Kredit, dan Rekening Koran Pelanggan."
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "Utang Usaha",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "Manajemen Kas & Bank",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "Biaya, Reimburse & Uang Muka",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "Perencanaan Pembayaran & Kontrol Anggaran",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "FIXED_ASSET": {
+          "TITLE": "Manajemen Aset Tetap",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "Akuntansi Biaya & Manajemen",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "Multi-Mata Uang & Valas",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "Otomasi Akuntansi",
+          "DESCRIPTION": "Bagan Akun Multi-Level, Entri Jurnal, Posting Otomatis, Buku Besar, Neraca Saldo, Buku Pembantu, Kontrol Periode, dan Tutup Buku."
+        }
+      }
+    },
+    "EXPENSE_AND_ADVANCE": {
+      "TITLE": "Expense Dan Advance Dalam Alur Yang Terkontrol",
+      "SUBTITLE": "Lima area yang ditonjolkan: employee reimbursement, expense claim, operational advance, supplier advance payment, serta payment planning & budget control.",
+      "TABS": {
+        "REIMBURSEMENT": {
+          "TITLE": "Reimbursement",
+          "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
+        },
+        "CASH_ADVANCE": {
+          "TITLE": "Cash Advance",
+          "SUBTITLE": "OPERATIONAL / EMPLOYEE ADVANCE"
+        }
+      },
+      "REIMBURSEMENT": {
+        "FLOW_TITLE": "Dari expense claim hingga payment",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
         }
       }
     }

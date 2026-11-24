@@ -42,7 +42,7 @@
 
             @for (layer of card.layers; track layer.name) {
               <div
-                class="absolute pointer-events-none will-change-transform transition-all duration-300 ease-out {{ layer.hoverClass }}"
+                class="feature-layer absolute pointer-events-none will-change-transform translate-0 rotate-0 scale-100 transition-all duration-300 ease-out {{ layer.hoverClass }}"
                 [style.left.%]="layer.leftPct !== undefined ? layer.leftPct : null"
                 [style.top.%]="layer.topPct !== undefined ? layer.topPct : null"
                 [style.bottom]="layer.bottomPct !== undefined ? (layer.bottomPct === 0 ? '-1px' : layer.bottomPct + '%') : null"
@@ -57,6 +57,7 @@
                   alt=""
                   class="w-full h-full object-contain pointer-events-none"
                   [class.object-bottom]="layer.bottomPct !== undefined"
+                  [style.rotate]="layer.rotateDeg !== undefined ? layer.rotateDeg + 'deg' : null"
                 />
               </div>
             }
@@ -70,13 +71,15 @@
             </h3>
 
             <div class="mt-4.5 sm:mt-5.25">
-              <a
-                href="#contact"
-                (click)="onLearnMore($event)"
-                class="w-full inline-flex items-center justify-center px-6 py-3 rounded-xl font-dm-sans font-semibold text-sm sm:text-[15px] text-[#FDFDFD] bg-linear-to-r from-[#1E37E1] to-[#6694EB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.99] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-              >
-                {{ 'FEATURES.CTA_LEARN_MORE' | translate }}
-              </a>
+              @if (card.route) {
+                <a [routerLink]="card.route" [class]="ctaButtonClass">
+                  {{ 'FEATURES.CTA_LEARN_MORE' | translate }}<span class="sr-only"> — {{ card.titleKey | translate }}</span>
+                </a>
+              } @else {
+                <a href="#contact" (click)="onLearnMore($event)" [class]="ctaButtonClass">
+                  {{ 'FEATURES.CTA_LEARN_MORE' | translate }}<span class="sr-only"> — {{ card.titleKey | translate }}</span>
+                </a>
+              }
             </div>
           </div>
         </article>

@@ -1208,5 +1208,197 @@
         }
       }
     }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "从日常交易到",
+      "TITLE_LINE_2": "财务报表",
+      "TITLE_LINE_3": "全面掌控",
+      "TITLE_LINE_4": "企业财务",
+      "DESCRIPTION": "SOFICloud 将业务交易与会计流程自动连接，涵盖总账凭证、应收应付、现金与银行、报销、预付款、固定资产直至管理层分析。",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "财务管理与会计",
+      "ILLUSTRATION_ALT": "SOFICloud 财务报表写字板、放大镜与计算器插图"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "财务管理板块",
+      "FINANCIAL_CONTROL": "财务管控",
+      "TEN_CAPABILITIES": "10项核心能力",
+      "EXPENSE_ADVANCE": "报销与预付款",
+      "REPORTING": "财务报表",
+      "INTEGRATION": "系统集成"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "在一个平台全面掌控业务",
+      "SUBTITLE": "选择您想查看的领域。每个流程都连接到同一套数据，随时可追溯",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "从业务交易到清晰可读的财务信息",
+        "DESCRIPTION": "会计影响由原始单据自动生成。财务团队可以基于一致的数据追溯凭证、总账直至财务报表。",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "在一个控制看板中掌握资金需求、到期日与付款优先级。",
+        "DESCRIPTION": "未清应收应付、到期日、付款建议、审批状态以及现金与银行头寸一目了然，助力财务团队快速决策。",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "供应商",
+          "DUE_DATE": "到期日",
+          "AMOUNT": "金额",
+          "STATUS": "状态"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "7月26日",
+            "AMOUNT": "Rp42,8 Jt",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "7月27日",
+            "AMOUNT": "Rp28,4 Jt",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "7月28日",
+            "AMOUNT": "Rp19,6 Jt",
+            "STATUS": "Approved"
+          }
+        }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "每笔申请均具备清晰的状态、审批权限、批注与决策历史。",
+        "DESCRIPTION": "费用报销、垫付及预支从发起申请到核销与会计入账全程可追溯。",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
+      }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "面向业务与会计的深度功能",
+      "SUBTITLE": "将日常交易、内部控制、会计记录与企业财务报表紧密连接的十项核心能力。",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "总分类账与财务会计",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "应收账款",
+          "DESCRIPTION": "客户发票、未清应收账款、应收账龄分析、收款、预收款、贷项通知单与客户对账单。"
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "应付账款",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "现金与银行管理",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "费用、报销与预付款",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "付款计划与预算控制",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "FIXED_ASSET": {
+          "TITLE": "固定资产管理",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "成本与管理会计",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "多币种与外汇",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "会计自动化",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        }
+      }
+    },
+    "EXPENSE_AND_ADVANCE": {
+      "TITLE": "在受控流程中管理费用报销与预付款",
+      "SUBTITLE": "五大核心领域：员工报销、费用申请、运营备用金、供应商预付款，以及付款计划与预算控制。",
+      "TABS": {
+        "REIMBURSEMENT": {
+          "TITLE": "费用报销",
+          "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
+        },
+        "CASH_ADVANCE": {
+          "TITLE": "备用金预支",
+          "SUBTITLE": "OPERATIONAL / EMPLOYEE ADVANCE"
+        }
+      },
+      "REIMBURSEMENT": {
+        "FLOW_TITLE": "从费用申请到付款结算",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      }
+    }
   }
 }

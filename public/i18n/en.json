@@ -1208,5 +1208,197 @@
         }
       }
     }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "Control Company",
+      "TITLE_LINE_2": "Finances from",
+      "TITLE_LINE_3": "Transactions to",
+      "TITLE_LINE_4": "Financial Reports",
+      "DESCRIPTION": "SOFICloud automatically connects operational transactions with accounting processes, from journals, receivables, payables, cash & bank, reimbursement, advances, and fixed assets to management analysis.",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "Financial Management & Accounting",
+      "ILLUSTRATION_ALT": "Illustration of SOFICloud financial report clipboard, magnifying glass, and calculator"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "Financial management sections",
+      "FINANCIAL_CONTROL": "FINANCIAL CONTROL",
+      "TEN_CAPABILITIES": "10 CAPABILITIES",
+      "EXPENSE_ADVANCE": "EXPENSE & ADVANCE",
+      "REPORTING": "REPORTING",
+      "INTEGRATION": "INTEGRATION"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "Control Your Business From One Place",
+      "SUBTITLE": "Choose the area you want to inspect. Every process connects to the same data and can be traced at any time",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "From Operational Transactions to Ready-to-Read Financial Information",
+        "DESCRIPTION": "Accounting impact is formed directly from source documents. Finance can trace journals, ledgers, and financial statements with consistent data.",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "Cash requirements, due dates, and payment priorities in a single control board.",
+        "DESCRIPTION": "Outstanding AR/AP, due dates, payment proposals, approvals, and cash & bank positions are available to help Finance decide the next step.",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "Vendor",
+          "DUE_DATE": "Due Date",
+          "AMOUNT": "Amount",
+          "STATUS": "Status"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "26 Jul",
+            "AMOUNT": "Rp42.8M",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "27 Jul",
+            "AMOUNT": "Rp28.4M",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "28 Jul",
+            "AMOUNT": "Rp19.6M",
+            "STATUS": "Approved"
+          }
+        }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "Every submission has a clear status, authorization, comments, and decision history.",
+        "DESCRIPTION": "Claims, reimbursements, and advances move from request to settlement and accounting along a fully traceable path.",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
+      }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "Functional Depth for Operations and Accounting",
+      "SUBTITLE": "Ten capabilities connecting daily transactions, controls, accounting records, and company financial statements.",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "General Ledger & Financial Accounting",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "Account Receivable",
+          "DESCRIPTION": "Customer Invoice, Outstanding AR, AR Aging, Receipt, Advance Receipt, Credit Note, and Customer Statement."
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "Account Payable",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "Cash & Bank Management",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "Expense, Reimbursement & Advance",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "Payment Planning & Budget Control",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "FIXED_ASSET": {
+          "TITLE": "Fixed Asset Management",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "Cost & Management Accounting",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "Multi-Currency & Forex",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "Accounting Automation",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        }
+      }
+    },
+    "EXPENSE_AND_ADVANCE": {
+      "TITLE": "Expense and Advance in a Controlled Flow",
+      "SUBTITLE": "Five highlighted areas: employee reimbursement, expense claim, operational advance, supplier advance payment, as well as payment planning & budget control.",
+      "TABS": {
+        "REIMBURSEMENT": {
+          "TITLE": "Reimbursement",
+          "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
+        },
+        "CASH_ADVANCE": {
+          "TITLE": "Cash Advance",
+          "SUBTITLE": "OPERATIONAL / EMPLOYEE ADVANCE"
+        }
+      },
+      "REIMBURSEMENT": {
+        "FLOW_TITLE": "From expense claim to payment",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      }
+    }
   }
 }

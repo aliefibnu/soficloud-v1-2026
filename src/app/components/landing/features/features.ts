@@ -1,5 +1,6 @@
   import { Component, inject, signal } from '@angular/core';
   import { NgOptimizedImage } from '@angular/common';
+  import { RouterLink } from '@angular/router';
   import { TranslatePipe } from '@ngx-translate/core';
   import { LandingAnchorService } from '../../../systems/lib/landing-anchor.service';
 
@@ -14,6 +15,7 @@
     bottomPct?: number;
     widthPct?: number;
     heightPct?: number;
+    rotateDeg?: number;
     hoverClass: string;
   }
 
@@ -21,6 +23,7 @@
     id: number;
     titleKey: string;
     descKey: string;
+    route?: string;
     topBg: string;
     domeBg: string;
     layers: FeatureLayer[];
@@ -28,14 +31,17 @@
 
   @Component({
     selector: 'app-features',
-    imports: [NgOptimizedImage, TranslatePipe],
+    imports: [NgOptimizedImage, RouterLink, TranslatePipe],
     templateUrl: './features.html',
     styles: `
       @media (prefers-reduced-motion: reduce) {
         .group,
-        .group * {
+        .group .feature-layer {
           transition-duration: 0.01ms !important;
           transform: none !important;
+          translate: 0 !important;
+          rotate: 0deg !important;
+          scale: 1 !important;
         }
       }
     `,
@@ -46,38 +52,43 @@
   export class Features {
     private readonly anchorService = inject(LandingAnchorService);
     readonly hoveredCard = signal<number | null>(null);
+    readonly ctaButtonClass =
+      'w-full inline-flex items-center justify-center px-6 py-3 rounded-xl font-dm-sans font-semibold text-sm sm:text-[15px] text-[#FDFDFD] bg-linear-to-r from-[#1E37E1] to-[#6694EB] shadow-sm hover:shadow-md hover:brightness-105 active:scale-[0.99] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2';
 
     readonly cards: FeatureCard[] = [
       {
         id: 1,
         titleKey: 'FEATURES.CARDS.FINANCIAL.TITLE',
         descKey: 'FEATURES.CARDS.FINANCIAL.DESC',
+        route: '/financial-management-1',
         topBg: 'linear-gradient(180deg, #FFEFED 0%, #FBCBC5 100%)',
         domeBg: '#FFDFDC',
         layers: [
           {
             name: 'Group 10284.svg',
             src: '/images/landing/features/1/Group 10284.svg',
-            w: 383,
-            h: 521,
+            w: 387,
+            h: 539,
             z: 10,
-            leftPct: 24,
-            bottomPct: -13,
-            widthPct: 43,
-            heightPct: 108,
+            leftPct: 26.5,
+            bottomPct: -7.5,
+            widthPct: 41.5,
+            heightPct: 106.5,
+            rotateDeg: -16.5,
             hoverClass:
               'origin-bottom group-hover:scale-[1.02]',
           },
           {
             name: 'Group 9410.svg',
             src: '/images/landing/features/1/Group 9410.svg',
-            w: 312,
-            h: 332,
+            w: 315,
+            h: 335,
             z: 20,
-            leftPct: 13,
-            bottomPct: -26,
-            widthPct: 42,
-            heightPct: 82,
+            leftPct: 20.5,
+            bottomPct: -16,
+            widthPct: 34,
+            heightPct: 66.6,
+            rotateDeg: -18,
             hoverClass:
               'origin-bottom group-hover:scale-105 group-hover:-rotate-3 group-hover:-translate-x-1',
           },
@@ -87,10 +98,10 @@
             w: 174,
             h: 191,
             z: 25,
-            leftPct: 54,
-            bottomPct: -15,
-            widthPct: 30,
-            heightPct: 60,
+            leftPct: 60.5,
+            bottomPct: -5.5,
+            widthPct: 18.5,
+            heightPct: 37.4,
             hoverClass:
               'origin-bottom group-hover:scale-105 group-hover:rotate-3 group-hover:translate-x-1',
           },
@@ -100,6 +111,7 @@
         id: 2,
         titleKey: 'FEATURES.CARDS.SALES.TITLE',
         descKey: 'FEATURES.CARDS.SALES.DESC',
+        route: '/sales-management-2',
         topBg: 'linear-gradient(180deg, #EDF3FB 0%, #C3D7F7 100%)',
         domeBg: '#EBF2FD',
         layers: [

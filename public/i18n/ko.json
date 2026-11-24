@@ -1208,5 +1208,197 @@
         }
       }
     }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "일상 거래부터",
+      "TITLE_LINE_2": "재무제표까지",
+      "TITLE_LINE_3": "기업 재무를",
+      "TITLE_LINE_4": "완벽하게 관리",
+      "DESCRIPTION": "SOFICloud는 분개, 매출채권, 매입채무, 현금 및 은행, 비용 정산, 가지급금, 고정자산부터 경영 분석까지 운영 거래와 회계 프로세스를 자동으로 연결합니다.",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "재무 관리 및 회계",
+      "ILLUSTRATION_ALT": "SOFICloud 재무 보고서 클립보드, 돋보기, 계산기 일러스트"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "재무 관리 섹션",
+      "FINANCIAL_CONTROL": "재무 통제",
+      "TEN_CAPABILITIES": "10가지 기능",
+      "EXPENSE_ADVANCE": "비용 및 가지급금",
+      "REPORTING": "리포팅",
+      "INTEGRATION": "시스템 연동"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "한 곳에서 비즈니스를 통합 관리",
+      "SUBTITLE": "확인하려는 영역을 선택하세요. 모든 프로세스가 동일한 데이터로 연결되어 언제든 추적할 수 있습니다",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "운영 거래에서 바로 읽을 수 있는 재무 정보까지",
+        "DESCRIPTION": "회계 영향은 원천 전표에서 자동으로 생성됩니다. 재무팀은 일관된 데이터로 분개, 원장, 재무제표까지 추적할 수 있습니다.",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "자금 수요, 만기일, 지급 우선순위를 하나의 컨트롤 보드에서 관리.",
+        "DESCRIPTION": "미결 채권·채무, 만기일, 지급 제안, 승인 내역, 현금 및 은행 잔고를 확인하여 재무팀의 다음 의사결정을 지원합니다.",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "거래처",
+          "DUE_DATE": "만기일",
+          "AMOUNT": "금액",
+          "STATUS": "상태"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "7월 26일",
+            "AMOUNT": "Rp42,8 Jt",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "7월 27일",
+            "AMOUNT": "Rp28,4 Jt",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "7월 28일",
+            "AMOUNT": "Rp19,6 Jt",
+            "STATUS": "Approved"
+          }
+        }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "모든 신청 건에는 상태, 승인 권한, 코멘트, 의사결정 이력이 함께 기록됩니다.",
+        "DESCRIPTION": "경비 청구, 정산, 가지급금은 요청부터 정산 및 회계 처리까지 추적 가능한 경로로 이어집니다.",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
+      }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "운영과 회계를 위한 깊이 있는 기능",
+      "SUBTITLE": "일상 거래, 통제, 회계 기록, 기업 재무제표를 연결하는 10가지 핵심 기능입니다.",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "총계정원장 및 재무회계",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "매출채권",
+          "DESCRIPTION": "고객 청구서, 미수 채권, 채권 연령 분석, 수금, 선수금, 대변 메모 및 고객 거래명세서."
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "매입채무",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "현금 및 은행 관리",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "비용, 경비 정산 및 가지급금",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "지급 계획 및 예산 통제",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        },
+        "FIXED_ASSET": {
+          "TITLE": "고정자산 관리",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "원가 및 관리회계",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "다중 통화 및 외환",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "회계 자동화",
+          "DESCRIPTION": "다단계 계정과목, 전표 입력, 자동 전기, 총계정원장, 시산표, 보조원장, 회계기간 통제 및 결산 마감."
+        }
+      }
+    },
+    "EXPENSE_AND_ADVANCE": {
+      "TITLE": "통제된 흐름으로 관리하는 비용과 가지급금",
+      "SUBTITLE": "강조되는 다섯 가지 영역: 임직원 경비 정산, 비용 청구, 운영 가지급금, 공급업체 선급금, 그리고 지급 계획 및 예산 통제.",
+      "TABS": {
+        "REIMBURSEMENT": {
+          "TITLE": "경비 정산",
+          "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
+        },
+        "CASH_ADVANCE": {
+          "TITLE": "가지급금",
+          "SUBTITLE": "OPERATIONAL / EMPLOYEE ADVANCE"
+        }
+      },
+      "REIMBURSEMENT": {
+        "FLOW_TITLE": "비용 청구부터 지급 처리까지",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      }
+    }
   }
 }

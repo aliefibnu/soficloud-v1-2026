@@ -1,0 +1,135 @@
+<section
+  id="expense-advance"
+  tabindex="-1"
+  aria-labelledby="expense-advance-heading"
+  class="expense-advance-section w-full py-12 sm:py-16 lg:py-18 short:py-12 scroll-mt-32 lg:scroll-mt-36 focus:outline-none"
+>
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-4xl mx-auto">
+      <h2
+        id="expense-advance-heading"
+        class="font-inter font-bold text-white text-[26px] sm:text-[34px] lg:text-[42px] leading-[1.18] tracking-[-0.02em]"
+      >
+        {{ 'FINANCIAL_MANAGEMENT_1.EXPENSE_AND_ADVANCE.TITLE' | translate }}
+      </h2>
+
+      <p
+        class="mt-2.5 sm:mt-3 font-dm-sans font-normal text-white text-[13.5px] sm:text-[15px] leading-[1.48] max-w-4xl mx-auto"
+      >
+        {{ 'FINANCIAL_MANAGEMENT_1.EXPENSE_AND_ADVANCE.SUBTITLE' | translate }}
+      </p>
+    </div>
+
+    <div class="mt-7 sm:mt-9 lg:mt-10 short:mt-7">
+      <div class="flex items-end gap-2.5 sm:gap-3.5 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden">
+        @for (tab of tabs; track tab.id) {
+          <div
+            [attr.data-tab-id]="tab.id"
+            [attr.data-active]="tab.active ? 'true' : 'false'"
+            class="expense-shelf-tab shrink-0 flex flex-col justify-center rounded-t-[18px] sm:rounded-t-[22px] px-5 sm:px-7 pt-3.5 sm:pt-4 pb-3 sm:pb-3.5 min-w-52 sm:min-w-68 lg:min-w-72 select-none"
+            [class.expense-shelf-tab--active]="tab.active"
+            [class.expense-shelf-tab--inactive]="!tab.active"
+          >
+            <span
+              class="font-inter font-bold text-[17px] sm:text-[20px] leading-tight tracking-[-0.01em]"
+              [class.text-[#23244E]]="tab.active"
+              [class.text-[#62657D]]="!tab.active"
+            >
+              {{ tab.titleKey | translate }}
+            </span>
+            <span
+              class="mt-1 font-dm-sans font-normal text-[10.5px] sm:text-[11.5px] leading-none tracking-[0.02em] uppercase"
+              [class.text-[#23244E]]="tab.active"
+              [class.text-[#62657D]]="!tab.active"
+            >
+              {{ tab.subtitleKey | translate }}
+            </span>
+          </div>
+        }
+      </div>
+
+      <div
+        class="expense-advance-stage rounded-b-[22px] sm:rounded-b-[28px] rounded-tr-[22px] sm:rounded-tr-[28px] pt-5 sm:pt-7 pb-6 sm:pb-8 lg:pb-9 short:pt-5 short:pb-7"
+      >
+        <div
+          class="inline-flex items-center bg-white rounded-r-xl sm:rounded-r-2xl pl-5 sm:pl-7 lg:pl-9 pr-7 sm:pr-10 py-2.5 sm:py-3.5 shadow-[0_6px_18px_rgba(35,36,78,0.06)]"
+        >
+          <h3
+            id="expense-advance-flow-heading"
+            class="font-inter font-bold text-[#23244E] text-[15px] sm:text-[18px] lg:text-[20px] leading-snug tracking-[-0.01em]"
+          >
+            {{ 'FINANCIAL_MANAGEMENT_1.EXPENSE_AND_ADVANCE.REIMBURSEMENT.FLOW_TITLE' | translate }}
+          </h3>
+        </div>
+
+        <ol
+          role="list"
+          aria-labelledby="expense-advance-flow-heading"
+          class="mt-5 sm:mt-6 lg:mt-7 short:mt-5 px-5 sm:px-7 lg:px-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 m-0 list-none"
+        >
+          @for (step of steps; track step.id) {
+            <li [class]="step.desktopGridClass">
+              <article
+                [attr.data-step-id]="step.id"
+                class="expense-step-card h-full rounded-[20px] sm:rounded-[24px] bg-[#FDFDFD] border border-white/80 shadow-[0_8px_24px_rgba(35,36,78,0.07)] p-5 sm:p-6 flex flex-col justify-between"
+              >
+                <div
+                  class="expense-step-badge relative z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shrink-0"
+                >
+                  <span
+                    class="font-inter font-bold text-[#23244E] text-[12.5px] sm:text-[13.5px] leading-none tabular-nums"
+                  >
+                    {{ step.number }}
+                  </span>
+                </div>
+
+                <div class="expense-step-artwork" aria-hidden="true">
+                  @if (step.illustration === 'claim-request') {
+                    <img
+                      [ngSrc]="claimRequestImage.src"
+                      [width]="claimRequestImage.width"
+                      [height]="claimRequestImage.height"
+                      alt=""
+                      aria-hidden="true"
+                      draggable="false"
+                      loading="lazy"
+                      class="expense-claim-art select-none pointer-events-none"
+                    />
+                  } @else {
+                    <div class="expense-workflow-stage">
+                      @for (layer of workflowBoardLayers; track layer.id) {
+                        <img
+                          [ngSrc]="layer.src"
+                          [width]="layer.width"
+                          [height]="layer.height"
+                          alt=""
+                          aria-hidden="true"
+                          draggable="false"
+                          loading="lazy"
+                          [class]="'expense-workflow-layer select-none pointer-events-none ' + layer.className"
+                        />
+                      }
+                    </div>
+                  }
+                </div>
+
+                <div class="relative z-10 mt-14 sm:mt-16 max-w-[54%]">
+                  <h4
+                    class="font-inter font-bold text-[#23244E] text-[15px] sm:text-[16px] leading-snug tracking-[-0.01em]"
+                  >
+                    {{ step.titleKey | translate }}
+                  </h4>
+                  <p
+                    class="mt-0.5 font-dm-sans font-normal text-[#4A4D6D] text-[12px] sm:text-[13px] leading-snug"
+                  >
+                    {{ step.subtitleKey | translate }}
+                  </p>
+                </div>
+              </article>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
