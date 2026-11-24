@@ -1458,6 +1458,78 @@
         "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
         "CUSTOMER_BILLING_ARIA": "Grafik batang vertikal Customer Billing Receipt per bulan"
       }
+    },
+    "INTEGRATION": {
+      "TITLE": "Transaksi bisnis membentuk\naccounting impact",
+      "SUBTITLE": "Finance tidak perlu mencatat ulang transaksi operasional. Pilih alur untuk melihat bagaimana dokumen bisnis bergerak menuju General Ledger.",
+      "TABS_ARIA_LABEL": "Alur integrasi akuntansi",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "Order yang selesai menjadi receivable,\nreceipt, dan jurnal.",
+          "STEPS_ARIA_LABEL": "Tahapan alur Sales to Cash",
+          "STEPS": {
+            "SALES_ORDER": "Sales Order",
+            "DELIVERY": "Delivery",
+            "CUSTOMER_INVOICE": "Customer Invoice",
+            "AR": "AR",
+            "RECEIPT": "Receipt",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "Pembelian yang diterima menjadi payable,\npayment, dan jurnal.",
+          "STEPS_ARIA_LABEL": "Tahapan alur Procure to Pay",
+          "STEPS": {
+            "PURCHASE_ORDER": "Purchase Order",
+            "GOODS_RECEIPT": "Goods Receipt",
+            "SUPPLIER_INVOICE": "Supplier Invoice",
+            "AP": "AP",
+            "PAYMENT": "Payment",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "Proses produksi yang selesai membentuk\nWIP, persediaan, dan COGS.",
+          "STEPS_ARIA_LABEL": "Tahapan alur Manufacture to COGs",
+          "STEPS": {
+            "BOM_ROUTING": "BOM & Routing",
+            "MATERIAL_ISSUE": "Material Issue",
+            "WORK_ORDER": "Work Order",
+            "FINISHED_GOODS": "Finished Goods",
+            "COGS": "COGS",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "Biaya dan progres proyek terhubung ke\nbilling, margin, dan jurnal.",
+          "STEPS_ARIA_LABEL": "Tahapan alur Project to Profitability",
+          "STEPS": {
+            "PROJECT_BUDGET": "Project Budget",
+            "COST_ALLOCATION": "Cost Allocation",
+            "PROGRESS_BILLING": "Progress Billing",
+            "PROJECT_REVENUE": "Project Revenue",
+            "PROFITABILITY": "Profitability",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "Pengajuan biaya yang disetujui menjadi\nsettlement, payable, dan jurnal.",
+          "STEPS_ARIA_LABEL": "Tahapan alur Expense to Accounting",
+          "STEPS": {
+            "EXPENSE_CLAIM": "Expense Claim",
+            "APPROVAL": "Approval",
+            "CASH_ADVANCE": "Cash Advance",
+            "SETTLEMENT": "Settlement",
+            "AP_BANK": "AP / Bank",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        }
+      }
     }
   }
 }

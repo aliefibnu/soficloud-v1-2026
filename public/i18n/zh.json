@@ -1458,6 +1458,78 @@
         "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
         "CUSTOMER_BILLING_ARIA": "月度客户账单收款垂直柱状图"
       }
+    },
+    "INTEGRATION": {
+      "TITLE": "业务交易直接形成\n财务会计影响",
+      "SUBTITLE": "财务团队无需重复录入业务单据。选择任意流程，查看业务单据如何自动流转并生成总账（General Ledger）分录。",
+      "TABS_ARIA_LABEL": "财务集成流程",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "已完成的销售订单自动形成应收账款、\n收款与会计分录。",
+          "STEPS_ARIA_LABEL": "Sales to Cash 流程步骤",
+          "STEPS": {
+            "SALES_ORDER": "销售订单",
+            "DELIVERY": "发货单",
+            "CUSTOMER_INVOICE": "客户发票",
+            "AR": "应收账款 (AR)",
+            "RECEIPT": "收款",
+            "GENERAL_LEDGER": "总账"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "已验收的采购自动形成应付账款、\n付款与会计分录。",
+          "STEPS_ARIA_LABEL": "Procure to Pay 流程步骤",
+          "STEPS": {
+            "PURCHASE_ORDER": "采购订单",
+            "GOODS_RECEIPT": "收货入库",
+            "SUPPLIER_INVOICE": "供应商发票",
+            "AP": "应付账款 (AP)",
+            "PAYMENT": "付款",
+            "GENERAL_LEDGER": "总账"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "已完工的生产流程自动归集\n在制品、库存与销货成本（COGS）。",
+          "STEPS_ARIA_LABEL": "Manufacture to COGs 流程步骤",
+          "STEPS": {
+            "BOM_ROUTING": "BOM 与工艺路线",
+            "MATERIAL_ISSUE": "生产领料",
+            "WORK_ORDER": "生产工单",
+            "FINISHED_GOODS": "完工入库",
+            "COGS": "销货成本 (COGS)",
+            "GENERAL_LEDGER": "总账"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "项目成本与进度实时关联至\n开票、利润率与会计分录。",
+          "STEPS_ARIA_LABEL": "Project to Profitability 流程步骤",
+          "STEPS": {
+            "PROJECT_BUDGET": "项目预算",
+            "COST_ALLOCATION": "成本分摊",
+            "PROGRESS_BILLING": "进度开票",
+            "PROJECT_REVENUE": "项目收入",
+            "PROFITABILITY": "盈利分析",
+            "GENERAL_LEDGER": "总账"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "已审批的费用申请自动流转至\n核销、应付账款与会计分录。",
+          "STEPS_ARIA_LABEL": "Expense to Accounting 流程步骤",
+          "STEPS": {
+            "EXPENSE_CLAIM": "费用报销",
+            "APPROVAL": "审批",
+            "CASH_ADVANCE": "预支备用金",
+            "SETTLEMENT": "核销结算",
+            "AP_BANK": "应付 / 银行",
+            "GENERAL_LEDGER": "总账"
+          }
+        }
+      }
     }
   }
 }

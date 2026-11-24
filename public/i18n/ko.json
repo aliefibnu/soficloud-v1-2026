@@ -1458,6 +1458,78 @@
         "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
         "CUSTOMER_BILLING_ARIA": "월별 고객 청구 수금액 세로 막대 차트"
       }
+    },
+    "INTEGRATION": {
+      "TITLE": "비즈니스 거래가 곧\n회계 영향으로 이어집니다",
+      "SUBTITLE": "재무팀이 운영 거래를 다시 입력할 필요가 없습니다. 흐름을 선택하여 업무 전표가 총계정원장(General Ledger)으로 연결되는 과정을 확인하세요.",
+      "TABS_ARIA_LABEL": "회계 통합 프로세스",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "완료된 주문이 매출채권,\n수금, 그리고 전표로 연결됩니다.",
+          "STEPS_ARIA_LABEL": "Sales to Cash 단계",
+          "STEPS": {
+            "SALES_ORDER": "판매 주문",
+            "DELIVERY": "출고 / 배송",
+            "CUSTOMER_INVOICE": "고객 송장",
+            "AR": "매출채권 (AR)",
+            "RECEIPT": "수금",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "입고된 구매가 매입채무,\n지급, 그리고 전표로 연결됩니다.",
+          "STEPS_ARIA_LABEL": "Procure to Pay 단계",
+          "STEPS": {
+            "PURCHASE_ORDER": "구매 주문",
+            "GOODS_RECEIPT": "입고 확인",
+            "SUPPLIER_INVOICE": "공급업체 송장",
+            "AP": "매입채무 (AP)",
+            "PAYMENT": "지급",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "완료된 생산 공정이 재공품(WIP),\n재고, 그리고 매출원가(COGS)를 형성합니다.",
+          "STEPS_ARIA_LABEL": "Manufacture to COGs 단계",
+          "STEPS": {
+            "BOM_ROUTING": "BOM & 공정",
+            "MATERIAL_ISSUE": "자재 출고",
+            "WORK_ORDER": "작업 지시",
+            "FINISHED_GOODS": "완제품 입고",
+            "COGS": "매출원가 (COGS)",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "프로젝트 원가와 진행률이\n청구, 수익성, 그리고 전표로 연결됩니다.",
+          "STEPS_ARIA_LABEL": "Project to Profitability 단계",
+          "STEPS": {
+            "PROJECT_BUDGET": "프로젝트 예산",
+            "COST_ALLOCATION": "원가 배부",
+            "PROGRESS_BILLING": "기성 청구",
+            "PROJECT_REVENUE": "프로젝트 매출",
+            "PROFITABILITY": "수익성",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "승인된 비용 청구가 정산,\n미지급금, 그리고 전표로 연결됩니다.",
+          "STEPS_ARIA_LABEL": "Expense to Accounting 단계",
+          "STEPS": {
+            "EXPENSE_CLAIM": "비용 청구",
+            "APPROVAL": "승인",
+            "CASH_ADVANCE": "가지급금",
+            "SETTLEMENT": "정산",
+            "AP_BANK": "AP / 은행",
+            "GENERAL_LEDGER": "총계정원장"
+          }
+        }
+      }
     }
   }
 }

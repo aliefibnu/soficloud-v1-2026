@@ -40,23 +40,26 @@ describe('FinancialManagement1', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render app-hero, app-section-tabs, app-financial-control, app-ten-capabilities, app-expense-and-advance, and app-real-dashboard in order', () => {
+  it('should render app-hero, app-section-tabs, app-financial-control, app-ten-capabilities, gradient band (app-expense-and-advance + app-real-dashboard), and app-integration in order', () => {
     const heroEl = fixture.debugElement.query(By.css('app-hero'));
     const tabsEl = fixture.debugElement.query(By.css('app-section-tabs'));
     const financialControlEl = fixture.debugElement.query(By.css('app-financial-control'));
     const tenCapabilitiesEl = fixture.debugElement.query(By.css('app-ten-capabilities'));
     const expenseAndAdvanceEl = fixture.debugElement.query(By.css('app-expense-and-advance'));
     const realDashboardEl = fixture.debugElement.query(By.css('app-real-dashboard'));
+    const integrationEl = fixture.debugElement.query(By.css('app-integration'));
     expect(heroEl).toBeTruthy();
     expect(tabsEl).toBeTruthy();
     expect(financialControlEl).toBeTruthy();
     expect(tenCapabilitiesEl).toBeTruthy();
     expect(expenseAndAdvanceEl).toBeTruthy();
     expect(realDashboardEl).toBeTruthy();
+    expect(integrationEl).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#financial-control'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#capabilities'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#expense-advance'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#reporting'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('#integration'))).toBeTruthy();
 
     const children = Array.from(
       (fixture.nativeElement as HTMLElement).querySelector('div')?.children ?? [],
@@ -67,6 +70,7 @@ describe('FinancialManagement1', () => {
       'app-financial-control',
       'app-ten-capabilities',
       'div',
+      'app-integration',
     ]);
 
     const gradientBand = fixture.debugElement.query(By.css('[data-gradient-band]'));
