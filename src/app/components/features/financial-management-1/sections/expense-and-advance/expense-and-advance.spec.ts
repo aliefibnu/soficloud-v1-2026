@@ -293,16 +293,45 @@ describe('ExpenseAndAdvance', () => {
     expect(panels[1].nativeElement.getAttribute('tabindex')).toBe('0');
     expect(panels[0].nativeElement.getAttribute('hidden')).toBe('until-found');
 
-    cashAdvanceBtn.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+    const arrowLeftEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft', cancelable: true });
+    cashAdvanceBtn.dispatchEvent(arrowLeftEvent);
     fixture.detectChanges();
+    expect(arrowLeftEvent.defaultPrevented).toBe(true);
     expect(component.activeTabId()).toBe('reimbursement');
     expect(reimbursementBtn.getAttribute('aria-selected')).toBe('true');
 
-    reimbursementBtn.dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }));
+    const arrowDownEvent = new KeyboardEvent('keydown', { key: 'ArrowDown', cancelable: true });
+    reimbursementBtn.dispatchEvent(arrowDownEvent);
     fixture.detectChanges();
+    expect(arrowDownEvent.defaultPrevented).toBe(false);
+    expect(component.activeTabId()).toBe('reimbursement');
+
+    const arrowRightEvent = new KeyboardEvent('keydown', { key: 'ArrowRight', cancelable: true });
+    reimbursementBtn.dispatchEvent(arrowRightEvent);
+    fixture.detectChanges();
+    expect(arrowRightEvent.defaultPrevented).toBe(true);
     expect(component.activeTabId()).toBe('cash-advance');
 
-    cashAdvanceBtn.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }));
+    const arrowUpEvent = new KeyboardEvent('keydown', { key: 'ArrowUp', cancelable: true });
+    cashAdvanceBtn.dispatchEvent(arrowUpEvent);
+    fixture.detectChanges();
+    expect(arrowUpEvent.defaultPrevented).toBe(false);
+    expect(component.activeTabId()).toBe('cash-advance');
+
+    const homeEvent = new KeyboardEvent('keydown', { key: 'Home', cancelable: true });
+    cashAdvanceBtn.dispatchEvent(homeEvent);
+    fixture.detectChanges();
+    expect(homeEvent.defaultPrevented).toBe(true);
+    expect(component.activeTabId()).toBe('reimbursement');
+
+    const endEvent = new KeyboardEvent('keydown', { key: 'End', cancelable: true });
+    reimbursementBtn.dispatchEvent(endEvent);
+    fixture.detectChanges();
+    expect(endEvent.defaultPrevented).toBe(true);
+    expect(component.activeTabId()).toBe('cash-advance');
+
+    homeEvent.stopPropagation();
+    cashAdvanceBtn.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', cancelable: true }));
     fixture.detectChanges();
     expect(component.activeTabId()).toBe('reimbursement');
 

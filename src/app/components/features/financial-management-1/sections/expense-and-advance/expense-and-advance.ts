@@ -182,11 +182,9 @@ export class ExpenseAndAdvance {
 
     switch (event.key) {
       case 'ArrowRight':
-      case 'ArrowDown':
         nextIndex = (currentIndex + 1) % total;
         break;
       case 'ArrowLeft':
-      case 'ArrowUp':
         nextIndex = (currentIndex - 1 + total) % total;
         break;
       case 'Home':
