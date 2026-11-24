@@ -86,6 +86,11 @@ describe('FinancialManagement1', () => {
     expect(bottomWave).toBeTruthy();
     expect(bottomWave.nativeElement.getAttribute('aria-hidden')).toBe('true');
     expect(bottomWave.query(By.css('path'))?.nativeElement.getAttribute('fill')).toBe('#ffffff');
+    expect(
+      fixture.debugElement
+        .query(By.css('app-integration section#integration'))
+        .nativeElement.classList.contains('bg-transparent'),
+    ).toBe(true);
 
     const tabLinks = fixture.debugElement.queryAll(By.css('app-section-tabs nav ul li a'));
     expect(tabLinks.length).toBe(5);
