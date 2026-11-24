@@ -93,6 +93,26 @@ describe('Navbar', () => {
     expect(component.isLangMenuOpen()).toBe(false);
   });
 
+  it('should not render checkmark icon on active language in desktop dropdown or mobile sheet', () => {
+    // Open desktop dropdown
+    component.isLangMenuOpen.set(true);
+    fixture.detectChanges();
+
+    const selectedDesktopOption = fixture.nativeElement.querySelector('ul[role="listbox"] button[aria-selected="true"]');
+    expect(selectedDesktopOption).toBeTruthy();
+    expect(selectedDesktopOption.classList.contains('text-[#1d44eb]')).toBe(true);
+    expect(selectedDesktopOption.querySelector('svg[viewBox="0 0 16 16"]')).toBeNull();
+
+    // Open mobile language sheet
+    component.openMobileLangSheet();
+    fixture.detectChanges();
+
+    const selectedMobileOption = fixture.nativeElement.querySelector('div[role="listbox"] button[aria-selected="true"]');
+    expect(selectedMobileOption).toBeTruthy();
+    expect(selectedMobileOption.classList.contains('text-[#1d44eb]')).toBe(true);
+    expect(selectedMobileOption.querySelector('svg[viewBox="0 0 16 16"]')).toBeNull();
+  });
+
   it('should toggle and close mobile menu', () => {
     component.toggleMobileMenu();
     expect(component.isMobileMenuOpen()).toBe(true);
