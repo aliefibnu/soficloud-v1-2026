@@ -111,9 +111,15 @@ describe('ScheduleDemoForm', () => {
 
     const nameError = fixture.debugElement.query(By.css('#demo-name-error'));
     expect(nameError).toBeTruthy();
+    const nameErrorSvg = nameError.query(By.css('svg'));
+    expect(nameErrorSvg.nativeElement.getAttribute('viewBox')).toBe('0 0 9 9');
+    expect(nameErrorSvg.query(By.css('path')).nativeElement.getAttribute('fill')).toBe('#CB1C29');
 
     const phoneError = fixture.debugElement.query(By.css('#demo-phone-error'));
     expect(phoneError).toBeTruthy();
+    const phoneErrorSvg = phoneError.query(By.css('svg'));
+    expect(phoneErrorSvg.nativeElement.getAttribute('viewBox')).toBe('0 0 9 9');
+    expect(phoneErrorSvg.query(By.css('path')).nativeElement.getAttribute('fill')).toBe('#CB1C29');
   });
 
   it('should toggle custom industry dropdown and select an option', () => {
@@ -261,6 +267,10 @@ describe('ScheduleDemoForm', () => {
     expect(trigger.nativeElement.classList.contains('border-[#E8E8E8]')).toBe(true);
     expect(trigger.nativeElement.classList.contains('font-dm-sans')).toBe(true);
     expect(trigger.nativeElement.classList.contains('font-normal')).toBe(true);
+
+    const triggerArrow = trigger.query(By.css('svg'));
+    expect(triggerArrow).toBeTruthy();
+    expect(triggerArrow.nativeElement.getAttribute('viewBox')).toBe('0 0 13 8');
 
     // Verify all 7 icons from /images/schedule-demo
     const imgs = fixture.debugElement.queryAll(By.css('form img'));
