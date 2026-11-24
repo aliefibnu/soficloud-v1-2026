@@ -36,7 +36,7 @@
             [attr.tabindex]="activeTabId() === tab.id ? 0 : -1"
             (click)="selectTab(tab.id)"
             (keydown)="onTabKeydown($event, i)"
-            class="expense-shelf-tab group shrink-0 flex flex-col items-start justify-center text-left rounded-t-[20px] sm:rounded-t-[24px] px-5 sm:px-7 pt-3.5 sm:pt-[17px] pb-3 sm:pb-[15px] min-w-52 sm:min-w-[280px] lg:min-w-[300px] cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#365AD2]"
+            class="expense-shelf-tab group shrink-0 flex flex-col items-start justify-center text-left rounded-t-[20px] sm:rounded-t-3xl px-5 sm:px-7 pt-3.5 sm:pt-4.25 pb-3 sm:pb-3.75 min-w-52 sm:min-w-70 lg:min-w-75 cursor-pointer select-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#365AD2]"
           >
             <span
               class="font-dm-sans font-semibold text-[17px] sm:text-[20px] leading-[1.1] tracking-normal transition-colors"
@@ -74,7 +74,7 @@
               class="expense-tabpanel"
             >
               <div
-                class="inline-flex items-center bg-[#FDFDFD] rounded-r-lg sm:rounded-r-xl px-4 py-2.5 sm:py-[13px]"
+                class="inline-flex items-center bg-[#FDFDFD] rounded-r-lg sm:rounded-r-xl px-4 py-2.5 sm:py-3.25"
               >
                 <h3
                   [id]="'expense-advance-flow-heading-' + tab.id"
