@@ -1361,6 +1361,7 @@
       "TITLE": "統制されたフローで管理する経費と仮払金",
       "SUBTITLE": "注目すべき5つの領域：従業員立替精算、経費申請、業務仮払金、仕入先前払金、および支払計画と予算統制。",
       "TABS": {
+        "ARIA_LABEL": "経費および仮払金フロー",
         "REIMBURSEMENT": {
           "TITLE": "立替精算",
           "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
@@ -1372,6 +1373,35 @@
       },
       "REIMBURSEMENT": {
         "FLOW_TITLE": "経費申請から支払処理まで",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "仮払申請から精算完了まで",
         "STEPS": {
           "CLAIM_REQUEST": {
             "TITLE": "Claim Request",

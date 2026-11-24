@@ -1361,6 +1361,7 @@
       "TITLE": "통제된 흐름으로 관리하는 비용과 가지급금",
       "SUBTITLE": "강조되는 다섯 가지 영역: 임직원 경비 정산, 비용 청구, 운영 가지급금, 공급업체 선급금, 그리고 지급 계획 및 예산 통제.",
       "TABS": {
+        "ARIA_LABEL": "경비 및 가지급금 워크플로우",
         "REIMBURSEMENT": {
           "TITLE": "경비 정산",
           "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
@@ -1372,6 +1373,35 @@
       },
       "REIMBURSEMENT": {
         "FLOW_TITLE": "비용 청구부터 지급 처리까지",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "가지급금 신청부터 정산 완료까지",
         "STEPS": {
           "CLAIM_REQUEST": {
             "TITLE": "Claim Request",

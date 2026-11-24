@@ -8,7 +8,7 @@
     <div class="text-center max-w-4xl mx-auto">
       <h2
         id="expense-advance-heading"
-        class="font-inter font-bold text-white text-[26px] sm:text-[34px] lg:text-[42px] leading-[1.18] tracking-[-0.02em]"
+        class="font-inter font-semibold text-white text-[26px] sm:text-[34px] lg:text-[42px] leading-[1.18] tracking-[-0.02em]"
       >
         {{ 'FINANCIAL_MANAGEMENT_1.EXPENSE_AND_ADVANCE.TITLE' | translate }}
       </h2>
@@ -21,114 +21,139 @@
     </div>
 
     <div class="mt-7 sm:mt-9 lg:mt-10 short:mt-7">
-      <div class="flex items-end gap-2.5 sm:gap-3.5 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden">
-        @for (tab of tabs; track tab.id) {
-          <div
+      <div
+        role="tablist"
+        [attr.aria-label]="'FINANCIAL_MANAGEMENT_1.EXPENSE_AND_ADVANCE.TABS.ARIA_LABEL' | translate"
+        class="expense-shelf-tablist flex items-end gap-2.5 sm:gap-3.5 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden"
+      >
+        @for (tab of tabs; track tab.id; let i = $index) {
+          <button
+            type="button"
+            role="tab"
+            [id]="'tab-expense-' + tab.id"
             [attr.data-tab-id]="tab.id"
-            [attr.data-active]="tab.active ? 'true' : 'false'"
-            class="expense-shelf-tab shrink-0 flex flex-col justify-center rounded-t-[18px] sm:rounded-t-[22px] px-5 sm:px-7 pt-3.5 sm:pt-4 pb-3 sm:pb-3.5 min-w-52 sm:min-w-68 lg:min-w-72 select-none"
-            [class.expense-shelf-tab--active]="tab.active"
-            [class.expense-shelf-tab--inactive]="!tab.active"
+            [attr.aria-selected]="activeTabId() === tab.id ? 'true' : 'false'"
+            [attr.tabindex]="activeTabId() === tab.id ? 0 : -1"
+            (click)="selectTab(tab.id)"
+            (keydown)="onTabKeydown($event, i)"
+            class="expense-shelf-tab group shrink-0 flex flex-col items-start justify-center text-left rounded-t-[20px] sm:rounded-t-[24px] px-5 sm:px-7 pt-3.5 sm:pt-[17px] pb-3 sm:pb-[15px] min-w-52 sm:min-w-[280px] lg:min-w-[300px] cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#365AD2]"
           >
             <span
-              class="font-inter font-bold text-[17px] sm:text-[20px] leading-tight tracking-[-0.01em]"
-              [class.text-[#23244E]]="tab.active"
-              [class.text-[#62657D]]="!tab.active"
+              class="font-dm-sans font-semibold text-[17px] sm:text-[20px] leading-[1.1] tracking-normal transition-colors"
+              [class.text-[#23244E]]="activeTabId() === tab.id"
+              [class.text-[#737373]]="activeTabId() !== tab.id"
+              [class.group-hover:text-[#23244E]]="activeTabId() !== tab.id"
             >
               {{ tab.titleKey | translate }}
             </span>
             <span
-              class="mt-1 font-dm-sans font-normal text-[10.5px] sm:text-[11.5px] leading-none tracking-[0.02em] uppercase"
-              [class.text-[#23244E]]="tab.active"
-              [class.text-[#62657D]]="!tab.active"
+              class="mt-1.5 sm:mt-2 font-dm-sans font-normal text-[11.5px] sm:text-[13.5px] leading-none tracking-[0.015em] uppercase transition-colors"
+              [class.text-[#23244E]]="activeTabId() === tab.id"
+              [class.text-[#737373]]="activeTabId() !== tab.id"
+              [class.group-hover:text-[#23244E]]="activeTabId() !== tab.id"
             >
               {{ tab.subtitleKey | translate }}
             </span>
-          </div>
+          </button>
         }
       </div>
 
       <div
-        class="expense-advance-stage rounded-b-[22px] sm:rounded-b-[28px] rounded-tr-[22px] sm:rounded-tr-[28px] pt-5 sm:pt-7 pb-6 sm:pb-8 lg:pb-9 short:pt-5 short:pb-7"
+        class="expense-advance-stage rounded-b-[22px] sm:rounded-b-[28px] rounded-tr-[22px] sm:rounded-tr-[28px] pt-4 sm:pt-5 pb-6 sm:pb-8 lg:pb-9 short:pt-4 short:pb-7"
       >
-        <div
-          class="inline-flex items-center bg-white rounded-r-xl sm:rounded-r-2xl pl-5 sm:pl-7 lg:pl-9 pr-7 sm:pr-10 py-2.5 sm:py-3.5 shadow-[0_6px_18px_rgba(35,36,78,0.06)]"
-        >
-          <h3
-            id="expense-advance-flow-heading"
-            class="font-inter font-bold text-[#23244E] text-[15px] sm:text-[18px] lg:text-[20px] leading-snug tracking-[-0.01em]"
-          >
-            {{ 'FINANCIAL_MANAGEMENT_1.EXPENSE_AND_ADVANCE.REIMBURSEMENT.FLOW_TITLE' | translate }}
-          </h3>
-        </div>
-
-        <ol
-          role="list"
-          aria-labelledby="expense-advance-flow-heading"
-          class="mt-5 sm:mt-6 lg:mt-7 short:mt-5 px-5 sm:px-7 lg:px-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 m-0 list-none"
-        >
-          @for (step of steps; track step.id) {
-            <li [class]="step.desktopGridClass">
-              <article
-                [attr.data-step-id]="step.id"
-                class="expense-step-card h-full rounded-[20px] sm:rounded-[24px] bg-[#FDFDFD] border border-white/80 shadow-[0_8px_24px_rgba(35,36,78,0.07)] p-5 sm:p-6 flex flex-col justify-between"
+        <div class="grid">
+          @for (tab of tabs; track tab.id) {
+            <div
+              [id]="'panel-expense-' + tab.id"
+              [attr.data-tab-panel]="tab.id"
+              role="tabpanel"
+              [attr.aria-labelledby]="'tab-expense-' + tab.id"
+              [attr.tabindex]="activeTabId() === tab.id ? 0 : null"
+              [attr.hidden]="activeTabId() === tab.id ? null : 'until-found'"
+              (beforematch)="selectTab(tab.id)"
+              class="expense-tabpanel"
+            >
+              <div
+                class="inline-flex items-center bg-[#FDFDFD] rounded-r-lg sm:rounded-r-xl px-4 py-2.5 sm:py-[13px]"
               >
-                <div
-                  class="expense-step-badge relative z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shrink-0"
+                <h3
+                  [id]="'expense-advance-flow-heading-' + tab.id"
+                  class="font-inter font-semibold text-[#23244E] text-[15px] sm:text-[18px] lg:text-[19px] leading-[1.2] tracking-normal"
                 >
-                  <span
-                    class="font-inter font-bold text-[#23244E] text-[12.5px] sm:text-[13.5px] leading-none tabular-nums"
-                  >
-                    {{ step.number }}
-                  </span>
-                </div>
+                  {{ tab.flowTitleKey | translate }}
+                </h3>
+              </div>
 
-                <div class="expense-step-artwork" aria-hidden="true">
-                  @if (step.illustration === 'claim-request') {
-                    <img
-                      [ngSrc]="claimRequestImage.src"
-                      [width]="claimRequestImage.width"
-                      [height]="claimRequestImage.height"
-                      alt=""
-                      aria-hidden="true"
-                      draggable="false"
-                      loading="lazy"
-                      class="expense-claim-art select-none pointer-events-none"
-                    />
-                  } @else {
-                    <div class="expense-workflow-stage">
-                      @for (layer of workflowBoardLayers; track layer.id) {
-                        <img
-                          [ngSrc]="layer.src"
-                          [width]="layer.width"
-                          [height]="layer.height"
-                          alt=""
-                          aria-hidden="true"
-                          draggable="false"
-                          loading="lazy"
-                          [class]="'expense-workflow-layer select-none pointer-events-none ' + layer.className"
-                        />
-                      }
-                    </div>
-                  }
-                </div>
+              <ol
+                role="list"
+                [attr.aria-labelledby]="'expense-advance-flow-heading-' + tab.id"
+                class="mt-5 sm:mt-6 lg:mt-7 short:mt-5 px-5 sm:px-7 lg:px-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 m-0 list-none"
+              >
+                @for (step of tab.steps; track step.id) {
+                  <li [class]="'expense-step-item ' + step.desktopGridClass">
+                    <article
+                      [attr.data-step-id]="step.id"
+                      class="expense-step-card h-full bg-[#FDFDFD] flex flex-col justify-between"
+                    >
+                      <div
+                        class="expense-step-badge relative z-10 rounded-full flex items-center justify-center shrink-0"
+                      >
+                        <span
+                          class="expense-step-badge-number font-dm-sans font-bold text-[#23244E] leading-none"
+                        >
+                          {{ step.number }}
+                        </span>
+                      </div>
 
-                <div class="relative z-10 mt-14 sm:mt-16 max-w-[54%]">
-                  <h4
-                    class="font-inter font-bold text-[#23244E] text-[15px] sm:text-[16px] leading-snug tracking-[-0.01em]"
-                  >
-                    {{ step.titleKey | translate }}
-                  </h4>
-                  <p
-                    class="mt-0.5 font-dm-sans font-normal text-[#4A4D6D] text-[12px] sm:text-[13px] leading-snug"
-                  >
-                    {{ step.subtitleKey | translate }}
-                  </p>
-                </div>
-              </article>
-            </li>
+                      <div class="expense-step-artwork" aria-hidden="true">
+                        @if (step.illustration === 'claim-request') {
+                          <img
+                            [ngSrc]="claimRequestImage.src"
+                            [width]="claimRequestImage.width"
+                            [height]="claimRequestImage.height"
+                            alt=""
+                            aria-hidden="true"
+                            draggable="false"
+                            loading="lazy"
+                            class="expense-claim-art select-none pointer-events-none"
+                          />
+                        } @else {
+                          <div class="expense-workflow-stage">
+                            @for (layer of workflowBoardLayers; track layer.id) {
+                              <img
+                                [ngSrc]="layer.src"
+                                [width]="layer.width"
+                                [height]="layer.height"
+                                alt=""
+                                aria-hidden="true"
+                                draggable="false"
+                                loading="lazy"
+                                [class]="'expense-workflow-layer select-none pointer-events-none ' + layer.className"
+                              />
+                            }
+                          </div>
+                        }
+                      </div>
+
+                      <div class="expense-step-copy relative z-10">
+                        <h4
+                          class="expense-step-title font-dm-sans font-bold text-[#23244E]"
+                        >
+                          {{ step.titleKey | translate }}
+                        </h4>
+                        <p
+                          class="expense-step-subtitle font-dm-sans font-normal text-[#23244E]"
+                        >
+                          {{ step.subtitleKey | translate }}
+                        </p>
+                      </div>
+                    </article>
+                  </li>
+                }
+              </ol>
+            </div>
           }
-        </ol>
+        </div>
       </div>
     </div>
   </div>

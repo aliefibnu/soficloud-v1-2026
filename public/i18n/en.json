@@ -1361,6 +1361,7 @@
       "TITLE": "Expense and Advance in a Controlled Flow",
       "SUBTITLE": "Five highlighted areas: employee reimbursement, expense claim, operational advance, supplier advance payment, as well as payment planning & budget control.",
       "TABS": {
+        "ARIA_LABEL": "Expense and advance workflows",
         "REIMBURSEMENT": {
           "TITLE": "Reimbursement",
           "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
@@ -1372,6 +1373,35 @@
       },
       "REIMBURSEMENT": {
         "FLOW_TITLE": "From expense claim to payment",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "From cash request to settlement",
         "STEPS": {
           "CLAIM_REQUEST": {
             "TITLE": "Claim Request",

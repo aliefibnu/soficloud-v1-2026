@@ -1361,6 +1361,7 @@
       "TITLE": "Expense Dan Advance Dalam Alur Yang Terkontrol",
       "SUBTITLE": "Lima area yang ditonjolkan: employee reimbursement, expense claim, operational advance, supplier advance payment, serta payment planning & budget control.",
       "TABS": {
+        "ARIA_LABEL": "Alur expense dan advance",
         "REIMBURSEMENT": {
           "TITLE": "Reimbursement",
           "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
@@ -1372,6 +1373,35 @@
       },
       "REIMBURSEMENT": {
         "FLOW_TITLE": "Dari expense claim hingga payment",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "Dari cash request hingga settlement",
         "STEPS": {
           "CLAIM_REQUEST": {
             "TITLE": "Claim Request",

@@ -1361,6 +1361,7 @@
       "TITLE": "在受控流程中管理费用报销与预付款",
       "SUBTITLE": "五大核心领域：员工报销、费用申请、运营备用金、供应商预付款，以及付款计划与预算控制。",
       "TABS": {
+        "ARIA_LABEL": "费用与备用金流程",
         "REIMBURSEMENT": {
           "TITLE": "费用报销",
           "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
@@ -1372,6 +1373,35 @@
       },
       "REIMBURSEMENT": {
         "FLOW_TITLE": "从费用申请到付款结算",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "从备用金申请到核销结算",
         "STEPS": {
           "CLAIM_REQUEST": {
             "TITLE": "Claim Request",

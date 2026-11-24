@@ -3,33 +3,35 @@
   background-image: linear-gradient(180deg, #346dd4 0%, #3975dc 55%, #3b77de 100%);
 }
 
+.expense-shelf-tablist {
+  scroll-padding-inline: 1rem;
+}
+
 .expense-shelf-tab {
   position: relative;
-  border-block-start: 3px solid transparent;
+  background-color: #fdfdfd;
 }
 
-.expense-shelf-tab--active {
+.expense-shelf-tab[aria-selected='true'] {
   z-index: 20;
-  background-color: #ffffff;
-  border-block-start-color: #23244e;
-  box-shadow: 0 -2px 14px rgba(24, 40, 73, 0.08);
 }
 
-.expense-shelf-tab--inactive {
-  z-index: 10;
-  background-color: rgba(255, 255, 255, 0.96);
-  box-shadow:
-    inset 0 -6px 10px -6px rgba(35, 36, 78, 0.14),
-    0 -2px 10px rgba(24, 40, 73, 0.05);
+.expense-shelf-tab[aria-selected='false'] {
+  z-index: 16;
+  box-shadow: 0 6px 14px -4px rgba(20, 42, 92, 0.14);
 }
 
 @media (forced-colors: active) {
-  .expense-shelf-tab--active {
+  .expense-shelf-tab[aria-selected='true'] {
     border: 2px solid Highlight;
     border-block-end: 0;
   }
 
-  .expense-shelf-tab--inactive {
+  .expense-shelf-tab[aria-selected='false'] {
+    border: 1px solid CanvasText;
+  }
+
+  .expense-step-badge {
     border: 1px solid CanvasText;
   }
 }
@@ -42,10 +44,31 @@
   box-shadow: 0 20px 48px rgba(20, 42, 92, 0.18);
 }
 
-.expense-step-card {
+.expense-tabpanel {
+  grid-column: 1;
+  grid-row: 1;
+  min-inline-size: 0;
+}
+
+.expense-tabpanel:focus-visible {
+  outline: 2px solid #365ad2;
+  outline-offset: -4px;
+  border-radius: inherit;
+}
+
+.expense-step-item {
   container: expense-step-card / inline-size;
+  min-inline-size: 0;
+}
+
+.expense-step-card {
   position: relative;
-  min-block-size: 13.25rem;
+  inline-size: 100%;
+  aspect-ratio: 464 / 262;
+  min-block-size: 9.5rem;
+  border-radius: clamp(1.25rem, 8.62cqi, 2.25rem);
+  padding-block: clamp(0.75rem, 5.17cqi, 1.5rem) clamp(1rem, 6.5cqi, 1.875rem);
+  padding-inline: clamp(1rem, 6.9cqi, 2rem);
   overflow: clip;
   transition:
     transform 220ms ease-out,
@@ -54,14 +77,43 @@
 
 .expense-step-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(35, 36, 78, 0.11);
+  box-shadow: 0 12px 28px rgba(35, 36, 78, 0.09);
 }
 
 .expense-step-badge {
-  background-color: #e4eefc;
-  background-image: linear-gradient(145deg, #f7faff 0%, #d4e3fa 100%);
-  border: 1px solid rgba(195, 215, 247, 0.85);
-  box-shadow: 0 4px 12px rgba(54, 90, 210, 0.1);
+  inline-size: clamp(2rem, 12.07cqi, 3.25rem);
+  block-size: clamp(2rem, 12.07cqi, 3.25rem);
+  margin-inline-start: -2.59cqi;
+  background: linear-gradient(
+    108.08deg,
+    #d7e4fa 12.76%,
+    #ebf2fd 69.26%,
+    rgba(169, 196, 241, 0.4) 111.44%
+  );
+}
+
+.expense-step-badge-number {
+  font-size: clamp(0.8125rem, 4.55cqi, 1.25rem);
+  letter-spacing: -0.01em;
+}
+
+.expense-step-copy {
+  margin-block-start: auto;
+  padding-block-start: clamp(1.5rem, 11cqi, 3.5rem);
+  max-inline-size: 85%;
+}
+
+.expense-step-title {
+  font-size: clamp(0.875rem, 4.95cqi, 1.375rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.expense-step-subtitle {
+  margin-block-start: clamp(0.0625rem, 0.25cqi, 0.1875rem);
+  font-size: clamp(0.75rem, 4.25cqi, 1.125rem);
+  line-height: 1.22;
+  letter-spacing: -0.005em;
 }
 
 .expense-step-artwork {
@@ -71,25 +123,27 @@
 }
 
 .expense-claim-art {
+  display: block;
   position: absolute;
-  inset-block-start: -3.5cqi;
-  inset-inline-end: 2cqi;
-  inline-size: 47cqi;
+  inset-block-start: -13.9cqi;
+  inset-inline-end: -10.2cqi;
+  inline-size: 60.2cqi;
   block-size: auto;
   max-inline-size: none;
 }
 
 .expense-workflow-stage {
   position: absolute;
-  inset-block-start: -3cqi;
-  inset-inline-end: -19cqi;
-  inline-size: 86cqi;
+  inset-block-start: -6cqi;
+  inset-inline-end: -15cqi;
+  inline-size: 68cqi;
   aspect-ratio: 396 / 215;
   transform: rotate(-2.5deg);
   transform-origin: center;
 }
 
 .expense-workflow-layer {
+  display: block;
   position: absolute;
   block-size: auto;
   max-inline-size: none;
