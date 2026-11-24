@@ -120,6 +120,9 @@ describe('ScheduleDemoForm', () => {
     const phoneErrorSvg = phoneError.query(By.css('svg'));
     expect(phoneErrorSvg.nativeElement.getAttribute('viewBox')).toBe('0 0 9 9');
     expect(phoneErrorSvg.query(By.css('path')).nativeElement.getAttribute('fill')).toBe('#CB1C29');
+
+    const phoneInput = fixture.debugElement.query(By.css('#demo-phone'));
+    expect(phoneInput.nativeElement.classList.contains('border-[#CB1C29]')).toBe(true);
   });
 
   it('should toggle custom industry dropdown and select an option', () => {
