@@ -111,6 +111,7 @@
         id: 2,
         titleKey: 'FEATURES.CARDS.SALES.TITLE',
         descKey: 'FEATURES.CARDS.SALES.DESC',
+        route: '/sales-management-2',
         topBg: 'linear-gradient(180deg, #EDF3FB 0%, #C3D7F7 100%)',
         domeBg: '#EBF2FD',
         layers: [

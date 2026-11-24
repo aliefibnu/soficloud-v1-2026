@@ -15,7 +15,10 @@ describe('Features', () => {
     await TestBed.configureTestingModule({
       imports: [Features],
       providers: [
-        provideRouter([{ path: 'financial-management-1', component: Features }]),
+        provideRouter([
+          { path: 'financial-management-1', component: Features },
+          { path: 'sales-management-2', component: Features },
+        ]),
         provideTranslateService({
           fallbackLang: 'id',
           lang: 'id',
@@ -91,7 +94,7 @@ describe('Features', () => {
     expect(cardParagraphs.length).toBe(0);
   });
 
-  it('should link only the first feature card to /financial-management-1 and keep #contact anchor behavior for remaining cards', async () => {
+  it('should link the first two feature cards to /financial-management-1 and /sales-management-2 and keep #contact anchor behavior for remaining cards', async () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const links = Array.from(compiled.querySelectorAll('article a')) as HTMLAnchorElement[];
@@ -107,12 +110,18 @@ describe('Features', () => {
     expect(router.url).toBe('/financial-management-1');
     expect(anchorSpy).not.toHaveBeenCalled();
 
-    for (const link of links.slice(1)) {
+    expect(links[1].getAttribute('href')).toBe('/sales-management-2');
+    links[1].click();
+    await fixture.whenStable();
+    expect(router.url).toBe('/sales-management-2');
+    expect(anchorSpy).not.toHaveBeenCalled();
+
+    for (const link of links.slice(2)) {
       expect(link.getAttribute('href')).toBe('#contact');
     }
 
     const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
-    links[1].dispatchEvent(clickEvent);
+    links[2].dispatchEvent(clickEvent);
     expect(anchorSpy).toHaveBeenCalledWith('contact', clickEvent, true, true);
   });
 

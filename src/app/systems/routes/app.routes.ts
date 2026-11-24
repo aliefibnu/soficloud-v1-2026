@@ -43,4 +43,11 @@ export const routes: Routes = [
         (m) => m.FinancialManagement1,
       ),
   },
+  {
+    path: 'sales-management-2',
+    loadComponent: () =>
+      import('../../pages/features/sales-management-2/sales-management-2').then(
+        (m) => m.SalesManagement2,
+      ),
+  },
 ];
