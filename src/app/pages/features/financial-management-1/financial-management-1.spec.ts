@@ -121,4 +121,42 @@ describe('FinancialManagement1', () => {
     component.ngOnInit();
     expect(scrollToSpy).toHaveBeenCalledWith(0, 0);
   });
+
+  it('should apply calibrated scroll-margin-top classes across all five sections accounting for global html scroll-padding-top', () => {
+    const expectedScrollMargins: ReadonlyArray<{
+      selector: string;
+      classes: readonly string[];
+    }> = [
+      {
+        selector: 'section#financial-control',
+        classes: ['scroll-mt-14', 'sm:scroll-mt-16', 'lg:scroll-mt-14'],
+      },
+      {
+        selector: 'section#capabilities',
+        classes: ['scroll-mt-12', 'sm:scroll-mt-14', 'lg:scroll-mt-12'],
+      },
+      {
+        selector: 'section#expense-advance',
+        classes: ['scroll-mt-10', 'sm:scroll-mt-12', 'lg:scroll-mt-10'],
+      },
+      {
+        selector: 'section#reporting',
+        classes: ['scroll-mt-12', 'sm:scroll-mt-14', 'lg:scroll-mt-12'],
+      },
+      {
+        selector: 'section#integration',
+        classes: ['scroll-mt-16', 'sm:scroll-mt-16', 'lg:scroll-mt-20'],
+      },
+    ];
+
+    for (const { selector, classes } of expectedScrollMargins) {
+      const sectionEl = fixture.debugElement.query(By.css(selector))?.nativeElement as HTMLElement;
+      expect(sectionEl).toBeTruthy();
+      for (const cls of classes) {
+        expect(sectionEl.classList.contains(cls)).toBe(true);
+      }
+      expect(sectionEl.classList.contains('scroll-mt-32')).toBe(false);
+      expect(sectionEl.classList.contains('lg:scroll-mt-36')).toBe(false);
+    }
+  });
 });
