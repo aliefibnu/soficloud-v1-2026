@@ -1,1 +1,174 @@
-<p>hero works!</p>
+<section
+  id="hero"
+  aria-labelledby="recognize-hero-heading"
+  class="relative w-full py-4 sm:py-6 lg:py-8 px-4 sm:px-6 lg:px-8 xl:px-12"
+>
+  <div class="max-w-7xl mx-auto">
+    <div
+      class="relative w-full rounded-2xl sm:rounded-3xl lg:rounded-[36px] overflow-hidden shadow-[0_20px_50px_rgba(20,40,90,0.15)] border border-blue-400/20"
+      style="
+        background: #1e66db;
+        background: linear-gradient(
+          135deg,
+          #1d4ede 0%,
+          #1e66db 45%,
+          #2574d9 75%,
+          #3875d9 100%
+        );
+      "
+    >
+      <div
+        class="grid grid-cols-1 lg:grid-cols-12 min-h-[480px] sm:min-h-[520px] lg:min-h-[560px] xl:min-h-[580px] items-stretch relative"
+      >
+        <!-- Left Column: Interactive Mockup Stage with Animated Concentric Ripple Rings and Floating Cards -->
+        <div
+          class="order-2 lg:order-1 lg:col-span-7 relative w-full h-full min-h-[380px] sm:min-h-[440px] lg:min-h-[520px] xl:min-h-[580px] flex items-end justify-center select-none overflow-hidden"
+        >
+          <!-- Concentric Ring Ripples Animation Layer -->
+          <div
+            class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 overflow-hidden"
+            aria-hidden="true"
+          >
+            <!-- Core solid center glow (covers center, casts shadow onto first ring) -->
+            <div
+              class="glow-core absolute w-[78%] sm:w-[82%] lg:w-[85%] max-w-[490px] xl:max-w-[530px] aspect-square rounded-full"
+            ></div>
+
+            <!-- Dynamic Expanding Ripple Discs (Concentric solid layers animating outward in continuous parallel flow) -->
+            @for (ring of rings; track ring) {
+              <div
+                class="glow-ring absolute w-[78%] sm:w-[82%] lg:w-[85%] max-w-[490px] xl:max-w-[530px] aspect-square rounded-full will-change-transform"
+                [style.--i]="ring"
+              ></div>
+            }
+          </div>
+
+          <!-- Mockup Stand Monitor on Pedestal Vector Stage (Flush to bottom) -->
+          <div
+            class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[74%] sm:w-[76%] lg:w-[78%] xl:w-[80%] max-w-[460px] xl:max-w-[500px] aspect-417/461 pointer-events-none z-20 flex items-end justify-center"
+          >
+            <img
+              ngSrc="/images/landing/overview-feature/dashboard-stand.svg"
+              width="417"
+              height="461"
+              priority
+              alt="SOFICloud Executive Dashboard Mockup on Pedestal"
+              class="w-full h-full object-contain object-bottom select-none drop-shadow-md"
+            />
+          </div>
+
+          <!-- Floating Card 1: Bottom-Left (Approval Hari ini / 18 dokumen) -->
+          <div
+            class="absolute left-[3%] sm:left-[4%] lg:left-[5%] top-[58%] sm:top-[60%] lg:top-[60%] z-30 will-change-transform animate-floating-card-left"
+          >
+            <div
+              class="bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 md:p-4 shadow-xl shadow-blue-950/20 border border-slate-100/90 transition-all duration-300 min-w-[125px] sm:min-w-[150px] md:min-w-[165px]"
+            >
+              <span
+                class="block text-[10px] sm:text-[11px] md:text-xs font-normal text-slate-400 tracking-wide font-dm-sans"
+              >
+                {{ 'OVERVIEW_FEATURE.APPROVAL.LABEL' | translate }}
+              </span>
+
+              <div
+                class="text-xs sm:text-sm md:text-base font-normal text-[#182849] mt-0.5 mb-1.5 leading-tight font-inter"
+              >
+                {{ 'OVERVIEW_FEATURE.APPROVAL.VALUE' | translate }}
+              </div>
+
+              <div
+                class="h-1 sm:h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"
+                role="progressbar"
+                aria-valuenow="75"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [attr.aria-label]="'OVERVIEW_FEATURE.APPROVAL.LABEL' | translate"
+              >
+                <div
+                  class="h-full bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] rounded-full transition-all duration-1000"
+                  style="width: 75%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Card 2: Top-Right (Target Revenue / 92%) -->
+          <div
+            class="absolute right-[4%] sm:right-[5%] lg:right-[6%] top-[22%] sm:top-[24%] lg:top-[24%] z-30 will-change-transform animate-floating-card-right"
+          >
+            <div
+              class="bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 md:p-4 border border-slate-100/90 flex flex-col items-center justify-center transition-all duration-300 shadow-xl shadow-blue-950/20 min-w-[95px] sm:min-w-[110px] md:min-w-[120px]"
+            >
+              <span
+                class="block text-[10px] sm:text-[11px] md:text-xs font-normal text-slate-400 tracking-wide mb-1.5 sm:mb-2 text-center font-dm-sans"
+              >
+                {{ 'OVERVIEW_FEATURE.TARGET_REVENUE.LABEL' | translate }}
+              </span>
+
+              <div
+                class="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center"
+              >
+                <svg
+                  class="w-full h-full -rotate-90 transform"
+                  viewBox="0 0 36 36"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="text-slate-200"
+                    stroke-width="3.5"
+                    stroke="currentColor"
+                    fill="none"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                  <path
+                    class="text-[#1d44eb]"
+                    stroke-dasharray="92, 100"
+                    stroke-linecap="round"
+                    stroke-width="3.5"
+                    stroke="currentColor"
+                    fill="none"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                </svg>
+
+                <span
+                  class="absolute text-[10px] sm:text-xs md:text-sm font-normal text-[#182849] font-inter"
+                >
+                  {{ 'OVERVIEW_FEATURE.TARGET_REVENUE.VALUE' | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Typography -->
+        <div
+          class="order-1 lg:order-2 lg:col-span-5 flex flex-col justify-center px-6 py-8 sm:px-10 sm:py-10 lg:py-12 lg:pr-10 xl:pr-14 lg:pl-4 z-20 text-left select-text"
+        >
+          <h1
+            id="recognize-hero-heading"
+            class="font-inter font-extrabold text-white text-[38px] sm:text-[48px] md:text-[54px] lg:text-[58px] xl:text-[68px] 2xl:text-[76px] leading-[1.08] tracking-tight max-w-2xl xl:max-w-3xl"
+            style="
+              font-family: var(--font-inter, 'Inter Variable', sans-serif);
+              font-weight: 800;
+            "
+          >
+            <span class="block whitespace-nowrap">{{ titleLine1() }}</span>
+            <span class="block whitespace-nowrap">{{ titleLine2() }}</span>
+            <span class="block whitespace-nowrap">{{ titleLine3() }}</span>
+          </h1>
+
+          <p
+            class="font-dm-sans font-normal text-[#d0e0f5] text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] leading-[1.6] max-w-[420px] lg:max-w-[460px] xl:max-w-[500px] mt-4 sm:mt-5 lg:mt-6"
+            style="
+              font-family: var(--font-dm-sans, 'DM Sans Variable', sans-serif);
+              font-weight: 400;
+            "
+          >
+            {{ description() }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
