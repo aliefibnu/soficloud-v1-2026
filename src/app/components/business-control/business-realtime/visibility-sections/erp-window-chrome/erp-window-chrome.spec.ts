@@ -11,6 +11,7 @@ import { ErpWindowChrome, ErpModuleType } from './erp-window-chrome';
       [activeModule]="activeModule()"
       [moduleTitle]="moduleTitle()"
       [showStatusPills]="showStatusPills()"
+      [logoSrc]="logoSrc()"
     >
       <div id="test-projected-card">Test Card Inside ERP</div>
     </app-erp-window-chrome>
@@ -20,6 +21,7 @@ class TestHostComponent {
   readonly activeModule = signal<ErpModuleType>('sales');
   readonly moduleTitle = signal<string>('Sales (PT INFORSYS INDONESIA )');
   readonly showStatusPills = signal<boolean>(true);
+  readonly logoSrc = signal<string | null>(null);
 }
 
 describe('ErpWindowChrome', () => {
@@ -88,6 +90,22 @@ describe('ErpWindowChrome', () => {
     expect(headerEl.nativeElement.textContent).toContain(
       'Sales (PT INFORSYS INDONESIA )',
     );
+  });
+
+  it('should render the default inline cart SVG and allow overriding with logoSrc', () => {
+    const header = fixture.debugElement.query(By.css('header'));
+    expect(header.query(By.css('#shopping_cart_img'))).toBeTruthy();
+    expect(header.query(By.css('img'))).toBeNull();
+
+    hostComponent.logoSrc.set('/images/landing/features/1/cart.svg');
+    fixture.detectChanges();
+
+    expect(header.query(By.css('#shopping_cart_img'))).toBeNull();
+    const logoImg = header.query(By.css('img'));
+    expect(logoImg).toBeTruthy();
+    expect(logoImg.nativeElement.getAttribute('src')).toBe('/images/landing/features/1/cart.svg');
+    expect(logoImg.nativeElement.getAttribute('alt')).toBe('');
+    expect(logoImg.nativeElement.getAttribute('aria-hidden')).toBe('true');
   });
 
   it('should render the avatar badge with letter A', () => {

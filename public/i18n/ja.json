@@ -1429,6 +1429,35 @@
           }
         }
       }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "実画面ダッシュボードを原寸比率で表示",
+      "SUBTITLE": "製品画面の実証としてスクリーンショットを使用し、トリミングや引き伸ばし、無理な枠への収め込みを行わず本来のサイズで表示しています。",
+      "LIST_ARIA_LABEL": "財務レポートのカテゴリ",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "財務諸表",
+          "DESCRIPTION": "貸借対照表、損益計算書、キャッシュフロー計算書、売上原価（COGS）、株主資本等変動計算書。"
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "売掛金・買掛金",
+          "DESCRIPTION": "売掛・買掛年齢調べ（AR/AP Aging）、得意先・仕入先明細表、支払期日分析。"
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "会計レポート",
+          "DESCRIPTION": "総勘定元帳、試算表、仕訳一覧表、勘定科目推移表。"
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "経営分析",
+          "DESCRIPTION": "予実対比（Budget vs Actual）、コストセンター別分析、収益性分析、原価分析。"
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "現金および銀行残高の横棒グラフ",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "月別の顧客請求回収額の縦棒グラフ"
+      }
     }
   }
 }

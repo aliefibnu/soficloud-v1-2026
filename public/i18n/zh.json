@@ -1429,6 +1429,35 @@
           }
         }
       }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "以原始完整比例呈现真实仪表盘",
+      "SUBTITLE": "采用真实产品界面截图作为展示证明，不裁剪、不拉伸、不强行套框，保持其原始比例呈现。",
+      "LIST_ARIA_LABEL": "财务报表分类",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "财务报表",
+          "DESCRIPTION": "资产负债表、利润表、现金流量表、销货成本（COGS）及所有者权益变动表。"
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "应收与应付",
+          "DESCRIPTION": "应收/应付账龄分析、客户/供应商对账单及到期日分析。"
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "会计报表",
+          "DESCRIPTION": "总账、试算平衡表、日记账清单及科目变动明细。"
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "管理分析",
+          "DESCRIPTION": "预算与实际对比、成本中心、盈利能力及成本分析。"
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "现金及银行余额水平条形图",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "月度客户账单收款垂直柱状图"
+      }
     }
   }
 }

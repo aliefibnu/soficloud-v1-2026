@@ -8,10 +8,19 @@ import {
 } from '../../../components/features/financial-management-1/section-tabs/section-tabs';
 import { ExpenseAndAdvance } from '../../../components/features/financial-management-1/sections/expense-and-advance/expense-and-advance';
 import { FinancialControl } from '../../../components/features/financial-management-1/sections/financial-control/financial-control';
+import { RealDashboard } from '../../../components/features/financial-management-1/sections/real-dashboard/real-dashboard';
 import { TenCapabilities } from '../../../components/features/financial-management-1/sections/ten-capabilities/ten-capabilities';
 
 @Component({
-  imports: [Hero, SectionTabs, FinancialControl, TenCapabilities, ExpenseAndAdvance, TranslatePipe],
+  imports: [
+    Hero,
+    SectionTabs,
+    FinancialControl,
+    TenCapabilities,
+    ExpenseAndAdvance,
+    RealDashboard,
+    TranslatePipe,
+  ],
   selector: 'app-financial-management-1',
   templateUrl: './financial-management-1.html',
 })

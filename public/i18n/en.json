@@ -1429,6 +1429,35 @@
           }
         }
       }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "Real Dashboard Displayed In Full Ratio",
+      "SUBTITLE": "Screenshots are used as product display proof and kept in their original size without cropping, stretching, or forced framing.",
+      "LIST_ARIA_LABEL": "Financial reporting categories",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "Financial Statements",
+          "DESCRIPTION": "Balance Sheet, Income Statement, Cash Flow, COGS, and Changes in Equity."
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "Receivable & Payable",
+          "DESCRIPTION": "AR/AP Aging, Customer/Supplier Statement, and Due Date Analysis."
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "Accounting Reports",
+          "DESCRIPTION": "General Ledger, Trial Balance, Journal Listing, and Account Movement."
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "Management Analysis",
+          "DESCRIPTION": "Budget vs Actual, Cost Centre, Profitability, and Cost Analysis."
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "Cash and Bank Balance horizontal bar chart in millions",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "Customer Billing Receipt vertical column chart by month"
+      }
     }
   }
 }

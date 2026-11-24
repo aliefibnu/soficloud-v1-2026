@@ -1429,6 +1429,35 @@
           }
         }
       }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "실제 대시보드를 원본 비율 그대로 표시",
+      "SUBTITLE": "실제 제품 화면의 증빙으로 스크린샷을 사용하며, 자르거나 늘이거나 프레임에 억지로 맞추지 않고 원본 크기 그대로 유지합니다.",
+      "LIST_ARIA_LABEL": "재무 보고서 카테고리",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "재무제표",
+          "DESCRIPTION": "재무상태표, 손익계산서, 현금흐름표, 매출원가(COGS) 및 자본변동표."
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "매출채권 및 매입채무",
+          "DESCRIPTION": "AR/AP 연령 분석, 고객/공급업체 거래명세서 및 만기일 분석."
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "회계 보고서",
+          "DESCRIPTION": "총계정원장, 시산표, 분개장 목록 및 계정 변동 내역."
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "경영 분석",
+          "DESCRIPTION": "예산 대 실적, 코스트 센터, 수익성 및 원가 분석."
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "현금 및 은행 잔액 가로 막대 차트",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "월별 고객 청구 수금액 세로 막대 차트"
+      }
     }
   }
 }

@@ -1,3 +1,4 @@
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { Component, input, signal, OnDestroy } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -16,7 +17,7 @@ export interface ErpSidebarItem {
 
 @Component({
   selector: 'app-erp-window-chrome',
-  imports: [TranslatePipe],
+  imports: [NgOptimizedImage, NgTemplateOutlet, TranslatePipe],
   templateUrl: './erp-window-chrome.html',
   host: {
     '(document:click)': 'onDocumentClick()',
@@ -29,7 +30,11 @@ export class ErpWindowChrome implements OnDestroy {
   readonly activeModule = input<ErpModuleType>('sales');
   readonly moduleTitle = input.required<string>();
   readonly showStatusPills = input<boolean>(true);
+  readonly useSemanticMain = input<boolean>(true);
+  readonly logoSrc = input<string | null>(null);
+  readonly windowWidthClass = input<string>('lg:w-[905.434px]');
   readonly windowHeightClass = input<string>('lg:h-[553.723px]');
+  readonly mainWidthClass = input<string>('lg:w-[743.104px]');
   readonly mainPaddingClass = input<string>('px-4 sm:px-8 lg:px-19');
   readonly contentContainerClass = input<string>(
     'w-full max-w-190 mx-auto flex-1 flex flex-col gap-4 sm:gap-6',

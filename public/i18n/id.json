@@ -1429,6 +1429,35 @@
           }
         }
       }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "Dashboard Asli Ditampilkan Dalam Rasio Utuh",
+      "SUBTITLE": "Screenshot digunakan sebagai bukti tampilan produk dan dibiarkan mengikuti ukuran aslinya tanpa crop, stretch, atau pemaksaan frame.",
+      "LIST_ARIA_LABEL": "Kategori laporan keuangan",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "Financial Statements",
+          "DESCRIPTION": "Balance Sheet, Income Statement, Cash Flow, COGS, dan Changes in Equity."
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "Receivable & Payable",
+          "DESCRIPTION": "AR/AP Aging, Customer/Supplier Statement, dan Due Date Analysis."
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "Accounting Reports",
+          "DESCRIPTION": "General Ledger, Trial Balance, Journal Listing, dan Account Movement."
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "Management Analysis",
+          "DESCRIPTION": "Budget vs Actual, Cost Centre, Profitability, dan Cost Analysis."
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "Grafik batang horizontal Cash and Bank Balance dalam juta rupiah",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "Grafik batang vertikal Customer Billing Receipt per bulan"
+      }
     }
   }
 }
