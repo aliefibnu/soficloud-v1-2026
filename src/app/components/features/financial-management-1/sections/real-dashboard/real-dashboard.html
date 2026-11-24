@@ -4,8 +4,7 @@
   aria-labelledby="real-dashboard-heading"
   class="real-dashboard-section w-full pt-8 sm:pt-10 lg:pt-12 pb-6 sm:pb-8 lg:pb-10 short:pt-6 short:pb-6 scroll-mt-32 lg:scroll-mt-36 focus:outline-none"
 >
-  <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
-    <!-- Section Header -->
+  <div class="w-full max-w-350 mx-auto px-4 sm:px-6 lg:px-10">
     <div class="text-center max-w-4xl mx-auto">
       <h2
         id="real-dashboard-heading"
@@ -21,11 +20,9 @@
       </p>
     </div>
 
-    <!-- Main 2-Column Content -->
     <div
       class="mt-8 sm:mt-10 lg:mt-11 short:mt-8 grid grid-cols-1 lg:grid-cols-[minmax(280px,340px)_minmax(0,1fr)] xl:grid-cols-[minmax(330px,380px)_minmax(0,1fr)] gap-6 lg:gap-8 xl:gap-10 items-center"
     >
-      <!-- Left Column: 4 Numbered Report Category Cards -->
       <ol
         role="list"
         [attr.aria-label]="'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.LIST_ARIA_LABEL' | translate"
@@ -49,7 +46,7 @@
               </p>
 
               <span
-                class="real-dashboard-card-badge absolute bottom-0 right-0 w-[34px] h-[32px] rounded-tl-[10px] flex items-center justify-center font-dm-sans font-semibold text-[12.5px] text-white tabular-nums select-none pointer-events-none"
+                class="real-dashboard-card-badge absolute bottom-0 right-0 w-8.5 h-8 rounded-tl-[10px] flex items-center justify-center font-dm-sans font-semibold text-[12.5px] text-white tabular-nums select-none pointer-events-none"
                 aria-hidden="true"
               >
                 {{ card.number }}
@@ -59,7 +56,6 @@
         }
       </ol>
 
-      <!-- Right Column: Full-Ratio ERP Finance Dashboard Window -->
       <div class="real-dashboard-stage w-full min-w-0">
         <app-erp-window-chrome
           activeModule="finance"
@@ -77,20 +73,16 @@
           mainPaddingClass="px-3 sm:px-5 lg:px-6"
           contentContainerClass="w-full flex-1 flex flex-col gap-3.5 xl:gap-4"
         >
-          <!-- Top Row: Shared Assets, Liabilities, Equity Cards -->
           <app-finance-balance-sheet-cards
             [categories]="balanceSheetCategories"
             layout="fluid"
           />
 
-          <!-- Bottom Row: Cash & Bank Balance + Customer Billing Receipt Charts -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 xl:gap-4 w-full">
-            <!-- Chart Card 1: Cash & Bank Balance Horizontal Bar Chart -->
             <article
               data-chart-id="cash-bank-balance"
-              class="min-w-0 w-full rounded-[6px] border-[0.75px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4px_10px_rgba(0,0,0,0.025)] relative px-3.5 pt-3.5 pb-3 flex flex-col overflow-clip"
+              class="min-w-0 w-full rounded-md border-[0.75px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4px_10px_rgba(0,0,0,0.025)] relative px-3.5 pt-3.5 pb-3 flex flex-col overflow-clip"
             >
-              <!-- 3-Dots Menu Tab Top-Right -->
               <div
                 class="absolute top-0 right-0 w-[15.39px] h-[18.14px] bg-[#DDDDDD] rounded-tr-[5.6px] flex flex-col items-center justify-center gap-[1.4px] pointer-events-none"
                 aria-hidden="true"
@@ -115,10 +107,8 @@
                 viewBox="0 0 324 156"
                 fill="none"
               >
-                <!-- Baseline Horizontal Line -->
                 <line x1="104" y1="132" x2="304" y2="132" stroke="#E5E5E5" stroke-width="0.7" />
 
-                <!-- 9 Vertical Grid Lines (0 to 80 M) -->
                 @for (tick of cashBankXTicks; track tick.label) {
                   <line
                     [attr.x1]="tick.pos"
@@ -130,7 +120,6 @@
                   />
                 }
 
-                <!-- Horizontal Bars & Y-Axis Labels -->
                 @for (bar of cashBankBalances; track bar.id) {
                   <text
                     x="97"
@@ -152,7 +141,6 @@
                   }
                 }
 
-                <!-- X-Axis Labels -->
                 <g
                   font-size="7.2"
                   fill="#787A88"
@@ -165,7 +153,6 @@
                 </g>
               </svg>
 
-              <!-- Semantic Table Alternative for Screen Readers -->
               <table class="sr-only">
                 <caption>
                   {{ 'FINANCIAL_MANAGEMENT_1.REAL_DASHBOARD.CHARTS.CASH_BANK_BALANCE' | translate }}
@@ -187,12 +174,10 @@
               </table>
             </article>
 
-            <!-- Chart Card 2: Customer Billing Receipt Vertical Column Chart -->
             <article
               data-chart-id="customer-billing-receipt"
-              class="min-w-0 w-full rounded-[6px] border-[0.75px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4px_10px_rgba(0,0,0,0.025)] relative px-3.5 pt-3.5 pb-3 flex flex-col overflow-clip"
+              class="min-w-0 w-full rounded-md border-[0.75px] border-[#DDDDDD] bg-[#FDFDFD] shadow-[0px_4px_10px_rgba(0,0,0,0.025)] relative px-3.5 pt-3.5 pb-3 flex flex-col overflow-clip"
             >
-              <!-- 3-Dots Menu Tab Top-Right -->
               <div
                 class="absolute top-0 right-0 w-[15.39px] h-[18.14px] bg-[#DDDDDD] rounded-tr-[5.6px] flex flex-col items-center justify-center gap-[1.4px] pointer-events-none"
                 aria-hidden="true"
@@ -220,7 +205,6 @@
                 viewBox="0 0 324 156"
                 fill="none"
               >
-                <!-- Centered Coral Legend Pill -->
                 <rect
                   data-legend-pill
                   x="158"
@@ -233,7 +217,6 @@
                   stroke-width="0.9"
                 />
 
-                <!-- Horizontal Grid Lines (400 M down to 0) -->
                 @for (tick of billingYTicks; track tick.label) {
                   <line
                     x1="44"
@@ -255,7 +238,6 @@
                   </text>
                 }
 
-                <!-- Vertical Grid Lines -->
                 @for (x of billingVerticalGridLines; track x) {
                   <line
                     [attr.x1]="x"
@@ -267,7 +249,6 @@
                   />
                 }
 
-                <!-- Vertical Column Bars -->
                 @for (col of billingReceipts; track col.id) {
                   <path
                     [attr.d]="col.barPath"
@@ -277,7 +258,6 @@
                   />
                 }
 
-                <!-- Rotated X-Axis Month Labels -->
                 <g
                   font-size="6.8"
                   fill="#787A88"
@@ -296,7 +276,6 @@
                 </g>
               </svg>
 
-              <!-- Semantic Table Alternative for Screen Readers -->
               <table class="sr-only">
                 <caption>
                   {{
