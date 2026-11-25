@@ -1169,6 +1169,370 @@
       "PARAGRAPH_1": "私たちは、企業が分かりやすいプロセスと手頃なコストでERPを導入できるようSOFICloudを開発しました。業務ニーズに基づき、モジュールやワークフロー、導入ステップを決定します。",
       "PARAGRAPH_2": "専門チームが日常業務を統合システムへと落とし込むことで、ユーザーのスムーズな定着、正確な取引記録、そして実務でのERP効果の実現を支援します。",
       "IMAGE_ALT": "ノートパソコンを囲み統合業務プロセスの導入について協議するSOFICloudチーム"
+    },
+    "OUR_JOURNEY": {
+      "ARIA_LABEL": "SOFICloudの歩みとコミットメント",
+      "PREV_ARIA_LABEL": "前のスライド",
+      "NEXT_ARIA_LABEL": "次のスライド",
+      "INDICATOR_GROUP_ARIA_LABEL": "スライドナビゲーションインジケーター",
+      "GO_TO_SLIDE_ARIA_LABEL": "スライドへ移動",
+      "SLIDES": {
+        "OUR_JOURNEY": {
+          "EYEBROW": "私たちの歩み",
+          "TITLE": "1998年から、お客様の信頼と\nともに成長。",
+          "PARAGRAPH_1": "1998年以来の経験を持つPT Inforsys Indonesiaが開発したSOFICloud ERPは、多様な業種における実務ニーズへの深い理解に基づいて構築されています。",
+          "PARAGRAPH_2": "会計ソフトウェアの開発から統合業務管理システムへと発展してきた歩みは、現場のリアルな課題とお客様の信頼によって形づくられてきました。すべての導入経験が業務プロセスへの新たな知見をもたらしています。",
+          "PARAGRAPH_3": "その経験を糧に、製品の改善と機能強化を続け、導入から日々の運用まで寄り添う伴走支援とともに価値あるソリューションを提供しています。",
+          "IMAGE_ALT": "タブレットとノートパソコンで業務書類を確認するSOFICloudチームメンバー"
+        },
+        "SUSTAINABLE_DEVELOPMENT": {
+          "EYEBROW": "継続的な開発",
+          "TITLE": "現場のニーズから\n進化し続ける。",
+          "PARAGRAPH_1": "製品の研究開発は導入経験と歩調を合わせて進みます。多様な現場の要件を反映し、機能性、使いやすさ、部門間の連携性を磨き続けています。",
+          "PARAGRAPH_2": "働き方の変化に合わせて製品技術も進化させています。クラウド対応とレスポンシブ画面により、権限や用途に応じた柔軟なデバイスアクセスを実現します。",
+          "IMAGE_ALT": "屋外でビジネスパートナーと握手を交わすSOFICloud担当者"
+        },
+        "FOR_BUSINESS": {
+          "EYEBROW": "成長する企業のために",
+          "TITLE": "中小企業のニーズに\n寄り添う設計。",
+          "PARAGRAPH_1": "成長期の企業には、販売・購買・在庫・生産・財務のより整った管理が求められます。同時に、システム投資は企業規模や体制、優先順位に見合ったものである必要があります。",
+          "PARAGRAPH_2": "SOFICloudは必要なモジュール構成で統合管理の構築を支援します。製造業では生産工程と原価を在庫・販売・会計と連携して一元管理できます。",
+          "IMAGE_ALT": "デスクで業務フローとERPモジュールを打ち合わせる2名のSOFICloudコンサルタント"
+        },
+        "OUR_COMMITMENT": {
+          "EYEBROW": "私たちの約束",
+          "TITLE": "導入に寄り添い、\n日々の運用を支える。",
+          "PARAGRAPH_1": "私たちはお客様のITニーズを理解するパートナーでありたいと考えています。業務フロー整備からユーザー教育、日々のERP運用定着までチームで丁寧に支援します。",
+          "PARAGRAPH_2": "継続的な改善と良好な信頼関係を通じて、特にインドネシアの中小産業の成長を支えるサービスを提供し続けます。",
+          "IMAGE_ALT": "ノートパソコンでERPの操作をユーザーに案内するSOFICloudサポートチーム"
+        }
+      }
+    }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "日々の取引から",
+      "TITLE_LINE_2": "財務諸表まで",
+      "TITLE_LINE_3": "企業の財務を",
+      "TITLE_LINE_4": "一元管理",
+      "DESCRIPTION": "SOFICloudは仕訳、売掛金・買掛金、現預金・銀行、経費精算、仮払金、固定資産から経営分析まで、業務取引と会計プロセスを自動で連携します。",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "財務管理・会計",
+      "ILLUSTRATION_ALT": "SOFICloudの財務レポートクリップボード、虫眼鏡、電卓のイラスト"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "財務管理セクション",
+      "FINANCIAL_CONTROL": "財務管理",
+      "TEN_CAPABILITIES": "10の機能",
+      "EXPENSE_ADVANCE": "経費・仮払金",
+      "REPORTING": "レポート",
+      "INTEGRATION": "システム連携"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "一つの画面からビジネスを統制",
+      "SUBTITLE": "確認したい領域を選択してください。すべてのプロセスが同一データで連携し、いつでも追跡できます",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "業務取引から読み取りやすい財務情報へ",
+        "DESCRIPTION": "会計インパクトは元伝票から自動生成されます。経理部門は仕訳、元帳、財務諸表まで一貫したデータで追跡できます。",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "資金需要、支払期日、支払優先度をひとつのコントロールボードに集約。",
+        "DESCRIPTION": "未決済の売掛金・買掛金、支払期日、支払提案、承認状況、現預金・銀行残高を確認し、経理部門の次の判断を支援します。",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "取引先",
+          "DUE_DATE": "期日",
+          "AMOUNT": "金額",
+          "STATUS": "ステータス"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "7月26日",
+            "AMOUNT": "Rp42,8 Jt",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "7月27日",
+            "AMOUNT": "Rp28,4 Jt",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "7月28日",
+            "AMOUNT": "Rp19,6 Jt",
+            "STATUS": "Approved"
+          }
+        }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "すべての申請にステータス、承認権限、コメント、意思決定履歴が記録されます。",
+        "DESCRIPTION": "経費精算、立替精算、仮払いは申請から精算・会計処理まで追跡可能なフローで進みます。",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
+      }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "業務と会計をつなぐ深い機能性",
+      "SUBTITLE": "日々の取引、統制、会計記録、企業の財務諸表までをつなぐ10の機能。",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "総勘定元帳・財務会計",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "売掛金管理",
+          "DESCRIPTION": "顧客請求書、未回収売掛金、売掛金年齢表、入金処理、前受金、クレジットノート、顧客別明細表。"
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "買掛金管理",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "現預金・銀行管理",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "経費・立替精算・仮払金",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "支払計画・予算統制",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        },
+        "FIXED_ASSET": {
+          "TITLE": "固定資産管理",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "原価計算・管理会計",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "多通貨・外貨管理",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "会計処理の自動化",
+          "DESCRIPTION": "多階層勘定科目、仕訳入力、自動転記、総勘定元帳、試算表、補助元帳、会計期間管理、決算処理。"
+        }
+      }
+    },
+    "EXPENSE_AND_ADVANCE": {
+      "TITLE": "統制されたフローで管理する経費と仮払金",
+      "SUBTITLE": "注目すべき5つの領域：従業員立替精算、経費申請、業務仮払金、仕入先前払金、および支払計画と予算統制。",
+      "TABS": {
+        "ARIA_LABEL": "経費および仮払金フロー",
+        "REIMBURSEMENT": {
+          "TITLE": "立替精算",
+          "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
+        },
+        "CASH_ADVANCE": {
+          "TITLE": "仮払金",
+          "SUBTITLE": "OPERATIONAL / EMPLOYEE ADVANCE"
+        }
+      },
+      "REIMBURSEMENT": {
+        "FLOW_TITLE": "経費申請から支払処理まで",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "仮払申請から精算完了まで",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "実画面ダッシュボードを原寸比率で表示",
+      "SUBTITLE": "製品画面の実証としてスクリーンショットを使用し、トリミングや引き伸ばし、無理な枠への収め込みを行わず本来のサイズで表示しています。",
+      "LIST_ARIA_LABEL": "財務レポートのカテゴリ",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "財務諸表",
+          "DESCRIPTION": "貸借対照表、損益計算書、キャッシュフロー計算書、売上原価（COGS）、株主資本等変動計算書。"
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "売掛金・買掛金",
+          "DESCRIPTION": "売掛・買掛年齢調べ（AR/AP Aging）、得意先・仕入先明細表、支払期日分析。"
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "会計レポート",
+          "DESCRIPTION": "総勘定元帳、試算表、仕訳一覧表、勘定科目推移表。"
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "経営分析",
+          "DESCRIPTION": "予実対比（Budget vs Actual）、コストセンター別分析、収益性分析、原価分析。"
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "現金および銀行残高の横棒グラフ",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "月別の顧客請求回収額の縦棒グラフ"
+      }
+    },
+    "INTEGRATION": {
+      "TITLE": "業務取引がそのまま\n会計インパクトを形成",
+      "SUBTITLE": "経理部門が業務取引を再入力する必要はありません。フローを選択して、業務伝票が総勘定元帳（General Ledger）へ連携される流れをご覧ください。",
+      "TABS_ARIA_LABEL": "会計連携フロー",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "完了した受注が売掛金、\n入金、仕訳へと連動します。",
+          "STEPS_ARIA_LABEL": "Sales to Cash の手順",
+          "STEPS": {
+            "SALES_ORDER": "受注（Sales Order）",
+            "DELIVERY": "出荷（Delivery）",
+            "CUSTOMER_INVOICE": "請求書（Customer Invoice）",
+            "AR": "売掛金（AR）",
+            "RECEIPT": "入金（Receipt）",
+            "GENERAL_LEDGER": "総勘定元帳（GL）"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "購買は申請からサプライヤーへの\n支払まで連動します。",
+          "STEPS_ARIA_LABEL": "Procure to Pay の手順",
+          "STEPS": {
+            "PR_PO": "PR / PO",
+            "GOODS_RECEIPT": "入庫（Goods Receipt）",
+            "SUPPLIER_INVOICE": "仕入請求（Supplier Invoice）",
+            "AP": "買掛金（AP）",
+            "PAYMENT": "支払（Payment）",
+            "GENERAL_LEDGER": "総勘定元帳（GL）"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "材料と生産実績が在庫評価額および\n売上原価（COGS）を形成します。",
+          "STEPS_ARIA_LABEL": "Manufacture to COGs の手順",
+          "STEPS": {
+            "MATERIAL_ISSUE": "材料出庫",
+            "WIP": "仕掛品（WIP）",
+            "FINISHED_GOODS": "完成品入庫",
+            "PRODUCTION_COST": "製造原価",
+            "COGS": "売上原価（COGS）",
+            "GENERAL_LEDGER": "総勘定元帳（GL）"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "予算、原価、売上がプロジェクトの\n利益率として可視化されます。",
+          "STEPS_ARIA_LABEL": "Project to Profitability の手順",
+          "STEPS": {
+            "PROJECT_BUDGET": "プロジェクト予算",
+            "MATERIAL_EXPENSE": "資材・経費",
+            "PROJECT_COST": "プロジェクト原価",
+            "REVENUE": "売上",
+            "PROFITABILITY": "収益性"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "経費精算と仮払いは適切な\nコストセンターまたはプロジェクトへ連携します。",
+          "STEPS_ARIA_LABEL": "Expense to Accounting の手順",
+          "STEPS": {
+            "CLAIM_ADVANCE": "経費精算 / 仮払い",
+            "APPROVAL": "承認",
+            "PAYMENT": "支払",
+            "SETTLEMENT": "精算",
+            "COST_CENTRE": "コストセンター / プロジェクト",
+            "GENERAL_LEDGER": "総勘定元帳（GL）"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "貴社の財務業務フローがSOFICloudで\nどのように運用できるかご覧ください。",
+      "DESCRIPTION": "日々の業務取引、承認、資金管理から、\n財務諸表および経営分析まで一貫して対応します。"
     }
   }
 }

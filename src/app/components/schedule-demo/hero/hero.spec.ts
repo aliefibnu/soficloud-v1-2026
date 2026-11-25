@@ -85,6 +85,18 @@ describe('ScheduleDemoHero', () => {
 
     const ringEl = images[0].nativeElement as HTMLImageElement;
     expect(ringEl.classList.contains('animate-hero-ring-spin')).toBe(true);
+
+    const chatBubbleLeftEl = images[2].nativeElement as HTMLImageElement;
+    expect(chatBubbleLeftEl.classList.contains('animate-hero-bubble-left')).toBe(true);
+    expect(chatBubbleLeftEl.classList.contains('will-change-transform')).toBe(true);
+
+    const chatBubbleRightEl = images[3].nativeElement as HTMLImageElement;
+    expect(chatBubbleRightEl.classList.contains('animate-hero-bubble-right')).toBe(true);
+    expect(chatBubbleRightEl.classList.contains('will-change-transform')).toBe(true);
+
+    const bellEl = images[4].nativeElement as HTMLImageElement;
+    expect(bellEl.classList.contains('animate-hero-bell-ring')).toBe(true);
+    expect(bellEl.classList.contains('will-change-transform')).toBe(true);
   });
 
   it('should render the subheadline paragraph with readable line-height and Figma-aligned width', () => {

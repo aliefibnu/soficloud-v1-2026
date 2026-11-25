@@ -11,6 +11,7 @@ import { ErpWindowChrome, ErpModuleType } from './erp-window-chrome';
       [activeModule]="activeModule()"
       [moduleTitle]="moduleTitle()"
       [showStatusPills]="showStatusPills()"
+      [logoSrc]="logoSrc()"
     >
       <div id="test-projected-card">Test Card Inside ERP</div>
     </app-erp-window-chrome>
@@ -20,6 +21,7 @@ class TestHostComponent {
   readonly activeModule = signal<ErpModuleType>('sales');
   readonly moduleTitle = signal<string>('Sales (PT INFORSYS INDONESIA )');
   readonly showStatusPills = signal<boolean>(true);
+  readonly logoSrc = signal<string | null>(null);
 }
 
 describe('ErpWindowChrome', () => {
@@ -90,10 +92,41 @@ describe('ErpWindowChrome', () => {
     );
   });
 
+  it('should render the default inline cart SVG and allow overriding with logoSrc', () => {
+    const header = fixture.debugElement.query(By.css('header'));
+    expect(header.query(By.css('#shopping_cart_img'))).toBeTruthy();
+    expect(header.query(By.css('img'))).toBeNull();
+
+    hostComponent.logoSrc.set('/images/landing/features/1/cart.svg');
+    fixture.detectChanges();
+
+    expect(header.query(By.css('#shopping_cart_img'))).toBeNull();
+    const logoImg = header.query(By.css('img'));
+    expect(logoImg).toBeTruthy();
+    expect(logoImg.nativeElement.getAttribute('src')).toBe('/images/landing/features/1/cart.svg');
+    expect(logoImg.nativeElement.getAttribute('alt')).toBe('');
+    expect(logoImg.nativeElement.getAttribute('aria-hidden')).toBe('true');
+  });
+
   it('should render the avatar badge with letter A', () => {
     const avatar = fixture.debugElement.query(By.css('[aria-label="User Avatar"]'));
     expect(avatar).toBeTruthy();
     expect(avatar.nativeElement.textContent.trim()).toBe('A');
+  });
+
+  it('should keep header and avatar outside horizontal scroll container for mobile/tablet visibility', () => {
+    const header = fixture.debugElement.query(By.css('header'));
+    const scrollContainer = fixture.debugElement.query(By.css('.overflow-x-auto'));
+    expect(header).toBeTruthy();
+    expect(scrollContainer).toBeTruthy();
+    expect(scrollContainer.nativeElement.contains(header.nativeElement)).toBe(false);
+
+    const avatarWrapper = header.query(By.css('[aria-label="User Avatar"]'))?.nativeElement.closest('div.relative');
+    expect(avatarWrapper?.classList.contains('shrink-0')).toBe(true);
+
+    const titleSpan = header.query(By.css('span.truncate'));
+    expect(titleSpan).toBeTruthy();
+    expect(titleSpan.nativeElement.classList.contains('min-w-0')).toBe(true);
   });
 
   it('should render 5 sidebar navigation items', () => {

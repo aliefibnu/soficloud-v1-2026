@@ -1,0 +1,9 @@
+.financial-gradient-band {
+  background-color: #3874db;
+  background-image: linear-gradient(
+    180deg var(--in-oklab),
+    #3874db -0.13%,
+    #9cbbf0 65.48%,
+    #c3d7f7 105.66%
+  );
+}

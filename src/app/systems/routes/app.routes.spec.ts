@@ -73,4 +73,40 @@ describe('app.routes', () => {
     )();
     expect(loadedComponent).toBeDefined();
   });
+
+  it('should include the financial-management-1 route', () => {
+    const financialManagementRoute = routes.find(
+      (r: Route) => r.path === 'financial-management-1',
+    );
+    expect(financialManagementRoute).toBeDefined();
+    expect(financialManagementRoute?.loadComponent).toBeDefined();
+  });
+
+  it('should lazy load the FinancialManagement1 component', async () => {
+    const financialManagementRoute = routes.find(
+      (r: Route) => r.path === 'financial-management-1',
+    );
+    const loadedComponent = await (
+      financialManagementRoute?.loadComponent as () => Promise<unknown>
+    )();
+    expect(loadedComponent).toBeDefined();
+  });
+
+  it('should include the sales-management-2 route', () => {
+    const salesManagementRoute = routes.find(
+      (r: Route) => r.path === 'sales-management-2',
+    );
+    expect(salesManagementRoute).toBeDefined();
+    expect(salesManagementRoute?.loadComponent).toBeDefined();
+  });
+
+  it('should lazy load the SalesManagement2 component', async () => {
+    const salesManagementRoute = routes.find(
+      (r: Route) => r.path === 'sales-management-2',
+    );
+    const loadedComponent = await (
+      salesManagementRoute?.loadComponent as () => Promise<unknown>
+    )();
+    expect(loadedComponent).toBeDefined();
+  });
 });

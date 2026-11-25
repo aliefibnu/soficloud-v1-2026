@@ -1169,6 +1169,370 @@
       "PARAGRAPH_1": "We built SOFICloud so companies can adopt ERP through an easy-to-understand process at an affordable cost. Business needs guide the selection of modules, workflows, and implementation stages.",
       "PARAGRAPH_2": "Our team helps translate day-to-day activities into an integrated system, enabling users to adapt more easily, keeping transactions neatly recorded, and delivering tangible ERP benefits across business operations.",
       "IMAGE_ALT": "SOFICloud implementation team collaborating around a laptop to configure integrated business processes"
+    },
+    "OUR_JOURNEY": {
+      "ARIA_LABEL": "SOFICloud Journey and Commitment",
+      "PREV_ARIA_LABEL": "Previous slide",
+      "NEXT_ARIA_LABEL": "Next slide",
+      "INDICATOR_GROUP_ARIA_LABEL": "Slide navigation indicators",
+      "GO_TO_SLIDE_ARIA_LABEL": "Go to slide",
+      "SLIDES": {
+        "OUR_JOURNEY": {
+          "EYEBROW": "OUR JOURNEY",
+          "TITLE": "Since 1998, growing together\nwith customer trust.",
+          "PARAGRAPH_1": "Developed by PT Inforsys Indonesia with experience since 1998, SOFICloud ERP is built on a deep understanding of operational needs across diverse industries.",
+          "PARAGRAPH_2": "Starting from financial software development to integrated business management, this journey has been shaped by real-world needs and customer trust. Every implementation brings fresh insight into how businesses operate.",
+          "PARAGRAPH_3": "That experience drives us to continuously refine the product, strengthen features, and deliver relevant solutions backed by hands-on guidance from implementation to daily use.",
+          "IMAGE_ALT": "SOFICloud team member reviewing operational documents with a tablet and laptop"
+        },
+        "SUSTAINABLE_DEVELOPMENT": {
+          "EYEBROW": "SUSTAINABLE DEVELOPMENT",
+          "TITLE": "Continuously evolving from\nreal-world needs.",
+          "PARAGRAPH_1": "Product research and development advance alongside implementation experience. Diverse operational requirements serve as input to refine features, ease of use, and cross-departmental connectivity.",
+          "PARAGRAPH_2": "We also evolve product technology to keep pace with changing ways of working. Cloud service options and responsive interfaces provide flexible access across devices based on user needs and access rights.",
+          "IMAGE_ALT": "SOFICloud representative shaking hands with a business partner outdoors"
+        },
+        "FOR_BUSINESS": {
+          "EYEBROW": "FOR GROWING BUSINESSES",
+          "TITLE": "Focused on small and medium\nenterprise needs.",
+          "PARAGRAPH_1": "Growing companies need tighter control over sales, purchasing, inventory, production, and finance. At the same time, system investment must align with business scale, team readiness, and priorities.",
+          "PARAGRAPH_2": "SOFICloud helps companies build integrated management with module coverage tailored to their needs. For manufacturing businesses, production processes and costs are managed within a system connected to inventory, sales, and accounting.",
+          "IMAGE_ALT": "Two SOFICloud consultants reviewing business workflows and ERP modules at a desk"
+        },
+        "OUR_COMMITMENT": {
+          "EYEBROW": "OUR COMMITMENT",
+          "TITLE": "Guiding implementation, supporting\ndaily operations.",
+          "PARAGRAPH_1": "We strive to be a partner who truly understands each customer's IT needs. Our team guides companies in structuring workflows, onboarding users, and running ERP smoothly in daily operations.",
+          "PARAGRAPH_2": "Through continuous improvement and strong working relationships, we are committed to delivering services that support company growth, especially for small and medium industries in Indonesia.",
+          "IMAGE_ALT": "SOFICloud support team guiding users through the ERP system on a laptop"
+        }
+      }
+    }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "Control Company",
+      "TITLE_LINE_2": "Finances from",
+      "TITLE_LINE_3": "Transactions to",
+      "TITLE_LINE_4": "Financial Reports",
+      "DESCRIPTION": "SOFICloud automatically connects operational transactions with accounting processes, from journals, receivables, payables, cash & bank, reimbursement, advances, and fixed assets to management analysis.",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "Financial Management & Accounting",
+      "ILLUSTRATION_ALT": "Illustration of SOFICloud financial report clipboard, magnifying glass, and calculator"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "Financial management sections",
+      "FINANCIAL_CONTROL": "FINANCIAL CONTROL",
+      "TEN_CAPABILITIES": "10 CAPABILITIES",
+      "EXPENSE_ADVANCE": "EXPENSE & ADVANCE",
+      "REPORTING": "REPORTING",
+      "INTEGRATION": "INTEGRATION"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "Control Your Business From One Place",
+      "SUBTITLE": "Choose the area you want to inspect. Every process connects to the same data and can be traced at any time",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "From Operational Transactions to Ready-to-Read Financial Information",
+        "DESCRIPTION": "Accounting impact is formed directly from source documents. Finance can trace journals, ledgers, and financial statements with consistent data.",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "Cash requirements, due dates, and payment priorities in a single control board.",
+        "DESCRIPTION": "Outstanding AR/AP, due dates, payment proposals, approvals, and cash & bank positions are available to help Finance decide the next step.",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "Vendor",
+          "DUE_DATE": "Due Date",
+          "AMOUNT": "Amount",
+          "STATUS": "Status"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "26 Jul",
+            "AMOUNT": "Rp42.8M",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "27 Jul",
+            "AMOUNT": "Rp28.4M",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "28 Jul",
+            "AMOUNT": "Rp19.6M",
+            "STATUS": "Approved"
+          }
+        }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "Every submission has a clear status, authorization, comments, and decision history.",
+        "DESCRIPTION": "Claims, reimbursements, and advances move from request to settlement and accounting along a fully traceable path.",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
+      }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "Functional Depth for Operations and Accounting",
+      "SUBTITLE": "Ten capabilities connecting daily transactions, controls, accounting records, and company financial statements.",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "General Ledger & Financial Accounting",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "Account Receivable",
+          "DESCRIPTION": "Customer Invoice, Outstanding AR, AR Aging, Receipt, Advance Receipt, Credit Note, and Customer Statement."
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "Account Payable",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "Cash & Bank Management",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "Expense, Reimbursement & Advance",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "Payment Planning & Budget Control",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "FIXED_ASSET": {
+          "TITLE": "Fixed Asset Management",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "Cost & Management Accounting",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "Multi-Currency & Forex",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "Accounting Automation",
+          "DESCRIPTION": "Multi-Level CoA, Journal Entry, Automatic Posting, General Ledger, Trial Balance, Subsidiary Ledger, Period Control, and Closing."
+        }
+      }
+    },
+    "EXPENSE_AND_ADVANCE": {
+      "TITLE": "Expense and Advance in a Controlled Flow",
+      "SUBTITLE": "Five highlighted areas: employee reimbursement, expense claim, operational advance, supplier advance payment, as well as payment planning & budget control.",
+      "TABS": {
+        "ARIA_LABEL": "Expense and advance workflows",
+        "REIMBURSEMENT": {
+          "TITLE": "Reimbursement",
+          "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
+        },
+        "CASH_ADVANCE": {
+          "TITLE": "Cash Advance",
+          "SUBTITLE": "OPERATIONAL / EMPLOYEE ADVANCE"
+        }
+      },
+      "REIMBURSEMENT": {
+        "FLOW_TITLE": "From expense claim to payment",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "From cash request to settlement",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "Real Dashboard Displayed In Full Ratio",
+      "SUBTITLE": "Screenshots are used as product display proof and kept in their original size without cropping, stretching, or forced framing.",
+      "LIST_ARIA_LABEL": "Financial reporting categories",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "Financial Statements",
+          "DESCRIPTION": "Balance Sheet, Income Statement, Cash Flow, COGS, and Changes in Equity."
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "Receivable & Payable",
+          "DESCRIPTION": "AR/AP Aging, Customer/Supplier Statement, and Due Date Analysis."
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "Accounting Reports",
+          "DESCRIPTION": "General Ledger, Trial Balance, Journal Listing, and Account Movement."
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "Management Analysis",
+          "DESCRIPTION": "Budget vs Actual, Cost Centre, Profitability, and Cost Analysis."
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "Cash and Bank Balance horizontal bar chart in millions",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "Customer Billing Receipt vertical column chart by month"
+      }
+    },
+    "INTEGRATION": {
+      "TITLE": "Business transactions form\naccounting impact",
+      "SUBTITLE": "Finance does not need to re-record operational transactions. Select a flow to see how business documents move into the General Ledger.",
+      "TABS_ARIA_LABEL": "Accounting integration workflows",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "Completed orders become receivables,\nreceipts, and journals.",
+          "STEPS_ARIA_LABEL": "Sales to Cash workflow steps",
+          "STEPS": {
+            "SALES_ORDER": "Sales Order",
+            "DELIVERY": "Delivery",
+            "CUSTOMER_INVOICE": "Customer Invoice",
+            "AR": "AR",
+            "RECEIPT": "Receipt",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "Purchases move from requisition to\nsupplier payment.",
+          "STEPS_ARIA_LABEL": "Procure to Pay workflow steps",
+          "STEPS": {
+            "PR_PO": "PR / PO",
+            "GOODS_RECEIPT": "Goods Receipt",
+            "SUPPLIER_INVOICE": "Supplier Invoice",
+            "AP": "AP",
+            "PAYMENT": "Payment",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "Materials and production output build\ninventory value and COGS.",
+          "STEPS_ARIA_LABEL": "Manufacture to COGs workflow steps",
+          "STEPS": {
+            "MATERIAL_ISSUE": "Material Issue",
+            "WIP": "WIP",
+            "FINISHED_GOODS": "Finished Goods",
+            "PRODUCTION_COST": "Production Cost",
+            "COGS": "COGS",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "Budgets, costs, and revenue are read as\nproject margin.",
+          "STEPS_ARIA_LABEL": "Project to Profitability workflow steps",
+          "STEPS": {
+            "PROJECT_BUDGET": "Project Budget",
+            "MATERIAL_EXPENSE": "Material / Expense",
+            "PROJECT_COST": "Project Cost",
+            "REVENUE": "Revenue",
+            "PROFITABILITY": "Profitability"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "Claims and advances flow into the right\ncost centre or project.",
+          "STEPS_ARIA_LABEL": "Expense to Accounting workflow steps",
+          "STEPS": {
+            "CLAIM_ADVANCE": "Claim / Advance",
+            "APPROVAL": "Approval",
+            "PAYMENT": "Payment",
+            "SETTLEMENT": "Settlement",
+            "COST_CENTRE": "Cost Centre / Project",
+            "GENERAL_LEDGER": "General Ledger"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "See how your company's finance workflows\ncan run on SOFICloud.",
+      "DESCRIPTION": "From operational transactions, approvals, and cash control,\nto financial statements and management analysis."
     }
   }
 }

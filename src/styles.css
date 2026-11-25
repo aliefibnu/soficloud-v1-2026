@@ -96,3 +96,27 @@ html {
 /* Short viewport height optimization (e.g., 125% - 150% display scaling on 1080p, or 1366x768 screens) */
 @custom-variant short (@media (min-width: 1024px) and (max-height: 860px));
 
+/* Registered custom properties for scroll-driven horizontal tab edge fades */
+@property --tab-fade-start {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --tab-fade-end {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* Progressive enhancement for smooth neutral-to-blue gradient interpolation */
+:root {
+  --in-oklab: ;
+}
+
+@supports (background: conic-gradient(from 0deg at 50% 50% in oklab, white, black)) {
+  :root {
+    --in-oklab: in oklab;
+  }
+}
+

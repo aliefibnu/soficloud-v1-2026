@@ -1,0 +1,29 @@
+<div class="min-h-screen flex flex-col w-full bg-white selection:bg-[#365AD2] selection:text-white">
+  <app-hero />
+  <app-section-tabs
+    [tabs]="tabs"
+    [navAriaLabel]="'FINANCIAL_MANAGEMENT_1.TABS.NAV_ARIA_LABEL' | translate"
+  />
+  <app-financial-control />
+  <app-ten-capabilities />
+  <div data-gradient-band class="financial-gradient-band relative w-full overflow-x-clip">
+    <app-expense-and-advance />
+    <app-real-dashboard />
+
+    <svg
+      data-bottom-wave
+      class="block w-full h-14 sm:h-20 md:h-26 lg:h-32 xl:h-35 -mb-px pointer-events-none select-none"
+      viewBox="0 0 1440 140"
+      fill="none"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M 0 68 C 115 20, 235 0, 355 0 C 610 0, 845 136, 1142 136 C 1265 136, 1362 106, 1440 70 L 1440 140 L 0 140 Z"
+        fill="#ffffff"
+      />
+    </svg>
+  </div>
+  <app-integration />
+  <app-subfooter />
+</div>

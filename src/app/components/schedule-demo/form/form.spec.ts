@@ -111,9 +111,18 @@ describe('ScheduleDemoForm', () => {
 
     const nameError = fixture.debugElement.query(By.css('#demo-name-error'));
     expect(nameError).toBeTruthy();
+    const nameErrorSvg = nameError.query(By.css('svg'));
+    expect(nameErrorSvg.nativeElement.getAttribute('viewBox')).toBe('0 0 9 9');
+    expect(nameErrorSvg.query(By.css('path')).nativeElement.getAttribute('fill')).toBe('#CB1C29');
 
     const phoneError = fixture.debugElement.query(By.css('#demo-phone-error'));
     expect(phoneError).toBeTruthy();
+    const phoneErrorSvg = phoneError.query(By.css('svg'));
+    expect(phoneErrorSvg.nativeElement.getAttribute('viewBox')).toBe('0 0 9 9');
+    expect(phoneErrorSvg.query(By.css('path')).nativeElement.getAttribute('fill')).toBe('#CB1C29');
+
+    const phoneInput = fixture.debugElement.query(By.css('#demo-phone'));
+    expect(phoneInput.nativeElement.classList.contains('border-[#CB1C29]')).toBe(true);
   });
 
   it('should toggle custom industry dropdown and select an option', () => {
@@ -130,6 +139,10 @@ describe('ScheduleDemoForm', () => {
     expect(listbox).toBeTruthy();
     expect(listbox.nativeElement.classList.contains('z-40')).toBe(true);
 
+    const optionButtons = listbox.queryAll(By.css('button[role="option"]'));
+    expect(optionButtons.length).toBe(component.industries.length);
+    expect(optionButtons[0].nativeElement.classList.contains('font-bold')).toBe(true);
+
     const firstOption = component.industries[0];
     component.selectIndustry(firstOption);
     fixture.detectChanges();
@@ -137,6 +150,19 @@ describe('ScheduleDemoForm', () => {
     expect(component.isDropdownOpen()).toBe(false);
     expect(component.selectedIndustry()).toEqual(firstOption);
     expect(component.industryControl.value).toBe(firstOption.value);
+
+    // Verify trigger button displays selected option with font-bold
+    const triggerText = fixture.debugElement.query(By.css('#demo-industry-trigger span'));
+    expect(triggerText.nativeElement.classList.contains('font-bold')).toBe(true);
+
+    // Reopen dropdown and verify selected option has bg-[#1d44eb], text-white, and NO checkmark SVG
+    component.toggleDropdown();
+    fixture.detectChanges();
+    const updatedOptionButtons = fixture.debugElement.queryAll(By.css('button[role="option"]'));
+    const selectedBtn = updatedOptionButtons[0];
+    expect(selectedBtn.nativeElement.classList.contains('bg-[#1d44eb]')).toBe(true);
+    expect(selectedBtn.nativeElement.classList.contains('text-white')).toBe(true);
+    expect(selectedBtn.query(By.css('svg'))).toBeNull();
   });
 
   it('should close dropdown on closeDropdown or escape key', () => {
@@ -244,6 +270,10 @@ describe('ScheduleDemoForm', () => {
     expect(trigger.nativeElement.classList.contains('border-[#E8E8E8]')).toBe(true);
     expect(trigger.nativeElement.classList.contains('font-dm-sans')).toBe(true);
     expect(trigger.nativeElement.classList.contains('font-normal')).toBe(true);
+
+    const triggerArrow = trigger.query(By.css('svg'));
+    expect(triggerArrow).toBeTruthy();
+    expect(triggerArrow.nativeElement.getAttribute('viewBox')).toBe('0 0 13 8');
 
     // Verify all 7 icons from /images/schedule-demo
     const imgs = fixture.debugElement.queryAll(By.css('form img'));

@@ -1169,6 +1169,370 @@
       "PARAGRAPH_1": "我们打造 SOFICloud，旨在让企业以清晰易懂的流程和可控的成本轻松使用 ERP。我们以业务需求为出发点，规划模块、工作流与实施阶段。",
       "PARAGRAPH_2": "我们的团队协助将日常业务转化为一体化系统，帮助用户更快上手、规范记录每一笔交易，并在日常运营中切实发挥 ERP 的价值。",
       "IMAGE_ALT": "SOFICloud 实施团队正围绕笔记本电脑讨论一体化业务流程配置"
+    },
+    "OUR_JOURNEY": {
+      "ARIA_LABEL": "SOFICloud 历程与承诺",
+      "PREV_ARIA_LABEL": "上一张幻灯片",
+      "NEXT_ARIA_LABEL": "下一张幻灯片",
+      "INDICATOR_GROUP_ARIA_LABEL": "幻灯片导航指示器",
+      "GO_TO_SLIDE_ARIA_LABEL": "切换到幻灯片",
+      "SLIDES": {
+        "OUR_JOURNEY": {
+          "EYEBROW": "我们的历程",
+          "TITLE": "自 1998 年起，与客户信赖\n共同成长。",
+          "PARAGRAPH_1": "由自 1998 年深耕行业的 PT Inforsys Indonesia 打造，SOFICloud ERP 立足于对各行业企业运营需求的深入理解。",
+          "PARAGRAPH_2": "从财务软件研发起步，发展为一体化企业管理系统，这一历程源于真实业务需求与客户信赖。每一次实施都让我们对企业流程有更深刻的理解。",
+          "PARAGRAPH_3": "这些经验推动我们持续打磨产品、强化功能并提供切合实际的解决方案，同时提供从上线实施到日常使用的全程陪伴支持。",
+          "IMAGE_ALT": "SOFICloud 团队成员正在使用平板电脑和笔记本电脑审阅运营文件"
+        },
+        "SUSTAINABLE_DEVELOPMENT": {
+          "EYEBROW": "持续演进",
+          "TITLE": "源于一线需求，\n持续迭代升级。",
+          "PARAGRAPH_1": "产品研发与实施经验同步推进。多元的运营需求成为我们完善功能、提升易用性与强化跨部门协作的重要来源。",
+          "PARAGRAPH_2": "我们也紧跟企业工作方式的演变升级产品技术。云服务方案与响应式界面让用户可根据权限和需求，通过多种设备灵活访问。",
+          "IMAGE_ALT": "SOFICloud 代表与商业伙伴在户外握手致意"
+        },
+        "FOR_BUSINESS": {
+          "EYEBROW": "助力成长型企业",
+          "TITLE": "聚焦中小企业的\n核心需求。",
+          "PARAGRAPH_1": "成长中的企业需要对销售、采购、库存、生产和财务进行更规范的管控；同时，系统投入也需与企业规模、团队准备度及业务优先级相匹配。",
+          "PARAGRAPH_2": "SOFICloud 帮助企业按需配置模块，构建一体化管理体系。对于制造型企业，生产流程与成本可在与库存、销售及财务联通的系统中高效管理。",
+          "IMAGE_ALT": "两位 SOFICloud 顾问在办公桌前讨论业务流程与 ERP 模块"
+        },
+        "OUR_COMMITMENT": {
+          "EYEBROW": "我们的承诺",
+          "TITLE": "陪伴落地实施，\n护航日常运营。",
+          "PARAGRAPH_1": "我们致力于成为真正理解客户 IT 需求的合作伙伴。专业团队协助企业梳理流程、开展用户培训，并保障 ERP 在日常运营中顺畅运行。",
+          "PARAGRAPH_2": "凭借持续创新与稳固的合作关系，我们承诺提供助力企业成长的优质服务，特别是面向印尼中小型工业企业。",
+          "IMAGE_ALT": "SOFICloud 支持团队正在笔记本电脑前协助用户操作 ERP 系统"
+        }
+      }
+    }
+  },
+  "FINANCIAL_MANAGEMENT_1": {
+    "HERO": {
+      "TITLE_LINE_1": "从日常交易到",
+      "TITLE_LINE_2": "财务报表",
+      "TITLE_LINE_3": "全面掌控",
+      "TITLE_LINE_4": "企业财务",
+      "DESCRIPTION": "SOFICloud 将业务交易与会计流程自动连接，涵盖总账凭证、应收应付、现金与银行、报销、预付款、固定资产直至管理层分析。",
+      "BADGE_NUMBER": "01",
+      "BADGE_LABEL": "财务管理与会计",
+      "ILLUSTRATION_ALT": "SOFICloud 财务报表写字板、放大镜与计算器插图"
+    },
+    "TABS": {
+      "NAV_ARIA_LABEL": "财务管理板块",
+      "FINANCIAL_CONTROL": "财务管控",
+      "TEN_CAPABILITIES": "10项核心能力",
+      "EXPENSE_ADVANCE": "报销与预付款",
+      "REPORTING": "财务报表",
+      "INTEGRATION": "系统集成"
+    },
+    "FINANCIAL_CONTROL": {
+      "TITLE": "在一个平台全面掌控业务",
+      "SUBTITLE": "选择您想查看的领域。每个流程都连接到同一套数据，随时可追溯",
+      "REPORTING_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "从业务交易到清晰可读的财务信息",
+        "DESCRIPTION": "会计影响由原始单据自动生成。财务团队可以基于一致的数据追溯凭证、总账直至财务报表。",
+        "STEPS": {
+          "TRANSACTION": {
+            "TITLE": "Transaction",
+            "SUBTITLE": "Business object"
+          },
+          "JOURNAL": {
+            "TITLE": "Journal",
+            "SUBTITLE": "Accounting rule"
+          },
+          "GENERAL_LEDGER": {
+            "TITLE": "General Ledger",
+            "SUBTITLE": "Accounting book"
+          },
+          "STATEMENT_INSIGHT": {
+            "TITLE": "Statement & Insight",
+            "SUBTITLE": "Financial output"
+          }
+        }
+      },
+      "CASH_CONTROL_CARD": {
+        "RIBBON_TITLE": "CASH, RECEIVABLE & PAYMENT CONTROL",
+        "RIBBON_SUBTITLE": "CONTROL",
+        "HEADING": "在一个控制看板中掌握资金需求、到期日与付款优先级。",
+        "DESCRIPTION": "未清应收应付、到期日、付款建议、审批状态以及现金与银行头寸一目了然，助力财务团队快速决策。",
+        "BOARD_TITLE": "Payment Priority",
+        "COLUMNS": {
+          "VENDOR": "供应商",
+          "DUE_DATE": "到期日",
+          "AMOUNT": "金额",
+          "STATUS": "状态"
+        },
+        "ROWS": {
+          "ROW_1": {
+            "VENDOR": "Supplier Material A",
+            "DUE_DATE": "7月26日",
+            "AMOUNT": "Rp42,8 Jt",
+            "STATUS": "Ready"
+          },
+          "ROW_2": {
+            "VENDOR": "Logistic Partner",
+            "DUE_DATE": "7月27日",
+            "AMOUNT": "Rp28,4 Jt",
+            "STATUS": "Review"
+          },
+          "ROW_3": {
+            "VENDOR": "Service Vendor",
+            "DUE_DATE": "7月28日",
+            "AMOUNT": "Rp19,6 Jt",
+            "STATUS": "Approved"
+          }
+        }
+      },
+      "APPROVAL_CARD": {
+        "RIBBON_TITLE": "FINANCIAL REPORTING & ACCOUNTING",
+        "RIBBON_SUBTITLE": "REPORT",
+        "HEADING": "每笔申请均具备清晰的状态、审批权限、批注与决策历史。",
+        "DESCRIPTION": "费用报销、垫付及预支从发起申请到核销与会计入账全程可追溯。",
+        "BOARD_EYEBROW": "CLAIM EXPENSE · REQ-260903-018",
+        "BOARD_TITLE": "Approval History",
+        "STEPS": {
+          "SUPERVISOR": {
+            "ROLE": "Finance Supervisor",
+            "META": "Approved · 09.42"
+          },
+          "MANAGER": {
+            "ROLE": "Finance Manager",
+            "META": "Approved · 10.06"
+          },
+          "DIRECTOR": {
+            "ROLE": "Finance Director",
+            "META": "Waiting for approval"
+          }
+        }
+      }
+    },
+    "TEN_CAPABILITIES": {
+      "TITLE": "面向业务与会计的深度功能",
+      "SUBTITLE": "将日常交易、内部控制、会计记录与企业财务报表紧密连接的十项核心能力。",
+      "CARDS": {
+        "GENERAL_LEDGER": {
+          "TITLE": "总分类账与财务会计",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "ACCOUNT_RECEIVABLE": {
+          "TITLE": "应收账款",
+          "DESCRIPTION": "客户发票、未清应收账款、应收账龄分析、收款、预收款、贷项通知单与客户对账单。"
+        },
+        "ACCOUNT_PAYABLE": {
+          "TITLE": "应付账款",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "CASH_AND_BANK": {
+          "TITLE": "现金与银行管理",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "EXPENSE_REIMBURSEMENT": {
+          "TITLE": "费用、报销与预付款",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "PAYMENT_PLANNING": {
+          "TITLE": "付款计划与预算控制",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "FIXED_ASSET": {
+          "TITLE": "固定资产管理",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "COST_AND_MANAGEMENT": {
+          "TITLE": "成本与管理会计",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "MULTI_CURRENCY": {
+          "TITLE": "多币种与外汇",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        },
+        "ACCOUNTING_AUTOMATION": {
+          "TITLE": "会计自动化",
+          "DESCRIPTION": "多级会计科目表、凭证录入、自动过账、总分类账、试算平衡表、明细分类账、会计期间控制与期末结账。"
+        }
+      }
+    },
+    "EXPENSE_AND_ADVANCE": {
+      "TITLE": "在受控流程中管理费用报销与预付款",
+      "SUBTITLE": "五大核心领域：员工报销、费用申请、运营备用金、供应商预付款，以及付款计划与预算控制。",
+      "TABS": {
+        "ARIA_LABEL": "费用与备用金流程",
+        "REIMBURSEMENT": {
+          "TITLE": "费用报销",
+          "SUBTITLE": "EMPLOYEE REIMBURSEMENT"
+        },
+        "CASH_ADVANCE": {
+          "TITLE": "备用金预支",
+          "SUBTITLE": "OPERATIONAL / EMPLOYEE ADVANCE"
+        }
+      },
+      "REIMBURSEMENT": {
+        "FLOW_TITLE": "从费用申请到付款结算",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      },
+      "CASH_ADVANCE": {
+        "FLOW_TITLE": "从备用金申请到核销结算",
+        "STEPS": {
+          "CLAIM_REQUEST": {
+            "TITLE": "Claim Request",
+            "SUBTITLE": "Purpose & attachment"
+          },
+          "NOTIFICATION": {
+            "TITLE": "Notification",
+            "SUBTITLE": "Email / WhatsApp"
+          },
+          "LAYERED_APPROVAL": {
+            "TITLE": "Layered Approval",
+            "SUBTITLE": "Authorization matrix"
+          },
+          "MONITORING": {
+            "TITLE": "Monitoring",
+            "SUBTITLE": "Status & audit trail"
+          },
+          "PAYMENT": {
+            "TITLE": "Payment",
+            "SUBTITLE": "Authorized settlement"
+          },
+          "ACCOUNT_PAYABLE": {
+            "TITLE": "Account Payable",
+            "SUBTITLE": "Outstanding & aging"
+          }
+        }
+      }
+    },
+    "REAL_DASHBOARD": {
+      "TITLE": "以原始完整比例呈现真实仪表盘",
+      "SUBTITLE": "采用真实产品界面截图作为展示证明，不裁剪、不拉伸、不强行套框，保持其原始比例呈现。",
+      "LIST_ARIA_LABEL": "财务报表分类",
+      "CARDS": {
+        "FINANCIAL_STATEMENTS": {
+          "TITLE": "财务报表",
+          "DESCRIPTION": "资产负债表、利润表、现金流量表、销货成本（COGS）及所有者权益变动表。"
+        },
+        "RECEIVABLE_PAYABLE": {
+          "TITLE": "应收与应付",
+          "DESCRIPTION": "应收/应付账龄分析、客户/供应商对账单及到期日分析。"
+        },
+        "ACCOUNTING_REPORTS": {
+          "TITLE": "会计报表",
+          "DESCRIPTION": "总账、试算平衡表、日记账清单及科目变动明细。"
+        },
+        "MANAGEMENT_ANALYSIS": {
+          "TITLE": "管理分析",
+          "DESCRIPTION": "预算与实际对比、成本中心、盈利能力及成本分析。"
+        }
+      },
+      "CHARTS": {
+        "CASH_BANK_BALANCE": "CASH & BANK BALANCE (-)",
+        "CASH_BANK_ARIA": "现金及银行余额水平条形图",
+        "CUSTOMER_BILLING_RECEIPT": "CUSTOMER BILLING RECEIPT (-)",
+        "CUSTOMER_BILLING_ARIA": "月度客户账单收款垂直柱状图"
+      }
+    },
+    "INTEGRATION": {
+      "TITLE": "业务交易直接形成\n财务会计影响",
+      "SUBTITLE": "财务团队无需重复录入业务单据。选择任意流程，查看业务单据如何自动流转并生成总账（General Ledger）分录。",
+      "TABS_ARIA_LABEL": "财务集成流程",
+      "FLOWS": {
+        "SALES_TO_CASH": {
+          "TAB_LABEL": "Sales to Cash",
+          "HEADLINE": "已完成的销售订单自动形成应收账款、\n收款与会计分录。",
+          "STEPS_ARIA_LABEL": "Sales to Cash 流程步骤",
+          "STEPS": {
+            "SALES_ORDER": "销售订单",
+            "DELIVERY": "发货单",
+            "CUSTOMER_INVOICE": "客户发票",
+            "AR": "应收账款 (AR)",
+            "RECEIPT": "收款",
+            "GENERAL_LEDGER": "总账"
+          }
+        },
+        "PROCURE_TO_PAY": {
+          "TAB_LABEL": "Procure to Pay",
+          "HEADLINE": "采购从需求申请一路流转至\n供应商付款。",
+          "STEPS_ARIA_LABEL": "Procure to Pay 流程步骤",
+          "STEPS": {
+            "PR_PO": "PR / PO",
+            "GOODS_RECEIPT": "收货入库",
+            "SUPPLIER_INVOICE": "供应商发票",
+            "AP": "应付账款 (AP)",
+            "PAYMENT": "付款",
+            "GENERAL_LEDGER": "总账"
+          }
+        },
+        "MANUFACTURE_TO_COGS": {
+          "TAB_LABEL": "Manufacture to COGs",
+          "HEADLINE": "领料与生产产出共同形成\n存货价值及销货成本（COGS）。",
+          "STEPS_ARIA_LABEL": "Manufacture to COGs 流程步骤",
+          "STEPS": {
+            "MATERIAL_ISSUE": "生产领料",
+            "WIP": "在制品 (WIP)",
+            "FINISHED_GOODS": "完工入库",
+            "PRODUCTION_COST": "生产成本",
+            "COGS": "销货成本 (COGS)",
+            "GENERAL_LEDGER": "总账"
+          }
+        },
+        "PROJECT_TO_PROFITABILITY": {
+          "TAB_LABEL": "Project to Profitability",
+          "HEADLINE": "预算、成本与收入汇总呈现为\n项目利润率。",
+          "STEPS_ARIA_LABEL": "Project to Profitability 流程步骤",
+          "STEPS": {
+            "PROJECT_BUDGET": "项目预算",
+            "MATERIAL_EXPENSE": "物料 / 费用",
+            "PROJECT_COST": "项目成本",
+            "REVENUE": "收入",
+            "PROFITABILITY": "盈利能力"
+          }
+        },
+        "EXPENSE_TO_ACCOUNTING": {
+          "TAB_LABEL": "Expense to Accounting",
+          "HEADLINE": "报销与预支准确归集至\n对应的成本中心或项目。",
+          "STEPS_ARIA_LABEL": "Expense to Accounting 流程步骤",
+          "STEPS": {
+            "CLAIM_ADVANCE": "报销 / 预支",
+            "APPROVAL": "审批",
+            "PAYMENT": "付款",
+            "SETTLEMENT": "核销结算",
+            "COST_CENTRE": "成本中心 / 项目",
+            "GENERAL_LEDGER": "总账"
+          }
+        }
+      }
+    },
+    "SUBFOOTER": {
+      "TITLE": "了解贵司的财务业务流程如何\n在 SOFICloud 上高效运行。",
+      "DESCRIPTION": "从日常业务单据、审批流程、资金控制，\n直达财务报表与管理分析。"
     }
   }
 }
