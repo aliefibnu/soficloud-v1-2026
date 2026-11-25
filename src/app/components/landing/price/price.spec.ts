@@ -108,9 +108,13 @@ describe('Price', () => {
     expect(sources.some((s) => s?.includes('coin.svg'))).toBe(true);
     expect(sources.some((s) => s?.includes('bottom-coins.svg'))).toBe(true);
 
+    const stage = fixture.nativeElement.querySelector('div[aria-hidden="true"] > div');
+    expect(stage?.className).toContain('aspect-[998/565]');
+
     const arrowImg = images.find((img) => img.getAttribute('src')?.includes('arrow-graph.svg'));
-    expect(arrowImg?.className).toContain('-top-20');
-    expect(arrowImg?.className).toContain('lg:-top-37');
+    expect(arrowImg?.className).toContain('-top-[42.12%]');
+    expect(arrowImg?.className).toContain('-right-[2.61%]');
+    expect(arrowImg?.className).toContain('w-[101.40%]');
 
     const p1Img = images.find((img) => img.getAttribute('src')?.includes('pillar-1.svg'));
     const p2Img = images.find((img) => img.getAttribute('src')?.includes('pillar-2.svg'));
@@ -120,9 +124,12 @@ describe('Price', () => {
     expect(p2Img?.className).toContain('opacity-40');
     expect(p3Img?.className).toContain('opacity-40');
 
-    expect(p1Img?.className).toContain('lg:right-102.5');
-    expect(p2Img?.className).toContain('lg:right-50');
-    expect(p3Img?.className).toContain('right-0');
+    expect(p1Img?.className).toContain('right-[65.93%]');
+    expect(p2Img?.className).toContain('right-[31.86%]');
+    expect(p3Img?.className).toContain('-right-[2.20%]');
+    expect(p1Img?.className).toContain('-bottom-[5.13%]');
+    expect(p2Img?.className).toContain('-bottom-[5.13%]');
+    expect(p3Img?.className).toContain('-bottom-[5.13%]');
 
     const bottomCoinsImg = images.find((img) =>
       img.getAttribute('src')?.endsWith('bottom-coins.svg'),
@@ -130,13 +137,16 @@ describe('Price', () => {
     const coinsImg = images.find((img) => img.getAttribute('src')?.endsWith('/coins.svg'));
     const coinImg = images.find((img) => img.getAttribute('src')?.endsWith('/coin.svg'));
 
-    expect(bottomCoinsImg?.className).toContain('bottom-0');
-    expect(bottomCoinsImg?.className).not.toContain('-bottom-');
+    expect(bottomCoinsImg?.className).toContain('-bottom-[5.13%]');
+    expect(bottomCoinsImg?.className).toContain('right-[42.89%]');
     expect(bottomCoinsImg?.className).toContain('z-10');
 
-    expect(coinsImg?.className).toContain('bottom-0');
+    expect(coinsImg?.className).toContain('-bottom-[5.31%]');
+    expect(coinsImg?.className).toContain('right-[13.83%]');
     expect(coinsImg?.className).toContain('z-20');
 
+    expect(coinImg?.className).toContain('top-[9.56%]');
+    expect(coinImg?.className).toContain('right-[17.54%]');
     expect(coinImg?.className).toContain('z-30');
   });
 });
