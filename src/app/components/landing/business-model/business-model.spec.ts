@@ -293,4 +293,19 @@ describe('BusinessModel', () => {
     expect(canvas?.classList.contains('xl:rounded-b-[160px]')).toBe(true);
     expect(canvas?.classList.contains('overflow-hidden')).toBe(true);
   });
+
+  it('should render the blue transition gap and white canvas bottom padding matching Figma spacing', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const section = compiled.querySelector('#resources');
+    expect(section).toBeTruthy();
+    expect(section?.classList.contains('pb-12')).toBe(true);
+    expect(section?.classList.contains('sm:pb-15')).toBe(true);
+    expect(section?.classList.contains('lg:pb-18')).toBe(true);
+
+    const canvas = compiled.querySelector('#resources > div.w-full.bg-white');
+    expect(canvas?.classList.contains('pb-12')).toBe(true);
+    expect(canvas?.classList.contains('sm:pb-15')).toBe(true);
+    expect(canvas?.classList.contains('lg:pb-18')).toBe(true);
+  });
 });
