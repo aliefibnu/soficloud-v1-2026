@@ -30,7 +30,7 @@ export interface IntegrationFlowTab {
 
 const STAGE_ICONS = {
   salesOrder: { src: '/images/landing/features/1/sales-order.svg', width: 115, height: 145 },
-  delivery: { src: '/images/landing/features/1/delivery.svg', width: 120, height: 137 },
+  delivery: { src: '/images/landing/features/1/delivery2.svg', width: 120, height: 137 },
   customerInvoice: {
     src: '/images/landing/features/1/customer-invoice.svg',
     width: 124,
