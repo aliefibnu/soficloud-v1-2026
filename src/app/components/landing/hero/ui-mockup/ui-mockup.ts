@@ -27,6 +27,7 @@ export interface NavMenuItem {
 export interface HighlightItem {
   readonly labelKey: string;
   readonly value?: string;
+  readonly compactValue?: string;
   readonly valueKey?: string;
   readonly valueParams?: Record<string, unknown>;
 }
@@ -83,28 +84,36 @@ export interface MonthDashboardData {
   readonly year: number;
   readonly receivables: {
     readonly total: string;
+    readonly compactTotal: string;
     readonly overdue: string;
+    readonly compactOverdue: string;
     readonly bars: readonly number[];
   };
   readonly currentMonth: {
     readonly due: string;
+    readonly compactDue: string;
     readonly progressPercent: number;
   };
   readonly sales: {
     readonly orders: string;
+    readonly compactOrders: string;
     readonly growthRate: string;
     readonly bars: readonly number[];
   };
   readonly liquidity: {
     readonly balance: string;
+    readonly compactBalance: string;
     readonly projected: string;
+    readonly compactProjected: string;
     readonly sparklinePrimaryPath: string;
     readonly sparklineSecondaryPath: string;
   };
   readonly dynamicPoints: readonly RawMonthPoint[];
   readonly highlightsData: {
     readonly outstandingOrders: string;
+    readonly compactOutstandingOrders: string;
     readonly opexBudget: string;
+    readonly compactOpexBudget: string;
     readonly cashCoverageMonths: string;
     readonly productionPlan: string;
     readonly ordersAtRiskCount: number;
@@ -221,6 +230,22 @@ const CANONICAL_Q3_MONTHS: readonly RawMonthPoint[] = [
   styles: `
     .notification-badge-text {
       text-box: trim-both cap alphabetic;
+    }
+
+    .mockup-stepper-btn {
+      position: relative;
+    }
+
+    @media (pointer: coarse) {
+      .mockup-stepper-btn::after {
+        content: '';
+        position: absolute;
+        inset: -8px;
+      }
+
+      .mockup-mobile-tab {
+        min-block-size: 44px;
+      }
     }
 
     .mockup-bottom-fade {
@@ -347,21 +372,27 @@ export class UiMockup {
       year: 2026,
       receivables: {
         total: 'Rp 7,920,000,000.-',
+        compactTotal: 'Rp 7.92B',
         overdue: 'Rp 850,000,000.-',
+        compactOverdue: 'Rp 0.85B',
         bars: [30, 50, 35, 65, 45, 75],
       },
       currentMonth: {
         due: 'Rp 1,650,000,000.-',
+        compactDue: 'Rp 1.65B',
         progressPercent: 46,
       },
       sales: {
         orders: 'Rp 4,900,000,000.-',
+        compactOrders: 'Rp 4.90B',
         growthRate: '+8.2%',
         bars: [25, 45, 35, 55, 50, 70],
       },
       liquidity: {
         balance: 'Rp 5,840,000,000.-',
+        compactBalance: 'Rp 5.84B',
         projected: 'Rp 4,700,000,000.-',
+        compactProjected: 'Rp 4.70B',
         sparklinePrimaryPath:
           'M 5,18 C 20,12 30,20 45,16 C 60,11 70,20 85,16 C 100,11 110,20 125,16 C 140,11 150,18 158,15',
         sparklineSecondaryPath:
@@ -370,7 +401,9 @@ export class UiMockup {
       dynamicPoints: [CANONICAL_Q3_MONTHS[0]],
       highlightsData: {
         outstandingOrders: 'Rp 2,750,000,000.-',
+        compactOutstandingOrders: 'Rp 2.75B',
         opexBudget: 'Rp 2,450,000,000.-',
+        compactOpexBudget: 'Rp 2.45B',
         cashCoverageMonths: '2.4',
         productionPlan: '11,200 (76.8%)',
         ordersAtRiskCount: 3,
@@ -386,21 +419,27 @@ export class UiMockup {
       year: 2026,
       receivables: {
         total: 'Rp 8,150,000,000.-',
+        compactTotal: 'Rp 8.15B',
         overdue: 'Rp 980,000,000.-',
+        compactOverdue: 'Rp 0.98B',
         bars: [35, 60, 45, 75, 60, 88],
       },
       currentMonth: {
         due: 'Rp 1,890,000,000.-',
+        compactDue: 'Rp 1.89B',
         progressPercent: 52,
       },
       sales: {
         orders: 'Rp 5,300,000,000.-',
+        compactOrders: 'Rp 5.30B',
         growthRate: '+8.2%',
         bars: [35, 55, 50, 70, 65, 85],
       },
       liquidity: {
         balance: 'Rp 6,250,000,000.-',
+        compactBalance: 'Rp 6.25B',
         projected: 'Rp 4,950,000,000.-',
+        compactProjected: 'Rp 4.95B',
         sparklinePrimaryPath:
           'M 5,16 C 20,10 30,18 45,14 C 60,9 70,18 85,14 C 100,9 110,18 125,14 C 140,9 150,17 158,14',
         sparklineSecondaryPath:
@@ -409,7 +448,9 @@ export class UiMockup {
       dynamicPoints: [CANONICAL_Q3_MONTHS[0], CANONICAL_Q3_MONTHS[1]],
       highlightsData: {
         outstandingOrders: 'Rp 2,980,000,000.-',
+        compactOutstandingOrders: 'Rp 2.98B',
         opexBudget: 'Rp 2,620,000,000.-',
+        compactOpexBudget: 'Rp 2.62B',
         cashCoverageMonths: '2.4',
         productionPlan: '11,900 (78.5%)',
         ordersAtRiskCount: 4,
@@ -425,21 +466,27 @@ export class UiMockup {
       year: 2026,
       receivables: {
         total: 'Rp 8,450,000,000.-',
+        compactTotal: 'Rp 8.45B',
         overdue: 'Rp 1,100,000,000.-',
+        compactOverdue: 'Rp 1.10B',
         bars: [40, 70, 50, 90, 70, 100],
       },
       currentMonth: {
         due: 'Rp 2,100,000,000.-',
+        compactDue: 'Rp 2.10B',
         progressPercent: 58,
       },
       sales: {
         orders: 'Rp 5,800,000,000.-',
+        compactOrders: 'Rp 5.80B',
         growthRate: '+9.4%',
         bars: [35, 65, 55, 85, 75, 100],
       },
       liquidity: {
         balance: 'Rp 6,720,000,000.-',
+        compactBalance: 'Rp 6.72B',
         projected: 'Rp 5,150,000,000.-',
+        compactProjected: 'Rp 5.15B',
         sparklinePrimaryPath:
           'M 5,16 C 20,8 30,18 45,13 C 60,8 70,18 85,13 C 100,8 110,18 125,13 C 140,8 150,16 158,13',
         sparklineSecondaryPath:
@@ -448,7 +495,9 @@ export class UiMockup {
       dynamicPoints: [CANONICAL_Q3_MONTHS[0], CANONICAL_Q3_MONTHS[1], CANONICAL_Q3_MONTHS[2]],
       highlightsData: {
         outstandingOrders: 'Rp 3,250,000,000.-',
+        compactOutstandingOrders: 'Rp 3.25B',
         opexBudget: 'Rp 2,800,000,000.-',
+        compactOpexBudget: 'Rp 2.80B',
         cashCoverageMonths: '2.4',
         productionPlan: '12,500 (80.4%)',
         ordersAtRiskCount: 5,
@@ -707,10 +756,12 @@ export class UiMockup {
       {
         labelKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.OUTSTANDING_ORDERS',
         value: data.outstandingOrders,
+        compactValue: data.compactOutstandingOrders,
       },
       {
         labelKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.OPEX_BUDGET',
         value: data.opexBudget,
+        compactValue: data.compactOpexBudget,
       },
       {
         labelKey: 'HERO.UI_MOCKUP.HIGHLIGHTS.CASH_COVERAGE',

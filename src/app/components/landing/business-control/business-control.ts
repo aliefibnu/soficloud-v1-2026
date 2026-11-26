@@ -1,10 +1,13 @@
 import {
   Component,
   computed,
+  ElementRef,
   inject,
   signal,
   PLATFORM_ID,
   OnDestroy,
+  viewChild,
+  viewChildren,
 } from '@angular/core';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -65,6 +68,77 @@ export interface ProjectKpiMetric {
   imports: [TranslatePipe, NgOptimizedImage, RouterLink],
   templateUrl: './business-control.html',
   styles: `
+    .business-control-surface {
+      background: #ffffff;
+    }
+
+    @media (min-width: 640px) {
+      .business-control-surface {
+        background: linear-gradient(
+          180deg,
+          #D7E4FA 0%,
+          #EBF2FD 50%,
+          rgba(169, 196, 241, 0.4) 100%
+        );
+      }
+    }
+
+    .bc-mobile-tablist {
+      overflow-x: auto;
+      scroll-snap-type: inline proximity;
+      scroll-padding-inline: 1.5rem;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+    }
+
+    .bc-mobile-tablist::-webkit-scrollbar {
+      display: none;
+    }
+
+    @supports (animation-timeline: scroll(self inline)) {
+      .bc-mobile-tablist {
+        --fade-size: 1.75rem;
+        mask:
+          linear-gradient(#000, #000) no-clip subtract,
+          linear-gradient(to right, #000, transparent) 0 0 / var(--tab-fade-start) 100% no-repeat no-clip,
+          linear-gradient(to right, transparent, #000) 100% 0 / var(--tab-fade-end) 100% no-repeat no-clip;
+        animation: bc-reveal-fade-start linear both, bc-hide-fade-end linear both;
+        animation-timeline: scroll(self inline);
+        animation-range: 0 var(--fade-size), calc(100% - var(--fade-size)) 100%;
+      }
+    }
+
+    @keyframes bc-reveal-fade-start {
+      to {
+        --tab-fade-start: var(--fade-size);
+      }
+    }
+
+    @keyframes bc-hide-fade-end {
+      from {
+        --tab-fade-end: var(--fade-size);
+      }
+    }
+
+    .bc-mobile-tab {
+      position: relative;
+      scroll-snap-align: start;
+    }
+
+    .bc-mobile-tab[aria-selected='true']::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0;
+      border-block-end: 2.5px solid #1d44eb;
+      border-radius: 9999px;
+    }
+
+    @media (pointer: coarse) {
+      .bc-mobile-tab {
+        min-block-size: 44px;
+      }
+    }
+
     .business-cta-btn {
       background: linear-gradient(90deg, #1E37E1 0%, #1C7DD8 69.97%, #6694EB 100%);
     }
@@ -163,6 +237,16 @@ export class BusinessControl implements OnDestroy {
     this.isHovered.set(false);
     this.startAutoPlay();
   }
+
+  private readonly mobileTablistRef = viewChild<ElementRef<HTMLElement>>('mobileTablist');
+  private readonly mobileTabRefs = viewChildren<ElementRef<HTMLButtonElement>>('mobileTabBtn');
+
+  readonly capabilityTabs: readonly { readonly id: string; readonly labelKey: string }[] = [
+    { id: 'realtime', labelKey: 'BUSINESS_CONTROL.CARDS.REALTIME.TAB' },
+    { id: 'connected', labelKey: 'BUSINESS_CONTROL.CARDS.CONNECTED.TAB' },
+    { id: 'workflow', labelKey: 'BUSINESS_CONTROL.CARDS.WORKFLOW.TAB' },
+    { id: 'insight', labelKey: 'BUSINESS_CONTROL.CARDS.INSIGHT.TAB' },
+  ];
 
   readonly categoryHeaders: readonly CardCategoryHeader[] = [
     { title: 'REAL-TIME BUSINESS CONTROL', subtitle: 'REAL-TIME' },
@@ -536,17 +620,72 @@ export class BusinessControl implements OnDestroy {
   goToCard(index: number): void {
     const normalized = (((index % 4) + 4) % 4) as 0 | 1 | 2 | 3;
     this.currentIndex.set(normalized);
+    this.scrollActiveTabIntoView(normalized);
     this.resetAutoPlay();
   }
 
   nextCard(): void {
     this.currentIndex.update((prev) => ((prev + 1) % 4) as 0 | 1 | 2 | 3);
+    this.scrollActiveTabIntoView(this.activeCard());
     this.resetAutoPlay();
   }
 
   prevCard(): void {
     this.currentIndex.update((prev) => ((prev + 3) % 4) as 0 | 1 | 2 | 3);
+    this.scrollActiveTabIntoView(this.activeCard());
     this.resetAutoPlay();
+  }
+
+  selectMobileTab(index: number): void {
+    this.goToCard(index);
+  }
+
+  onMobileTabKeydown(event: KeyboardEvent, index: number): void {
+    let nextIndex: number | null = null;
+    if (event.key === 'ArrowRight') {
+      nextIndex = (index + 1) % this.totalCards;
+    } else if (event.key === 'ArrowLeft') {
+      nextIndex = (index + this.totalCards - 1) % this.totalCards;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = this.totalCards - 1;
+    }
+
+    if (nextIndex === null) return;
+    event.preventDefault();
+    event.stopPropagation();
+    this.goToCard(nextIndex);
+    this.mobileTabRefs()[nextIndex]?.nativeElement.focus({ preventScroll: true });
+  }
+
+  private scrollActiveTabIntoView(index: number): void {
+    if (!this.isBrowser) return;
+    const tablist = this.mobileTablistRef()?.nativeElement;
+    const tab = this.mobileTabRefs()[index]?.nativeElement;
+    if (!tablist || !tab || tablist.clientWidth === 0) return;
+
+    const pad = 24;
+    const tabStart = tab.offsetLeft;
+    const tabEnd = tabStart + tab.offsetWidth;
+    let nextLeft: number | null = null;
+
+    if (tabStart < tablist.scrollLeft + pad) {
+      nextLeft = Math.max(0, tabStart - pad);
+    } else if (tabEnd > tablist.scrollLeft + tablist.clientWidth - pad) {
+      nextLeft = tabEnd - tablist.clientWidth + pad;
+    }
+
+    if (nextLeft !== null) {
+      const reducedMotion =
+        typeof window !== 'undefined' &&
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      tablist.scrollTo?.({
+        left: nextLeft,
+        behavior: reducedMotion ? 'auto' : 'smooth',
+      });
+    }
   }
 
   getCardTransform(cardIndex: number): string {

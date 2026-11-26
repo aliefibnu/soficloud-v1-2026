@@ -193,9 +193,38 @@ describe('Hero', () => {
 
   it('should have responsive top padding classes matching navbar height and vertical spacing', () => {
     const section = fixture.nativeElement.querySelector('section#hero');
-    expect(section?.classList.contains('pt-29.25')).toBe(true);
+    expect(section?.classList.contains('pt-25')).toBe(true);
     expect(section?.classList.contains('sm:pt-[137px]')).toBe(true);
     expect(section?.classList.contains('md:pt-[157px]')).toBe(true);
     expect(section?.classList.contains('lg:pt-[173px]')).toBe(true);
+  });
+
+  it('should use left-aligned editorial layout and stacked touch-friendly CTAs on mobile while centering on sm+', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const contentWrapper = compiled.querySelector('section#hero > div.max-w-7xl');
+    expect(contentWrapper?.classList.contains('items-start')).toBe(true);
+    expect(contentWrapper?.classList.contains('text-left')).toBe(true);
+    expect(contentWrapper?.classList.contains('sm:items-center')).toBe(true);
+    expect(contentWrapper?.classList.contains('sm:text-center')).toBe(true);
+
+    const headlineSpans = compiled.querySelectorAll('h1 > span');
+    expect(headlineSpans.length).toBe(2);
+    expect(headlineSpans[0].classList.contains('inline')).toBe(true);
+    expect(headlineSpans[0].classList.contains('sm:block')).toBe(true);
+    expect(headlineSpans[1].classList.contains('inline')).toBe(true);
+    expect(headlineSpans[1].classList.contains('sm:block')).toBe(true);
+    expect(compiled.querySelector('h1')?.textContent).toContain('Untuk Bisnis');
+
+    const ctaContainer = compiled.querySelector('.mt-6');
+    expect(ctaContainer?.classList.contains('flex-col')).toBe(true);
+    expect(ctaContainer?.classList.contains('sm:flex-row')).toBe(true);
+
+    const buttons = ctaContainer?.querySelectorAll('button') ?? [];
+    expect(buttons.length).toBe(2);
+    for (const button of Array.from(buttons)) {
+      expect(button.classList.contains('w-full')).toBe(true);
+      expect(button.classList.contains('sm:w-auto')).toBe(true);
+      expect(button.classList.contains('min-h-12')).toBe(true);
+    }
   });
 });

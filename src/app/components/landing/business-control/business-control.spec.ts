@@ -424,6 +424,63 @@ describe('BusinessControl', () => {
         '/smart-workflow',
       );
     });
+
+    it('should render mobile capability tabs with localized labels and support click and keyboard navigation without double-stepping', () => {
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement as HTMLElement;
+
+      const tablist = compiled.querySelector('[role="tablist"]');
+      expect(tablist).toBeTruthy();
+      expect(tablist?.classList.contains('bc-mobile-tablist')).toBe(true);
+
+      const tabs = Array.from(compiled.querySelectorAll('[role="tab"]')) as HTMLButtonElement[];
+      expect(tabs.length).toBe(4);
+      expect(tabs.map((t) => t.textContent?.trim())).toEqual([
+        'Monitoring Real-Time',
+        'Proses Terhubung',
+        'Workflow & Approval',
+        'Insight Keuangan',
+      ]);
+      expect(tabs[0].getAttribute('aria-selected')).toBe('true');
+      expect(tabs[1].getAttribute('aria-selected')).toBe('false');
+
+      tabs[2].click();
+      fixture.detectChanges();
+      expect(component.activeCard()).toBe(2);
+      expect(tabs[2].getAttribute('aria-selected')).toBe('true');
+
+      tabs[2].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+      fixture.detectChanges();
+      expect(component.activeCard()).toBe(3);
+
+      tabs[3].dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+      fixture.detectChanges();
+      expect(component.activeCard()).toBe(0);
+
+      tabs[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+      fixture.detectChanges();
+      expect(component.activeCard()).toBe(3);
+    });
+
+    it('should use crisp white mobile surface, full-width touch CTAs, and hide desktop-only carousel chrome on mobile', () => {
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement as HTMLElement;
+
+      const surface = compiled.querySelector('.business-control-surface');
+      expect(surface).toBeTruthy();
+
+      const ctas = Array.from(compiled.querySelectorAll('.business-cta-btn'));
+      expect(ctas.length).toBe(4);
+      for (const cta of ctas) {
+        expect(cta.classList.contains('w-full')).toBe(true);
+        expect(cta.classList.contains('sm:w-auto')).toBe(true);
+        expect(cta.classList.contains('min-h-11')).toBe(true);
+      }
+
+      const categoryWrapper = compiled.querySelector('.business-control-surface > div.max-w-4xl');
+      expect(categoryWrapper?.classList.contains('hidden')).toBe(true);
+      expect(categoryWrapper?.classList.contains('sm:flex')).toBe(true);
+    });
   });
 });
 
