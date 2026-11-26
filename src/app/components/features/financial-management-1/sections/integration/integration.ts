@@ -39,7 +39,7 @@ const STAGE_ICONS = {
   ar: { src: '/images/landing/features/1/AR.svg', width: 123, height: 129 },
   receipt: { src: '/images/landing/features/1/receipt.svg', width: 116, height: 127 },
   generalLedger: {
-    src: '/images/landing/features/1/general-ledger-2.svg',
+    src: '/images/landing/features/1/general-ledger-1.svg',
     width: 119,
     height: 135,
   },
@@ -51,7 +51,7 @@ const STAGE_ICONS = {
     height: 140,
   },
   ap: { src: '/images/landing/features/1/AP.svg', width: 103, height: 133 },
-  payment: { src: '/images/landing/features/1/claim-request.svg', width: 226, height: 194 },
+  payment: { src: '/images/landing/features/1/payment.svg', width: 105, height: 133 },
   generalLedger1: {
     src: '/images/landing/features/1/general-ledger-1.svg',
     width: 112,

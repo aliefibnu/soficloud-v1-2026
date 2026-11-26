@@ -179,11 +179,11 @@ describe('Integration', () => {
     expect(imgs.length).toBe(6);
     expect(imgs.map((img) => img.nativeElement.getAttribute('src'))).toEqual([
       '/images/landing/features/1/sales-order.svg',
-      '/images/landing/features/1/delivery.svg',
+      '/images/landing/features/1/delivery2.svg',
       '/images/landing/features/1/customer-invoice.svg',
       '/images/landing/features/1/AR.svg',
       '/images/landing/features/1/receipt.svg',
-      '/images/landing/features/1/general-ledger-2.svg',
+      '/images/landing/features/1/general-ledger-1.svg',
     ]);
 
     const arrows = panel.queryAll(By.css('.integration-step-arrow img'));
@@ -238,7 +238,7 @@ describe('Integration', () => {
       '/images/landing/features/1/goods-receipt.svg',
       '/images/landing/features/1/supplier-invoice.svg',
       '/images/landing/features/1/AP.svg',
-      '/images/landing/features/1/claim-request.svg',
+      '/images/landing/features/1/payment.svg',
       '/images/landing/features/1/general-ledger-1.svg',
     ]);
 
@@ -395,7 +395,7 @@ describe('Integration', () => {
     expect(imgs.map((img) => img.nativeElement.getAttribute('src'))).toEqual([
       '/images/landing/features/1/claim-advance.svg',
       '/images/landing/features/1/approval.svg',
-      '/images/landing/features/1/claim-request.svg',
+      '/images/landing/features/1/payment.svg',
       '/images/landing/features/1/settlement.svg',
       '/images/landing/features/1/cost-centre.svg',
       '/images/landing/features/1/general-ledger-1.svg',
