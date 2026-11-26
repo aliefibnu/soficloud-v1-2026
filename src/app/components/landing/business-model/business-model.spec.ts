@@ -113,13 +113,20 @@ describe('BusinessModel', () => {
     );
   });
 
-  it('should render a centered header above a 2x2 grid container', () => {
+  it('should render a left-aligned, vertically centered header above a 2x2 grid container', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     const heading = compiled.querySelector('#business-model-heading');
     const headerContainer = heading?.parentElement;
-    expect(headerContainer?.classList.contains('text-center')).toBe(true);
-    expect(headerContainer?.classList.contains('mx-auto')).toBe(true);
+    const subtitle = headerContainer?.querySelector('p');
+    expect(headerContainer?.classList.contains('flex')).toBe(true);
+    expect(headerContainer?.classList.contains('flex-col')).toBe(true);
+    expect(headerContainer?.classList.contains('justify-center')).toBe(true);
+    expect(headerContainer?.classList.contains('items-start')).toBe(true);
+    expect(headerContainer?.classList.contains('text-left')).toBe(true);
+    expect(headerContainer?.classList.contains('text-center')).toBe(false);
+    expect(headerContainer?.classList.contains('mx-auto')).toBe(false);
+    expect(subtitle?.classList.contains('mx-auto')).toBe(false);
 
     const firstCard = compiled.querySelector('article');
     const gridContainer = firstCard?.parentElement;
