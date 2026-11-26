@@ -1052,5 +1052,42 @@ describe('UiMockup', () => {
     expect(badge?.classList.contains('leading-none')).toBe(true);
     expect(badge?.classList.contains('tabular-nums')).toBe(true);
   });
+
+  it('should render streamlined mobile executive header, compact non-truncating metrics, and avoid nested main landmark', () => {
+    fixture.detectChanges();
+    const host = fixture.nativeElement as HTMLElement;
+
+    // Avoid nested <main> landmark inside decorative dashboard mockup
+    expect(host.querySelector('main')).toBeNull();
+
+    // Compact mobile values render cleanly for September and update on month navigation
+    expect(host.textContent).toContain('Rp 8.45B');
+    expect(host.textContent).toContain('Rp 2.10B');
+    expect(host.textContent).toContain('Rp 5.80B');
+    expect(host.textContent).toContain('Rp 6.72B');
+    expect(host.textContent).toContain('Rp 3.25B');
+
+    component.prevMonth();
+    fixture.detectChanges();
+    expect(host.textContent).toContain('Rp 8.15B');
+    expect(host.textContent).toContain('Rp 1.89B');
+    expect(host.textContent).toContain('Rp 5.30B');
+    expect(host.textContent).toContain('Rp 6.25B');
+
+    // Accessible stepper controls & mobile tabs
+    const prevBtn = host.querySelector('header button[aria-label="Previous month"]');
+    const nextBtn = host.querySelector('header button[aria-label="Next month"]');
+    expect(prevBtn?.classList.contains('mockup-stepper-btn')).toBe(true);
+    expect(prevBtn?.classList.contains('min-h-7')).toBe(true);
+    expect(nextBtn?.classList.contains('mockup-stepper-btn')).toBe(true);
+    expect(nextBtn?.classList.contains('min-h-7')).toBe(true);
+
+    const tabs = host.querySelectorAll('[role="tab"]');
+    expect(tabs.length).toBe(2);
+    for (const tab of Array.from(tabs)) {
+      expect(tab.classList.contains('mockup-mobile-tab')).toBe(true);
+      expect(tab.classList.contains('min-h-10')).toBe(true);
+    }
+  });
 });
 

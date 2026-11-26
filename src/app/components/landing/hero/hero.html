@@ -1,10 +1,10 @@
-<section id="hero" class="relative w-full pt-29.25 sm:pt-[137px] md:pt-[157px] lg:pt-[173px] pb-section overflow-x-clip">
+<section id="hero" class="relative w-full pt-25 sm:pt-[137px] md:pt-[157px] lg:pt-[173px] pb-section overflow-x-clip">
   <div
     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none [mask-image:linear-gradient(to_bottom,#000_0%,#000_72%,transparent_100%)]"
     aria-hidden="true"
   >
     <div
-      class="hero-ambient-canvas absolute top-0 left-1/2 -translate-x-1/2 w-360 h-256 pointer-events-none"
+      class="hero-ambient-canvas opacity-45 sm:opacity-100 absolute top-0 left-1/2 -translate-x-1/2 w-360 h-256 pointer-events-none"
     >
       <div
         class="absolute -top-100.25 -left-137.5 w-333.25 h-328.5 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(168,195,240,0.42)_0%,rgba(168,195,240,0.22)_35%,rgba(168,195,240,0.06)_62%,transparent_80%)]"
@@ -28,29 +28,28 @@
     ></div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex flex-col items-start text-left sm:items-center sm:text-center">
     <h1
-      class="font-inter font-extrabold text-[#23244E] text-[28px] sm:text-[38px] md:text-[56px] lg:text-[66px] xl:text-[76px] leading-[1.12] sm:leading-[1.08] md:leading-[1.04] tracking-[-0.03em] sm:tracking-[-0.035em] max-w-sm sm:max-w-6xl mb-3.5 sm:mb-5 text-balance"
+      class="font-inter font-extrabold text-[#23244E] text-[clamp(1.75rem,1.25rem+2.5vw,2.125rem)] sm:text-[38px] md:text-[56px] lg:text-[66px] xl:text-[76px] leading-[1.12] sm:leading-[1.08] md:leading-[1.04] tracking-[-0.03em] sm:tracking-[-0.035em] max-w-[20ch] sm:max-w-6xl mb-3 sm:mb-5 text-balance"
     >
-      <span class="block md:whitespace-nowrap">{{ 'HERO.TITLE_LINE_1' | translate }}</span>
-      <span class="block md:whitespace-nowrap">
+      <span class="inline sm:block md:whitespace-nowrap">{{ 'HERO.TITLE_LINE_1' | translate }}</span>{{ ' ' }}<span class="inline sm:block md:whitespace-nowrap">
         <span>{{ 'HERO.TITLE_LINE_2_PREFIX' | translate }}</span>
         <span class="text-[#1C73E8]">{{ 'HERO.TITLE_LINE_2_HIGHLIGHT' | translate }}</span>
       </span>
     </h1>
 
     <p
-      class="font-dm-sans font-normal text-[#000000] sm:text-[#000000] text-[14px] sm:text-[16.5px] md:text-[17.5px] lg:text-[18.5px] leading-relaxed max-w-xs sm:max-w-4xl md:whitespace-nowrap text-balance"
+      class="font-dm-sans font-normal text-[#475569] sm:text-[#000000] text-[0.9375rem] sm:text-[16.5px] md:text-[17.5px] lg:text-[18.5px] leading-[1.6] sm:leading-relaxed max-w-[38ch] sm:max-w-4xl md:whitespace-nowrap text-pretty sm:text-balance"
     >
       {{ 'HERO.SUBTITLE' | translate }}
     </p>
 
-    <div class="mt-6 sm:mt-7 flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-full max-w-85 sm:max-w-none sm:w-auto">
+    <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 w-full sm:w-auto">
       <button
         type="button"
         (click)="onWatchVideo()"
         [attr.aria-label]="'HERO.ARIA.WATCH_VIDEO' | translate"
-        class="group relative overflow-hidden flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 sm:gap-3 px-4 py-2.5 sm:px-7 sm:py-2.5 rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] text-white font-display text-[13.5px] sm:text-xl font-semibold shadow-xs hover:shadow-md active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
+        class="group relative overflow-hidden w-full sm:w-auto min-h-12 sm:min-h-0 inline-flex items-center justify-center gap-2 sm:gap-3 px-5 py-3 sm:px-7 sm:py-2.5 rounded-xl bg-linear-to-r from-[#1d44eb] via-[#2563eb] to-[#3b82f6] text-white font-display text-[0.9375rem] sm:text-xl font-semibold shadow-[0_6px_18px_-6px_rgba(29,68,235,0.45)] sm:shadow-xs hover:shadow-md active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer before:absolute before:inset-0 before:bg-linear-to-r before:from-[#1738c2] before:via-[#1e4ed8] before:to-[#2563eb] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 motion-reduce:before:transition-none"
       >
         <img
           ngSrc="/images/landing/hero/play-white.svg"
@@ -60,20 +59,20 @@
           aria-hidden="true"
           class="relative z-10 w-auto h-3.5 sm:h-[17.5px] shrink-0 pointer-events-none select-none"
         />
-        <span class="relative z-10 whitespace-nowrap">{{ 'HERO.ACTIONS.WATCH_VIDEO' | translate }}</span>
+        <span class="relative z-10 sm:whitespace-nowrap">{{ 'HERO.ACTIONS.WATCH_VIDEO' | translate }}</span>
       </button>
 
       <button
         type="button"
         (click)="onAbout()"
         [attr.aria-label]="'HERO.ARIA.ABOUT_SOFICLOUD' | translate"
-        class="group flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 sm:px-7 sm:py-2.5 rounded-xl border border-[#2563eb] bg-white hover:bg-[#F0F5FE] text-[#1C73E8] hover:text-[#1738c2] font-display text-[13.5px] sm:text-xl font-semibold shadow-xs hover:shadow-sm active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer"
+        class="group w-full sm:w-auto min-h-12 sm:min-h-0 inline-flex items-center justify-center px-5 py-3 sm:px-7 sm:py-2.5 rounded-xl border border-[#cbd5e1] sm:border-[#2563eb] bg-white/95 sm:bg-white hover:border-[#2563eb] hover:bg-[#F0F5FE] text-[#182849] sm:text-[#1C73E8] hover:text-[#1738c2] font-display text-[0.9375rem] sm:text-xl font-semibold shadow-2xs sm:shadow-xs hover:shadow-sm active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d44eb] cursor-pointer"
       >
-        <span class="whitespace-nowrap">{{ 'HERO.ACTIONS.ABOUT_SOFICLOUD' | translate }}</span>
+        <span class="sm:whitespace-nowrap">{{ 'HERO.ACTIONS.ABOUT_SOFICLOUD' | translate }}</span>
       </button>
     </div>
 
-    <div class="mt-7 sm:mt-14 md:mt-16 w-full max-w-6xl xl:max-w-7xl">
+    <div class="mt-8 sm:mt-14 md:mt-16 w-full max-w-6xl xl:max-w-7xl">
       <app-ui-mockup />
     </div>
   </div>
