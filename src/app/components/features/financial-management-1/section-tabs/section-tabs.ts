@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   DestroyRef,
+  effect,
   ElementRef,
   inject,
   input,
@@ -15,16 +16,14 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
-import { filter } from 'rxjs';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { filter, merge } from 'rxjs';
 
 export interface FeatureTab {
   readonly id: string;
   readonly titleKey?: string;
   readonly defaultTitle: string;
 }
-
-let nextSectionTabsInstanceId = 0;
 
 @Component({
   selector: 'app-section-tabs',
@@ -43,19 +42,20 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly router = inject(Router, { optional: true });
   private readonly platformLocation = inject(PlatformLocation, { optional: true });
+  private readonly translate = inject(TranslateService, { optional: true });
   private readonly destroyRef = inject(DestroyRef);
   readonly isBrowser = isPlatformBrowser(this.platformId);
 
   readonly tabs = input.required<readonly FeatureTab[]>();
   readonly navAriaLabel = input<string>('Financial management sections');
+  readonly listMinWidthClass = input<string>('min-w-270 xl:min-w-0');
 
-  readonly scrollerRef = viewChild<ElementRef<HTMLElement>>('scrollerRef');
   readonly tabsListRef = viewChild<ElementRef<HTMLElement>>('tabsListRef');
 
-  readonly anchorName = `--fm-section-tab-active-${++nextSectionTabsInstanceId}`;
   readonly isSticky = signal<boolean>(false);
-  readonly moreStart = signal<boolean>(false);
-  readonly moreEnd = signal<boolean>(false);
+  readonly isStickyTransitioning = signal<boolean>(false);
+  readonly indicatorLeft = signal<number>(0);
+  readonly indicatorWidth = signal<number>(140);
   private readonly currentBaseUrl = signal<string>(this.resolveBaseUrl());
 
   readonly activeTabId = linkedSignal<readonly FeatureTab[], string>({
@@ -73,14 +73,36 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
     return currentTabs[this.activeTabIndex()] ?? currentTabs[0];
   });
 
+  private resizeObserver?: ResizeObserver;
   private scrollRafId: number | null = null;
+  private indicatorRafId: number | null = null;
+  private stickyTransitionRafId: number | null = null;
+  private stickyTransitionTimeout?: ReturnType<typeof setTimeout>;
+  private indicatorTimeout?: ReturnType<typeof setTimeout>;
   private isUserClicking = false;
   private userClickTimeout?: ReturnType<typeof setTimeout>;
   private initialHashScrollTimeout?: ReturnType<typeof setTimeout>;
-  private edgeFadeObserver?: IntersectionObserver;
   private scrollendCleanup?: () => void;
 
   constructor() {
+    effect(() => {
+      const currentTabs = this.tabs();
+      const activeId = this.activeTabId();
+      if (this.isBrowser && currentTabs.length > 0 && activeId) {
+        this.scheduleIndicatorUpdate();
+      }
+    });
+
+    if (this.translate) {
+      merge(this.translate.onLangChange, this.translate.onTranslationChange)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(() => {
+          if (this.isBrowser) {
+            this.scheduleIndicatorUpdate(50);
+          }
+        });
+    }
+
     this.router?.events
       .pipe(
         filter((event): event is NavigationEnd => event instanceof NavigationEnd),
@@ -108,17 +130,49 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
       }
     }
 
+    this.updateIndicator();
+    this.scheduleIndicatorUpdate(50);
+
+    const listEl = this.tabsListRef()?.nativeElement;
+    if (typeof ResizeObserver !== 'undefined' && listEl) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.updateIndicator();
+      });
+      this.resizeObserver.observe(listEl);
+      const tabLinks = listEl.querySelectorAll('[data-tab-id]');
+      tabLinks.forEach((link) => this.resizeObserver?.observe(link));
+    }
+
+    if (typeof document !== 'undefined' && document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        this.updateIndicator();
+      });
+    }
+
     this.setupScrollTargetGroupSync();
-    this.setupEdgeFadeFallback();
     this.checkStickyState();
     this.updateActiveSectionByScroll();
   }
 
   ngOnDestroy(): void {
-    this.edgeFadeObserver?.disconnect();
+    this.resizeObserver?.disconnect();
     this.scrollendCleanup?.();
-    if (this.scrollRafId !== null && typeof window !== 'undefined') {
-      window.cancelAnimationFrame(this.scrollRafId);
+    if (typeof window !== 'undefined') {
+      if (this.scrollRafId !== null) {
+        window.cancelAnimationFrame(this.scrollRafId);
+      }
+      if (this.indicatorRafId !== null) {
+        window.cancelAnimationFrame(this.indicatorRafId);
+      }
+      if (this.stickyTransitionRafId !== null) {
+        window.cancelAnimationFrame(this.stickyTransitionRafId);
+      }
+    }
+    if (this.stickyTransitionTimeout) {
+      clearTimeout(this.stickyTransitionTimeout);
+    }
+    if (this.indicatorTimeout) {
+      clearTimeout(this.indicatorTimeout);
     }
     if (this.userClickTimeout) {
       clearTimeout(this.userClickTimeout);
@@ -134,6 +188,7 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
 
   onWindowResize(): void {
     if (!this.isBrowser) return;
+    this.updateIndicator();
     this.checkStickyState();
     this.updateActiveSectionByScroll();
   }
@@ -176,6 +231,9 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
       this.isUserClicking = false;
     }, 700);
 
+    this.updateIndicator();
+    this.scheduleIndicatorUpdate(0);
+
     const scrollBehavior: ScrollBehavior = this.prefersReducedMotion() ? 'auto' : 'smooth';
 
     const listEl = this.tabsListRef()?.nativeElement;
@@ -191,6 +249,32 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
 
     if (typeof history !== 'undefined' && typeof history.replaceState === 'function') {
       history.replaceState(null, '', this.getTabHref(id));
+    }
+  }
+
+  /**
+   * Aligns the 3px sliding pill indicator beneath the active tab link relative to the first tab.
+   */
+  updateIndicator(): void {
+    const currentTabs = this.tabs();
+    if (!this.isBrowser || currentTabs.length === 0) return;
+    const listEl = this.tabsListRef()?.nativeElement;
+    if (!listEl) return;
+
+    const firstLink = listEl.querySelector(
+      `[data-tab-id="${currentTabs[0].id}"]`,
+    ) as HTMLElement | null;
+    const activeLink = listEl.querySelector(
+      `[data-tab-id="${this.activeTabId()}"]`,
+    ) as HTMLElement | null;
+
+    if (activeLink && firstLink) {
+      const firstRect = firstLink.getBoundingClientRect();
+      const activeRect = activeLink.getBoundingClientRect();
+      const safeLeft = Math.max(0, activeRect.left - firstRect.left);
+
+      this.indicatorLeft.set(safeLeft);
+      this.indicatorWidth.set(activeRect.width);
     }
   }
 
@@ -212,6 +296,7 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
       const lastTabId = existingSections[existingSections.length - 1].tab.id;
       if (this.activeTabId() !== lastTabId) {
         this.activeTabId.set(lastTabId);
+        this.updateIndicator();
       }
       return;
     }
@@ -224,6 +309,7 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
       if (rect.top <= readingLine && rect.bottom > readingLine) {
         if (this.activeTabId() !== tab.id) {
           this.activeTabId.set(tab.id);
+          this.updateIndicator();
         }
         return;
       }
@@ -233,7 +319,29 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
     if (firstSection.el.getBoundingClientRect().top > readingLine) {
       if (this.activeTabId() !== firstSection.tab.id) {
         this.activeTabId.set(firstSection.tab.id);
+        this.updateIndicator();
       }
+    }
+  }
+
+  private scheduleIndicatorUpdate(delayMs?: number): void {
+    if (typeof window !== 'undefined') {
+      if (this.indicatorRafId !== null) {
+        window.cancelAnimationFrame(this.indicatorRafId);
+      }
+      this.indicatorRafId = window.requestAnimationFrame(() => {
+        this.indicatorRafId = null;
+        this.updateIndicator();
+      });
+    }
+    if (delayMs !== undefined) {
+      if (this.indicatorTimeout) {
+        clearTimeout(this.indicatorTimeout);
+      }
+      this.indicatorTimeout = setTimeout(() => {
+        this.indicatorTimeout = undefined;
+        this.updateIndicator();
+      }, delayMs);
     }
   }
 
@@ -247,7 +355,43 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
 
     if (currentlySticky !== sticky) {
       this.isSticky.set(sticky);
+      this.syncIndicatorDuringStickyTransition();
     }
+  }
+
+  /**
+   * Tracks tab positions on every animation frame while the dynamic-island max-width transitions,
+   * temporarily disabling the CSS transition on the pill so it stays locked to the active tab.
+   */
+  private syncIndicatorDuringStickyTransition(): void {
+    if (!this.isBrowser) return;
+    this.isStickyTransitioning.set(true);
+    this.updateIndicator();
+
+    if (this.stickyTransitionRafId !== null) {
+      window.cancelAnimationFrame(this.stickyTransitionRafId);
+      this.stickyTransitionRafId = null;
+    }
+    if (this.stickyTransitionTimeout) {
+      clearTimeout(this.stickyTransitionTimeout);
+    }
+
+    const step = (): void => {
+      this.updateIndicator();
+      if (this.isStickyTransitioning()) {
+        this.stickyTransitionRafId = window.requestAnimationFrame(step);
+      }
+    };
+    this.stickyTransitionRafId = window.requestAnimationFrame(step);
+
+    this.stickyTransitionTimeout = setTimeout(() => {
+      if (this.stickyTransitionRafId !== null) {
+        window.cancelAnimationFrame(this.stickyTransitionRafId);
+        this.stickyTransitionRafId = null;
+      }
+      this.isStickyTransitioning.set(false);
+      this.updateIndicator();
+    }, 320);
   }
 
   private setupScrollTargetGroupSync(): void {
@@ -268,6 +412,7 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
         const tabId = currentLink?.getAttribute('data-tab-id');
         if (tabId && this.activeTabId() !== tabId) {
           this.activeTabId.set(tabId);
+          this.updateIndicator();
         }
       } catch {
         // Ignore if :target-current selector is unsupported by the runtime selector engine.
@@ -278,42 +423,6 @@ export class SectionTabs implements AfterViewInit, OnDestroy {
     this.scrollendCleanup = () => {
       document.removeEventListener('scrollend', syncFromTargetCurrent);
     };
-  }
-
-  private setupEdgeFadeFallback(): void {
-    const supportsScrollTimeline =
-      typeof CSS !== 'undefined' &&
-      typeof CSS.supports === 'function' &&
-      CSS.supports('animation-timeline', 'scroll()');
-
-    if (supportsScrollTimeline || typeof IntersectionObserver === 'undefined') {
-      return;
-    }
-
-    const scrollerEl = this.scrollerRef()?.nativeElement;
-    const listEl = this.tabsListRef()?.nativeElement;
-    if (!scrollerEl || !listEl) return;
-
-    const firstItem = listEl.firstElementChild;
-    const lastItem = listEl.lastElementChild;
-    if (!firstItem || !lastItem) return;
-
-    this.edgeFadeObserver = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.target === firstItem) {
-            this.moreStart.set(entry.intersectionRatio < 1);
-          }
-          if (entry.target === lastItem) {
-            this.moreEnd.set(entry.intersectionRatio < 1);
-          }
-        }
-      },
-      { root: scrollerEl, threshold: 1, rootMargin: '1px' },
-    );
-
-    this.edgeFadeObserver.observe(firstItem);
-    this.edgeFadeObserver.observe(lastItem);
   }
 
   private scrollTargetIntoView(id: string, behavior: ScrollBehavior): void {
