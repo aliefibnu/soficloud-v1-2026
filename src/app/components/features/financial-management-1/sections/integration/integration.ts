@@ -29,19 +29,19 @@ export interface IntegrationFlowTab {
 }
 
 const STAGE_ICONS = {
-  salesOrder: { src: '/images/landing/features/1/sales-order.svg', width: 115, height: 145 },
-  delivery: { src: '/images/landing/features/1/delivery.svg', width: 120, height: 137 },
+  salesOrder: { src: '/images/landing/features/1/sales-order.svg', width: 104, height: 133 },
+  delivery: { src: '/images/landing/features/1/delivery2.svg', width: 105, height: 133 },
   customerInvoice: {
     src: '/images/landing/features/1/customer-invoice.svg',
-    width: 124,
-    height: 132,
+    width: 110,
+    height: 133,
   },
   ar: { src: '/images/landing/features/1/AR.svg', width: 123, height: 129 },
-  receipt: { src: '/images/landing/features/1/receipt.svg', width: 116, height: 127 },
+  receipt: { src: '/images/landing/features/1/receipt.svg', width: 116, height: 133 },
   generalLedger: {
-    src: '/images/landing/features/1/general-ledger-2.svg',
-    width: 119,
-    height: 135,
+    src: '/images/landing/features/1/general-ledger-1.svg',
+    width: 112,
+    height: 131,
   },
   prPo: { src: '/images/landing/features/1/PR-PO.svg', width: 120, height: 139 },
   goodsReceipt: { src: '/images/landing/features/1/goods-receipt.svg', width: 110, height: 140 },
@@ -51,7 +51,7 @@ const STAGE_ICONS = {
     height: 140,
   },
   ap: { src: '/images/landing/features/1/AP.svg', width: 103, height: 133 },
-  payment: { src: '/images/landing/features/1/claim-request.svg', width: 226, height: 194 },
+  payment: { src: '/images/landing/features/1/payment.svg', width: 115, height: 137 },
   generalLedger1: {
     src: '/images/landing/features/1/general-ledger-1.svg',
     width: 112,
@@ -59,21 +59,21 @@ const STAGE_ICONS = {
   },
   materialIssue: {
     src: '/images/landing/features/1/material-issue.svg',
-    width: 119,
+    width: 124,
     height: 135,
   },
-  wip: { src: '/images/landing/features/1/wip.svg', width: 120, height: 139 },
+  wip: { src: '/images/landing/features/1/wip.svg', width: 125, height: 135 },
   finishedGoods: {
     src: '/images/landing/features/1/finished-goods.svg',
-    width: 120,
-    height: 139,
+    width: 124,
+    height: 131,
   },
   productionCost: {
     src: '/images/landing/features/1/production-cost.svg',
-    width: 120,
-    height: 135,
+    width: 106,
+    height: 132,
   },
-  cogs: { src: '/images/landing/features/1/delivery.svg', width: 120, height: 137 },
+  cogs: { src: '/images/landing/features/1/delivery.svg', width: 117, height: 133 },
   projectBudget: {
     src: '/images/landing/features/1/project-budget.svg',
     width: 114,

@@ -179,11 +179,11 @@ describe('Integration', () => {
     expect(imgs.length).toBe(6);
     expect(imgs.map((img) => img.nativeElement.getAttribute('src'))).toEqual([
       '/images/landing/features/1/sales-order.svg',
-      '/images/landing/features/1/delivery.svg',
+      '/images/landing/features/1/delivery2.svg',
       '/images/landing/features/1/customer-invoice.svg',
       '/images/landing/features/1/AR.svg',
       '/images/landing/features/1/receipt.svg',
-      '/images/landing/features/1/general-ledger-2.svg',
+      '/images/landing/features/1/general-ledger-1.svg',
     ]);
 
     const arrows = panel.queryAll(By.css('.integration-step-arrow img'));
@@ -238,7 +238,7 @@ describe('Integration', () => {
       '/images/landing/features/1/goods-receipt.svg',
       '/images/landing/features/1/supplier-invoice.svg',
       '/images/landing/features/1/AP.svg',
-      '/images/landing/features/1/claim-request.svg',
+      '/images/landing/features/1/payment.svg',
       '/images/landing/features/1/general-ledger-1.svg',
     ]);
 
@@ -395,7 +395,7 @@ describe('Integration', () => {
     expect(imgs.map((img) => img.nativeElement.getAttribute('src'))).toEqual([
       '/images/landing/features/1/claim-advance.svg',
       '/images/landing/features/1/approval.svg',
-      '/images/landing/features/1/claim-request.svg',
+      '/images/landing/features/1/payment.svg',
       '/images/landing/features/1/settlement.svg',
       '/images/landing/features/1/cost-centre.svg',
       '/images/landing/features/1/general-ledger-1.svg',
@@ -418,11 +418,85 @@ describe('Integration', () => {
       const tileEl = tile.nativeElement as HTMLElement;
       const tileStyle = getComputedStyle(tileEl);
       expect(tileStyle.position).toBe('relative');
-      expect(tileStyle.aspectRatio).toBe('95 / 112');
+      expect(tileStyle.aspectRatio).toBe('10 / 11');
 
       const iconEl = tile.query(By.css('img.integration-step-icon')).nativeElement as HTMLElement;
       const iconStyle = getComputedStyle(iconEl);
       expect(iconStyle.position).toBe('absolute');
+      expect(['0', '0px']).toContain(iconStyle.insetBlockEnd);
+      expect(iconStyle.blockSize).toContain('var(--icon-height');
+      expect(iconEl.style.getPropertyValue('--icon-height')).toBeTruthy();
+      expect(iconStyle.objectFit).toBe('contain');
+      expect(iconStyle.objectPosition).toBe('left bottom');
     }
+  });
+
+  it('should render Sales to Cash icons with intrinsic SVG width and height attributes', () => {
+    const panel = fixture.debugElement.query(By.css('[data-tab-panel="sales-to-cash"]'));
+    const imgs = panel.queryAll(By.css('ol img.integration-step-icon'));
+
+    expect(
+      imgs.map((img) => ({
+        width: img.nativeElement.getAttribute('width'),
+        height: img.nativeElement.getAttribute('height'),
+      })),
+    ).toEqual([
+      { width: '104', height: '133' },
+      { width: '105', height: '133' },
+      { width: '110', height: '133' },
+      { width: '123', height: '129' },
+      { width: '116', height: '133' },
+      { width: '112', height: '131' },
+    ]);
+  });
+
+  it('should render Procure to Pay icons with intrinsic SVG width, height, and proportional height token', () => {
+    const procureTab = fixture.debugElement.query(By.css('button[data-tab-id="procure-to-pay"]'));
+    procureTab.nativeElement.click();
+    fixture.detectChanges();
+
+    const panel = fixture.debugElement.query(By.css('[data-tab-panel="procure-to-pay"]'));
+    const imgs = panel.queryAll(By.css('ol img.integration-step-icon'));
+
+    expect(
+      imgs.map((img) => ({
+        width: img.nativeElement.getAttribute('width'),
+        height: img.nativeElement.getAttribute('height'),
+        iconHeightVar: img.nativeElement.style.getPropertyValue('--icon-height'),
+      })),
+    ).toEqual([
+      { width: '120', height: '139', iconHeightVar: '139' },
+      { width: '110', height: '140', iconHeightVar: '140' },
+      { width: '109', height: '140', iconHeightVar: '140' },
+      { width: '103', height: '133', iconHeightVar: '133' },
+      { width: '115', height: '137', iconHeightVar: '137' },
+      { width: '112', height: '131', iconHeightVar: '131' },
+    ]);
+  });
+
+  it('should render Manufacture to COGs icons with intrinsic SVG width, height, and proportional height token', () => {
+    const manufactureTab = fixture.debugElement.query(
+      By.css('button[data-tab-id="manufacture-to-cogs"]'),
+    );
+    manufactureTab.nativeElement.click();
+    fixture.detectChanges();
+
+    const panel = fixture.debugElement.query(By.css('[data-tab-panel="manufacture-to-cogs"]'));
+    const imgs = panel.queryAll(By.css('ol img.integration-step-icon'));
+
+    expect(
+      imgs.map((img) => ({
+        width: img.nativeElement.getAttribute('width'),
+        height: img.nativeElement.getAttribute('height'),
+        iconHeightVar: img.nativeElement.style.getPropertyValue('--icon-height'),
+      })),
+    ).toEqual([
+      { width: '124', height: '135', iconHeightVar: '135' },
+      { width: '125', height: '135', iconHeightVar: '135' },
+      { width: '124', height: '131', iconHeightVar: '131' },
+      { width: '106', height: '132', iconHeightVar: '132' },
+      { width: '117', height: '133', iconHeightVar: '133' },
+      { width: '112', height: '131', iconHeightVar: '131' },
+    ]);
   });
 });

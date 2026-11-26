@@ -130,33 +130,93 @@ describe('FinancialManagement1 SectionTabs', () => {
     expect(links[4].nativeElement.getAttribute('href')).toBe(component.getTabHref('integration'));
   });
 
-  it('should mark only the first tab active by default with aria-current and WCAG AA color classes', () => {
+  it('should mark only the first tab active by default with aria-current and process-tabs color/padding classes', () => {
     const links = fixture.debugElement.queryAll(By.css('nav ul li a'));
     expect(component.activeTabId()).toBe('financial-control');
     expect(links[0].nativeElement.getAttribute('aria-current')).toBe('true');
     expect(links[0].nativeElement.classList.contains('text-[#23244E]')).toBe(true);
-    expect(links[0].nativeElement.classList.contains('min-h-11')).toBe(true);
+    expect(links[0].nativeElement.classList.contains('py-2')).toBe(true);
+    expect(links[0].nativeElement.classList.contains('px-2.5')).toBe(true);
+    expect(links[0].nativeElement.classList.contains('min-h-11')).toBe(false);
 
     for (let i = 1; i < links.length; i++) {
       expect(links[i].nativeElement.getAttribute('aria-current')).toBeNull();
-      expect(links[i].nativeElement.classList.contains('text-[#717386]')).toBe(true);
+      expect(links[i].nativeElement.classList.contains('text-[#B1B1B1DD]')).toBe(true);
     }
   });
 
-  it('should render full-width 1px gray baseline with horizontal inset padding on the list', () => {
+  it('should render process-tabs layout padding, dynamic-island width, and 3px rounded baseline track with indicator', () => {
     component.isSticky.set(false);
     fixture.detectChanges();
 
+    const island = fixture.debugElement.query(By.css('.lg\\:max-w-310'));
+    expect(island).toBeTruthy();
+
+    const overflowContainer = fixture.debugElement.query(By.css('.min-w-270.xl\\:min-w-0'));
+    expect(overflowContainer).toBeTruthy();
+
     const list = fixture.debugElement.query(By.css('ul.tabs-list'));
     expect(list).toBeTruthy();
-    expect(list.nativeElement.classList.contains('border-b')).toBe(true);
-    expect(list.nativeElement.classList.contains('border-[#D8D8D8]')).toBe(true);
-    expect(list.nativeElement.classList.contains('lg:px-16')).toBe(true);
-    expect(list.nativeElement.classList.contains('xl:px-20')).toBe(true);
+    expect(list.nativeElement.classList.contains('px-6')).toBe(true);
+    expect(list.nativeElement.classList.contains('sm:px-10')).toBe(true);
+    expect(
+      list.nativeElement.classList.contains('lg:px-17.5') ||
+        list.nativeElement.classList.contains('lg:px-[70px]'),
+    ).toBe(true);
 
-    component.isSticky.set(true);
-    fixture.detectChanges();
-    expect(list.nativeElement.classList.contains('lg:px-8')).toBe(true);
+    const baseLine = fixture.debugElement.query(By.css('.bg-\\[\\#D9D9D9\\]'));
+    expect(baseLine).toBeTruthy();
+    expect(baseLine.nativeElement.classList.contains('overflow-hidden')).toBe(true);
+    expect(baseLine.nativeElement.classList.contains('rounded-full')).toBe(true);
+
+    const indicator = fixture.debugElement.query(By.css('.tab-indicator.bg-\\[\\#365AD2\\]'));
+    expect(indicator).toBeTruthy();
+  });
+
+  it('should update indicator on window resize and recalculate dimensions from bounding boxes', () => {
+    const updateSpy = vi.spyOn(component, 'updateIndicator');
+    window.dispatchEvent(new Event('resize'));
+    expect(updateSpy).toHaveBeenCalled();
+    updateSpy.mockRestore();
+
+    const listEl = component.tabsListRef()?.nativeElement;
+    expect(listEl).toBeTruthy();
+    if (!listEl) return;
+
+    const firstLink = listEl.querySelector('[data-tab-id="financial-control"]') as HTMLElement;
+    const secondLink = listEl.querySelector('[data-tab-id="capabilities"]') as HTMLElement;
+    expect(firstLink).toBeTruthy();
+    expect(secondLink).toBeTruthy();
+
+    vi.spyOn(firstLink, 'getBoundingClientRect').mockReturnValue({
+      left: 70,
+      top: 100,
+      width: 140,
+      height: 44,
+      right: 210,
+      bottom: 144,
+      x: 70,
+      y: 100,
+      toJSON: () => {},
+    });
+
+    vi.spyOn(secondLink, 'getBoundingClientRect').mockReturnValue({
+      left: 260,
+      top: 100,
+      width: 120,
+      height: 44,
+      right: 380,
+      bottom: 144,
+      x: 260,
+      y: 100,
+      toJSON: () => {},
+    });
+
+    component.activeTabId.set('capabilities');
+    component.updateIndicator();
+
+    expect(component.indicatorLeft()).toBe(190);
+    expect(component.indicatorWidth()).toBe(120);
   });
 
   it('should support defaultTitle fallback when titleKey is omitted', async () => {
@@ -427,7 +487,7 @@ describe('FinancialManagement1 SectionTabs', () => {
   it('should disconnect observer and clean up listeners on destroy', () => {
     const disconnectSpy = vi.fn();
     const cleanupSpy = vi.fn();
-    (component as unknown as { edgeFadeObserver?: { disconnect: () => void } }).edgeFadeObserver = {
+    (component as unknown as { resizeObserver?: { disconnect: () => void } }).resizeObserver = {
       disconnect: disconnectSpy,
     };
     (component as unknown as { scrollendCleanup?: () => void }).scrollendCleanup = cleanupSpy;

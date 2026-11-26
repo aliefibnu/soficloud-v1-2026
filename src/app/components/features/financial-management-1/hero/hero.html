@@ -4,13 +4,12 @@
     [style.background]="heroBackground"
   >
     <div
-      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pt-14 pb-12 sm:pt-20 sm:pb-16 lg:py-24 xl:py-[112px] short:lg:py-16"
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pt-14 pb-12 sm:pt-20 sm:pb-16 lg:py-24 xl:py-28 short:lg:py-16"
     >
       <div class="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-6 xl:gap-8">
-        <!-- Left Column: Typography & Module Badge -->
         <div class="w-full lg:w-[54%] xl:w-[53%] flex flex-col justify-center z-10 select-text">
           <h1
-            class="font-inter font-extrabold text-[#23244E] text-[34px] sm:text-[44px] md:text-[52px] lg:text-[clamp(44px,4.44vw,64px)] leading-[1.2] tracking-[-0.025em] max-w-[680px]"
+            class="font-inter font-extrabold text-[#23244E] text-[34px] sm:text-[44px] md:text-[52px] lg:text-[clamp(44px,4.44vw,64px)] leading-[1.2] tracking-tight max-w-170"
           >
             <span class="block lg:whitespace-nowrap">{{ 'FINANCIAL_MANAGEMENT_1.HERO.TITLE_LINE_1' | translate }}</span>
             <span class="block lg:whitespace-nowrap">{{ 'FINANCIAL_MANAGEMENT_1.HERO.TITLE_LINE_2' | translate }}</span>
@@ -19,14 +18,14 @@
           </h1>
 
           <p
-            class="mt-4 sm:mt-5 font-dm-sans font-normal text-[#23244E] text-[14px] sm:text-[14.5px] leading-[1.58] max-w-[545px]"
+            class="mt-4 sm:mt-5 font-dm-sans font-normal text-[#23244E] text-[14px] sm:text-[14.5px] leading-[1.58] max-w-136.25"
           >
             {{ 'FINANCIAL_MANAGEMENT_1.HERO.DESCRIPTION' | translate }}
           </p>
 
           <div class="mt-6 sm:mt-7">
             <div
-              class="inline-flex items-center gap-2.5 rounded-[8px] px-5 py-2.5 sm:pr-12 border border-white/80 shadow-[0_4px_16px_rgba(35,36,78,0.08)]"
+              class="inline-flex items-center gap-2.5 rounded-lg px-5 py-2.5 sm:pr-12 border border-white/80 shadow-[0_4px_16px_rgba(35,36,78,0.08)]"
               [style.background]="badgeBackground"
             >
               <span class="font-dm-sans font-semibold text-[#23244E] text-[15px] sm:text-[16px] leading-none tabular-nums">
@@ -39,12 +38,10 @@
           </div>
         </div>
 
-        <!-- Right Column: 3-Layer Financial Illustration Stage -->
         <div class="w-full lg:w-[46%] xl:w-[47%] flex items-center justify-center lg:justify-end">
           <div
-            class="hero-illustration group relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] xl:max-w-[546px] aspect-[546/531] select-none"
+            class="hero-illustration group relative w-full max-w-85 sm:max-w-105 lg:max-w-120 xl:max-w-136.5 aspect-546/531 select-none"
           >
-            <!-- Layer 1: Blue Clipboard with Charts (Primary LCP image) -->
             <div
               class="hero-layer absolute left-[15.2%] top-[-4%] w-[70.4%] h-auto z-10 pointer-events-none translate-0 rotate-0 scale-100 transition-transform duration-300 ease-out group-hover:scale-[1.015]"
             >
@@ -59,7 +56,6 @@
               />
             </div>
 
-            <!-- Layer 2: Red Magnifying Glass framed over the pie chart -->
             <div
               class="hero-layer absolute left-[-1.7%] top-[34.1%] w-[57.3%] h-auto z-20 pointer-events-none translate-0 rotate-0 scale-100 transition-transform duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:scale-[1.03]"
             >
@@ -74,9 +70,8 @@
               />
             </div>
 
-            <!-- Layer 3: Red Calculator at bottom-right -->
             <div
-              class="hero-layer absolute left-[67.8%] top-[63.6%] w-[31.1%] h-auto z-25 pointer-events-none translate-0 rotate-0 scale-100 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:translate-y-0.5 group-hover:rotate-[2deg]"
+              class="hero-layer absolute left-[67.8%] top-[63.6%] w-[31.1%] h-auto z-25 pointer-events-none translate-0 rotate-0 scale-100 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:translate-y-0.5 group-hover:rotate-2"
             >
               <img
                 ngSrc="/images/landing/features/1/Group 9409.svg"
@@ -85,7 +80,7 @@
                 alt=""
                 aria-hidden="true"
                 draggable="false"
-                class="w-full h-auto object-contain pointer-events-none -rotate-[4.3deg]"
+                class="w-full h-auto object-contain pointer-events-none rotate-[-4.3deg]"
               />
             </div>
           </div>
